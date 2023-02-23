@@ -1,4 +1,5 @@
-import BudgetPage from '../../page-objects/budget-page.js';
+// import BudgetPage from '../../page-objects/budget-page.js';
+// import ActivityPage from '../../page-objects/activity-page';
 
 /// <reference types="cypress" />
 
@@ -11,11 +12,13 @@ Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   let apdUrl = '/';
+  // let activityPage;
   let apdId;
   const years = [];
   let budgetPage;
 
   before(() => {
+    // activityPage = new ActivityPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
@@ -44,7 +47,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
-    budgetPage = new BudgetPage();
+    // budgetPage = new BudgetPage();
   });
 
   beforeEach(function () {

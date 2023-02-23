@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.19.0"
+    "node": "16.19.1"
   },
   "scripts": {
     "clean": "rm -rf yarn.lock node_modules */node_modules",
