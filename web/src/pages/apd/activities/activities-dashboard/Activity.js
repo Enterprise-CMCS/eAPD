@@ -115,7 +115,7 @@ EntryDetails.propTypes = {
   fundingSource: PropTypes.string,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired,
-  apdType: PropTypes.string
+  apdType: PropTypes.string.isRequired
 };
 
 EntryDetails.defaultProps = {

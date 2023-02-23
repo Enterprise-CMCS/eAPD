@@ -1117,7 +1117,7 @@ jobs:
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
-            yarn test --runInBand
+            yarn test
       - run:
           name: report coverage
           when: always

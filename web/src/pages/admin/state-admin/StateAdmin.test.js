@@ -85,6 +85,7 @@ const setup = (props = {}, options = {}) =>
 
 const loadTab = async tab => {
   fireEvent.click(screen.getByRole('tab', { name: tab }));
+
   await waitForElementToBeRemoved(() =>
     within(screen.getByRole('tabpanel', { name: tab })).queryByText(
       'Loading...'
@@ -110,7 +111,7 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders no results message', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       expect(
         screen.getAllByText('No users on this tab at this time')
@@ -118,7 +119,7 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders header', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       expect(
         screen.getByText('Maryland eAPD State Administrator Portal')
@@ -126,7 +127,7 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders correct tabs', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       expect(screen.getByText('Requests')).toBeTruthy();
       expect(screen.getByText('Active')).toBeTruthy();
@@ -143,7 +144,7 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders name and email', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       // Note: we render the affiliations in each tab and update on tab change, so we
       // expect to see 3 instances which is why this is using getAllByText
@@ -154,14 +155,14 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders approve and deny buttons', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       expect(screen.getByText('Approve')).toBeTruthy();
       expect(screen.getByText('Deny')).toBeTruthy();
     });
 
     it('should open manage modal on approve', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Requests');
       expect(screen.getByText('Approve')).toBeTruthy();
       fireEvent.click(screen.getByText('Approve'));
@@ -183,7 +184,7 @@ describe('<StateAdmin />', () => {
     });
 
     test('renders name, email, role', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Active');
       expect(screen.getAllByText(activeAffiliation.displayName)).toHaveLength(
         3
@@ -194,14 +195,14 @@ describe('<StateAdmin />', () => {
     });
 
     test('renders edit role and revoke buttons', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Active');
       expect(screen.getByText('Edit Role')).toBeTruthy();
       expect(screen.getByText('Revoke')).toBeTruthy();
     });
 
     it('should open manage modal on Edit Role', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Active');
       fireEvent.click(screen.getByText('Edit Role'));
       expect(
@@ -210,7 +211,7 @@ describe('<StateAdmin />', () => {
     });
 
     it('should open confirmation modal on revoke', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Active');
       fireEvent.click(screen.getByText('Revoke'));
       expect(await screen.findByText('Confirm')).toBeInTheDocument();
@@ -226,7 +227,7 @@ describe('<StateAdmin />', () => {
     });
 
     test('renders name, email, status', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Inactive');
       expect(screen.getAllByText(inactiveAffiliation.displayName)).toHaveLength(
         3
@@ -237,13 +238,13 @@ describe('<StateAdmin />', () => {
     });
 
     test('renders restore access button', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Inactive');
       expect(screen.getByText('Restore Access')).toBeTruthy();
     });
 
     it('should open manage modal on Restore Access', async () => {
-      setup({}, { initialState });
+      await setup({}, { initialState });
       await loadTab('Inactive');
       fireEvent.click(screen.getByText('Restore Access'));
       expect(

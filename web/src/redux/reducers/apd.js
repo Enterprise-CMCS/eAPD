@@ -39,13 +39,13 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
+
 import {
   generateKey,
   defaultAPDYearOptions,
   APD_TYPE,
   FUNDING_CATEGORY_TYPE
 } from '@cms-eapd/common';
-import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
@@ -374,11 +374,6 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
   }
 };
 
-const getAssurancesAndCompliances = assurancesAndCompliances =>
-  Object.values(assurancesAndCompliances).every(regs => regs.length > 0)
-    ? assurancesAndCompliances
-    : initialAssurances;
-
 const initialState = {
   data: {},
   byId: {},
@@ -599,9 +594,6 @@ const reducer = (state = initialState, action) => {
                 key: generateKey()
               }))
             })
-          ),
-          assurancesAndCompliances: getAssurancesAndCompliances(
-            action.data.apd.assurancesAndCompliances
           )
         },
         adminCheck: {
