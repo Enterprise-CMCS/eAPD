@@ -1,48 +1,95 @@
-title: Cost Allocation
-instruction:
-  detail: >-
-    Cost allocation plan must include all participants
-    and their associated costs to depict non-Medicaid activities.
+HITECH:
+  title: Cost Allocation
+  instruction:
+    detail: >-
+      Cost allocation plan must include all participants and their associated
+      costs to depict non-Medicaid activities.
 
 
-    [ol]
-    CMS will work with states individually to determine the
-    most appropriate cost allocation methodology.
+      [ol] CMS will work with states individually to determine the most
+      appropriate cost allocation methodology.
 
-    HITECH cost allocation formulas should be based on direct benefit to
-    Medicaid EHR incentive program, accounting for state
-    projections of eligible Medicaid provider participation.
+      HITECH cost allocation formulas should be based on direct benefit to
+      Medicaid EHR incentive program, accounting for state projections of
+      eligible Medicaid provider participation.
 
-    Cost allocation must account for other available federal funding
-    sources including division of resources and activities across relevant
-    payers, and relative benefit to the state Medicaid program.
+      Cost allocation must account for other available federal funding sources
+      including division of resources and activities across relevant payers, and
+      relative benefit to the state Medicaid program.
 
-    Cost allocations should be current and ensure financial participation of all
-    parties so Medicaid funds are neither the sole contributor at the onset, nor
-    the primary source of funding. Other payers who may benefit must contribute
-    their share from the outset. The absence of ancillary payers is not
-    sufficient cause for Medicaid to be the primary payer.
-    [/ol]
-  helpText: >-
-    Include any participating non-Medicaid FTEs.
+      Cost allocations should be current and ensure financial participation of
+      all parties so Medicaid funds are neither the sole contributor at the
+      onset, nor the primary source of funding. Other payers who may benefit
+      must contribute their share from the outset. The absence of ancillary
+      payers is not sufficient cause for Medicaid to be the primary payer. [/ol]
+    helpText: >-
+      Include any participating non-Medicaid FTEs.
+MMIS:
+  title: Cost Allocation
+  instruction:
+    detail: >-
+      Cost allocation plan must include all participants and their associated
+      costs to depict non-Medicaid activities.
+
+
+      [ol] CMS will work with states individually to determine the most
+      appropriate cost allocation methodology.
+
+      HITECH cost allocation formulas should be based on direct benefit to
+      Medicaid EHR incentive program, accounting for state projections of
+      eligible Medicaid provider participation.
+
+      Cost allocation must account for other available federal funding sources
+      including division of resources and activities across relevant payers, and
+      relative benefit to the state Medicaid program.
+
+      Cost allocations should be current and ensure financial participation of
+      all parties so Medicaid funds are neither the sole contributor at the
+      onset, nor the primary source of funding. Other payers who may benefit
+      must contribute their share from the outset. The absence of ancillary
+      payers is not sufficient cause for Medicaid to be the primary payer. [/ol]
+    helpText: >-
+      **Example:** PACAP Approved Methodology for 2023, Medicaid 40%, FNS 30%,
+      ACF 30%, State, 10%  
+        
+      **Example:** Beneficiary Based Cost Allocation using data from a study
+      conducted from 1/1/2023 through 6/1/2023. Medicaid 40%, Private Insurer:
+      20%, State Based Plan: 40%
 methodology:
   instruction:
-    heading: Description of Cost Allocation Methodology
-    detail: >-
-      Do not assume absence of other payers is sufficient cause for
-      Medicaid to be primary payer. Limit ambiguity about other
-      potential federal funding sources.
-    helpText: >-
-      For example, if no CHIP funds are being requested, include a statement in
-      this section.
+    HITECH:
+      heading: Description of Cost Allocation Methodology
+      detail: >-
+        Do not assume absence of other payers is sufficient cause for Medicaid
+        to be primary payer. Limit ambiguity about other potential federal
+        funding sources.
+      helpText: >-
+        For example, if no CHIP funds are being requested, include a statement
+        in this section.
+    MMIS:
+      heading: Description of Cost Allocation Methodology
+      detail: >-
+        Do not assume absence of other payers is sufficient cause for Medicaid
+        to be primary payer. Limit ambiguity about other potential federal
+        funding sources.
+      helpText: >-
+        **Example:** This is a beneficiary based cost allocation. A sample was
+        collected between January 1, 2023 through July 1, 2023 to determine the
+        beneficiary count and percentages. This was approved by the Division of
+        Cost Allocation Services as part of the State's PACAP on 1/1/2023.  
+          
+        **Example:** This is a utilization based cost allocation: The system
+        reports the number of Medicaid queries made to the system. A report is
+        generated every quarter by the vendor to determine specific Medicaid
+        related costs.
 ffp:
   title: Federal Financial Participation (FFP) and Cost Allocation
   federalStateSplitInstruction:
     heading: Federal-State Split
     detail: >-
-      Select the match rate for Federal Financial Participation applicable
-      to this activity. Calculations for the Federal and State share will be updated
-      in the table below.
+      Select the match rate for Federal Financial Participation applicable to
+      this activity. Calculations for the Federal and State share will be
+      updated in the table below.
   quarterlyFFPInstruction:
     heading: Estimated Quarterly Expenditure
     detail: >-
@@ -65,8 +112,8 @@ quarterly:
   instruction:
     heading: Breakout of federal share by quarter
     detail: >-
-      Indicate allocations of state personnel & contract resources in current FFY
-      by quarter.
+      Indicate allocations of state personnel & contract resources in current
+      FFY by quarter.
   expenseNames:
     state: State Staff and Expenses (In-House Costs)
     contractor: Private Contractor Costs

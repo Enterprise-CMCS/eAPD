@@ -1,5 +1,6 @@
 import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
+import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -54,6 +55,7 @@ describe(
     });
 
     after(function () {
+      cy.useStateStaff();
       cy.visit('/');
       cy.deleteAPD(this.apdId);
     });
@@ -65,6 +67,10 @@ describe(
 
       describe('first', function () {
         testStatePrioritiesAndScopeWithData();
+      });
+
+      describe('Assurances and Compliance', function () {
+        testMmisAssurancesAndComplianceWithData();
       });
     });
   }

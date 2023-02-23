@@ -1,4 +1,3 @@
-import ActivityPage from '../../page-objects/activity-page';
 import { testApdName } from '../../helpers/apd/apd-name.js';
 
 /// <reference types="cypress" />
@@ -11,13 +10,11 @@ import { testApdName } from '../../helpers/apd/apd-name.js';
 Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
-  let activityPage;
   let apdUrl;
   let apdId;
   const years = [];
 
   before(() => {
-    activityPage = new ActivityPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
@@ -61,6 +58,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   after(function () {
+    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
@@ -569,7 +567,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
       cy.waitForSave();
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToPreviousActivities();
       cy.checkTinyMCE(
         'previous-activity-summary-field',

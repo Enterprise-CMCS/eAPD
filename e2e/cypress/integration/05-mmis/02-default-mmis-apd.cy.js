@@ -2,6 +2,7 @@
 import { testDefaultMmisAPDOverview } from '../../helpers/apd/apd-overview';
 import { testStatePrioritiesAndScope } from '../../helpers/apd/state-priorities-and-scope';
 import { testDefaultMMISActivity } from '../../helpers/mmis/activity/default-activity';
+import { testDefaultMmisAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
 
 // Tests the default values of an MMIS APD
 
@@ -59,6 +60,7 @@ describe(
     });
 
     after(function () {
+      cy.useStateStaff();
       cy.visit('/');
       cy.deleteAPD(this.apdId);
     });
@@ -80,6 +82,10 @@ describe(
 
       describe('default Activity', function () {
         testDefaultMMISActivity();
+      });
+
+      describe('Assurances and Compliance', function () {
+        testDefaultMmisAssurancesAndCompliance();
       });
     });
   }
