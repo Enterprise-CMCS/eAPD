@@ -1,29 +1,59 @@
 import Joi from 'joi';
+import { APD_TYPE } from '../utils/constants.js';
 
-const updateStatusSchema = Joi.object({
+const updateStatusCustomValidation = (obj, helpers) => {
+  const { isUpdateAPD, annualUpdate, asNeededUpdate } = obj;
+  const isUpdateTypeBlank = !annualUpdate && !asNeededUpdate;
+  if (isUpdateAPD && isUpdateTypeBlank) {
+    return helpers.error('object.missing');
+  }
+  return obj;
+};
+
+const mmisUpdateStatusSchema = Joi.object({
   isUpdateAPD: Joi.boolean().required().messages({
-    'boolean.base': 'Select yes or no',
-    'boolean.empty': 'Select yes or no',
-    'boolean.required': 'Select yes or no'
+    'boolean.base': 'Select yes or no.',
+    'boolean.empty': 'Select yes or no.',
+    'boolean.required': 'Select yes or no.'
   }),
-  annualUpdate: Joi.when('isUpdateAPD', {
-    is: true,
-    then: Joi.boolean(),
-    otherwise: Joi.any()
-  }),
-  asNeededUpdate: Joi.when('isUpdateAPD', {
-    is: true,
-    then: Joi.boolean(),
-    otherwise: Joi.any()
-  })
+  annualUpdate: Joi.boolean(),
+  asNeededUpdate: Joi.boolean()
 })
-  .or('annualUpdate', 'asNeededUpdate')
+  .custom(updateStatusCustomValidation)
   .messages({
-    'object.missing': 'Select an update type'
+    'object.missing': 'Select an update type.'
   });
 
+const hitechUpdateStatusSchema = Joi.object({
+  isUpdateAPD: Joi.boolean().allow(null),
+  annualUpdate: Joi.boolean(),
+  asNeededUpdate: Joi.boolean()
+})
+  .or('annualUpdate', 'asNeededUpdate', {
+    isPresent: resolved => resolved === true
+  })
+  .messages({
+    'object.missing': 'Select an update type.'
+  });
+
+export const apdNameSchema = Joi.string()
+  .pattern(/^((?!untitled).)*$/i)
+  .min(1)
+  .required()
+  .messages({
+    'any.required': 'Provide an APD name.',
+    'string.empty': 'Provide an APD name.',
+    'string.base': 'Provide an APD name.',
+    'string.pattern.base': 'APD name cannot contain "untitled".'
+  });
+
+// Used for form validations in [APD] type-agnostic components
+export const sharedApdOverviewFields = Joi.object({
+  name: apdNameSchema
+});
+
 export const hitechOverviewSchema = Joi.object({
-  updateStatus: updateStatusSchema,
+  updateStatus: hitechUpdateStatusSchema,
   // Funding sources is not a user input but we use this as a dependency for
   // conditionally validating the narratives below
   fundingSources: Joi.array().items(Joi.string()).required().messages({
@@ -78,16 +108,42 @@ export const medicaidBusinessAreasSchema = Joi.object({
   other: Joi.boolean(),
   otherMedicaidBusinessAreas: Joi.when('other', {
     is: true,
-    then: Joi.string().min(1).required().messages({
-      'string.base': 'Provide another Medicaid Business Area(s)',
-      'string.empty': 'Provide another Medicaid Business Area(s)',
-      'string.required': 'Provide another Medicaid Business Area(s)'
+    then: Joi.string().trim().min(1).required().messages({
+      'string.base': 'Provide Other Medicaid Business Area(s).',
+      'string.empty': 'Provide Other Medicaid Business Area(s).',
+      'string.required': 'Provide Other Medicaid Business Area(s).'
     }),
     otherwise: Joi.any()
   })
-}).or('waiverSupportSystems', 'assetVerificationSystem');
+})
+  .or(
+    'waiverSupportSystems',
+    'assetVerificationSystem',
+    'claimsProcessing',
+    'decisionSupportSystemDW',
+    'electronicVisitVerification',
+    'encounterProcessingSystemMCS',
+    'financialManagement',
+    'healthInformationExchange',
+    'longTermServicesSupports',
+    'memberManagement',
+    'pharmacyBenefitManagementPOS',
+    'programIntegrity',
+    'providerManagement',
+    'thirdPartyLiability',
+    'other',
+    { isPresent: resolved => resolved === true }
+  )
+  .messages({
+    'object.missing': 'Select at least one Medicaid Business Area.'
+  });
 
 export const mmisOverviewSchema = Joi.object({
-  updateStatus: updateStatusSchema,
+  updateStatus: mmisUpdateStatusSchema,
   medicaidBusinessAreas: medicaidBusinessAreasSchema
 });
+
+export const apdTypeToOverviewSchemaMapping = {
+  [APD_TYPE.HITECH]: hitechOverviewSchema,
+  [APD_TYPE.MMIS]: mmisOverviewSchema
+};
