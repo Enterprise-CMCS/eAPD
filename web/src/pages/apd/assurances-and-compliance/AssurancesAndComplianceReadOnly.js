@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
-import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
+import {
+  selectFederalCitations,
+  selectApdType
+} from '../../../redux/selectors/apd.selectors';
 import { t } from '../../../i18n';
 import { LinkOrText } from './AssurancesAndCompliance';
 
-const AssurancesAndCompliance = ({ citations }) => {
+const AssurancesAndCompliance = ({ citations, apdType }) => {
+  console.log({ regLinks, apdType });
   return (
     <div>
       <h2>Assurances and Compliance</h2>
-      {Object.entries(regLinks).map(([name, regulations]) => (
+      {Object.entries(regLinks[apdType]).map(([name, regulations]) => (
         <div key={name} className="ds-u-margin-bottom--3">
           <h4 className="ds-h4">
             {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
@@ -64,10 +68,14 @@ const AssurancesAndCompliance = ({ citations }) => {
 };
 
 AssurancesAndCompliance.propTypes = {
-  citations: PropTypes.object.isRequired
+  citations: PropTypes.object.isRequired,
+  apdType: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({ citations: selectFederalCitations(state) });
+const mapStateToProps = state => ({
+  citations: selectFederalCitations(state),
+  apdType: (selectApdType(state) || '').toLowerCase()
+});
 
 export default connect(mapStateToProps, null)(AssurancesAndCompliance);
 export { AssurancesAndCompliance as plain, mapStateToProps };

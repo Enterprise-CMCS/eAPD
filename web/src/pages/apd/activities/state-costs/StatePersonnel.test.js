@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import {
   plain as StatePersonnel,
@@ -50,18 +51,24 @@ describe('activity state personnel costs subsection', () => {
         {
           apd: {
             data: {
+              apdType: APD_TYPE.HITECH,
               activities: [
                 {
                   statePersonnel: 'these are personnel'
                 },
                 {}
-              ]
+              ],
+              years: [2027, 2028]
             }
           }
         },
         { activityIndex: 0 }
       )
-    ).toEqual({ personnel: 'these are personnel', apdType: 'HITECH' });
+    ).toEqual({
+      personnel: 'these are personnel',
+      apdType: 'HITECH',
+      years: [2027, 2028]
+    });
   });
 
   it('maps dispatch actions to props', () => {

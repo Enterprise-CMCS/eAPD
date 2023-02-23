@@ -13,8 +13,9 @@ headings:
   procurement: Procurement Standards (Competition / Sole Source)
   recordsAccess: Access to Records, Reporting and Agency Attestations
   softwareRights: >-
-    Software & Ownership Rights, Federal Licenses, Information
-    Safeguarding, HIPAA compliance, and progress reports
+    Software & Ownership Rights, Federal Licenses, Information Safeguarding,
+    HIPAA compliance, and progress reports
   security: >-
-    Security and interface requirements to be employed for all state
-    HIT systems
+    Security and interface requirements to be employed for all state HIT systems
+  independentVV: >-
+    Independent Verification and Validation (IV&V)
