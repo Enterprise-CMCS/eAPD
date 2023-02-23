@@ -129,6 +129,8 @@ const ApdNew = ({ createApd: create }) => {
       setValue('apdType', APD_TYPE.HITECH);
     }
 
+    console.log({ apdType });
+
     setSubmitDisabled(!isValid);
   }, [enableMmis, isValid]);
 
