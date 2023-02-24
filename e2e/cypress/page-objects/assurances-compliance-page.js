@@ -40,7 +40,27 @@ class AssurancesCompliancePage {
     }
   };
 
-  verifyRegulationValue = (category, regulation, expected) => {
+  // Given a regulation, fills in an appropriate response.
+  // A null response results in checking "yes" for following the regulation
+  // A string response checks "no" and enters the string into the
+  fillRegulationSeed = (category, regulation, checked, explanation = '') => {
+    cy.findByRole('heading', { name: category })
+      .parent()
+      .contains('fieldset', regulation)
+      .as('regulationDiv');
+
+    if (checked === true) {
+      cy.get('@regulationDiv').find('[value="yes"]').check({ force: true });
+    } else {
+      cy.get('@regulationDiv').find('[value="no"]').check({ force: true });
+
+      if (explanation.length > 0) {
+        cy.get('@regulationDiv').find('textarea').type(explanation);
+      }
+    }
+  };
+
+  verifyRegulationValue = (category, regulation, expected = null) => {
     cy.findByRole('heading', { name: category })
       .parent()
       .contains('fieldset', regulation)

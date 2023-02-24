@@ -1,6 +1,6 @@
 [![Build status](https://img.shields.io/circleci/project/github/Enterprise-CMCS/eAPD.svg)](https://circleci.com/gh/Enterprise-CMCS/workflows/eAPD)
 [![Test coverage](https://img.shields.io/codecov/c/github/Enterprise-CMCS/eAPD.svg)](https://codecov.io/gh/Enterprise-CMCS/eAPD)
-![Node.js >= 16.19.0](https://img.shields.io/badge/node-%3E%3D%2016.19.0-brightgreen.svg)
+![Node.js >= 16.19.1](https://img.shields.io/badge/node-%3E%3D%2016.19.1-brightgreen.svg)
 
 # CMS eAPD app
 
@@ -111,7 +111,11 @@ for information about running tests.
 
 ### Secret scanning
 
-Configure gitleaks pre-commit hook by running  `pre-commit install` in your local. This will guard secrets from acccidentally being commited to this repository. Please take a look at [gitleaks](https://github.com/zricethezav/gitleaks) for installation instruction and for more information.
+Configure gitleaks pre-commit hook by running `pre-commit install` in your
+local. This will guard secrets from acccidentally being commited to this
+repository. Please take a look at
+[gitleaks](https://github.com/zricethezav/gitleaks) for installation instruction
+and for more information.
 
 ### More technical documentation
 

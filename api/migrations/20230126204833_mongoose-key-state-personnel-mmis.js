@@ -73,7 +73,7 @@ export const up = async () => {
   await Promise.all(
     updatedApds.map(async apd => {
       logger.info(`Updating HITECH APD ${apd.id} to add split`);
-      await HITECH.replaceOne({ _id: apd.id }, { ...apd });
+      return HITECH.replaceOne({ _id: apd.id }, { ...apd });
     })
   ).catch(err => {
     logger.error(err);

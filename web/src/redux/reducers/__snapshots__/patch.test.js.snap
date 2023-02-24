@@ -41,6 +41,7 @@ Array [
     "value": Object {
       "ffp": Object {
         "federal": 0,
+        "fundingCategory": null,
         "state": 100,
       },
       "other": 0,

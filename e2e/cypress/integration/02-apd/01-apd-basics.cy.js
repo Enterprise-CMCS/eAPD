@@ -4,6 +4,7 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page.js';
 import ExportPage from '../../page-objects/export-page.js';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page.js';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page.js';
+import { testApdName } from '../../helpers/apd/apd-name.js';
 
 /// <reference types="cypress" />
 
@@ -57,9 +58,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       apdUrl = pathname.replace('/apd-overview', '');
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
+
+    cy.findByText('Update Type').should('exist');
+    cy.findByRole('checkbox', { name: /Annual Update/i }).should('be.checked');
   });
 
   beforeEach(function () {
@@ -72,9 +78,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
   });
 
   describe('Create APD', function () {
-    it('creates a default new APD and handles changing the name and summary', function () {
+    it('checks fields on newly created APD', function () {
       const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
+      const title = 'HITECH IAPD';
 
       cy.get('#apd-header-info').contains(
         `Created: ${today.toLocaleDateString('en-us', options)}`
@@ -84,41 +91,22 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
-      cy.log('change the APD name');
-      const title1 = 'HITECH IAPD';
-      const title2 = 'My Awesome eAPD';
-      const title3 = 'Magnus Archive Project';
+      // APD Header
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title}`);
 
-      cy.get('#apd-title-input').contains(`${title1}`);
+      // APD Summary text box
+      cy.findByLabelText('APD Name').should('have.value', `${title}`);
 
-      // Change name in APD Summary text box
-      cy.findByLabelText('APD Name').clear().type(`${title2}`).blur();
-
-      cy.get('#apd-title-input').contains(`${title2}`).click();
-
-      // Change name via APD Header
-      cy.focused()
-        .should('have.attr', 'id', 'apd-title-input')
-        .clear()
-        .type(`${title3}`)
-        .blur();
-
-      cy.get('#apd-title-input').contains(`${title3}`);
-
-      // Change name by clicking EDIT button
-      cy.get('#title-edit-link').click();
-
-      cy.focused()
-        .should('have.attr', 'id', 'apd-title-input')
-        .clear()
-        .type(`${title2}`)
-        .blur();
-
-      cy.get('#apd-title-input').contains(`${title2}`);
-      cy.get('[type="checkbox"][checked]').should('have.length', 2);
+      cy.get('[data-cy=yearList]').within(() => {
+        cy.get('[type="checkbox"][checked]').should('have.length', 2);
+      });
 
       cy.get('[id="program-introduction-field"]').should('have.value', '');
     });
+  });
+
+  describe('APD Name', function () {
+    testApdName();
   });
 
   describe('Navigation', function () {

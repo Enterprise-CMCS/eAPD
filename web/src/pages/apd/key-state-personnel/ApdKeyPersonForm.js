@@ -12,7 +12,11 @@ import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 
-import { keyPersonnelSchema as schema } from '@cms-eapd/common';
+import {
+  keyPersonnelSchema as schema,
+  FUNDING_CATEGORY_TYPE,
+  FUNDING_CATEGORY_LABEL_MAPPING
+} from '@cms-eapd/common';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
@@ -110,7 +114,8 @@ const PersonForm = forwardRef(
               ...state.split,
               [action.year]: {
                 federal: action.federal,
-                state: action.state
+                state: action.state,
+                fundingCategory: action.fundingCategory
               }
             }
           };
@@ -182,16 +187,25 @@ const PersonForm = forwardRef(
 
     const handleSplitChange = (year, e) => {
       const [federal, state] = e.target.value.split('-').map(Number);
+      let fundingCategory = null;
+      if (federal === 90 && state === 10) {
+        fundingCategory = FUNDING_CATEGORY_TYPE.DDI;
+      }
+      if (federal === 75 && state === 25) {
+        fundingCategory = FUNDING_CATEGORY_TYPE.MANDO;
+      }
 
       dispatch({
         type: 'updateSplit',
         year: year,
         federal,
-        state
+        state,
+        fundingCategory
       });
 
       setValue(`split.${year}.federal`, federal);
       setValue(`split.${year}.state`, state);
+      setValue(`split.${year}.fundingCategory`, fundingCategory);
     };
 
     const handleMedicaidShareChange = (year, e) => {
@@ -260,12 +274,12 @@ const PersonForm = forwardRef(
               choices={[
                 {
                   checked: value?.federal == 90,
-                  label: '90/10 DDI',
+                  label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.DDI}`,
                   value: '90-10'
                 },
                 {
                   checked: value?.federal == 75,
-                  label: '75/25 Operations',
+                  label: `75/25 ${FUNDING_CATEGORY_LABEL_MAPPING.MANDO}`,
                   value: '75-25'
                 }
               ]}
