@@ -4,6 +4,16 @@ export const APD_TYPE = {
   MMIS: 'MMIS'
 };
 
+export const FUNDING_CATEGORY_TYPE = {
+  DDI: 'DDI',
+  MANDO: 'MO'
+};
+
+export const FUNDING_CATEGORY_LABEL_MAPPING = {
+  DDI: 'Design, Development, and Installation (DDI)',
+  MANDO: 'Maintenance & Operations (M&O)'
+};
+
 export const MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING = {
   waiverSupportSystems: '1115 or Waiver Support Systems',
   assetVerificationSystem: 'Asset Verification System',

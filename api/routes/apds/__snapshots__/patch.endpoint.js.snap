@@ -153,11 +153,13 @@ Object {
           "split": Object {
             "2022": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -182,12 +184,14 @@ Object {
           "position": "Project Management Office Director",
           "split": Object {
             "2022": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -540,11 +544,13 @@ Object {
           "split": Object {
             "2022": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -569,12 +575,14 @@ Object {
           "position": "Project Management Office Director",
           "split": Object {
             "2022": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -918,11 +926,13 @@ Object {
           "split": Object {
             "2022": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -947,12 +957,14 @@ Object {
           "position": "Project Management Office Director",
           "split": Object {
             "2022": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -1277,11 +1289,13 @@ Object {
           "split": Object {
             "2022": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },
@@ -1306,12 +1320,14 @@ Object {
           "position": "Project Management Office Director",
           "split": Object {
             "2022": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
             "2023": Object {
-              "federal": 90,
-              "state": 10,
+              "federal": 75,
+              "fundingCategory": "MO",
+              "state": 25,
             },
           },
         },

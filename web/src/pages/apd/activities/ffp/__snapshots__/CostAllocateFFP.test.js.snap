@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
+exports[`the CostAllocateFFP component renders table correctly 1`] = `
 <table
   class="budget-table activity-budget-table"
   data-cy="FFPActivityTable"

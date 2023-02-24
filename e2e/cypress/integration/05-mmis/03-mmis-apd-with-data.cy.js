@@ -1,5 +1,6 @@
 import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
+import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 
 // Tests an MMIS APD by adding data and checking the results
@@ -67,6 +68,10 @@ describe(
 
       describe('first', function () {
         testStatePrioritiesAndScopeWithData();
+      });
+
+      describe('add activity', function () {
+        addMMISActivity();
       });
 
       describe('Assurances and Compliance', function () {

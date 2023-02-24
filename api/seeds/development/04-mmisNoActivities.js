@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.MMIS,
@@ -53,8 +53,16 @@ export default {
         hasCosts: true,
         costs: { 2023: 100000, 2024: 100000 },
         split: {
-          2023: { federal: 90, state: 10 },
-          2024: { federal: 90, state: 10 }
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2024: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
         },
         medicaidShare: {
           2023: 90,
@@ -70,8 +78,16 @@ export default {
         hasCosts: false,
         costs: { 2023: 0, 2024: 0 },
         split: {
-          2023: { federal: 90, state: 10 },
-          2024: { federal: 90, state: 10 }
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2024: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
         },
         medicaidShare: {
           2023: 50,

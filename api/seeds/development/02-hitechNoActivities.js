@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.HITECH,
@@ -43,8 +43,16 @@ export default {
         hasCosts: true,
         costs: { 2022: 100000, 2023: 100000 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
         },
         medicaidShare: {
           2022: 100,
@@ -60,8 +68,16 @@ export default {
         hasCosts: false,
         costs: { 2022: 0, 2023: 0 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2022: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
+          },
+          2023: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
+          }
         },
         medicaidShare: {
           2022: 100,

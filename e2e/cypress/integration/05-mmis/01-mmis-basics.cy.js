@@ -1,3 +1,5 @@
+// import ActivityPage from '../../page-objects/activity-page';
+import BudgetPage from '../../page-objects/budget-page.js';
 import { testApdName } from '../../helpers/apd/apd-name.js';
 
 /// <reference types="cypress" />
@@ -11,12 +13,14 @@ Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   // let activityPage;
-  let apdUrl;
+  let budgetPage;
+  let apdUrl = '/';
   let apdId;
   const years = [];
 
   before(() => {
     // activityPage = new ActivityPage();
+    budgetPage = new BudgetPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
@@ -66,9 +70,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   describe('Create MMIS APD', function () {
-    it('tests Create New page', function () {
+    it('tests Create New page and do not save', function () {
+      //
+      // APD Overview
+      //
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains(
         'This selection cannot be changed after creating a new APD.'
@@ -163,6 +171,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
       cy.findByRole('button', { name: /Cancel/i }).click();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains('MMIS APD Test').should('not.exist');
     });
@@ -292,16 +301,106 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         );
       });
     });
-    it('tests Activity Overview page', function () {
-      const mmisBasics = this.mmisBasics;
 
+    it('test MMIS APD Basics', function () {
+      const mmisBasics = this.mmisBasics;
+      // Key State Personnel
+      cy.goToKeyStatePersonnel();
+      cy.contains('Key Personnel and Program Management').should('exist');
+
+      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+
+      cy.get('[data-cy="key-person-0__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].name);
+
+      cy.get('[data-cy="key-person-0__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].email);
+
+      cy.get('[data-cy="key-person-0__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].position);
+
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+
+      cy.get('[data-cy="key-person-1__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].name);
+
+      cy.get('[data-cy="key-person-1__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].email);
+
+      cy.get('[data-cy="key-person-1__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].position);
+
+      cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
+      cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
+      cy.get('[data-cy="key-person-1-0__medicaidShare"]')
+        .eq(0)
+        .clear()
+        .type('50');
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      }).check({ force: true });
+
+      cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
+      cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
+      cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      })
+        .eq(1)
+        .check({ force: true });
+
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.contains(
+        'Total Computable Medicaid: $250 (50% Medicaid Share) '
+      ).should('exist');
+      cy.contains('Federal Share: $225').should('exist');
+      cy.contains(
+        'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
+      ).should('exist');
+      cy.contains('Federal Share: $1,800').should('exist');
+
+      // Previous Activities
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+
+      cy.goToApdOverview();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.goToPreviousActivities();
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
+      );
+
+      // Activity Tests
       cy.goToActivityDashboard();
 
       // Create new Activity
       cy.contains('Add Activity').click();
       cy.contains('Activity 1').should('exist');
 
+      //
       // Check Activity Overview
+      //
       cy.goToActivityOverview(0);
       cy.url().should('contain', '/activity/0/overview');
       cy.findAllByRole('heading', { name: /Activity Overview/i }).should(
@@ -411,76 +510,23 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'activity-proposed-solution-field',
         `<p>${mmisBasics.activities[0].activityOverview.proposedSolution}</p>`
       );
-    });
 
-    it('tests Key State Personnel page', function () {
-      const mmisBasics = this.mmisBasics;
+      // Budget and FFP
+      cy.goToBudgetAndFFP(0);
+      cy.contains('Budget and FFP').should('exist');
 
-      cy.goToKeyStatePersonnel();
-      cy.contains('Key Personnel and Program Management').should('exist');
+      cy.then(() => {
+        this.years.forEach(year => {
+          cy.contains(`Budget for FFY ${year}`)
+            .parent()
+            .parent()
+            .within(() => {
+              budgetPage.checkMatchRateFunctionality();
+            });
+        });
+      });
 
-      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-
-      cy.get('[data-cy="key-person-0__name"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].name);
-
-      cy.get('[data-cy="key-person-0__email"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].email);
-
-      cy.get('[data-cy="key-person-0__position"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].position);
-
-      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-
-      cy.get('[data-cy="key-person-1__name"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].name);
-
-      cy.get('[data-cy="key-person-1__email"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].email);
-
-      cy.get('[data-cy="key-person-1__position"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].position);
-
-      cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
-      cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
-      cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
-      cy.get('[data-cy="key-person-1-0__medicaidShare"]')
-        .eq(0)
-        .clear()
-        .type('50');
-      cy.findAllByRole('radio', { name: '90/10 DDI' }).check({ force: true });
-
-      cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
-      cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
-      cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
-      cy.findAllByRole('radio', { name: '90/10 DDI' })
-        .eq(1)
-        .check({ force: true });
-
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.contains(
-        'Total Computable Medicaid: $250 (50% Medicaid Share) '
-      ).should('exist');
-      cy.contains('Federal Share: $225').should('exist');
-      cy.contains(
-        'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
-      ).should('exist');
-      cy.contains('Federal Share: $1,800').should('exist');
-    });
-
-    it('tests the Security Planning page', function () {
-      const mmisBasics = this.mmisBasics;
-
+      // Security Planning
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
 
@@ -552,29 +598,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
 
       // Todo: TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
-    });
-
-    it('tests the Results of Previous Activities section', function () {
-      const mmisBasics = this.mmisBasics;
-
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
     });
   });
 });

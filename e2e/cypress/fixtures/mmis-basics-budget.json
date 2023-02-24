@@ -1,0 +1,52 @@
+{
+  "activityTotals": [
+    {
+      "activityId": "722u1e6b",
+      "data": {
+        "combined": {
+          "2023": 0,
+          "2024": 0,
+          "total": 0
+        },
+        "otherFunding": {
+          "2023": {
+            "contractors": 0,
+            "expenses": 0,
+            "statePersonnel": 0,
+            "total": 0
+          },
+          "2024": {
+            "contractors": 0,
+            "expenses": 0,
+            "statePersonnel": 0,
+            "total": 0
+          }
+        }
+      }
+    }
+  ],
+  "activities": {
+    "722u1e6b": {
+      "costsByFFY": {
+        "2023": {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0
+        },
+        "2024": {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0
+        },
+        "total": {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0
+        }
+      }
+    }
+  }
+}
