@@ -7,8 +7,8 @@ export default {
   yearOptions: ['2022', '2023', '2024'],
   apdOverview: {
     updateStatus: {
-      isUpdateAPD: false,
-      annualUpdate: false,
+      isUpdateAPD: true,
+      annualUpdate: true,
       asNeededUpdate: false
     },
     programOverview:

@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import {
   // activitiesDashboard,
+  apdNameSchema,
   hitechOverviewSchema,
   mmisOverviewSchema,
   keyStatePersonnelSchema,
@@ -40,10 +41,7 @@ export const hitechCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
-    'string.base': 'Provide an APD name',
-    'string.empty': 'Provide an APD name'
-  }),
+  name: apdNameSchema,
   years: Joi.any(),
   yearOptions: Joi.any(),
   apdOverview: hitechOverviewSchema,
@@ -103,10 +101,7 @@ export const mmisCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
-    'string.base': 'Provide an APD name',
-    'string.empty': 'Provide an APD name'
-  }),
+  name: apdNameSchema,
   years: Joi.any(),
   yearOptions: Joi.any(),
   apdOverview: mmisOverviewSchema,

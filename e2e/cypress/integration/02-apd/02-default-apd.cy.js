@@ -38,9 +38,11 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
   });
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -66,7 +68,9 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
       testDefaultAPDOverview();
 
       it('should have two checked years', function () {
-        cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        cy.get('[data-cy=yearList]').within(() => {
+          cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        });
       });
     });
 
