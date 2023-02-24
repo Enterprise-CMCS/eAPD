@@ -22,7 +22,7 @@ function findExistingInstances() {
 
 # Find all tags for instances with the github-pr tag
 # WIP needs to be refined
-aws ec2 describe-tags --no-cli-pager --filters Name=key,Values=github-pr --query "Tags[*].Value"
+aws ec2 describe-tags --no-cli-pager --filters Name=key,Values=github-pr | jq -rc  ".Tags[].Value" |sort |uniq
 
 #findExistingInstances
 
