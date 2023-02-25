@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 import { selectApdData, selectApdYears } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../../util';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 export const selectActivityCount = state => state.apd.data.activities.length;
 
 export const selectActivityByIndex = (
@@ -37,6 +39,49 @@ export const selectCostAllocationForActivityByIndex = createSelector(
   ({ costAllocation }) => costAllocation
 );
 
+export const selectKeyStatePersonnelCostSummary = createSelector(
+  ({
+    apd: {
+      data: {
+        keyStatePersonnel: { keyPersonnel },
+        years
+      }
+    }
+  }) =>
+    years.reduce(
+      (keyStatePersonnel, ffy) => ({
+        ...keyStatePersonnel,
+        [ffy]: keyPersonnel.map(kp => ({
+          key: kp.key,
+          description: `${kp.position}: ${kp.name || 'Not specified'} ${
+            kp.isPrimary ? '(APD Point of Contact)' : ''
+          }`,
+          totalCost: kp.hasCosts
+            ? kp.costs[ffy] * kp.fte[ffy] * (kp.medicaidShare[ffy] / 100)
+            : 0,
+          unitCost: kp.hasCosts ? kp.costs[ffy] : null,
+          units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null,
+          medicaidShare: kp.hasCosts ? kp.medicaidShare[ffy] : null
+        }))
+      }),
+      {}
+    ),
+  keyPersonnel => {
+    return {
+      keyStatePersonnel: keyPersonnel,
+      keyStatePersonnelTotal: Object.keys(keyPersonnel).reduce(
+        (o, year) => ({
+          ...o,
+          [year]: keyPersonnel[year].reduce((sum, kp) => {
+            return sum + kp.totalCost;
+          }, 0)
+        }),
+        {}
+      )
+    };
+  }
+);
+
 export const selectActivityCostSummary = createSelector(
   selectApdYears,
   selectActivityByIndex,
@@ -60,7 +105,8 @@ export const selectActivityCostSummary = createSelector(
       apd: {
         data: {
           keyStatePersonnel: { keyPersonnel },
-          years
+          years,
+          apdType
         }
       }
     },
@@ -70,7 +116,7 @@ export const selectActivityCostSummary = createSelector(
       (activityKeyPersonnel, ffy) => ({
         ...activityKeyPersonnel,
         [ffy]:
-          activityIndex === 0
+          activityIndex === 0 && apdType == APD_TYPE.HITECH
             ? keyPersonnel.map(kp => ({
                 key: kp.key,
                 description: `${
@@ -167,7 +213,6 @@ export const selectActivityCostSummary = createSelector(
         total.totalCost += totalCost;
       }
     );
-
     return { years: summary, total };
   }
 );

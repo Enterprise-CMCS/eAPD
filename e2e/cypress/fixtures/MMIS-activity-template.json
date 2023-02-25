@@ -163,17 +163,17 @@
           "$84,912"
         ],
         ["Other Funding Amount", "-", "$2,240"],
-        ["State Staff Subtotal", "$136,422"],
+        ["State Staff Total", "$136,422"],
         [],
         ["Training and outreach", "", "", "", "", "$75,000"],
         ["Equipment and supplies", "", "", "", "", "$1,000"],
         ["Other Funding Amount", "-", "$1,227"],
-        ["Other State Expenses Subtotal", "$74,773"],
+        ["Other State Expenses Total", "$74,773"],
         [],
         ["Studio 56", "", "", "", "", "$30,000"],
         ["Feel Good Inc.", "$300", "×", "10 hours", "=", "$3,000"],
         ["Other Funding Amount", "-", "$533"],
-        ["Private Contractor Subtotal", "$32,467"],
+        ["Private Contractor Total", "$32,467"],
         ["Activity 3 Total Computable Medicaid Cost", "$243,662"]
       ],
       [
@@ -195,17 +195,17 @@
           "$172,068"
         ],
         ["Other Funding Amount", "-", "$5,289"],
-        ["State Staff Subtotal", "$193,529"],
+        ["State Staff Total", "$193,529"],
         [],
         ["Training and outreach", "", "", "", "", "$100,000"],
         ["Equipment and supplies", "", "", "", "", "$2,500"],
         ["Other Funding Amount", "-", "$2,727"],
-        ["Other State Expenses Subtotal", "$99,773"],
+        ["Other State Expenses Total", "$99,773"],
         [],
         ["Studio 56", "", "", "", "", "$35,000"],
         ["Feel Good Inc.", "$400", "×", "5 hours", "=", "$2,000"],
         ["Other Funding Amount", "-", "$984"],
-        ["Private Contractor Subtotal", "$36,016"],
+        ["Private Contractor Total", "$36,016"],
         ["Activity 3 Total Computable Medicaid Cost", "$329,318"]
       ]
     ],
