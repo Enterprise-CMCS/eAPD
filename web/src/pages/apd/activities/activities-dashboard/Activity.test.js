@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -111,7 +112,7 @@ describe('the (Activity) EntryDetails component', () => {
 
     expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
       activityId: 'key3',
-      apdType: 'HITECH',
+      apdType: APD_TYPE.HITECH,
       fundingSource: 'appropriations',
       name: 'Congress Dollars'
     });

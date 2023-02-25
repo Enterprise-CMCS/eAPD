@@ -12,8 +12,8 @@
     "npm-check": "npx npm-check-updates",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --silent",
-    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
-    "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output -- --watch",
+    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage --runInBand",
+    "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output --watch",
     "prebuild:storybook": "yarn run scaffold && yarn run test:generate-output",
     "build:storybook": "build-storybook -o docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=docs-build",
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.19.0"
+    "node": "16.19.1"
   },
   "dependencies": {
     "@cms-eapd/common": "0.0.1",

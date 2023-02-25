@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import {
   plain as NonPersonnelCosts,
@@ -50,8 +51,7 @@ describe('activity non-personnel costs subsection', () => {
         {
           apd: {
             data: {
-              years: ['2021', '2022'],
-              apdType: 'HITECH',
+              apdType: APD_TYPE.HITECH,
               activities: [
                 {
                   expenses: 'these are wrong expenses'
@@ -62,7 +62,8 @@ describe('activity non-personnel costs subsection', () => {
                 {
                   expenses: 'these are expenses'
                 }
-              ]
+              ],
+              years: [2027, 2028]
             }
           }
         },
@@ -71,7 +72,7 @@ describe('activity non-personnel costs subsection', () => {
     ).toEqual({
       expenses: 'these are expenses',
       apdType: 'HITECH',
-      years: ['2021', '2022']
+      years: [2027, 2028]
     });
   });
 

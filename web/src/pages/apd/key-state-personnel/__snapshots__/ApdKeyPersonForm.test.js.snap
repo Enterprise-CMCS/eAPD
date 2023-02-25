@@ -26,10 +26,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       "split": Object {
         "1992": Object {
           "federal": 90,
+          "fundingCategory": "DDI",
           "state": 10,
         },
         "1993": Object {
           "federal": 90,
+          "fundingCategory": "DDI",
           "state": 10,
         },
       },
@@ -107,10 +109,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -4229,10 +4233,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -4276,10 +4282,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "split": Object {
                 "1992": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
                 "1993": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
               },
@@ -4480,10 +4488,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -8602,10 +8612,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -8649,10 +8661,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "split": Object {
                 "1992": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
                 "1993": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
               },
@@ -8853,10 +8867,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -12975,10 +12991,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -13022,10 +13040,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "split": Object {
                 "1992": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
                 "1993": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
               },
@@ -13226,10 +13246,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -17348,10 +17370,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -17395,10 +17419,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "split": Object {
                 "1992": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
                 "1993": Object {
                   "federal": 90,
+                  "fundingCategory": "DDI",
                   "state": 10,
                 },
               },
@@ -17547,10 +17573,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -21669,10 +21697,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -21716,10 +21746,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -21854,10 +21886,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -25976,10 +26010,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -26023,10 +26059,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -26189,10 +26227,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -30311,10 +30351,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -30358,10 +30400,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -30496,10 +30540,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -34618,10 +34664,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -34665,10 +34713,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -34882,10 +34932,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -39004,10 +39056,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -39051,10 +39105,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "split": Object {
                                   "1992": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                   "1993": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                 },
@@ -39189,10 +39245,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -43311,10 +43369,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -43358,10 +43418,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "split": Object {
                                   "1992": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                   "1993": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                 },
@@ -43524,10 +43586,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -47646,10 +47710,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -47693,10 +47759,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "split": Object {
                                   "1992": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                   "1993": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                 },
@@ -47831,10 +47899,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -51953,10 +52023,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -52000,10 +52072,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "split": Object {
                                   "1992": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                   "1993": Object {
                                     "federal": 90,
+                                    "fundingCategory": "DDI",
                                     "state": 10,
                                   },
                                 },
@@ -52212,10 +52286,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -56334,10 +56410,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -56381,10 +56459,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -56627,10 +56707,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -60749,10 +60831,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -60796,10 +60880,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -61051,10 +61137,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -65173,10 +65261,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -65220,10 +65310,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -65466,10 +65558,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -69588,10 +69682,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "split": Object {
                               "1992": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                               "1993": Object {
                                 "federal": 90,
+                                "fundingCategory": "DDI",
                                 "state": 10,
                               },
                             },
@@ -69635,10 +69731,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "split": Object {
                                 "1992": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                                 "1993": Object {
                                   "federal": 90,
+                                  "fundingCategory": "DDI",
                                   "state": 10,
                                 },
                               },
@@ -69972,10 +70070,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70016,10 +70116,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70054,10 +70156,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70136,10 +70240,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70180,10 +70286,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70218,10 +70326,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70300,10 +70410,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70344,10 +70456,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70382,10 +70496,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70464,10 +70580,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70508,10 +70626,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70546,10 +70666,12 @@ exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70664,10 +70786,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70708,10 +70832,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70746,10 +70872,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70828,10 +70956,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70872,10 +71002,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -70910,10 +71042,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -70992,10 +71126,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71036,10 +71172,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71074,10 +71212,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -71156,10 +71296,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71200,10 +71342,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71238,10 +71382,12 @@ exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`]
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -71356,10 +71502,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71400,10 +71548,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71438,10 +71588,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -71520,10 +71672,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71564,10 +71718,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71602,10 +71758,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -71684,10 +71842,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71728,10 +71888,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71766,10 +71928,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -71848,10 +72012,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71892,10 +72058,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -71930,10 +72098,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -72048,10 +72218,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72092,10 +72264,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72130,10 +72304,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -72212,10 +72388,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72256,10 +72434,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72294,10 +72474,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -72376,10 +72558,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72420,10 +72604,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72458,10 +72644,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },
@@ -72540,10 +72728,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72584,10 +72774,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "split": Object {
             "1992": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
             "1993": Object {
               "federal": 90,
+              "fundingCategory": "DDI",
               "state": 10,
             },
           },
@@ -72622,10 +72814,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "split": Object {
               "1992": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
               "1993": Object {
                 "federal": 90,
+                "fundingCategory": "DDI",
                 "state": 10,
               },
             },

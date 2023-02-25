@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.19.0"
+    "node": "16.19.1"
   },
   "dependencies": {
     "@joi/date": "2.1.0",

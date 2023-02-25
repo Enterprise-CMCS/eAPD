@@ -2,7 +2,7 @@
 
 # This is the title displayed in the sidebar.  First is when logged in, second
 # is when logged out.
-title: '{{year}} HITECH APD'
+title: '{{year}} APD'
 titleBasic: CMS eAPD
 
 # Top navbar button text
@@ -21,5 +21,5 @@ wip: '**Stay tuned!** This section is a work in progress.'
 
 exportAndSubmit:
   title: Export and Submit
-reviewAndDownload: 
+reviewAndDownload:
   title: Review and Download

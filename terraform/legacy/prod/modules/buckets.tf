@@ -34,7 +34,7 @@ resource "aws_s3_bucket_public_access_block" "eapd-cpm-bucket-public-access-bloc
 resource "aws_s3_bucket_versioning" "eapd-cpm-bucket-versioning" {
   bucket = aws_s3_bucket.eapd-cpm-bucket.id
   versioning_configuration {
-    status = "Enabled"
+    status = "Disabled"
   }
 }
 
@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "bucket-require-tls" {
 
     principals {
       type        = "AWS"
-      identifiers = [ var.aws_account_id]
+      identifiers = [ "*" ]
     }
 
     actions = ["s3:*",]
