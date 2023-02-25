@@ -2,8 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { APD_TYPE } from '@cms-eapd/common';
 
-import { APD_TYPE } from '@cms-eapd/common';
-
 import { removeActivity } from '../../../../redux/actions/editActivity';
 
 import {

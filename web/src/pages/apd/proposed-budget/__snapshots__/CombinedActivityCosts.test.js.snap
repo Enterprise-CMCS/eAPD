@@ -293,6 +293,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -316,6 +317,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -343,6 +345,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -366,6 +369,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -398,6 +402,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -421,6 +426,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -451,6 +457,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",
@@ -474,6 +481,7 @@ Array [
     </h4>
     <Instruction
       args={null}
+      disableTitleCaseConversion={false}
       headingDisplay={
         Object {
           "className": "ds-h3",

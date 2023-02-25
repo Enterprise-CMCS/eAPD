@@ -2,8 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { APD_TYPE } from '@cms-eapd/common';
 
-import { APD_TYPE } from '@cms-eapd/common';
-
 import {
   plain as KeyPersonnel,
   mapStateToProps,
