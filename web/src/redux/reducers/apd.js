@@ -138,6 +138,25 @@ export const getPatchesToAddYear = (state, year) => {
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
       value: 0
     });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`,
+      value:
+        apdType === APD_TYPE.HITECH
+          ? {
+              federal: 90,
+              state: 10,
+              fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+            }
+          : { federal: 0, state: 0, fundingCategory: null }
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`,
+      value: 0
+    });
   });
 
   return patches;
@@ -220,6 +239,16 @@ export const getPatchesToRemoveYear = (state, year) => {
     patches.push({
       op: 'remove',
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`
     });
   });
 
