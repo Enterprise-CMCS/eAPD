@@ -2,6 +2,25 @@ import React from 'react';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import { renderWithProviderAndRouter } from 'apd-storybook-library';
 
+const exampleActivity = {
+  activityId: '152a1e2b',
+  name: 'Activity 1',
+  milestones: [
+    {
+      endDate: '2020-09-07',
+      milestone: 'Implementation of Final Rule and Stage 3 System Developments'
+    },
+    {
+      endDate: '2019-12-31',
+      milestone: 'Environmental Scan Completion'
+    },
+    {
+      endDate: '2022-05-30',
+      milestone: 'HIT Roadmap Development'
+    }
+  ]
+};
+
 const exampleBudget = {
   _id: '63f7ce43a104d6032e367070',
   federalShareByFFYQuarter: {
@@ -751,7 +770,7 @@ const exampleBudget = {
     }
   ],
   activities: {
-    '235a3d2e': {
+    '152a1e2b': {
       _id: '63f7ce43a104d6032e367071',
       costsByFFY: {
         2022: {
@@ -1468,7 +1487,15 @@ export default {
   argTypes: {}
 };
 
-const Template = args => <CostAllocateFFPQuarterly {...args} />;
+const Template = args => (
+  <CostAllocateFFPQuarterly
+    {...args}
+    activityIndex={0}
+    activityId={'152a1e2b'}
+    isViewOnly={false}
+    year={'2022'}
+  />
+);
 
 export const CostAllocateFFPQuarterlyStory = Template.bind({});
 CostAllocateFFPQuarterlyStory.decorators = [
@@ -1491,7 +1518,8 @@ CostAllocateFFPQuarterlyStory.decorators = [
         apd: {
           data: {
             id: 'abc123',
-            years: ['2022', '2023']
+            years: ['2022', '2023'],
+            activities: [exampleActivity]
           }
         },
         budget: exampleBudget
