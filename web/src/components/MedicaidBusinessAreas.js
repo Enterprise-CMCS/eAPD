@@ -30,7 +30,7 @@ const MedicaidBusinessAreas = ({
       <Controller
         name={controllerNameForOtherDetails}
         control={control}
-        render={({ field: { onChange, onBlur, ...props } }) => (
+        render={({ field: { onBlur, ...props } }) => (
           <TextArea
             {...props}
             value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
