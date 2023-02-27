@@ -27,7 +27,11 @@ export default {
   includeStories: /.*Story$/,
   decorators: [],
   parameters: {
-    jest: ['ScheduleSummary.test.js']
+    jest: ['ScheduleSummary.test.js'],
+    controls: {
+      exclude: /.*$/,
+      hideNoControlsWarning: true
+    }
   },
   argTypes: {
     activities: exampleActivity

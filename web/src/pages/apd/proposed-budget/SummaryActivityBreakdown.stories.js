@@ -1009,129 +1009,6 @@ const exampleBudget = {
           total: 2733876
         }
       }
-    },
-    {
-      id: '2313d32a',
-      name: 'Claims Data Analytics',
-      fundingSource: 'MMIS',
-      data: {
-        combined: {
-          2022: 1808000,
-          2023: 2104250,
-          total: 3912250
-        },
-        contractors: {
-          2022: 655000,
-          2023: 761250,
-          total: 1416250
-        },
-        expenses: {
-          2022: 0,
-          2023: 0,
-          total: 0
-        },
-        otherFunding: {
-          2022: {
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          },
-          2023: {
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          }
-        },
-        statePersonnel: {
-          2022: 1153000,
-          2023: 1343000,
-          total: 2496000
-        }
-      }
-    },
-    {
-      id: '543ace23',
-      name: 'HIE Enhancement and Onboarding',
-      fundingSource: 'HIE',
-      data: {
-        combined: {
-          2022: 470000,
-          2023: 486000,
-          total: 956000
-        },
-        contractors: {
-          2022: 0,
-          2023: 0,
-          total: 0
-        },
-        expenses: {
-          2022: 10000,
-          2023: 10000,
-          total: 20000
-        },
-        otherFunding: {
-          2022: {
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          },
-          2023: {
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          }
-        },
-        statePersonnel: {
-          2022: 460000,
-          2023: 476000,
-          total: 936000
-        }
-      }
-    },
-    {
-      id: '7893e324',
-      name: 'Medicaid Blue Button',
-      fundingSource: 'HIE',
-      data: {
-        combined: {
-          2022: 785246,
-          2023: 505000,
-          total: 1290246
-        },
-        contractors: {
-          2022: 785246,
-          2023: 505000,
-          total: 1290246
-        },
-        expenses: {
-          2022: 0,
-          2023: 0,
-          total: 0
-        },
-        otherFunding: {
-          2022: {
-            contractors: 15000,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 15000
-          },
-          2023: {
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          }
-        },
-        statePersonnel: {
-          2022: 0,
-          2023: 0,
-          total: 0
-        }
-      }
     }
   ],
   activities: {
@@ -1310,563 +1187,33 @@ const exampleBudget = {
           inHouse: 3167443
         }
       }
-    },
-    '2313d32a': {
-      _id: '63f7ce43a104d6032e367072',
-      costsByFFY: {
-        2022: {
-          federal: 1627200,
-          medicaid: 1808000,
-          state: 180800,
-          total: 1808000
-        },
-        2023: {
-          federal: 1578188,
-          medicaid: 2104250,
-          state: 526062,
-          total: 2104250
-        },
-        total: {
-          federal: 3205388,
-          medicaid: 3912250,
-          state: 706862,
-          total: 3912250
-        }
-      },
-      quarterlyFFP: {
-        years: {
-          2022: {
-            1: {
-              combined: {
-                dollars: 406800,
-                percent: 0
-              },
-              contractors: {
-                dollars: 147375,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 259425,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 406800,
-                percent: 0
-              },
-              contractors: {
-                dollars: 147375,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 259425,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 406800,
-                percent: 0
-              },
-              contractors: {
-                dollars: 147375,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 259425,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 406800,
-                percent: 0
-              },
-              contractors: {
-                dollars: 147375,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 259425,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 1627200,
-                percent: 0
-              },
-              contractors: {
-                dollars: 589500,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 1037700,
-                percent: 1
-              }
-            }
-          },
-          2023: {
-            1: {
-              combined: {
-                dollars: 394548,
-                percent: 0
-              },
-              contractors: {
-                dollars: 142735,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 251813,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 394548,
-                percent: 0
-              },
-              contractors: {
-                dollars: 142735,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 251813,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 394546,
-                percent: 0
-              },
-              contractors: {
-                dollars: 142734,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 251812,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 394546,
-                percent: 0
-              },
-              contractors: {
-                dollars: 142734,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 251812,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 1578188,
-                percent: 0
-              },
-              contractors: {
-                dollars: 570938,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 1007250,
-                percent: 1
-              }
-            }
-          }
-        },
-        total: {
-          combined: 3205388,
-          contractors: 1160438,
-          inHouse: 2044950
-        }
-      }
-    },
-    '543ace23': {
-      _id: '63f7ce43a104d6032e367073',
-      costsByFFY: {
-        2022: {
-          federal: 423000,
-          medicaid: 470000,
-          state: 47000,
-          total: 470000
-        },
-        2023: {
-          federal: 437400,
-          medicaid: 486000,
-          state: 48600,
-          total: 486000
-        },
-        total: {
-          federal: 860400,
-          medicaid: 956000,
-          state: 95600,
-          total: 956000
-        }
-      },
-      quarterlyFFP: {
-        years: {
-          2022: {
-            1: {
-              combined: {
-                dollars: 105750,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 105750,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 105750,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 105750,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 105750,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 105750,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 105750,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 105750,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 423000,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 423000,
-                percent: 1
-              }
-            }
-          },
-          2023: {
-            1: {
-              combined: {
-                dollars: 109350,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 109350,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 109350,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 109350,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 109350,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 109350,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 109350,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 109350,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 437400,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 437400,
-                percent: 1
-              }
-            }
-          }
-        },
-        total: {
-          combined: 860400,
-          contractors: 0,
-          inHouse: 860400
-        }
-      }
-    },
-    '7893e324': {
-      _id: '63f7ce43a104d6032e367074',
-      costsByFFY: {
-        2022: {
-          federal: 693221,
-          medicaid: 770246,
-          state: 77025,
-          total: 785246
-        },
-        2023: {
-          federal: 454500,
-          medicaid: 505000,
-          state: 50500,
-          total: 505000
-        },
-        total: {
-          federal: 1147721,
-          medicaid: 1275246,
-          state: 127525,
-          total: 1290246
-        }
-      },
-      quarterlyFFP: {
-        years: {
-          2022: {
-            1: {
-              combined: {
-                dollars: 173306,
-                percent: 0
-              },
-              contractors: {
-                dollars: 173306,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 173305,
-                percent: 0
-              },
-              contractors: {
-                dollars: 173305,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 173305,
-                percent: 0
-              },
-              contractors: {
-                dollars: 173305,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 173305,
-                percent: 0
-              },
-              contractors: {
-                dollars: 173305,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 693221,
-                percent: 0
-              },
-              contractors: {
-                dollars: 693221,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 1
-              }
-            }
-          },
-          2023: {
-            1: {
-              combined: {
-                dollars: 113625,
-                percent: 0
-              },
-              contractors: {
-                dollars: 113625,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 113625,
-                percent: 0
-              },
-              contractors: {
-                dollars: 113625,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 113625,
-                percent: 0
-              },
-              contractors: {
-                dollars: 113625,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 113625,
-                percent: 0
-              },
-              contractors: {
-                dollars: 113625,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 454500,
-                percent: 0
-              },
-              contractors: {
-                dollars: 454500,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 1
-              }
-            }
-          }
-        },
-        total: {
-          combined: 1147721,
-          contractors: 1147721,
-          inHouse: 0
-        }
-      }
     }
   },
   __v: 0
 };
 
-const exampleOtherFunding = {
-  2022: {
-    contractors: 40505,
-    expenses: 23554,
-    statePersonnel: 40941,
-    total: 105000
-  }
-};
-
 export default {
-  title: 'Pages/Apd/Tables/SummaryActivityBreakdownTable',
+  title: 'Pages/Apd/Tables/SummaryBudgetByActivityBreakdown',
   component: SummaryActivityBreakdownTable,
   includeStories: /.*Story$/,
   decorators: [],
-  parameters: {},
+  parameters: {
+    jest: ['CombinedActivityCosts.test.js'],
+    controls: {
+      exclude: /.*$/,
+      hideNoControlsWarning: true
+    }
+  },
   argTypes: {}
 };
 
 const Template = args => (
   <SummaryActivityBreakdownTable
     {...args}
-    activityIndex={0}
+    key={'abc123'}
     ffy={'2022'}
-    otherFunding={exampleOtherFunding}
+    activityIndex={0}
+    otherFunding={exampleBudget.activityTotals[0].data.otherFunding}
   />
 );
 
@@ -1875,19 +1222,6 @@ SummaryActivityBreakdownTableStory.decorators = [
   story =>
     renderWithProviderAndRouter({
       initialState: {
-        router: {
-          location: {
-            pathname: '/'
-          }
-        },
-        nav: {
-          continueLink: {
-            label: 'go forth',
-            url: '/apd/abc123/go-forth',
-            selected: false
-          },
-          previousLink: null
-        },
         apd: {
           data: {
             keyStatePersonnel: {
@@ -1921,11 +1255,13 @@ SummaryActivityBreakdownTableStory.decorators = [
                   split: {
                     2022: {
                       federal: 90,
-                      state: 10
+                      state: 10,
+                      fundingCategory: 'DDI'
                     },
                     2023: {
                       federal: 90,
-                      state: 10
+                      state: 10,
+                      fundingCategory: 'DDI'
                     }
                   },
                   medicaidShare: {
@@ -1933,7 +1269,7 @@ SummaryActivityBreakdownTableStory.decorators = [
                     2023: 100
                   },
                   id: null,
-                  key: '8640e368'
+                  key: '8e97cfe2'
                 },
                 {
                   name: 'Fred Johnson',
@@ -1952,11 +1288,13 @@ SummaryActivityBreakdownTableStory.decorators = [
                   split: {
                     2022: {
                       federal: 90,
-                      state: 10
+                      state: 10,
+                      fundingCategory: 'DDI'
                     },
                     2023: {
                       federal: 90,
-                      state: 10
+                      state: 10,
+                      fundingCategory: 'DDI'
                     }
                   },
                   medicaidShare: {
@@ -1964,82 +1302,16 @@ SummaryActivityBreakdownTableStory.decorators = [
                     2023: 100
                   },
                   id: null,
-                  key: '5c198283'
+                  key: 'a2b5eea2'
                 }
               ]
             },
-            previousActivities: {
-              previousActivitySummary:
-                '<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>\n<p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>\n<p>&nbsp;</p>\n<p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the State&acirc;s audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the state&acirc;s accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>\n<p>&nbsp;</p>\n<p>IAPD Funding Milestones and Expenditures</p>\n<p>The first IAPDU which was approved by CMS in October 2012 requested funding for HIT initiatives. The primary focus of the activities in the IAPDU # 2, which was approved in April 2013 was support of MU Stage 1, preparation for MU Stage 2, and the ongoing administration of the EHR Incentive Payment program. Subsequent IAPD submissions requested continued funding to support program operations and modernization of enterprise systems.</p>\n<p>&nbsp;</p>\n<p>Tycho recently transitioned to a new state-wide financial system and it would be overly burdensome and a manual process to detail expenses out in the method done in previous HITECH IAPD submissions. Tycho has elected to report expenditures based on the CMS-64 line reporting for HITECH as this will be the most audible method due to the state&acirc;s transition to a new financial system.</p>\n<p>Detailed List of Expenditure Types:</p>\n<ul>\n<li>State personnel</li>\n<li>Travel and conferences: CMS Regional Meeting, attendance at local/Anchorage-based conferences to support EHR Incentive Program and Meaningful Use, and other HIT/HIE related conferences such as StateHealth IT Connect, IT Solutions Management (ISM) annual conference</li>\n<li>Contract payments for State Level Registry solution</li>\n<li>Contract payments for post-payment audits for the Medicaid EHR Incentive Program</li>\n<li>Contract payments for Technical Assistance for EHR Incentive Program and other HITECH activities identified in HITECH IAPD</li>\n<li>Contract payments for MITA 3.0 COTS solution as outlined in HITECH IAPD to support the development of a HITECH MITA 3.0 State Self-Assessment</li>\n<li>Administrative costs: copy paper, office supplies</li>\n</ul>',
-              actualExpenditures: {
-                2019: {
-                  hithie: {
-                    federalActual: 140000,
-                    totalApproved: 280000
-                  },
-                  mmis: {
-                    50: {
-                      federalActual: 23445,
-                      totalApproved: 82545
-                    },
-                    75: {
-                      federalActual: 23440,
-                      totalApproved: 75340
-                    },
-                    90: {
-                      federalActual: 235720,
-                      totalApproved: 262460
-                    }
-                  }
-                },
-                2020: {
-                  hithie: {
-                    federalActual: 146346,
-                    totalApproved: 234526
-                  },
-                  mmis: {
-                    50: {
-                      federalActual: 129387,
-                      totalApproved: 375445
-                    },
-                    75: {
-                      federalActual: 413246,
-                      totalApproved: 654455
-                    },
-                    90: {
-                      federalActual: 614544,
-                      totalApproved: 863455
-                    }
-                  }
-                },
-                2021: {
-                  hithie: {
-                    federalActual: 320000,
-                    totalApproved: 540000
-                  },
-                  mmis: {
-                    50: {
-                      federalActual: 0,
-                      totalApproved: 0
-                    },
-                    75: {
-                      federalActual: 0,
-                      totalApproved: 0
-                    },
-                    90: {
-                      federalActual: 0,
-                      totalApproved: 0
-                    }
-                  }
-                }
-              }
-            },
+            years: ['2022'],
             apdType: 'HITECH',
-            id: 'abc123',
-            years: ['2022', '2023'],
             activities: [exampleActivity]
           }
-        }
+        },
+        budget: exampleBudget
       },
       story
     })

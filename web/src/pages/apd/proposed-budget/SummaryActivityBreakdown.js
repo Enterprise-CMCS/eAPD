@@ -8,14 +8,15 @@ import {
 import CostAllocationRows from '../activities/cost-allocation/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
-  ffy,
-  activityIndex,
+  ffy, // prop
+  activityIndex, // prop
   costSummary,
   activityName,
-  otherFunding,
+  otherFunding, // prop
   fundingSource
 }) => {
   const { years } = costSummary;
+  console.log('stuff', { years, costSummary });
 
   return (
     <table
