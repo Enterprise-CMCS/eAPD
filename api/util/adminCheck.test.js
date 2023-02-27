@@ -967,24 +967,6 @@ const mockHitechApdRandomInvalid = {
       isUpdateAPD: false,
       annualUpdate: false,
       asNeededUpdate: false
-    },
-    medicaidBusinessAreas: {
-      waiverSupportSystems: false,
-      assetVerificationSystem: false,
-      claimsProcessing: true,
-      decisionSupportSystemDW: false,
-      electronicVisitVerification: false,
-      encounterProcessingSystemMCS: false,
-      financialManagement: true,
-      healthInformationExchange: false,
-      longTermServicesSupports: false,
-      memberManagement: false,
-      pharmacyBenefitManagementPOS: false,
-      programIntegrity: true,
-      providerManagement: false,
-      thirdPartyLiability: false,
-      other: true,
-      otherMedicaidBusinessAreas: ''
     }
   },
   keyStatePersonnel: {
