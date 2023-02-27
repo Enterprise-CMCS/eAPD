@@ -101,17 +101,17 @@ const MmsiUpdateStatus = ({
       <Controller
         name="medicaidBusinessAreas"
         control={control}
-        render={({ field: { onBlur, onChange } }) => (
+        render={({ field: { onBlur } }) => (
           <MedicaidBusinessAreas
+            controllerName="medicaidBusinessAreas"
             controllerNameForOtherDetails="medicaidBusinessAreas.otherMedicaidBusinessAreas"
             errorMessage={errors?.medicaidBusinessAreas?.message}
             errorOtherDetails={
               errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas?.message
             }
-            medicaidBusinessAreaChoices={medicaidBusinessAreas}
+            medicaidBusinessAreas={medicaidBusinessAreas}
             setMedicaidBusinessAreas={setMedicaidBusinessAreas}
             onBlur={onBlur}
-            onChange={onChange}
           />
         )}
       />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TextArea from './TextArea';
 import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common';
@@ -6,15 +6,88 @@ import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const MedicaidBusinessAreas = ({
+  adminCheck,
+  controllerName,
   controllerNameForOtherDetails,
   errorMessage,
   errorOtherDetails,
-  medicaidBusinessAreaChoices,
+  medicaidBusinessAreas,
   setMedicaidBusinessAreas,
-  onBlur,
-  onChange
+  onBlur
 }) => {
-  const { control } = useFormContext();
+  const { control, setValue, trigger, clearErrors } = useFormContext();
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]);
+
+  const otherMedicaidBusinessAreaComponent = (
+    <div className="ds-c-choice__checkedChild">
+      <Controller
+        name={controllerNameForOtherDetails}
+        control={control}
+        render={({ field: { onChange, onBlur, ...props } }) => (
+          <TextArea
+            {...props}
+            value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
+            label={
+              MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
+            }
+            labelClassName="label-header"
+            data-cy="other_details"
+            hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
+            onBlur={onBlur}
+            errorMessage={errorOtherDetails}
+            errorPlacement="bottom"
+          />
+        )}
+      />
+    </div>
+  );
+
+  const getBusinessAreaChoices = () => {
+    const medicaidBusinessAreasBooleanFields = Object.assign(
+      {},
+      medicaidBusinessAreas
+    );
+    delete medicaidBusinessAreasBooleanFields.otherMedicaidBusinessAreas;
+
+    let choiceList = [];
+
+    for (const [key, value] of Object.entries(
+      medicaidBusinessAreasBooleanFields
+    )) {
+      let choice = {
+        label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key],
+        value: key,
+        checked: value
+      };
+
+      if (key === 'other') {
+        choice.checkedChildren = otherMedicaidBusinessAreaComponent;
+      }
+
+      choiceList.push(choice);
+    }
+    return choiceList;
+  };
+
+  const handleBusinessAreas = e => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    medicaidBusinessAreas[value] = checked;
+    setMedicaidBusinessAreas(medicaidBusinessAreas);
+    setValue(controllerName, {
+      ...medicaidBusinessAreas,
+      [e.target.value]: e.target.checked
+    });
+    trigger(controllerName);
+  };
 
   return (
     <ChoiceList
@@ -36,122 +109,8 @@ const MedicaidBusinessAreas = ({
         </div>
       }
       type="checkbox"
-      choices={[
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.waiverSupportSystems,
-          value: 'waiverSupportSystems',
-          checked: medicaidBusinessAreaChoices.waiverSupportSystems
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.assetVerificationSystem,
-          value: 'assetVerificationSystem',
-          checked: medicaidBusinessAreaChoices.assetVerificationSystem
-        },
-        {
-          label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.claimsProcessing,
-          value: 'claimsProcessing',
-          checked: medicaidBusinessAreaChoices.claimsProcessing
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.decisionSupportSystemDW,
-          value: 'decisionSupportSystemDW',
-          checked: medicaidBusinessAreaChoices.decisionSupportSystemDW
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.electronicVisitVerification,
-          value: 'electronicVisitVerification',
-          checked: medicaidBusinessAreaChoices.electronicVisitVerification
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.encounterProcessingSystemMCS,
-          value: 'encounterProcessingSystemMCS',
-          checked: medicaidBusinessAreaChoices.encounterProcessingSystemMCS
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.financialManagement,
-          value: 'financialManagement',
-          checked: medicaidBusinessAreaChoices.financialManagement
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.healthInformationExchange,
-          value: 'healthInformationExchange',
-          checked: medicaidBusinessAreaChoices.healthInformationExchange
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.longTermServicesSupports,
-          value: 'longTermServicesSupports',
-          checked: medicaidBusinessAreaChoices.longTermServicesSupports
-        },
-        {
-          label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.memberManagement,
-          value: 'memberManagement',
-          checked: medicaidBusinessAreaChoices.memberManagement
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.pharmacyBenefitManagementPOS,
-          value: 'pharmacyBenefitManagementPOS',
-          checked: medicaidBusinessAreaChoices.pharmacyBenefitManagementPOS
-        },
-        {
-          label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.programIntegrity,
-          value: 'programIntegrity',
-          checked: medicaidBusinessAreaChoices.programIntegrity
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.providerManagement,
-          value: 'providerManagement',
-          checked: medicaidBusinessAreaChoices.providerManagement
-        },
-        {
-          label:
-            MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.thirdPartyLiability,
-          value: 'thirdPartyLiability',
-          checked: medicaidBusinessAreaChoices.thirdPartyLiability
-        },
-        {
-          label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.other,
-          value: 'other',
-          checked: medicaidBusinessAreaChoices.other,
-          checkedChildren: (
-            <div className="ds-c-choice__checkedChild">
-              <Controller
-                name={controllerNameForOtherDetails}
-                control={control}
-                render={({ field: { onBlur, ...props } }) => (
-                  <TextArea
-                    {...props}
-                    label={
-                      MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
-                    }
-                    data-cy="other_details"
-                    hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                    onBlur={onBlur}
-                    onComponentBlur={onBlur}
-                    errorMessage={errorOtherDetails}
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
-            </div>
-          )
-        }
-      ]}
-      onChange={({ target: { value, checked } }) => {
-        medicaidBusinessAreaChoices[value] = checked;
-        setMedicaidBusinessAreas(medicaidBusinessAreaChoices);
-        console.log(typeof errorMessage);
-        onChange(medicaidBusinessAreaChoices);
-      }}
+      choices={getBusinessAreaChoices()}
+      onChange={handleBusinessAreas}
       onBlur={onBlur}
       onComponentBlur={onBlur}
       errorMessage={errorMessage}
@@ -161,13 +120,14 @@ const MedicaidBusinessAreas = ({
 };
 
 MedicaidBusinessAreas.propTypes = {
+  adminCheck: PropTypes.func,
+  controllerName: PropTypes.string.isRequired,
   controllerNameForOtherDetails: PropTypes.string.isRequired,
   errorMessage: PropTypes.string,
   errorOtherDetails: PropTypes.string,
-  medicaidBusinessAreaChoices: PropTypes.object.isRequired,
+  medicaidBusinessAreas: PropTypes.object.isRequired,
   setMedicaidBusinessAreas: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onBlur: PropTypes.func.isRequired
 };
 
 export default MedicaidBusinessAreas;
