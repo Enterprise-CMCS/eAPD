@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextArea from '../../../components/TextArea';
 import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
 
 import { ChoiceList } from '@cmsgov/design-system';
