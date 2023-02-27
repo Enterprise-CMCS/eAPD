@@ -3,22 +3,29 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
-  items.map(({ key, description, totalCost, unitCost, units }) => (
-    <tr key={key || description}>
-      <td className="title">{description || 'Category Not Selected'}</td>
-      <td className="budget-table--number">
-        {unitCost !== null && <Dollars>{unitCost}</Dollars>}
-      </td>
-      <td className="budget-table--number ds-u-padding--0">
-        {unitCost !== null && '×'}
-      </td>
-      <td className="budget-table--number ds-u-text-align--left">{units}</td>
-      <td className="budget-table--number">{unitCost !== null && '='}</td>
-      <td className="budget-table--number">
-        <Dollars>{totalCost}</Dollars>
-      </td>
-    </tr>
-  ));
+  items.map(
+    ({ key, description, totalCost, unitCost, units, medicaidShare }) => (
+      <tr key={key || description}>
+        <td className="title">{description || 'Category Not Selected'}</td>
+        <td className="budget-table--number">
+          {unitCost !== null && <Dollars>{unitCost}</Dollars>}
+        </td>
+        <td className="budget-table--number ds-u-padding--0">
+          {unitCost !== null && '×'}
+        </td>
+        <td className="budget-table--number ds-u-text-align--left">{units}</td>
+        {medicaidShare && (
+          <td className="budget-table--number ds-u-text-align--left">
+            × {medicaidShare}%
+          </td>
+        )}
+        <td className="budget-table--number">{unitCost !== null && '='}</td>
+        <td className="budget-table--number">
+          <Dollars>{totalCost}</Dollars>
+        </td>
+      </tr>
+    )
+  );
 
 CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired
@@ -58,11 +65,11 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         </td>
       </tr>
     )}
-    <tr className="budget-table--subtotal budget-table--row__highlight">
+    <tr className="budget-table--total budget-table--row__highlight">
       <td className="title" colSpan="5">
-        State Staff Subtotal
+        State Staff Total
       </td>
-      <td className="budget-table--number" data-cy="subtotal">
+      <td className="budget-table--number" data-cy="total">
         <Dollars>
           {otherFunding
             ? years[ffy].statePersonnelTotal - otherFunding[ffy].statePersonnel
@@ -87,11 +94,11 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         </td>
       </tr>
     )}
-    <tr className="budget-table--subtotal budget-table--row__highlight">
+    <tr className="budget-table--total budget-table--row__highlight">
       <td className="title" colSpan="5">
-        Other State Expenses Subtotal
+        Other State Expenses Total
       </td>
-      <td className="budget-table--number" data-cy="subtotal">
+      <td className="budget-table--number" data-cy="total">
         <Dollars>
           {otherFunding
             ? years[ffy].nonPersonnelTotal - otherFunding[ffy].expenses
@@ -116,11 +123,11 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         </td>
       </tr>
     )}
-    <tr className="budget-table--subtotal budget-table--row__highlight">
+    <tr className="budget-table--total budget-table--row__highlight">
       <td className="title" colSpan="5">
-        Private Contractor Subtotal
+        Private Contractor Total
       </td>
-      <td className="budget-table--number" data-cy="subtotal">
+      <td className="budget-table--number" data-cy="total">
         <Dollars>
           {otherFunding
             ? years[ffy].contractorResourcesTotal -
@@ -129,12 +136,12 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         </Dollars>
       </td>
     </tr>
-    <tr className="budget-table--subtotal budget-table--row__header">
+    <tr className="budget-table--total budget-table--row__header">
       <td colSpan="5">
         Activity {activityIndex >= 0 && activityIndex + 1} Total Computable
         Medicaid Cost
       </td>
-      <td className="budget-table--number" data-cy="subtotal">
+      <td className="budget-table--number" data-cy="total">
         <Dollars>
           {otherFunding
             ? years[ffy].totalCost - otherFunding[ffy].total

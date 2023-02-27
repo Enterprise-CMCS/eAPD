@@ -50,17 +50,16 @@ const contractorResourcesSchema = Joi.object({
     'number.positive': 'Provide a contract cost greater than or equal to $0.',
     'number.allow': 'Provide a contract cost greater than or equal to $0.'
   }),
-  useHourly: Joi.alternatives()
-    .try(Joi.string().min(1), Joi.boolean())
-    .required()
-    .messages({
-      'alternatives.match': 'Must select hourly or yearly.',
-      'alternatives.types': 'Must select hourly or yearly.',
-      'string.base': 'Must select hourly or yearly.',
-      'string.empty': 'Must select hourly or yearly.'
-    }),
+  useHourly: Joi.boolean().required().messages({
+    'alternatives.match': 'Must select hourly or yearly.',
+    'alternatives.types': 'Must select hourly or yearly.',
+    'string.base': 'Must select hourly or yearly.',
+    'string.empty': 'Must select hourly or yearly.',
+    'boolean.base': 'Must select hourly or yearly.',
+    'boolean.empty': 'Must select hourly or yearly.'
+  }),
   hourly: Joi.alternatives().conditional('useHourly', {
-    is: 'yes',
+    is: true,
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.object({
@@ -88,7 +87,7 @@ const contractorResourcesSchema = Joi.object({
     otherwise: Joi.any()
   }),
   years: Joi.alternatives().conditional('useHourly', {
-    is: 'no',
+    is: false,
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.number().positive().allow(0).required().messages({

@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
@@ -13,6 +13,7 @@ import {
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
   SAVE_APD_SUCCESS,
+  SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
   ADMIN_CHECK_COLLAPSE_TOGGLE,
@@ -25,7 +26,6 @@ import {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
-import regulations from '../../util/regulations';
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -293,7 +293,12 @@ describe('APD reducer', () => {
               ]
             }
           ],
-          assurancesAndCompliances: regulations,
+          assurancesAndCompliances: {
+            procurement: [],
+            recordsAccess: [],
+            security: [],
+            softwareRights: []
+          },
           value: `hurr hurr i'm a burr`
         }
       });
@@ -517,7 +522,10 @@ describe('APD reducer', () => {
               }
             ],
             costAllocation: {
-              1741: { other: 0, ffp: { federal: 0, state: 100 } },
+              1741: {
+                other: 0,
+                ffp: { federal: 0, state: 100, fundingCategory: null }
+              },
               1742: 'yes',
               1743: 'no'
             },
@@ -641,7 +649,14 @@ describe('APD reducer', () => {
               }
             ],
             costAllocation: {
-              1741: { other: 0, ffp: { federal: 90, state: 10 } },
+              1741: {
+                other: 0,
+                ffp: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                }
+              },
               1742: 'yes',
               1743: 'no'
             },
@@ -1006,11 +1021,13 @@ describe('APD reducer', () => {
                 split: {
                   1: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   },
                   2: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   }
                 },
                 medicaidShare: {
@@ -1043,11 +1060,13 @@ describe('APD reducer', () => {
                 split: {
                   1: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   },
                   2: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   }
                 },
                 medicaidShare: {
@@ -1082,11 +1101,13 @@ describe('APD reducer', () => {
                 split: {
                   1: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   },
                   2: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   }
                 },
                 medicaidShare: {
@@ -1107,11 +1128,13 @@ describe('APD reducer', () => {
                 split: {
                   1: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   },
                   2: {
                     federal: 0,
-                    state: 0
+                    state: 0,
+                    fundingCategory: null
                   }
                 },
                 medicaidShare: {
@@ -1169,7 +1192,10 @@ describe('APD reducer', () => {
               expenses: [],
               contractorResources: [],
               costAllocation: {
-                1787: { ffp: { federal: 0, state: 100 }, other: 0 }
+                1787: {
+                  ffp: { federal: 0, state: 100, fundingCategory: null },
+                  other: 0
+                }
               },
               costAllocationNarrative: {
                 years: {
@@ -1243,7 +1269,10 @@ describe('APD reducer', () => {
               expenses: [],
               contractorResources: [],
               costAllocation: {
-                1787: { ffp: { federal: 0, state: 100 }, other: 0 }
+                1787: {
+                  ffp: { federal: 0, state: 100, fundingCategory: null },
+                  other: 0
+                }
               },
               costAllocationNarrative: {
                 years: {
@@ -1549,6 +1578,45 @@ describe('APD reducer', () => {
     );
   });
 
+  it('should handle APD select failure', () => {
+    expect(
+      apd(
+        {
+          a: 'alpha',
+          b: 'beta',
+          byId: {
+            apdID: { name: 'Bobbert', updated: 'in the past' },
+            otherID: { name: 'Jimbob', updated: 'in the future' }
+          },
+          data: {
+            name: 'Timmothert',
+            updated: 'in the present'
+          },
+          adminCheck: {
+            errors: []
+          }
+        },
+        {
+          type: SELECT_APD_FAILURE,
+          data: 'Error selected APD'
+        }
+      )
+    ).toEqual({
+      a: 'alpha',
+      b: 'beta',
+      byId: {
+        apdID: { name: 'Bobbert', updated: 'in the past' },
+        otherID: { name: 'Jimbob', updated: 'in the future' }
+      },
+      data: {},
+      adminCheck: {
+        errors: []
+      },
+      error: 'Error selected APD',
+      fetching: false
+    });
+  });
+
   describe('admin check panel toggles', () => {
     it('should handle turning the admin check on', () => {
       expect(
@@ -1633,11 +1701,13 @@ describe('APD reducer helper methods', () => {
             split: {
               1: {
                 federal: 0,
-                state: 0
+                state: 0,
+                fundingCategory: null
               },
               2: {
                 federal: 0,
-                state: 0
+                state: 0,
+                fundingCategory: null
               }
             },
             medicaidShare: {
@@ -1677,11 +1747,13 @@ describe('APD reducer helper methods', () => {
             split: {
               1: {
                 federal: 0,
-                state: 0
+                state: 0,
+                fundingCategory: null
               },
               2: {
                 federal: 0,
-                state: 0
+                state: 0,
+                fundingCategory: null
               }
             },
             medicaidShare: {

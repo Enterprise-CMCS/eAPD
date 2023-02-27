@@ -49,6 +49,7 @@ const ApdHeader = ({ apdCreated, apdName, apdType, setName, year }) => {
             <input
               id="apd-title-input"
               className="ds-h1 apd--title"
+              data-cy="apd-name-header"
               type="text"
               value={apdName}
               onChange={value => setName(value.target.value)}
@@ -62,6 +63,7 @@ const ApdHeader = ({ apdCreated, apdName, apdType, setName, year }) => {
               <div
                 id="apd-title-input"
                 className="ds-h1 apd--title"
+                data-cy="apd-name-header"
                 onClick={() => setEditing(true)}
                 onKeyPress={onKeyPress}
                 role="button"

@@ -1,19 +1,22 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
+import { connect } from 'react-redux';
 
 import CombinedActivityCosts from './CombinedActivityCosts';
 import BudgetSummary from './BudgetSummary';
 import IncentivePayments from './IncentivePayments';
 import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
-const ProposedBudget = () => (
+const ProposedBudget = ({ apdType }) => (
   <div>
     <h2>Proposed Budget</h2>
 
     <h3>Combined Activity Costs</h3>
-    <CombinedActivityCosts isViewOnly />
+    <CombinedActivityCosts isViewOnly apdType={apdType} />
 
     <h3>Summary Budget Table</h3>
-    <BudgetSummary />
+    <BudgetSummary apdType={apdType} />
 
     <h3>Quarterly Federal Share</h3>
     <QuarterlyBudgetSummary />
@@ -23,4 +26,14 @@ const ProposedBudget = () => (
   </div>
 );
 
-export default ProposedBudget;
+ProposedBudget.propTypes = {
+  apdType: PropTypes.string
+};
+
+const mapStateToProps = state => ({
+  apdType: selectApdType(state)
+});
+
+export default connect(mapStateToProps)(ProposedBudget);
+
+export { ProposedBudget as plain, mapStateToProps };

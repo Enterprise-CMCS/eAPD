@@ -1,5 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+
+import { APD_TYPE } from '@cms-eapd/common';
+
 import {
   plain as CombinedActivityCosts,
   mapStateToProps,
@@ -12,14 +15,34 @@ import {
 describe('renders correctly', () => {
   it('renders correctly in view-only mode', () => {
     const component = shallow(
-      <CombinedActivityCosts data={{}} years={['1984', '1985']} isViewOnly />
+      <CombinedActivityCosts
+        apdType={APD_TYPE.HITECH}
+        data={{}}
+        years={['1984', '1985']}
+        isViewOnly
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
-  it('renders correctly in standard mode', () => {
+  it('renders correctly in standard mode for hitech apds', () => {
     const component = shallow(
-      <CombinedActivityCosts data={{}} years={['1984', '1985']} />
+      <CombinedActivityCosts
+        apdType={APD_TYPE.HITECH}
+        data={{}}
+        years={['1984', '1985']}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders correctly in standard mode for mmis apds', () => {
+    const component = shallow(
+      <CombinedActivityCosts
+        apdType={APD_TYPE.MMIS}
+        data={{}}
+        years={['1984', '1985']}
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -47,7 +70,26 @@ describe('renders correctly', () => {
             expenses: { 1448: {} },
             statePersonnel: { 1448: {} }
           }}
-          groupTitle="MMIS"
+          groupTitle={APD_TYPE.MMIS}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('data row group renders for mmis', () => {
+    expect(
+      shallow(
+        <DataRowGroup
+          apdType={APD_TYPE.MMIS}
+          year="1448"
+          data={{
+            combined: { 1448: {} },
+            contractors: { 1448: {} },
+            expenses: { 1448: {} },
+            statePersonnel: { 1448: {} },
+            keyStatePersonnel: { 1448: {} }
+          }}
+          groupTitle={APD_TYPE.MMIS}
         />
       )
     ).toMatchSnapshot();

@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { FUNDING_CATEGORY_TYPE } from '../utils/constants.js';
 
 export const medicaidDirectorSchema = Joi.object().keys({
   name: Joi.string().trim().required().messages({
@@ -113,7 +114,19 @@ export const keyPersonnelSchema = Joi.object({
           .messages({
             'alternatives.base': 'Select a federal-state split.',
             'alternatives.any': 'Select a federal-state split.'
-          })
+          }),
+        fundingCategory: Joi.alternatives().conditional('federal', {
+          switch: [
+            {
+              is: 90,
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.DDI)
+            },
+            {
+              is: 75,
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.MANDO)
+            }
+          ]
+        })
       })
     ),
     otherwise: Joi.any()
@@ -121,11 +134,11 @@ export const keyPersonnelSchema = Joi.object({
   medicaidShare: Joi.object().pattern(
     /\d{4}/,
     Joi.number().positive().allow(0).max(100).required().messages({
-      'number.base': 'Provide a valid percentage.',
-      'number.empty': 'Provide a valid percentage.',
-      'number.format': 'Provide a valid percentage.',
-      'number.max': 'Provide a valid percentage.',
-      'number.positive': 'Provide a valid percentage.'
+      'number.base': 'Provide a valid Medicaid Share as a percentage.',
+      'number.empty': 'Provide a valid Medicaid Share as a percentage.',
+      'number.format': 'Provide a valid Medicaid Share as a percentage.',
+      'number.max': 'Provide a valid Medicaid Share as a percentage.',
+      'number.positive': 'Provide a valid Medicaid Share as a percentage.'
     })
   )
 });

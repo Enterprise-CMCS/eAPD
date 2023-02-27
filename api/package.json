@@ -24,9 +24,9 @@
     "seed-users": "yarn knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest --maxWorkers=50%",
     "tap": "NODE_ENV=test TAP_DIAG=1 tap -J --no-browser --no-coverage --no-timeout",
-    "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
+    "test": "NODE_ENV=test tap -J --coverage-report=text-lcov --no-browser",
     "test-endpoints": "yarn jest --detectOpenHandles --forceExit --maxWorkers=50%",
-    "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
+    "test-specific": "NODE_ENV=test tap --no-coverage --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.19.0"
+    "node": "16.19.1"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.259.0",
@@ -107,14 +107,9 @@
     "globalSetup": "<rootDir>/jest.setup.js",
     "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
-    "testEnvironment": "node",
     "testTimeout": 30000,
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)"
-    ],
+    "testEnvironment": "jest-environment-node",
+    "transform": {},
     "moduleFileExtensions": [
       "js",
       "jsx"
@@ -127,13 +122,14 @@
     ]
   },
   "tap": {
-    "files": "!(node_modules|coverage)/**/*.test.js",
+    "files": "!(node_modules|coverage|dist)/**/*.test.js",
     "lines": 75,
     "functions": 60,
     "branches": 49,
     "statements": 75,
     "nyc-arg": [
       "--reporter-dir=./coverage/",
+      "--include=./**/*.js",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/migrations/**",

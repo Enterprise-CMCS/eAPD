@@ -2,6 +2,7 @@
 import { testDefaultMmisAPDOverview } from '../../helpers/apd/apd-overview';
 import { testStatePrioritiesAndScope } from '../../helpers/apd/state-priorities-and-scope';
 import { testDefaultMMISActivity } from '../../helpers/mmis/activity/default-activity';
+import { testDefaultMmisAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
 
 // Tests the default values of an MMIS APD
 
@@ -40,10 +41,11 @@ describe(
         apdUrl = pathname.replace('/apd-overview', '');
         apdId = apdUrl.split('/').pop();
       });
-
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
+      cy.get('[data-cy=yearList]').within(() => {
+        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+          years.push(list[index].value)
+        );
+      });
     });
 
     beforeEach(function () {
@@ -58,6 +60,7 @@ describe(
     });
 
     after(function () {
+      cy.useStateStaff();
       cy.visit('/');
       cy.deleteAPD(this.apdId);
     });
@@ -67,7 +70,9 @@ describe(
         testDefaultMmisAPDOverview();
 
         it('should have two checked years', function () {
-          cy.get('[type="checkbox"][checked]').should('have.length', 2);
+          cy.get('[data-cy=yearList]').within(() => {
+            cy.get('[type="checkbox"][checked]').should('have.length', 2);
+          });
         });
       });
 
@@ -77,6 +82,10 @@ describe(
 
       describe('default Activity', function () {
         testDefaultMMISActivity();
+      });
+
+      describe('Assurances and Compliance', function () {
+        testDefaultMmisAssurancesAndCompliance();
       });
     });
   }

@@ -1,0 +1,62 @@
+{
+  "procurement": {
+    "label": "Procurement Standards (Competition / Sole Source)",
+    "regulations": [
+      {
+        "regulation": "SMM, Part 11",
+        "link": "https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+      },
+      {
+        "regulation": "45 CFR Part 95.615",
+        "link": "https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
+      },
+      {
+        "regulation": "45 CFR Part 75.326",
+        "link": "https://www.ecfr.gov/cgi-bin/text-idx?SID=d1d1ed46083496c2114c787af6f29afc&mc=true&node=pt45.1.75&rgn=div5#se45.1.75_1326"
+      }
+    ]
+  },
+  "recordsAccess": {
+    "label": "Access to Records, Reporting and Agency Attestations",
+    "regulations": [
+      {
+        "regulation": "45 CFR Part 433.112 (b)(5)-(9)",
+        "link": "https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
+      },
+      {
+        "regulation": "45 CFR Part 95.615",
+        "link": "https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
+      },
+      {
+        "regulation": "SMM Section 11267",
+        "link": "https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+      }
+    ]
+  },
+  "softwareRights": {
+    "label": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports",
+    "regulations": [
+      {
+        "regulation": "45 CFR 95.617",
+        "link": "https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1617&rgn=div8"
+      },
+      {
+        "regulation": "42 CFR Part 431.300",
+        "link": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-431/subpart-F/section-431.300"
+      },
+      {
+        "regulation": "45 CFR Part 164",
+        "link": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164"
+      }
+    ]
+  },
+  "independentVV": {
+    "label": "Independent Verification and Validation (IV&V)",
+    "regulations": [
+      {
+        "regulation": "45 CFR Part 95.626",
+        "link": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-95/subpart-F/subject-group-ECFR8ea7e78ba47a262/section-95.626"
+      }
+    ]
+  }
+}
