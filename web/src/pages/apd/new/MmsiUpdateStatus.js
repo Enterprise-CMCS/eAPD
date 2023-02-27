@@ -23,8 +23,9 @@ const MmsiUpdateStatus = ({
       <Controller
         name="updateAPD"
         control={control}
-        render={({ field: { onBlur, onChange, value } }) => (
+        render={({ field: { onBlur, onChange, value, ...props } }) => (
           <ChoiceList
+            {...props}
             label="Is this an APD update?"
             hint="Indicate if this APD is for a new project or if it is an update to an existing one."
             type="radio"

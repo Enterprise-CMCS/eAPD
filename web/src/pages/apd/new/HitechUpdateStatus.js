@@ -7,7 +7,8 @@ import { Controller, useFormContext } from 'react-hook-form';
 const HitechUpdateStatus = ({ setUpdateStatus, updateStatus }) => {
   const {
     control,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useFormContext();
 
   return (
@@ -15,8 +16,9 @@ const HitechUpdateStatus = ({ setUpdateStatus, updateStatus }) => {
       <Controller
         name="updateStatus"
         control={control}
-        render={({ field: { onBlur, onChange } }) => (
+        render={({ field: { onBlur, onChange, ...props } }) => (
           <ChoiceList
+            {...props}
             label="Update Type"
             hint={
               <div>
@@ -45,6 +47,7 @@ const HitechUpdateStatus = ({ setUpdateStatus, updateStatus }) => {
               updateStatus.isUpdateAPD = true;
               setUpdateStatus(updateStatus);
               onChange(updateStatus);
+              setValue('updateStatus', updateStatus, { shouldValidate: true });
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
