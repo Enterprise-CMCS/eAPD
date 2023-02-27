@@ -57,6 +57,68 @@ class BudgetPage {
     cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
   };
 
+  checkMatchRateFunctionality = () => {
+    cy.findByRole('radio', {
+      name: '90/10 Design, Development, and Installation (DDI)'
+    }).should('exist');
+    cy.findByRole('radio', { name: '75/25' }).should('exist');
+    cy.findByRole('radio', { name: '50/50' }).should('exist');
+
+    cy.findByRole('radio', {
+      name: '90/10 Design, Development, and Installation (DDI)'
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.9,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.1,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
+
+    cy.findByRole('radio', { name: '75/25' }).click();
+
+    cy.findByRole('radio', {
+      name: 'Design, Development, and Installation (DDI)'
+    }).should('exist');
+    cy.findByRole('radio', {
+      name: 'Maintenance & Operations (M&O)'
+    }).should('exist');
+
+    cy.findByRole('radio', {
+      name: 'Design, Development, and Installation (DDI)'
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.75,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.25,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
+
+    cy.findByRole('radio', { name: '50/50' }).click();
+
+    cy.findByRole('radio', {
+      name: 'Design, Development, and Installation (DDI)'
+    }).should('exist');
+    cy.findByRole('radio', {
+      name: 'Maintenance & Operations (M&O)'
+    }).should('exist');
+
+    cy.findByRole('radio', {
+      name: 'Maintenance & Operations (M&O)'
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.5,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.5,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
+  };
+
   checkCostSplitTable = ({
     federalSharePercentage,
     federalShareAmount,
@@ -132,6 +194,48 @@ class BudgetPage {
         );
         cy.contains(`${state} share of $${addCommas(totalStateShare)}`).should(
           'exist'
+        );
+
+        years.forEach(year => {
+          cy.contains(year).should('exist');
+        });
+      });
+  };
+
+  checkMmisFFYtotals = ({
+    years,
+    activityIndex,
+    activityName,
+    state,
+    fundingSplit,
+    totalOtherFunding,
+    totals
+  }) => {
+    cy.contains(
+      `Activity ${activityIndex + 1} Budget for FFY ${years[years.length - 1]}`
+    )
+      .parent()
+      .parent()
+      .next()
+      .should('contain', `FFY ${years[0]}-${years[years.length - 1]} Totals`)
+      .next()
+      .within(() => {
+        cy.contains(
+          `The total cost of the ${activityName} activity is $${addCommas(
+            totals.total
+          )}`
+        );
+        cy.contains(
+          `Because of other funding of $${addCommas(totalOtherFunding)}`
+        );
+        cy.contains(
+          `the total computable Medicaid cost is $${addCommas(
+            totals.medicaid
+          )}.`
+        );
+        cy.contains(`This activity is using a ${fundingSplit} funding split,`);
+        cy.contains(
+          `resulting in a federal share of $${totals.federal} and a ${state} share of $${totals.state}.`
         );
 
         years.forEach(year => {

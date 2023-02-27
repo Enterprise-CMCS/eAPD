@@ -6,9 +6,9 @@ import { testActivityScheduleSummaryWithData } from '../../helpers/apd/activity-
 import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget.js';
 import { testHitechAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary.js';
-import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity.js';
-import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity.js';
-import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity.js';
+import { addHITActivity } from '../../helpers/apd/activity/add-HITECH-HIT-activity.js';
+import { addHIEActivity } from '../../helpers/apd/activity/add-HITECH-HIE-activity.js';
+import { addMMISActivity } from '../../helpers/apd/activity/add-HITECH-MMIS-activity.js';
 
 // Tests an APD by adding data and checking the results
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
@@ -37,9 +37,11 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
   });
 
   beforeEach(function () {
@@ -62,7 +64,9 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       testAPDOverviewWithData();
 
       it('should have two checked years', function () {
-        cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        cy.get('[data-cy=yearList]').within(() => {
+          cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        });
       });
     });
 

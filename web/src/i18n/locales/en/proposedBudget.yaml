@@ -4,7 +4,7 @@ helpText: >-
   information entered by the state. Capture incentive payments if applicable.
 combinedActivityCosts:
   title: Combined Activity Costs
-  totalMedicaidCost:
+  totalMedicaidCostHITECH:
     detail: >-
       The following tables summarize the **Total Computable Medicaid Cost** for
       all activities organized by their funding  source (**HIT**, **HIE**,
@@ -13,7 +13,16 @@ combinedActivityCosts:
       amounts described in the cost allocation section of the activities are not
       included in these tables, but can be reviewed in the individual activity
       summary tables on this page.
-  activityBreakdown:
+  totalMedicaidCostMMIS:
+    detail: >-
+      The following tables summarize the **Total Computable Medicaid Cost** for
+      all activities organized by their funding source (**MMIS**) and their cost
+      category (**Key State Personnel**, **State Personnel**, **Other State
+      Expenses**, and **Private Contractor Costs**) by FFY. Other funding
+      amounts described in the cost allocation section of the activities are not
+      included in these tables, but can be reviewed in the individual activity
+      summary tables on this page.
+  activityBreakdownHITECH:
     title: State and Contractor Cost Breakdown
     detail: >-
       These tables summarize **State Staff**, **Other State Expenses**, and
@@ -23,7 +32,18 @@ combinedActivityCosts:
       Computable Medicaid Cost** by subtracting other costs that  were described
       in each activity. The other costs provided here are the sum of other costs
       from each activity.
+  activityBreakdownMMIS:
+    title: State and Contractor Cost Breakdown
+    detail: >-
+      These tables summarize **Key State Personnel**, **State Staff**, **Other
+      State Expenses**, and **Private Contractors** for all activities in this
+      APD, organized by FFY. These tables provide subtotals for each FFY and
+      calculate the **Total Computable Medicaid Cost** by subtracting other
+      costs that were described in each activity. The other costs provided here
+      are the sum of other costs from each activity.
 summaryBudget:
+  title: Summary Budget Table
+summaryBudgetHITECH:
   title: Summary Budget Table
   instruction:
     detail: >-
@@ -34,6 +54,17 @@ summaryBudget:
       with the calculated  Federal share by FFP rate and the associated state
       share. The final table in this section provides the total Medicaid cost
       for all activities in this APD by FFY.
+summaryBudgetMMIS:
+  title: Summary Budget Table
+  instruction:
+    detail: >-
+      These tables summarize the calculated Medicaid Total Computable (Total
+      Activity Cost minus any Other Funding amounts) for key state personnel, as
+      well as state personnel, private contractor, and other state expenses for
+      all activities by FFY. The tables provide subtotals for each of these
+      categories by program area with the calculated Federal share by FFP rate
+      and the associated state share. The final table in this section provides
+      the total Medicaid cost for all activities in this APD by FFY.
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:

@@ -38,6 +38,10 @@ export const fedStateSplitByCost = new mongoose.Schema(
       type: Map,
       of: fedStateSplit
     },
+    keyStatePersonnel: {
+      type: Map,
+      of: fedStateSplit
+    },
     contractors: {
       type: Map,
       of: fedStateSplit

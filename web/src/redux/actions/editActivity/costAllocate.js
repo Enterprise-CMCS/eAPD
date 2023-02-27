@@ -26,6 +26,25 @@ export const setCostAllocationFFPFundingSplit =
     });
   };
 
+export const setCostAllocationMatchRate =
+  (index, year, federal, state, fundingCategory) => dispatch => {
+    dispatch({
+      type: EDIT_APD,
+      path: `/activities/${index}/costAllocation/${year}/ffp/federal`,
+      value: federal
+    });
+    dispatch({
+      type: EDIT_APD,
+      path: `/activities/${index}/costAllocation/${year}/ffp/state`,
+      value: state
+    });
+    dispatch({
+      type: EDIT_APD,
+      path: `/activities/${index}/costAllocation/${year}/ffp/fundingCategory`,
+      value: fundingCategory
+    });
+  };
+
 export const setCostAllocationFFPOtherFunding =
   (index, year, otherFunding) => dispatch => {
     dispatch({

@@ -18,6 +18,7 @@ exports[`APD header renders correctly 1`] = `
         </FormLabel>
         <div
           className="ds-h1 apd--title"
+          data-cy="apd-name-header"
           id="apd-title-input"
           onClick={[Function]}
           onKeyPress={[Function]}

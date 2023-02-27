@@ -23,9 +23,9 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 0,
-            "Other State Expenses Subtotal": 0,
-            "Private Contractor Subtotal": 0
+            "State Staff Total": 0,
+            "Other State Expenses Total": 0,
+            "Private Contractor Total": 0
           },
           "totalComputableMedicaidCost": 0
         }
@@ -35,9 +35,9 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 0,
-            "Other State Expenses Subtotal": 0,
-            "Private Contractor Subtotal": 0
+            "State Staff Total": 0,
+            "Other State Expenses Total": 0,
+            "Private Contractor Total": 0
           },
           "totalComputableMedicaidCost": 0
         }
@@ -202,25 +202,25 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 348778,
-            "Other State Expenses Subtotal": 34581,
-            "Private Contractor Subtotal": 29641
+            "State Staff Total": 348778,
+            "Other State Expenses Total": 34581,
+            "Private Contractor Total": 29641
           },
           "totalComputableMedicaidCost": 413000
         },
         {
           "expenses": {
-            "State Staff Subtotal": 189707,
-            "Other State Expenses Subtotal": 39910,
-            "Private Contractor Subtotal": 40895
+            "State Staff Total": 189707,
+            "Other State Expenses Total": 39910,
+            "Private Contractor Total": 40895
           },
           "totalComputableMedicaidCost": 270512
         },
         {
           "expenses": {
-            "State Staff Subtotal": 136422,
-            "Other State Expenses Subtotal": 74773,
-            "Private Contractor Subtotal": 32467
+            "State Staff Total": 136422,
+            "Other State Expenses Total": 74773,
+            "Private Contractor Total": 32467
           },
           "totalComputableMedicaidCost": 243662
         }
@@ -230,25 +230,25 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 370176,
-            "Other State Expenses Subtotal": 34367,
-            "Private Contractor Subtotal": 29457
+            "State Staff Total": 370176,
+            "Other State Expenses Total": 34367,
+            "Private Contractor Total": 29457
           },
           "totalComputableMedicaidCost": 434000
         },
         {
           "expenses": {
-            "State Staff Subtotal": 189749,
-            "Other State Expenses Subtotal": 38898,
-            "Private Contractor Subtotal": 40156
+            "State Staff Total": 189749,
+            "Other State Expenses Total": 38898,
+            "Private Contractor Total": 40156
           },
           "totalComputableMedicaidCost": 268802
         },
         {
           "expenses": {
-            "State Staff Subtotal": 193529,
-            "Other State Expenses Subtotal": 99773,
-            "Private Contractor Subtotal": 36016
+            "State Staff Total": 193529,
+            "Other State Expenses Total": 99773,
+            "Private Contractor Total": 36016
           },
           "totalComputableMedicaidCost": 329318
         }

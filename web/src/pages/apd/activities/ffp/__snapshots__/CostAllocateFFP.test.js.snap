@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
+exports[`the CostAllocateFFP component renders table correctly 1`] = `
 <table
   class="budget-table activity-budget-table"
   data-cy="FFPActivityTable"
@@ -50,17 +50,17 @@ exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--subtotal budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight"
     >
       <td
         class="title"
         colspan="5"
       >
-        State Staff Subtotal
+        State Staff Total
       </td>
       <td
         class="budget-table--number"
-        data-cy="subtotal"
+        data-cy="total"
       >
         <span>
           $0
@@ -78,17 +78,17 @@ exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--subtotal budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight"
     >
       <td
         class="title"
         colspan="5"
       >
-        Other State Expenses Subtotal
+        Other State Expenses Total
       </td>
       <td
         class="budget-table--number"
-        data-cy="subtotal"
+        data-cy="total"
       >
         <span>
           $0
@@ -106,17 +106,17 @@ exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--subtotal budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight"
     >
       <td
         class="title"
         colspan="5"
       >
-        Private Contractor Subtotal
+        Private Contractor Total
       </td>
       <td
         class="budget-table--number"
-        data-cy="subtotal"
+        data-cy="total"
       >
         <span>
           $0
@@ -124,7 +124,7 @@ exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
       </td>
     </tr>
     <tr
-      class="budget-table--subtotal budget-table--row__header"
+      class="budget-table--total budget-table--row__header"
     >
       <td
         colspan="5"
@@ -135,7 +135,7 @@ exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
       </td>
       <td
         class="budget-table--number"
-        data-cy="subtotal"
+        data-cy="total"
       >
         <span>
           $300

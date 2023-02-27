@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 import {
   newActivity,
   newContractor,
@@ -7,7 +7,9 @@ import {
   newOutcome,
   newOutcomeMetric,
   newStatePerson,
-  setKeyGenerator
+  setKeyGenerator,
+  costAllocationEntry,
+  quarterlyFFPEntry
 } from './activities';
 
 describe('activities reducer helpers', () => {
@@ -73,6 +75,44 @@ describe('activities reducer helpers', () => {
     });
   });
 
+  it('can create a cost allocation entry', () => {
+    expect(costAllocationEntry(0, 75, 25, FUNDING_CATEGORY_TYPE.MANDO)).toEqual(
+      {
+        other: 0,
+        ffp: {
+          federal: 75,
+          state: 25,
+          fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
+        }
+      }
+    );
+  });
+
+  it('can create a quarterly ffp entry', () => {
+    expect(quarterlyFFPEntry()).toEqual({
+      1: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      2: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      3: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      4: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      }
+    });
+  });
+
   it('can create a new activity', () => {
     expect(newActivity({ years: ['2020'], apdType: APD_TYPE.HITECH })).toEqual({
       key: '--- key ---',
@@ -97,7 +137,12 @@ describe('activities reducer helpers', () => {
       statePersonnel: [],
       expenses: [],
       contractorResources: [],
-      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
+      costAllocation: {
+        2020: {
+          other: 0,
+          ffp: { federal: 0, state: 100, fundingCategory: null }
+        }
+      },
       costAllocationNarrative: {
         years: {
           2020: { otherSources: '' }
@@ -149,7 +194,12 @@ describe('activities reducer helpers', () => {
       statePersonnel: [],
       expenses: [],
       contractorResources: [],
-      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
+      costAllocation: {
+        2020: {
+          other: 0,
+          ffp: { federal: 0, state: 100, fundingCategory: null }
+        }
+      },
       costAllocationNarrative: {
         years: {
           2020: { otherSources: '' }

@@ -152,14 +152,16 @@ export default {
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2024: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         }
@@ -239,14 +241,16 @@ export default {
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2024: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         }
@@ -320,14 +324,16 @@ export default {
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2024: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         }

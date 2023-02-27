@@ -301,5 +301,54 @@ class FillOutActivityPage {
         });
     });
   };
+
+  checkMmisBudgetAndFFPTables = ({
+    years,
+    costAllocation,
+    expectedTableData
+  }) => {
+    _.forEach(years, (year, ffyIndex) => {
+      const { ffp } = costAllocation[year];
+      const split = `${ffp.federal}-${ffp.state}`;
+
+      if (split === '90-10') {
+        cy.contains(`Budget for FFY ${year}`)
+          .parent()
+          .parent()
+          .within(() => {
+            cy.findByRole('radio', {
+              name: '90/10 Design, Development, and Installation (DDI)'
+            }).click();
+          });
+      } else {
+        cy.contains(`Budget for FFY ${year}`)
+          .parent()
+          .parent()
+          .within(() => {
+            cy.findByRole('radio', {
+              name: `${ffp.federal}/${ffp.state}`
+            }).click();
+            const name =
+              ffp.fundingCategory === 'DDI'
+                ? 'Design, Development, and Installation (DDI)'
+                : 'Maintenance & Operations (M&O)';
+            cy.findByRole('radio', { name }).click();
+          });
+      }
+      cy.waitForSave();
+
+      cy.get('[data-cy="FFPFedStateSplitTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              _.forEach(expectedTableData[ffyIndex], data => {
+                expect(tableData).to.deep.include(data);
+              });
+            });
+        });
+    });
+  };
 }
 export default FillOutActivityPage;

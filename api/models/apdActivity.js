@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { generateKey } from '@cms-eapd/common';
+import { generateKey, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -129,6 +129,10 @@ const activitySchema = new mongoose.Schema({
           state: {
             type: Number,
             default: 0
+          },
+          fundingCategory: {
+            type: String,
+            enum: [FUNDING_CATEGORY_TYPE.DDI, FUNDING_CATEGORY_TYPE.MANDO, null]
           }
         },
         other: {

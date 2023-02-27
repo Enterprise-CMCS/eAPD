@@ -40,7 +40,12 @@ import {
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
 
-import { generateKey, defaultAPDYearOptions, APD_TYPE } from '@cms-eapd/common';
+import {
+  generateKey,
+  defaultAPDYearOptions,
+  APD_TYPE,
+  FUNDING_CATEGORY_TYPE
+} from '@cms-eapd/common';
 
 export const apdValid = apdType => {
   if (apdType === APD_TYPE.HITECH || apdType === APD_TYPE.MMIS) {
@@ -250,27 +255,36 @@ const getHumanTimestamp = iso8601 => {
 };
 
 const getKeyPersonnelSplit = (years, apdType) => {
-  let split;
   switch (apdType) {
     case 'HITECH':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
+        }),
         {}
       );
-      break;
     case 'MMIS':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
-      break;
     default:
       return years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
   }
-  return split;
 };
 
 export const getKeyPersonnel = (

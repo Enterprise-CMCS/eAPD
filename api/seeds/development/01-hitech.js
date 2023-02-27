@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.HITECH,
@@ -9,7 +9,7 @@ export default {
     updateStatus: {
       isUpdateAPD: true,
       annualUpdate: true,
-      asNeededUpdate: true
+      asNeededUpdate: false
     },
     programOverview:
       "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
@@ -43,8 +43,16 @@ export default {
         hasCosts: true,
         costs: { 2022: 100000, 2023: 100000 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
         },
         medicaidShare: {
           2022: 100,
@@ -60,8 +68,16 @@ export default {
         hasCosts: false,
         costs: { 2022: 0, 2023: 0 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
         },
         medicaidShare: {
           2022: 100,
@@ -278,8 +294,22 @@ export default {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 105000 },
-        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: {
+          ffp: {
+            federal: 75,
+            state: 25,
+            fundingCategory: null
+          },
+          other: 105000
+        },
+        2023: {
+          ffp: {
+            federal: 50,
+            state: 50,
+            fundingCategory: null
+          },
+          other: 0
+        }
       },
       costAllocationNarrative: {
         years: {
@@ -460,8 +490,22 @@ export default {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
-        2023: { ffp: { federal: 75, state: 25 }, other: 0 }
+        2022: {
+          ffp: {
+            federal: 90,
+            state: 10,
+            fundingCategory: null
+          },
+          other: 0
+        },
+        2023: {
+          ffp: {
+            federal: 75,
+            state: 25,
+            fundingCategory: null
+          },
+          other: 0
+        }
       },
       costAllocationNarrative: {
         years: {
@@ -597,8 +641,22 @@ export default {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
-        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: {
+          ffp: {
+            federal: 50,
+            state: 50,
+            fundingCategory: null
+          },
+          other: 0
+        },
+        2023: {
+          ffp: {
+            federal: 50,
+            state: 50,
+            fundingCategory: null
+          },
+          other: 0
+        }
       },
       costAllocationNarrative: {
         years: {
@@ -711,8 +769,22 @@ export default {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 15000 },
-        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2022: {
+          ffp: {
+            federal: 50,
+            state: 50,
+            fundingCategory: null
+          },
+          other: 15000
+        },
+        2023: {
+          ffp: {
+            federal: 75,
+            state: 25,
+            fundingCategory: null
+          },
+          other: 0
+        }
       },
       costAllocationNarrative: {
         years: {

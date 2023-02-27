@@ -287,8 +287,14 @@
         }
       ],
       "costAllocation": {
-        "2023": { "ffp": { "federal": 90, "state": 10 }, "other": 105000 },
-        "2024": { "ffp": { "federal": 90, "state": 10 }, "other": 0 }
+        "2023": {
+          "ffp": { "federal": 90, "state": 10, "fundingCategory": "DDI" },
+          "other": 105000
+        },
+        "2024": {
+          "ffp": { "federal": 50, "state": 50, "fundingCategory": "MO" },
+          "other": 0
+        }
       },
       "costAllocationNarrative": {
         "years": {
@@ -462,8 +468,14 @@
         }
       ],
       "costAllocation": {
-        "2023": { "ffp": { "federal": 90, "state": 10 }, "other": 0 },
-        "2024": { "ffp": { "federal": 75, "state": 25 }, "other": 0 }
+        "2023": {
+          "ffp": { "federal": 50, "state": 50, "fundingCategory": "MO" },
+          "other": 0
+        },
+        "2024": {
+          "ffp": { "federal": 75, "state": 25, "fundingCategory": "MO" },
+          "other": 0
+        }
       },
       "costAllocationNarrative": {
         "years": {
