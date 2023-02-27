@@ -24,6 +24,7 @@ import { useFlags } from 'launchdarkly-react-client-sdk';
 import { apdValid } from '../../../redux/reducers/apd';
 import { createApd } from '../../../redux/actions/app';
 import Loading from '../../../components/Loading';
+import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
 
 import HitechUpdateStatus from './HitechUpdateStatus';
 import MmsiUpdateStatus from './MmsiUpdateStatus';
@@ -171,13 +172,31 @@ const ApdNew = ({ createApd: create }) => {
         );
       case APD_TYPE.MMIS:
         return (
-          <MmsiUpdateStatus
-            medicaidBusinessAreas={medicaidBusinessAreas}
-            setMedicaidBusinessAreas={setMedicaidBusinessAreas}
-            updateStatus={updateStatus}
-            setUpdateStatus={setUpdateStatus}
-            setUpdateAPD={setUpdateAPD}
-          />
+          <div>
+            <MmsiUpdateStatus
+              updateStatus={updateStatus}
+              setUpdateStatus={setUpdateStatus}
+              setUpdateAPD={setUpdateAPD}
+            />
+            <Controller
+              name="medicaidBusinessAreas"
+              control={control}
+              render={({ field: { onBlur } }) => (
+                <MedicaidBusinessAreas
+                  controllerName="medicaidBusinessAreas"
+                  controllerNameForOtherDetails="medicaidBusinessAreas.otherMedicaidBusinessAreas"
+                  errorMessage={errors?.medicaidBusinessAreas?.message}
+                  errorOtherDetails={
+                    errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas
+                      ?.message
+                  }
+                  medicaidBusinessAreas={medicaidBusinessAreas}
+                  setMedicaidBusinessAreas={setMedicaidBusinessAreas}
+                  onBlur={onBlur}
+                />
+              )}
+            />
+          </div>
         );
       default:
         return null;

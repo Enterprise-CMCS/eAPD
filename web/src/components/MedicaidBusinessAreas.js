@@ -120,7 +120,7 @@ const MedicaidBusinessAreas = ({
 };
 
 MedicaidBusinessAreas.propTypes = {
-  adminCheck: PropTypes.func,
+  adminCheck: PropTypes.bool,
   controllerName: PropTypes.string.isRequired,
   controllerNameForOtherDetails: PropTypes.string.isRequired,
   errorMessage: PropTypes.string,

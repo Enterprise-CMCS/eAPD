@@ -1,18 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
-
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const MmsiUpdateStatus = ({
-  medicaidBusinessAreas,
-  setMedicaidBusinessAreas,
-  updateStatus,
-  setUpdateStatus,
-  setUpdateAPD
-}) => {
+const MmsiUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
   const {
     control,
     formState: { errors }
@@ -98,31 +90,11 @@ const MmsiUpdateStatus = ({
           />
         )}
       />
-
-      <Controller
-        name="medicaidBusinessAreas"
-        control={control}
-        render={({ field: { onBlur } }) => (
-          <MedicaidBusinessAreas
-            controllerName="medicaidBusinessAreas"
-            controllerNameForOtherDetails="medicaidBusinessAreas.otherMedicaidBusinessAreas"
-            errorMessage={errors?.medicaidBusinessAreas?.message}
-            errorOtherDetails={
-              errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas?.message
-            }
-            medicaidBusinessAreas={medicaidBusinessAreas}
-            setMedicaidBusinessAreas={setMedicaidBusinessAreas}
-            onBlur={onBlur}
-          />
-        )}
-      />
     </div>
   );
 };
 
 MmsiUpdateStatus.propTypes = {
-  medicaidBusinessAreas: PropTypes.object.isRequired,
-  setMedicaidBusinessAreas: PropTypes.func.isRequired,
   updateStatus: PropTypes.object.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   setUpdateAPD: PropTypes.func.isRequired
