@@ -5735,14 +5735,44 @@ describe('budget calculate methods', () => {
             2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
             total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
           },
-          combined: {
-            2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-            2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
+          keyStatePersonnel: {
+            2017: {
+              federal: 45990,
+              medicaid: 51320,
+              state: 5330,
+              total: 232000
+            },
+            2018: {
+              federal: 97875,
+              medicaid: 115500,
+              state: 17625,
+              total: 120000
+            },
             total: {
-              total: 16600,
-              federal: 14940,
-              medicaid: 16600,
-              state: 1660
+              federal: 143865,
+              medicaid: 166820,
+              state: 22955,
+              total: 352000
+            }
+          },
+          combined: {
+            2017: {
+              total: 240400,
+              federal: 53550,
+              medicaid: 59720,
+              state: 6170
+            },
+            2018: {
+              total: 128200,
+              federal: 105255,
+              medicaid: 123700,
+              state: 18445
+            },
+            total: {
+              total: 368600,
+              federal: 158805,
+              medicaid: 183420,
+              state: 24615
             }
           }
         },
@@ -5784,9 +5814,19 @@ describe('budget calculate methods', () => {
           }
         },
         combined: {
-          2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-          2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
-          total: { total: 16600, federal: 14940, medicaid: 16600, state: 1660 }
+          2017: { total: 240400, federal: 53550, medicaid: 59720, state: 6170 },
+          2018: {
+            total: 128200,
+            federal: 105255,
+            medicaid: 123700,
+            state: 18445
+          },
+          total: {
+            total: 368600,
+            federal: 158805,
+            medicaid: 183420,
+            state: 24615
+          }
         },
         activityTotals: [
           {
@@ -6135,14 +6175,61 @@ describe('budget calculate methods', () => {
         keyStatePersonnel: {
           keyPersonnel: [
             {
-              costs: { 2017: 150, 2018: 151 },
-              fte: { 2017: 0, 2018: 0.5 },
-              hasCosts: false
+              costs: { 2017: 100000, 2018: 150000 },
+              fte: { 2017: 1, 2018: 0.5 },
+              split: {
+                2017: {
+                  federal: 90,
+                  state: 10
+                },
+                2018: {
+                  federal: 90,
+                  state: 10
+                }
+              },
+              medicaidShare: {
+                2017: 50,
+                2018: 100
+              },
+              hasCosts: true
             },
             {
-              costs: { 2017: 150, 2018: 1500 },
-              fte: { 2017: 0, 2018: 0.3 },
+              costs: { 2017: 200000, 2018: 150000 },
+              fte: { 2017: 0.66, 2018: 0.3 },
+              split: {
+                2017: {
+                  federal: 75,
+                  state: 25
+                },
+                2018: {
+                  federal: 75,
+                  state: 25
+                }
+              },
+              medicaidShare: {
+                2017: 1,
+                2018: 90
+              },
               hasCosts: true
+            },
+            {
+              costs: { 2017: 0, 2018: 0 },
+              fte: { 2017: 0, 2018: 0 },
+              split: {
+                2017: {
+                  federal: 0,
+                  state: 0
+                },
+                2018: {
+                  federal: 0,
+                  state: 0
+                }
+              },
+              medicaidShare: {
+                2017: 0,
+                2018: null
+              },
+              hasCosts: false
             }
           ]
         },

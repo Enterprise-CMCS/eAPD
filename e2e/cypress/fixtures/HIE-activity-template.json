@@ -154,17 +154,17 @@
           "$110,012"
         ],
         ["Other Funding Amount", "-", "$2,805"],
-        ["State Staff Subtotal", "$189,707"],
+        ["State Staff Total", "$189,707"],
         [],
         ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
         ["Equipment and supplies", "", "", "", "", "$500"],
         ["Other Funding Amount", "-", "$590"],
-        ["Other State Expenses Subtotal", "$39,910"],
+        ["Other State Expenses Total", "$39,910"],
         [],
         ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
         ["Interface Vendor Inc.", "$150", "×", "10 hours", "=", "$1,500"],
         ["Other Funding Amount", "-", "$605"],
-        ["Private Contractor Subtotal", "$40,895"],
+        ["Private Contractor Total", "$40,895"],
         ["Activity 2 Total Computable Medicaid Cost", "$270,512"]
       ],
       [
@@ -186,17 +186,17 @@
           "$111,102"
         ],
         ["Other Funding Amount", "-", "$6,353"],
-        ["State Staff Subtotal", "$189,749"],
+        ["State Staff Total", "$189,749"],
         [],
         ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
         ["Equipment and supplies", "", "", "", "", "$200"],
         ["Other Funding Amount", "-", "$1,302"],
-        ["Other State Expenses Subtotal", "$38,898"],
+        ["Other State Expenses Total", "$38,898"],
         [],
         ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
         ["Interface Vendor Inc.", "$20", "×", "75 hours", "=", "$1,500"],
         ["Other Funding Amount", "-", "$1,345"],
-        ["Private Contractor Subtotal", "$40,155"],
+        ["Private Contractor Total", "$40,155"],
         ["Activity 2 Total Computable Medicaid Cost", "$268,802"]
       ]
     ],

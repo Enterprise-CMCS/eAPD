@@ -858,6 +858,24 @@ const openapi = {
                       }
                     }
                   },
+                  split: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `The Federal-State split by year`
+                      }
+                    }
+                  },
+                  medicaidShare: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `The Medicaid Share as a percentage of an individual Key State Personnel by year`
+                      }
+                    }
+                  },
                   position: { type: 'string', description: `Person's position` }
                 }
               })

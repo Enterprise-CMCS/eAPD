@@ -149,7 +149,7 @@ export const calculateActvityBreakdownByFFYAndActivity = ({
       });
 
       stateStaff['Other Funding Amount'] = activity.staff[yearIndex].other;
-      stateStaff['State Staff Subtotal'] = activity.staff[yearIndex].subtotal;
+      stateStaff['State Staff Total'] = activity.staff[yearIndex].subtotal;
 
       const stateExpenses = {};
       activity.expenses[yearIndex].items.forEach(item => {
@@ -157,7 +157,7 @@ export const calculateActvityBreakdownByFFYAndActivity = ({
       });
       stateExpenses['Other Funding Amount'] =
         activity.expenses[yearIndex].other;
-      stateExpenses['Other State Expenses Subtotal'] =
+      stateExpenses['Other State Expenses Total'] =
         activity.expenses[yearIndex].subtotal;
 
       const privateContractors = {};
@@ -166,7 +166,7 @@ export const calculateActvityBreakdownByFFYAndActivity = ({
       });
       privateContractors['Other Funding Amount'] =
         activity.privateContractors.FFYcosts[yearIndex].other;
-      privateContractors['Private Contractor Subtotal'] =
+      privateContractors['Private Contractor Total'] =
         activity.privateContractors.FFYcosts[yearIndex].subtotal;
 
       return {
