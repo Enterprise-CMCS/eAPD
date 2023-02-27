@@ -95,7 +95,6 @@ const ApdNew = ({ createApd: create }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [medicaidBusinessAreas, setMedicaidBusinessAreas] =
     useState(businessAreaOptions);
-  const [apdName, setApdName] = useState('');
   const [updateStatus, setUpdateStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [updateAPD, setUpdateAPD] = useState('');
@@ -104,7 +103,7 @@ const ApdNew = ({ createApd: create }) => {
   const methods = useForm({
     defaultValues: {
       apdType,
-      apdName,
+      apdName: '',
       years,
       medicaidBusinessAreas,
       updateStatus,
@@ -119,8 +118,7 @@ const ApdNew = ({ createApd: create }) => {
     control,
     formState: { errors, isValid },
     getValues,
-    setValue,
-    trigger
+    setValue
   } = methods;
 
   useEffect(() => {
@@ -131,7 +129,7 @@ const ApdNew = ({ createApd: create }) => {
     }
 
     setSubmitDisabled(!isValid);
-  }, [enableMmis, isValid]);
+  }, [apdTypeHitechOnly, enableMmis, isValid, setValue]);
 
   if (isLoading) {
     return (
