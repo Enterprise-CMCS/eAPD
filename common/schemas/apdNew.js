@@ -41,24 +41,7 @@ const apdNewSchema = Joi.object({
       then: updateStatusSchema
     })
   }),
-  medicaidBusinessAreas: Joi.when('apdType', {
-    is: APD_TYPE.MMIS,
-    then: Joi.array().min(1).required().messages({
-      'array.min': 'Provide Other Medicaid Business Area(s)',
-      'any.only': 'Provide Other Medicaid Business Area(s)',
-      'any.required': 'Provide Other Medicaid Business Area(s)'
-    }),
-    otherwise: Joi.any()
-  }),
-  otherDetails: Joi.when('businessList', {
-    is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
-    then: Joi.string().min(1).required().messages({
-      'string.empty': 'Provide Other Medicaid Business Area(s)',
-      'any.required': 'Provide Other Medicaid Business Area(s)',
-      'any.only': 'Provide Other Medicaid Business Area(s)'
-    }),
-    otherwise: Joi.any()
-  })
+  medicaidBusinessAreas: medicaidBusinessAreasSchema
 });
 
 export default apdNewSchema;

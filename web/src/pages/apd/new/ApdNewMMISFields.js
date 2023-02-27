@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextArea from '../../../components/TextArea';
+import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
+
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -101,136 +103,16 @@ const ApdNewMMISFields = ({
         name="medicaidBusinessAreas"
         control={control}
         render={({ field: { onBlur, onChange } }) => (
-          <ChoiceList
-            label="Medicaid Business Areas"
-            hint={
-              <div>
-                Select the Medicaid Enterprise Systems Business Area(s) that
-                cover the scope of this APD. A more detailed description of
-                these business areas, along with the associated outcomes and
-                metrics, are available at the&nbsp;
-                <a
-                  href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  MES Certification Repository
-                </a>
-                .
-              </div>
-            }
-            type="checkbox"
-            choices={[
-              {
-                label: '1115 or Waiver Support Systems',
-                value: 'waiverSupportSystems',
-                checked: medicaidBusinessAreas.waiverSupportSystems
-              },
-              {
-                label: 'Asset Verification System',
-                value: 'assetVerificationSystem',
-                checked: medicaidBusinessAreas.assetVerificationSystem
-              },
-              {
-                label: 'Claims Processing',
-                value: 'claimsProcessing',
-                checked: medicaidBusinessAreas.claimsProcessing
-              },
-              {
-                label: 'Decision Support System & Data Warehouse',
-                value: 'decisionSupportSystemDW',
-                checked: medicaidBusinessAreas.decisionSupportSystemDW
-              },
-              {
-                label: 'Electronic Visit Verification (EVV)',
-                value: 'electronicVisitVerification',
-                checked: medicaidBusinessAreas.electronicVisitVerification
-              },
-              {
-                label:
-                  'Encounter Processing System (EPS) & Managed Care System',
-                value: 'encounterProcessingSystemMCS',
-                checked: medicaidBusinessAreas.encounterProcessingSystemMCS
-              },
-              {
-                label: 'Financial Management',
-                value: 'financialManagement',
-                checked: medicaidBusinessAreas.financialManagement
-              },
-              {
-                label: 'Health Information Exchange (HIE)',
-                value: 'healthInformationExchange',
-                checked: medicaidBusinessAreas.healthInformationExchange
-              },
-              {
-                label: 'Long Term Services & Supports (LTSS)',
-                value: 'longTermServicesSupports',
-                checked: medicaidBusinessAreas.longTermServicesSupports
-              },
-              {
-                label: 'Member Management',
-                value: 'memberManagement',
-                checked: medicaidBusinessAreas.memberManagement
-              },
-              {
-                label:
-                  'Pharmacy Benefit Management (PBM) & Point of Sale (POS)',
-                value: 'pharmacyBenefitManagementPOS',
-                checked: medicaidBusinessAreas.pharmacyBenefitManagementPOS
-              },
-              {
-                label: 'Program Integrity',
-                value: 'programIntegrity',
-                checked: medicaidBusinessAreas.programIntegrity
-              },
-              {
-                label: 'Provider Management',
-                value: 'providerManagement',
-                checked: medicaidBusinessAreas.providerManagement
-              },
-              {
-                label: 'Third Party Liability (TPL)',
-                value: 'thirdPartyLiability',
-                checked: medicaidBusinessAreas.thirdPartyLiability
-              },
-              {
-                label: 'Other',
-                value: 'other',
-                checked: medicaidBusinessAreas.other,
-                checkedChildren: (
-                  <div className="ds-c-choice__checkedChild">
-                    <Controller
-                      name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
-                      control={control}
-                      render={({ field: { onBlur, ...props } }) => (
-                        <TextArea
-                          {...props}
-                          label="Other Medicaid Business Area(s)"
-                          data-cy="other_details"
-                          hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                          onBlur={onBlur}
-                          onComponentBlur={onBlur}
-                          errorMessage={
-                            errors?.medicaidBusinessAreas
-                              ?.otherMedicaidBusinessAreas?.message
-                          }
-                          errorPlacement="bottom"
-                        />
-                      )}
-                    />
-                  </div>
-                )
-              }
-            ]}
-            onChange={({ target: { value, checked } }) => {
-              medicaidBusinessAreas[value] = checked;
-              setMedicaidBusinessAreas(medicaidBusinessAreas);
-              onChange(medicaidBusinessAreas);
-            }}
-            onBlur={onBlur}
-            onComponentBlur={onBlur}
+          <MedicaidBusinessAreas
+            controllerNameForOtherDetails="medicaidBusinessAreas.otherMedicaidBusinessAreas"
             errorMessage={errors?.medicaidBusinessAreas?.message}
-            errorPlacement="bottom"
+            errorOtherDetails={
+              errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas?.message
+            }
+            medicaidBusinessAreas={medicaidBusinessAreas}
+            setMedicaidBusinessAreas={setMedicaidBusinessAreas}
+            onBlur={onBlur}
+            onChange={onChange}
           />
         )}
       />
