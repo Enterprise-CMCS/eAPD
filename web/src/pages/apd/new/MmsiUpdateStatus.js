@@ -108,7 +108,7 @@ const MmsiUpdateStatus = ({
             errorOtherDetails={
               errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas?.message
             }
-            medicaidBusinessAreas={medicaidBusinessAreas}
+            medicaidBusinessAreaChoices={medicaidBusinessAreas}
             setMedicaidBusinessAreas={setMedicaidBusinessAreas}
             onBlur={onBlur}
             onChange={onChange}

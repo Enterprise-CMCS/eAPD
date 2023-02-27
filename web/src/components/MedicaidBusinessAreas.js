@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextArea from './TextArea';
 import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common';
 import { ChoiceList } from '@cmsgov/design-system';
@@ -8,7 +9,7 @@ const MedicaidBusinessAreas = ({
   controllerNameForOtherDetails,
   errorMessage,
   errorOtherDetails,
-  medicaidBusinessAreas,
+  medicaidBusinessAreaChoices,
   setMedicaidBusinessAreas,
   onBlur,
   onChange
@@ -40,87 +41,87 @@ const MedicaidBusinessAreas = ({
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.waiverSupportSystems,
           value: 'waiverSupportSystems',
-          checked: medicaidBusinessAreas.waiverSupportSystems
+          checked: medicaidBusinessAreaChoices.waiverSupportSystems
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.assetVerificationSystem,
           value: 'assetVerificationSystem',
-          checked: medicaidBusinessAreas.assetVerificationSystem
+          checked: medicaidBusinessAreaChoices.assetVerificationSystem
         },
         {
           label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.claimsProcessing,
           value: 'claimsProcessing',
-          checked: medicaidBusinessAreas.claimsProcessing
+          checked: medicaidBusinessAreaChoices.claimsProcessing
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.decisionSupportSystemDW,
           value: 'decisionSupportSystemDW',
-          checked: medicaidBusinessAreas.decisionSupportSystemDW
+          checked: medicaidBusinessAreaChoices.decisionSupportSystemDW
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.electronicVisitVerification,
           value: 'electronicVisitVerification',
-          checked: medicaidBusinessAreas.electronicVisitVerification
+          checked: medicaidBusinessAreaChoices.electronicVisitVerification
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.encounterProcessingSystemMCS,
           value: 'encounterProcessingSystemMCS',
-          checked: medicaidBusinessAreas.encounterProcessingSystemMCS
+          checked: medicaidBusinessAreaChoices.encounterProcessingSystemMCS
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.financialManagement,
           value: 'financialManagement',
-          checked: medicaidBusinessAreas.financialManagement
+          checked: medicaidBusinessAreaChoices.financialManagement
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.healthInformationExchange,
           value: 'healthInformationExchange',
-          checked: medicaidBusinessAreas.healthInformationExchange
+          checked: medicaidBusinessAreaChoices.healthInformationExchange
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.longTermServicesSupports,
           value: 'longTermServicesSupports',
-          checked: medicaidBusinessAreas.longTermServicesSupports
+          checked: medicaidBusinessAreaChoices.longTermServicesSupports
         },
         {
           label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.memberManagement,
           value: 'memberManagement',
-          checked: medicaidBusinessAreas.memberManagement
+          checked: medicaidBusinessAreaChoices.memberManagement
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.pharmacyBenefitManagementPOS,
           value: 'pharmacyBenefitManagementPOS',
-          checked: medicaidBusinessAreas.pharmacyBenefitManagementPOS
+          checked: medicaidBusinessAreaChoices.pharmacyBenefitManagementPOS
         },
         {
           label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.programIntegrity,
           value: 'programIntegrity',
-          checked: medicaidBusinessAreas.programIntegrity
+          checked: medicaidBusinessAreaChoices.programIntegrity
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.providerManagement,
           value: 'providerManagement',
-          checked: medicaidBusinessAreas.providerManagement
+          checked: medicaidBusinessAreaChoices.providerManagement
         },
         {
           label:
             MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.thirdPartyLiability,
           value: 'thirdPartyLiability',
-          checked: medicaidBusinessAreas.thirdPartyLiability
+          checked: medicaidBusinessAreaChoices.thirdPartyLiability
         },
         {
           label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.other,
           value: 'other',
-          checked: medicaidBusinessAreas.other,
+          checked: medicaidBusinessAreaChoices.other,
           checkedChildren: (
             <div className="ds-c-choice__checkedChild">
               <Controller
@@ -146,9 +147,10 @@ const MedicaidBusinessAreas = ({
         }
       ]}
       onChange={({ target: { value, checked } }) => {
-        medicaidBusinessAreas[value] = checked;
-        setMedicaidBusinessAreas(medicaidBusinessAreas);
-        onChange(medicaidBusinessAreas);
+        medicaidBusinessAreaChoices[value] = checked;
+        setMedicaidBusinessAreas(medicaidBusinessAreaChoices);
+        console.log(typeof errorMessage);
+        onChange(medicaidBusinessAreaChoices);
       }}
       onBlur={onBlur}
       onComponentBlur={onBlur}
@@ -156,6 +158,15 @@ const MedicaidBusinessAreas = ({
       errorPlacement="bottom"
     />
   );
+};
+
+MedicaidBusinessAreas.propTypes = {
+  controllerNameForOtherDetails: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  errorOtherDetails: PropTypes.string,
+  medicaidBusinessAreaChoices: PropTypes.object.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default MedicaidBusinessAreas;
