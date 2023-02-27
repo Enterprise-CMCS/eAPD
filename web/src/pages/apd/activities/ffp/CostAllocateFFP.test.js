@@ -6,6 +6,8 @@ import {
   waitFor
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
+import { APD_TYPE } from '@cms-eapd/common';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import CostAllocatedFFP from './CostAllocateFFP';
 
@@ -23,7 +25,8 @@ const initialState = {
             2022: {
               ffp: {
                 federal: 0,
-                state: 100
+                state: 100,
+                fundingCategory: null
               },
               other: 105000
             }
@@ -209,17 +212,24 @@ const initialStateWithAdminCheck = {
 };
 
 const setup = async (props = {}, options = {}) => {
-  let util;
-  // eslint-disable-next-line testing-library/no-unnecessary-act
+  /* eslint react/prop-types: 0 */
+  const Wrapper = props => {
+    const formMethods = useForm();
+
+    return <FormProvider {...formMethods}>{props.children}</FormProvider>;
+  };
+
+  /* eslint testing-library/no-unnecessary-act: 0 */
   await act(async () => {
-    util = renderWithConnection(
-      <CostAllocatedFFP {...defaultProps} {...props} />,
+    renderWithConnection(
+      <Wrapper>
+        <CostAllocatedFFP {...defaultProps} {...props} />
+      </Wrapper>,
       options
     );
   });
   const user = userEvent.setup();
   return {
-    util,
     user
   };
 };
@@ -230,7 +240,7 @@ describe('the CostAllocateFFP component', () => {
     jest.resetAllMocks();
   });
 
-  it('renders tbale correctly', async () => {
+  it('renders table correctly', async () => {
     await setup(
       {},
       {
@@ -270,21 +280,42 @@ describe('the CostAllocateFFP component', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders correct number of options in fed-state split dropdown', async () => {
+  it('renders correct number of options in fed-state split dropdown for HITECH', async () => {
     await setup(
       {},
       {
-        initialState: initialStateWithAdminCheck
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.HITECH
+            }
+          }
+        }
       }
     );
     expect(screen.getAllByRole('option').length).toBe(4);
   });
 
-  it('handles changes to the fed-state split', async () => {
+  it('handles changes to the fed-state split for HITECH', async () => {
     const { user } = await setup(
       {},
       {
-        initialState: initialStateWithAdminCheck
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.HITECH
+            },
+            adminCheck: {
+              enabled: true
+            }
+          }
+        }
       }
     );
 
@@ -301,15 +332,26 @@ describe('the CostAllocateFFP component', () => {
       dropdown.blur();
     });
 
-    const error = screen.queryByText('Select a federal-state split.');
-    expect(error).not.toBeInTheDocument();
+    expect(screen.queryByText('Select a federal-state split.')).toBeNull();
   });
 
-  it('renders error when no federal-state split is selected', async () => {
+  it('renders error when no federal-state split is selected for HITECH', async () => {
     const { user } = await setup(
       {},
       {
-        initialState: initialStateWithAdminCheck
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.HITECH
+            }
+          },
+          adminCheck: {
+            enabled: true
+          }
+        }
       }
     );
 
@@ -328,7 +370,101 @@ describe('the CostAllocateFFP component', () => {
       dropdown.blur();
     });
 
-    const error = await screen.findByText('Select a federal-state split.');
-    expect(error).toBeInTheDocument();
+    expect(
+      // eslint-disable-next-line testing-library/prefer-presence-queries
+      screen.queryByText('Select a federal-state split.')
+    ).toBeInTheDocument();
+  });
+
+  it('renders correct options in the match rate radio group for MMIS', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.MMIS
+            }
+          }
+        }
+      }
+    );
+    expect(
+      screen.getByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: '75/25' })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: '50/50' })).toBeInTheDocument();
+
+    expect(
+      screen.queryAllByRole('radio', {
+        name: 'Design, Development, and Installation (DDI)'
+      })
+    ).toHaveLength(0);
+    expect(
+      screen.queryAllByRole('radio', {
+        name: 'Maintenance & Operations (M&O)'
+      })
+    ).toHaveLength(0);
+  });
+
+  it('handles changes to the match rate for MMIS', async () => {
+    const { user } = await setup(
+      {},
+      {
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.MMIS
+            }
+          }
+        }
+      }
+    );
+
+    user.click(
+      screen.getByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      })
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByRole('radio', {
+          name: '90/10 Design, Development, and Installation (DDI)'
+        })
+      ).toBeChecked();
+    });
+  });
+
+  it('renders error when no match is selected for MMIS', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          ...initialStateWithAdminCheck,
+          apd: {
+            ...initialStateWithAdminCheck.apd,
+            data: {
+              ...initialStateWithAdminCheck.apd.data,
+              apdType: APD_TYPE.MMIS
+            },
+            adminCheck: {
+              enabled: true
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      await screen.findAllByText('Select a federal-state split.')
+    ).toHaveLength(2);
   });
 });

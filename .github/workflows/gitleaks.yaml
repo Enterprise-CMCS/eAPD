@@ -4,8 +4,8 @@ jobs:
   gitleaks-scan:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run gitlakes docker	    
-      uses: docker://zricethezav/gitleaks
-      with:
-        args: detect --source /github/workspace/ --no-git --verbose
+      - uses: actions/checkout@v2
+      - name: Run gitleaks docker
+        uses: docker://zricethezav/gitleaks
+        with:
+          args: detect --source /github/workspace/ --no-git --verbose

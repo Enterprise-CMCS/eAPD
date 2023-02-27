@@ -38,6 +38,7 @@ exports[`Subsection component renders correctly 1`] = `
 >
   <Instruction
     args={null}
+    disableTitleCaseConversion={false}
     headingDisplay={
       Object {
         "className": "ds-h3",
@@ -58,6 +59,7 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
 >
   <Instruction
     args={null}
+    disableTitleCaseConversion={false}
     headingDisplay={
       Object {
         "className": "ds-h3",

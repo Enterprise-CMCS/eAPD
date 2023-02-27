@@ -14,21 +14,6 @@ import RichText from '../../../../../components/RichText';
 import { contractorResourcesSchema as schema } from '@cms-eapd/common';
 import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
-const getCheckedValue = value => {
-  if (value !== null) {
-    if (value === true) return 'yes';
-    if (value === false) return 'no';
-    return value;
-  }
-  return null;
-};
-
-const getBooleanValue = value => {
-  if (value === 'yes') return true;
-  if (value === 'no') return false;
-  return null;
-};
-
 const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor, setFormValid }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
@@ -57,7 +42,7 @@ const ContractorResourceForm = forwardRef(
         start,
         end,
         totalCost,
-        useHourly: getCheckedValue(useHourlyProp),
+        useHourly: useHourlyProp,
         hourly,
         years
       },
@@ -65,7 +50,7 @@ const ContractorResourceForm = forwardRef(
       reValidateMode: 'onBlur',
       resolver: joiResolver(schema)
     });
-    const [useHourly, setUseHourly] = useState(getCheckedValue(item.useHourly));
+    const [useHourly, setUseHourly] = useState(item.useHourly);
 
     useEffect(() => {
       setFormValid(isValid);
@@ -78,7 +63,7 @@ const ContractorResourceForm = forwardRef(
       saveContractor(activityIndex, index, {
         ...item,
         ...getValues(),
-        useHourly: getBooleanValue(getValues('useHourly'))
+        useHourly
       });
     };
 
@@ -209,8 +194,7 @@ const ContractorResourceForm = forwardRef(
             field: {
               name,
               onChange: radioHourlyOnChange,
-              onBlur: radioHourlyOnBlur,
-              value
+              onBlur: radioHourlyOnBlur
             }
           }) => (
             <ChoiceList
@@ -219,8 +203,8 @@ const ContractorResourceForm = forwardRef(
               choices={[
                 {
                   label: 'Yes',
-                  value: 'yes',
-                  checked: value === 'yes',
+                  value: true,
+                  checked: useHourly === true,
                   checkedChildren: (
                     <div className="ds-c-choice__checkedChild">
                       {apdFFYs.map(ffy => (
@@ -304,13 +288,13 @@ const ContractorResourceForm = forwardRef(
                 },
                 {
                   label: 'No',
-                  value: 'no',
-                  checked: value === 'no'
+                  value: false,
+                  checked: useHourly === false
                 }
               ]}
               type="radio"
               onChange={e => {
-                setUseHourly(e.target.value);
+                setUseHourly(e.target.value === 'true');
                 radioHourlyOnChange(e);
                 if (getFieldState('hourly').isTouched) trigger('hourly');
                 if (getFieldState('years').isTouched) trigger('years');
@@ -322,7 +306,7 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {useHourly === 'yes' || useHourly === true || useHourly === null ? (
+        {useHourly === true || useHourly === null ? (
           <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>

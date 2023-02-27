@@ -39,8 +39,13 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { generateKey, defaultAPDYearOptions, APD_TYPE } from '@cms-eapd/common';
-import initialAssurances from '../../util/regulations';
+
+import {
+  generateKey,
+  defaultAPDYearOptions,
+  APD_TYPE,
+  FUNDING_CATEGORY_TYPE
+} from '@cms-eapd/common';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
@@ -243,27 +248,36 @@ const getHumanTimestamp = iso8601 => {
 };
 
 const getKeyPersonnelSplit = (years, apdType) => {
-  let split;
   switch (apdType) {
     case 'HITECH':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
+        }),
         {}
       );
-      break;
     case 'MMIS':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
-      break;
     default:
       return years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
   }
-  return split;
 };
 
 export const getKeyPersonnel = (
@@ -359,11 +373,6 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
       return [{ op: 'add', path, value: null }];
   }
 };
-
-const getAssurancesAndCompliances = assurancesAndCompliances =>
-  Object.values(assurancesAndCompliances).every(regs => regs.length > 0)
-    ? assurancesAndCompliances
-    : initialAssurances;
 
 const initialState = {
   data: {},
@@ -585,9 +594,6 @@ const reducer = (state = initialState, action) => {
                 key: generateKey()
               }))
             })
-          ),
-          assurancesAndCompliances: getAssurancesAndCompliances(
-            action.data.apd.assurancesAndCompliances
           )
         },
         adminCheck: {

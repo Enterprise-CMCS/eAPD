@@ -134,6 +134,7 @@ describe('renders correctly', () => {
     );
     expect(component).toMatchSnapshot();
   });
+
   it('renders correctly with otherFunding', () => {
     const component = mount(
       <table>
@@ -163,6 +164,14 @@ describe('renders correctly', () => {
               totalCost: 200,
               unitCost: null,
               units: null
+            },
+            {
+              // show medicaid share %
+              description: 'share percent',
+              totalCost: 200,
+              unitCost: 1,
+              units: 'fte',
+              medicaidShare: '50'
             }
           ]}
         />

@@ -1,5 +1,7 @@
 import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
+import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
+import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -36,9 +38,11 @@ describe(
         apdId = apdUrl.split('/').pop();
       });
 
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
+      cy.get('[data-cy=yearList]').within(() => {
+        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+          years.push(list[index].value)
+        );
+      });
     });
 
     beforeEach(function () {
@@ -52,6 +56,7 @@ describe(
     });
 
     after(function () {
+      cy.useStateStaff();
       cy.visit('/');
       cy.deleteAPD(this.apdId);
     });
@@ -63,6 +68,14 @@ describe(
 
       describe('first', function () {
         testStatePrioritiesAndScopeWithData();
+      });
+
+      describe('add activity', function () {
+        addMMISActivity();
+      });
+
+      describe('Assurances and Compliance', function () {
+        testMmisAssurancesAndComplianceWithData();
       });
     });
   }

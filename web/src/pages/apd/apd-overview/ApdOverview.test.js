@@ -3,6 +3,7 @@ import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
+import { APD_TYPE } from '@cms-eapd/common';
 import { plain as ApdOverview } from './ApdOverview';
 
 jest.mock('../../../util/api', () => ({
@@ -15,16 +16,8 @@ jest.mock('../../../util/api', () => ({
 const defaultProps = {
   addApdYear: jest.fn(),
   name: 'apd #1',
-  narrativeHIE: 'narrative HIE',
-  narrativeHIT: 'narrative HIT',
-  narrativeMMIS: 'narrative MMIS',
-  programOverview: '',
   removeApdYear: jest.fn(),
-  setHIE: jest.fn(),
-  setHIT: jest.fn(),
-  setMMIS: jest.fn(),
   setName: jest.fn(),
-  setOverview: jest.fn(),
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025']
 };
@@ -37,7 +30,15 @@ const setup = async (props = {}) => {
       initialState: {
         apd: {
           data: {
-            activities: []
+            apdOverview: {
+              updateStatus: {
+                isUpdateAPD: true,
+                annualUpdate: true,
+                asNeededUpdate: false
+              }
+            },
+            activities: [],
+            apdType: APD_TYPE.MMIS
           }
         }
       }
@@ -57,15 +58,10 @@ describe('APD overview component', () => {
     resetLDMocks();
   });
 
-  test('dispatches on text change', async () => {
+  test('displays APD name', async () => {
     mockFlags({ enableMmis: false });
-    jest.setTimeout(30000);
-    const { user } = await setup();
-
-    await user.type(screen.getByLabelText('Introduction'), 'it is really cool');
-    expect(screen.getByLabelText('Introduction')).toHaveValue(
-      'it is really cool'
-    );
+    await setup();
+    expect(screen.getByLabelText('APD Name')).toHaveValue(defaultProps.name);
   });
 
   test('user can add a year', async () => {

@@ -28,9 +28,11 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
   });
 
   beforeEach(function () {

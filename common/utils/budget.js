@@ -485,6 +485,156 @@ export const updateStatePersonnel = ({
 };
 
 /**
+ * Calculates the key state personnel total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the overall total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE
+ */
+export const calculateKeyStatePersonnelTotal = (keyPersonnel, year) => {
+  return keyPersonnel?.costs[year] * keyPersonnel?.fte[year] || 0;
+};
+
+/**
+ * Calculates the key state personnel medicaid total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the medicaid computable total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%)
+ */
+export const calculateKeyStatePersonnelMedicaid = (keyPersonnel, year) => {
+  return (
+    keyPersonnel?.costs[year] *
+      keyPersonnel?.fte[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) || 0
+  );
+};
+
+/**
+ * Calculates the key state personnel federal share total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the federal share total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%) x Federal Share(%)
+ */
+export const calculateKeyStatePersonnelFed = (keyPersonnel, year) => {
+  return (
+    keyPersonnel?.costs?.[year] *
+      keyPersonnel?.fte?.[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) *
+      (keyPersonnel?.split?.[year].federal / 100) || 0
+  );
+};
+
+/**
+ * Calculates the key state personnel state share total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the state share total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%) x State Share(%)
+ */
+export const calculateKeyStatePersonnelState = (keyPersonnel, year) => {
+  return (
+    keyPersonnel?.costs?.[year] *
+      keyPersonnel?.fte?.[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) *
+      (keyPersonnel?.split?.[year].state / 100) || 0
+  );
+};
+
+/**
+ * For MMIS APDs add the key state personnel costs to the budget
+ * before iterating over the activities and adding those costs
+ * @param {Object} budget The current budget object
+ * @param {Array} years Array of years as a four-character year string (e.g., '2018')
+ * @param {Array} keyPersonnel List of key personnel for the APD
+ * @returns {Object} an updated budget with key state personnel costs included
+ */
+export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
+  // Add to key state personnel the default data structure
+  budget.mmis = {
+    ...budget.mmis,
+    keyStatePersonnel: getDefaultFundingSourceObject(years)
+  };
+
+  let updatedBudget = deepCopy(budget);
+  if (Array.isArray(keyPersonnel)) {
+    keyPersonnel?.forEach(keyPersonnel => {
+      if (keyPersonnel.hasCosts) {
+        updatedBudget = years.reduce((budget, year) => {
+          const keyStatePersonnelTotal = calculateKeyStatePersonnelTotal(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelMedicaid = calculateKeyStatePersonnelMedicaid(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelFed = calculateKeyStatePersonnelFed(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelState = calculateKeyStatePersonnelState(
+            keyPersonnel,
+            year
+          );
+
+          // Add total cost (before medicaid and fed-state split)
+          budget['mmis']['keyStatePersonnel'][year].total +=
+            keyStatePersonnelTotal;
+          budget['mmis']['keyStatePersonnel'].total.total +=
+            keyStatePersonnelTotal;
+          budget['mmis']['combined'][year].total += keyStatePersonnelTotal;
+          budget['mmis']['combined'].total.total += keyStatePersonnelTotal;
+          budget['combined'][year].total += keyStatePersonnelTotal;
+          budget['combined'].total.total += keyStatePersonnelTotal;
+
+          // Add federal cost (total cost * medicaid share * fed-split)
+          budget['mmis']['keyStatePersonnel'][year].federal +=
+            keyStatePersonnelFed;
+          budget['mmis']['keyStatePersonnel'].total.federal +=
+            keyStatePersonnelFed;
+          budget['mmis']['combined'][year].federal += keyStatePersonnelFed;
+          budget['mmis']['combined'].total.federal += keyStatePersonnelFed;
+          budget['combined'][year].federal += keyStatePersonnelFed;
+          budget['combined'].total.federal += keyStatePersonnelFed;
+
+          // Add state cost (total cost * medicaid share * state-split)
+          budget['mmis']['keyStatePersonnel'][year].state +=
+            keyStatePersonnelState;
+          budget['mmis']['keyStatePersonnel'].total.state +=
+            keyStatePersonnelState;
+          budget['mmis']['combined'][year].state += keyStatePersonnelState;
+          budget['mmis']['combined'].total.state += keyStatePersonnelState;
+          budget['combined'][year].state += keyStatePersonnelState;
+          budget['combined'].total.state += keyStatePersonnelState;
+
+          // Add medicaid cost (total cost * medicaid share)
+          budget['mmis']['keyStatePersonnel'][year].medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['keyStatePersonnel'].total.medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['combined'][year].medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['combined'].total.medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['combined'][year].medicaid += keyStatePersonnelMedicaid;
+          budget['combined'].total.medicaid += keyStatePersonnelMedicaid;
+
+          return budget;
+        }, updatedBudget);
+      }
+    });
+  }
+
+  return updatedBudget;
+};
+
+/**
  * The cost from the item by year for the category.
  * statePersonnel is a special case, because it's years don't have a
  * number value, but an object with amount and percent
@@ -604,7 +754,7 @@ export const sumActivityTotals = ({ activity, years } = {}) => {
  * @param {Object} budget The current budget object
  * @param {String} fundingSource The funding source for the Activity (e.g., "HIT", "HIE")
  * @param {String} category The category this cost comes from (e.g., "contractors", "statePersonnel")
- * @param {Array} items The list of items of the category type in the budget
+ * @param {Array} items The list of items of the category type in the budget (e.g., a personnel in the list of "statePersonnel")
  * @return {Object} The budget object with the totals updated
  */
 export const sumCostsForFundingSourceByCategory = ({
@@ -1351,6 +1501,7 @@ export const calculateBudget = apd => {
     keyStatePersonnel: { keyPersonnel } = {},
     apdType // eslint-disable-line no-underscore-dangle
   } = deepCopy(apd);
+
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.
   let newBudget;
@@ -1364,10 +1515,20 @@ export const calculateBudget = apd => {
     default:
       newBudget = defaultBudgetObject(years);
   }
-
+  // For MMIS-type APDs we calculate all of the totals for
+  // key state personnel prior to calculating the activities
   if (years && activities && keyPersonnel) {
-    // Since all of our expenses are tied up in activities, we'll start
-    // by looking at all of them and doing Magic Math™. (It's not magic.)
+    if (apdType === APD_TYPE.MMIS) {
+      newBudget = addKeyStatePersonnel({
+        budget: newBudget,
+        years,
+        keyPersonnel
+      });
+    }
+
+    // Since all of our expenses are tied up in activities (with the
+    // exception of key state personnel in MMIS-type APDs), we'll start by
+    // looking at all of them and doing Magic Math™. (It's not magic.)
     activities.forEach(activity => {
       // Update the statePersonnel with keyPersonnel, if applicable
       if (apdType === APD_TYPE.HITECH) {
