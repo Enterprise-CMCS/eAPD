@@ -165,6 +165,7 @@ MedicaidBusinessAreas.propTypes = {
   errorMessage: PropTypes.string,
   errorOtherDetails: PropTypes.string,
   medicaidBusinessAreaChoices: PropTypes.object.isRequired,
+  setMedicaidBusinessAreas: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 };
