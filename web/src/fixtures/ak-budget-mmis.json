@@ -69,6 +69,26 @@
     "years": ["2023", "2024"],
     "__t": "MMISBudget",
     "mmis": {
+      "keyStatePersonnel": {
+        "2023": {
+          "total": 2629801,
+          "federal": 2302963,
+          "medicaid": 2558847,
+          "state": 255884
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 5029876,
+          "federal": 2302963,
+          "medicaid": 2558847,
+          "state": 255884
+        }
+      },
       "statePersonnel": {
         "2023": {
           "total": 2629801,

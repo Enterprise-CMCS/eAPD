@@ -60,25 +60,25 @@
       [
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["State Staff Subtotal", "$0"],
+        ["State Staff Total", "$0"],
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["Other State Expenses Subtotal", "$0"],
+        ["Other State Expenses Total", "$0"],
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["Private Contractor Subtotal", "$0"],
+        ["Private Contractor Total", "$0"],
         ["Activity 1 Total Computable Medicaid Cost", "$0"]
       ],
       [
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["State Staff Subtotal", "$0"],
+        ["State Staff Total", "$0"],
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["Other State Expenses Subtotal", "$0"],
+        ["Other State Expenses Total", "$0"],
         [],
         ["Other Funding Amount", "-", "$0"],
-        ["Private Contractor Subtotal", "$0"],
+        ["Private Contractor Total", "$0"],
         ["Activity 1 Total Computable Medicaid Cost", "$0"]
       ]
     ],

@@ -1960,6 +1960,15 @@ Object {
                       "description": "Whether the person is the primary point of contact for the APD",
                       "type": "boolean",
                     },
+                    "medicaidShare": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "The Medicaid Share as a percentage of an individual Key State Personnel by year",
+                          "type": "number",
+                        },
+                      },
+                    },
                     "name": Object {
                       "description": "Person's name",
                       "type": "string",
@@ -1967,6 +1976,15 @@ Object {
                     "position": Object {
                       "description": "Person's position",
                       "type": "string",
+                    },
+                    "split": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "The Federal-State split by year",
+                          "type": "number",
+                        },
+                      },
                     },
                   },
                   "type": "object",
