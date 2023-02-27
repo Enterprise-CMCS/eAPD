@@ -25,8 +25,8 @@ import { apdValid } from '../../../redux/reducers/apd';
 import { createApd } from '../../../redux/actions/app';
 import Loading from '../../../components/Loading';
 
-import ApdNewHITECHFields from './ApdNewHITECHFields';
-import ApdNewMMISFields from './ApdNewMMISFields';
+import HitechUpdateStatus from './HitechUpdateStatus';
+import MmsiUpdateStatus from './MmsiUpdateStatus';
 
 const ApdNew = ({ createApd: create }) => {
   ApdNew.displayName = 'ApdNew';
@@ -164,14 +164,14 @@ const ApdNew = ({ createApd: create }) => {
     switch (apdType) {
       case APD_TYPE.HITECH:
         return (
-          <ApdNewHITECHFields
+          <HitechUpdateStatus
             updateStatus={updateStatus}
             setUpdateStatus={setUpdateStatus}
           />
         );
       case APD_TYPE.MMIS:
         return (
-          <ApdNewMMISFields
+          <MmsiUpdateStatus
             medicaidBusinessAreas={medicaidBusinessAreas}
             setMedicaidBusinessAreas={setMedicaidBusinessAreas}
             updateStatus={updateStatus}

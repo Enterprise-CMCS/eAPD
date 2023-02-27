@@ -6,7 +6,7 @@ import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const ApdNewMMISFields = ({
+const MmsiUpdateStatus = ({
   medicaidBusinessAreas,
   setMedicaidBusinessAreas,
   updateStatus,
@@ -119,7 +119,7 @@ const ApdNewMMISFields = ({
   );
 };
 
-ApdNewMMISFields.propTypes = {
+MmsiUpdateStatus.propTypes = {
   medicaidBusinessAreas: PropTypes.object.isRequired,
   setMedicaidBusinessAreas: PropTypes.func.isRequired,
   updateStatus: PropTypes.object.isRequired,
@@ -127,4 +127,4 @@ ApdNewMMISFields.propTypes = {
   setUpdateAPD: PropTypes.func.isRequired
 };
 
-export default ApdNewMMISFields;
+export default MmsiUpdateStatus;

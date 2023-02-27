@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
+const HitechUpdateStatus = ({ setUpdateStatus, updateStatus }) => {
   const {
     control,
     formState: { errors }
@@ -57,9 +57,9 @@ const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
   );
 };
 
-ApdNewHITECHFields.propTypes = {
+HitechUpdateStatus.propTypes = {
   updateStatus: PropTypes.object.isRequired,
   setUpdateStatus: PropTypes.func.isRequired
 };
 
-export default ApdNewHITECHFields;
+export default HitechUpdateStatus;
