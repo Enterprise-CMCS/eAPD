@@ -205,7 +205,7 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    const { name, updateStatus } = getValues();
+    const { apdName, updateStatus } = getValues();
     const apdValues = {
       apdOverview: {
         programOverview: '',
@@ -213,7 +213,7 @@ const ApdNew = ({ createApd: create }) => {
       },
       years,
       yearOptions,
-      name,
+      name: apdName,
       apdType
     };
 
