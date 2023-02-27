@@ -209,7 +209,7 @@ const ApdNew = ({ createApd: create }) => {
     const apdValues = {
       apdOverview: {
         programOverview: '',
-        updateStatus: updateStatus
+        updateStatus
       },
       years,
       yearOptions,
