@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const MmsiUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
+const MmisUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
   const {
     control,
     formState: { errors }
@@ -80,6 +80,16 @@ const MmsiUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
               }
             ]}
             onChange={({ target: { value } }) => {
+              if (value === 'yes') {
+                updateStatus.isUpdateAPD = true;
+              } else {
+                updateStatus = {
+                  isUpdateAPD: false,
+                  annualUpdate: false,
+                  asNeededUpdate: false
+                };
+              }
+              setUpdateStatus(updateStatus);
               setUpdateAPD(value);
               onChange(value);
             }}
@@ -94,10 +104,10 @@ const MmsiUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
   );
 };
 
-MmsiUpdateStatus.propTypes = {
+MmisUpdateStatus.propTypes = {
   updateStatus: PropTypes.object.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   setUpdateAPD: PropTypes.func.isRequired
 };
 
-export default MmsiUpdateStatus;
+export default MmisUpdateStatus;

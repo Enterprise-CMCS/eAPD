@@ -27,7 +27,7 @@ import Loading from '../../../components/Loading';
 import MedicaidBusinessAreas from '../../../components/MedicaidBusinessAreas';
 
 import HitechUpdateStatus from './HitechUpdateStatus';
-import MmsiUpdateStatus from './MmsiUpdateStatus';
+import MmisUpdateStatus from './MmisUpdateStatus';
 
 const ApdNew = ({ createApd: create }) => {
   ApdNew.displayName = 'ApdNew';
@@ -55,6 +55,7 @@ const ApdNew = ({ createApd: create }) => {
   };
 
   const updateTypes = {
+    isUpdateAPD: false,
     annualUpdate: false,
     asNeededUpdate: false
   };
@@ -173,7 +174,7 @@ const ApdNew = ({ createApd: create }) => {
       case APD_TYPE.MMIS:
         return (
           <div>
-            <MmsiUpdateStatus
+            <MmisUpdateStatus
               updateStatus={updateStatus}
               setUpdateStatus={setUpdateStatus}
               setUpdateAPD={setUpdateAPD}
