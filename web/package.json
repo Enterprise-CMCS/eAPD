@@ -138,7 +138,6 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-storybook": "0.6.4",
     "eslint-plugin-testing-library": "5.10.0",
-    "glob": "^9.0.1",
     "jest": "27.5.1",
     "jest-axe": "5.0.1",
     "jest-launchdarkly-mock": "^1.0.6",
