@@ -13,7 +13,8 @@ const MedicaidBusinessAreas = ({
   errorOtherDetails,
   medicaidBusinessAreas,
   setMedicaidBusinessAreas,
-  onBlur
+  onBlur,
+  ...props
 }) => {
   const { control, setValue, trigger, clearErrors } = useFormContext();
 
@@ -91,6 +92,7 @@ const MedicaidBusinessAreas = ({
 
   return (
     <ChoiceList
+      {...props}
       label="Medicaid Business Areas"
       hint={
         <div>

@@ -28,8 +28,7 @@ const defaultProps = {
   yearOptions: ['2023', '2024', '2025']
 };
 
-let options;
-let props;
+let options, props;
 const setup = async (props = {}, options = {}) => {
   let util;
   // eslint-disable-next-line testing-library/no-unnecessary-act

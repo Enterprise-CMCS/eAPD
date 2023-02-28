@@ -182,9 +182,10 @@ const ApdNew = ({ createApd: create }) => {
             <Controller
               name="medicaidBusinessAreas"
               control={control}
-              render={({ field: { onBlur } }) => (
+              render={({ field: { name, onBlur, ...props } }) => (
                 <MedicaidBusinessAreas
-                  controllerName="medicaidBusinessAreas"
+                  {...props}
+                  controllerName={name}
                   controllerNameForOtherDetails="medicaidBusinessAreas.otherMedicaidBusinessAreas"
                   errorMessage={errors?.medicaidBusinessAreas?.message}
                   errorOtherDetails={
