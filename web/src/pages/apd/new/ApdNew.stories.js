@@ -1,6 +1,8 @@
 import React from 'react';
-import { decoratorWithProviderAndRouter } from 'apd-storybook-library';
-import { renderWithProvider } from 'apd-storybook-library';
+import {
+  decoratorWithProviderAndRouter,
+  renderWithProvider
+} from 'apd-storybook-library';
 import ApdNew from './ApdNew';
 
 export const { history, decorators } = decoratorWithProviderAndRouter({
