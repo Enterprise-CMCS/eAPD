@@ -8,9 +8,12 @@ import {
 import { FormProvider, useForm } from 'react-hook-form';
 
 import MedicaidBusinessAreas from './MedicaidBusinessAreas';
-import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common';
+import {
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING,
+  MEDICAID_BUSINESS_AREAS_CHECKBOXES
+} from '@cms-eapd/common';
 
-const defaultBusinessAreaOptions = {
+export const defaultBusinessAreaOptions = {
   waiverSupportSystems: false,
   assetVerificationSystem: false,
   claimsProcessing: false,
@@ -57,12 +60,12 @@ describe('Medicaid wrapper component', () => {
       </Wrapper>
     );
 
-    for (var key in defaultBusinessAreaOptions) {
-      await expect(
+    MEDICAID_BUSINESS_AREAS_CHECKBOXES.forEach(key => {
+      expect(
         screen.getByLabelText(
           MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key]
         )
       ).not.toBeChecked();
-    }
+    });
   });
 });
