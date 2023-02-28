@@ -44,10 +44,10 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
       <tr className="budget-table--row__header">
         <th scope="col">State Staff</th>
         <th scope="col" colSpan="2">
-          <span className="sr-only">unit cost</span>
+          <span className="ds-u-visibility--screen-reader">unit cost</span>
         </th>
         <th scope="col" colSpan="2">
-          <span className="sr-only">units</span>
+          <span className="ds-u-visibility--screen-reader">units</span>
         </th>
         <th scope="col">Total cost</th>
       </tr>

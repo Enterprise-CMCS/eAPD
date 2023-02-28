@@ -28,7 +28,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         scope="col"
       >
         <span
-          class="sr-only"
+          class="ds-u-visibility--screen-reader"
         >
           unit cost
         </span>
@@ -38,7 +38,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         scope="col"
       >
         <span
-          class="sr-only"
+          class="ds-u-visibility--screen-reader"
         >
           units
         </span>

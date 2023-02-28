@@ -154,7 +154,7 @@ const CostAllocateFFPQuarterly = ({
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
-                        labelClassName="sr-only"
+                        labelClassName="ds-u-visibility--screen-reader"
                         onChange={setInHouse(q)}
                         onBlur={onBlur}
                         round
@@ -218,7 +218,7 @@ const CostAllocateFFPQuarterly = ({
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, contractors`}
-                        labelClassName="sr-only"
+                        labelClassName="ds-u-visibility--screen-reader"
                         onChange={setContractor(q)}
                         onBlur={onBlur}
                         round

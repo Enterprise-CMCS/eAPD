@@ -54,6 +54,11 @@ export const ActivityTotalCostTable = ({ years, ffy }) => {
   );
 };
 
+ActivityTotalCostTable.propTypes = {
+  years: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired
+};
+
 const OtherFunding = ({
   activityIndex,
   activity,
@@ -173,7 +178,7 @@ const OtherFunding = ({
                   {...props}
                   value={value}
                   label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
+                  labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
                   errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
