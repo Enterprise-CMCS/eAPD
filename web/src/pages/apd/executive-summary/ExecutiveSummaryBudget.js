@@ -2,30 +2,21 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { titleCase } from 'title-case';
 import Dollars from '../../../components/Dollars';
 import { t } from '../../../i18n';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
+
+import HitechBudgetSummary from './HitechBudgetSummary';
+import MmisBudgetSummary from './MmisBudgetSummary';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const thId = (program, share) =>
   `program-budget-table-${program}${share ? `-${share}` : ''}`;
 const tdHdrs = (program, share) =>
   `program-budget-table-${program} program-budget-table-${program}-${share}`;
 
-const DollarCell = ({ headers, value }) => (
-  <td className="budget-table--number" headers={headers}>
-    <Dollars>{value}</Dollars>
-  </td>
-);
-
-DollarCell.propTypes = {
-  headers: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-};
-
-DollarCell.defaultProps = { headers: '' };
-
-const ExecutiveSummaryBudget = ({ budget }) => {
-  const { hit, hie, hitAndHie, mmisByFFP, years } = budget;
+const ExecutiveSummaryBudget = ({ apdType, budget }) => {
+  const { years } = budget;
 
   if (!years.length) return null;
 
@@ -34,9 +25,29 @@ const ExecutiveSummaryBudget = ({ budget }) => {
     { year: 'total', display: 'Total' }
   ];
 
+  function renderApdTypeSpecificFields(apdType) {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return (
+          <HitechBudgetSummary
+            budget={budget}
+            rowKeys={rowKeys}
+            tdHdrs={tdHdrs}
+            thId={thId}
+          />
+        );
+      case APD_TYPE.MMIS:
+        return <MmisBudgetSummary />;
+      default:
+        null;
+    }
+  }
+
   return (
     <Fragment>
-      <table className="budget-table">
+      {/* Show relevant fields based on APD type selected */}
+      {renderApdTypeSpecificFields(apdType)}
+      {/* <table className="budget-table">
         <caption className="ds-h4">
           HIT + HIE{' '}
           <span className="ds-u-visibility--screen-reader">
@@ -254,16 +265,19 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </Fragment>
   );
 };
 
 ExecutiveSummaryBudget.propTypes = {
+  apdType: PropTypes.string,
   budget: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ budget }) => ({ budget });
+const mapStateToProps = state => {
+  return { apdType: selectApdType(state), budget: state.budget };
+};
 
 export default connect(mapStateToProps)(ExecutiveSummaryBudget);
 
