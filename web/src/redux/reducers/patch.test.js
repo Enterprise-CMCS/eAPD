@@ -88,7 +88,14 @@ describe('JSON patch reducer', () => {
               ],
               incentivePayments: {},
               keyStatePersonnel: {
-                keyPersonnel: [{ costs: {}, fte: {} }]
+                keyPersonnel: [
+                  {
+                    costs: {},
+                    fte: {},
+                    split: { federal: 0, state: 0, fundingCategory: null },
+                    medicaidShare: 0
+                  }
+                ]
               },
               years: []
             }
@@ -141,7 +148,9 @@ describe('JSON patch reducer', () => {
                 keyPersonnel: [
                   {
                     costs: { 2019: 'this gets deleted' },
-                    fte: { 2019: 'this gets deleted' }
+                    fte: { 2019: 'this gets deleted' },
+                    split: { federal: 0, state: 0, fundingCategory: null },
+                    medicaidShare: 0
                   }
                 ]
               },

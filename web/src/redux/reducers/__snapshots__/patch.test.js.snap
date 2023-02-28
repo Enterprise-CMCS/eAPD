@@ -90,6 +90,20 @@ Array [
     "path": "/keyStatePersonnel/keyPersonnel/0/fte/2019",
     "value": 0,
   },
+  Object {
+    "op": "add",
+    "path": "/keyStatePersonnel/keyPersonnel/0/split/2019",
+    "value": Object {
+      "federal": 0,
+      "fundingCategory": null,
+      "state": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/keyStatePersonnel/keyPersonnel/0/medicaidShare/2019",
+    "value": 0,
+  },
 ]
 `;
 
@@ -134,6 +148,14 @@ Array [
   Object {
     "op": "remove",
     "path": "/keyStatePersonnel/keyPersonnel/0/fte/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/keyStatePersonnel/keyPersonnel/0/split/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/keyStatePersonnel/keyPersonnel/0/medicaidShare/2019",
   },
 ]
 `;
