@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  renderWithConnection,
-  screen,
-  act,
-  waitFor
-} from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import MedicaidBusinessAreas from './MedicaidBusinessAreas';
@@ -50,7 +45,7 @@ describe('Medicaid wrapper component', () => {
   it('should do render with no checks by default', async () => {
     const Wrapper = props => {
       const formMethods = useForm();
-
+      // eslint-disable-next-line react/prop-types
       return <FormProvider {...formMethods}>{props.children}</FormProvider>;
     };
 

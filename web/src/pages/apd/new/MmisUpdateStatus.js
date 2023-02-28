@@ -83,6 +83,7 @@ const MmisUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
               if (value === 'yes') {
                 updateStatus.isUpdateAPD = true;
               } else {
+                // eslint-disable-next-line no-param-reassign
                 updateStatus = {
                   isUpdateAPD: false,
                   annualUpdate: false,
