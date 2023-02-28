@@ -30,13 +30,15 @@ Array [
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_111"
+    id="checkbox_updateStatus_111"
+    name="updateStatus"
     type="checkbox"
     value="annualUpdate"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_112"
+    id="checkbox_updateStatus_112"
+    name="updateStatus"
     type="checkbox"
     value="asNeededUpdate"
   />,

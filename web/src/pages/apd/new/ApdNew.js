@@ -131,7 +131,7 @@ const ApdNew = ({ createApd: create }) => {
     }
 
     setSubmitDisabled(!isValid);
-  }, [apdTypeHitechOnly, enableMmis, isValid, setValue]);
+  }, [enableMmis, isValid]);
 
   if (isLoading) {
     return (
