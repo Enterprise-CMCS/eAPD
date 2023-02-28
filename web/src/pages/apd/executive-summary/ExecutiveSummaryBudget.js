@@ -1,27 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-
-import Dollars from '../../../components/Dollars';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 import HitechBudgetSummary from './HitechBudgetSummary';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
-
-const DollarCell = ({ headers, value }) => (
-  <td className="budget-table--number" headers={headers}>
-    <Dollars>{value}</Dollars>
-  </td>
-);
-
-DollarCell.propTypes = {
-  headers: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-};
-
-DollarCell.defaultProps = { headers: '' };
 
 const thId = (program, share) =>
   `program-budget-table-${program}${share ? `-${share}` : ''}`;
@@ -44,7 +29,6 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
         return (
           <HitechBudgetSummary
             budget={budget}
-            DollarCell={DollarCell}
             rowKeys={rowKeys}
             tdHdrs={tdHdrs}
             thId={thId}
@@ -54,7 +38,6 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
         return (
           <MmisBudgetSummary
             budget={budget}
-            DollarCell={DollarCell}
             rowKeys={rowKeys}
             tdHdrs={tdHdrs}
             thId={thId}
@@ -84,4 +67,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(ExecutiveSummaryBudget);
 
-export { ExecutiveSummaryBudget as plain, mapStateToProps, DollarCell };
+export { ExecutiveSummaryBudget as plain, mapStateToProps };

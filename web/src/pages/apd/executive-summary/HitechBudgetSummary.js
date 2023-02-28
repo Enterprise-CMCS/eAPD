@@ -3,10 +3,10 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import Dollars from '../../../components/Dollars';
+import DollarCell from '../../../components/DollarCell';
 import { t } from '../../../i18n';
 
-const HitechBudgetSummary = ({ budget, DollarCell, rowKeys, tdHdrs, thId }) => {
+const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
   const { hit, hie, hitAndHie } = budget;
 
   return (

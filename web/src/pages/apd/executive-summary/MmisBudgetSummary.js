@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import DollarCell from '../../../components/DollarCell';
 import { titleCase } from 'title-case';
 import { t } from '../../../i18n';
 
-const MmisBudgetSummary = ({ budget, DollarCell, rowKeys, tdHdrs, thId }) => {
+const MmisBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
   const { mmisByFFP } = budget;
 
   return (
