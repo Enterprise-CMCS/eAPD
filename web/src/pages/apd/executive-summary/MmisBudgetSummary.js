@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { titleCase } from 'title-case';
 import { t } from '../../../i18n';
 
-const MmisBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
+const MmisBudgetSummary = ({ budget, DollarCell, rowKeys, tdHdrs, thId }) => {
   const { mmisByFFP } = budget;
 
   return (

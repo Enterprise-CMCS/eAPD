@@ -6,20 +6,7 @@ import { titleCase } from 'title-case';
 import Dollars from '../../../components/Dollars';
 import { t } from '../../../i18n';
 
-const DollarCell = ({ headers, value }) => (
-  <td className="budget-table--number" headers={headers}>
-    <Dollars>{value}</Dollars>
-  </td>
-);
-
-DollarCell.propTypes = {
-  headers: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-};
-
-DollarCell.defaultProps = { headers: '' };
-
-const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
+const HitechBudgetSummary = ({ budget, DollarCell, rowKeys, tdHdrs, thId }) => {
   const { hit, hie, hitAndHie } = budget;
 
   return (
