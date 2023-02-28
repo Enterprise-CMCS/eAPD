@@ -111,8 +111,8 @@ const ApdNew = ({ createApd: create }) => {
       updateStatus,
       updateAPD
     },
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: 'all',
+    reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
 

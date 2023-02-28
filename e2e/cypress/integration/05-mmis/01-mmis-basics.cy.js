@@ -13,12 +13,12 @@ Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   // let activityPage;
-  let budgetPage;
-  let apdUrl = '/';
-  let apdId;
+  let budgetPage,
+    apdUrl = '/',
+    apdId;
   const years = [];
 
-  before(() => {
+  before(function () {
     // activityPage = new ActivityPage();
     budgetPage = new BudgetPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
@@ -28,7 +28,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     // Create a new MMIS APD
     cy.findAllByText('Create new').click();
     cy.findByRole('radio', { name: /MMIS/i }).click();
-    cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
+    cy.findByLabelText('APD Name').clear().type('My First APD').blur();
     cy.findByRole('radio', { name: /No, this is for a new project./i }).click();
     cy.findByRole('checkbox', {
       name: /Claims Processing/i
@@ -52,6 +52,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   beforeEach(function () {
+    cy.wrap(budgetPage).as('budgetPage');
     cy.wrap(apdUrl).as('apdUrl');
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
@@ -70,13 +71,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   describe('Create MMIS APD', function () {
-    it('tests Create New page and do not save', function () {
-      //
-      // APD Overview
-      //
+    it('tests Create New page and does not save', function () {
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains(
         'This selection cannot be changed after creating a new APD.'
@@ -100,7 +98,35 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
-      cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
+      cy.findByLabelText('APD Name').clear().type('Not Saving This One').blur();
+
+      cy.findByRole('radio', { name: /Yes, it is an update/i })
+        .focus()
+        .blur();
+      cy.contains('Indicate whether this APD is an update.').should('exist');
+
+      cy.findByRole('radio', {
+        name: /No, this is for a new project/i
+      }).click();
+      cy.findAllByText('Indicate whether this APD is an update.').should(
+        'not.exist'
+      );
+      cy.findAllByText('Update Type').should('not.exist');
+
+      cy.findByRole('radio', { name: /Yes, it is an update/i }).click();
+      cy.findAllByText('Indicate whether this APD is an update.').should(
+        'not.exist'
+      );
+      cy.findAllByText('Update Type').should('exist');
+      cy.findByRole('checkbox', { name: /Annual update/i })
+        .focus()
+        .blur()
+        .should('exist');
+      cy.findByRole('checkbox', { name: /As-needed update/i }).should('exist');
+      cy.contains('Select at least one type of update.').should('exist');
+
+      cy.findByRole('checkbox', { name: /Annual update/i }).click();
+      cy.contains('Select at least one type of update.').should('not.exist');
 
       // Year validation
       this.years.forEach(year => {
@@ -113,31 +139,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
       cy.contains('Select at least one year.').should('not.exist');
 
-      // Update section validation
-      cy.findByRole('radio', { name: /No, this is for a new project./i })
-        .focus()
-        .blur();
-      cy.contains('Indicate whether this APD is an update.').should('exist');
-
-      cy.findByRole('radio', {
-        name: /No, this is for a new project./i
-      }).click();
-      cy.contains('Indicate whether this APD is an update.').should(
-        'not.exist'
-      );
-      cy.findAllByText('Update Type').should('not.exist');
-
-      cy.findByRole('radio', { name: /Yes, it is an update./i }).click();
-      cy.findAllByText('Update Type').should('exist');
-
-      cy.findByRole('checkbox', { name: /Annual update/i })
-        .focus()
-        .blur();
-      cy.contains('Select at least one type of update.').should('exist');
-
-      cy.findByRole('checkbox', { name: /As-needed update/i }).click();
-      cy.contains('Select at least one type of update.').should('not.exist');
-
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
       // Medicaid Business Area validation
@@ -146,12 +147,14 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       })
         .focus()
         .blur();
-      cy.contains('Provide Other Medicaid Business Area(s)').should('exist');
+      cy.contains('Select at least one Medicaid Business Area.').should(
+        'exist'
+      );
 
       cy.findByRole('checkbox', {
         name: /Program Integrity/i
       }).click();
-      cy.contains('Provide Other Medicaid Business Area(s)').should(
+      cy.contains('Select at least one Medicaid Business Area.').should(
         'not.exist'
       );
 
@@ -163,7 +166,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
       cy.get(`[data-cy='other_details']`).focus().blur();
-      cy.contains('Provide Other Medicaid Business Area(s)').should(
+      cy.contains('Select at least one Medicaid Business Area.').should(
         'not.exist'
       );
 
@@ -173,7 +176,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.findByRole('button', { name: /Cancel/i }).click();
       cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
 
-      cy.contains('MMIS APD Test').should('not.exist');
+      cy.contains('Not Saving This One').should('not.exist');
     });
   });
 
