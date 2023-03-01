@@ -1,12 +1,40 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
-const MmisActivitySummary = ({ data }) => {
+import { ffyList } from './ExecutiveSummary';
+
+const MmisActivitySummary = ({ data, ffys }) => {
   const { apdId } = useParams();
+
+  if (data.length === 0) {
+    return (
+      <Fragment>
+        <ul className="ds-c-list--bare ds-u-margin-bottom--3">
+          <li>
+            <strong>No activities were added</strong>
+          </li>
+          <li>No description added.</li>
+          <li className="ds-u-margin-top--2">
+            <strong>Start Date - End Date:</strong> Date not specified - Date
+            not specified
+          </li>
+          <li>
+            <strong>Total Cost of Activity:</strong> $0
+          </li>
+          <li>
+            <strong>Total Computable Cost:</strong> $0 ($0 Federal share)
+          </li>
+
+          {ffyList(ffys)}
+        </ul>
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
       {data.map((activity, i) => (
@@ -38,16 +66,7 @@ const MmisActivitySummary = ({ data }) => {
               <Dollars>{activity.medicaid}</Dollars> (
               <Dollars>{activity.federal}</Dollars> Federal share)
             </li>
-            {Object.entries(activity.ffys).map(
-              ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-                <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
-                  <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                  <strong>Total Computable Medicaid Cost:</strong>{' '}
-                  <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
-                  Federal share)
-                </li>
-              )
-            )}
+            {ffyList(activity.ffys)}
           </ul>
         </Review>
       ))}
@@ -56,11 +75,8 @@ const MmisActivitySummary = ({ data }) => {
 };
 
 MmisActivitySummary.propTypes = {
-  apdType: PropTypes.string,
-  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
-  total: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired
+  ffys: PropTypes.object.isRequired
 };
 
 export default MmisActivitySummary;

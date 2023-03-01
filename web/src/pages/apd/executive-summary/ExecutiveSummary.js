@@ -11,10 +11,8 @@ import { Section, Subsection } from '../../../components/Section';
 
 import HitechActivitySummary from './HitechActivitySummary';
 import HitechBudgetSummary from './HitechBudgetSummary';
-import HitechFfyTotalsSummary from './HitechFfyTotalsSummary';
 import MmisActivitySummary from './MmisActivitySummary';
 import MmisBudgetSummary from './MmisBudgetSummary';
-import MmisFfyTotalsSummary from './MmisFfyTotalsSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
@@ -24,12 +22,27 @@ import {
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-const thId = (program, share) =>
+export const thId = (program, share) =>
   `program-budget-table-${program}${share ? `-${share}` : ''}`;
-const tdHdrs = (program, share) =>
+
+export const tdHdrs = (program, share) =>
   `program-budget-table-${program} program-budget-table-${program}-${share}`;
 
+export const ffyList = ffys => {
+  return Object.entries(ffys).map(
+    ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
+      <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
+        <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
+        <strong>Total Computable Medicaid Cost:</strong>{' '}
+        <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars> Federal
+        share)
+      </li>
+    )
+  );
+};
+
 const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
+  const { ffys } = total;
   if (!years.length) return null;
 
   const rowKeys = [
@@ -40,20 +53,9 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   function renderApdTypeSpecificActivities(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
-        return <HitechActivitySummary data={data} />;
+        return <HitechActivitySummary data={data} ffys={ffys} />;
       case APD_TYPE.MMIS:
-        return <MmisActivitySummary data={data} />;
-      default:
-        null;
-    }
-  }
-
-  function renderApdTypeSpecificFfyTotals(apdType) {
-    switch (apdType) {
-      case APD_TYPE.HITECH:
-        return <HitechFfyTotalsSummary ffys={total.ffys} />;
-      case APD_TYPE.MMIS:
-        return <MmisFfyTotalsSummary ffys={total.ffys} />;
+        return <MmisActivitySummary data={data} ffys={ffys} />;
       default:
         null;
     }
@@ -62,23 +64,9 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   function renderApdTypeSpecificBudgets(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
-        return (
-          <HitechBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
+        return <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />;
       case APD_TYPE.MMIS:
-        return (
-          <MmisBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
+        return <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />;
       default:
         null;
     }
@@ -121,20 +109,14 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </li>
-              {/* Show relevant ffy totals based on APD type selected */}
-              {renderApdTypeSpecificFfyTotals(apdType)}
+              {ffyList(total.ffys)}
             </ul>
           </Review>
         </Subsection>
 
         <Waypoint id="executive-summary-budget-table" />
-        <Subsection
-          id="executive-summary-budget-table"
-          resource="executiveSummary.budgetTable"
-        >
-          {/* Show relevant budgets based on APD type selected */}
-          {renderApdTypeSpecificBudgets(apdType)}
-        </Subsection>
+        {/* Show relevant budgets based on APD type selected */}
+        {renderApdTypeSpecificBudgets(apdType)}
       </Section>
     </React.Fragment>
   );

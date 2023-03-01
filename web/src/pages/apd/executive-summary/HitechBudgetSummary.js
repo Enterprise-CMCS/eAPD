@@ -1,14 +1,21 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import { titleCase } from 'title-case';
-import DollarCell from '../../../components/DollarCell';
+import React from 'react';
 import { t } from '../../../i18n';
+import { titleCase } from 'title-case';
 
-const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
+import { Subsection } from '../../../components/Section';
+import DollarCell from '../../../components/DollarCell';
+
+import { tdHdrs, thId } from './ExecutiveSummary';
+
+const HitechBudgetSummary = ({ budget, rowKeys }) => {
   const { hit, hie, hitAndHie } = budget;
 
   return (
-    <Fragment>
+    <Subsection
+      id="executive-summary-budget-table"
+      resource="executiveSummary.budgetTable"
+    >
       <table className="budget-table">
         <caption className="ds-h4">
           HIT + HIE{' '}
@@ -108,15 +115,13 @@ const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
           ))}
         </tbody>
       </table>
-    </Fragment>
+    </Subsection>
   );
 };
 
 HitechBudgetSummary.propTypes = {
   budget: PropTypes.object.isRequired,
-  rowKeys: PropTypes.array.isRequired,
-  tdHdrs: PropTypes.string.isRequired,
-  thId: PropTypes.string.isRequired
+  rowKeys: PropTypes.array.isRequired
 };
 
 export default HitechBudgetSummary;

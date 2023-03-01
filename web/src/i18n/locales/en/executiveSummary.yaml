@@ -1,10 +1,10 @@
 title: Executive Summary
 helpText: >-
-  This Executive Summary is automatically generated from the short
-  descriptions you provided throughout the APD and activities. It is 
-  structured in a way so your State Officer can quickly assess the APD 
-  when starting their review. When the APD is exported, the Executive 
-  Summary will appear at the beginning of the exported PDF.
+  This Executive Summary is automatically generated from the short descriptions
+  you provided throughout the APD and activities. It is  structured in a way so
+  your State Officer can quickly assess the APD  when starting their review.
+  When the APD is exported, the Executive  Summary will appear at the beginning
+  of the exported PDF.
 total: Total
 summary:
   title: Activities Summary
@@ -15,8 +15,8 @@ budgetTable:
   title: Program Budget Tables
   instruction:
     detail: >-
-      Program budget tables are automatically computed for this APD. These tables will be referenced
-      in the CMS approval letter.
+      Program budget tables are automatically computed for this APD. This table
+      will be referenced in the CMS approval letter.
   hit: HIT (90/10)
   hie: HIE (90/10)
   hitHie: HIT + HIE (90/10)
