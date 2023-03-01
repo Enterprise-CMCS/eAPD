@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
-import { Subsection } from '../../../components/Section';
 
-const MmisExecutiveSummary = ({ apdId, data, total, years }) => {
+const MmisActivitySummary = ({ data }) => {
+  const { apdId } = useParams();
   return (
-    <Subsection
-      id="executive-summary-summary"
-      resource="executiveSummary.summary"
-    >
+    <Fragment>
       {data.map((activity, i) => (
         <Review
           key={activity.activityId}
@@ -53,47 +51,16 @@ const MmisExecutiveSummary = ({ apdId, data, total, years }) => {
           </ul>
         </Review>
       ))}
-
-      <hr className="ds-u-border--dark ds-u-margin--0" />
-      <Review heading="Total Cost" headingLevel="4" className="ds-u-border--0">
-        <p>
-          Verify that this information is correct. Edit activities above to make
-          changes.
-        </p>
-        <ul className="ds-c-list--bare">
-          <li>
-            <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
-            {years.join(', ')}
-          </li>
-          <li>
-            <strong>Total Computable Medicaid Cost:</strong>{' '}
-            <Dollars>{total.medicaid}</Dollars> (
-            <Dollars>{total.federal}</Dollars> Federal share)
-          </li>
-          <li>
-            <strong>Total Funding Request:</strong>{' '}
-            <Dollars>{total.combined}</Dollars>
-          </li>
-          {Object.entries(total.ffys).map(
-            ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
-              <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
-                <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                <Dollars>{medicaid}</Dollars> Total Computable Medicaid Cost |{' '}
-                <Dollars>{federal}</Dollars> Federal share
-              </li>
-            )
-          )}
-        </ul>
-      </Review>
-    </Subsection>
+    </Fragment>
   );
 };
 
-MmisExecutiveSummary.propTypes = {
-  apdId: PropTypes.string.isRequired,
+MmisActivitySummary.propTypes = {
+  apdType: PropTypes.string,
+  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
-export default MmisExecutiveSummary;
+export default MmisActivitySummary;

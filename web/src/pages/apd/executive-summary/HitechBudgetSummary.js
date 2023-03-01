@@ -117,7 +117,10 @@ const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
 };
 
 HitechBudgetSummary.propTypes = {
-  apdType: PropTypes.string
+  budget: PropTypes.object.isRequired,
+  rowKeys: PropTypes.array.isRequired,
+  tdHdrs: PropTypes.string.isRequired,
+  thId: PropTypes.string.isRequired
 };
 
 // export default connect(mapStateToProps)(HitechBudgetSummary);
