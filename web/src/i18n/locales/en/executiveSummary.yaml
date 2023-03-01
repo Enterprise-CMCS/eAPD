@@ -6,7 +6,9 @@ helpText: >-
   When the APD is exported, the Executive  Summary will appear at the beginning
   of the exported PDF.
 total: Total
-summary:
+overviewSummary:
+  title: APD Overview
+activitiesSummary:
   title: Activities Summary
   instruction:
     detail: >-

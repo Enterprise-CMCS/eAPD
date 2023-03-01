@@ -93,8 +93,8 @@ const staticItems = (apdId, apdType) => {
               url: `/apd/${apdId}/executive-summary`
             },
             {
-              label: titleCase(t('executiveSummary.summary.title')),
-              url: `/apd/${apdId}/executive-summary#executive-summary-summary`
+              label: titleCase(t('executiveSummary.activitiesSummary.title')),
+              url: `/apd/${apdId}/executive-summary#executive-activities-summary`
             },
             {
               label: titleCase(t('executiveSummary.budgetTable.title')),
@@ -198,8 +198,8 @@ const staticItems = (apdId, apdType) => {
               url: `/apd/${apdId}/executive-summary`
             },
             {
-              label: titleCase(t('executiveSummary.summary.title')),
-              url: `/apd/${apdId}/executive-summary#executive-summary-summary`
+              label: titleCase(t('executiveSummary.activitiesSummary.title')),
+              url: `/apd/${apdId}/executive-summary#executive-activities-summary`
             },
             {
               label: titleCase(t('executiveSummary.budgetTable.title')),

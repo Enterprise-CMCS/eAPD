@@ -316,6 +316,14 @@ export const getAPDName = ({
   }
 }) => name;
 
+export const getUpdateStatus = ({
+  apd: {
+    data: {
+      apdOverview: { updateStatus }
+    }
+  }
+}) => updateStatus;
+
 export const getAPDYearRange = ({
   apd: {
     data: { years }

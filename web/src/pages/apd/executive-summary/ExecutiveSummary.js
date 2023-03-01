@@ -12,6 +12,7 @@ import { Section, Subsection } from '../../../components/Section';
 import HitechActivitySummary from './HitechActivitySummary';
 import HitechBudgetSummary from './HitechBudgetSummary';
 import MmisActivitySummary from './MmisActivitySummary';
+import MmisApdOverview from './MmisApdOverview';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -77,10 +78,11 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
       <Waypoint />
       <AlertMissingFFY />
       <Section resource="executiveSummary">
-        <Waypoint id="executive-summary-summary" />
+        {apdType === APD_TYPE.MMIS && <MmisApdOverview />}
+        <Waypoint id="executive-activities-summary" />
         <Subsection
-          id="executive-summary-summary"
-          resource="executiveSummary.summary"
+          id="executive-activities-summary"
+          resource="executiveSummary.activitiesSummary"
         >
           {/* Show relevant activities fields based on APD type selected */}
           {renderApdTypeSpecificActivities(apdType)}
