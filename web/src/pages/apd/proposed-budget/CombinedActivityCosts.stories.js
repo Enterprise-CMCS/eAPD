@@ -2,7 +2,7 @@ import React from 'react';
 import { SummaryBudgetByActivityTotals } from './CombinedActivityCosts';
 import { renderWithProviderAndRouter } from 'apd-storybook-library';
 
-const exampleBudget = {
+const exampleHITECHBudget = {
   years: ['2022', '2023'],
   hie: {
     statePersonnel: {
@@ -272,6 +272,200 @@ const exampleBudget = {
   }
 };
 
+const exampleMMISBudget = {
+  _id: '63ff5e7b7ed64d005f031160',
+  federalShareByFFYQuarter: {
+    mmis: {
+      years: {
+        2023: {
+          1: {
+            inHouse: 700153,
+            contractors: 436735,
+            combined: 1136888
+          },
+          2: {
+            inHouse: 700153,
+            contractors: 436735,
+            combined: 1136888
+          },
+          3: {
+            inHouse: 700152,
+            contractors: 436735,
+            combined: 1136887
+          },
+          4: {
+            inHouse: 700151,
+            contractors: 436734,
+            combined: 1136885
+          },
+          subtotal: {
+            inHouse: 2800609,
+            contractors: 1746939,
+            combined: 4547548
+          }
+        },
+        2024: {
+          1: {
+            inHouse: 507152,
+            contractors: 429834,
+            combined: 936986
+          },
+          2: {
+            inHouse: 507151,
+            contractors: 429833,
+            combined: 936984
+          },
+          3: {
+            inHouse: 507149,
+            contractors: 429833,
+            combined: 936982
+          },
+          4: {
+            inHouse: 507149,
+            contractors: 429833,
+            combined: 936982
+          },
+          subtotal: {
+            inHouse: 2028601,
+            contractors: 1719333,
+            combined: 3747934
+          }
+        }
+      },
+      total: {
+        inHouse: 4829210,
+        contractors: 3466272,
+        combined: 8295482
+      }
+    }
+  },
+  years: ['2022', '2023'],
+  __t: 'MMISBudget',
+  mmis: {
+    statePersonnel: {
+      2022: {
+        total: 2400075,
+        federal: 2124939,
+        medicaid: 2361044,
+        state: 236104
+      },
+      2023: {
+        total: 2629801,
+        federal: 1972351,
+        medicaid: 2629801,
+        state: 657450
+      },
+      total: {
+        total: 5029876,
+        federal: 4097290,
+        medicaid: 4990845,
+        state: 893554
+      }
+    },
+    contractors: {
+      2022: {
+        total: 1982756,
+        federal: 1746939,
+        medicaid: 1941043,
+        state: 194104
+      },
+      2023: {
+        total: 2292444,
+        federal: 1719333,
+        medicaid: 2292444,
+        state: 573111
+      },
+      total: {
+        total: 4275200,
+        federal: 3466272,
+        medicaid: 4233487,
+        state: 767215
+      }
+    },
+    expenses: {
+      2022: {
+        total: 775000,
+        federal: 675670,
+        medicaid: 750744,
+        state: 75075
+      },
+      2023: {
+        total: 75000,
+        federal: 56250,
+        medicaid: 75000,
+        state: 18750
+      },
+      total: {
+        total: 850000,
+        federal: 731920,
+        medicaid: 825744,
+        state: 93825
+      }
+    },
+    combined: {
+      2022: {
+        total: 5257831,
+        federal: 4628548,
+        medicaid: 5142831,
+        state: 514283
+      },
+      2023: {
+        total: 5097245,
+        federal: 3792934,
+        medicaid: 5047245,
+        state: 1254311
+      },
+      total: {
+        total: 10355076,
+        federal: 8421482,
+        medicaid: 10190076,
+        state: 1768594
+      }
+    },
+    keyStatePersonnel: {
+      2022: {
+        total: 100000,
+        federal: 81000,
+        medicaid: 90000,
+        state: 9000
+      },
+      2023: {
+        total: 100000,
+        federal: 45000,
+        medicaid: 50000,
+        state: 5000
+      },
+      total: {
+        total: 200000,
+        federal: 126000,
+        medicaid: 140000,
+        state: 14000
+      }
+    }
+  },
+  combined: {
+    2022: {
+      total: 5257831,
+      federal: 4628548,
+      medicaid: 5142831,
+      state: 514283
+    },
+    2023: {
+      total: 5097245,
+      federal: 3792934,
+      medicaid: 5047245,
+      state: 1254311
+    },
+    total: {
+      total: 10355076,
+      federal: 8421482,
+      medicaid: 10190076,
+      state: 1768594
+    }
+  },
+  __v: 0
+};
+
 export default {
   title: 'Pages/Apd/Tables/SummaryBudgetByActivityTotals',
   component: SummaryBudgetByActivityTotals,
@@ -287,18 +481,30 @@ export default {
   argTypes: {}
 };
 
-const Template = args => (
-  <SummaryBudgetByActivityTotals {...args} data={exampleBudget} ffy={'2022'} />
-);
+const Template = args => <SummaryBudgetByActivityTotals {...args} />;
 
-export const SummaryBudgetByActivityTotalsStory = Template.bind({});
-SummaryBudgetByActivityTotalsStory.decorators = [
+export const HITECHSummaryBudgetByActivityTotalsStory = Template.bind();
+HITECHSummaryBudgetByActivityTotalsStory.args = {
+  data: exampleHITECHBudget,
+  ffy: '2022',
+  apdType: 'HITECH'
+};
+HITECHSummaryBudgetByActivityTotalsStory.decorators = [
   story =>
     renderWithProviderAndRouter({
-      initialState: {
-        data: exampleBudget,
-        ffy: ['2022', '2023']
-      },
+      story
+    })
+];
+
+export const MMISSummaryBudgetByActivityTotalsStory = Template.bind();
+MMISSummaryBudgetByActivityTotalsStory.args = {
+  data: exampleMMISBudget,
+  ffy: '2022',
+  apdType: 'MMIS'
+};
+MMISSummaryBudgetByActivityTotalsStory.decorators = [
+  story =>
+    renderWithProviderAndRouter({
       story
     })
 ];

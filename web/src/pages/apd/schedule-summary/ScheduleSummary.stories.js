@@ -2,24 +2,46 @@ import React from 'react';
 import ScheduleSummary from './ScheduleSummary';
 import { renderWithProviderAndRouter } from 'apd-storybook-library';
 
-const exampleActivity = {
-  activityId: '152a1e2b',
-  name: 'Activity 1',
-  milestones: [
-    {
-      endDate: '2020-09-07',
-      milestone: 'Implementation of Final Rule and Stage 3 System Developments'
-    },
-    {
-      endDate: '2019-12-31',
-      milestone: 'Environmental Scan Completion'
-    },
-    {
-      endDate: '2022-05-30',
-      milestone: 'HIT Roadmap Development'
-    }
-  ]
-};
+const exampleActivities = [
+  {
+    activityId: '152a1e2b',
+    name: 'Implementation',
+    milestones: [
+      {
+        endDate: '2020-09-07',
+        milestone:
+          'Implementation of Final Rule and Stage 3 System Developments'
+      },
+      {
+        endDate: '2019-12-31',
+        milestone: 'Environmental Scan Completion'
+      },
+      {
+        endDate: '2022-05-30',
+        milestone: 'HIT Roadmap Development'
+      }
+    ]
+  },
+  {
+    activityId: '152a1e2b',
+    name: 'Super',
+    milestones: [
+      {
+        endDate: '2020-09-07',
+        milestone:
+          'Implementation of Final Rule and Stage 3 System Developments'
+      },
+      {
+        endDate: '2019-12-31',
+        milestone: 'Environmental Scan Completion'
+      },
+      {
+        endDate: '2022-05-30',
+        milestone: 'HIT Roadmap Development'
+      }
+    ]
+  }
+];
 
 export default {
   title: 'Pages/Apd/Tables/ActivitySummary',
@@ -33,9 +55,7 @@ export default {
       hideNoControlsWarning: true
     }
   },
-  argTypes: {
-    activities: exampleActivity
-  }
+  argTypes: {}
 };
 
 const Template = args => <ScheduleSummary {...args} />;
@@ -62,7 +82,7 @@ ScheduleSummaryStory.decorators = [
           data: {
             id: 'abc123',
             years: ['2023', '2024'],
-            activities: [exampleActivity]
+            activities: exampleActivities
           }
         }
       },

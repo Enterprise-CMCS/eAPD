@@ -34,6 +34,10 @@ td {
     margin-top: $spacer-2;
   }
 
+  .budget-table--category-row_highlight {
+    background-color: #f1f1f1;
+  }
+
   caption {
     text-align: left;
     /* override for design system where first-child has a top margin of 0 */
@@ -53,6 +57,7 @@ td {
     &.budget-table--subtotal,
     &.budget-table--sum {
       font-weight: $font-bold;
+      background-color: #fdf9eb;
       th,
       td {
         font-weight: $font-bold;
@@ -80,14 +85,9 @@ td {
         background-color: $color-warn-lightest;
       }
     }
-    border-top: 1px solid $color-gray-light;
-    border-bottom: 1px solid $color-gray-light;
   }
 
   tbody {
-    th {
-      border-right: solid 2px $color-gray-lighter;
-    }
     tr {
       border-top: 1px dotted $color-gray-lighter;
       border-bottom: 1px dotted $color-gray-lighter;
@@ -108,7 +108,7 @@ td {
     .budget-table--row__highlight {
       td,
       th {
-        background-color: $color-warn-lightest;
+        background-color: #fad980;
       }
     }
     /* used on a tr to highlight a whole row */
@@ -158,6 +158,16 @@ tr.budget-table--row__primary-header {
     color: $color-white;
     background-color: $color-gray-dark;
     white-space: nowrap;
+  }
+}
+
+tr.budget-table--row__primary-header__light {
+  th,
+  td {
+    color: #323a44;
+    background-color: #d6d7d9;
+    white-space: nowrap;
+    font-weight: 700;
   }
 }
 

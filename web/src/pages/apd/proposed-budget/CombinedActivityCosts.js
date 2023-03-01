@@ -8,14 +8,15 @@ import Dollars from '../../../components/Dollars';
 
 import { APD_TYPE } from '@cms-eapd/common';
 
-const DataRow = ({ category, data, title, groupTitle }) => (
+const DataRow = ({ category, data, title, groupTitle, apdType }) => (
   <tr
     key={category}
-    className={
-      category === 'combined'
-        ? 'budget-table--subtotal budget-table--row__highlight'
+    className={`${category === 'combined' ? 'budget-table--subtotal' : ''} ${
+      (apdType === 'MMIS' && category === 'statePersonnel') ||
+      (apdType === 'MMIS' && category === 'contractors')
+        ? 'budget-table--category-row_highlight'
         : ''
-    }
+    }`}
   >
     <th scope="row" className="title indent-title">
       {category === 'combined' ? `${groupTitle} ${title}` : title}
@@ -30,7 +31,8 @@ DataRow.propTypes = {
   category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  groupTitle: PropTypes.string.isRequired
+  groupTitle: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
@@ -55,6 +57,7 @@ const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
           data={data[category][year]}
           title={title}
           groupTitle={groupTitle}
+          apdType={apdType}
         />
       ))}
     </Fragment>
@@ -72,7 +75,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
   return (
     <table className="budget-table" data-cy="CACTable">
       <thead>
-        <tr className="budget-table--row__primary-header">
+        <tr className="budget-table--row__primary-header__light">
           <th scope="col">
             Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
           </th>
@@ -84,7 +87,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
       <tbody>
         {data?.hit && (
           <Fragment>
-            <tr className="budget-table--row__header">
+            <tr className="">
               <th scope="row" colSpan="2">
                 HIT
               </th>
@@ -95,7 +98,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
 
         {data?.hie && (
           <Fragment>
-            <tr className="budget-table--row__header">
+            <tr className="">
               <th scope="row" colSpan="2">
                 HIE
               </th>
@@ -106,7 +109,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
 
         {data?.mmis && (
           <Fragment>
-            <tr className="budget-table--row__header">
+            <tr className="">
               <th scope="row" colSpan="2">
                 MMIS
               </th>
@@ -120,7 +123,10 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
           </Fragment>
         )}
 
-        <tr key={ffy} className="budget-table--row__header">
+        <tr
+          key={ffy}
+          className="budget-table--row__header budget-table--row__highlight"
+        >
           <th scope="row">FFY {ffy} Total Computable Medicaid Cost</th>
           <td className="budget-table--number budget-table--total">
             <Dollars>{data.combined[ffy].medicaid}</Dollars>
