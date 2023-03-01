@@ -3,17 +3,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { t } from '../../../i18n';
 
-import HitechBudgetSummary from './HitechBudgetSummary';
-import MmisBudgetSummary from './MmisBudgetSummary';
-
-import {
-  selectApdType,
-  selectApdYears
-} from '../../../redux/selectors/apd.selectors';
+import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
@@ -21,45 +16,7 @@ import {
 
 class ExecutiveSummary extends PureComponent {
   render() {
-    const { apdType, budget, data, total, years } = this.props;
-
-    if (!years.length) return null;
-
-    const rowKeys = [
-      ...years.map(year => ({ year, display: t('ffy', { year }) })),
-      { year: 'total', display: 'Total' }
-    ];
-
-    const thId = (program, share) =>
-      `program-budget-table-${program}${share ? `-${share}` : ''}`;
-    const tdHdrs = (program, share) =>
-      `program-budget-table-${program} program-budget-table-${program}-${share}`;
-
-    function renderApdTypeSpecificFields(apdType) {
-      switch (apdType) {
-        case APD_TYPE.HITECH:
-          return (
-            <HitechBudgetSummary
-              budget={budget}
-              rowKeys={rowKeys}
-              tdHdrs={tdHdrs}
-              thId={thId}
-            />
-          );
-        case APD_TYPE.MMIS:
-          return (
-            <MmisBudgetSummary
-              budget={budget}
-              rowKeys={rowKeys}
-              tdHdrs={tdHdrs}
-              thId={thId}
-            />
-          );
-        default:
-          null;
-      }
-    }
-
+    const { data, total, years } = this.props;
     return (
       <div>
         <h2>Executive Summary</h2>
@@ -137,24 +94,19 @@ class ExecutiveSummary extends PureComponent {
 
         <hr className="subsection-rule" />
         <h3>Program Budget Tables</h3>
-        {/* Show relevant fields based on APD type selected */}
-        {renderApdTypeSpecificFields(apdType)}
+        <ExecutiveSummaryBudget />
       </div>
     );
   }
 }
 
 ExecutiveSummary.propTypes = {
-  apdType: PropTypes.string,
-  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  apdType: selectApdType(state),
-  budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
   total: selectBudgetGrandTotal(state),
   years: selectApdYears(state)

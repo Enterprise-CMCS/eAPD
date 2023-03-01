@@ -11,8 +11,10 @@ import { Section, Subsection } from '../../../components/Section';
 
 import HitechActivitySummary from './HitechActivitySummary';
 import HitechBudgetSummary from './HitechBudgetSummary';
+import HitechFfyTotalsSummary from './HitechFfyTotalsSummary';
 import MmisActivitySummary from './MmisActivitySummary';
 import MmisBudgetSummary from './MmisBudgetSummary';
+import MmisFfyTotalsSummary from './MmisFfyTotalsSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
@@ -41,6 +43,17 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
         return <HitechActivitySummary data={data} />;
       case APD_TYPE.MMIS:
         return <MmisActivitySummary data={data} />;
+      default:
+        null;
+    }
+  }
+
+  function renderApdTypeSpecificFfyTotals(apdType) {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return <HitechFfyTotalsSummary ffys={total.ffys} />;
+      case APD_TYPE.MMIS:
+        return <MmisFfyTotalsSummary ffys={total.ffys} />;
       default:
         null;
     }
@@ -81,7 +94,7 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
           id="executive-summary-summary"
           resource="executiveSummary.summary"
         >
-          {/* Show relevant fields based on APD type selected */}
+          {/* Show relevant activities fields based on APD type selected */}
           {renderApdTypeSpecificActivities(apdType)}
 
           <hr className="ds-u-border--dark ds-u-margin--0" />
@@ -108,15 +121,8 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </li>
-              {Object.entries(total.ffys).map(
-                ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
-                  <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
-                    <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                    <Dollars>{medicaid}</Dollars> Total Computable Medicaid Cost
-                    | <Dollars>{federal}</Dollars> Federal share
-                  </li>
-                )
-              )}
+              {/* Show relevant ffy totals based on APD type selected */}
+              {renderApdTypeSpecificFfyTotals(apdType)}
             </ul>
           </Review>
         </Subsection>
@@ -126,7 +132,7 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
           id="executive-summary-budget-table"
           resource="executiveSummary.budgetTable"
         >
-          {/* Show relevant fields based on APD type selected */}
+          {/* Show relevant budgets based on APD type selected */}
           {renderApdTypeSpecificBudgets(apdType)}
         </Subsection>
       </Section>
