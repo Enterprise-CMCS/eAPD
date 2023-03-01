@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-
+import React from 'react';
 import { titleCase } from 'title-case';
+import { Subsection } from '../../../components/Section';
 import DollarCell from '../../../components/DollarCell';
 import { t } from '../../../i18n';
 
@@ -9,7 +9,10 @@ const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
   const { hit, hie, hitAndHie } = budget;
 
   return (
-    <Fragment>
+    <Subsection
+      id="executive-summary-budget-table"
+      resource="executiveSummary.budgetTable"
+    >
       <table className="budget-table">
         <caption className="ds-h4">
           HIT + HIE{' '}
@@ -109,7 +112,7 @@ const HitechBudgetSummary = ({ budget, rowKeys, tdHdrs, thId }) => {
           ))}
         </tbody>
       </table>
-    </Fragment>
+    </Subsection>
   );
 };
 
