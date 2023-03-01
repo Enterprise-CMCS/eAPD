@@ -4,26 +4,20 @@ import { connect } from 'react-redux';
 
 import Dollars from '../../../components/Dollars';
 import { TABLE_HEADERS } from '../../../constants';
-import {
-  selectPreviousActivityExpensesTotals,
-  selectApdType
-} from '../../../redux/selectors/apd.selectors';
+import { selectPreviousActivityExpensesTotalsMMIS } from '../../../redux/selectors/apd.selectors';
 
-const ApdPreviousActivityTableMMIS = ({ totals, apdType }) => {
+const ApdPreviousActivityTableTotalsMMIS = ({ totals }) => {
   const years = Object.keys(totals);
 
   return (
     <table className="budget-table">
-      {apdType === 'HITECH' && (
-        <caption className="ds-h4">
-          Grand totals: Federal HIT, HIE, MMIS
-        </caption>
-      )}
-
-      {apdType === 'MMIS' && (
-        <caption className="ds-h4">Grand totals: Federal MMIS</caption>
-      )}
+      <caption className="ds-h4">Grand totals: Federal MMIS</caption>
       <thead>
+        <tr className="budget-table--row__primary-header">
+          <th scope="col" colSpan="3">
+            {'MMIS Grand Totals'}
+          </th>
+        </tr>
         <tr>
           <th id="prev_act_totals_ffy">
             <span className="ds-u-visibility--screen-reader">Year</span>
@@ -66,16 +60,17 @@ const ApdPreviousActivityTableMMIS = ({ totals, apdType }) => {
   );
 };
 
-ApdPreviousActivityTableMMIS.propTypes = {
-  totals: PropTypes.object.isRequired,
-  apdType: PropTypes.string
+ApdPreviousActivityTableTotalsMMIS.propTypes = {
+  totals: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  totals: selectPreviousActivityExpensesTotals(state),
-  apdType: selectApdType(state)
+  totals: selectPreviousActivityExpensesTotalsMMIS(state)
 });
 
-export default connect(mapStateToProps, null)(ApdPreviousActivityTableMMIS);
+export default connect(
+  mapStateToProps,
+  null
+)(ApdPreviousActivityTableTotalsMMIS);
 
-export { ApdPreviousActivityTableMMIS as plain, mapStateToProps };
+export { ApdPreviousActivityTableTotalsMMIS as plain, mapStateToProps };

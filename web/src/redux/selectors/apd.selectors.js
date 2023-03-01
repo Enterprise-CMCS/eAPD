@@ -72,7 +72,7 @@ export const selectPreviousHITHIEActivities = createSelector(
     )
 );
 
-export const selectPreviousMMISActivities = createSelector(
+export const selectPreviousMMISActivitiesHITECH = createSelector(
   [selectApdData],
   ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(
@@ -84,7 +84,43 @@ export const selectPreviousMMISActivities = createSelector(
     )
 );
 
-export const selectPreviousActivityExpensesTotals = createSelector(
+export const selectPreviousMMISActivitiesMMIS = createSelector(
+  [selectApdData],
+  ({ previousActivities }) =>
+    Object.entries(previousActivities.actualExpenditures).reduce(
+      (o, [year, expenses]) => ({
+        ...o,
+        [year]: expenses
+      }),
+      {}
+    )
+);
+
+export const selectPreviousActivityExpensesTotalsMMIS = createSelector(
+  [selectApdData],
+  ({ previousActivities }) =>
+    Object.entries(previousActivities.actualExpenditures).reduce(
+      (acc, [ffy, expenses]) => ({
+        ...acc,
+        [ffy]: {
+          actual: [75, 50].reduce(
+            (sum, ffp) =>
+              sum + stringToNumber(expenses.mando[ffp].federalActual),
+            stringToNumber(expenses.ddi[90].federalActual)
+          ),
+          approved: [75, 50].reduce(
+            (sum, ffp) =>
+              sum +
+              (stringToNumber(expenses.mando[ffp].totalApproved) * ffp) / 100,
+            (stringToNumber(expenses.ddi[90].totalApproved) * 90) / 100
+          )
+        }
+      }),
+      {}
+    )
+);
+
+export const selectPreviousActivityExpensesTotalsHITECH = createSelector(
   [selectApdData],
   ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(

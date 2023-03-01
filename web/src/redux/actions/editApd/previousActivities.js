@@ -41,91 +41,69 @@ export const setPreviousActivityFederalActualExpenseForHITandHIE = (
 });
 
 /**
- * Set the total amount approved for MMIS activities at the 50/50 match level
- * in a previous federal fiscal year.
+ * Set the total amount approved for MMIS activities for HITECH APDs
  * @param {String} year Federal fiscal year, four-digit
  * @param {Number} expense Total approved HIE/HIT for the year
+ * @param {Number} level FFP Percentage, [50, 75, 90]
  */
-export const setPreviousActivityApprovedExpenseforMMIS50FFP = (
+export const setPreviousActivityApprovedExpenseforMMISOld = (
   year,
-  expense
+  expense,
+  level
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/50/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/${level}/totalApproved`,
   value: expense
 });
 
 /**
- * Set the total amount approved for MMIS activities at the 75/25 match level
- * in a previous federal fiscal year.
+ * Set the total amount approved for MMIS activities for MMIS APDs
  * @param {String} year Federal fiscal year, four-digit
  * @param {Number} expense Total approved HIE/HIT for the year
+ * @param {Number} level FFP Percentage, [50, 75, 90]
+ * @param {String} fundingType DDI or M&O
  */
-export const setPreviousActivityApprovedExpenseforMMIS75FFP = (
+export const setPreviousActivityApprovedExpenseforMMISNew = (
   year,
-  expense
+  expense,
+  level,
+  fundingType
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/75/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/${fundingType}/${level}/totalApproved`,
   value: expense
 });
 
 /**
- * Set the total amount approved for MMIS activities at the 90/10 match level
- * in a previous federal fiscal year.
- * @param {String} year Federal fiscal year, four-digit
- * @param {Number} expense Total approved HIE/HIT for the year
- */
-export const setPreviousActivityApprovedExpenseforMMIS90FFP = (
-  year,
-  expense
-) => ({
-  type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/90/totalApproved`,
-  value: expense
-});
-
-/**
- * Set the actual federal amount spent on MMIS activities at the 50/50 match
- * level in a previous federal fiscal year
+ * Set the actual federal amount spent on MMIS activities for HITECH APDs
  * @param {String} year Federal fiscal year, four-digit
  * @param {Number} expense Actual federal money spent
+ * @param {Number} level FFP Percentage, [50, 75, 90]
  */
-export const setPreviousActivityFederalActualExpenseforMMIS50FFP = (
+export const setPreviousActivityFederalActualExpenseforMMISOld = (
   year,
-  expense
+  expense,
+  level
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/50/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/${level}/federalActual`,
   value: expense
 });
 
 /**
- * Set the actual federal amount spent on MMIS activities at the 75/25 match
- * level in a previous federal fiscal year
+ * Set the actual federal amount spent on MMIS activities for HITECH APDs
  * @param {String} year Federal fiscal year, four-digit
  * @param {Number} expense Actual federal money spent
+ * @param {Number} level FFP Percentage, [50, 75, 90]
+ * @param {String} fundingType DDI or M&O
  */
-export const setPreviousActivityFederalActualExpenseforMMIS75FFP = (
+export const setPreviousActivityFederalActualExpenseforMMISNew = (
   year,
-  expense
+  expense,
+  level,
+  fundingType
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/75/federalActual`,
-  value: expense
-});
-
-/**
- * Set the actual federal amount spent on MMIS activities at the 90/10 match
- * level in a previous federal fiscal year
- * @param {String} year Federal fiscal year, four-digit
- * @param {Number} expense Actual federal money spent
- */
-export const setPreviousActivityFederalActualExpenseforMMIS90FFP = (
-  year,
-  expense
-) => ({
-  type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/mmis/90/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/${fundingType}/${level}/federalActual`,
   value: expense
 });

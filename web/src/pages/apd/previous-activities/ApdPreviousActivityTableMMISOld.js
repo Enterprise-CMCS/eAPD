@@ -5,70 +5,30 @@ import { connect } from 'react-redux';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import {
-  setPreviousActivityApprovedExpenseforMMIS50FFP,
-  setPreviousActivityApprovedExpenseforMMIS75FFP,
-  setPreviousActivityApprovedExpenseforMMIS90FFP,
-  setPreviousActivityFederalActualExpenseforMMIS50FFP,
-  setPreviousActivityFederalActualExpenseforMMIS75FFP,
-  setPreviousActivityFederalActualExpenseforMMIS90FFP
+  setPreviousActivityFederalActualExpenseforMMISOld,
+  setPreviousActivityApprovedExpenseforMMISOld
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousMMISActivities } from '../../../redux/selectors/apd.selectors';
+import { selectPreviousMMISActivitiesHITECH } from '../../../redux/selectors/apd.selectors';
 
-const ApdPreviousActivityTableMMIS = ({
+const ApdPreviousActivityTableMMISOld = ({
   isViewOnly,
   previousActivityExpenses,
-  setActual50,
-  setActual75,
-  setActual90,
-  setApproved50,
-  setApproved75,
-  setApproved90
+  setActual,
+  setApproved
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
-  const getActualsHandler = (year, ffp) => {
-    switch (+ffp) {
-      case 50:
-        return ({ target: { value } }) => {
-          setActual50(year, value);
-        };
-
-      case 75:
-        return ({ target: { value } }) => {
-          setActual75(year, value);
-        };
-
-      case 90:
-        return ({ target: { value } }) => {
-          setActual90(year, value);
-        };
-
-      default:
-        return () => {};
-    }
+  const getActualsHandler = (year, level) => {
+    return ({ target: { value } }) => {
+      setActual(year, value, level);
+    };
   };
 
-  const getApprovedHandler = (year, ffp) => {
-    switch (+ffp) {
-      case 50:
-        return ({ target: { value } }) => {
-          setApproved50(year, value);
-        };
-
-      case 75:
-        return ({ target: { value } }) => {
-          setApproved75(year, value);
-        };
-
-      case 90:
-        return ({ target: { value } }) => {
-          setApproved90(year, value);
-        };
-
-      default:
-        return () => {};
-    }
+  const getApprovedHandler = (year, level) => {
+    return ({ target: { value } }) => {
+      setApproved(year, value, level);
+    };
   };
 
   return (
@@ -176,41 +136,33 @@ const ApdPreviousActivityTableMMIS = ({
   );
 };
 
-ApdPreviousActivityTableMMIS.propTypes = {
+ApdPreviousActivityTableMMISOld.propTypes = {
   isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
-  setActual50: PropTypes.func.isRequired,
-  setActual75: PropTypes.func.isRequired,
-  setActual90: PropTypes.func.isRequired,
-  setApproved50: PropTypes.func.isRequired,
-  setApproved75: PropTypes.func.isRequired,
-  setApproved90: PropTypes.func.isRequired
+  setActual: PropTypes.func.isRequired,
+  setApproved: PropTypes.func.isRequired
 };
 
-ApdPreviousActivityTableMMIS.defaultProps = {
+ApdPreviousActivityTableMMISOld.defaultProps = {
   isViewOnly: false
 };
 
 const mapStateToProps = state => ({
-  previousActivityExpenses: selectPreviousMMISActivities(state)
+  previousActivityExpenses: selectPreviousMMISActivitiesHITECH(state)
 });
 
 const mapDispatchToProps = {
-  setActual50: setPreviousActivityFederalActualExpenseforMMIS50FFP,
-  setActual75: setPreviousActivityFederalActualExpenseforMMIS75FFP,
-  setActual90: setPreviousActivityFederalActualExpenseforMMIS90FFP,
-  setApproved50: setPreviousActivityApprovedExpenseforMMIS50FFP,
-  setApproved75: setPreviousActivityApprovedExpenseforMMIS75FFP,
-  setApproved90: setPreviousActivityApprovedExpenseforMMIS90FFP
+  setActual: setPreviousActivityFederalActualExpenseforMMISOld,
+  setApproved: setPreviousActivityApprovedExpenseforMMISOld
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ApdPreviousActivityTableMMIS);
+)(ApdPreviousActivityTableMMISOld);
 
 export {
-  ApdPreviousActivityTableMMIS as plain,
+  ApdPreviousActivityTableMMISOld as plain,
   mapStateToProps,
   mapDispatchToProps
 };
