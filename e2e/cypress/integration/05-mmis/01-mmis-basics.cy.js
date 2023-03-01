@@ -74,7 +74,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     it('tests Create New page and does not save', function () {
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
-      // cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains(
         'This selection cannot be changed after creating a new APD.'
