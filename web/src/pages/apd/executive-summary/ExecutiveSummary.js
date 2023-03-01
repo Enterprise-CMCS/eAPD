@@ -2,12 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { t } from '../../../i18n';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
-import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';
+
+import HitechBudgetSummary from './HitechBudgetSummary';
+import MmisBudgetSummary from './MmisBudgetSummary';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
@@ -16,8 +21,47 @@ import {
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-const ExecutiveSummary = ({ data, total, years }) => {
+const thId = (program, share) =>
+  `program-budget-table-${program}${share ? `-${share}` : ''}`;
+const tdHdrs = (program, share) =>
+  `program-budget-table-${program} program-budget-table-${program}-${share}`;
+
+const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   const { apdId } = useParams();
+  const { years } = budget;
+
+  if (!years.length) return null;
+
+  const rowKeys = [
+    ...years.map(year => ({ year, display: t('ffy', { year }) })),
+    { year: 'total', display: 'Total' }
+  ];
+
+  function renderApdTypeSpecificFields(apdType) {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return (
+          <HitechBudgetSummary
+            budget={budget}
+            rowKeys={rowKeys}
+            tdHdrs={tdHdrs}
+            thId={thId}
+          />
+        );
+      case APD_TYPE.MMIS:
+        return (
+          <MmisBudgetSummary
+            budget={budget}
+            rowKeys={rowKeys}
+            tdHdrs={tdHdrs}
+            thId={thId}
+          />
+        );
+      default:
+        null;
+    }
+  }
+
   return (
     <React.Fragment>
       <Waypoint />
@@ -116,7 +160,8 @@ const ExecutiveSummary = ({ data, total, years }) => {
           id="executive-summary-budget-table"
           resource="executiveSummary.budgetTable"
         >
-          <ExecutiveSummaryBudget />
+          {/* Show relevant fields based on APD type selected */}
+          {renderApdTypeSpecificFields(apdType)}
         </Subsection>
       </Section>
     </React.Fragment>
@@ -124,12 +169,16 @@ const ExecutiveSummary = ({ data, total, years }) => {
 };
 
 ExecutiveSummary.propTypes = {
+  apdType: PropTypes.string,
+  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
+  apdType: selectApdType(state),
+  budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
   total: selectBudgetGrandTotal(state),
   years: selectApdYears(state)
