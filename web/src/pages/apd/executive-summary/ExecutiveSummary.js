@@ -17,7 +17,6 @@ import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 import {
-  apdIsMMIS,
   getAPDName,
   getMedicaidBusinessAreas,
   getUpdateStatus
@@ -74,7 +73,9 @@ const ExecutiveSummary = ({
         <div>
           <li className="ds-u-margin-top--1">
             <strong>Medicaid Business Area(s) :</strong>{' '}
-            {arrayOfObjectsToStringList(businessAreasList)}
+            {!!businessAreasList.length
+              ? arrayOfObjectsToStringList(businessAreasList)
+              : 'Provide at least one Medicaid Business Area.'}
           </li>
           {otherDetails()}
         </div>
