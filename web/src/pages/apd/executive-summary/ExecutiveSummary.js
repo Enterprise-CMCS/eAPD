@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
@@ -17,6 +17,12 @@ import MmisSpecificFields from './MmisSpecificFields';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
+import {
+  apdIsMMIS,
+  getAPDName,
+  getMedicaidBusinessAreas,
+  getUpdateStatus
+} from '../../../redux/reducers/apd';
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
@@ -24,10 +30,24 @@ import {
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-import { ffyList } from '../../../util/apd';
+import {
+  arrayOfObjectsToStringList,
+  businessAreaChoices,
+  ffyList,
+  updateStatusChoices
+} from '../../../util/apd';
 
-const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
-  if (years.length === 0) {
+const ExecutiveSummary = ({
+  apdName,
+  apdType,
+  budget,
+  data,
+  medicaidBusinessAreas,
+  total,
+  updateStatus,
+  years
+}) => {
+  if (!years.length) {
     return (
       <React.Fragment>
         <Waypoint />
@@ -39,16 +59,37 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   const { apdId } = useParams();
   const { ffys } = total;
 
-  if (!years.length) return null;
+  const statusList = updateStatusChoices(updateStatus);
+
+  const isApdMmis = apdIsMMIS(apdType);
+
+  function otherDetails() {
+    if (medicaidBusinessAreas.other) {
+      return (
+        <li className="ds-c-choice__checkedChild">
+          {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+        </li>
+      );
+    }
+  }
 
   const rowKeys = [
     ...years.map(year => ({ year, display: t('ffy', { year }) })),
     { year: 'total', display: 'Total' }
   ];
 
-  function renderMmisSpecificFields() {
-    if (apdType === APD_TYPE.MMIS) {
-      return <MmisSpecificFields />;
+  function renderMedicaidBusinessAreas() {
+    if (isApdMmis) {
+      var businessAreasList = businessAreaChoices(medicaidBusinessAreas);
+      return (
+        <div>
+          <li className="ds-u-margin-top--1">
+            <strong>Medicaid Business Area(s) :</strong>{' '}
+            {arrayOfObjectsToStringList(businessAreasList)}
+          </li>
+          {otherDetails()}
+        </div>
+      );
     }
     return null;
   }
@@ -79,7 +120,25 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
     <React.Fragment>
       <Waypoint />
       <Section resource="executiveSummary">
-        {renderMmisSpecificFields()}
+        <Waypoint id="executive-overview-summary" />
+        <Subsection
+          id="executive-overview-summary"
+          resource="executiveSummary.overviewSummary"
+        >
+          <ul className="ds-c-list--bare">
+            <li className="ds-u-margin-top--1">
+              <strong>APD Name :</strong> {apdName}
+            </li>
+            <li className="ds-u-margin-top--1">
+              <strong>Update Type :</strong>{' '}
+              {updateStatus.isUpdateAPD
+                ? arrayOfObjectsToStringList(statusList)
+                : 'No update type was specified.'}
+            </li>
+            {renderMedicaidBusinessAreas()}
+          </ul>
+        </Subsection>
+        {isApdMmis ? <MmisSpecificFields /> : null}
         <Waypoint id="executive-activities-summary" />
         <Subsection
           id="executive-activities-summary"
@@ -126,18 +185,24 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
 };
 
 ExecutiveSummary.propTypes = {
+  apdName: PropTypes.string,
   apdType: PropTypes.string,
   budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
+  medicaidBusinessAreas: PropTypes.object,
   total: PropTypes.object.isRequired,
+  updateStatus: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
+  apdName: getAPDName(state),
   apdType: selectApdType(state),
   budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
+  medicaidBusinessAreas: getMedicaidBusinessAreas(state),
   total: selectBudgetGrandTotal(state),
+  updateStatus: getUpdateStatus(state),
   years: selectApdYears(state)
 });
 

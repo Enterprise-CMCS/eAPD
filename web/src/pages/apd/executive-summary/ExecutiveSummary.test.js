@@ -113,6 +113,11 @@ const defaultProps = {
       3001: 'ffy 2 combined costs'
     }
   },
+  updateStatus: {
+    isUpdateAPD: true,
+    annualUpdate: true,
+    asNeededUpdate: false
+  },
   years: ['3000', '3001']
 };
 
@@ -171,13 +176,6 @@ describe('<ExecutiveSummary />', () => {
         initialState: {
           apd: {
             data: {
-              apdOverview: {
-                updateStatus: {
-                  isUpdateAPD: true,
-                  annualUpdate: true,
-                  asNeededUpdate: false
-                }
-              },
               activities: []
             }
           }
@@ -187,12 +185,13 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Executive Summary' })
     ).toBeTruthy();
-    expect(screen.queryByRole('heading', { name: 'APD Overview' })).toBeFalsy();
+    expect(screen.getByRole('heading', { name: 'APD Overview' })).toBeTruthy();
     expect(
       screen.queryByRole('heading', {
         name: 'State Priorities and Scope of APD'
       })
     ).toBeFalsy();
+    expect(screen.queryByText('Medicaid Business Area(s)')).toBeFalsy();
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
@@ -210,19 +209,14 @@ describe('<ExecutiveSummary />', () => {
   test('renders MMIS correctly', async () => {
     mockFlags({ enableMmis: true });
     await setup(
-      { apdType: APD_TYPE.MMIS },
+      {
+        apdType: APD_TYPE.MMIS,
+        medicaidBusinessAreas: defaultMedicaidBusinessAreas
+      },
       {
         initialState: {
           apd: {
             data: {
-              apdOverview: {
-                updateStatus: {
-                  isUpdateAPD: true,
-                  annualUpdate: true,
-                  asNeededUpdate: false
-                },
-                medicaidBusinessAreas: defaultMedicaidBusinessAreas
-              },
               activities: [],
               statePrioritiesAndScope: {
                 medicaidProgramAndPriorities:
@@ -239,6 +233,7 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Executive Summary' })
     ).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'APD Overview' })).toBeTruthy();
+    expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
     expect(
       screen.getByRole('heading', {
         name: 'State Priorities and Scope of APD'

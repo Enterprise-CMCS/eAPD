@@ -55,11 +55,7 @@ const HitechActivitySummary = ({ apdId, data }) => {
 
 HitechActivitySummary.propTypes = {
   apdId: PropTypes.string.isRequired,
-  apdType: PropTypes.string,
-  budget: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
-  total: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired
 };
 
 export default HitechActivitySummary;

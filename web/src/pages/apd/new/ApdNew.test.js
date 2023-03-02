@@ -8,8 +8,6 @@ import {
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
 
-import { UPDATE_STATUS_LABEL_MAPPING } from '@cms-eapd/common';
-
 import ApdNew from './ApdNew';
 
 jest.mock('../../../util/api', () => ({
@@ -101,13 +99,13 @@ describe('<ApdNew />', () => {
 
       user.click(
         screen.getByRole('checkbox', {
-          name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+          name: /Annual Update/i
         })
       );
       await waitFor(() => {
         expect(
           screen.getByRole('checkbox', {
-            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+            name: /Annual Update/i
           })
         ).toBeChecked();
       });
@@ -211,13 +209,13 @@ describe('<ApdNew />', () => {
 
         user.click(
           screen.getByRole('checkbox', {
-            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+            name: /Annual Update/i
           })
         );
         await waitFor(() => {
           expect(
             screen.getByRole('checkbox', {
-              name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+              name: /Annual Update/i
             })
           ).toBeChecked();
         });
@@ -356,13 +354,13 @@ describe('<ApdNew />', () => {
 
         user.click(
           screen.getByRole('checkbox', {
-            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+            name: /Annual Update/i
           })
         );
         await waitFor(() => {
           expect(
             screen.getByRole('checkbox', {
-              name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+              name: /Annual Update/i
             })
           ).toBeChecked();
         });

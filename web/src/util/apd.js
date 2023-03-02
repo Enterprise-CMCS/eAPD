@@ -8,11 +8,13 @@ import Dollars from '../components/Dollars';
 export const updateStatusChoices = updateStatus => {
   let list = [];
   Object.keys(updateStatus).map(key => {
-    list.push({
-      label: UPDATE_STATUS_LABEL_MAPPING[key],
-      value: key,
-      checked: updateStatus[key]
-    });
+    if (key != 'isUpdateAPD') {
+      list.push({
+        label: UPDATE_STATUS_LABEL_MAPPING[key],
+        value: key,
+        checked: updateStatus[key]
+      });
+    }
   });
   return list;
 };
