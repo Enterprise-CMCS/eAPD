@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { APD_TYPE } from '@cms-eapd/common';
-// import Dollars from '../../../components/Dollars';
-import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
+import { APD_TYPE, FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
+import { stateDateToDisplay } from '../../../../util';
 
 const HitechActivitySummaryReadOnly = ({ activity, activityIndex }) => (
   <Fragment>
@@ -86,6 +85,42 @@ const HitechActivitySummaryReadOnly = ({ activity, activityIndex }) => (
     </div>
   </Fragment>
 );
+HitechActivitySummaryReadOnly.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
+  activity: PropTypes.object.isRequired
+};
+
+const mmisFedStateSplit = ({ costAllocation }) => {
+  const noneSet = Object.keys(costAllocation).every(
+    year =>
+      costAllocation[year].ffp.state === 0 &&
+      costAllocation[year].ffp.federal === 0 &&
+      costAllocation[year].ffp.fundingCategory === null
+  );
+
+  if (noneSet) {
+    return 'No Federal-State Split was specified.';
+  }
+
+  return Object.keys(costAllocation).map(year => {
+    const { state, federal, fundingCategory } = costAllocation[year].ffp;
+    if (state === 0 && federal === 0 && fundingCategory === null) {
+      return (
+        <span key={year}>
+          <strong>FFY {year}:</strong> No Federal-State Split was specified.
+          <br />
+        </span>
+      );
+    }
+    return (
+      <span key={year}>
+        <strong>FFY {year}:</strong> {federal} - {state}{' '}
+        {FUNDING_CATEGORY_LABEL_MAPPING[fundingCategory]}
+        <br />
+      </span>
+    );
+  });
+};
 
 const MmisActivitySummaryReadOnly = ({ activity, activityIndex, years }) => (
   <Fragment>
@@ -107,9 +142,20 @@ const MmisActivitySummaryReadOnly = ({ activity, activityIndex, years }) => (
       <strong>Federal Fiscal Years requested: </strong>
       {years ? `FFY ${years.join(', ')}` : 'None provided'}
     </p>
-    <p>
-      <strong>Federal-State split: </strong>
-    </p>
+
+    <strong>Federal-State Split: </strong>
+    <div
+      className="ds-l-col--11"
+      style={{
+        marginLeft: '12px',
+        borderLeft: '3px solid #0071BC',
+        whiteSpace: 'pre-wrap'
+      }}
+    >
+      {mmisFedStateSplit({ costAllocation: activity?.costAllocation })}
+    </div>
+    <br />
+
     <strong>Activity snapshot</strong>
     <div
       dangerouslySetInnerHTML={{
@@ -118,6 +164,7 @@ const MmisActivitySummaryReadOnly = ({ activity, activityIndex, years }) => (
           'No response was provided.'
       }}
     />
+
     <h3>Comprehensive Activity Overview</h3>
     <strong>Problem statement</strong>
     <div
@@ -127,6 +174,7 @@ const MmisActivitySummaryReadOnly = ({ activity, activityIndex, years }) => (
           'No response was provided.'
       }}
     />
+    <br />
     <strong>Proposed solution</strong>
     <div
       dangerouslySetInnerHTML={{
@@ -135,8 +183,14 @@ const MmisActivitySummaryReadOnly = ({ activity, activityIndex, years }) => (
           'No response was provided.'
       }}
     />
+    <br />
   </Fragment>
 );
+MmisActivitySummaryReadOnly.propTypes = {
+  activityIndex: PropTypes.number.isRequired,
+  activity: PropTypes.object.isRequired,
+  years: PropTypes.array.isRequired
+};
 
 const ActivitySummaryReadOnly = ({
   activity,

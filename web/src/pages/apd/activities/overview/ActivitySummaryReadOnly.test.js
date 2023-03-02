@@ -11,6 +11,7 @@ const defaultProps = {
 const setup = async (props = {}) =>
   render(<ActivitySummaryReadOnly {...defaultProps} {...props} />);
 
+/* eslint-disable testing-library/no-node-access */
 describe('the ActivitySummaryReadOnly component', () => {
   it('displays a HITECH APD Activity Summary correctly', async () => {
     const activity = {
@@ -140,6 +141,60 @@ describe('the ActivitySummaryReadOnly component', () => {
     expect(screen.getByText(/End date/i).closest('p')).toHaveTextContent(
       /End date: 9\/30\/2023/
     );
+    expect(
+      screen.getByText(/Federal Fiscal Years/i).closest('p')
+    ).toHaveTextContent('Federal Fiscal Years requested: FFY 2023, 2024');
+    expect(screen.getByText(/FFY 2023:/i).closest('span')).toHaveTextContent(
+      'FFY 2023: 90 - 10 Design, Development, and Installation (DDI)'
+    );
+    expect(screen.getByText(/FFY 2024:/i).closest('span')).toHaveTextContent(
+      'FFY 2024: 75 - 25 Maintenance & Operations (M&O)'
+    );
+  });
+
+  it('displays a MMIS APD Federal-State Split correctly', async () => {
+    await setup({
+      apdType: APD_TYPE.MMIS,
+      activity: {
+        activityOverview: {
+          activitySnapshot:
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+          problemStatement:
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus sed viverra tellus in hac habitasse platea. Vulputate sapien nec sagittis aliquam malesuada bibendum. Iaculis urna id volutpat lacus laoreet. Urna duis convallis convallis tellus id interdum velit. Facilisi cras fermentum odio eu feugiat pretium. Sed enim ut sem viverra aliquet eget sit amet tellus. At ultrices mi tempus imperdiet nulla malesuada. Sit amet risus nullam eget felis eget nunc. Aliquam sem et tortor consequat id.</p><p>Accumsan tortor posuere ac ut consequat semper viverra nam. Lacus viverra vitae congue eu consequat. Nibh ipsum consequat nisl vel pretium lectus. At tellus at urna condimentum mattis. Diam vel quam elementum pulvinar. Fermentum iaculis eu non diam phasellus vestibulum. Leo a diam sollicitudin tempor id eu nisl nunc mi. Mauris pellentesque pulvinar pellentesque habitant. Id velit ut tortor pretium viverra suspendisse. Tellus integer feugiat scelerisque varius morbi enim. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Molestie nunc non blandit massa enim nec dui nunc mattis. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Ut consequat semper viverra nam libero. Eu volutpat odio facilisis mauris sit amet massa vitae. Feugiat nisl pretium fusce id velit. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Et ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Aenean sed adipiscing diam donec adipiscing tristique risus. Lorem ipsum dolor sit amet.</p>',
+          proposedSolution:
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue interdum velit euismod in pellentesque massa placerat duis. Sit amet nisl purus in mollis nunc sed. Fames ac turpis egestas sed. Leo in vitae turpis massa sed elementum. Leo duis ut diam quam nulla porttitor massa id. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Massa vitae tortor condimentum lacinia quis vel eros. Porttitor leo a diam sollicitudin tempor id. Quam id leo in vitae turpis massa.</p><p>Gravida quis blandit turpis cursus in hac habitasse platea. Facilisis gravida neque convallis a cras semper auctor. Blandit aliquam etiam erat velit scelerisque in. Urna id volutpat lacus laoreet non. Tempus iaculis urna id volutpat. Faucibus in ornare quam viverra orci sagittis eu. Nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus. Turpis egestas sed tempus urna et pharetra pharetra massa. Lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor. Cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Egestas diam in arcu cursus euismod. Placerat orci nulla pellentesque dignissim enim sit amet. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Nulla facilisi morbi tempus iaculis urna id volutpat. Sapien et ligula ullamcorper malesuada. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Eu lobortis elementum nibh tellus molestie nunc non blandit.</p>'
+        },
+        name: 'Activity 1',
+        activitySchedule: {
+          plannedStartDate: '2017-10-01T00:00:00.000Z',
+          plannedEndDate: '2023-09-30T00:00:00.000Z'
+        },
+        costAllocation: {
+          2023: {
+            ffp: {
+              federal: 0,
+              state: 0,
+              fundingCategory: null
+            },
+            other: 105000
+          },
+          2024: {
+            ffp: {
+              federal: 75,
+              state: 25,
+              fundingCategory: 'MO'
+            },
+            other: 0
+          }
+        }
+      }
+    });
+    expect(screen.getByText(/FFY 2023:/i).closest('span')).toHaveTextContent(
+      'FFY 2023: No Federal-State Split was specified.'
+    );
+    expect(screen.getByText(/FFY 2024:/i).closest('span')).toHaveTextContent(
+      'FFY 2024: 75 - 25 Maintenance & Operations (M&O)'
+    );
   });
 
   it('displays an empty MMIS APD Activity Summary correctly', async () => {
@@ -185,6 +240,9 @@ describe('the ActivitySummaryReadOnly component', () => {
     expect(
       screen.getByText(/Federal Fiscal Years requested/i).closest('p')
     ).toHaveTextContent('Federal Fiscal Years requested: FFY 2023, 2024');
+    expect(
+      screen.getAllByText(/Federal-State Split/i)[0].closest('div')
+    ).toHaveTextContent('No Federal-State Split was specified.');
     expect(
       screen.getByText(/Activity snapshot/i).closest('div')
     ).toHaveTextContent('No response was provided.');

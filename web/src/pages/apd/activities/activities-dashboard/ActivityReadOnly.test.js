@@ -415,9 +415,11 @@ const defaultProps = {
 
 const setup = async (props = {}, options = {}) =>
   renderWithConnection(<Activity {...defaultProps} {...props} />, {
-    initialState
+    initialState,
+    ...options
   });
 
+/* eslint-disable testing-library/no-node-access */
 describe('<Activity /> component', () => {
   it('renders HITECH dates correctly', async () => {
     await setup({ activity: activityHitech, apdType: APD_TYPE.HITECH });

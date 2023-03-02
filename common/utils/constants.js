@@ -11,7 +11,8 @@ export const FUNDING_CATEGORY_TYPE = {
 
 export const FUNDING_CATEGORY_LABEL_MAPPING = {
   DDI: 'Design, Development, and Installation (DDI)',
-  MANDO: 'Maintenance & Operations (M&O)'
+  MANDO: 'Maintenance & Operations (M&O)',
+  MO: 'Maintenance & Operations (M&O)'
 };
 
 export const MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING = {
