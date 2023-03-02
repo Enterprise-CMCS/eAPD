@@ -57,10 +57,10 @@ exports[`apd export component renders correctly 1`] = `
   <p>
     Once you’ve exported a PDF of a completed APD, submit it for state officer review by emailing the PDF to
      
-    <Link
-      onClick={[Function]}
-      to="#"
+    <a
+      href="mailto:null"
     />
+    .
   </p>
   <Button
     className="ds-u-margin-top--2"
