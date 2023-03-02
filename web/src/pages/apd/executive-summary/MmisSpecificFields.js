@@ -27,7 +27,15 @@ const MmisSpecificFields = ({
   const statusList = updateStatusChoices(updateStatus);
   const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
 
-  console.log(statePrioritiesAndScope);
+  function otherDetails() {
+    if (medicaidBusinessAreas.other) {
+      return (
+        <li className="ds-c-choice__checkedChild">
+          {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+        </li>
+      );
+    }
+  }
 
   return (
     <Fragment>
@@ -50,10 +58,11 @@ const MmisSpecificFields = ({
             <strong>Medicaid Business Area(s) :</strong>{' '}
             {arrayOfObjectsToStringList(businessAreasList)}
           </li>
+          {otherDetails()}
         </ul>
       </Subsection>
       <Subsection
-        id="executive-overview-summary"
+        id="executive-prioritiesAndScope-summary"
         resource="executiveSummary.statePrioritiesAndScope"
       >
         <h3 className="ds-u-margin-bottom--1">
