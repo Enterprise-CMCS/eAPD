@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
@@ -47,21 +47,11 @@ const ExecutiveSummary = ({
   updateStatus,
   years
 }) => {
-  if (!years.length) {
-    return (
-      <React.Fragment>
-        <Waypoint />
-        <AlertMissingFFY />
-      </React.Fragment>
-    );
-  }
-
   const { apdId } = useParams();
   const { ffys } = total;
-
-  const statusList = updateStatusChoices(updateStatus);
-
   const isApdMmis = apdIsMMIS(apdType);
+  const noYears = !years.length;
+  const statusList = updateStatusChoices(updateStatus);
 
   function otherDetails() {
     if (medicaidBusinessAreas.other) {
@@ -119,6 +109,7 @@ const ExecutiveSummary = ({
   return (
     <React.Fragment>
       <Waypoint />
+      {noYears && <AlertMissingFFY />}
       <Section resource="executiveSummary">
         <Waypoint id="executive-overview-summary" />
         <Subsection
@@ -145,7 +136,7 @@ const ExecutiveSummary = ({
           resource="executiveSummary.activitiesSummary"
         >
           {/* Show relevant activities fields based on APD type selected */}
-          {renderApdTypeSpecificActivities(apdType)}
+          {!noYears && renderApdTypeSpecificActivities(apdType)}
 
           <hr className="ds-u-margin--0" />
           <Review
@@ -160,7 +151,7 @@ const ExecutiveSummary = ({
             <ul className="ds-c-list--bare">
               <li>
                 <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
-                {years.join(', ')}
+                {!noYears && years.join(', ')}
               </li>
               <li>
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
@@ -171,14 +162,14 @@ const ExecutiveSummary = ({
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </li>
-              {ffyList(total.ffys)}
+              {!noYears && ffyList(total.ffys)}
             </ul>
           </Review>
         </Subsection>
 
         <Waypoint id="executive-summary-budget-table" />
         {/* Show relevant budgets based on APD type selected */}
-        {renderApdTypeSpecificBudgets(apdType)}
+        {!noYears && renderApdTypeSpecificBudgets(apdType)}
       </Section>
     </React.Fragment>
   );
