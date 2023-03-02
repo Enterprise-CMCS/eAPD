@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Button } from '@cmsgov/design-system';
 import { APD_TYPE } from '@cms-eapd/common';
 import { Envelope, PDFFile } from '../../../components/Icons';
@@ -75,13 +74,7 @@ const ExportInstructions = ({
       <p>
         Once you’ve exported a PDF of a completed APD, submit it for state
         officer review by emailing the PDF to{' '}
-        <Link to="#" onClick={e => sendMail(e)}>
-          {email}
-        </Link>
-        {/* <a href="mailto:MedicaidHITECH@cms.hhs.gov">
-          MedicaidHITECH@cms.hhs.gov
-        </a> */}
-        {/* <a href={`mailto:${email}`}>{email}</a>. */}
+        <a href={`mailto:${email}`}>{email}</a>.
       </p>
       <Button
         size="big"
