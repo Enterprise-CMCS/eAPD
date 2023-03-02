@@ -198,6 +198,10 @@ const staticItems = (apdId, apdType) => {
               url: `/apd/${apdId}/executive-summary`
             },
             {
+              label: titleCase(t('executiveSummary.overviewSummary.title')),
+              url: `/apd/${apdId}/executive-summary#executive-overview-summary`
+            },
+            {
               label: titleCase(t('executiveSummary.activitiesSummary.title')),
               url: `/apd/${apdId}/executive-summary#executive-activities-summary`
             },

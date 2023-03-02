@@ -10,18 +10,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { selectAdminCheckEnabled } from '../../src/redux/selectors/apd.selectors';
 import { setUpdateStatusField } from '../../src/redux/actions/editApd';
 
-export const updateStatusChoices = updateStatus => [
-  {
-    label: 'Annual update',
-    value: 'annualUpdate',
-    checked: updateStatus.annualUpdate
-  },
-  {
-    label: 'As-needed update',
-    value: 'asNeededUpdate',
-    checked: updateStatus.asNeededUpdate
-  }
-];
+import { updateStatusChoices } from '../util/apd';
 
 const ApdUpdate = ({
   apdType,

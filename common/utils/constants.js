@@ -34,3 +34,8 @@ export const MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING = {
   other: 'Other',
   otherMedicaidBusinessAreas: 'Other Medicaid Business Area(s)'
 };
+
+export const UPDATE_STATUS_LABEL_MAPPING = {
+  annualUpdate: 'Annual Update',
+  asNeededUpdate: 'As-Needed Update'
+};
