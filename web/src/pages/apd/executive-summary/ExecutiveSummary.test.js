@@ -4,7 +4,7 @@ import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
-import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
+import { plain as ExecutiveSummary } from './ExecutiveSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 const mockPush = jest.fn();
@@ -106,7 +106,108 @@ const defaultProps = {
         }
       }
     },
-    mmisByFFP: {}
+    mmisByFFP: {
+      '90-10': {
+        3000: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        3001: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        total: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        }
+      },
+      '75-25': {
+        3000: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        3001: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        total: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        }
+      },
+      '50-50': {
+        3000: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        3001: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        total: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        }
+      },
+      '0-100': {
+        3000: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        3001: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        total: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        }
+      },
+      combined: {
+        3000: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        3001: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        },
+        total: {
+          federal: 0,
+          medicaid: 0,
+          state: 0,
+          total: 0
+        }
+      }
+    }
   },
   data: [
     {
@@ -148,7 +249,27 @@ const defaultProps = {
   years: ['3000', '3001']
 };
 
-const setup = async (props = {}) => {
+const defaultMedicaidBusinessAreas = {
+  waiverSupportSystems: false,
+  assetVerificationSystem: false,
+  claimsProcessing: true,
+  decisionSupportSystemDW: false,
+  electronicVisitVerification: false,
+  encounterProcessingSystemMCS: false,
+  financialManagement: true,
+  healthInformationExchange: false,
+  longTermServicesSupports: false,
+  memberManagement: false,
+  pharmacyBenefitManagementPOS: false,
+  programIntegrity: true,
+  providerManagement: false,
+  thirdPartyLiability: false,
+  other: true,
+  otherMedicaidBusinessAreas:
+    'This is another area! And here, and here, and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here'
+};
+
+const setup = async (props = {}, options = {}) => {
   jest.spyOn(Router, 'useHistory').mockReturnValue({ push: () => mockPush() });
   jest.spyOn(Router, 'useRouteMatch').mockReturnValue({ path: '---path---' });
   jest
@@ -159,24 +280,7 @@ const setup = async (props = {}) => {
   await act(async () => {
     util = renderWithConnection(
       <ExecutiveSummary {...defaultProps} {...props} />,
-      {
-        initialState: {
-          apd: {
-            data: {
-              apdOverview: {
-                updateStatus: {
-                  isUpdateAPD: true,
-                  annualUpdate: true,
-                  asNeededUpdate: false
-                }
-              },
-              activities: [],
-              apdType: APD_TYPE.HITECH,
-              years: ['3000', '3001']
-            }
-          }
-        }
-      }
+      options
     );
   });
   const user = userEvent.setup();
@@ -192,8 +296,92 @@ describe('<ExecutiveSummary />', () => {
     resetLDMocks();
   });
 
-  test('renders correctly', async () => {
+  test('renders HITECH correctly', async () => {
     mockFlags({ enableMmis: false });
-    await setup();
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              apdOverview: {
+                updateStatus: {
+                  isUpdateAPD: true,
+                  annualUpdate: true,
+                  asNeededUpdate: false
+                }
+              },
+              activities: []
+            }
+          }
+        }
+      }
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Executive Summary' })
+    ).toBeTruthy();
+    expect(screen.queryByRole('heading', { name: 'APD Overview' })).toBeFalsy();
+    expect(
+      screen.queryByRole('heading', {
+        name: 'State Priorities and Scope of APD'
+      })
+    ).toBeFalsy();
+    expect(
+      screen.getByRole('heading', { name: 'Activities Summary' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'Program Budget Tables' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('table', { name: 'HIT + HIE executive summary' })
+    ).toBeTruthy();
+  });
+
+  test('renders MMIS correctly', async () => {
+    mockFlags({ enableMmis: true });
+    await setup(
+      { apdType: APD_TYPE.MMIS },
+      {
+        initialState: {
+          apd: {
+            data: {
+              apdOverview: {
+                updateStatus: {
+                  isUpdateAPD: true,
+                  annualUpdate: true,
+                  asNeededUpdate: false
+                },
+                medicaidBusinessAreas: defaultMedicaidBusinessAreas
+              },
+              activities: [],
+              statePrioritiesAndScope: {
+                medicaidProgramAndPriorities:
+                  '<p>Medicaid program and priorities</p>',
+                mesIntroduction: '<p>Introduction</p>',
+                scopeOfAPD: '<p>scope</p>'
+              }
+            }
+          }
+        }
+      }
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Executive Summary' })
+    ).toBeTruthy();
+    expect(screen.queryByRole('heading', { name: 'APD Overview' })).toBeFalsy();
+    expect(
+      screen.queryByRole('heading', {
+        name: 'State Priorities and Scope of APD'
+      })
+    ).toBeFalsy();
+    expect(
+      screen.getByRole('heading', { name: 'Activities Summary' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'Program Budget Tables' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('table', { name: 'HIT + HIE executive summary' })
+    ).toBeTruthy();
   });
 });
