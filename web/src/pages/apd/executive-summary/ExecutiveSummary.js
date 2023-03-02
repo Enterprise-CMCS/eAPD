@@ -109,7 +109,7 @@ const ExecutiveSummary = ({
   return (
     <React.Fragment>
       <Waypoint />
-      {noYears && <AlertMissingFFY />}
+      <AlertMissingFFY />
       <Section resource="executiveSummary">
         <Waypoint id="executive-overview-summary" />
         <Subsection
