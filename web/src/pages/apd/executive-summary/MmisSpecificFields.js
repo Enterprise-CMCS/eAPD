@@ -27,6 +27,8 @@ const MmisSpecificFields = ({
   const statusList = updateStatusChoices(updateStatus);
   const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
 
+  console.log(statePrioritiesAndScope);
+
   return (
     <Fragment>
       <Waypoint id="executive-overview-summary" />
@@ -59,21 +61,30 @@ const MmisSpecificFields = ({
             'executiveSummary.statePrioritiesAndScope.medicaidProgramAndPriorities'
           )}
         </h3>
-        <div className="ds-u-margin-y--1">
-          {statePrioritiesAndScope.medicaidProgramAndPriorities}
-        </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: statePrioritiesAndScope.medicaidProgramAndPriorities
+          }}
+          className="ds-u-margin-y--1"
+        />
         <h3 className="ds-u-margin-bottom--1">
           {t('executiveSummary.statePrioritiesAndScope.mesIntroduction')}
         </h3>
-        <div className="ds-u-margin-y--1">
-          {statePrioritiesAndScope.mesIntroduction}
-        </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: statePrioritiesAndScope.mesIntroduction
+          }}
+          className="ds-u-margin-y--1"
+        />
         <h3 className="ds-u-margin-bottom--1">
           {t('executiveSummary.statePrioritiesAndScope.scopeOfAPD')}
         </h3>
-        <div className="ds-u-margin-y--1">
-          {statePrioritiesAndScope.scopeOfAPD}
-        </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: statePrioritiesAndScope.scopeOfAPD
+          }}
+          className="ds-u-margin-y--1"
+        />
       </Subsection>
     </Fragment>
   );
