@@ -73,9 +73,9 @@ const ExecutiveSummary = ({
         <div>
           <li className="ds-u-margin-top--1">
             <strong>Medicaid Business Area(s) :</strong>{' '}
-            {!!businessAreasList.length
-              ? arrayOfObjectsToStringList(businessAreasList)
-              : 'Provide at least one Medicaid Business Area.'}
+            {!businessAreasList.length
+              ? 'Provide at least one Medicaid Business Area.'
+              : arrayOfObjectsToStringList(businessAreasList)}
           </li>
           {otherDetails()}
         </div>
