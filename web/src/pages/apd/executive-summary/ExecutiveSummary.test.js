@@ -175,7 +175,8 @@ describe('<ExecutiveSummary />', () => {
         initialState: {
           apd: {
             data: {
-              activities: []
+              activities: [],
+              years: ['3000', '3001']
             }
           }
         }
@@ -222,7 +223,8 @@ describe('<ExecutiveSummary />', () => {
                   '<p>Medicaid program and priorities</p>',
                 mesIntroduction: '<p>Introduction</p>',
                 scopeOfAPD: '<p>scope</p>'
-              }
+              },
+              years: ['3000', '3001']
             }
           }
         }
