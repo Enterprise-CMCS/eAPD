@@ -71,7 +71,7 @@
     "previousActivitySummary": "This is the previous activities summary",
     "actualExpenditures": {
       "2022": {
-        "mmis": {
+        "ddi": {
           "50": {
             "federalActual": 0,
             "totalApproved": 0
@@ -81,13 +81,23 @@
             "totalApproved": 0
           },
           "90": {
+            "federalActual": 0,
+            "totalApproved": 0
+          }
+        },
+        "mando": {
+          "50": {
+            "federalActual": 0,
+            "totalApproved": 0
+          },
+          "75": {
             "federalActual": 0,
             "totalApproved": 0
           }
         }
       },
       "2023": {
-        "mmis": {
+        "ddi": {
           "50": {
             "federalActual": 0,
             "totalApproved": 0
@@ -100,10 +110,20 @@
             "federalActual": 0,
             "totalApproved": 0
           }
+        },
+        "mando": {
+          "50": {
+            "federalActual": 0,
+            "totalApproved": 0
+          },
+          "75": {
+            "federalActual": 0,
+            "totalApproved": 0
+          }
         }
       },
       "2024": {
-        "mmis": {
+        "ddi": {
           "50": {
             "federalActual": 0,
             "totalApproved": 0
@@ -113,6 +133,16 @@
             "totalApproved": 0
           },
           "90": {
+            "federalActual": 0,
+            "totalApproved": 0
+          }
+        },
+        "mando": {
+          "50": {
+            "federalActual": 0,
+            "totalApproved": 0
+          },
+          "75": {
             "federalActual": 0,
             "totalApproved": 0
           }
