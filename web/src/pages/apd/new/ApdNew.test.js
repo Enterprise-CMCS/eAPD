@@ -8,6 +8,8 @@ import {
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
 
+import { UPDATE_STATUS_LABEL_MAPPING } from '@cms-eapd/common';
+
 import ApdNew from './ApdNew';
 
 jest.mock('../../../util/api', () => ({
@@ -97,10 +99,16 @@ describe('<ApdNew />', () => {
         ).not.toBeChecked();
       });
 
-      user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+      user.click(
+        screen.getByRole('checkbox', {
+          name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+        })
+      );
       await waitFor(() => {
         expect(
-          screen.getByRole('checkbox', { name: /Annual update/i })
+          screen.getByRole('checkbox', {
+            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+          })
         ).toBeChecked();
       });
       await waitFor(() => {
@@ -201,10 +209,16 @@ describe('<ApdNew />', () => {
           ).not.toBeChecked();
         });
 
-        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        user.click(
+          screen.getByRole('checkbox', {
+            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+          })
+        );
         await waitFor(() => {
           expect(
-            screen.getByRole('checkbox', { name: /Annual update/i })
+            screen.getByRole('checkbox', {
+              name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+            })
           ).toBeChecked();
         });
         await waitFor(() => {
@@ -340,10 +354,16 @@ describe('<ApdNew />', () => {
           expect(disabledBtn).toBeDisabled();
         });
 
-        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        user.click(
+          screen.getByRole('checkbox', {
+            name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+          })
+        );
         await waitFor(() => {
           expect(
-            screen.getByRole('checkbox', { name: /Annual update/i })
+            screen.getByRole('checkbox', {
+              name: UPDATE_STATUS_LABEL_MAPPING.annualUpdate
+            })
           ).toBeChecked();
         });
         await waitFor(() => {
