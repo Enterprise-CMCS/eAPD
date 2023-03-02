@@ -116,10 +116,7 @@ const CostAllocateFFPQuarterly = ({
                   {titleCase(t('table.quarter', { q }))}
                 </th>
               ))}
-              <th
-                scope="col"
-                className="budget-table--subtotal ds-u-text-align--right"
-              >
+              <th scope="col" className="ds-u-text-align--right">
                 {titleCase(t('table.subtotal'))}
               </th>
             </Fragment>

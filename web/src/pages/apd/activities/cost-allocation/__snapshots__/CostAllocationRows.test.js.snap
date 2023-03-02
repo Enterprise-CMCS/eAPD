@@ -6,6 +6,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
     <CostAllocationRows
       activityIndex={-1}
       ffy="1990"
+      highlightSubtotals={false}
       otherFunding={
         Object {
           "1990": Object {
@@ -138,6 +139,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -172,7 +174,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -183,6 +185,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -227,7 +230,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
             =
           </td>
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -248,7 +251,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           -
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
         >
           <Dollars>
             <span>
@@ -258,7 +261,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -267,7 +270,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           State Staff Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -288,6 +291,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -320,7 +324,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -341,7 +345,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           -
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
         >
           <Dollars>
             <span>
@@ -351,7 +355,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -360,7 +364,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           Other State Expenses Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -381,6 +385,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -419,7 +424,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -461,7 +466,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
             =
           </td>
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -482,7 +487,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           -
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
         >
           <Dollars>
             <span>
@@ -492,7 +497,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -501,7 +506,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           Private Contractor Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -512,7 +517,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__header"
+        className="budget-table--total budget-table--row__header budget-table--row__highlight"
       >
         <td
           colSpan="5"
@@ -542,6 +547,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
     <CostAllocationRows
       activityIndex={-1}
       ffy="1990"
+      highlightSubtotals={false}
       otherFunding={null}
       years={
         Object {
@@ -683,6 +689,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -717,7 +724,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -728,6 +735,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -772,7 +780,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
             =
           </td>
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -783,7 +791,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -792,7 +800,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
           State Staff Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -813,6 +821,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -845,7 +854,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -856,7 +865,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -865,7 +874,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
           Other State Expenses Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -886,6 +895,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </th>
       </tr>
       <CostSummaryRows
+        highlightSubtotals={false}
         items={
           Array [
             Object {
@@ -924,7 +934,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
             className="budget-table--number"
           />
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -966,7 +976,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
             =
           </td>
           <td
-            className="budget-table--number"
+            className="budget-table--number "
           >
             <Dollars>
               <span>
@@ -977,7 +987,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--total budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight-lighter"
       >
         <td
           className="title"
@@ -986,7 +996,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
           Private Contractor Total
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number "
           data-cy="total"
         >
           <Dollars>
@@ -997,7 +1007,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__header"
+        className="budget-table--total budget-table--row__header budget-table--row__highlight"
       >
         <td
           colSpan="5"
@@ -1054,7 +1064,7 @@ Array [
       =
     </td>
     <td
-      className="budget-table--number"
+      className="budget-table--number "
     >
       <Dollars>
         100
@@ -1082,7 +1092,7 @@ Array [
       className="budget-table--number"
     />
     <td
-      className="budget-table--number"
+      className="budget-table--number "
     >
       <Dollars>
         200
@@ -1127,7 +1137,7 @@ Array [
       =
     </td>
     <td
-      className="budget-table--number"
+      className="budget-table--number "
     >
       <Dollars>
         200

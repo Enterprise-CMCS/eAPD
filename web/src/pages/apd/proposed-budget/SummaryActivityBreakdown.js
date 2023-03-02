@@ -46,6 +46,7 @@ const SummaryActivityBreakdownTable = ({
           ffy={ffy}
           otherFunding={otherFunding}
           activityIndex={activityIndex}
+          highlightSubtotals={true}
         />
       </tbody>
     </table>

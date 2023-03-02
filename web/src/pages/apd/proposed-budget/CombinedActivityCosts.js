@@ -11,7 +11,11 @@ import { APD_TYPE } from '@cms-eapd/common';
 const DataRow = ({ category, data, title, groupTitle, apdType }) => (
   <tr
     key={category}
-    className={`${category === 'combined' ? 'budget-table--subtotal' : ''} ${
+    className={`${
+      category === 'combined'
+        ? 'budget-table--subtotal budget-table--category-row_highlight-lighter'
+        : ''
+    } ${
       (apdType === 'MMIS' && category === 'statePersonnel') ||
       (apdType === 'MMIS' && category === 'contractors')
         ? 'budget-table--category-row_highlight'

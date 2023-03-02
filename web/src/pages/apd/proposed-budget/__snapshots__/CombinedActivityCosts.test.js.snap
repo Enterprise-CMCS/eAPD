@@ -7,7 +7,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
 >
   <thead>
     <tr
-      className="budget-table--row__primary-header"
+      className="budget-table--row__primary-header__light"
     >
       <th
         scope="col"
@@ -26,7 +26,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
   </thead>
   <tbody>
     <tr
-      className="budget-table--row__header"
+      className=""
     >
       <th
         colSpan="2"
@@ -56,7 +56,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
       year="1975"
     />
     <tr
-      className="budget-table--row__header"
+      className=""
     >
       <th
         colSpan="2"
@@ -86,7 +86,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
       year="1975"
     />
     <tr
-      className="budget-table--row__header"
+      className=""
     >
       <th
         colSpan="2"
@@ -116,7 +116,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
       year="1975"
     />
     <tr
-      className="budget-table--row__header"
+      className="budget-table--row__header budget-table--row__highlight"
       key="1975"
     >
       <th
@@ -221,6 +221,7 @@ exports[`renders correctly data row group renders 1`] = `
 exports[`renders correctly data row group renders for mmis 1`] = `
 <Fragment>
   <DataRow
+    apdType="MMIS"
     category="keyStatePersonnel"
     data={Object {}}
     groupTitle="MMIS"
@@ -228,6 +229,7 @@ exports[`renders correctly data row group renders for mmis 1`] = `
     title="Key State Personnel Total"
   />
   <DataRow
+    apdType="MMIS"
     category="statePersonnel"
     data={Object {}}
     groupTitle="MMIS"
@@ -235,6 +237,7 @@ exports[`renders correctly data row group renders for mmis 1`] = `
     title="State Staff Total"
   />
   <DataRow
+    apdType="MMIS"
     category="expenses"
     data={Object {}}
     groupTitle="MMIS"
@@ -242,6 +245,7 @@ exports[`renders correctly data row group renders for mmis 1`] = `
     title="Other State Expenses Total"
   />
   <DataRow
+    apdType="MMIS"
     category="contractors"
     data={Object {}}
     groupTitle="MMIS"
@@ -249,6 +253,7 @@ exports[`renders correctly data row group renders for mmis 1`] = `
     title="Private Contractor Total"
   />
   <DataRow
+    apdType="MMIS"
     category="combined"
     data={Object {}}
     groupTitle="MMIS"
@@ -260,7 +265,7 @@ exports[`renders correctly data row group renders for mmis 1`] = `
 
 exports[`renders correctly data row renders 1`] = `
 <tr
-  className=""
+  className=" "
   key="category"
 >
   <th

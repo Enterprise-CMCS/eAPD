@@ -44,6 +44,7 @@ exports[`State and Contractor Cost Breakdown Table renders correctly renders cor
     <CostAllocationRows
       activityIndex={2}
       ffy="2016"
+      highlightSubtotals={true}
       otherFunding={
         Object {
           "2016": Object {
