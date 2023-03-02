@@ -136,9 +136,8 @@ const defaultMedicaidBusinessAreas = {
   programIntegrity: true,
   providerManagement: false,
   thirdPartyLiability: false,
-  other: true,
-  otherMedicaidBusinessAreas:
-    'This is another area! And here, and here, and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here,  and here'
+  other: false,
+  otherMedicaidBusinessAreas: ''
 };
 
 const setup = async (props = {}, options = {}) => {
