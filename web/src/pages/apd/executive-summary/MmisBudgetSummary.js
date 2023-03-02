@@ -6,7 +6,7 @@ import { titleCase } from 'title-case';
 import { Subsection } from '../../../components/Section';
 import DollarCell from '../../../components/DollarCell';
 
-import { tdHdrs, thId } from './ExecutiveSummary';
+import { thId, tdHdrs } from '../../../util/apd';
 
 const MmisBudgetSummary = ({ budget, rowKeys }) => {
   const { mmisByFFP } = budget;

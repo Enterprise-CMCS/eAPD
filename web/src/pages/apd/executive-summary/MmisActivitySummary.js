@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
-import { ffyList } from './ExecutiveSummary';
+import { ffyList } from '../../../util/apd';
 
 const MmisActivitySummary = ({ apdId, data, ffys }) => {
   if (data.length === 0) {

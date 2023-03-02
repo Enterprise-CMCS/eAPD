@@ -24,31 +24,14 @@ import {
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-export const thId = (program, share) =>
-  `program-budget-table-${program}${share ? `-${share}` : ''}`;
-
-export const tdHdrs = (program, share) =>
-  `program-budget-table-${program} program-budget-table-${program}-${share}`;
-
-export const ffyList = ffys => {
-  return Object.entries(ffys).map(
-    ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-      <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
-        <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-        <strong>Total Computable Medicaid Cost:</strong>{' '}
-        <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars> Federal
-        share)
-      </li>
-    )
-  );
-};
+import { ffyList } from '../../../util/apd';
 
 const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   if (years.length === 0) {
     return (
       <React.Fragment>
         <Waypoint />
-        {/* <AlertMissingFFY /> */}
+        <AlertMissingFFY />
       </React.Fragment>
     );
   }

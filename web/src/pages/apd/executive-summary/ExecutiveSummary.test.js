@@ -16,23 +16,42 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }));
 
+const defaultCostsByFFY = {
+  3000: 'a1 ffy 1 costs',
+  3001: 'a1 ffy 2 costs',
+  total: { federal: 0, medicaid: 0, total: 0 }
+};
+
+const defaultCosts = {
+  3000: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  },
+  3001: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  },
+  total: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  }
+};
+
 const defaultProps = {
   apdType: APD_TYPE.HITECH,
   budget: {
     activities: {
       a1: {
-        costsByFFY: {
-          3000: 'a1 ffy 1 costs',
-          3001: 'a1 ffy 2 costs',
-          total: { federal: 0, medicaid: 0, total: 0 }
-        }
+        costsByFFY: defaultCostsByFFY
       },
       a2: {
-        costsByFFY: {
-          3000: 'a2 ffy 1 costs',
-          3001: 'a2 ffy 2 costs',
-          total: { federal: 0, medicaid: 0, total: 0 }
-        }
+        costsByFFY: defaultCostsByFFY
       }
     },
     combined: {
@@ -41,172 +60,20 @@ const defaultProps = {
       total: { federal: 0, medicaid: 0, total: 0 }
     },
     hit: {
-      combined: {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      }
+      combined: defaultCosts
     },
     hie: {
-      combined: {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      }
+      combined: defaultCosts
     },
     hitAndHie: {
-      combined: {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      }
+      combined: defaultCosts
     },
     mmisByFFP: {
-      '90-10': {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      },
-      '75-25': {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      },
-      '50-50': {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      },
-      '0-100': {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      },
-      combined: {
-        3000: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        3001: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        },
-        total: {
-          federal: 0,
-          medicaid: 0,
-          state: 0,
-          total: 0
-        }
-      }
+      '90-10': defaultCosts,
+      '75-25': defaultCosts,
+      '50-50': defaultCosts,
+      '0-100': defaultCosts,
+      combined: defaultCosts
     }
   },
   data: [
@@ -335,6 +202,9 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('table', { name: 'HIT + HIE executive summary' })
     ).toBeTruthy();
+    expect(
+      screen.queryByRole('table', { name: 'MMIS executive summary' })
+    ).toBeFalsy();
   });
 
   test('renders MMIS correctly', async () => {
@@ -368,12 +238,12 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Executive Summary' })
     ).toBeTruthy();
-    expect(screen.queryByRole('heading', { name: 'APD Overview' })).toBeFalsy();
+    expect(screen.getByRole('heading', { name: 'APD Overview' })).toBeTruthy();
     expect(
-      screen.queryByRole('heading', {
+      screen.getByRole('heading', {
         name: 'State Priorities and Scope of APD'
       })
-    ).toBeFalsy();
+    ).toBeTruthy();
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
@@ -381,7 +251,10 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Program Budget Tables' })
     ).toBeTruthy();
     expect(
-      screen.getByRole('table', { name: 'HIT + HIE executive summary' })
+      screen.queryByRole('table', { name: 'HIT + HIE executive summary' })
+    ).toBeFalsy();
+    expect(
+      screen.getByRole('table', { name: 'MMIS executive summary' })
     ).toBeTruthy();
   });
 });
