@@ -114,7 +114,7 @@ const mmisFedStateSplit = ({ costAllocation }) => {
     }
     return (
       <span key={year}>
-        <strong>FFY {year}:</strong> {federal} - {state}{' '}
+        <strong>FFY {year}:</strong> {federal}/{state}{' '}
         {FUNDING_CATEGORY_LABEL_MAPPING[fundingCategory]}
         <br />
       </span>

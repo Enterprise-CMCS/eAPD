@@ -145,10 +145,10 @@ describe('the ActivitySummaryReadOnly component', () => {
       screen.getByText(/Federal Fiscal Years/i).closest('p')
     ).toHaveTextContent('Federal Fiscal Years requested: FFY 2023, 2024');
     expect(screen.getByText(/FFY 2023:/i).closest('span')).toHaveTextContent(
-      'FFY 2023: 90 - 10 Design, Development, and Installation (DDI)'
+      'FFY 2023: 90/10 Design, Development, and Installation (DDI)'
     );
     expect(screen.getByText(/FFY 2024:/i).closest('span')).toHaveTextContent(
-      'FFY 2024: 75 - 25 Maintenance & Operations (M&O)'
+      'FFY 2024: 75/25 Maintenance & Operations (M&O)'
     );
   });
 
@@ -193,7 +193,7 @@ describe('the ActivitySummaryReadOnly component', () => {
       'FFY 2023: No Federal-State Split was specified.'
     );
     expect(screen.getByText(/FFY 2024:/i).closest('span')).toHaveTextContent(
-      'FFY 2024: 75 - 25 Maintenance & Operations (M&O)'
+      'FFY 2024: 75/25 Maintenance & Operations (M&O)'
     );
   });
 
