@@ -12,7 +12,7 @@ import { Section, Subsection } from '../../../components/Section';
 import HitechActivitySummary from './HitechActivitySummary';
 import HitechBudgetSummary from './HitechBudgetSummary';
 import MmisActivitySummary from './MmisActivitySummary';
-import MmisApdOverview from './MmisApdOverview';
+import MmisSpecificFields from './MmisSpecificFields';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -51,6 +51,13 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
     { year: 'total', display: 'Total' }
   ];
 
+  function renderMmisSpecificFields() {
+    if (apdType === APD_TYPE.MMIS) {
+      return <MmisSpecificFields />;
+    }
+    return null;
+  }
+
   function renderApdTypeSpecificActivities(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
@@ -78,7 +85,7 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
       <Waypoint />
       <AlertMissingFFY />
       <Section resource="executiveSummary">
-        {apdType === APD_TYPE.MMIS && <MmisApdOverview />}
+        {renderMmisSpecificFields()}
         <Waypoint id="executive-activities-summary" />
         <Subsection
           id="executive-activities-summary"
@@ -87,7 +94,7 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
           {/* Show relevant activities fields based on APD type selected */}
           {renderApdTypeSpecificActivities(apdType)}
 
-          <hr className="ds-u-border--dark ds-u-margin--0" />
+          <hr className="ds-u-margin--0" />
           <Review
             heading="Total Cost"
             headingLevel="4"

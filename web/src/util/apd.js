@@ -18,7 +18,7 @@ export const updateStatusChoices = updateStatus => {
 export const businessAreaChoices = medicaidBusinessAreas => {
   let list = [];
   Object.keys(medicaidBusinessAreas).map(key => {
-    if (key != 'otherMedicaidBusinessAreas') {
+    if (key != 'other' || key != 'otherMedicaidBusinessAreas') {
       list.push({
         label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key],
         value: key,

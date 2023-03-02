@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { t } from '../../../i18n';
 
 import {
   getAPDName,
   getMedicaidBusinessAreas,
+  getPrioritiesAndScope,
   getUpdateStatus
 } from '../../../redux/reducers/apd';
 import {
@@ -16,7 +18,12 @@ import {
 import { Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
 
-const MmisApdOverview = ({ apdName, medicaidBusinessAreas, updateStatus }) => {
+const MmisSpecificFields = ({
+  apdName,
+  medicaidBusinessAreas,
+  statePrioritiesAndScope,
+  updateStatus
+}) => {
   const statusList = updateStatusChoices(updateStatus);
   const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
 
@@ -43,22 +50,49 @@ const MmisApdOverview = ({ apdName, medicaidBusinessAreas, updateStatus }) => {
           </li>
         </ul>
       </Subsection>
+      <Subsection
+        id="executive-overview-summary"
+        resource="executiveSummary.statePrioritiesAndScope"
+      >
+        <h3 className="ds-u-margin-bottom--1">
+          {t(
+            'executiveSummary.statePrioritiesAndScope.medicaidProgramAndPriorities'
+          )}
+        </h3>
+        <div className="ds-u-margin-y--1">
+          {statePrioritiesAndScope.medicaidProgramAndPriorities}
+        </div>
+        <h3 className="ds-u-margin-bottom--1">
+          {t('executiveSummary.statePrioritiesAndScope.mesIntroduction')}
+        </h3>
+        <div className="ds-u-margin-y--1">
+          {statePrioritiesAndScope.mesIntroduction}
+        </div>
+        <h3 className="ds-u-margin-bottom--1">
+          {t('executiveSummary.statePrioritiesAndScope.scopeOfAPD')}
+        </h3>
+        <div className="ds-u-margin-y--1">
+          {statePrioritiesAndScope.scopeOfAPD}
+        </div>
+      </Subsection>
     </Fragment>
   );
 };
 
-MmisApdOverview.propTypes = {
-  apdName: PropTypes.string,
-  medicaidBusinessAreas: PropTypes.object,
-  updateStatus: PropTypes.object
+MmisSpecificFields.propTypes = {
+  apdName: PropTypes.string.isRequired,
+  medicaidBusinessAreas: PropTypes.object.isRequired,
+  statePrioritiesAndScope: PropTypes.object.isRequired,
+  updateStatus: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   apdName: getAPDName(state),
   medicaidBusinessAreas: getMedicaidBusinessAreas(state),
+  statePrioritiesAndScope: getPrioritiesAndScope(state),
   updateStatus: getUpdateStatus(state)
 });
 
-export default connect(mapStateToProps, null)(MmisApdOverview);
+export default connect(mapStateToProps, null)(MmisSpecificFields);
 
-export { MmisApdOverview as plain, mapStateToProps };
+export { MmisSpecificFields as plain, mapStateToProps };
