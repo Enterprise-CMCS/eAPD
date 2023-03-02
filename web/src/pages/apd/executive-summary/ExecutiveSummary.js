@@ -36,10 +36,9 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
     );
   }
 
-  console.log({ apdType, budget, data, total, years });
-
   const { apdId } = useParams();
   const { ffys } = total;
+
   if (!years.length) return null;
 
   const rowKeys = [
