@@ -10,9 +10,8 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';
 
-import HitechActivitySummary from './HitechActivitySummary';
 import HitechBudgetSummary from './HitechBudgetSummary';
-import MmisActivitySummary from './MmisActivitySummary';
+import ActivityExecutiveSummary from './ActivityExecutiveSummary';
 import MmisSpecificFields from './MmisSpecificFields';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
@@ -84,17 +83,6 @@ const ExecutiveSummary = ({
     return null;
   }
 
-  function renderApdTypeSpecificActivities(apdType) {
-    switch (apdType) {
-      case APD_TYPE.HITECH:
-        return <HitechActivitySummary apdId={apdId} data={data} ffys={ffys} />;
-      case APD_TYPE.MMIS:
-        return <MmisActivitySummary apdId={apdId} data={data} ffys={ffys} />;
-      default:
-        null;
-    }
-  }
-
   function renderApdTypeSpecificBudgets(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
@@ -136,7 +124,15 @@ const ExecutiveSummary = ({
           resource="executiveSummary.activitiesSummary"
         >
           {/* Show relevant activities fields based on APD type selected */}
-          {!noYears && renderApdTypeSpecificActivities(apdType)}
+          {!noYears && (
+            <ActivityExecutiveSummary
+              apdId={apdId}
+              data={data}
+              ffys={ffys}
+              isApdMmis={isApdMmis}
+              noYears={noYears}
+            />
+          )}
 
           <hr className="ds-u-margin--0" />
           <Review

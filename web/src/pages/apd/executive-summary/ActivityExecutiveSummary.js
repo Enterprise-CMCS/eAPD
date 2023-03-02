@@ -6,8 +6,14 @@ import Review from '../../../components/Review';
 
 import { ffyList } from '../../../util/apd';
 
-const MmisActivitySummary = ({ apdId, data, ffys }) => {
-  if (data.length === 0) {
+const ActivityExecutiveSummary = ({
+  apdId,
+  data,
+  ffys,
+  isApdMmis,
+  noYears
+}) => {
+  if (data.length === 0 && isApdMmis) {
     return (
       <Fragment>
         <ul className="ds-c-list--bare ds-u-margin-bottom--3">
@@ -71,10 +77,12 @@ const MmisActivitySummary = ({ apdId, data, ffys }) => {
   );
 };
 
-MmisActivitySummary.propTypes = {
+ActivityExecutiveSummary.propTypes = {
   apdId: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-  ffys: PropTypes.object.isRequired
+  ffys: PropTypes.object.isRequired,
+  isApdMmis: PropTypes.bool,
+  noYears: PropTypes.bool
 };
 
-export default MmisActivitySummary;
+export default ActivityExecutiveSummary;
