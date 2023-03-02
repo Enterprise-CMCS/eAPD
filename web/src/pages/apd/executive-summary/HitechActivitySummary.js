@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
 
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
-const HitechActivitySummary = ({ data }) => {
-  const { apdId } = useParams();
+const HitechActivitySummary = ({ apdId, data }) => {
   return (
     <Fragment>
       {data.map((activity, i) => (
@@ -56,6 +54,7 @@ const HitechActivitySummary = ({ data }) => {
 };
 
 HitechActivitySummary.propTypes = {
+  apdId: PropTypes.string.isRequired,
   apdType: PropTypes.string,
   budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,

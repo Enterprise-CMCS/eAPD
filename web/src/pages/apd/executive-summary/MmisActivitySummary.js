@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { Fragment } from 'react';
 
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
 import { ffyList } from './ExecutiveSummary';
 
-const MmisActivitySummary = ({ data, ffys }) => {
-  const { apdId } = useParams();
-
+const MmisActivitySummary = ({ apdId, data, ffys }) => {
   if (data.length === 0) {
     return (
       <Fragment>
@@ -75,6 +72,7 @@ const MmisActivitySummary = ({ data, ffys }) => {
 };
 
 MmisActivitySummary.propTypes = {
+  apdId: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   ffys: PropTypes.object.isRequired
 };

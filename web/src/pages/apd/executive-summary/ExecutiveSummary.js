@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
+import { useParams } from 'react-router-dom';
 
 import Waypoint from '../../../components/ConnectedWaypoint';
 import Dollars from '../../../components/Dollars';
@@ -43,6 +44,18 @@ export const ffyList = ffys => {
 };
 
 const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
+  if (years.length === 0) {
+    return (
+      <React.Fragment>
+        <Waypoint />
+        {/* <AlertMissingFFY /> */}
+      </React.Fragment>
+    );
+  }
+
+  console.log({ apdType, budget, data, total, years });
+
+  const { apdId } = useParams();
   const { ffys } = total;
   if (!years.length) return null;
 
@@ -61,9 +74,9 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   function renderApdTypeSpecificActivities(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
-        return <HitechActivitySummary data={data} ffys={ffys} />;
+        return <HitechActivitySummary apdId={apdId} data={data} ffys={ffys} />;
       case APD_TYPE.MMIS:
-        return <MmisActivitySummary data={data} ffys={ffys} />;
+        return <MmisActivitySummary apdId={apdId} data={data} ffys={ffys} />;
       default:
         null;
     }
@@ -83,7 +96,6 @@ const ExecutiveSummary = ({ apdType, budget, data, total, years }) => {
   return (
     <React.Fragment>
       <Waypoint />
-      <AlertMissingFFY />
       <Section resource="executiveSummary">
         {renderMmisSpecificFields()}
         <Waypoint id="executive-activities-summary" />
