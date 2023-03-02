@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Button } from '@cmsgov/design-system';
+import { APD_TYPE } from '@cms-eapd/common';
 import { Envelope, PDFFile } from '../../../components/Icons';
 import { printApd, saveApdEvent } from '../../../redux/actions/app';
 import { APD_EVENTS } from '../../../constants';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
-const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
-  const sendMail = email => {
+const ExportInstructions = ({
+  apdType,
+  printApd: print,
+  saveApdEvent: log
+}) => {
+  const email = useMemo(() => {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return 'MedicaidHITECH@cms.hhs.gov';
+      case APD_TYPE.MMIS:
+        return 'MedicaidMMIS@cms.hhs.gov';
+      default:
+        return null;
+    }
+  }, [apdType]);
+
+  const sendMail = e => {
+    e.preventDefault();
+    console.log({ email });
     window.location.href = `mailto:${email}`;
   };
 
@@ -55,16 +75,19 @@ const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
       <p>
         Once you’ve exported a PDF of a completed APD, submit it for state
         officer review by emailing the PDF to{' '}
-        <a href="mailto:MedicaidHITECH@cms.hhs.gov">
+        <Link to="#" onClick={e => sendMail(e)}>
+          {email}
+        </Link>
+        {/* <a href="mailto:MedicaidHITECH@cms.hhs.gov">
           MedicaidHITECH@cms.hhs.gov
-        </a>
-        .
+        </a> */}
+        {/* <a href={`mailto:${email}`}>{email}</a>. */}
       </p>
       <Button
         size="big"
         variation="primary"
         className="ds-u-margin-top--2"
-        onClick={() => sendMail('MedicaidHITECH@cms.hhs.gov')}
+        onClick={e => sendMail(e)}
       >
         Submit
         <span className="ds-u-margin-left--2">
@@ -75,12 +98,17 @@ const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
   );
 };
 ExportInstructions.propTypes = {
+  apdType: PropTypes.string.isRequired,
   printApd: PropTypes.func.isRequired,
   saveApdEvent: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  apdType: selectApdType(state)
+});
+
 const mapDispatchToProps = { printApd, saveApdEvent };
 
-export default connect(null, mapDispatchToProps)(ExportInstructions);
+export default connect(mapStateToProps, mapDispatchToProps)(ExportInstructions);
 
 export { ExportInstructions as plain, mapDispatchToProps };
