@@ -49,7 +49,7 @@ const ExecutiveSummary = ({
 }) => {
   const { apdId } = useParams();
   const { ffys } = total;
-  const isApdMmis = apdIsMMIS(apdType);
+  const isApdMmis = apdType === APD_TYPE.MMIS;
   const noYears = !years.length;
   const statusList = updateStatusChoices(updateStatus);
 
