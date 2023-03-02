@@ -6,13 +6,7 @@ import Review from '../../../components/Review';
 
 import { ffyList } from '../../../util/apd';
 
-const ActivityExecutiveSummary = ({
-  apdId,
-  data,
-  ffys,
-  isApdMmis,
-  noYears
-}) => {
+const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
   if (data.length === 0 && isApdMmis) {
     return (
       <Fragment>
@@ -81,8 +75,7 @@ ActivityExecutiveSummary.propTypes = {
   apdId: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   ffys: PropTypes.object.isRequired,
-  isApdMmis: PropTypes.bool,
-  noYears: PropTypes.bool
+  isApdMmis: PropTypes.bool
 };
 
 export default ActivityExecutiveSummary;
