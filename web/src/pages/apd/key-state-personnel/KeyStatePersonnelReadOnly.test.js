@@ -16,7 +16,9 @@ describe('APD Summary/viewOnly component', () => {
       keyPersonnel: []
     };
     render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
-    expect(screen.getByText(/No response was provided/i)).toBeTruthy();
+    expect(
+      screen.getByText(/No key state personnel was provided/i)
+    ).toBeTruthy();
   });
 
   test('renders key personnel when provided', () => {
@@ -72,6 +74,42 @@ describe('APD Summary/viewOnly component', () => {
       keyPersonnel: keyPersonnel
     };
     render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
-    expect(screen.getByText(/No response was provided/i)).toBeTruthy();
+    expect(screen.getByText(/No Medicaid office was provided/i)).toBeTruthy();
+  });
+
+  test('renders the correct state medicaid director when provided', () => {
+    const keyStatePersonnel = {
+      medicaidOffice: {
+        address1: '123 Street St',
+        state: 'MD'
+      },
+      medicaidDirector: {
+        name: 'Test Medicaid Director'
+      },
+      keyPersonnel: []
+    };
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
+    expect(screen.getByText(/Test Medicaid Director/i)).toBeTruthy();
+  });
+
+  test('renders the correct message when no medicaid director is provided', () => {
+    const keyPersonnel = [
+      {
+        isPrimary: true,
+        name: 'Primary Person Name'
+      }
+    ];
+    const keyStatePersonnel = {
+      medicaidOffice: {
+        address1: '123 Street St',
+        state: 'MD'
+      },
+      medicaidDirector: {
+        name: ''
+      },
+      keyPersonnel: keyPersonnel
+    };
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
+    expect(screen.getByText(/No Medicaid director was provided/i)).toBeTruthy();
   });
 });
