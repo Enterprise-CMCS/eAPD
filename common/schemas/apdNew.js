@@ -67,7 +67,7 @@ const apdNewSchema = Joi.object({
   }),
   otherDetails: Joi.when('businessList', {
     is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
-    then: Joi.string().min(1).required().messages({
+    then: Joi.string().trim().min(1).required().messages({
       'string.empty': 'Provide Other Medicaid Business Area(s)',
       'any.required': 'Provide Other Medicaid Business Area(s)',
       'any.only': 'Provide Other Medicaid Business Area(s)'
