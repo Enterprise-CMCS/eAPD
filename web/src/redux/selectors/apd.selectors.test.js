@@ -7,10 +7,11 @@ import {
   selectIncentivePayments,
   selectIncentivePaymentTotals,
   selectKeyPersonnel,
-  selectPreviousActivityExpensesTotals,
+  selectPreviousActivityExpensesTotalsHITECH,
   selectPreviousActivitySummary,
   selectPreviousHITHIEActivities,
-  selectPreviousMMISActivities,
+  selectPreviousMMISActivitiesHITECH,
+  selectPreviousActivityExpensesTotalsMMIS,
   selectKeyStatePersonnel,
   selectSummary
 } from './apd.selectors';
@@ -119,7 +120,7 @@ describe('APD selectors', () => {
 
   it('selects the computed totals for previous activity expenses for the current APD', () => {
     expect(
-      selectPreviousActivityExpensesTotals({
+      selectPreviousActivityExpensesTotalsHITECH({
         apd: {
           data: {
             previousActivities: {
@@ -155,6 +156,46 @@ describe('APD selectors', () => {
     });
   });
 
+  it('selects the computed totals for previous activity expenses for the current MMIS APD', () => {
+    expect(
+      selectPreviousActivityExpensesTotalsMMIS({
+        apd: {
+          data: {
+            previousActivities: {
+              actualExpenditures: {
+                2014: {
+                  ddi: {
+                    50: { federalActual: 20, totalApproved: 200 },
+                    75: { federalActual: 30, totalApproved: 300 },
+                    90: { federalActual: 40, totalApproved: 400 }
+                  },
+                  mando: {
+                    50: { federalActual: 20, totalApproved: 200 },
+                    75: { federalActual: 30, totalApproved: 300 }
+                  }
+                },
+                2015: {
+                  ddi: {
+                    50: { federalActual: 10, totalApproved: 100 },
+                    75: { federalActual: 15, totalApproved: 100 },
+                    90: { federalActual: 20, totalApproved: 100 }
+                  },
+                  mando: {
+                    50: { federalActual: 10, totalApproved: 100 },
+                    75: { federalActual: 15, totalApproved: 100 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      })
+    ).toEqual({
+      2014: { actual: 90, approved: 685 },
+      2015: { actual: 45, approved: 215 }
+    });
+  });
+
   it('selects the previous activity summary for the current APD', () => {
     expect(
       selectPreviousActivitySummary({
@@ -187,7 +228,7 @@ describe('APD selectors', () => {
 
   it('selects previous MMIS activity costs for the current APD', () => {
     expect(
-      selectPreviousMMISActivities({
+      selectPreviousMMISActivitiesHITECH({
         apd: {
           data: {
             previousActivities: {

@@ -64,7 +64,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="approved-total-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 50);
   });
 
   test('handles changing a 50/50 actual expense', () => {
@@ -72,7 +72,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="actual-federal-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 50);
   });
 
   test('handles changing a 75/25 approved expense', () => {
@@ -80,7 +80,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="approved-total-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 75);
   });
 
   test('handles changing a 75/25 actual expense', () => {
@@ -88,7 +88,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="actual-federal-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 75);
   });
 
   test('handles changing a 90/10 approved expense', () => {
@@ -96,7 +96,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="approved-total-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 90);
   });
 
   test('handles changing a 90/10 actual expense', () => {
@@ -104,7 +104,7 @@ describe('apd previous activity table, mmis component', () => {
       .find('DollarField[name="actual-federal-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 90);
   });
 
   test('maps state to props', () => {
