@@ -1,11 +1,11 @@
 import Joi from 'joi';
 
-const titleSchema = Joi.string().required().messages({
+const titleSchema = Joi.string().trim().required().messages({
   'string.empty': 'Provide a personnel title.',
   'string.base': 'Provide a personnel title.',
   'string.format': 'Provide a personnel title.'
 });
-const descriptionSchema = Joi.string().required().messages({
+const descriptionSchema = Joi.string().trim().required().messages({
   'string.empty': 'Provide a personnel description.',
   'string.base': 'Provide a personnel description.',
   'string.format': 'Provide a personnel description.'
