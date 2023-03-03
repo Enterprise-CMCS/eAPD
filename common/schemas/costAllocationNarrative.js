@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 export const costAllocationMethodologySchema = Joi.string()
   .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
   .min(1)
   .required()
   .messages({

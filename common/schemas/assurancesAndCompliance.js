@@ -6,7 +6,7 @@ const complianceSchema = Joi.object({
     'boolean.empty': 'Select yes or no',
     'boolean.required': 'Select yes or no'
   }),
-  title: Joi.string().required(),
+  title: Joi.string().trim().required(),
   explanation: Joi.alternatives().conditional('checked', {
     is: false,
     then: Joi.string().trim().min(1).required().label('explanation').messages({
