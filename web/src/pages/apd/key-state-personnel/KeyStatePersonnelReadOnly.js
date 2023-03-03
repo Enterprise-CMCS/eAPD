@@ -11,7 +11,7 @@ const ApdStateProfile = ({ keyStatePersonnel, apdType }) => {
     hasCosts ? (
       <div className="ds-u-padding-top--1">
         {Object.keys(costs).map(year => (
-          <Fragment>
+          <Fragment key={year}>
             <div key={year} className="ds-u-padding-top--1">
               <strong>FFY {year} Cost: </strong>
               <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
