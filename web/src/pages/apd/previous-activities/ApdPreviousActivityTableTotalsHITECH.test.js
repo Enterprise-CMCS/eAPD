@@ -10,7 +10,6 @@ describe('apd previous activity table, grand total component', () => {
   const state = {
     apd: {
       data: {
-        apdType: 'HITECH',
         previousActivities: {
           actualExpenditures: {
             1: {
@@ -60,7 +59,6 @@ describe('apd previous activity table, grand total component', () => {
   };
 
   const props = {
-    apdType: 'HITECH',
     totals: {
       1: {
         actual: 1090,

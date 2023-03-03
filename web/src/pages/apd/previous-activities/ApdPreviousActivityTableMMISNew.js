@@ -39,8 +39,8 @@ const ApdPreviousActivityTableMMISNew = ({
     },
     {
       ffp: 75,
-      fundingTypeHeader: 'DDI', // Change testing seed, post.mmis.data.js, migrate?, joi schema -> /common/schemas
-      fundingTypeSchema: 'ddi' // yarn make-migrate mongoose-name /api/migrations
+      fundingTypeHeader: 'DDI',
+      fundingTypeSchema: 'ddi'
     },
     {
       ffp: 75,

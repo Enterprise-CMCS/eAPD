@@ -2,14 +2,14 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as ApdPreviousActivityTableMMISOld,
+  plain as ApdPreviousActivityTableMMISNew,
   mapStateToProps,
   mapDispatchToProps
-} from './ApdPreviousActivityTableMMISOld';
+} from './ApdPreviousActivityTableMMISNew';
 
 import {
-  setPreviousActivityFederalActualExpenseforMMISOld,
-  setPreviousActivityApprovedExpenseforMMISOld
+  setPreviousActivityFederalActualExpenseforMMISNew,
+  setPreviousActivityApprovedExpenseforMMISNew
 } from '../../../redux/actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
@@ -55,12 +55,12 @@ describe('apd previous activity table, mmis component', () => {
 
   test('renders correctly', () => {
     expect(
-      shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+      shallow(<ApdPreviousActivityTableMMISNew {...props} />)
     ).toMatchSnapshot();
   });
 
   test('handles changing a 50/50 approved expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="approved-total-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -68,7 +68,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 50/50 actual expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="actual-federal-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -76,7 +76,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 75/25 approved expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="approved-total-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -84,7 +84,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 75/25 actual expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="actual-federal-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -92,7 +92,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 90/10 approved expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="approved-total-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -100,7 +100,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 90/10 actual expense', () => {
-    shallow(<ApdPreviousActivityTableMMISOld {...props} />)
+    shallow(<ApdPreviousActivityTableMMISNew {...props} />)
       .find('DollarField[name="actual-federal-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -145,8 +145,8 @@ describe('apd previous activity table, mmis component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setActual: setPreviousActivityFederalActualExpenseforMMISOld,
-      setApproved: setPreviousActivityApprovedExpenseforMMISOld
+      setActual: setPreviousActivityFederalActualExpenseforMMISNew,
+      setApproved: setPreviousActivityApprovedExpenseforMMISNew
     });
   });
 });
