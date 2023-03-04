@@ -6,7 +6,7 @@ const Joi = JoiImport.extend(DateExtension);
 const milestonesSchema = Joi.object({
   id: Joi.any(),
   key: Joi.any(),
-  milestone: Joi.string().required().messages({
+  milestone: Joi.string().trim().required().messages({
     'string.base': 'Milestone is required.',
     'string.empty': 'Milestone is required.'
   }),
