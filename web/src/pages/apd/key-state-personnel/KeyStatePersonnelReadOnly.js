@@ -111,7 +111,8 @@ const ApdStateProfile = ({ keyStatePersonnel, apdType }) => {
       <p>
         {address1}
         <br />
-        {!!address2 && address2 && <br />}
+        {!!address2 && address2}
+        {!!address2 && <br />}
         {city}, {state} {zip}
       </p>
     );
