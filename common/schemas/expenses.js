@@ -16,7 +16,7 @@ const expensesSchema = Joi.object({
       'any.default': 'Select a category.',
       'any.only': 'Select a category.'
     }),
-  description: Joi.string().required().messages({
+  description: Joi.string().trim().required().messages({
     'string.base':
       'Provide a description of the selected non-personal category.',
     'string.empty':
