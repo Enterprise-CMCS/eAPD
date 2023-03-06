@@ -478,7 +478,7 @@ const invalidHitechApdOverview = {
   narrativeHIE: '',
   narrativeMMIS: '',
   updateStatus: {
-    isUpdateAPD: null,
+    isUpdateAPD: false,
     annualUpdate: false,
     asNeededUpdate: false
   }
@@ -963,10 +963,11 @@ const mockHitechApdRandomInvalid = {
   name: 'Test APD',
   years: ['2022', '2023'],
   apdOverview: {
-    programOverview: 'abc',
-    narrativeHIT: '',
-    narrativeHIE: 'abc',
-    narrativeMMIS: 'abc'
+    updateStatus: {
+      isUpdateAPD: false,
+      annualUpdate: false,
+      asNeededUpdate: false
+    }
   },
   keyStatePersonnel: {
     medicaidDirector: {
@@ -2086,7 +2087,7 @@ const expectedErrorsMockHitechApdRandom = [
   {
     section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Provide a summary of HIT-funded activities.'
+    fieldDescription: 'Select an update type.'
   },
   {
     section: 'Key State Personnel',
