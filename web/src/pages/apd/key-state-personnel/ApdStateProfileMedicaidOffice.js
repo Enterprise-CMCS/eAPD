@@ -24,7 +24,7 @@ import {
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
-import { keyPersonnelSchema as schema } from '@cms-eapd/common';
+import { keyMedicaidDirectorAndOfficeSchema as schema } from '@cms-eapd/common';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
