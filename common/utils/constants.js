@@ -39,3 +39,14 @@ export const UPDATE_STATUS_LABEL_MAPPING = {
   annualUpdate: 'Annual Update',
   asNeededUpdate: 'As-Needed Update'
 };
+
+function returnArrayOfCheckBoxes(obj) {
+  var array = Object.keys(obj),
+    index = array.indexOf(obj.otherMedicaidBusinessAreas);
+  array.splice(index, 1);
+  return array;
+}
+
+export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
+);
