@@ -21,6 +21,10 @@ td {
   vertical-align: top;
 }
 
+#summary-budget-null1 {
+  background-color: transparent;
+}
+
 .budget-table {
   font-size: 12px;
   input,
@@ -206,6 +210,14 @@ tr.budget-table--row__primary-header {
 
 .indent-title {
   padding-left: 3em;
+}
+
+.budget-table--col-divider__right {
+  border-right: 3px solid #d6d7d9;
+}
+
+.budget-table--col-divider__left {
+  border-left: 3px solid #d6d7d9;
 }
 
 /* Custom borders to support highlighted rows for validation */
