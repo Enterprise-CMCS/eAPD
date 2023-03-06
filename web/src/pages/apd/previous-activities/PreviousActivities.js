@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
-import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis ';
+import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis';
 import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTable';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
 import ApdPreviousActivityTableTotalsMMIS from './ApdPreviousActivityTableTotalsMMIS';

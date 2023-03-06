@@ -5,7 +5,7 @@ import {
   plain as HitechApdPreviousActivityMmis,
   mapStateToProps,
   mapDispatchToProps
-} from './HitechApdPreviousActivityMmis ';
+} from './HitechApdPreviousActivityMmis';
 
 import {
   setPreviousActivityFederalActualExpenseforMMISOld,

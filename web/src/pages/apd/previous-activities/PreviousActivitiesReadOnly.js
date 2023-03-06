@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
-import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis ';
+import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
 
 import {
