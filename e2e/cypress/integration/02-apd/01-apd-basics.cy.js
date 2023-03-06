@@ -202,7 +202,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
           parent: 'Executive Summary',
           label: 'Activities Summary',
           subnav: [
-            '#executive-summary-summary',
+            '#executive-overview-summary',
+            '#executive-activities-summary',
             '#executive-summary-budget-table'
           ]
         }
@@ -243,7 +244,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       );
       cy.goToExecutiveSummary();
 
-      cy.get('#executive-summary-summary')
+      cy.get('#executive-activities-summary')
         .parent()
         .contains('div', 'Activity 1: Program Administration')
         .parent()
