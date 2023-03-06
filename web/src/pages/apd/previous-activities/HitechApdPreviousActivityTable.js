@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import {
-  setPreviousActivityFederalActualExpenseforMMISOld,
-  setPreviousActivityApprovedExpenseforMMISOld
+  setPreviousActivityFederalActualExpense,
+  setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousMMISActivitiesHITECH } from '../../../redux/selectors/apd.selectors';
 
-const HitechApdPreviousActivityMmis = ({
+const HitechApdPreviousActivityTable = ({
   isViewOnly,
   previousActivityExpenses,
   setActual,
@@ -31,18 +31,42 @@ const HitechApdPreviousActivityMmis = ({
     };
   };
 
+  const tables = [
+    {
+      ffp: 90,
+      fundingTypeHeader: 'HIT + HIE ',
+      fundingTypeSchema: 'hithie'
+    },
+    {
+      ffp: 90,
+      fundingTypeHeader: 'MMIS ',
+      fundingTypeSchema: 'mmis'
+    },
+    {
+      ffp: 75,
+      fundingTypeHeader: 'MMIS ',
+      fundingTypeSchema: 'mmis'
+    },
+    {
+      ffp: 50,
+      fundingTypeHeader: 'MMIS ',
+      fundingTypeSchema: 'mmis'
+    }
+  ];
+
   return (
     <Fragment>
-      {[90, 75, 50].map(level => (
-        <table key={level} className="budget-table">
+      {tables.map(level => (
+        <table key={level.ffp} className="budget-table">
           <caption className="ds-h4">
-            MMIS {TABLE_HEADERS.federal(level)}
+            {level.fundingTypeHeader}
+            {TABLE_HEADERS.federal(level.ffp)}
           </caption>
           <thead>
             <tr>
               <td className="th" aria-hidden="true" />
               <th
-                id={`prev_act_mmis${level}_total_approved`}
+                id={`prev_act_${level.fundingTypeSchema}${level.ffp}_total_approved`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
@@ -50,14 +74,14 @@ const HitechApdPreviousActivityMmis = ({
               </th>
 
               <th
-                id={`prev_act_mmis${level}_federal_approved`}
+                id={`prev_act_${level.fundingTypeSchema}${level.ffp}_federal_approved`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
-                {TABLE_HEADERS.approved(level)}
+                {TABLE_HEADERS.approved(level.ffp)}
               </th>
               <th
-                id={`prev_act_mmis${level}_federal_actual`}
+                id={`prev_act_${level.fundingTypeSchema}${level.ffp}_federal_actual`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
@@ -67,18 +91,22 @@ const HitechApdPreviousActivityMmis = ({
           </thead>
           <tbody>
             {years.map(year => {
-              const expenses = previousActivityExpenses[year][level];
-              const federalApproved = (expenses.totalApproved * level) / 100;
+              const expenses = previousActivityExpenses[year][level.ffp];
+              const federalApproved =
+                (expenses.totalApproved * level.ffp) / 100;
 
               return (
                 <tr key={year}>
-                  <th id={`prev_act_mmis_row_${year}_${level}`} scope="row">
+                  <th
+                    id={`prev_act_${level.fundingTypeSchema}_row_${year}_${level.ffp}`}
+                    scope="row"
+                  >
                     {TABLE_HEADERS.ffy(year)}
                   </th>
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level}`}
+                    headers={`prev_act_${level.fundingTypeSchema}_row_${year}_${level.ffp}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
-                    data-cy={`prev_act_mmis${level}_total_approved`}
+                    data-cy={`prev_act_${level.fundingTypeSchema}${level.ffp}_total_approved`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.totalApproved}</Dollars>
@@ -86,29 +114,35 @@ const HitechApdPreviousActivityMmis = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`approved total computable Medicaid funding for MMIS at the ${level}/${
+                        label={`approved total computable Medicaid funding for ${
+                          level.fundingTypeHeader
+                        } at the ${level.ffp}/${
                           100 - level
                         } level for FFY ${year}, state plus federal`}
                         labelClassName="ds-u-visibility--screen-reader"
-                        name={`approved-total-mmis${level}-${year}`}
+                        name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.totalApproved}
-                        onChange={getApprovedHandler(year, level)}
+                        onChange={getApprovedHandler(
+                          year,
+                          level.ffp,
+                          level.fundingTypeSchema
+                        )}
                       />
                     )}
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level}`}
+                    headers={`prev_act_${level.fundingTypeSchema}_row_${year}_${level.ffp}`}
                     className="budget-table--number"
-                    data-cy={`prev_act_mmis${level}_federal_approved_${year}`}
+                    data-cy={`prev_act_${level.fundingTypeSchema}${level.ffp}_federal_approved_${year}`}
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level}`}
+                    headers={`prev_act_${level.fundingTypeSchema}_row_${year}_${level.ffp}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
-                    data-cy={`prev_act_mmis${level}_federal_actual`}
+                    data-cy={`prev_act_${level.fundingTypeSchema}${level.ffp}_federal_actual`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.federalActual}</Dollars>
@@ -116,13 +150,19 @@ const HitechApdPreviousActivityMmis = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`actual ffp expenditures for MMIS at the ${level}/${
+                        label={`actual ffp expenditures for ${
+                          level.fundingTypeHeader
+                        } at the ${level.ffp}/${
                           100 - level
                         } level for FFY ${year}`}
                         labelClassName="ds-u-visibility--screen-reader"
-                        name={`actual-federal-mmis${level}-${year}`}
+                        name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.federalActual}
-                        onChange={getActualsHandler(year, level)}
+                        onChange={getActualsHandler(
+                          year,
+                          level.ffp,
+                          level.fundingTypeSchema
+                        )}
                       />
                     )}
                   </td>
@@ -136,14 +176,14 @@ const HitechApdPreviousActivityMmis = ({
   );
 };
 
-HitechApdPreviousActivityMmis.propTypes = {
+HitechApdPreviousActivityTable.propTypes = {
   isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
   setActual: PropTypes.func.isRequired,
   setApproved: PropTypes.func.isRequired
 };
 
-HitechApdPreviousActivityMmis.defaultProps = {
+HitechApdPreviousActivityTable.defaultProps = {
   isViewOnly: false
 };
 
@@ -152,17 +192,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setActual: setPreviousActivityFederalActualExpenseforMMISOld,
-  setApproved: setPreviousActivityApprovedExpenseforMMISOld
+  setActual: setPreviousActivityFederalActualExpense,
+  setApproved: setPreviousActivityApprovedExpense
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HitechApdPreviousActivityMmis);
+)(HitechApdPreviousActivityTable);
 
 export {
-  HitechApdPreviousActivityMmis as plain,
+  HitechApdPreviousActivityTable as plain,
   mapStateToProps,
   mapDispatchToProps
 };

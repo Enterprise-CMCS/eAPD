@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import {
-  setPreviousActivityFederalActualExpenseforMMISNew,
-  setPreviousActivityApprovedExpenseforMMISNew
+  setPreviousActivityFederalActualExpense,
+  setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousMMISActivitiesMMIS } from '../../../redux/selectors/apd.selectors';
@@ -200,8 +200,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setActual: setPreviousActivityFederalActualExpenseforMMISNew,
-  setApproved: setPreviousActivityApprovedExpenseforMMISNew
+  setActual: setPreviousActivityFederalActualExpense,
+  setApproved: setPreviousActivityApprovedExpense
 };
 
 export default connect(

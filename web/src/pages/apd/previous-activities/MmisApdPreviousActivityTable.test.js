@@ -8,8 +8,8 @@ import {
 } from './MmisApdPreviousActivityTable';
 
 import {
-  setPreviousActivityFederalActualExpenseforMMISNew,
-  setPreviousActivityApprovedExpenseforMMISNew
+  setPreviousActivityFederalActualExpense,
+  setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
@@ -211,8 +211,8 @@ describe('apd previous activity table, mmis component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setActual: setPreviousActivityFederalActualExpenseforMMISNew,
-      setApproved: setPreviousActivityApprovedExpenseforMMISNew
+      setActual: setPreviousActivityFederalActualExpense,
+      setApproved: setPreviousActivityApprovedExpense
     });
   });
 });
