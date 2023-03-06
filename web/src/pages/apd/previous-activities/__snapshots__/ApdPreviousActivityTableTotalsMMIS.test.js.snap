@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd previous activity table, grand total component renders correctly 1`] = `
+<table
+  className="budget-table"
+>
+  <caption
+    className="ds-h4"
+  >
+    Grand totals: Federal MMIS
+  </caption>
+  <thead>
+    <tr
+      className="budget-table--row__primary-header"
+    >
+      <th
+        colSpan="3"
+        scope="col"
+      >
+        MMIS Grand Totals
+      </th>
+    </tr>
+    <tr>
+      <th
+        id="prev_act_totals_ffy"
+      >
+        <span
+          className="ds-u-visibility--screen-reader"
+        >
+          Year
+        </span>
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_total_approved"
+      >
+        FFP Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_total_actual"
+      >
+        FFP Actual Expenditures
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="1"
+    >
+      <th
+        id="prev_act_total_row_1"
+      >
+        FFY 1
+      </th>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_1 prev_act_total_approved"
+      >
+        <Dollars>
+          3318
+        </Dollars>
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_1 prev_act_total_actual"
+      >
+        <Dollars>
+          8010
+        </Dollars>
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <th
+        id="prev_act_total_row_2"
+      >
+        FFY 2
+      </th>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_2 prev_act_total_approved"
+      >
+        <Dollars>
+          6180
+        </Dollars>
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_2 prev_act_total_actual"
+      >
+        <Dollars>
+          8100
+        </Dollars>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

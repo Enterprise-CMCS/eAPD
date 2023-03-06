@@ -2,7 +2,7 @@ import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.MMIS,
-  name: 'MMIS IAPD Seed Test existing ddi',
+  name: 'MMIS IAPD',
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025'],
   apdOverview: {

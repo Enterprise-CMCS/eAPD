@@ -130,7 +130,7 @@ const ApdPreviousActivityTableMMISNew = ({
                           100 - level.ffp
                         } level for FFY ${year}, state plus federal`}
                         labelClassName="ds-u-visibility--screen-reader"
-                        name={`approved-total-mmis${level.ffp}-${year}`}
+                        name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.totalApproved}
                         onChange={getApprovedHandler(
                           year,
@@ -164,7 +164,7 @@ const ApdPreviousActivityTableMMISNew = ({
                           level.ffp
                         }/${100 - level.ffp} level for FFY ${year}`}
                         labelClassName="ds-u-visibility--screen-reader"
-                        name={`actual-federal-mmis${level.ffp}-${year}`}
+                        name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.federalActual}
                         onChange={getActualsHandler(
                           year,
