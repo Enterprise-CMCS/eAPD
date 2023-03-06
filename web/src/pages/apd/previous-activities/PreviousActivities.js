@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
-import ApdPreviousActivityTableMMISOld from './ApdPreviousActivityTableMMISOld';
-import ApdPreviousActivityTableMMISNew from './ApdPreviousActivityTableMMISNew';
+import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis ';
+import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTable';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
 import ApdPreviousActivityTableTotalsMMIS from './ApdPreviousActivityTableTotalsMMIS';
 import Waypoint from '../../../components/ConnectedWaypoint';
@@ -56,10 +56,10 @@ const PreviousActivities = ({
           resource="previousActivities.actualExpenses"
         >
           {apdType === 'HITECH' && <ApdPreviousActivityTableHI />}
-          {apdType === 'HITECH' && <ApdPreviousActivityTableMMISOld />}
+          {apdType === 'HITECH' && <HitechApdPreviousActivityMmis />}
           {apdType === 'HITECH' && <ApdPreviousActivityTableTotalsHITECH />}
 
-          {apdType === 'MMIS' && <ApdPreviousActivityTableMMISNew />}
+          {apdType === 'MMIS' && <MmisApdPreviousActivityTable />}
           {apdType === 'MMIS' && <ApdPreviousActivityTableTotalsMMIS />}
         </Subsection>
       </Section>

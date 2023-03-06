@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
-import ApdPreviousActivityTableMMISOld from './ApdPreviousActivityTableMMISOld';
+import HitechApdPreviousActivityMmis from './HitechApdPreviousActivityMmis ';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
 
 import {
@@ -21,7 +21,7 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <hr className="subsection-rule" />
       <h3>Actual Expenditures</h3>
       {apdType === 'HITECH' && <ApdPreviousActivityTableHI isViewOnly />}
-      <ApdPreviousActivityTableMMISOld isViewOnly />
+      <HitechApdPreviousActivityMmis isViewOnly />
       <ApdPreviousActivityTableTotalsHITECH />
     </div>
   );

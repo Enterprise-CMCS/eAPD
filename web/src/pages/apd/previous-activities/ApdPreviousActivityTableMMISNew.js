@@ -11,7 +11,7 @@ import {
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousMMISActivitiesMMIS } from '../../../redux/selectors/apd.selectors';
 
-const ApdPreviousActivityTableMMISNew = ({
+const MmisApdPreviousActivityTable = ({
   isViewOnly,
   previousActivityExpenses,
   setActual,
@@ -184,14 +184,14 @@ const ApdPreviousActivityTableMMISNew = ({
   );
 };
 
-ApdPreviousActivityTableMMISNew.propTypes = {
+MmisApdPreviousActivityTable.propTypes = {
   isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
   setActual: PropTypes.func.isRequired,
   setApproved: PropTypes.func.isRequired
 };
 
-ApdPreviousActivityTableMMISNew.defaultProps = {
+MmisApdPreviousActivityTable.defaultProps = {
   isViewOnly: false
 };
 
@@ -207,10 +207,10 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ApdPreviousActivityTableMMISNew);
+)(MmisApdPreviousActivityTable);
 
 export {
-  ApdPreviousActivityTableMMISNew as plain,
+  MmisApdPreviousActivityTable as plain,
   mapStateToProps,
   mapDispatchToProps
 };
