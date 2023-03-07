@@ -4,15 +4,20 @@ import { connect } from 'react-redux';
 
 import Dollars from '../../../components/Dollars';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousActivityExpensesTotalsHITECH } from '../../../redux/selectors/apd.selectors';
+import { selectPreviousActivityExpensesTotalsMMIS } from '../../../redux/selectors/apd.selectors';
 
-const ApdPreviousActivityTableTotalsHITECH = ({ totals }) => {
+const MmisPreviousActivityTotalsTable = ({ totals }) => {
   const years = Object.keys(totals);
 
   return (
     <table className="budget-table">
-      <caption className="ds-h4">Grand totals: Federal HIT, HIE, MMIS</caption>
+      <caption className="ds-h4">Grand totals: Federal MMIS</caption>
       <thead>
+        <tr className="budget-table--row__primary-header">
+          <th scope="col" colSpan="3">
+            {'MMIS Grand Totals'}
+          </th>
+        </tr>
         <tr>
           <th id="prev_act_totals_ffy">
             <span className="ds-u-visibility--screen-reader">Year</span>
@@ -55,17 +60,14 @@ const ApdPreviousActivityTableTotalsHITECH = ({ totals }) => {
   );
 };
 
-ApdPreviousActivityTableTotalsHITECH.propTypes = {
+MmisPreviousActivityTotalsTable.propTypes = {
   totals: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  totals: selectPreviousActivityExpensesTotalsHITECH(state)
+  totals: selectPreviousActivityExpensesTotalsMMIS(state)
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(ApdPreviousActivityTableTotalsHITECH);
+export default connect(mapStateToProps, null)(MmisPreviousActivityTotalsTable);
 
-export { ApdPreviousActivityTableTotalsHITECH as plain, mapStateToProps };
+export { MmisPreviousActivityTotalsTable as plain, mapStateToProps };

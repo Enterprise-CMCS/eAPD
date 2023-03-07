@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import HitechApdPreviousActivityTables from './HitechApdPreviousActivityTables';
-import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
+import HitechPreviousActivityTotalsTable from './HitechPreviousActivityTotalsTable';
 import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTables';
-import ApdPreviousActivityTableTotalsMMIS from './ApdPreviousActivityTableTotalsMMIS';
+import MmisPreviousActivityTotalsTable from './MmisPreviousActivityTotalsTable';
 
 import {
   selectPreviousActivitySummary,
@@ -22,12 +22,10 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <hr className="subsection-rule" />
       <h3>Actual Expenditures</h3>
       {apdType === 'HITECH' && <HitechApdPreviousActivityTables isViewOnly />}
-      {apdType === 'HITECH' && <ApdPreviousActivityTableTotalsHITECH />}
+      {apdType === 'HITECH' && <HitechPreviousActivityTotalsTable />}
 
-      {apdType === 'HITECH' && <MmisApdPreviousActivityTable isViewOnly />}
-      {apdType === 'HITECH' && (
-        <ApdPreviousActivityTableTotalsMMIS isViewOnly />
-      )}
+      {apdType === 'MMIS' && <MmisApdPreviousActivityTable isViewOnly />}
+      {apdType === 'MMIS' && <MmisPreviousActivityTotalsTable isViewOnly />}
     </div>
   );
 };

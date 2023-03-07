@@ -2,9 +2,9 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as ApdPreviousActivityTableTotalsMMIS,
+  plain as MmisPreviousActivityTotalsTable,
   mapStateToProps
-} from './ApdPreviousActivityTableTotalsMMIS';
+} from './MmisPreviousActivityTotalsTable';
 
 describe('apd previous activity table, grand total component', () => {
   const state = {
@@ -85,7 +85,7 @@ describe('apd previous activity table, grand total component', () => {
 
   test('renders correctly', () => {
     expect(
-      shallow(<ApdPreviousActivityTableTotalsMMIS {...props} />)
+      shallow(<MmisPreviousActivityTotalsTable {...props} />)
     ).toMatchSnapshot();
   });
 
