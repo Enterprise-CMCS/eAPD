@@ -2,7 +2,9 @@ import { EDIT_APD } from './symbols';
 import {
   setPreviousActivitySummary,
   setPreviousActivityApprovedExpense,
-  setPreviousActivityFederalActualExpense
+  setPreviousActivityFederalActualExpense,
+  setPreviousActivityFederalActualExpenseForHITandHIE,
+  setPreviousActivityApprovedExpenseForHITandHIE
 } from './previousActivities';
 
 describe('APD edit actions for previous activities', () => {
@@ -16,7 +18,7 @@ describe('APD edit actions for previous activities', () => {
 
   it('dispatches an action for setting the total approved expenses for HIT/HIE in a fiscal year', () => {
     expect(
-      setPreviousActivityApprovedExpense('year', 'expense', 'hithie')
+      setPreviousActivityApprovedExpenseForHITandHIE('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
       path: '/previousActivities/actualExpenditures/year/hithie/totalApproved',
@@ -106,7 +108,7 @@ describe('APD edit actions for previous activities', () => {
 
   it('dispatches an action for setting the actual federal expenses for HIT/HIE in a fiscal year', () => {
     expect(
-      setPreviousActivityFederalActualExpense('year', 'expense', 'hithie')
+      setPreviousActivityFederalActualExpenseForHITandHIE('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
       path: '/previousActivities/actualExpenditures/year/hithie/federalActual',
