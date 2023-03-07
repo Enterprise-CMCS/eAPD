@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import HitechApdPreviousActivityTable from './HitechApdPreviousActivityTable';
-import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTable';
+import HitechApdPreviousActivityTables from './HitechApdPreviousActivityTables';
+import MmisApdPreviousActivityTables from './MmisApdPreviousActivityTables';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
 import ApdPreviousActivityTableTotalsMMIS from './ApdPreviousActivityTableTotalsMMIS';
 import Waypoint from '../../../components/ConnectedWaypoint';
@@ -54,10 +54,10 @@ const PreviousActivities = ({
           id="prev-activities-table"
           resource="previousActivities.actualExpenses"
         >
-          {apdType === 'HITECH' && <HitechApdPreviousActivityTable />}
+          {apdType === 'HITECH' && <HitechApdPreviousActivityTables />}
           {apdType === 'HITECH' && <ApdPreviousActivityTableTotalsHITECH />}
 
-          {apdType === 'MMIS' && <MmisApdPreviousActivityTable />}
+          {apdType === 'MMIS' && <MmisApdPreviousActivityTables />}
           {apdType === 'MMIS' && <ApdPreviousActivityTableTotalsMMIS />}
         </Subsection>
       </Section>

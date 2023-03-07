@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import HitechApdPreviousActivityTable from './HitechApdPreviousActivityTable';
+import HitechApdPreviousActivityTables from './HitechApdPreviousActivityTables';
 import ApdPreviousActivityTableTotalsHITECH from './ApdPreviousActivityTableTotalsHITECH';
-import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTable';
+import MmisApdPreviousActivityTable from './MmisApdPreviousActivityTables';
 import ApdPreviousActivityTableTotalsMMIS from './ApdPreviousActivityTableTotalsMMIS';
 
 import {
@@ -21,7 +21,7 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
       <hr className="subsection-rule" />
       <h3>Actual Expenditures</h3>
-      {apdType === 'HITECH' && <HitechApdPreviousActivityTable isViewOnly />}
+      {apdType === 'HITECH' && <HitechApdPreviousActivityTables isViewOnly />}
       {apdType === 'HITECH' && <ApdPreviousActivityTableTotalsHITECH />}
 
       {apdType === 'HITECH' && <MmisApdPreviousActivityTable isViewOnly />}

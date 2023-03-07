@@ -11,7 +11,7 @@ import {
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousMMISActivitiesHITECH } from '../../../redux/selectors/apd.selectors';
 
-const HitechApdPreviousActivityTable = ({
+const HitechApdPreviousActivityTables = ({
   isViewOnly,
   previousActivityExpenses,
   setActual,
@@ -176,14 +176,14 @@ const HitechApdPreviousActivityTable = ({
   );
 };
 
-HitechApdPreviousActivityTable.propTypes = {
+HitechApdPreviousActivityTables.propTypes = {
   isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
   setActual: PropTypes.func.isRequired,
   setApproved: PropTypes.func.isRequired
 };
 
-HitechApdPreviousActivityTable.defaultProps = {
+HitechApdPreviousActivityTables.defaultProps = {
   isViewOnly: false
 };
 
@@ -199,10 +199,10 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HitechApdPreviousActivityTable);
+)(HitechApdPreviousActivityTables);
 
 export {
-  HitechApdPreviousActivityTable as plain,
+  HitechApdPreviousActivityTables as plain,
   mapStateToProps,
   mapDispatchToProps
 };

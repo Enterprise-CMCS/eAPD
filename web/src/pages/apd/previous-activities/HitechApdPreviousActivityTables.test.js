@@ -2,10 +2,10 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as HitechApdPreviousActivityTable,
+  plain as HitechApdPreviousActivityTables,
   mapStateToProps,
   mapDispatchToProps
-} from './HitechApdPreviousActivityTable';
+} from './HitechApdPreviousActivityTables';
 
 import {
   setPreviousActivityFederalActualExpense,
@@ -55,12 +55,12 @@ describe('apd previous activity table, mmis component', () => {
 
   test('renders correctly', () => {
     expect(
-      shallow(<HitechApdPreviousActivityTable {...props} />)
+      shallow(<HitechApdPreviousActivityTables {...props} />)
     ).toMatchSnapshot();
   });
 
   test('handles changing a 50/50 approved expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -68,7 +68,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 50/50 actual expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -76,7 +76,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 75/25 approved expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -84,7 +84,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 75/25 actual expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -92,7 +92,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 90/10 approved expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
@@ -100,7 +100,7 @@ describe('apd previous activity table, mmis component', () => {
   });
 
   test('handles changing a 90/10 actual expense', () => {
-    shallow(<HitechApdPreviousActivityTable {...props} />)
+    shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
