@@ -19,7 +19,7 @@ activitiesSummary:
     detail: >-
       Each activity is listed with its total cost and cost per FFY.
 budgetTable:
-  title: Program Budget Tables
+  title: Program Budget Table
   instruction:
     detail: >-
       Program budget tables are automatically computed for this APD. This table
