@@ -1040,7 +1040,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/common
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F common
 
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
