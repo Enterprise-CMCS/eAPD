@@ -117,7 +117,7 @@
   "defaultSummaryBudgetTotals": {
     "FFY 2023": ["$0", "$0", "$0"],
     "FFY 2024": ["$0", "$0", "$0"],
-    "Total": ["$0", "$0", "$0"]
+    "Activities Grand Total": ["$0", "$0", "$0"]
   },
 
   "defaultQFSByActivity": [
@@ -328,7 +328,7 @@
   "populatedSummaryBudgetTotals": {
     "FFY 2023": ["$262,872", "$664,302", "$927,174"],
     "FFY 2024": ["$408,539", "$623,581", "$1,032,120"],
-    "Total": ["$671,411", "$1,287,883", "$1,959,294"]
+    "Activities Grand Total": ["$671,411", "$1,287,883", "$1,959,294"]
   },
 
   "populatedQFSByActivity": [

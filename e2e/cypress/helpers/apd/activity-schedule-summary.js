@@ -75,7 +75,7 @@ export const testDefaultActivityScheduleSummary = function () {
 
     schedulePage
       .getActivityScheduleMilestoneTableName(0)
-      .should('eq', 'Activity 1: Program Administration Milestones');
+      .should('eq', 'Activity 1: Program Administration');
 
     schedulePage.getAllActivityScheduleMilestones(0).should('not.exist');
   });
