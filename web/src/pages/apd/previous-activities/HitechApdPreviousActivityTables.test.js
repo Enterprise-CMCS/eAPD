@@ -9,7 +9,9 @@ import {
 
 import {
   setPreviousActivityFederalActualExpense,
-  setPreviousActivityApprovedExpense
+  setPreviousActivityApprovedExpense,
+  setPreviousActivityFederalActualExpenseForHITandHIE,
+  setPreviousActivityApprovedExpenseForHITandHIE
 } from '../../../redux/actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
@@ -44,13 +46,17 @@ describe('apd previous activity table, mmis component', () => {
         }
       }
     },
-    setActual: jest.fn(),
-    setApproved: jest.fn()
+    setActualMmis: jest.fn(),
+    setApprovedMmis: jest.fn(),
+    setActualHitech: jest.fn(),
+    setApprovedHitech: jest.fn()
   };
 
   beforeEach(() => {
-    props.setActual.mockClear();
-    props.setApproved.mockClear();
+    props.setActualMmis.mockClear();
+    props.setApprovedMmis.mockClear();
+    props.setActualHitech.mockClear();
+    props.setApprovedHitech.mockClear();
   });
 
   test('renders correctly', () => {
@@ -59,52 +65,98 @@ describe('apd previous activity table, mmis component', () => {
     ).toMatchSnapshot();
   });
 
-  test('handles changing a 50/50 approved expense', () => {
+  test('handles changing a 50/50 approved expense hitech', () => {
+    shallow(<HitechApdPreviousActivityTables {...props} />)
+      .find('DollarField[name="approved-total-hithie90-1"]')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setApprovedHitech).toHaveBeenCalledWith('1', 'new value');
+  });
+
+  test('handles changing a 50/50 actual expense hitech', () => {
+    shallow(<HitechApdPreviousActivityTables {...props} />)
+      .find('DollarField[name="actual-federal-hithie90-1"]')
+      .simulate('change', { target: { value: 'new value' } });
+
+    expect(props.setActualHitech).toHaveBeenCalledWith('1', 'new value');
+  });
+
+  test('handles changing a 50/50 approved expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 50);
+    expect(props.setApprovedMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      50,
+      'mmis'
+    );
   });
 
-  test('handles changing a 50/50 actual expense', () => {
+  test('handles changing a 50/50 actual expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis50-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 50);
+    expect(props.setActualMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      50,
+      'mmis'
+    );
   });
 
-  test('handles changing a 75/25 approved expense', () => {
+  test('handles changing a 75/25 approved expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 75);
+    expect(props.setApprovedMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      75,
+      'mmis'
+    );
   });
 
-  test('handles changing a 75/25 actual expense', () => {
+  test('handles changing a 75/25 actual expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis75-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 75);
+    expect(props.setActualMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      75,
+      'mmis'
+    );
   });
 
-  test('handles changing a 90/10 approved expense', () => {
+  test('handles changing a 90/10 approved expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="approved-total-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 90);
+    expect(props.setApprovedMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      90,
+      'mmis'
+    );
   });
 
-  test('handles changing a 90/10 actual expense', () => {
+  test('handles changing a 90/10 actual expense mmis', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
       .find('DollarField[name="actual-federal-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
-    expect(props.setActual).toHaveBeenCalledWith('1', 'new value', 90);
+    expect(props.setActualMmis).toHaveBeenCalledWith(
+      '1',
+      'new value',
+      90,
+      'mmis'
+    );
   });
 
   test('maps state to props', () => {
@@ -145,8 +197,10 @@ describe('apd previous activity table, mmis component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setActual: setPreviousActivityFederalActualExpense,
-      setApproved: setPreviousActivityApprovedExpense
+      setActualMmis: setPreviousActivityFederalActualExpense,
+      setApprovedMmis: setPreviousActivityApprovedExpense,
+      setActualHitech: setPreviousActivityFederalActualExpenseForHITandHIE,
+      setApprovedHitech: setPreviousActivityApprovedExpenseForHITandHIE
     });
   });
 });

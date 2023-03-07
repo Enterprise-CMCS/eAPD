@@ -191,8 +191,8 @@ describe('APD selectors', () => {
         }
       })
     ).toEqual({
-      2014: { actual: 90, approved: 685 },
-      2015: { actual: 45, approved: 215 }
+      2014: { actual: 140, approved: 1010 },
+      2015: { actual: 70, approved: 340 }
     });
   });
 

@@ -73,12 +73,12 @@ describe('apd previous activity table, grand total component', () => {
   const props = {
     totals: {
       1: {
-        actual: 8010,
-        approved: 3318
+        actual: 8090,
+        approved: 3378
       },
       2: {
-        actual: 8100,
-        approved: 6180
+        actual: 8900,
+        approved: 6780
       }
     }
   };
