@@ -16,8 +16,8 @@ const DataRow = ({ category, data, title, groupTitle, apdType }) => (
         ? 'budget-table--subtotal budget-table--category-row_highlight-lighter'
         : ''
     } ${
-      (apdType === 'MMIS' && category === 'statePersonnel') ||
-      (apdType === 'MMIS' && category === 'contractors')
+      (apdType === APD_TYPE.MMIS && category === 'statePersonnel') ||
+      (apdType === APD_TYPE.MMIS && category === 'contractors')
         ? 'budget-table--category-row_highlight'
         : ''
     }`}

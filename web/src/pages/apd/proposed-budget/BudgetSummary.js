@@ -16,8 +16,8 @@ function DataRow({ category, data, title, apdType }) {
           : ''
       }
       ${
-        (apdType === 'MMIS' && category === 'statePersonnel') ||
-        (apdType === 'MMIS' && category === 'contractors')
+        (apdType === APD_TYPE.MMIS && category === 'statePersonnel') ||
+        (apdType === APD_TYPE.MMIS && category === 'contractors')
           ? 'budget-table--category-row_highlight'
           : ''
       }`}
@@ -108,7 +108,10 @@ HeaderRow.propTypes = {
 };
 
 const BudgetSummary = ({ activities, data, years, apdType }) => {
-  const orderedTotals = [{ total: data.combined.total }];
+  const orderedTotals = [];
+  data?.combined?.total
+    ? orderedTotals.push({ total: data.combined.total })
+    : null;
   years.forEach(year => orderedTotals.push({ [year]: data.combined[year] }));
 
   return (
@@ -213,6 +216,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
         </thead>
         <tbody>
           {orderedTotals.map((rowData, index) => {
+            console.log('rowData', rowData);
             const key = Object.keys(rowData)[0];
             return (
               <tr
