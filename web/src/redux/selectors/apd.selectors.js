@@ -105,13 +105,16 @@ export const selectPreviousActivityExpensesTotalsMMIS = createSelector(
         [ffy]: {
           actual: [75, 50].reduce(
             (sum, ffp) =>
-              sum + stringToNumber(expenses.mando[ffp].federalActual),
+              sum +
+              stringToNumber(expenses.mando[ffp].federalActual) +
+              stringToNumber(expenses.ddi[ffp].federalActual),
             stringToNumber(expenses.ddi[90].federalActual)
           ),
           approved: [75, 50].reduce(
             (sum, ffp) =>
               sum +
-              (stringToNumber(expenses.mando[ffp].totalApproved) * ffp) / 100,
+              (stringToNumber(expenses.mando[ffp].totalApproved) * ffp) / 100 +
+              (stringToNumber(expenses.ddi[ffp].totalApproved) * ffp) / 100,
             (stringToNumber(expenses.ddi[90].totalApproved) * 90) / 100
           )
         }

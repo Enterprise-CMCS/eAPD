@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import {
+  setPreviousActivityApprovedExpenseForHITandHIE,
+  setPreviousActivityFederalActualExpenseForHITandHIE,
   setPreviousActivityFederalActualExpense,
   setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
@@ -14,21 +16,27 @@ import { selectPreviousMMISActivitiesHITECH } from '../../../redux/selectors/apd
 const HitechApdPreviousActivityTables = ({
   isViewOnly,
   previousActivityExpenses,
-  setActual,
-  setApproved
+  setActualMmis,
+  setApprovedMmis,
+  setActualHitech,
+  setApprovedHitech
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
-  const getActualsHandler = (year, level) => {
-    return ({ target: { value } }) => {
-      setActual(year, value, level);
-    };
+  const getActualsHandlerMmis = (year, value, level, fundingType) => {
+    return setActualMmis(year, value, level, fundingType);
   };
 
-  const getApprovedHandler = (year, level) => {
-    return ({ target: { value } }) => {
-      setApproved(year, value, level);
-    };
+  const getApprovedHandlerMmis = (year, value, level, fundingType) => {
+    return setApprovedMmis(year, value, level, fundingType);
+  };
+
+  const getActualsHandlerHitech = (year, value) => {
+    return setActualHitech(year, value);
+  };
+
+  const getApprovedHandlerHitech = (year, value) => {
+    return setApprovedHitech(year, value);
   };
 
   const tables = [
@@ -122,11 +130,18 @@ const HitechApdPreviousActivityTables = ({
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.totalApproved}
-                        onChange={getApprovedHandler(
-                          year,
-                          level.ffp,
-                          level.fundingTypeSchema
-                        )}
+                        onChange={e => {
+                          if (level.fundingTypeSchema === 'hithie') {
+                            getApprovedHandlerHitech(year, e.target.value);
+                          } else {
+                            getApprovedHandlerMmis(
+                              year,
+                              e.target.value,
+                              level.ffp,
+                              level.fundingTypeSchema
+                            );
+                          }
+                        }}
                       />
                     )}
                   </td>
@@ -158,11 +173,18 @@ const HitechApdPreviousActivityTables = ({
                         labelClassName="ds-u-visibility--screen-reader"
                         name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.federalActual}
-                        onChange={getActualsHandler(
-                          year,
-                          level.ffp,
-                          level.fundingTypeSchema
-                        )}
+                        onChange={e => {
+                          if (level.fundingTypeSchema === 'hithie') {
+                            getActualsHandlerHitech(year, e.target.value);
+                          } else {
+                            getActualsHandlerMmis(
+                              year,
+                              e.target.value,
+                              level.ffp,
+                              level.fundingTypeSchema
+                            );
+                          }
+                        }}
                       />
                     )}
                   </td>
@@ -179,8 +201,10 @@ const HitechApdPreviousActivityTables = ({
 HitechApdPreviousActivityTables.propTypes = {
   isViewOnly: PropTypes.bool,
   previousActivityExpenses: PropTypes.object.isRequired,
-  setActual: PropTypes.func.isRequired,
-  setApproved: PropTypes.func.isRequired
+  setActualMmis: PropTypes.func.isRequired,
+  setApprovedMmis: PropTypes.func.isRequired,
+  setActualHitech: PropTypes.func.isRequired,
+  setApprovedHitech: PropTypes.func.isRequired
 };
 
 HitechApdPreviousActivityTables.defaultProps = {
@@ -192,8 +216,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setActual: setPreviousActivityFederalActualExpense,
-  setApproved: setPreviousActivityApprovedExpense
+  setActualMmis: setPreviousActivityFederalActualExpense,
+  setApprovedMmis: setPreviousActivityApprovedExpense,
+  setActualHitech: setPreviousActivityFederalActualExpenseForHITandHIE,
+  setApprovedHitech: setPreviousActivityApprovedExpenseForHITandHIE
 };
 
 export default connect(
