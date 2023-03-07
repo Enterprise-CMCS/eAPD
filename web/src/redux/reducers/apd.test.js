@@ -392,6 +392,22 @@ describe('APD reducer', () => {
               fte: {
                 1742: 1,
                 1743: 2
+              },
+              split: {
+                1742: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1743: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                }
+              },
+              medicaidShare: {
+                1742: 0,
+                1743: 0
               }
             }
           ]
@@ -483,6 +499,28 @@ describe('APD reducer', () => {
                 1741: 0,
                 1742: 1,
                 1743: 2
+              },
+              split: {
+                1741: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1742: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1743: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                }
+              },
+              medicaidShare: {
+                1741: 0,
+                1742: 0,
+                1743: 0
               }
             }
           ]
@@ -610,6 +648,28 @@ describe('APD reducer', () => {
                 1741: 0,
                 1742: 1,
                 1743: 2
+              },
+              split: {
+                1741: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1742: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1743: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                }
+              },
+              medicaidShare: {
+                1741: 0,
+                1742: 0,
+                1743: 0
               }
             }
           ]
@@ -737,6 +797,22 @@ describe('APD reducer', () => {
               fte: {
                 1742: 1,
                 1743: 2
+              },
+              split: {
+                1742: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                },
+                1743: {
+                  federal: 90,
+                  state: 10,
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                }
+              },
+              medicaidShare: {
+                1742: 0,
+                1743: 0
               }
             }
           ]
@@ -813,6 +889,215 @@ describe('APD reducer', () => {
     });
   });
 
+  it('should handle adding an MMIS APD year', () => {
+    const state = {
+      data: {
+        apdType: APD_TYPE.MMIS,
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1742: 1,
+                1743: 2
+              },
+              split: {
+                1742: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1743: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                }
+              },
+              medicaidShare: {
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
+        activities: [
+          {
+            statePersonnel: [
+              {
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            contractorResources: [
+              {
+                hourly: {
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            costAllocation: {
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
+          }
+        ],
+        years: ['1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
+      }
+    };
+
+    expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
+      data: {
+        apdType: APD_TYPE.MMIS,
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              split: {
+                1741: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1742: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1743: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                }
+              },
+              medicaidShare: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
+        activities: [
+          {
+            statePersonnel: [
+              {
+                years: {
+                  1741: { amt: null, perc: null },
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1741: null,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            contractorResources: [
+              {
+                hourly: {
+                  1741: { hours: null, rate: null },
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
+                years: {
+                  1741: null,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            costAllocation: {
+              1741: {
+                other: 0,
+                ffp: { federal: 0, state: 100, fundingCategory: null }
+              },
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1741: {
+                1: {
+                  inHouse: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  inHouse: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  inHouse: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  inHouse: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
+          }
+        ],
+        years: ['1741', '1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
+      }
+    });
+  });
+
   it('should handle removing an MMIS APD year', () => {
     const state = {
       data: {
@@ -826,6 +1111,28 @@ describe('APD reducer', () => {
                 1743: 2
               },
               fte: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              split: {
+                1741: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1742: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1743: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                }
+              },
+              medicaidShare: {
                 1741: 0,
                 1742: 1,
                 1743: 2
@@ -923,6 +1230,22 @@ describe('APD reducer', () => {
                 1743: 2
               },
               fte: {
+                1742: 1,
+                1743: 2
+              },
+              split: {
+                1742: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                },
+                1743: {
+                  federal: 0,
+                  state: 0,
+                  fundingCategory: null
+                }
+              },
+              medicaidShare: {
                 1742: 1,
                 1743: 2
               }
