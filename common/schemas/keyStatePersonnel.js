@@ -2,17 +2,17 @@ import Joi from 'joi';
 import { FUNDING_CATEGORY_TYPE } from '../utils/constants.js';
 
 export const medicaidDirectorSchema = Joi.object().keys({
-  name: Joi.string().required().messages({
+  name: Joi.string().trim().required().messages({
     'string.base': 'Provide the name of the State Medicaid Director.',
     'string.empty': 'Provide the name of the State Medicaid Director.',
     'string.min': 'Provide the name of the State Medicaid Director.',
     'string.required': 'Provide the name of the State Medicaid Director.'
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().trim().required().messages({
     'string.base': 'Provide the email address of the State Medicaid Director.',
     'string.empty': 'Provide the email address of the State Medicaid Director.'
   }),
-  phone: Joi.string().required().messages({
+  phone: Joi.string().trim().required().messages({
     'string.base':
       'Provide a valid phone number for the State Medicaid Director.',
     'string.empty':
@@ -21,17 +21,17 @@ export const medicaidDirectorSchema = Joi.object().keys({
 });
 
 export const medicaidOfficeSchema = Joi.object({
-  address1: Joi.string().min(1).required().messages({
+  address1: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a mailing street address for the Medicaid office.',
     'string.empty': 'Provide a mailing street address for the Medicaid office.'
   }),
   address2: Joi.any(),
   state: Joi.any(),
-  city: Joi.string().min(1).required().messages({
+  city: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a city name.',
     'string.empty': 'Provide a city name.'
   }),
-  zip: Joi.string().required().messages({
+  zip: Joi.string().trim().required().messages({
     'string.base': 'Provide a zip code.',
     'string.empty': 'Provide a zip code.'
   })
@@ -39,15 +39,15 @@ export const medicaidOfficeSchema = Joi.object({
 
 export const keyPersonnelSchema = Joi.object({
   id: Joi.any(),
-  name: Joi.string().required().messages({
+  name: Joi.string().trim().required().messages({
     'string.base': 'Provide a name for the point of contact.',
     'string.empty': 'Provide a name for the point of contact.'
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().trim().required().messages({
     'string.base': 'Provide an email address for the point of contact.',
     'string.empty': 'Provide an email address for the point of contact.'
   }),
-  position: Joi.string().required().messages({
+  position: Joi.string().trim().required().messages({
     'string.base': 'Provide a role for the point of contact.',
     'string.empty': 'Provide a role for the point of contact.'
   }),
@@ -143,9 +143,15 @@ export const keyPersonnelSchema = Joi.object({
   )
 });
 
+export const keyMedicaidDirectorAndOfficeSchema = Joi.object({
+  medicaidDirector: medicaidDirectorSchema,
+  medicaidOffice: medicaidOfficeSchema
+});
+
 const keyMedicaidSchema = Joi.object({
   medicaidDirector: medicaidDirectorSchema,
   medicaidOffice: medicaidOfficeSchema,
   keyPersonnel: Joi.array().items(keyPersonnelSchema)
 });
+
 export default keyMedicaidSchema;
