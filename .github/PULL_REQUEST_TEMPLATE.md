@@ -19,6 +19,7 @@ Resolves #
 
 - [ ] Automated tests are updated (and all tests are passing)
 - [ ] New automated test cases are documented above
+- [ ] Chromatic link added to description above
 - [ ] Pull request has been labeled, if applicable with feature, content, bug,
       tests, refactor
 - [ ] Associated OpenAPI documentation has been updated
@@ -29,7 +30,7 @@ Resolves #
 
 - [ ] Code has been reviewed by someone other than the original author
 
-### This pull request is ready to review when the QA has
+### This pull request is ready to review when QA has
 
 - [ ] Verified the functionality related to the change
 - [ ] Verified that the change works with Narrator on Windows
