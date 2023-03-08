@@ -17,34 +17,6 @@ export const testApdNavigation = function () {
       type: 'h2'
     },
     {
-      title: 'Activity Overview',
-      type: 'h3'
-    },
-    {
-      title: 'Activity Schedule',
-      type: 'h3'
-    },
-    {
-      title: 'Outcomes and Metrics',
-      type: 'h3'
-    },
-    {
-      title: 'State Staff and Expenses',
-      type: 'h3'
-    },
-    {
-      title: 'Private Contractor Costs',
-      type: 'h3'
-    },
-    {
-      title: 'Cost Allocation',
-      type: 'h3'
-    },
-    {
-      title: 'Budget and FFP',
-      type: 'h2'
-    },
-    {
       title: 'Activity Schedule Summary',
       type: 'h2'
     },
