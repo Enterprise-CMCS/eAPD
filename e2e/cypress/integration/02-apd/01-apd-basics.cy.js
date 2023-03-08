@@ -1224,7 +1224,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       // Activity 1 has index 0
       exportPage
         .getActivityScheduleMilestoneTableName(0)
-        .should('eq', 'Activity 1: Program Administration Milestones');
+        .should('eq', 'Activity 1: Program Administration');
       // Get the first milestone for Activity 1
       exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
       exportPage
