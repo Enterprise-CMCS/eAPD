@@ -42,8 +42,7 @@
     "testEnvironment": "node",
     "testTimeout": 30000,
     "transform": {
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.tsx?$": "babel-jest"
+      "^.+\\.(t|j)sx?$": "babel-jest"
     },
     "moduleFileExtensions": [
       "js",

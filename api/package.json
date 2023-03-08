@@ -25,8 +25,8 @@
     "jest": "NODE_ENV=test node --experimental-vm-modules ../node_modules/.bin/jest",
     "tap": "NODE_ENV=test TAP_DIAG=1 tap --jobs=1 --no-browser --no-timeout",
     "test": "NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' NODE_ENV=test tap --jobs=1 --coverage --no-browser",
-    "test-endpoints": "yarn jest --detectOpenHandles --forceExit --runInBand --collectCoverage",
-    "test-specific": "NODE_ENV=test tap --no-coverage --no-browser",
+    "test-endpoints": "yarn jest --detectOpenHandles --forceExit --runInBand",
+    "test-specific": "NODE_ENV=test TAP_DIAG=1 tap --no-coverage --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -90,6 +90,7 @@
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.5",
     "istanbul": "0.4.5",
+    "jest-environment-jsdom": "^29.5.0",
     "nodemon": "2.0.20",
     "nyc": "15.1.0",
     "sinon": "14.0.0",
@@ -109,11 +110,10 @@
     "globalSetup": "<rootDir>/jest.setup.js",
     "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
-    "testEnvironment": "jest-environment-node",
+    "testEnvironment": "node",
     "testTimeout": 30000,
     "transform": {
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.tsx?$": "babel-jest"
+      "^.+\\.(t|j)sx?$": "babel-jest"
     },
     "moduleFileExtensions": [
       "js",
@@ -154,11 +154,13 @@
       "--exclude=main.js",
       "--exclude=shared.js",
       "--exclude=**/*.endpoint.js",
+      "--exclude=**/*.brokentest.js",
       "--exclude=**/index.js",
       "--exclude=**/openAPI.js",
       "--exclude=**/routes/**/index.js",
       "--exclude=__snapshots__/**",
       "--exclude=auth/mockedOktaAuth.js",
+      "--exclude=coverage-endpoint",
       "--exclude=db/knex.js",
       "--exclude=db/mongodb.js",
       "--exclude=endpoint-tests/**",
