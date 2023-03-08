@@ -204,8 +204,8 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('table', { name: 'HIT + HIE executive summary' })
     ).toBeTruthy();
     expect(
-      screen.queryByRole('table', { name: 'MMIS executive summary' })
-    ).toBeFalsy();
+      screen.getByRole('table', { name: 'MMIS executive summary' })
+    ).toBeTruthy();
   });
 
   test('renders MMIS correctly', async () => {
