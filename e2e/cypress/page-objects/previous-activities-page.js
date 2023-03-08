@@ -30,10 +30,10 @@ class PreviousActivitiesPage {
 
   setExpenditures(expenditures) {
     this.years.forEach((year, i) => {
-      cy.get(`[name='hithie90-approved-total-${year}']`)
+      cy.get(`[name='approved-total-hithie90-${year}']`)
         .clear()
         .type(expenditures.hithie.approved[i]);
-      cy.get(`[name='hithie90-actual-federal-${year}']`)
+      cy.get(`[name='actual-federal-hithie90--${year}']`)
         .clear()
         .type(expenditures.hithie.actual[i]);
 
