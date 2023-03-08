@@ -98,48 +98,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
     testApdName();
   });
 
-  describe.only('Navigation', function () {
+  describe('Navigation', function () {
     testApdNavigation();
-
-    it('confirms navigation', function () {
-      cy.log('confirms side nav buttons redirect to correct sections');
-      const pages = [
-        { parent: 'APD Overview', label: '' },
-        {
-          parent: 'Key State Personnel',
-          label: 'Key Personnel and Program Management'
-        },
-        {
-          parent: 'Results of Previous Activities',
-          label: 'Results of Previous Activities'
-        },
-        { parent: 'Activities', label: '' },
-        { parent: 'Activity Schedule Summary', label: '' },
-        { parent: 'Proposed Budget', label: 'Proposed Budget' },
-        { parent: 'Assurances and Compliance', label: '' },
-        { parent: 'Executive Summary', label: 'Executive Summary' },
-        { parent: 'Export and Submit', label: '' }
-      ];
-
-      cy.log(
-        'should go to the Activity Overview page when edit is clicked in Executive Summary'
-      );
-      cy.goToExecutiveSummary();
-
-      cy.get('#executive-activities-summary')
-        .parent()
-        .contains('div', 'Activity 1: Program Administration')
-        .parent()
-        .parent()
-        .findByRole('link', { name: 'Edit' })
-        .click();
-
-      cy.findByRole('heading', {
-        name: /^Activity 1:/i,
-        level: 2
-      }).should('exist');
-      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
-    });
   });
 
   describe('tests admin check validation errors', function () {

@@ -185,7 +185,9 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Executive Summary' })
     ).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'APD Overview' })).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'APD Overview Summary' })
+    ).toBeTruthy();
     expect(
       screen.queryByRole('heading', {
         name: 'State Priorities and Scope of APD'
@@ -196,7 +198,7 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
     expect(
-      screen.getByRole('heading', { name: 'Program Budget Tables' })
+      screen.getByRole('heading', { name: 'Program Budget Table' })
     ).toBeTruthy();
     expect(
       screen.getByRole('table', { name: 'HIT + HIE executive summary' })
@@ -233,7 +235,9 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Executive Summary' })
     ).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'APD Overview' })).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'APD Overview Summary' })
+    ).toBeTruthy();
     expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
     expect(
       screen.getByRole('heading', {
@@ -244,7 +248,7 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
     expect(
-      screen.getByRole('heading', { name: 'Program Budget Tables' })
+      screen.getByRole('heading', { name: 'Program Budget Table' })
     ).toBeTruthy();
     expect(
       screen.queryByRole('table', { name: 'HIT + HIE executive summary' })

@@ -2,95 +2,64 @@ import { titleCase } from 'title-case';
 import { t } from '../../i18n';
 import { APD_TYPE } from '@cms-eapd/common';
 
-const baseLinks = apdId => [
-  {
-    label: titleCase(t('apd.title')),
-    url: `/apd/${apdId}/apd-overview`
-  },
-  {
-    label: titleCase(t('apd.stateProfile.title')),
-    items: [
-      {
-        label: titleCase(t('apd.stateProfile.title')),
-        url: `/apd/${apdId}/state-profile`
-      },
-      {
-        label: titleCase(t('apd.stateProfile.directorAndAddress.title')),
-        url: `/apd/${apdId}/state-profile#apd-state-profile-office`
-      },
-      {
-        label: titleCase(t('apd.stateProfile.keyPersonnel.title')),
-        url: `/apd/${apdId}/state-profile#apd-state-profile-key-personnel`
-      }
-    ]
-  },
-  {
-    label: titleCase(t('previousActivities.title')),
-    items: [
-      {
-        label: titleCase(t('previousActivities.title')),
-        url: `/apd/${apdId}/previous-activities`
-      },
-      {
-        label: titleCase(t('previousActivities.outline.title')),
-        url: `/apd/${apdId}/previous-activities#prev-activities-outline`
-      },
-      {
-        label: titleCase(t('previousActivities.actualExpenses.title')),
-        url: `/apd/${apdId}/previous-activities#prev-activities-table`
-      }
-    ]
-  },
-  {
-    label: titleCase(t('activities.title')),
-    items: [
-      {
-        label: titleCase(t('activities.list.title')),
-        url: `/apd/${apdId}/activities`
-      }
-    ]
-  },
-  {
-    label: titleCase(t('scheduleSummary.title')),
-    url: `/apd/${apdId}/schedule-summary`
-  },
-  {
-    label: titleCase(t('assurancesAndCompliance.title')),
-    url: `/apd/${apdId}/assurances-and-compliance`
-  },
-  {
-    label: titleCase(t('executiveSummary.title')),
-    items: [
-      {
-        label: titleCase(t('executiveSummary.title')),
-        url: `/apd/${apdId}/executive-summary`
-      },
-      {
-        label: titleCase(t('executiveSummary.overviewSummary.title')),
-        url: `/apd/${apdId}/executive-summary#executive-overview-summary`
-      },
-      {
-        label: titleCase(t('executiveSummary.activitiesSummary.title')),
-        url: `/apd/${apdId}/executive-summary#executive-activities-summary`
-      },
-      {
-        label: titleCase(t('executiveSummary.budgetTable.title')),
-        url: `/apd/${apdId}/executive-summary#executive-summary-budget-table`
-      }
-    ]
-  },
-  {
-    label: titleCase(t('exportAndSubmit.title')),
-    url: `/apd/${apdId}/export`
-  }
-];
-
 const staticItems = (apdId, apdType) => {
   if (apdId) {
     switch (apdType) {
       case APD_TYPE.HITECH:
         return [
-          ...baseLinks(apdType).slice(0, 5),
+          {
+            label: titleCase(t('apd.title')),
+            url: `/apd/${apdId}/apd-overview`
+          },
+          {
+            label: titleCase(t('apd.stateProfile.title')),
+            items: [
+              {
+                label: titleCase(t('apd.stateProfile.title')),
+                url: `/apd/${apdId}/state-profile`
+              },
+              {
+                label: titleCase(
+                  t('apd.stateProfile.directorAndAddress.title')
+                ),
+                url: `/apd/${apdId}/state-profile#apd-state-profile-office`
+              },
+              {
+                label: titleCase(t('apd.stateProfile.keyPersonnel.title')),
+                url: `/apd/${apdId}/state-profile#apd-state-profile-key-personnel`
+              }
+            ]
+          },
+          {
+            label: titleCase(t('previousActivities.title')),
+            items: [
+              {
+                label: titleCase(t('previousActivities.title')),
+                url: `/apd/${apdId}/previous-activities`
+              },
+              {
+                label: titleCase(t('previousActivities.outline.title')),
+                url: `/apd/${apdId}/previous-activities#prev-activities-outline`
+              },
+              {
+                label: titleCase(t('previousActivities.actualExpenses.title')),
+                url: `/apd/${apdId}/previous-activities#prev-activities-table`
+              }
+            ]
+          },
+          {
+            label: titleCase(t('activities.title')),
+            items: [
+              {
+                label: titleCase(t('activities.list.title')),
+                url: `/apd/${apdId}/activities`
+              }
+            ]
+          },
+          {
+            label: titleCase(t('scheduleSummary.title')),
+            url: `/apd/${apdId}/schedule-summary`
+          },
           {
             label: titleCase(t('proposedBudget.title')),
             items: [
@@ -120,7 +89,35 @@ const staticItems = (apdId, apdType) => {
               }
             ]
           },
-          ...baseLinks(apdType).slice(-3)
+          {
+            label: titleCase(t('assurancesAndCompliance.title')),
+            url: `/apd/${apdId}/assurances-and-compliance`
+          },
+          {
+            label: titleCase(t('executiveSummary.title')),
+            items: [
+              {
+                label: titleCase(t('executiveSummary.title')),
+                url: `/apd/${apdId}/executive-summary`
+              },
+              {
+                label: titleCase(t('executiveSummary.overviewSummary.title')),
+                url: `/apd/${apdId}/executive-summary#executive-overview-summary`
+              },
+              {
+                label: titleCase(t('executiveSummary.activitiesSummary.title')),
+                url: `/apd/${apdId}/executive-summary#executive-activities-summary`
+              },
+              {
+                label: titleCase(t('executiveSummary.budgetTable.title')),
+                url: `/apd/${apdId}/executive-summary#executive-summary-budget-table`
+              }
+            ]
+          },
+          {
+            label: titleCase(t('exportAndSubmit.title')),
+            url: `/apd/${apdId}/export`
+          }
         ];
       case APD_TYPE.MMIS:
         return [
@@ -220,6 +217,10 @@ const staticItems = (apdId, apdType) => {
                 url: `/apd/${apdId}/executive-summary#executive-overview-summary`
               },
               {
+                label: titleCase(t('executiveSummary.activitiesSummary.title')),
+                url: `/apd/${apdId}/executive-summary#executive-activities-summary`
+              },
+              {
                 label: titleCase(t('executiveSummary.budgetTable.title')),
                 url: `/apd/${apdId}/executive-summary#executive-summary-budget-table`
               }
@@ -238,77 +239,77 @@ const staticItems = (apdId, apdType) => {
 };
 
 const buildActivitySection = (apdId, apdType, activityId) => {
-  if (apdType === 'HITECH') {
-    return [
-      {
-        label: 'Activity Overview',
-        url: `/apd/${apdId}/activity/${activityId}/overview`
-      },
-      {
-        label: 'Activity Schedule and Milestones',
-        url: `/apd/${apdId}/activity/${activityId}/schedule-and-milestones`
-      },
-      {
-        label: 'Outcomes and Metrics',
-        url: `/apd/${apdId}/activity/${activityId}/oms`
-      },
-      {
-        label: 'State Staff and Expenses',
-        url: `/apd/${apdId}/activity/${activityId}/state-costs`
-      },
-      {
-        label: 'Private Contractor Costs',
-        url: `/apd/${apdId}/activity/${activityId}/contractor-costs`
-      },
-      {
-        label: 'Cost Allocation and Other Funding',
-        url: `/apd/${apdId}/activity/${activityId}/cost-allocation`
-      },
-      {
-        label: 'Budget and FFP',
-        url: `/apd/${apdId}/activity/${activityId}/ffp`
-      }
-    ];
-  }
-  if (apdType === 'MMIS') {
-    return [
-      {
-        label: 'Activity Overview',
-        url: `/apd/${apdId}/activity/${activityId}/overview`
-      },
-      {
-        label: 'Analysis of Alternatives and Risks',
-        url: `/apd/${apdId}/activity/${activityId}/alternatives-and-risks`
-      },
-      {
-        label: 'Activity Schedule and Milestones',
-        url: `/apd/${apdId}/activity/${activityId}/schedule-and-milestones`
-      },
-      {
-        label: 'Conditions for Enhanced Funding',
-        url: `/apd/${apdId}/activity/${activityId}/conditions`
-      },
-      {
-        label: 'Outcomes and Metrics',
-        url: `/apd/${apdId}/activity/${activityId}/oms`
-      },
-      {
-        label: 'State Staff and Expenses',
-        url: `/apd/${apdId}/activity/${activityId}/state-costs`
-      },
-      {
-        label: 'Private Contractor Costs',
-        url: `/apd/${apdId}/activity/${activityId}/contractor-costs`
-      },
-      {
-        label: 'Cost Allocation and Other Funding',
-        url: `/apd/${apdId}/activity/${activityId}/cost-allocation`
-      },
-      {
-        label: 'Budget and FFP',
-        url: `/apd/${apdId}/activity/${activityId}/ffp`
-      }
-    ];
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      return [
+        {
+          label: 'Activity Overview',
+          url: `/apd/${apdId}/activity/${activityId}/overview`
+        },
+        {
+          label: 'Activity Schedule and Milestones',
+          url: `/apd/${apdId}/activity/${activityId}/schedule-and-milestones`
+        },
+        {
+          label: 'Outcomes and Metrics',
+          url: `/apd/${apdId}/activity/${activityId}/oms`
+        },
+        {
+          label: 'State Staff and Expenses',
+          url: `/apd/${apdId}/activity/${activityId}/state-costs`
+        },
+        {
+          label: 'Private Contractor Costs',
+          url: `/apd/${apdId}/activity/${activityId}/contractor-costs`
+        },
+        {
+          label: 'Cost Allocation and Other Funding',
+          url: `/apd/${apdId}/activity/${activityId}/cost-allocation`
+        },
+        {
+          label: 'Budget and FFP',
+          url: `/apd/${apdId}/activity/${activityId}/ffp`
+        }
+      ];
+    case APD_TYPE.MMIS:
+      return [
+        {
+          label: 'Activity Overview',
+          url: `/apd/${apdId}/activity/${activityId}/overview`
+        },
+        {
+          label: 'Analysis of Alternatives and Risks',
+          url: `/apd/${apdId}/activity/${activityId}/alternatives-and-risks`
+        },
+        {
+          label: 'Activity Schedule and Milestones',
+          url: `/apd/${apdId}/activity/${activityId}/schedule-and-milestones`
+        },
+        {
+          label: 'Conditions for Enhanced Funding',
+          url: `/apd/${apdId}/activity/${activityId}/conditions`
+        },
+        {
+          label: 'Outcomes and Metrics',
+          url: `/apd/${apdId}/activity/${activityId}/oms`
+        },
+        {
+          label: 'State Staff and Expenses',
+          url: `/apd/${apdId}/activity/${activityId}/state-costs`
+        },
+        {
+          label: 'Private Contractor Costs',
+          url: `/apd/${apdId}/activity/${activityId}/contractor-costs`
+        },
+        {
+          label: 'Cost Allocation and Other Funding',
+          url: `/apd/${apdId}/activity/${activityId}/cost-allocation`
+        },
+        {
+          label: 'Budget and FFP',
+          url: `/apd/${apdId}/activity/${activityId}/ffp`
+        }
+      ];
   }
 };
 
