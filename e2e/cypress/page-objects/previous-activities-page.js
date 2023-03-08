@@ -13,7 +13,7 @@ class PreviousActivitiesPage {
   getYears() {
     if (this.years.length > 0) return this;
     return cy
-      .contains('HIT + HIE Federal share 90% FFP')
+      .contains('HIT + HIE')
       .parent()
       .find('[data-cy="yearRow"]')
       .each($el => {
