@@ -27,7 +27,7 @@ const testActivityMilestone = page => {
     ];
     milestones.forEach(({ names, dates }, index) => {
       const activityId = index + 1; // Activity Id is 1-base and index is 0-based
-      const activityName = `Activity ${activityId}: ${data.activityOverview[index].name} Milestones`;
+      const activityName = `Activity ${activityId}: ${data.activityOverview[index].name}`;
       page
         .getActivityScheduleMilestoneTableName(index)
         .should('eq', activityName);
