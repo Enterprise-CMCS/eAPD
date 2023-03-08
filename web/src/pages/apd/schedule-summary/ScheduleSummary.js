@@ -76,14 +76,6 @@ const ScheduleSummary = ({ activities }) => (
                 </tr>
               </thead>
               <tbody>
-                {milestones.length === 0 && (
-                  <tr>
-                    <td className="ds-u-border-right--0">
-                      No milestones specified
-                    </td>
-                    <td className="ds-u-border-left--0 ds-u-text-align--left"></td>
-                  </tr>
-                )}
                 {milestones.map(
                   ({ end: milestoneEnd, name: milestoneName }) => (
                     <tr key={`${milestoneName}-${milestoneEnd}`}>
