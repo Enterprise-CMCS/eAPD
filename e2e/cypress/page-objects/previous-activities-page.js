@@ -68,7 +68,7 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       // HIT + HIE
       // Get input value for approved medicaid funding
-      cy.get(`[name='hithie90-approved-total-${year}']`)
+      cy.get(`[name='approved-total-hithie90-${year}']`)
         .invoke('val')
         .then(val => {
           const share = 0.9;
@@ -183,7 +183,7 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      cy.get(`[name='hithie90-actual-federal-${year}']`)
+      cy.get(`[name='actual-federal-hithie90-${year}']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);
