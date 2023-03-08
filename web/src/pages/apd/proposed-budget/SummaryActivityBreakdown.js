@@ -16,7 +16,6 @@ const SummaryActivityBreakdownTable = ({
   fundingSource
 }) => {
   const { years } = costSummary;
-  console.log('stuff', { years, costSummary });
 
   return (
     <table

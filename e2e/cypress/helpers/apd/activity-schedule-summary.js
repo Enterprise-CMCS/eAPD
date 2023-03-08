@@ -62,7 +62,7 @@ export const testDefaultActivityScheduleSummary = function () {
     // Activity List
     schedulePage
       .getActivityScheduleOverviewName(0)
-      .should('eq', 'Activity 1: Program Administration');
+      .should('eq', 'Activity 1: Program Administration Milestones');
 
     schedulePage
       .getActivityScheduleOverviewDates(0)
@@ -89,7 +89,7 @@ export const testDefaultActivityScheduleSummary = function () {
 
     exportPage
       .getActivityScheduleOverviewName(0)
-      .should('eq', 'Activity 1: Program Administration');
+      .should('eq', 'Activity 1: Program Administration Milestones');
 
     exportPage
       .getActivityScheduleOverviewDates(0)
@@ -100,7 +100,7 @@ export const testDefaultActivityScheduleSummary = function () {
 
     exportPage
       .getActivityScheduleMilestoneTableName(0)
-      .should('eq', 'Activity 1: Program Administration');
+      .should('eq', 'Activity 1: Program Administration Milestones');
 
     exportPage
       .getAllActivityScheduleMilestones(0)
