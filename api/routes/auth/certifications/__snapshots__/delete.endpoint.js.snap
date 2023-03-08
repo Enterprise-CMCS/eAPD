@@ -3,7 +3,7 @@
 exports[`auth/certifications delete endpoint DELETE /auth/certifications when authenticated as a user with permission with a valid request 1`] = `"OK"`;
 
 exports[`auth/certifications delete endpoint DELETE /auth/certifications when authenticated as a user with permission with an invalid request 1`] = `
-Object {
+{
   "error": "Cannot read properties of undefined (reading 'affiliationId')",
 }
 `;

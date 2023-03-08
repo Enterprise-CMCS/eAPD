@@ -3,7 +3,7 @@
 exports[`auth/certifications put endpoint PUT /auth/certifications when authenticated as a user with permissions with a valid request body 1`] = `""`;
 
 exports[`auth/certifications put endpoint PUT /auth/certifications when authenticated as a user with permissions with no request body 1`] = `
-Object {
+{
   "message": "Unable to complete state admin certification",
 }
 `;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`auth/certifications endpoints POST /auth/certifications when authenticated as a user with permission with no request body 1`] = `
-Object {
+{
   "error": "Unable to save state admin certification",
 }
 `;

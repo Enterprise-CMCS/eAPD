@@ -33,7 +33,6 @@
   },
   "packageManager": "yarn@1.22.18",
   "jest": {
-    "coverageDirectory": "./coverage/",
     "rootDir": "./",
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -43,8 +42,19 @@
     "testEnvironment": "node",
     "testTimeout": 30000,
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "babel-jest"
     },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "coverageDirectory": "./coverage/",
+    "coverageProvider": "babel",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/schemas/**",

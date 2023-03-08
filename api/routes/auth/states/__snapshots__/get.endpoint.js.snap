@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`auth roles endpoint get endpoint GET /auth/state/:stateId when authenticated 1`] = `
-Object {
+{
   "id": "md",
   "medicaid_office": null,
   "name": "Maryland",

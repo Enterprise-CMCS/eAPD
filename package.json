@@ -89,7 +89,7 @@
     ]
   },
   "dependencies": {
-    "@babel/cli": "7.20.7",
+    "@babel/cli": "7.21.0",
     "@babel/core": "7.20.12",
     "@babel/eslint-parser": "7.19.1",
     "@babel/node": "7.20.7",
@@ -103,9 +103,9 @@
   },
   "devDependencies": {
     "@snyk/protect": "1.1091.0",
-    "babel-jest": "27.5.1",
+    "babel-jest": "29.5.0",
     "husky": "8.0.3",
-    "jest": "27.5.1",
+    "jest": "29.5.0",
     "prettier": "2.8.3",
     "pretty-quick": "3.1.3"
   },

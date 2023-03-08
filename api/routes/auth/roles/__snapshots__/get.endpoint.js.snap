@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`] = `
-Array [
-  Object {
-    "activities": Array [
+[
+  {
+    "activities": [
       "view-users",
       "view-roles",
       "view-document",
@@ -13,8 +13,8 @@ Array [
     "isActive": true,
     "name": "eAPD System Admin",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "view-roles",
       "view-affiliations",
       "edit-affiliations",
@@ -26,8 +26,8 @@ Array [
     "isActive": true,
     "name": "eAPD Federal Admin",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "view-roles",
       "export-document",
       "create-draft",
@@ -39,8 +39,8 @@ Array [
     "isActive": true,
     "name": "eAPD State Admin",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "export-document",
       "create-draft",
       "edit-document",
@@ -49,8 +49,8 @@ Array [
     "isActive": true,
     "name": "eAPD State Staff",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "export-document",
       "create-draft",
       "edit-document",
@@ -59,8 +59,8 @@ Array [
     "isActive": true,
     "name": "eAPD State Contractor",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "view-users",
       "view-roles",
       "export-document",
@@ -77,8 +77,8 @@ Array [
     "isActive": true,
     "name": "eAPD Tester",
   },
-  Object {
-    "activities": Array [
+  {
+    "activities": [
       "no-activities",
     ],
     "isActive": true,

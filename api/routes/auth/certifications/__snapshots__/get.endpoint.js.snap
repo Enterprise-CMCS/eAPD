@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`auth/certifications get endpoint GET /auth/certifications when authenticated as a user with permission valid request 1`] = `
-Array [
-  Object {
+[
+  {
     "affiliationId": null,
     "email": "stateadminmatch@email.com",
     "ffy": 2023,

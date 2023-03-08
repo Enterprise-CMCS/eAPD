@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Roles endpoint GET /roles returns expected roles given a fed admin 1`] = `
-Array [
+[
   "eAPD Federal Admin",
   "eAPD State Admin",
 ]
 `;
 
 exports[`Roles endpoint GET /roles returns expected roles given a state admin 1`] = `
-Array [
+[
   "eAPD State Staff",
   "eAPD State Contractor",
 ]
 `;
 
 exports[`Roles endpoint GET /roles returns expected roles given a system admin 1`] = `
-Array [
+[
   "eAPD System Admin",
   "eAPD Federal Admin",
   "eAPD State Admin",

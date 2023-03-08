@@ -881,7 +881,11 @@ jobs:
           name: report coverage for e2e
           when: always
           working_directory: ~/project/e2e/cypress
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F web
 
   chromatic deployment:
     parameters:
@@ -969,6 +973,15 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api 
             ./endpoint-tests/endpoint.sh
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/api
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./coverage-endpoint -t ${CODECOV_TOKEN} -F api
 
   # Lints the backend code.
   backend lint:
@@ -1012,7 +1025,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/api
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F api
 
   # ===== Common jobs ===== #
   # Runs common tests and reports coverage to codecov.io.
@@ -1126,7 +1143,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/web
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F web
 
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.
