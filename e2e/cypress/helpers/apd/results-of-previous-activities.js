@@ -35,100 +35,45 @@ export const testDefaultResultsOfPreviousActivities = function () {
       .next()
       .should('have.text', '');
 
-    // HIT + HIE Federal share 90% FFP
-    cy.get('[class="budget-table"]')
-      .eq(0)
-      .within(table => {
-        cy.get(table)
-          .find('td.budget-table--number')
-          .each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
+    cy.get('@previousActivitiesDiv')
+      .contains('HIT + HIE Federal share 90% FFP')
+      .parent()
+      .find('td.budget-table--number')
+      .each($el => {
+        cy.wrap($el).should('have.text', '$0');
       });
 
-    // MMIS Federal share 90% FFP
-    cy.get('[class="budget-table"]')
-      .eq(1)
-      .within(table => {
-        cy.get(table)
-          .find('td.budget-table--number')
-          .each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
+    cy.get('@previousActivitiesDiv')
+      .contains('MMIS Federal share 90% FFP')
+      .parent()
+      .find('td.budget-table--number')
+      .each($el => {
+        cy.wrap($el).should('have.text', '$0');
       });
 
-    // MMIS Federal share 75% FFP
-    cy.get('[class="budget-table"]')
-      .eq(2)
-      .within(table => {
-        cy.get(table)
-          .find('td.budget-table--number')
-          .each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
+    cy.get('@previousActivitiesDiv')
+      .contains('MMIS Federal share 75% FFP')
+      .parent()
+      .find('td.budget-table--number')
+      .each($el => {
+        cy.wrap($el).should('have.text', '$0');
       });
 
-    // MMIS Federal share 50% FFP
-    cy.get('[class="budget-table"]')
-      .eq(3)
-      .within(table => {
-        cy.get(table)
-          .find('td.budget-table--number')
-          .each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
+    cy.get('@previousActivitiesDiv')
+      .contains('MMIS Federal share 50% FFP')
+      .parent()
+      .find('td.budget-table--number')
+      .each($el => {
+        cy.wrap($el).should('have.text', '$0');
       });
 
-    // Grand totals: Federal HIT, HIE, MMIS
-    cy.get('[class="budget-table"]')
-      .eq(4)
-      .within(table => {
-        cy.get(table)
-          .find('td.budget-table--number')
-          .each($el => {
-            cy.wrap($el).should('have.text', '$0');
-          });
+    cy.get('@previousActivitiesDiv')
+      .contains('Grand totals: Federal HIT, HIE, MMIS')
+      .parent()
+      .find('td.budget-table--number')
+      .each($el => {
+        cy.wrap($el).should('have.text', '$0');
       });
-
-    // cy.get('@previousActivitiesDiv')
-    //   .contains('HIT + HIE Federal share 90% FFP')
-    //   .parent()
-    //   .find('td.budget-table--number')
-    //   .each($el => {
-    //     cy.wrap($el).should('have.text', '$0');
-    //   });
-
-    // cy.get('@previousActivitiesDiv')
-    //   .contains('MMIS Federal share 90% FFP')
-    //   .parent()
-    //   .find('td.budget-table--number')
-    //   .each($el => {
-    //     cy.wrap($el).should('have.text', '$0');
-    //   });
-
-    // cy.get('@previousActivitiesDiv')
-    //   .contains('MMIS Federal share 75% FFP')
-    //   .parent()
-    //   .find('td.budget-table--number')
-    //   .each($el => {
-    //     cy.wrap($el).should('have.text', '$0');
-    //   });
-
-    // cy.get('@previousActivitiesDiv')
-    //   .contains('MMIS Federal share 50% FFP')
-    //   .parent()
-    //   .find('td.budget-table--number')
-    //   .each($el => {
-    //     cy.wrap($el).should('have.text', '$0');
-    //   });
-
-    // cy.get('@previousActivitiesDiv')
-    //   .contains('Grand totals: Federal HIT, HIE, MMIS')
-    //   .parent()
-    //   .find('td.budget-table--number')
-    //   .each($el => {
-    //     cy.wrap($el).should('have.text', '$0');
-    //   });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
