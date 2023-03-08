@@ -1,5 +1,4 @@
 FROM node:16.19.1-bullseye-slim
-RUN apt-get update && apt-get install build-essential curl -y
 
 RUN mkdir /app
 WORKDIR /app
