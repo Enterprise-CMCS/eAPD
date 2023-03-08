@@ -44,16 +44,16 @@ export const testMmisNavigation = function () {
     },
     {
       title: 'Executive Summary',
-      type: 'h2'
-    },
-    {
-      title: 'Export and Submit',
       label: 'APD Overview Summary',
       subnav: [
         '#executive-overview-summary',
         '#executive-activities-summary',
         '#executive-summary-budget-table'
       ],
+      type: 'h2'
+    },
+    {
+      title: 'Export and Submit',
       type: 'h2'
     }
   ];
@@ -85,30 +85,32 @@ export const testMmisNavigation = function () {
     cy.wrap(pages).each(index => {
       const { label, subnav, title } = index;
 
-      cy.get('.ds-c-vertical-nav__label--parent')
-        .contains(title)
-        .then($el => {
-          if ($el.attr('aria-expanded') === 'false') {
-            // if it's not expanded, expand it
-            cy.wrap($el).click();
-          }
+      if (subnav) {
+        cy.get('.ds-c-vertical-nav__label--parent')
+          .contains(title)
+          .then($el => {
+            if ($el.attr('aria-expanded') === 'false') {
+              // if it's not expanded, expand it
+              cy.wrap($el).click();
+            }
 
-          // Click on anchor link
-          cy.get('a.ds-c-vertical-nav__label').contains(label).click();
-        });
+            // Click on anchor link
+            cy.get('a.ds-c-vertical-nav__label').contains(label).click();
+          });
 
-      if (Array.isArray(subnav)) {
-        cy.wrap(subnav).each(sub => {
-          cy.get(sub)
+        if (Array.isArray(subnav)) {
+          cy.wrap(subnav).each(sub => {
+            cy.get(sub)
+              .then(element => element[0].offsetTop)
+              .then(() => cy.window().its('scrollY').should('be.gt', 0))
+              .then(offset => cy.window().its('scrollY').should('eq', offset));
+          });
+        } else {
+          cy.get(subnav)
             .then(element => element[0].offsetTop)
             .then(() => cy.window().its('scrollY').should('be.gt', 0))
             .then(offset => cy.window().its('scrollY').should('eq', offset));
-        });
-      } else {
-        cy.get(subnav)
-          .then(element => element[0].offsetTop)
-          .then(() => cy.window().its('scrollY').should('be.gt', 0))
-          .then(offset => cy.window().its('scrollY').should('eq', offset));
+        }
       }
     });
   });
