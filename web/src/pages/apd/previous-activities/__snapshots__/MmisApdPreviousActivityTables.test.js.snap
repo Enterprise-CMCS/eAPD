@@ -63,6 +63,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="1"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_1_90"
           scope="row"
         >
@@ -112,6 +113,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="2"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_2_90"
           scope="row"
         >
@@ -220,6 +222,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="1"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_1_75"
           scope="row"
         >
@@ -269,6 +272,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="2"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_2_75"
           scope="row"
         >
@@ -364,6 +368,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="1"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_1_75"
           scope="row"
         >
@@ -413,6 +418,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="2"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_2_75"
           scope="row"
         >
@@ -521,6 +527,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="1"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_1_50"
           scope="row"
         >
@@ -570,6 +577,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="2"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_2_50"
           scope="row"
         >
@@ -665,6 +673,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="1"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_1_50"
           scope="row"
         >
@@ -714,6 +723,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         key="2"
       >
         <th
+          data-cy="yearRow"
           id="prev_act_mmis_row_2_50"
           scope="row"
         >
