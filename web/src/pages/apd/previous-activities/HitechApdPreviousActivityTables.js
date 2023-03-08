@@ -108,6 +108,7 @@ const HitechApdPreviousActivityTables = ({
                   <th
                     id={`prev_act_${level.fundingTypeSchema}_row_${year}_${level.ffp}`}
                     scope="row"
+                    data-cy="yearRow"
                   >
                     {TABLE_HEADERS.ffy(year)}
                   </th>

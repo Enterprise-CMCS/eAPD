@@ -112,7 +112,11 @@ const MmisApdPreviousActivityTables = ({
 
               return (
                 <tr key={year}>
-                  <th id={`prev_act_mmis_row_${year}_${level.ffp}`} scope="row">
+                  <th
+                    id={`prev_act_mmis_row_${year}_${level.ffp}`}
+                    scope="row"
+                    data-cy="yearRow"
+                  >
                     {TABLE_HEADERS.ffy(year)}
                   </th>
                   <td
