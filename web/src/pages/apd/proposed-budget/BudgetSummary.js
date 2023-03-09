@@ -216,7 +216,6 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
         </thead>
         <tbody>
           {orderedTotals.map((rowData, index) => {
-            console.log('rowData', rowData);
             const key = Object.keys(rowData)[0];
             return (
               <tr
