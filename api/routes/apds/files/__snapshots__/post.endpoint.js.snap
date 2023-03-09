@@ -3,19 +3,19 @@
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (gif) 1`] = `
-{
+Object {
   "url": "/apds/eeac3c9865059f26eccb0600/files/5e2a1199ef4bed6563331995449ff477f918b40005c0008ee6f9d339fa13d876",
 }
 `;
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (jpg) 1`] = `
-{
+Object {
   "url": "/apds/eeac3c9865059f26eccb0600/files/5885fa3767a2b6079141bf99976d989455f8c36d1e9be115aa97012ffd3c41fa",
 }
 `;
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (tiff) 1`] = `
-{
+Object {
   "url": "/apds/eeac3c9865059f26eccb0600/files/c956d2961b10745920a24a31aa6a9184f5851ae5bfbc6f3c636dbefd8f4e97a3",
 }
 `;

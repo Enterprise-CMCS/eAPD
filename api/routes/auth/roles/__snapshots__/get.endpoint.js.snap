@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`] = `
-[
-  {
-    "activities": [
+Array [
+  Object {
+    "activities": Array [
       "view-users",
       "view-roles",
       "view-document",
@@ -13,8 +13,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD System Admin",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "view-roles",
       "view-affiliations",
       "edit-affiliations",
@@ -26,8 +26,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD Federal Admin",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "view-roles",
       "export-document",
       "create-draft",
@@ -39,8 +39,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD State Admin",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "export-document",
       "create-draft",
       "edit-document",
@@ -49,8 +49,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD State Staff",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "export-document",
       "create-draft",
       "edit-document",
@@ -59,8 +59,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD State Contractor",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "view-users",
       "view-roles",
       "export-document",
@@ -77,8 +77,8 @@ exports[`auth roles endpoint get endpoint GET /auth/roles when authenticated 1`]
     "isActive": true,
     "name": "eAPD Tester",
   },
-  {
-    "activities": [
+  Object {
+    "activities": Array [
       "no-activities",
     ],
     "isActive": true,

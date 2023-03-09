@@ -1,78 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`APD endpoint | POST /apds when authenticated as a user with permission 1`] = `
-{
-  "activities": [],
-  "apdOverview": {},
+Object {
+  "activities": Array [],
+  "apdOverview": Object {},
   "apdType": "MMIS",
-  "assurancesAndCompliances": {
-    "independentVV": [
-      {
+  "assurancesAndCompliances": Object {
+    "independentVV": Array [
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 95.626",
       },
     ],
-    "procurement": [
-      {
+    "procurement": Array [
+      Object {
         "checked": null,
         "explanation": "",
         "title": "SMM, Part 11",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 95.615",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 75.326",
       },
     ],
-    "recordsAccess": [
-      {
+    "recordsAccess": Array [
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 433.112 (b)(5)-(9)",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 95.615",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "SMM Section 11267",
       },
     ],
-    "softwareRights": [
-      {
+    "softwareRights": Array [
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR 95.617",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "42 CFR Part 431.300",
       },
-      {
+      Object {
         "checked": null,
         "explanation": "",
         "title": "45 CFR Part 164",
       },
     ],
   },
-  "keyStatePersonnel": {
-    "keyPersonnel": [],
-    "medicaidDirector": {
+  "keyStatePersonnel": Object {
+    "keyPersonnel": Array [],
+    "medicaidDirector": Object {
       "email": "",
       "name": "",
       "phone": "",
     },
-    "medicaidOffice": {
+    "medicaidOffice": Object {
       "address1": "",
       "address2": "",
       "city": "",
@@ -81,51 +81,51 @@ exports[`APD endpoint | POST /apds when authenticated as a user with permission 
     },
   },
   "name": "MMIS IAPD",
-  "previousActivities": {
-    "actualExpenditures": {
-      "2021": {
-        "mmis": {
-          "50": {
+  "previousActivities": Object {
+    "actualExpenditures": Object {
+      "2021": Object {
+        "mmis": Object {
+          "50": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
-          "75": {
+          "75": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
-          "90": {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-        },
-      },
-      "2022": {
-        "mmis": {
-          "50": {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-          "75": {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-          "90": {
+          "90": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
         },
       },
-      "2023": {
-        "mmis": {
-          "50": {
+      "2022": Object {
+        "mmis": Object {
+          "50": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
-          "75": {
+          "75": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
-          "90": {
+          "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+      },
+      "2023": Object {
+        "mmis": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "90": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
@@ -134,21 +134,21 @@ exports[`APD endpoint | POST /apds when authenticated as a user with permission 
     },
     "previousActivitySummary": "",
   },
-  "securityPlanning": {
+  "securityPlanning": Object {
     "businessContinuityAndDisasterRecovery": "",
     "securityAndInterfacePlan": "",
   },
-  "statePrioritiesAndScope": {
+  "statePrioritiesAndScope": Object {
     "medicaidProgramAndPriorities": "",
     "mesIntroduction": "",
     "scopeOfAPD": "",
   },
-  "yearOptions": [
+  "yearOptions": Array [
     "2023",
     "2024",
     "2025",
   ],
-  "years": [
+  "years": Array [
     "2023",
     "2024",
   ],

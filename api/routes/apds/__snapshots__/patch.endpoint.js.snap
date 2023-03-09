@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission patch succeeds with an invalid date 1`] = `
-{
+Object {
   "adminCheck": Any<Array>,
-  "apd": {
+  "apd": Object {
     "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
-    "apdOverview": {
+    "apdOverview": Object {
       "narrativeHIE": "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>
 <ul>
 <li>Health systems, affiliated providers, and ancillary services;</li>
@@ -22,8 +22,8 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>
 <p></p>
 <p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
-      "narrativeHIT": "<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
-<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
+      "narrativeHIT": "<p><span style=\\"font-size: 18px;\\"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
+<p><span style=\\"font-size: 18px;\\">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
       "narrativeMMIS": "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>
 <p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
       "programOverview": "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>
@@ -35,92 +35,92 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
-      "updateStatus": {
+      "updateStatus": Object {
         "annualUpdate": false,
         "asNeededUpdate": false,
         "isUpdateAPD": false,
       },
     },
     "apdType": "HITECH",
-    "assurancesAndCompliances": {
-      "procurement": [
-        {
+    "assurancesAndCompliances": Object {
+      "procurement": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.348",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.613",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 75.326",
         },
       ],
-      "recordsAccess": [
-        {
+      "recordsAccess": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.350",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.352",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.346",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR 433.112(b)",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR Part 95.615",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
       ],
-      "security": [
-        {
+      "security": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 164 Security and Privacy",
         },
       ],
-      "softwareRights": [
-        {
+      "softwareRights": Array [
+        Object {
           "checked": false,
           "explanation": "We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.",
           "title": "42 CFR 495.360",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.617",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 431.300",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 433.112",
@@ -129,79 +129,79 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     },
     "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "keyStatePersonnel": {
-      "keyPersonnel": [
-        {
-          "costs": {
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
             "2022": 100000,
             "2023": 100000,
           },
           "email": "JimPushesButtons@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 1,
             "2023": 1,
           },
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "James Holden",
           "position": "HIT Coordinator",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 90,
               "fundingCategory": "DDI",
               "state": 10,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 0,
             "2023": 0,
           },
           "email": "FJohnson@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.3,
             "2023": 0.3,
           },
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 50,
             "2023": 45,
           },
           "email": "test@email.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.75,
             "2023": 1,
           },
@@ -212,12 +212,12 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
           "position": "Tester",
         },
       ],
-      "medicaidDirector": {
+      "medicaidDirector": Object {
         "email": "c.fudge@ministry.magic",
         "name": "Bob the Builder",
         "phone": "5551234567",
       },
-      "medicaidOffice": {
+      "medicaidOffice": Object {
         "address1": "100 Round Sq",
         "address2": "",
         "city": "Cityville",
@@ -226,70 +226,70 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
       },
     },
     "name": "new APD name",
-    "previousActivities": {
-      "actualExpenditures": {
-        "2019": {
-          "hithie": {
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2019": Object {
+          "hithie": Object {
             "federalActual": 140000,
             "totalApproved": 280000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 23445,
               "totalApproved": 82545,
             },
-            "75": {
+            "75": Object {
               "federalActual": 23440,
               "totalApproved": 75340,
             },
-            "90": {
+            "90": Object {
               "federalActual": 235720,
               "totalApproved": 262460,
             },
           },
         },
-        "2020": {
-          "hithie": {
+        "2020": Object {
+          "hithie": Object {
             "federalActual": 146346,
             "totalApproved": 234526,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 129387,
               "totalApproved": 375445,
             },
-            "75": {
+            "75": Object {
               "federalActual": 413246,
               "totalApproved": 654455,
             },
-            "90": {
+            "90": Object {
               "federalActual": 614544,
               "totalApproved": 863455,
             },
           },
         },
-        "2021": {
-          "hithie": {
+        "2021": Object {
+          "hithie": Object {
             "federalActual": 320000,
             "totalApproved": 540000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "75": {
+            "75": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "90": {
+            "90": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
           },
         },
       },
-      "previousActivitySummary": "<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
+      "previousActivitySummary": "<p><span style=\\"font-size: 18px;\\"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
 <p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>
 <p></p>
 <p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>
@@ -309,58 +309,58 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <li>Administrative costs: copy paper, office supplies</li>
 </ul>",
     },
-    "proposedBudget": {
-      "incentivePayments": {
-        "ehAmt": {
-          "2022": {
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-        },
-        "ehCt": {
-          "2022": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epAmt": {
-          "2022": {
+        "ehCt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epCt": {
-          "2022": {
+        "epAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2022": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
@@ -372,18 +372,18 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
-    "yearOptions": [
+    "yearOptions": Array [
       "2022",
       "2023",
       "2024",
     ],
-    "years": [
+    "years": Array [
       "2022",
       "2023",
     ],
   },
   "budget": Any<Object>,
-  "errors": {},
+  "errors": Object {},
 }
 `;
 
@@ -392,14 +392,14 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `
-{
+Object {
   "adminCheck": Any<Array>,
-  "apd": {
+  "apd": Object {
     "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
-    "apdOverview": {
+    "apdOverview": Object {
       "narrativeHIE": "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>
 <ul>
 <li>Health systems, affiliated providers, and ancillary services;</li>
@@ -413,8 +413,8 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>
 <p></p>
 <p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
-      "narrativeHIT": "<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
-<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
+      "narrativeHIT": "<p><span style=\\"font-size: 18px;\\"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
+<p><span style=\\"font-size: 18px;\\">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
       "narrativeMMIS": "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>
 <p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
       "programOverview": "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>
@@ -426,92 +426,92 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
-      "updateStatus": {
+      "updateStatus": Object {
         "annualUpdate": false,
         "asNeededUpdate": false,
         "isUpdateAPD": false,
       },
     },
     "apdType": "HITECH",
-    "assurancesAndCompliances": {
-      "procurement": [
-        {
+    "assurancesAndCompliances": Object {
+      "procurement": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.348",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.613",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 75.326",
         },
       ],
-      "recordsAccess": [
-        {
+      "recordsAccess": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.350",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.352",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.346",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR 433.112(b)",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR Part 95.615",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
       ],
-      "security": [
-        {
+      "security": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 164 Security and Privacy",
         },
       ],
-      "softwareRights": [
-        {
+      "softwareRights": Array [
+        Object {
           "checked": false,
           "explanation": "We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.",
           "title": "42 CFR 495.360",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.617",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 431.300",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 433.112",
@@ -520,66 +520,66 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     },
     "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "keyStatePersonnel": {
-      "keyPersonnel": [
-        {
-          "costs": {
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
             "2022": 100000,
             "2023": 100000,
           },
           "email": "JimPushesButtons@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 1,
             "2023": 1,
           },
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "James Holden",
           "position": "HIT Coordinator",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 90,
               "fundingCategory": "DDI",
               "state": 10,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 0,
             "2023": 0,
           },
           "email": "FJohnson@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.3,
             "2023": 0.3,
           },
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
@@ -587,12 +587,12 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
           },
         },
       ],
-      "medicaidDirector": {
+      "medicaidDirector": Object {
         "email": "c.fudge@ministry.magic",
         "name": "Cornelius Fudge",
         "phone": "5551234567",
       },
-      "medicaidOffice": {
+      "medicaidOffice": Object {
         "address1": "100 Round Sq",
         "address2": "",
         "city": "Cityville",
@@ -601,70 +601,70 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
       },
     },
     "name": "HITECH IAPD",
-    "previousActivities": {
-      "actualExpenditures": {
-        "2019": {
-          "hithie": {
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2019": Object {
+          "hithie": Object {
             "federalActual": 140000,
             "totalApproved": 280000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 23445,
               "totalApproved": 82545,
             },
-            "75": {
+            "75": Object {
               "federalActual": 23440,
               "totalApproved": 75340,
             },
-            "90": {
+            "90": Object {
               "federalActual": 235720,
               "totalApproved": 262460,
             },
           },
         },
-        "2020": {
-          "hithie": {
+        "2020": Object {
+          "hithie": Object {
             "federalActual": 146346,
             "totalApproved": 234526,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 129387,
               "totalApproved": 375445,
             },
-            "75": {
+            "75": Object {
               "federalActual": 413246,
               "totalApproved": 654455,
             },
-            "90": {
+            "90": Object {
               "federalActual": 614544,
               "totalApproved": 863455,
             },
           },
         },
-        "2021": {
-          "hithie": {
+        "2021": Object {
+          "hithie": Object {
             "federalActual": 320000,
             "totalApproved": 540000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "75": {
+            "75": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "90": {
+            "90": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
           },
         },
       },
-      "previousActivitySummary": "<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
+      "previousActivitySummary": "<p><span style=\\"font-size: 18px;\\"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
 <p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>
 <p></p>
 <p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>
@@ -684,58 +684,58 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <li>Administrative costs: copy paper, office supplies</li>
 </ul>",
     },
-    "proposedBudget": {
-      "incentivePayments": {
-        "ehAmt": {
-          "2022": {
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-        },
-        "ehCt": {
-          "2022": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epAmt": {
-          "2022": {
+        "ehCt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epCt": {
-          "2022": {
+        "epAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2022": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
@@ -747,26 +747,26 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
-    "yearOptions": [
+    "yearOptions": Array [
       "2022",
       "2023",
       "2024",
     ],
-    "years": [
+    "years": Array [
       "2022",
       "2023",
     ],
   },
   "budget": Any<Object>,
-  "errors": {
-    "/activities/0/milestones/0/endDate": {
+  "errors": Object {
+    "/activities/0/milestones/0/endDate": Object {
       "dataPath": "/activities/0/milestones/0/endDate",
       "errorValue": "2022-13-12",
       "kind": "date",
-      "message": "Cast to date failed for value "2022-13-12" (type string) at path "endDate"",
+      "message": "Cast to date failed for value \\"2022-13-12\\" (type string) at path \\"endDate\\"",
       "name": "CastError",
       "newValue": null,
-      "stringValue": ""2022-13-12"",
+      "stringValue": "\\"2022-13-12\\"",
       "valueType": "string",
     },
   },
@@ -774,14 +774,14 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 `;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 1`] = `
-{
+Object {
   "adminCheck": Any<Array>,
-  "apd": {
+  "apd": Object {
     "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
-    "apdOverview": {
+    "apdOverview": Object {
       "narrativeHIE": "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>
 <ul>
 <li>Health systems, affiliated providers, and ancillary services;</li>
@@ -795,8 +795,8 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>
 <p></p>
 <p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
-      "narrativeHIT": "<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
-<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
+      "narrativeHIT": "<p><span style=\\"font-size: 18px;\\"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
+<p><span style=\\"font-size: 18px;\\">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
       "narrativeMMIS": "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>
 <p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
       "programOverview": "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>
@@ -808,92 +808,92 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
-      "updateStatus": {
+      "updateStatus": Object {
         "annualUpdate": false,
         "asNeededUpdate": false,
         "isUpdateAPD": false,
       },
     },
     "apdType": "HITECH",
-    "assurancesAndCompliances": {
-      "procurement": [
-        {
+    "assurancesAndCompliances": Object {
+      "procurement": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.348",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.613",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 75.326",
         },
       ],
-      "recordsAccess": [
-        {
+      "recordsAccess": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.350",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.352",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.346",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR 433.112(b)",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR Part 95.615",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
       ],
-      "security": [
-        {
+      "security": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 164 Security and Privacy",
         },
       ],
-      "softwareRights": [
-        {
+      "softwareRights": Array [
+        Object {
           "checked": false,
           "explanation": "We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.",
           "title": "42 CFR 495.360",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.617",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 431.300",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 433.112",
@@ -902,66 +902,66 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     },
     "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "keyStatePersonnel": {
-      "keyPersonnel": [
-        {
-          "costs": {
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
             "2022": 100000,
             "2023": 100000,
           },
           "email": "JimPushesButtons@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 1,
             "2023": 1,
           },
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "James Holden",
           "position": "HIT Coordinator",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 90,
               "fundingCategory": "DDI",
               "state": 10,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 0,
             "2023": 0,
           },
           "email": "FJohnson@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.3,
             "2023": 0.3,
           },
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
@@ -969,12 +969,12 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
           },
         },
       ],
-      "medicaidDirector": {
+      "medicaidDirector": Object {
         "email": "c.fudge@ministry.magic",
         "name": "Bob the Builder",
         "phone": "5551234567",
       },
-      "medicaidOffice": {
+      "medicaidOffice": Object {
         "address1": "100 Round Sq",
         "address2": "",
         "city": "Cityville",
@@ -983,70 +983,70 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
       },
     },
     "name": "new APD name",
-    "previousActivities": {
-      "actualExpenditures": {
-        "2019": {
-          "hithie": {
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2019": Object {
+          "hithie": Object {
             "federalActual": 140000,
             "totalApproved": 280000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 23445,
               "totalApproved": 82545,
             },
-            "75": {
+            "75": Object {
               "federalActual": 23440,
               "totalApproved": 75340,
             },
-            "90": {
+            "90": Object {
               "federalActual": 235720,
               "totalApproved": 262460,
             },
           },
         },
-        "2020": {
-          "hithie": {
+        "2020": Object {
+          "hithie": Object {
             "federalActual": 146346,
             "totalApproved": 234526,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 129387,
               "totalApproved": 375445,
             },
-            "75": {
+            "75": Object {
               "federalActual": 413246,
               "totalApproved": 654455,
             },
-            "90": {
+            "90": Object {
               "federalActual": 614544,
               "totalApproved": 863455,
             },
           },
         },
-        "2021": {
-          "hithie": {
+        "2021": Object {
+          "hithie": Object {
             "federalActual": 320000,
             "totalApproved": 540000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "75": {
+            "75": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "90": {
+            "90": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
           },
         },
       },
-      "previousActivitySummary": "<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
+      "previousActivitySummary": "<p><span style=\\"font-size: 18px;\\"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
 <p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>
 <p></p>
 <p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>
@@ -1066,58 +1066,58 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <li>Administrative costs: copy paper, office supplies</li>
 </ul>",
     },
-    "proposedBudget": {
-      "incentivePayments": {
-        "ehAmt": {
-          "2022": {
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-        },
-        "ehCt": {
-          "2022": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epAmt": {
-          "2022": {
+        "ehCt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epCt": {
-          "2022": {
+        "epAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2022": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
@@ -1129,30 +1129,30 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
-    "yearOptions": [
+    "yearOptions": Array [
       "2022",
       "2023",
       "2024",
     ],
-    "years": [
+    "years": Array [
       "2022",
       "2023",
     ],
   },
   "budget": Any<Object>,
-  "errors": {},
+  "errors": Object {},
 }
 `;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 2`] = `
-{
+Object {
   "adminCheck": Any<Array>,
-  "apd": {
+  "apd": Object {
     "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
-    "apdOverview": {
+    "apdOverview": Object {
       "narrativeHIE": "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>
 <ul>
 <li>Health systems, affiliated providers, and ancillary services;</li>
@@ -1166,97 +1166,97 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>
 <p></p>
 <p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
-      "narrativeHIT": "<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
-<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
+      "narrativeHIT": "<p><span style=\\"font-size: 18px;\\"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>
+<p><span style=\\"font-size: 18px;\\">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>",
       "narrativeMMIS": "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>
 <p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
       "programOverview": "<a>XSS</a>",
-      "updateStatus": {
+      "updateStatus": Object {
         "annualUpdate": false,
         "asNeededUpdate": false,
         "isUpdateAPD": false,
       },
     },
     "apdType": "HITECH",
-    "assurancesAndCompliances": {
-      "procurement": [
-        {
+    "assurancesAndCompliances": Object {
+      "procurement": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.348",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.613",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 75.326",
         },
       ],
-      "recordsAccess": [
-        {
+      "recordsAccess": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.350",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.352",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 495.346",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR 433.112(b)",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR Part 95.615",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "SMM Section 11267",
         },
       ],
-      "security": [
-        {
+      "security": Array [
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 164 Security and Privacy",
         },
       ],
-      "softwareRights": [
-        {
+      "softwareRights": Array [
+        Object {
           "checked": false,
           "explanation": "We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.",
           "title": "42 CFR 495.360",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "45 CFR 95.617",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 431.300",
         },
-        {
+        Object {
           "checked": true,
           "explanation": "",
           "title": "42 CFR Part 433.112",
@@ -1265,79 +1265,79 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     },
     "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "keyStatePersonnel": {
-      "keyPersonnel": [
-        {
-          "costs": {
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
             "2022": 100000,
             "2023": 100000,
           },
           "email": "JimPushesButtons@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 1,
             "2023": 1,
           },
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "James Holden",
           "position": "HIT Coordinator",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 90,
               "fundingCategory": "DDI",
               "state": 10,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 0,
             "2023": 0,
           },
           "email": "FJohnson@tycho.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.3,
             "2023": 0.3,
           },
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
-          "medicaidShare": {
+          "medicaidShare": Object {
             "2022": 100,
             "2023": 100,
           },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
-          "split": {
-            "2022": {
+          "split": Object {
+            "2022": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
-            "2023": {
+            "2023": Object {
               "federal": 75,
               "fundingCategory": "MO",
               "state": 25,
             },
           },
         },
-        {
-          "costs": {
+        Object {
+          "costs": Object {
             "2022": 50,
             "2023": 45,
           },
           "email": "test@email.com",
-          "fte": {
+          "fte": Object {
             "2022": 0.75,
             "2023": 1,
           },
@@ -1348,12 +1348,12 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
           "position": "Tester",
         },
       ],
-      "medicaidDirector": {
+      "medicaidDirector": Object {
         "email": "c.fudge@ministry.magic",
         "name": "Bob the Builder",
         "phone": "5551234567",
       },
-      "medicaidOffice": {
+      "medicaidOffice": Object {
         "address1": "100 Round Sq",
         "address2": "",
         "city": "Cityville",
@@ -1362,70 +1362,70 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
       },
     },
     "name": "new APD name",
-    "previousActivities": {
-      "actualExpenditures": {
-        "2019": {
-          "hithie": {
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2019": Object {
+          "hithie": Object {
             "federalActual": 140000,
             "totalApproved": 280000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 23445,
               "totalApproved": 82545,
             },
-            "75": {
+            "75": Object {
               "federalActual": 23440,
               "totalApproved": 75340,
             },
-            "90": {
+            "90": Object {
               "federalActual": 235720,
               "totalApproved": 262460,
             },
           },
         },
-        "2020": {
-          "hithie": {
+        "2020": Object {
+          "hithie": Object {
             "federalActual": 146346,
             "totalApproved": 234526,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 129387,
               "totalApproved": 375445,
             },
-            "75": {
+            "75": Object {
               "federalActual": 413246,
               "totalApproved": 654455,
             },
-            "90": {
+            "90": Object {
               "federalActual": 614544,
               "totalApproved": 863455,
             },
           },
         },
-        "2021": {
-          "hithie": {
+        "2021": Object {
+          "hithie": Object {
             "federalActual": 320000,
             "totalApproved": 540000,
           },
-          "mmis": {
-            "50": {
+          "mmis": Object {
+            "50": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "75": {
+            "75": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
-            "90": {
+            "90": Object {
               "federalActual": 0,
               "totalApproved": 0,
             },
           },
         },
       },
-      "previousActivitySummary": "<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
+      "previousActivitySummary": "<p><span style=\\"font-size: 18px;\\"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>
 <p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>
 <p></p>
 <p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>
@@ -1445,58 +1445,58 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 <li>Administrative costs: copy paper, office supplies</li>
 </ul>",
     },
-    "proposedBudget": {
-      "incentivePayments": {
-        "ehAmt": {
-          "2022": {
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-        },
-        "ehCt": {
-          "2022": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-          },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epAmt": {
-          "2022": {
+        "ehCt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
         },
-        "epCt": {
-          "2022": {
+        "epAmt": Object {
+          "2022": Object {
             "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
           },
-          "2023": {
+          "2023": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2022": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2023": Object {
             "1": 0,
             "2": 0,
             "3": 0,
@@ -1508,18 +1508,18 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
-    "yearOptions": [
+    "yearOptions": Array [
       "2022",
       "2023",
       "2024",
     ],
-    "years": [
+    "years": Array [
       "2022",
       "2023",
     ],
   },
   "budget": Any<Object>,
-  "errors": {},
+  "errors": Object {},
 }
 `;
 
