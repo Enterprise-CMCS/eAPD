@@ -26,7 +26,6 @@ const ExportInstructions = ({
 
   const sendMail = e => {
     e.preventDefault();
-    console.log({ email });
     window.location.href = `mailto:${email}`;
   };
 
