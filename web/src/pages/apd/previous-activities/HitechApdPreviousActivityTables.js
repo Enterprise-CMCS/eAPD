@@ -24,7 +24,6 @@ const HitechApdPreviousActivityTables = ({
   const years = Object.keys(previousActivityExpenses);
 
   const getActualsHandler = (year, value, level, fundingType, activityType) => {
-    console.log(`Activity Type is ${activityType}`);
     if (activityType === 'HIT + HIE ') {
       return setActualHitech(year, value);
     }
@@ -40,7 +39,6 @@ const HitechApdPreviousActivityTables = ({
     fundingType,
     activityType
   ) => {
-    console.log(`Activity Type is ${activityType}`);
     if (activityType === 'HIT + HIE ') {
       return setApprovedHitech(year, value);
     }
