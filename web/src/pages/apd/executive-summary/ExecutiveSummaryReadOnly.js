@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { titleCase } from 'title-case';
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
@@ -21,27 +20,32 @@ class ExecutiveSummary extends PureComponent {
       <div>
         <h2>Executive Summary</h2>
         <Review
-          heading="Total Cost of All Activities"
+          heading="Total cost of all activities"
           headingLevel="3"
           className="ds-u-border--0"
         >
           <ul className="ds-c-list--bare">
-            <li>
+            <li className="ds-u-margin-top--1">
               <strong>Federal Fiscal Years requested:</strong> FFY{' '}
               {years.join(', ')}
             </li>
-            <li>
+            <li className="ds-u-margin-top--1">
               <strong>Total Computable Medicaid Cost:</strong>{' '}
               <Dollars>{total.medicaid}</Dollars> (
               <Dollars>{total.federal}</Dollars> Federal share)
             </li>
-            <li>
+            <li className="ds-u-margin-top--1">
               <strong>Total funding request:</strong>{' '}
               <Dollars>{total.combined}</Dollars>
             </li>
             {Object.entries(total.ffys).map(
               ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
-                <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
+                <li
+                  key={ffy}
+                  className={
+                    i === 0 ? 'ds-u-margin-top--4' : 'ds-u-margin-top--1'
+                  }
+                >
                   <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
                   <strong>Total Computable Medicaid Cost:</strong>{' '}
                   <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
@@ -51,36 +55,33 @@ class ExecutiveSummary extends PureComponent {
             )}
           </ul>
         </Review>
+        <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
         {data.map((activity, i) => (
-          <Review
-            key={activity.activityId}
-            heading={titleCase(
-              `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
-            )}
-            headingLevel="3"
-            className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
-          >
+          <Fragment key={activity.activityId}>
+            <h2>{`Activity ${i + 1}: ${
+              activity.name || t('activities.noNameYet')
+            }`}</h2>
             {activity.summary && (
               /* eslint-disable react/no-danger */
               <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
             )}
 
             <ul className="ds-c-list--bare">
-              <li>
+              <li className="ds-u-margin-top--3 ds-u-margin-bottom--1">
                 <strong>Start date - End date:</strong> {activity.dateRange}
               </li>
-              <li>
+              <li className="ds-u-margin-y--1">
                 <strong>Total cost of activity:</strong>{' '}
                 <Dollars>{activity.combined}</Dollars>
               </li>
-              <li>
+              <li className="ds-u-margin-top--1 ds-u-margin-bottom--3">
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
                 <Dollars>{activity.medicaid}</Dollars> (
                 <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
               {Object.entries(activity.ffys).map(
                 ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-                  <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
+                  <li key={ffy} className="ds-u-margin-y--1">
                     <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
                     <strong>Total Computable Medicaid Cost:</strong>{' '}
                     <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
@@ -89,10 +90,9 @@ class ExecutiveSummary extends PureComponent {
                 )
               )}
             </ul>
-          </Review>
+            <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
+          </Fragment>
         ))}
-
-        <hr className="subsection-rule" />
         <h3>Program Budget Tables</h3>
         <ExecutiveSummaryBudget />
       </div>

@@ -100,12 +100,14 @@ const ApdViewOnly = ({
       </div>
       <ExportInstructions />
       <h1 className="ds-h1 ds-u-margin-top--2">
-        <span className="ds-h6 ds-u-display--block">{apd.name}</span>
         {place.name} {year} APD
+        <span className="ds-h6 ds-u-font-size--lg ds-u-display--block ds-u-margin-top--2">
+          {apd.name}
+        </span>
       </h1>
-      <hr className="section-rule" />
+      <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
-      <hr className="section-rule" />
+      <hr className="section-rule ds-u-margin-bottom--3" />
       <ApdSummary />
       <hr className="section-rule" />
       <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
