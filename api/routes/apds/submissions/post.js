@@ -10,19 +10,8 @@ export default (
 ) => {
   logger.silly('setting up PATCH /apds/submissions route');
 
-  app.patch('/apds/submissions', async (req, res, next) => {
-    let ip = req?.headers?.['x-forwarded-for'] || req?.ip || '';
-    ip = ip.toString().replace('::ffff:', '');
-    const sharepoint = await getLaunchDarklyFlag(
-      'sharepoint-endpoints-4196',
-      {
-        key: 'anonymous',
-        anonymous: true,
-        ip
-      },
-      false
-    );
-    if (sharepoint !== true) {
+  app.post('/apds/submissions', async (req, res, next) => {
+    if (!req?.headers?.apikey) {
       return res.status(403).end();
     }
 

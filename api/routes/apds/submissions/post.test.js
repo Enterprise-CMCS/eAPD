@@ -1,7 +1,7 @@
 import tap from 'tap';
 import { stub, match } from 'sinon';
 
-import patchEndpoint from './patch.js';
+import postEndpoint from './post.js';
 import mockExpress from '../../../util/mockExpress.js';
 import mockResponse from '../../../util/mockResponse.js';
 
@@ -21,20 +21,20 @@ tap.test('apds/submissions PATCH endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    patchEndpoint(app);
+    postEndpoint(app);
 
     setupTest.ok(
-      app.patch.calledWith('/apds/submissions', match.func),
+      app.post.calledWith('/apds/submissions', match.func),
       'apds/submissions PATCH endpoint is registered'
     );
   });
 
-  endpointTest.test('patch apds/submissions handler', async tests => {
+  endpointTest.test('post apds/submissions handler', async tests => {
     let handler;
 
     tests.beforeEach(async () => {
-      patchEndpoint(app, { updateAPDReviewStatus, getLaunchDarklyFlag });
-      handler = app.patch.args
+      postEndpoint(app, { updateAPDReviewStatus, getLaunchDarklyFlag });
+      handler = app.post.args
         .find(args => args[0] === '/apds/submissions')
         .pop();
     });
