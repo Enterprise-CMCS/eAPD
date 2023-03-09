@@ -26,29 +26,27 @@ const HitechApdPreviousActivityTables = ({
   const getActualsHandler = (year, value, level, fundingType, activityType) => {
     console.log(`Activity Type is ${activityType}`);
     if (activityType === 'HIT + HIE ') {
-      console.log(`Inside the hit branch`);
       return setActualHitech(year, value);
     }
     if (activityType === 'MMIS ') {
-      console.log(`Inside the mmis branch`);
       return setActualMmis(year, value, level, fundingType);
     }
   };
 
-  const getActualsHandlerMmis = (year, value, level, fundingType) => {
-    return setActualMmis(year, value, level, fundingType);
-  };
-
-  const getApprovedHandlerMmis = (year, value, level, fundingType) => {
-    return setApprovedMmis(year, value, level, fundingType);
-  };
-
-  const getActualsHandlerHitech = (year, value) => {
-    return setActualHitech(year, value);
-  };
-
-  const getApprovedHandlerHitech = (year, value) => {
-    return setApprovedHitech(year, value);
+  const getApprovedHandler = (
+    year,
+    value,
+    level,
+    fundingType,
+    activityType
+  ) => {
+    console.log(`Activity Type is ${activityType}`);
+    if (activityType === 'HIT + HIE ') {
+      return setApprovedHitech(year, value);
+    }
+    if (activityType === 'MMIS ') {
+      return setApprovedMmis(year, value, level, fundingType);
+    }
   };
 
   const tables = [
@@ -157,16 +155,13 @@ const HitechApdPreviousActivityTables = ({
                         name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.totalApproved}
                         onChange={e => {
-                          if (level.fundingTypeSchema === 'hithie') {
-                            getApprovedHandlerHitech(year, e.target.value);
-                          } else {
-                            getApprovedHandlerMmis(
-                              year,
-                              e.target.value,
-                              level.ffp,
-                              level.fundingTypeSchema
-                            );
-                          }
+                          getApprovedHandler(
+                            year,
+                            e.target.value,
+                            level.ffp,
+                            level.fundingTypeSchema,
+                            level.fundingTypeHeader
+                          );
                         }}
                       />
                     )}
