@@ -1,0 +1,25 @@
+sequenceDiagram
+  %% @outputScale(5)
+  participant UI
+  participant Redux Action
+  participant Redux Store
+  participant Save Middleware
+  participant API
+
+  UI->>Redux Action: Sends the changes <br/>from the form fields
+  Redux Action->>Redux Store: Converts the changes to <br/>JSON patches and dispatches <br/>changes and patches
+  Note right of Redux Store: The APD Redux store listens <br/>for changes and updates <br/>the APD state
+  Redux Store-->>UI: Updates the UI as necessary
+  Note right of Redux Store: The Patch Redux store listens <br/>for dispatched patches and <br/>stores them in a queue
+  
+  Note right of Save Middleware: The Save Middleware service <br/>is always running in <br/>the background
+  loop Every 300ms
+    Note right of Save Middleware: The Save Middleware service runs every 300ms, <br/>if it takes longer than 300ms to save, <br/>then an additional save is queued <br/>and it runs after the currently running save.
+    Save Middleware->>Redux Action: Triggers an APD save action
+    Redux Action->>Redux Store: Checks for the queued patches
+    Redux Store-->>Redux Action: Returns the queued patches
+    Redux Action->>API: Sends the queued patches to the API
+    API-->>Redux Action: Updates the APD with the patches, runs validations, and updates <br/>the budget, if necessary, then returns the updated APD and budget
+    Redux Action->>Redux Store: Dispatches the changes
+    Redux Store-->>UI: Updates the UI as necessary
+  end

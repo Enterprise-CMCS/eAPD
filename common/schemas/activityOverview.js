@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 export const activitySummarySchema = Joi.string()
   .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
   .min(1)
   .required()
   .messages({
@@ -11,6 +12,7 @@ export const activitySummarySchema = Joi.string()
   });
 export const activityDescriptionSchema = Joi.string()
   .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
   .min(1)
   .required()
   .messages({
@@ -22,14 +24,19 @@ export const activityAlternativesSchema = Joi.any();
 
 export const standardsAndConditionsSchema = Joi.object({
   doesNotSupport: Joi.any(),
-  supports: Joi.string().trim().min(1).required().messages({
-    'string.base':
-      'Provide a description about how this activity will support the Medicaid standards and conditions.',
-    'string.empty':
-      'Provide a description about how this activity will support the Medicaid standards and conditions.',
-    'string.min':
-      'Provide a description about how this activity will support the Medicaid standards and conditions.'
-  })
+  supports: Joi.string()
+    .trim()
+    .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+    .min(1)
+    .required()
+    .messages({
+      'string.base':
+        'Provide a description about how this activity will support the Medicaid standards and conditions.',
+      'string.empty':
+        'Provide a description about how this activity will support the Medicaid standards and conditions.',
+      'string.min':
+        'Provide a description about how this activity will support the Medicaid standards and conditions.'
+    })
 });
 
 // No Standards and Conditions (SC)
@@ -46,23 +53,35 @@ export const hitechActivityOverviewSchema = Joi.object({
   standardsAndConditions: standardsAndConditionsSchema
 });
 
-export const activitySnapshotSchema = Joi.string().required().messages({
-  'string.base': 'Provide an Activity snapshot',
-  'string.empty': 'Provide an Activity snapshot',
-  'string.required': 'Provide an Activity snapshot'
-});
+export const activitySnapshotSchema = Joi.string()
+  .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+  .required()
+  .messages({
+    'string.base': 'Provide an Activity snapshot',
+    'string.empty': 'Provide an Activity snapshot',
+    'string.required': 'Provide an Activity snapshot'
+  });
 
-export const problemStatementSchema = Joi.string().required().messages({
-  'string.base': 'Provide a Problem statement',
-  'string.empty': 'Provide a Problem statement',
-  'string.required': 'Provide a Problem statement'
-});
+export const problemStatementSchema = Joi.string()
+  .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+  .required()
+  .messages({
+    'string.base': 'Provide a Problem statement',
+    'string.empty': 'Provide a Problem statement',
+    'string.required': 'Provide a Problem statement'
+  });
 
-export const proposedSolutionSchema = Joi.string().required().messages({
-  'string.base': 'Provide a Proposed solution',
-  'string.empty': 'Provide a Proposed solution',
-  'string.required': 'Provide a Proposed solution'
-});
+export const proposedSolutionSchema = Joi.string()
+  .trim()
+  .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+  .required()
+  .messages({
+    'string.base': 'Provide a Proposed solution',
+    'string.empty': 'Provide a Proposed solution',
+    'string.required': 'Provide a Proposed solution'
+  });
 
 export const mmisActivityOverviewSchema = Joi.object({
   activitySnapshot: activitySnapshotSchema,
