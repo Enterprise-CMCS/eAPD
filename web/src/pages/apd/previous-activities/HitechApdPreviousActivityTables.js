@@ -23,6 +23,18 @@ const HitechApdPreviousActivityTables = ({
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
+  const getActualsHandler = (year, value, level, fundingType, activityType) => {
+    console.log(`Activity Type is ${activityType}`);
+    if (activityType === 'HIT + HIE ') {
+      console.log(`Inside the hit branch`);
+      return setActualHitech(year, value);
+    }
+    if (activityType === 'MMIS ') {
+      console.log(`Inside the mmis branch`);
+      return setActualMmis(year, value, level, fundingType);
+    }
+  };
+
   const getActualsHandlerMmis = (year, value, level, fundingType) => {
     return setActualMmis(year, value, level, fundingType);
   };
@@ -65,7 +77,10 @@ const HitechApdPreviousActivityTables = ({
   return (
     <Fragment>
       {tables.map(level => (
-        <table key={level.ffp} className="budget-table">
+        <table
+          key={`${level.fundingTypeSchema}${level.ffp}`}
+          className="budget-table"
+        >
           <caption className="ds-h4">
             {level.fundingTypeHeader}
             {TABLE_HEADERS.federal(level.ffp)}
@@ -175,16 +190,13 @@ const HitechApdPreviousActivityTables = ({
                         name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
                         value={expenses.federalActual}
                         onChange={e => {
-                          if (level.fundingTypeSchema === 'hithie') {
-                            getActualsHandlerHitech(year, e.target.value);
-                          } else {
-                            getActualsHandlerMmis(
-                              year,
-                              e.target.value,
-                              level.ffp,
-                              level.fundingTypeSchema
-                            );
-                          }
+                          getActualsHandler(
+                            year,
+                            e.target.value,
+                            level.ffp,
+                            level.fundingTypeSchema,
+                            level.fundingTypeHeader
+                          );
                         }}
                       />
                     )}
