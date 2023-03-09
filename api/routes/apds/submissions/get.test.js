@@ -9,7 +9,6 @@ let app;
 let res;
 let next;
 let getAllSubmittedAPDs;
-let getLaunchDarklyFlag;
 
 tap.test('apds/submissions GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
@@ -17,7 +16,6 @@ tap.test('apds/submissions GET endpoint', async endpointTest => {
     res = mockResponse();
     next = stub();
     getAllSubmittedAPDs = stub();
-    getLaunchDarklyFlag = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -33,28 +31,22 @@ tap.test('apds/submissions GET endpoint', async endpointTest => {
     let handler;
 
     tests.beforeEach(async () => {
-      getEndpoint(app, { getAllSubmittedAPDs, getLaunchDarklyFlag });
+      getEndpoint(app, { getAllSubmittedAPDs });
       handler = app.get.args
         .find(args => args[0] === '/apds/submissions')
         .pop();
     });
 
-    tests.test('flag off', async test => {
-      const req = {
-        headers: {},
-        ip: 'bad ip' // bad ip
-      };
-      getLaunchDarklyFlag.returns(false);
+    tests.test('no apikey', async test => {
+      const req = { headers: {} };
       await handler(req, res, next);
       test.ok(res.status.calledWith(403));
     });
 
-    tests.test('flag on', async test => {
-      getLaunchDarklyFlag.returns(true);
+    tests.test('good apikey', async test => {
       getAllSubmittedAPDs.returns({ apdID: 'apd id' });
       const req = {
-        headers: {},
-        ip: '10.0.0.0' // good ip
+        headers: { apikey: 'good api key' }
       };
       await handler(req, res, next);
       test.ok(res.send.calledWith({ apdID: 'apd id' }));

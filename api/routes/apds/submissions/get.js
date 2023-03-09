@@ -1,17 +1,13 @@
 import loggerFactory from '../../../logger/index.js';
-import { getLaunchDarklyFlag as flag } from '../../../middleware/launchDarkly.js';
 import { getAllSubmittedAPDs as sub } from '../../../db/apds.js';
 
 const logger = loggerFactory('apds/submissions get');
 
-export default (
-  app,
-  { getAllSubmittedAPDs = sub, getLaunchDarklyFlag = flag } = {}
-) => {
+export default (app, { getAllSubmittedAPDs = sub } = {}) => {
   logger.silly('setting up GET /apds/submissions route');
 
   app.get('/apds/submissions', async (req, res, next) => {
-    if (req?.headers?.apikey) {
+    if (!req?.headers?.apikey) {
       return res.status(403).end();
     }
 

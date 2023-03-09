@@ -21,13 +21,14 @@ const axiosDefaults = {
 export const api = axios.create(axiosDefaults);
 
 export const apiKeyAuth = token => {
-  const ip = token || '10.0.0.0';
   const options = {
-    ...axiosDefaults,
-    headers: {
-      'x-forwarded-for': ip
-    }
+    ...axiosDefaults
   };
+  if (token) {
+    options.headers = {
+      apikey: token
+    };
+  }
   return axios.create(options);
 };
 

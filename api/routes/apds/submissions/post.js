@@ -1,14 +1,10 @@
 import loggerFactory from '../../../logger/index.js';
-import { getLaunchDarklyFlag as flag } from '../../../middleware/launchDarkly.js';
 import { updateAPDReviewStatus as urs } from '../../../db/apds.js';
 
 const logger = loggerFactory('apds/submissions get');
 
-export default (
-  app,
-  { updateAPDReviewStatus = urs, getLaunchDarklyFlag = flag } = {}
-) => {
-  logger.silly('setting up PATCH /apds/submissions route');
+export default (app, { updateAPDReviewStatus = urs } = {}) => {
+  logger.silly('setting up POST /apds/submissions route');
 
   app.post('/apds/submissions', async (req, res, next) => {
     if (!req?.headers?.apikey) {

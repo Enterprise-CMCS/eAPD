@@ -16,7 +16,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 403 when the IP is not allowed', async () => {
-    const api = apiKeyAuth('bad ip');
+    const api = apiKeyAuth();
     const response = await api.post('/apds/submissions', [
       {
         apdId: mnAPDId,
@@ -27,7 +27,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 400 when body is invalid', async () => {
-    const api = apiKeyAuth();
+    const api = apiKeyAuth('good api key');
     const response = await api.post('/apds/submissions', {
       apdId: badAPDId,
       newStatus: 'approved'
@@ -36,7 +36,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('returns 200', async () => {
-    const api = apiKeyAuth();
+    const api = apiKeyAuth('good api key');
     const response = await api.post('/apds/submissions', [
       {
         apdId: mnAPDId,
