@@ -8,7 +8,10 @@ export default {
       user: process.env.DEV_DB_USER || 'postgres',
       password: process.env.DEV_DB_PASSWORD || 'cms'
     },
-    seeds: { directory: './seeds/development' }
+    seeds: { directory: './seeds/development' },
+    migrations: {
+      stub: 'migrations-template.js'
+    }
   },
 
   test: {
