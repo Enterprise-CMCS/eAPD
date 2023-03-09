@@ -724,7 +724,6 @@ jobs:
             yarn install --frozen-lockfile
             yarn add glob
             yarn add js-yaml
-            yarn add babel-jest
             node yaml-tests.js
 
   e2e test:
