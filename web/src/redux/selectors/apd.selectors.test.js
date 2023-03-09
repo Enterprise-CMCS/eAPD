@@ -241,8 +241,12 @@ describe('APD selectors', () => {
         }
       })
     ).toEqual({
-      2014: '2014 data',
-      2015: '2015 data'
+      2014: {
+        mmis: '2014 data'
+      },
+      2015: {
+        mmis: '2015 data'
+      }
     });
   });
 

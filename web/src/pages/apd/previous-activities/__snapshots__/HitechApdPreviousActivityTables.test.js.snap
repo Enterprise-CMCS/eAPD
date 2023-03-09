@@ -4,7 +4,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
 <Fragment>
   <table
     className="budget-table"
-    key="90"
+    key="hithie90"
   >
     <caption
       className="ds-h4"
@@ -153,7 +153,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </table>
   <table
     className="budget-table"
-    key="90"
+    key="mmis90"
   >
     <caption
       className="ds-h4"
@@ -302,7 +302,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </table>
   <table
     className="budget-table"
-    key="75"
+    key="mmis75"
   >
     <caption
       className="ds-h4"
@@ -451,7 +451,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </table>
   <table
     className="budget-table"
-    key="50"
+    key="mmis50"
   >
     <caption
       className="ds-h4"

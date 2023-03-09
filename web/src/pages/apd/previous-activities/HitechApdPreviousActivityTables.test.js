@@ -18,31 +18,43 @@ describe('apd previous activity table, mmis component', () => {
   const props = {
     previousActivityExpenses: {
       1: {
-        90: {
+        hithie: {
           federalActual: 10,
           totalApproved: 20
         },
-        75: {
-          federalActual: 30,
-          totalApproved: 40
-        },
-        50: {
-          federalActual: 50,
-          totalApproved: 60
+        mmis: {
+          90: {
+            federalActual: 10,
+            totalApproved: 20
+          },
+          75: {
+            federalActual: 30,
+            totalApproved: 40
+          },
+          50: {
+            federalActual: 50,
+            totalApproved: 60
+          }
         }
       },
       2: {
-        90: {
+        hithie: {
           federalActual: 100,
           totalApproved: 200
         },
-        75: {
-          federalActual: 300,
-          totalApproved: 400
-        },
-        50: {
-          federalActual: 500,
-          totalApproved: 600
+        mmis: {
+          90: {
+            federalActual: 100,
+            totalApproved: 200
+          },
+          75: {
+            federalActual: 300,
+            totalApproved: 400
+          },
+          50: {
+            federalActual: 500,
+            totalApproved: 600
+          }
         }
       }
     },
@@ -189,8 +201,22 @@ describe('apd previous activity table, mmis component', () => {
       })
     ).toEqual({
       previousActivityExpenses: {
-        1: { the: 'good stuff' },
-        2: { finders: 'keepers' }
+        1: {
+          hithie: {
+            some: 'junk'
+          },
+          mmis: {
+            the: 'good stuff'
+          }
+        },
+        2: {
+          hithie: {
+            more: 'garbage'
+          },
+          mmis: {
+            finders: 'keepers'
+          }
+        }
       }
     });
   });
