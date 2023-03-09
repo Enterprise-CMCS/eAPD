@@ -23,7 +23,7 @@ const ScheduleSummary = ({ activities }) => (
             <thead>
               <tr>
                 <th scope="col">Activity List Overview</th>
-                <th scope="col" className="ds-u-text-align--left">
+                <th scope="col" className="ds-u-text-align--right">
                   Activity Date Range
                 </th>
               </tr>
@@ -40,7 +40,7 @@ const ScheduleSummary = ({ activities }) => (
                   >
                     Activity {i + 1}: {activityName || 'Untitled'} Milestones
                   </td>
-                  <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
+                  <td className="ds-u-font-weight--bold ds-u-text-align--right ds-u-border-left--0 budget-table--cell__nowrap">
                     {dateRange}
                   </td>
                 </tr>
@@ -67,10 +67,10 @@ const ScheduleSummary = ({ activities }) => (
                   </th>
                 </tr>
                 <tr>
-                  <th className="ds-u-font-weight--bold ds-u-border-right--0">
+                  <th className="ds-u-font-weight--bold ds-u-border-right--0 indent-title">
                     Milestone List
                   </th>
-                  <th className="ds-u-font-weight--bold ds-u-border-right--0">
+                  <th className="ds-u-font-weight--bold ds-u-border-right--0 ds-u-text-align--right">
                     Target Completion Date
                   </th>
                 </tr>
@@ -89,7 +89,7 @@ const ScheduleSummary = ({ activities }) => (
                       <td className="ds-u-border-right--0 indent-title">
                         {milestoneName || 'Milestone not specified'}
                       </td>
-                      <td className="ds-u-border-left--0 ds-u-text-align--left">
+                      <td className="ds-u-border-left--0 ds-u-text-align--right">
                         {milestoneEnd}
                       </td>
                     </tr>

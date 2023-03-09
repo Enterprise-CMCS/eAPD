@@ -79,7 +79,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
   return (
     <table className="budget-table" data-cy="CACTable">
       <thead>
-        <tr className="budget-table--row__primary-header__light">
+        <tr className="budget-table--row__highlight-gray-dark">
           <th scope="col">
             Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
           </th>
@@ -91,7 +91,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
       <tbody>
         {data?.hit && (
           <Fragment>
-            <tr className="">
+            <tr className="budget-table--category-row_highlight">
               <th scope="row" colSpan="2">
                 HIT
               </th>
@@ -102,7 +102,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
 
         {data?.hie && (
           <Fragment>
-            <tr className="">
+            <tr className="budget-table--category-row_highlight">
               <th scope="row" colSpan="2">
                 HIE
               </th>
@@ -113,7 +113,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
 
         {data?.mmis && (
           <Fragment>
-            <tr className="">
+            <tr className="budget-table--category-row_highlight">
               <th scope="row" colSpan="2">
                 MMIS
               </th>

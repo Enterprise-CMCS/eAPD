@@ -7,7 +7,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
 >
   <thead>
     <tr
-      className="budget-table--row__primary-header__light"
+      className="budget-table--row__highlight-gray-dark"
     >
       <th
         scope="col"
@@ -26,7 +26,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
   </thead>
   <tbody>
     <tr
-      className=""
+      className="budget-table--category-row_highlight"
     >
       <th
         colSpan="2"
@@ -56,7 +56,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
       year="1975"
     />
     <tr
-      className=""
+      className="budget-table--category-row_highlight"
     >
       <th
         colSpan="2"
@@ -86,7 +86,7 @@ exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
       year="1975"
     />
     <tr
-      className=""
+      className="budget-table--category-row_highlight"
     >
       <th
         colSpan="2"
