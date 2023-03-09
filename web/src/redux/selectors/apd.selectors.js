@@ -78,7 +78,7 @@ export const selectPreviousMMISActivitiesHITECH = createSelector(
     Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
-        [year]: expenses.mmis
+        [year]: expenses
       }),
       {}
     )

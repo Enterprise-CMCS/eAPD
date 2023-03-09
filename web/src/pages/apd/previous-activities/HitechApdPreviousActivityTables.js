@@ -114,7 +114,17 @@ const HitechApdPreviousActivityTables = ({
           </thead>
           <tbody>
             {years.map(year => {
-              const expenses = previousActivityExpenses[year][level.ffp];
+              let expenses;
+              if (level.fundingTypeSchema === 'hithie') {
+                expenses =
+                  previousActivityExpenses[year][level.fundingTypeSchema];
+              } else {
+                expenses =
+                  previousActivityExpenses[year][level.fundingTypeSchema][
+                    level.ffp
+                  ];
+              }
+
               const federalApproved =
                 (expenses.totalApproved * level.ffp) / 100;
 
