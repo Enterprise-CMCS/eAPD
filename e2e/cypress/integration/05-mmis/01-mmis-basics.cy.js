@@ -668,7 +668,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
             // if (index !== 0) cy.get('.ds-h3').should('contain', subnav);
             if (index !== 0)
-              cy.get('.ds-h3').contains(subnav).should('be.visible');
+              cy.get('.ds-h3').contains(subnav).should('be.visible'); // Could potentiall fail due to viewport
           });
         }
         cy.get('.ds-h2').should('contain', title[0]);
@@ -684,7 +684,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       // TODO: Bug Ticket 4481, Uncomment code below to navigate via side panel
       // cy.get('.ds-c-vertical-nav__item').contains('Activity 1: Untitled').click();
 
-      // Once 4481 is fixed, and the code above expands the subnav of the activity, we can delete this line
+      // Once 4481 is fixed, the code above should expand the subnav of the activity, we can delete this line
       cy.get('#activities').contains('Edit').click();
 
       activityPageTitles.forEach(title => {
