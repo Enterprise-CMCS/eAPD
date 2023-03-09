@@ -8,7 +8,10 @@ import {
 } from 'react-router-dom';
 
 import { selectApd } from '../../redux/actions/app';
-import { selectApdData } from '../../redux/selectors/apd.selectors';
+import {
+  selectApdData,
+  selectApdType
+} from '../../redux/selectors/apd.selectors';
 import { selectBudget } from '../../redux/selectors/budget.selectors';
 import { getAPDYearRange } from '../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
@@ -28,6 +31,7 @@ const ApdViewOnly = ({
   budget,
   place,
   year,
+  apdType,
   goToApd,
   useParams,
   useHistory
@@ -108,11 +112,19 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ApdSummary />
       <hr className="section-rule" />
-      <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
+      <ApdStateProfile
+        keyStatePersonnel={apd.keyStatePersonnel}
+        apdType={apd.apdType}
+      />
       <hr className="section-rule" />
       <PreviousActivities />
       <hr className="section-rule" />
-      <Activities apdId={apd.id} activities={apd.activities} />
+      <Activities
+        apdId={apd.id}
+        activities={apd.activities}
+        years={budget.years}
+        apdType={apdType}
+      />
       <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
       <ScheduleSummary />
       <hr className="section-rule" />
@@ -131,6 +143,7 @@ ApdViewOnly.propTypes = {
   budget: PropTypes.object.isRequired,
   place: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   year: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired,
   goToApd: PropTypes.func.isRequired,
   useParams: PropTypes.func,
   useHistory: PropTypes.func
@@ -145,7 +158,8 @@ const mapStateToProps = state => ({
   apd: selectApdData(state),
   budget: selectBudget(state),
   place: getUserStateOrTerritory(state),
-  year: getAPDYearRange(state)
+  year: getAPDYearRange(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {
