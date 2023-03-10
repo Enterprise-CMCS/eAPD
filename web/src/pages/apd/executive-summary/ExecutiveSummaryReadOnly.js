@@ -12,18 +12,17 @@ import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../../../redux/selectors/budget.selectors';
+import { ffyList } from '../../../util/apd';
 
 class ExecutiveSummary extends PureComponent {
   render() {
     const { data, total, years } = this.props;
+    const noYears = !years;
     return (
       <div>
         <h2>Executive Summary</h2>
-        <Review
-          heading="Total cost of all activities"
-          headingLevel="3"
-          className="ds-u-border--0"
-        >
+        <Fragment>
+          <h3 className="ds-u-border--0">Total cost of all activities</h3>
           <ul className="ds-c-list--bare">
             <li className="ds-u-margin-top--1">
               <strong>Federal Fiscal Years requested:</strong> FFY{' '}
@@ -54,7 +53,7 @@ class ExecutiveSummary extends PureComponent {
               )
             )}
           </ul>
-        </Review>
+        </Fragment>
         <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
         {data.map((activity, i) => (
           <Fragment key={activity.activityId}>
@@ -79,21 +78,11 @@ class ExecutiveSummary extends PureComponent {
                 <Dollars>{activity.medicaid}</Dollars> (
                 <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
-              {Object.entries(activity.ffys).map(
-                ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-                  <li key={ffy} className="ds-u-margin-y--1">
-                    <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                    <strong>Total Computable Medicaid Cost:</strong>{' '}
-                    <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
-                    Federal share)
-                  </li>
-                )
-              )}
+              {!noYears && ffyList(activity.ffys)}
             </ul>
             <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
           </Fragment>
         ))}
-        <h3>Program Budget Tables</h3>
         <ExecutiveSummaryBudget />
       </div>
     );
