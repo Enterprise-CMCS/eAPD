@@ -2,21 +2,18 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiNoPermissions,
   unauthenticatedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('Affiliations endpoint | POST', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiNoPermissions;
   beforeAll(async () => {
-    api = login('no-permissions', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   unauthenticatedTest('post', '/states/ak/affiliations');

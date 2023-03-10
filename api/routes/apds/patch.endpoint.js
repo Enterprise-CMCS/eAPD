@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateStaff,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
@@ -10,15 +10,12 @@ import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateStaff;
   beforeAll(async () => {
-    api = login('state-staff', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   const url = apdID => `/apds/${apdID}`;

@@ -1,4 +1,5 @@
 import {
+  apiNoKey,
   apiKeyAuth,
   getDB,
   setupDB,
@@ -16,39 +17,30 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 403 when the IP is not allowed', async () => {
-    const controller = new AbortController();
-    const api = apiKeyAuth('bad ip', controller);
-    const response = await api.patch('/apds/submissions', [
+    const response = await apiNoKey.patch('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
       }
     ]);
     expect(response.status).toBe(403);
-    controller.abort();
   });
 
   it('it returns 400 when body is invalid', async () => {
-    const controller = new AbortController();
-    const api = apiKeyAuth(null, controller);
-    const response = await api.patch('/apds/submissions', {
+    const response = await apiKeyAuth.patch('/apds/submissions', {
       apdId: badAPDId,
       newStatus: 'approved'
     });
     expect(response.status).toBe(400);
-    controller.abort();
   });
 
   it('returns 200', async () => {
-    const controller = new AbortController();
-    const api = apiKeyAuth(null, controller);
-    const response = await api.patch('/apds/submissions', [
+    const response = await apiKeyAuth.patch('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
       }
     ]);
     expect(response.status).toEqual(200);
-    controller.abort();
   });
 });

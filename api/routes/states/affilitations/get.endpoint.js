@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -12,15 +13,12 @@ import {
 // user, change once user is set
 describe('Affiliations endpoint | GET', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateAdmin;
   beforeAll(async () => {
-    api = login('state-admin', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('GET /states/:stateId/affiliations', () => {
@@ -33,11 +31,8 @@ describe('Affiliations endpoint | GET', () => {
     });
     // Figure this out when we have the
     it('returns 200 for the "federal" state', async () => {
-      const controllerFed = new AbortController();
-      const fedAdminApi = login('fed-admin', controllerFed);
-      const response = await fedAdminApi.get('/states/fd/affiliations');
+      const response = await apiAsFedAdmin.get('/states/fd/affiliations');
       expect(response.status).toEqual(200);
-      controllerFed.abort();
     });
   });
 

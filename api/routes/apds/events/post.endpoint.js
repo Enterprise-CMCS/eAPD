@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -10,15 +10,12 @@ import { akAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe('APD events endpoints', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateAdmin;
   beforeAll(async () => {
-    api = login('state-admin', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {

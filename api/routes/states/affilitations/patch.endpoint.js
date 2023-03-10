@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -10,18 +11,15 @@ import { getAllActiveRoles } from '../../../db/roles.js';
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateAdmin;
   let stateStaffId = 0;
   beforeAll(async () => {
-    api = login('state-admin', controller);
     await setupDB(db);
     const [{ id }] = await getAllActiveRoles(['eAPD State Staff'], { db });
     stateStaffId = id;
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   const url = (stateId, affiliationId) =>
@@ -42,11 +40,8 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it('returns 400 when US state is incorrect for a fed admin', async () => {
-      const controllerFed = new AbortController();
-      const fedAdminApi = login('fed-admin', controllerFed);
-      const response = await fedAdminApi.patch(url('zz', 4000));
+      const response = await apiAsFedAdmin.patch(url('zz', 4000));
       expect(response.status).toEqual(400);
-      controllerFed.abort();
     });
 
     it('returns 403 when US state is not authorized', async () => {

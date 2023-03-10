@@ -2,22 +2,19 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../../endpoint-tests/utils.js';
 
 describe('auth/certifications/files endpoints', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAllPermissions;
   beforeAll(async () => {
-    api = login(null, controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('Get a file by fileId | GET /auth/certifications/:fileID', () => {

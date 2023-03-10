@@ -2,22 +2,19 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications get endpoint', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsFedAdmin;
   beforeAll(async () => {
-    api = login('fed-admin', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('GET /auth/certifications', () => {

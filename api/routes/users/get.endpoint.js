@@ -2,18 +2,14 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
 
 const url = '/users';
-const controller = new AbortController();
 
-const get = (id = '') => {
-  const api = login(null, controller);
-  return api.get(`${url}/${id}`);
-};
+const get = (id = '') => apiAllPermissions.get(`${url}/${id}`);
 
 describe('users endpoint', () => {
   const db = getDB();
@@ -22,7 +18,6 @@ describe('users endpoint', () => {
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('users endpoint | GET /users/:userID', () => {

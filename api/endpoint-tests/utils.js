@@ -24,9 +24,7 @@ const axiosDefaults = {
   validateStatus: status => status < 500
 };
 
-export const api = axios.create(axiosDefaults);
-
-export const apiKeyAuth = (token, controller = null) => {
+const apiKeyHeader = token => {
   const ip = token || '10.0.0.0';
   const options = {
     ...axiosDefaults,
@@ -34,13 +32,13 @@ export const apiKeyAuth = (token, controller = null) => {
       'x-forwarded-for': ip
     }
   };
-  if (controller) {
-    options.signal = controller.signal;
-  }
   return axios.create(options);
 };
 
-export const login = (token, controller = null) => {
+export const apiNoKey = apiKeyHeader('bad ip');
+export const apiKeyAuth = apiKeyHeader();
+
+const login = token => {
   const jwt = token || 'all-permissions';
   const options = {
     ...axiosDefaults,
@@ -48,23 +46,27 @@ export const login = (token, controller = null) => {
       Authorization: `Bearer ${jwt}`
     }
   };
-  if (controller) {
-    options.signal = controller.signal;
-  }
   return axios.create(options);
 };
 
+export const apiAllPermissions = login('all-permissions');
+export const apiAsFedAdmin = login('fed-admin');
+export const apiAsStateAdmin = login('state-admin');
+export const apiAsStateStaff = login('state-staff');
+export const apiNoPermissionsNoState = login('all-permissions-no-state');
+export const apiNoPermissions = login('no-permissions');
+const apiNoAuth = axios.create(axiosDefaults);
+
 export const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
-    const response = await api[method](url);
+    const response = await apiNoAuth[method](url);
     expect(response.status).toEqual(401);
   });
 };
 
 export const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
-    const authenticatedClient = login('no-permissions');
-    const response = await authenticatedClient[method](url);
+    const response = await apiNoPermissions[method](url);
     expect(response.status).toEqual(403);
   });
 };

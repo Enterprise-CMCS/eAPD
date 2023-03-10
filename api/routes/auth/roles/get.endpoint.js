@@ -3,7 +3,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -11,15 +11,12 @@ import {
 describe('auth roles endpoint get endpoint', () => {
   jest.setTimeout(300000);
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateAdmin;
   beforeAll(async () => {
-    api = login('state-admin', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('GET /auth/roles', () => {

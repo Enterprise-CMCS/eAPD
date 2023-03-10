@@ -4,7 +4,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateStaff,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -17,15 +17,12 @@ import {
 
 describe('APD files endpoints', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateStaff;
   beforeAll(async () => {
-    api = login('state-staff', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {

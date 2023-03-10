@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login
+  apiAllPermissions
 } from '../../endpoint-tests/utils.js';
 import openApi from './index.js';
 
@@ -12,15 +12,12 @@ const openAPI = JSON.parse(JSON.stringify(openApi));
 
 describe('Open-API endpoint', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAllPermissions;
   beforeAll(async () => {
-    api = login(null, controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   it('open-api endpoint | GET /open-api', async () => {

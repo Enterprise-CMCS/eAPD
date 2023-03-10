@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
@@ -15,15 +15,12 @@ import {
 
 describe('APD endpoint', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAsStateAdmin;
   beforeAll(async () => {
-    api = login('state-admin', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {
@@ -55,15 +52,12 @@ describe('APD endpoint', () => {
       });
 
       it('with a valid update', async () => {
-        const controllerAdmin = new AbortController();
-        const apiAdmin = login('state-admin', controllerAdmin);
-        const response = await apiAdmin.delete(url(akAPDId), {
+        const response = await api.delete(url(akAPDId), {
           programOverview: 'new overview'
         });
 
         expect(response.status).toEqual(204);
         expect(response.data).toMatchSnapshot();
-        controllerAdmin.abort();
       });
     });
   });

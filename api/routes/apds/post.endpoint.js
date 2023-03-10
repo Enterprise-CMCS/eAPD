@@ -3,22 +3,19 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();
-  const controller = new AbortController();
-  let api;
+  const api = apiAllPermissions;
   beforeAll(async () => {
-    api = login(null, controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
-    controller.abort();
   });
 
   const url = `/apds`;
