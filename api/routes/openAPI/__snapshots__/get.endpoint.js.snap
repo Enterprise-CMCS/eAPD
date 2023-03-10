@@ -1,0 +1,4396 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Open-API endpoint open-api endpoint | GET /open-api 1`] = `
+Object {
+  "components": Object {
+    "schemas": Object {
+      "activityTotal": Object {
+        "properties": Object {
+          "data": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "type": "number",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "type": "number",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "type": "number",
+                  },
+                },
+              },
+              "otherFunding": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "contractors": Object {
+                        "type": "number",
+                      },
+                      "expenses": Object {
+                        "type": "number",
+                      },
+                      "statePersonnel": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "type": "number",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "fundingSource": Object {
+            "type": "string",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "name": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "adminCheck": Object {
+        "items": Object {
+          "properties": Object {
+            "fieldDescription": Object {
+              "description": "Error message returned from schema",
+              "type": "string",
+            },
+            "link": Object {
+              "description": "Link to page where admin check error occured",
+              "type": "string",
+            },
+            "section": Object {
+              "description": "Section name/title of admin check error",
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "type": "array",
+      },
+      "budgetActivity": Object {
+        "properties": Object {
+          "costsByFFY": Object {
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9]{4}$": Object {
+                "properties": Object {
+                  "federal": Object {
+                    "type": "number",
+                  },
+                  "medicaid": Object {
+                    "type": "number",
+                  },
+                  "state": Object {
+                    "type": "number",
+                  },
+                  "total": Object {
+                    "type": "number",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "quarterlyFFP": Object {
+            "properties": Object {
+              "total": Object {
+                "properties": Object {
+                  "combined": Object {
+                    "type": "number",
+                  },
+                  "contractors": Object {
+                    "type": "number",
+                  },
+                  "inHouse": Object {
+                    "type": "number",
+                  },
+                },
+                "type": "object",
+              },
+              "year": Object {
+                "properties": Object {
+                  "1": Object {
+                    "$ref": "#/components/schemas/costPercentByCostType",
+                  },
+                  "2": Object {
+                    "$ref": "#/components/schemas/costPercentByCostType",
+                  },
+                  "3": Object {
+                    "$ref": "#/components/schemas/costPercentByCostType",
+                  },
+                  "4": Object {
+                    "$ref": "#/components/schemas/costPercentByCostType",
+                  },
+                  "subtotal": Object {
+                    "$ref": "#/components/schemas/costPercentByCostType",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+        },
+        "type": "object",
+      },
+      "costPercentByCostType": Object {
+        "properties": Object {
+          "combined": Object {
+            "properties": Object {
+              "dollars": Object {
+                "type": "number",
+              },
+              "percent": Object {
+                "type": "number",
+              },
+            },
+            "type": "object",
+          },
+          "contractors": Object {
+            "properties": Object {
+              "dollars": Object {
+                "type": "number",
+              },
+              "percent": Object {
+                "type": "number",
+              },
+            },
+            "type": "object",
+          },
+          "inHouse": Object {
+            "properties": Object {
+              "dollars": Object {
+                "type": "number",
+              },
+              "percent": Object {
+                "type": "number",
+              },
+            },
+            "type": "object",
+          },
+        },
+        "type": "object",
+      },
+      "hitech": Object {
+        "properties": Object {
+          "activities": Object {
+            "items": Object {
+              "properties": Object {
+                "activityId": Object {
+                  "description": "Key for Activity",
+                  "type": "string",
+                },
+                "activityOverview": Object {
+                  "description": "The Activity overview",
+                  "properties": Object {
+                    "alernatives": Object {
+                      "description": "Alternative considerations for the activity",
+                      "type": "string",
+                    },
+                    "description": Object {
+                      "description": "Activity description",
+                      "type": "string",
+                    },
+                    "standardsAndConditions": Object {
+                      "description": "Description of the 11 standards and conditions",
+                      "properties": Object {
+                        "doesNotSupport": Object {
+                          "description": "If this activity does not support the standards and conditions, an explanation of why not",
+                          "type": "string",
+                        },
+                        "supports": Object {
+                          "description": "A description of how this activity supports the standards and conditions",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "summary": Object {
+                      "description": "Short summary of the activity",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "activitySchedule": Object {
+                  "description": "The start and end date for the activity",
+                  "properties": Object {
+                    "plannedEndDate": Object {
+                      "description": "The date this activity is planned to begin",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "plannedStartDate": Object {
+                      "description": "The date this activity is planned to be completed",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "contractorResources": Object {
+                  "items": Object {
+                    "description": "Activity contractor resource",
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Description",
+                        "type": "string",
+                      },
+                      "end": Object {
+                        "description": "When the contractor resource will end work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "hourly": Object {
+                        "properties": Object {
+                          "data": Object {
+                            "x-patternProperties": Object {
+                              "^[0-9]{4}$": Object {
+                                "properties": Object {
+                                  "hours": Object {
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                  "rate": Object {
+                                    "description": "Contractor hourly rate for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                          },
+                          "useHourly": Object {
+                            "description": "Whether to use hourly rates for this contractor",
+                            "type": "boolean",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "name": Object {
+                        "description": "Name of the contractor resource",
+                        "type": "string",
+                      },
+                      "start": Object {
+                        "description": "When the contractor resource will begin work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "totalCost": Object {
+                        "description": "Contractor resource total cost",
+                        "type": "number",
+                      },
+                      "years": Object {
+                        "description": "Details of each year the contractor resource will be working",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Contractor resource cost of the year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "costAllocation": Object {
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "properties": Object {
+                        "ffp": Object {
+                          "properties": Object {
+                            "federal": Object {
+                              "description": "Federal share for this activity for this year, from 0 to 100",
+                              "type": "number",
+                            },
+                            "state": Object {
+                              "description": "State share for this activity for this year, from 0 to 100",
+                              "type": "number",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "other": Object {
+                          "description": "Other amount (dollars) for this activity for this year",
+                          "type": "number",
+                        },
+                      },
+                      "type": "object",
+                    },
+                  },
+                },
+                "costAllocationNarrative": Object {
+                  "properties": Object {
+                    "methodology": Object {
+                      "description": "Description of the cost allocation methodology",
+                      "type": "string",
+                    },
+                    "years": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "properties": Object {
+                            "otherSources": Object {
+                              "description": "Description of other funding sources",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
+                    },
+                  },
+                  "type": "object",
+                },
+                "expenses": Object {
+                  "items": Object {
+                    "description": "Activity expense",
+                    "properties": Object {
+                      "category": Object {
+                        "description": "Expense category, such as \\"Hardware, software, and licensing\\"",
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "description": "Short description of the expense",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "description": "Expense entry",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Expense amount for the given federal fiscal year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "fundingSource": Object {
+                  "description": "Federal funding source that applies to this activity",
+                  "type": "string",
+                },
+                "milestones": Object {
+                  "items": Object {
+                    "description": "Activity milestone item",
+                    "properties": Object {
+                      "endDate": Object {
+                        "description": "The date this milestone is planned to be met",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "milestone": Object {
+                        "description": "The name of the milestone",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "name": Object {
+                  "description": "Activity name, unique within an APD",
+                  "type": "string",
+                },
+                "outcomes": Object {
+                  "items": Object {
+                    "description": "Activity outcome",
+                    "properties": Object {
+                      "metrics": Object {
+                        "items": Object {
+                          "properties": Object {
+                            "metric": Object {
+                              "description": "metric",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "type": "array",
+                      },
+                      "outcome": Object {
+                        "description": "Outcome description",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "quarterlyFFP": Object {
+                  "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                  "type": "object",
+                  "x-patternProperties": Object {
+                    "^[0-9]{4}$": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[1-4]$": Object {
+                          "properties": Object {
+                            "contractors": Object {
+                              "description": "Contractor costs for the given quarter of the given federal fiscal year",
+                              "type": "number",
+                            },
+                            "inHouse": Object {
+                              "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year",
+                              "type": "number",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
+                    },
+                  },
+                },
+                "statePersonnel": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Description of the role",
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "description": "Title for the state personnel",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "amt": Object {
+                                "description": "State personnel's total cost for the federal fiscal year",
+                                "type": "number",
+                              },
+                              "perc": Object {
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+              "type": "object",
+            },
+            "type": "array",
+          },
+          "apdOverview": Object {
+            "description": "APD Overview section",
+            "properties": Object {
+              "narrativeHIE": Object {
+                "description": "Brief description of HIE-funded activities contained in this APD",
+                "type": "string",
+              },
+              "narrativeHIT": Object {
+                "description": "Brief description of HIT-funded activities contained in this APD",
+                "type": "string",
+              },
+              "narrativeMMIS": Object {
+                "description": "Brief description of MMIS-funded activities contained in this APD",
+                "type": "string",
+              },
+              "programOverview": Object {
+                "description": "An overview of the overall program",
+                "type": "string",
+              },
+              "updateStatus": Object {
+                "description": "APD update status and type",
+                "properties": Object {
+                  "annualUpdate": Object {
+                    "type": "boolean",
+                  },
+                  "asNeededUpdate": Object {
+                    "type": "boolean",
+                  },
+                  "isUpdateAPD": Object {
+                    "type": "boolean",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "assurancesAndCompliances": Object {
+            "description": "Federal citations that states must assert compliance with. This is a free-form object.",
+            "type": "object",
+          },
+          "created": Object {
+            "description": "Timestamp of when this APD was created",
+            "format": "date-time",
+            "type": "string",
+          },
+          "id": Object {
+            "description": "APD ID",
+            "type": "number",
+          },
+          "keyStatePersonnel": Object {
+            "description": "Key State Personnel section",
+            "properties": Object {
+              "keyPersonnel": Object {
+                "items": Object {
+                  "properties": Object {
+                    "costs": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "Person's cost for the year described by the property name",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "email": Object {
+                      "description": "Person's email address",
+                      "type": "string",
+                    },
+                    "fte": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{0,2}": Object {
+                          "description": "FTE equivalent of this person's time dedicated to the project",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "hasCosts": Object {
+                      "description": "Whether the person has costs attributable to the project",
+                      "type": "boolean",
+                    },
+                    "isPrimary": Object {
+                      "description": "Whether the person is the primary point of contact for the APD",
+                      "type": "boolean",
+                    },
+                    "name": Object {
+                      "description": "Person's name",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "Person's position",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+              "medicaidDirector": Object {
+                "properties": Object {
+                  "email": Object {
+                    "description": "State Medicaid director's email address",
+                    "type": "string",
+                  },
+                  "name": Object {
+                    "description": "State Medicaid director's name",
+                    "type": "string",
+                  },
+                  "phone": Object {
+                    "description": "State Medicaid director's phone number",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+              "medicaidOffice": Object {
+                "properties": Object {
+                  "address1": Object {
+                    "description": "State Medicaid office address",
+                    "type": "string",
+                  },
+                  "address2": Object {
+                    "description": "State Medicaid office address",
+                    "type": "string",
+                  },
+                  "city": Object {
+                    "description": "State Medicaid office address city",
+                    "type": "string",
+                  },
+                  "state": Object {
+                    "description": "State Medicaid office address state",
+                    "type": "string",
+                  },
+                  "zip": Object {
+                    "description": "State Medicaid office address ZIP code",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "name": Object {
+            "description": "The APD document name, following SEA naming conventions",
+            "type": "string",
+          },
+          "previousActivities": Object {
+            "description": "Previous Activities section",
+            "properties": Object {
+              "actualExpenditures": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "hithie": Object {
+                        "description": "HIT- and HIE-funded expenses",
+                        "properties": Object {
+                          "federalActual": Object {
+                            "description": "Total federal share actually spent",
+                            "type": "number",
+                          },
+                          "totalApproved": Object {
+                            "description": "Total approved in the previous APD",
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "mmis": Object {
+                        "description": "HIT-funded expenses",
+                        "properties": Object {
+                          "50": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "75": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "90": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "previousActivitySummary": Object {
+                "description": "High-level outline of activities approved in previous APD",
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "proposedBudget": Object {
+            "description": "Proposed budget section",
+            "properties": Object {
+              "incentivePayments": Object {
+                "description": "APD incentive payments",
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^e[hc](Amt|Ct)$": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[1-4]$": Object {
+                            "description": "EH or EC payment or count for the given federal fiscal year and quarter",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "state": Object {
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
+            "type": "string",
+          },
+          "status": Object {
+            "description": "Status",
+            "type": "string",
+          },
+          "updated": Object {
+            "description": "Timestamp of the last save to this APD",
+            "format": "date-time",
+            "type": "string",
+          },
+          "yearOptions": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+          "years": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+        },
+        "type": "object",
+      },
+      "hitechBudget": Object {
+        "properties": Object {
+          "activities": Object {
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9a-zA-Z]{6}$": Object {
+                "properties": Object {
+                  "$ref": "#/components/schemas/budgetActivity",
+                },
+                "type": "object",
+              },
+            },
+          },
+          "activityTotals": Object {
+            "items": Object {
+              "$ref": "#/components/schemas/activityTotal",
+            },
+            "type": "array",
+          },
+          "combined": Object {
+            "type": "object",
+            "x-patternProperties": Object {
+              "^([0-9]{4}|total)$": Object {
+                "properties": Object {
+                  "federal": Object {
+                    "type": "number",
+                  },
+                  "medicaid": Object {
+                    "type": "number",
+                  },
+                  "state": Object {
+                    "type": "number",
+                  },
+                  "total": Object {
+                    "type": "number",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "federalShareByFFYQuarter": Object {
+            "properties": Object {
+              "hitAndHie": Object {
+                "properties": Object {
+                  "total": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "type": "number",
+                      },
+                      "inHouse": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "years": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "1": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "2": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "3": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "4": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "subtotal": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+              "mmis": Object {
+                "properties": Object {
+                  "total": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "type": "number",
+                      },
+                      "inHouse": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "years": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "1": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "2": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "3": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "4": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "subtotal": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "hie": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "hit": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "hitAndHie": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "mmis": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "mmisByFFP": Object {
+            "properties": Object {
+              "0-100": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "50-50": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "75-25": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "90-10": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+          },
+          "years": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+        },
+        "type": "object",
+      },
+      "mmis": Object {
+        "properties": Object {
+          "activities": Object {
+            "items": Object {
+              "properties": Object {
+                "activityId": Object {
+                  "description": "Key for Activity",
+                  "type": "string",
+                },
+                "activityOverview": Object {
+                  "properties": Object {
+                    "activitySnapshot": Object {
+                      "type": "string",
+                    },
+                    "problemStatement": Object {
+                      "type": "string",
+                    },
+                    "proposedSolution": Object {
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "activitySchedule": Object {
+                  "description": "The start and end date for the activity",
+                  "properties": Object {
+                    "plannedEndDate": Object {
+                      "description": "The date this activity is planned to begin",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "plannedStartDate": Object {
+                      "description": "The date this activity is planned to be completed",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "analysisOfAlternativesAndRisks": Object {
+                  "properties": Object {
+                    "alternativeAnalysis": Object {
+                      "type": "boolean",
+                    },
+                    "costBenefitAnalysis": Object {
+                      "type": "boolean",
+                    },
+                    "feasibilityStudy": Object {
+                      "type": "boolean",
+                    },
+                    "forseeableRisks": Object {
+                      "type": "boolean",
+                    },
+                    "requirementsAnalysis": Object {
+                      "type": "boolean",
+                    },
+                  },
+                  "type": "object",
+                },
+                "conditionsForEnhancedFunding": Object {
+                  "properties": Object {
+                    "enhancedFundingJustification": Object {
+                      "type": "string",
+                    },
+                    "enhancedFundingQualification": Object {
+                      "type": "boolean",
+                    },
+                  },
+                  "type": "object",
+                },
+                "contractorResources": Object {
+                  "items": Object {
+                    "description": "Activity contractor resource",
+                    "properties": Object {
+                      "costAllocation": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "ffp": Object {
+                                "properties": Object {
+                                  "federal": Object {
+                                    "description": "Federal share for this activity for this year, from 0 to 100",
+                                    "type": "number",
+                                  },
+                                  "state": Object {
+                                    "description": "State share for this activity for this year, from 0 to 100",
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "other": Object {
+                                "description": "Other amount (dollars) for this activity for this year",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                      "description": Object {
+                        "description": "Description",
+                        "type": "string",
+                      },
+                      "end": Object {
+                        "description": "When the contractor resource will end work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "hourly": Object {
+                        "properties": Object {
+                          "data": Object {
+                            "x-patternProperties": Object {
+                              "^[0-9]{4}$": Object {
+                                "properties": Object {
+                                  "hours": Object {
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                  "rate": Object {
+                                    "description": "Contractor hourly rate for the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                          },
+                          "useHourly": Object {
+                            "description": "Whether to use hourly rates for this contractor",
+                            "type": "boolean",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "name": Object {
+                        "description": "Name of the contractor resource",
+                        "type": "string",
+                      },
+                      "quarterlyFFP": Object {
+                        "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "type": "object",
+                            "x-patternProperties": Object {
+                              "^[1-4]$": Object {
+                                "properties": Object {
+                                  "contractors": Object {
+                                    "description": "Contractor costs for the given quarter of the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year",
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                          },
+                        },
+                      },
+                      "start": Object {
+                        "description": "When the contractor resource will begin work; date only",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "totalCost": Object {
+                        "description": "Contractor resource total cost",
+                        "type": "number",
+                      },
+                      "years": Object {
+                        "description": "Details of each year the contractor resource will be working",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Contractor resource cost of the year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "expenses": Object {
+                  "items": Object {
+                    "description": "Activity expense",
+                    "properties": Object {
+                      "category": Object {
+                        "description": "Expense category, such as \\"Hardware, software, and licensing\\"",
+                        "type": "string",
+                      },
+                      "description": Object {
+                        "description": "Short description of the expense",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "description": "Expense entry",
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "description": "Expense amount for the given federal fiscal year",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "milestones": Object {
+                  "items": Object {
+                    "description": "Activity milestone item",
+                    "properties": Object {
+                      "endDate": Object {
+                        "description": "The date this milestone is planned to be met",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "milestone": Object {
+                        "description": "The name of the milestone",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "name": Object {
+                  "description": "Activity name, unique within an APD",
+                  "type": "string",
+                },
+                "outcomes": Object {
+                  "items": Object {
+                    "description": "Activity outcome",
+                    "properties": Object {
+                      "metrics": Object {
+                        "items": Object {
+                          "properties": Object {
+                            "metric": Object {
+                              "description": "metric",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "type": "array",
+                      },
+                      "outcome": Object {
+                        "description": "Outcome description",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+                "statePersonnel": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "description": Object {
+                        "description": "Description of the role",
+                        "type": "string",
+                      },
+                      "title": Object {
+                        "description": "Title for the state personnel",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "amt": Object {
+                                "description": "State personnel's total cost for the federal fiscal year",
+                                "type": "number",
+                              },
+                              "perc": Object {
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+              "type": "object",
+            },
+            "type": "array",
+          },
+          "apdOverview": Object {
+            "description": "APD Overview section",
+            "properties": Object {
+              "medicaidBusinessAreas": Object {
+                "properties": Object {
+                  "assetVerificationSystem": Object {
+                    "type": "boolean",
+                  },
+                  "claimsProcessing": Object {
+                    "type": "boolean",
+                  },
+                  "decisionSupportSystemDW": Object {
+                    "type": "boolean",
+                  },
+                  "electronicVisitVerification": Object {
+                    "type": "boolean",
+                  },
+                  "encounterProcessingSystemMCS": Object {
+                    "type": "boolean",
+                  },
+                  "financialManagement": Object {
+                    "type": "boolean",
+                  },
+                  "healthInformationExchange": Object {
+                    "type": "boolean",
+                  },
+                  "longTermServicesSupports": Object {
+                    "type": "boolean",
+                  },
+                  "memberManagement": Object {
+                    "type": "boolean",
+                  },
+                  "other": Object {
+                    "type": "boolean",
+                  },
+                  "otherMedicaidBusinessAreas": Object {
+                    "type": "string",
+                  },
+                  "pharmacyBenefitManagementPOS": Object {
+                    "type": "boolean",
+                  },
+                  "programIntegrity": Object {
+                    "type": "boolean",
+                  },
+                  "providerManagement": Object {
+                    "type": "boolean",
+                  },
+                  "thirdPartyLiability": Object {
+                    "type": "boolean",
+                  },
+                  "waiverSupportSystems": Object {
+                    "type": "boolean",
+                  },
+                },
+                "type": "object",
+              },
+              "updateStatus": Object {
+                "description": "APD update status and type",
+                "properties": Object {
+                  "annualUpdate": Object {
+                    "type": "boolean",
+                  },
+                  "asNeededUpdate": Object {
+                    "type": "boolean",
+                  },
+                  "isUpdateAPD": Object {
+                    "type": "boolean",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "assurancesAndCompliances": Object {
+            "description": "Federal citations that states must assert compliance with. This is a free-form object.",
+            "type": "object",
+          },
+          "created": Object {
+            "description": "Timestamp of when this APD was created",
+            "format": "date-time",
+            "type": "string",
+          },
+          "id": Object {
+            "description": "APD ID",
+            "type": "number",
+          },
+          "keyStatePersonnel": Object {
+            "description": "Key State Personnel section",
+            "properties": Object {
+              "keyPersonnel": Object {
+                "items": Object {
+                  "properties": Object {
+                    "costs": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "Person's cost for the year described by the property name",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "email": Object {
+                      "description": "Person's email address",
+                      "type": "string",
+                    },
+                    "fte": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{0,2}": Object {
+                          "description": "FTE equivalent of this person's time dedicated to the project",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "hasCosts": Object {
+                      "description": "Whether the person has costs attributable to the project",
+                      "type": "boolean",
+                    },
+                    "isPrimary": Object {
+                      "description": "Whether the person is the primary point of contact for the APD",
+                      "type": "boolean",
+                    },
+                    "medicaidShare": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "The Medicaid Share as a percentage of an individual Key State Personnel by year",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "name": Object {
+                      "description": "Person's name",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "Person's position",
+                      "type": "string",
+                    },
+                    "split": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "The Federal-State split by year",
+                          "type": "number",
+                        },
+                      },
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+              "medicaidDirector": Object {
+                "properties": Object {
+                  "email": Object {
+                    "description": "State Medicaid director's email address",
+                    "type": "string",
+                  },
+                  "name": Object {
+                    "description": "State Medicaid director's name",
+                    "type": "string",
+                  },
+                  "phone": Object {
+                    "description": "State Medicaid director's phone number",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+              "medicaidOffice": Object {
+                "properties": Object {
+                  "address1": Object {
+                    "description": "State Medicaid office address",
+                    "type": "string",
+                  },
+                  "address2": Object {
+                    "description": "State Medicaid office address",
+                    "type": "string",
+                  },
+                  "city": Object {
+                    "description": "State Medicaid office address city",
+                    "type": "string",
+                  },
+                  "state": Object {
+                    "description": "State Medicaid office address state",
+                    "type": "string",
+                  },
+                  "zip": Object {
+                    "description": "State Medicaid office address ZIP code",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "name": Object {
+            "description": "The APD document name, following SEA naming conventions",
+            "type": "string",
+          },
+          "previousActivities": Object {
+            "description": "Previous Activities section",
+            "properties": Object {
+              "actualExpenditures": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "mmis": Object {
+                        "description": "MMIS-funded expenses",
+                        "properties": Object {
+                          "50": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "75": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "90": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "previousActivitySummary": Object {
+                "description": "High-level outline of activities approved in previous APD",
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "state": Object {
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
+            "type": "string",
+          },
+          "statePrioritiesAndScope": Object {
+            "properties": Object {
+              "medicaidProgramAndPriorities": Object {
+                "type": "string",
+              },
+              "mesIntroduction": Object {
+                "type": "string",
+              },
+              "scopeOfAPD": Object {
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "status": Object {
+            "description": "Status",
+            "type": "string",
+          },
+          "updated": Object {
+            "description": "Timestamp of the last save to this APD",
+            "format": "date-time",
+            "type": "string",
+          },
+          "yearOptions": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+          "years": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+        },
+        "type": "object",
+      },
+      "mmisBudget": Object {
+        "properties": Object {
+          "activities": Object {
+            "type": "object",
+            "x-patternProperties": Object {
+              "^[0-9a-zA-Z]{6}$": Object {
+                "properties": Object {
+                  "$ref": "#/components/schemas/budgetActivity",
+                },
+                "type": "object",
+              },
+            },
+          },
+          "activityTotals": Object {
+            "items": Object {
+              "$ref": "#/components/schemas/activityTotal",
+            },
+            "type": "array",
+          },
+          "combined": Object {
+            "type": "object",
+            "x-patternProperties": Object {
+              "^([0-9]{4}|total)$": Object {
+                "properties": Object {
+                  "federal": Object {
+                    "type": "number",
+                  },
+                  "medicaid": Object {
+                    "type": "number",
+                  },
+                  "state": Object {
+                    "type": "number",
+                  },
+                  "total": Object {
+                    "type": "number",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "federalShareByFFYQuarter": Object {
+            "properties": Object {
+              "mmis": Object {
+                "properties": Object {
+                  "total": Object {
+                    "properties": Object {
+                      "combined": Object {
+                        "type": "number",
+                      },
+                      "contractors": Object {
+                        "type": "number",
+                      },
+                      "inHouse": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "years": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "1": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "2": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "3": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "4": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "subtotal": Object {
+                            "properties": Object {
+                              "combined": Object {
+                                "type": "number",
+                              },
+                              "contractors": Object {
+                                "type": "number",
+                              },
+                              "inHouse": Object {
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+            },
+            "type": "object",
+          },
+          "mmis": Object {
+            "properties": Object {
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "contractors": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "expenses": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "statePersonnel": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "mmisByFFP": Object {
+            "properties": Object {
+              "0-100": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "50-50": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "75-25": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "90-10": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+            },
+          },
+          "years": Object {
+            "items": Object {
+              "type": "string",
+            },
+            "type": "array",
+          },
+        },
+        "type": "object",
+      },
+    },
+    "securitySchemes": Object {
+      "apiKeyAuth": Object {
+        "in": "header",
+        "name": "X-API-KEY",
+        "type": "apiKey",
+      },
+      "bearerAuth": Object {
+        "bearerFormat": "Bearer xxx.yyy.zzz",
+        "scheme": "bearer",
+        "type": "http",
+      },
+    },
+  },
+  "info": Object {
+    "description": "The API for the CMS HITECH APD app.",
+    "title": "CMS HITECH APD API",
+    "version": "0.0.1",
+  },
+  "openapi": "3.0.0",
+  "paths": Object {
+    "/affiliations/me": Object {
+      "get": Object {
+        "description": "Get the current affiliations for the logged in user",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "createdAt": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "displayName": Object {
+                        "description": "The full name of the user",
+                        "type": "string",
+                      },
+                      "email": Object {
+                        "description": "The email address of the user",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role": Object {
+                        "description": "The role applied to this user for this US State",
+                        "type": "string",
+                      },
+                      "stateId": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updatedAt": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "userId": Object {
+                        "description": "ID of user",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "A list of affiliations for the logged in user",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
+    "/apds": Object {
+      "get": Object {
+        "description": "Get a list of all apds associated with requesting user",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "created": Object {
+                        "description": "Timestamp of when this APD was created",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "APD ID",
+                        "type": "number",
+                      },
+                      "status": Object {
+                        "description": "Current status of the APD; e.g., \\"draft\\", \\"archived\\", etc.",
+                        "type": "string",
+                      },
+                      "updated": Object {
+                        "description": "Timestamp of the last save to this APD",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "years": Object {
+                        "items": Object {
+                          "type": "number",
+                        },
+                        "type": "array",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The list of a user’s apds",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Get all of the APDs available to the user",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+      "post": Object {
+        "description": "Create a new draft APD for the current user's state",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "oneOf": Array [
+                    Object {
+                      "$ref": "#/components/schemas/hitech",
+                    },
+                    Object {
+                      "$ref": "#/components/schemas/mmis",
+                    },
+                  ],
+                },
+              },
+            },
+            "description": "The new APD",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Create a new draft APD associated with the user's state",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+    },
+    "/apds/{id}": Object {
+      "delete": Object {
+        "description": "Updates an APD's status to \\"archive\\" and prevents it from being edited",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd to archive",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "204": Object {
+            "description": "The APD was archived",
+          },
+          "400": Object {
+            "description": "The apd is not in draft",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Archive an APD",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+      "get": Object {
+        "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd to get",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "oneOf": Array [
+                    Object {
+                      "$ref": "#/components/schemas/hitech",
+                    },
+                    Object {
+                      "$ref": "#/components/schemas/mmis",
+                    },
+                  ],
+                },
+              },
+            },
+            "description": "The APD",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd does not exist",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Get a single, complete APD",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+      "patch": Object {
+        "description": "Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd to update",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "items": Object {
+                  "description": "A JSON Patch object",
+                  "properties": Object {
+                    "op": Object {
+                      "description": "The JSON Patch operation. This API only supports add, remove, and replace.",
+                      "enum": Array [
+                        "add",
+                        "remove",
+                        "replace",
+                      ],
+                      "type": "string",
+                    },
+                    "path": Object {
+                      "description": "The path of the value to be operated on, specified as a JSON Pointer",
+                      "type": "string",
+                    },
+                    "value": Object {
+                      "description": "For add or replace operations, the new value to be applied",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+            },
+          },
+          "description": "A set of JSON Patch objects to be applied to the APD to change it",
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "adminCheck": Object {
+                      "$ref": "#/components/schemas/adminCheck",
+                    },
+                    "apd": Object {
+                      "oneOf": Array [
+                        Object {
+                          "$ref": "#/components/schemas/hitech",
+                        },
+                        Object {
+                          "$ref": "#/components/schemas/mmis",
+                        },
+                      ],
+                    },
+                    "budget": Object {
+                      "oneOf": Array [
+                        Object {
+                          "$ref": "#/components/schemas/hitechBudget",
+                        },
+                        Object {
+                          "$ref": "#/components/schemas/mmisBudget",
+                        },
+                      ],
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The update was successful",
+          },
+          "400": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": Object {
+                      "path": Object {
+                        "description": "A JSON Pointer path whose patched value is invalid",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The update failed due to a problem with the input data",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd does not exist",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Update a specific APD",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+    },
+    "/apds/{id}/events": Object {
+      "post": Object {
+        "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the event is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "eventType": Object {
+                    "description": "the type of the event performed",
+                    "type": "string",
+                  },
+                  "metadata": Object {
+                    "description": "anny additional metadata to add to the log",
+                    "type": "object",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "success": Object {
+                      "description": "whether the event was successfully logged",
+                      "type": "boolean",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The status of the event being logged",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Log an event performed on an APD",
+        "tags": Array [
+          "APDs",
+          "events",
+        ],
+      },
+    },
+    "/apds/{id}/files": Object {
+      "post": Object {
+        "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the file is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "multipart/form-data": Object {
+              "schema": Object {
+                "properties": Object {
+                  "file": Object {
+                    "description": "The file body",
+                    "format": "binary",
+                    "type": "string",
+                  },
+                  "metadata": Object {
+                    "description": "arbitrary metadata to attach to the file",
+                    "type": "object",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "url": Object {
+                      "description": "The URL of the uploaded file, absolute, relative to the API host",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+          },
+          "400": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
+          },
+          "415": Object {
+            "description": "The file is not a valid format",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Upload a file associated with an APD",
+        "tags": Array [
+          "APDs",
+          "files",
+        ],
+      },
+    },
+    "/apds/{id}/files/{fileID}": Object {
+      "get": Object {
+        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd the file is associated with",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+          Object {
+            "description": "The ID of the file to get",
+            "in": "path",
+            "name": "fileID",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "*/*": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+          "400": Object {
+            "description": "The file does not belong to the APD or does not exist",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Get a file associated with an APD",
+        "tags": Array [
+          "APDs",
+          "files",
+        ],
+      },
+    },
+    "/auth/activities": Object {
+      "get": Object {
+        "description": "Get a list of all activities in the system",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "Activity ID",
+                        "type": "number",
+                      },
+                      "name": Object {
+                        "description": "Activity name",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The list of activities known to the system",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Gets the list of all activities",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
+    "/auth/certifications": Object {
+      "delete": Object {
+        "description": "Archives a previously uploaded state admin certification letter. Only non-matched letters can be archived/deleted.",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "certificationId": Object {
+                    "description": "ID of the certification letter",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification archived successfully",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to archive certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Archives a previously uploaded state admin certification letter.",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
+      "get": Object {
+        "description": "get the state admin certifications and potential matches for loading up the state admin certification table",
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification form successfully saved",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to upload certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Retrieve the Add State Certifications and additional details",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
+      "post": Object {
+        "description": "Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "email": Object {
+                    "description": "Email of individual being certified",
+                    "type": "string",
+                  },
+                  "ffy": Object {
+                    "description": "Federal Fiscal Year (FFY) that the certification is valid for",
+                    "type": "integer",
+                  },
+                  "fileUrl": Object {
+                    "description": "URL provided from the /certifications/files endpoint",
+                    "type": "string",
+                  },
+                  "name": Object {
+                    "description": "Name of individual being certified",
+                    "type": "string",
+                  },
+                  "state": Object {
+                    "description": "State of individual being certified",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification form successfully saved",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to upload certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Submit the Add State Certification and additional details",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
+      "put": Object {
+        "description": "update a state admin certification to associate it with an affiliation and approve that affiliation as a state admin",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "affiliationId": Object {
+                    "description": "ID of the affiliation to be matched",
+                    "type": "string",
+                  },
+                  "certificationFfy": Object {
+                    "description": "Federal Fiscal Year (FFY) from the certification upload form",
+                    "type": "string",
+                  },
+                  "certificationId": Object {
+                    "description": "ID of the certification letter",
+                    "type": "string",
+                  },
+                  "stateId": Object {
+                    "description": "ID of the state associated with the affiliation",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "State Admin Certification match successful",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "Unauthorized",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to match certification letters",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Match a state admin certification letter to an affiliation",
+        "tags": Array [
+          "Certifications",
+        ],
+      },
+    },
+    "/auth/certifications/files": Object {
+      "post": Object {
+        "description": "Uploads a state admin certification letter.",
+        "requestBody": Object {
+          "content": Object {
+            "multipart/form-data": Object {
+              "schema": Object {
+                "properties": Object {
+                  "file": Object {
+                    "description": "The file body",
+                    "format": "binary",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "url": Object {
+                      "description": "The URL of the uploaded file, absolute, relative to the API host",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+          },
+          "400": Object {
+            "description": "Invalid request",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have sufficient authorization to upload certification letters",
+          },
+          "415": Object {
+            "description": "The file is not a valid format",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Upload a state admin certification file",
+        "tags": Array [
+          "files",
+        ],
+      },
+    },
+    "/auth/certifications/files/{fileID}": Object {
+      "get": Object {
+        "description": "Returns a state admin certification letter",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the file to get",
+            "in": "path",
+            "name": "fileID",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "*/*": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+          "400": Object {
+            "description": "The file does not exist",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Get a state admin certification letter",
+        "tags": Array [
+          "files",
+        ],
+      },
+    },
+    "/auth/roles": Object {
+      "get": Object {
+        "description": "Get a list of all roles in the system",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "activities": Object {
+                        "items": Object {
+                          "description": "Activity name",
+                          "type": "string",
+                        },
+                        "type": "array",
+                      },
+                      "id": Object {
+                        "description": "Role ID",
+                        "type": "number",
+                      },
+                      "name": Object {
+                        "description": "Role name",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The list of roles known to the system",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Gets the list of all roles",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
+    "/auth/state/{stateId}": Object {
+      "get": Object {
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "jwt": Object {
+                      "description": "a JWT",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A JWT containing the new claims",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user can not switch to this state",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
+        "tags": Array [
+          "Authentication and authorization",
+        ],
+      },
+    },
+    "/docs/account-registration": Object {
+      "get": Object {
+        "description": "Get the account registration documentation",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/pdf": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+        },
+        "tags": Array [
+          "Docs",
+        ],
+      },
+    },
+    "/docs/system-access": Object {
+      "get": Object {
+        "description": "Get the eAPD system access documentation",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/pdf": Object {
+                "schema": Object {
+                  "format": "binary",
+                  "type": "string",
+                },
+              },
+            },
+            "description": "The file",
+          },
+        },
+        "tags": Array [
+          "Docs",
+        ],
+      },
+    },
+    "/me": Object {
+      "get": Object {
+        "description": "Get information about the current user",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "activities": Object {
+                      "items": Object {
+                        "description": "Names of system activities this user can perform for the selected state",
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "affiliation": Object {
+                      "properties": Object {
+                        "created_at": Object {
+                          "type": "string",
+                        },
+                        "expires_at": Object {
+                          "type": "string",
+                        },
+                        "id": Object {
+                          "type": "string",
+                        },
+                        "role_id": Object {
+                          "type": "string",
+                        },
+                        "state": Object {
+                          "type": "string",
+                        },
+                        "state_id": Object {
+                          "type": "string",
+                        },
+                        "updated_at": Object {
+                          "type": "string",
+                        },
+                        "user_id": Object {
+                          "type": "string",
+                        },
+                        "username": Object {
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "id": Object {
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                      "type": "string",
+                    },
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "permissions": Object {
+                      "items": Object {
+                        "properties": Object {
+                          "{state_id}": Object {
+                            "items": Object {
+                              "description": "Names of system activities this user can perform for that state",
+                              "type": "string",
+                            },
+                            "type": "array",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "type": "array",
+                    },
+                    "role": Object {
+                      "description": "The user's access role",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "Lowercase 2-letter code",
+                          "type": "string",
+                        },
+                        "medicaid_office": Object {
+                          "properties": Object {
+                            "address1": Object {
+                              "type": "string",
+                            },
+                            "city": Object {
+                              "type": "string",
+                            },
+                            "director": Object {
+                              "properties": Object {
+                                "email": Object {
+                                  "type": "string",
+                                },
+                                "name": Object {
+                                  "type": "string",
+                                },
+                                "phone": Object {
+                                  "type": "string",
+                                },
+                              },
+                              "type": "object",
+                            },
+                            "state": Object {
+                              "type": "string",
+                            },
+                            "zip": Object {
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "name": Object {
+                          "description": "State/territory/district full name",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "states": Object {
+                      "properties": Object {
+                        "{state_id}": Object {
+                          "description": "The affiliation status for the state in the field",
+                          "enum": Array [
+                            "requested",
+                            "approved",
+                            "denied",
+                            "revoked",
+                          ],
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "username": Object {
+                      "description": "User's unique username",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The current user",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Gets the current user's information",
+        "tags": Array [
+          "Users",
+        ],
+      },
+    },
+    "/open-api": Object {
+      "get": Object {
+        "description": "Returns this document",
+        "responses": Object {
+          "200": Object {
+            "description": "This OpenAPI document",
+          },
+        },
+        "summary": "Gets this document",
+        "tags": Array [
+          "Metadata",
+        ],
+      },
+    },
+    "/roles": Object {
+      "get": Object {
+        "description": "Get a list of all of the active roles",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "Integer ID for a role",
+                        "type": "integer",
+                      },
+                      "name": Object {
+                        "description": "Full name of the Role",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of Active Roles",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Roles",
+        ],
+      },
+    },
+    "/states": Object {
+      "get": Object {
+        "description": "Get a list of all US States and Territories",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "name": Object {
+                        "description": "Full name of US State or Territory",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of US States and Territories",
+          },
+        },
+        "tags": Array [
+          "States",
+        ],
+      },
+    },
+    "/states/{id}": Object {
+      "get": Object {
+        "description": "Get a single US State or Territiory",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "id": Object {
+                      "description": "2-letter US State or Territory abbreviation, lowercase",
+                      "type": "string",
+                    },
+                    "medicaid_office": Object {
+                      "description": "Contact information for this US State/Territory Medicaid office",
+                      "type": "object",
+                    },
+                    "name": Object {
+                      "description": "Full name of US State or Territory",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "US State or Territory",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue.",
+          },
+          "404": Object {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "States",
+        ],
+      },
+    },
+    "/states/{stateId}/affiliations": Object {
+      "get": Object {
+        "description": "Get a list of all user affiliations for a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          Object {
+            "description": "The filter status of the affiliations for this US State",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": Object {
+              "enum": Array [
+                "pending",
+                "active",
+                "inactive",
+              ],
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "created_at": Object {
+                        "description": "Timestamp of record creation",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "id": Object {
+                        "description": "ID of record",
+                        "type": "integer",
+                      },
+                      "role_id": Object {
+                        "description": "ID of the role applied to this user for this US State",
+                        "type": "integer",
+                      },
+                      "state_id": Object {
+                        "description": "2-letter US State or Territory abbreviation, lowercase",
+                        "type": "string",
+                      },
+                      "status": Object {
+                        "description": "The status of the user role for this US State",
+                        "enum": Array [
+                          "requested",
+                          "approved",
+                          "denied",
+                          "revoked",
+                        ],
+                        "type": "string",
+                      },
+                      "updated_at": Object {
+                        "description": "Timestamp of last update",
+                        "format": "date-time",
+                        "type": "string",
+                      },
+                      "user_id": Object {
+                        "description": "ID of user",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "List of all user affiliations for a US State",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+      "post": Object {
+        "description": "Create a request for the currently logged in user to be affiliated with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": Object {
+          "201": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "description": "ID of record",
+                  "type": "integer",
+                },
+              },
+            },
+            "description": "Record was created",
+          },
+          "400": Object {
+            "description": "Record does not exist or US State ID is invalid",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
+    "/states/{stateId}/affiliations/{id}": Object {
+      "get": Object {
+        "description": "Get a single user affiliation with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          Object {
+            "description": "ID of record",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "created_at": Object {
+                      "description": "Timestamp of record creation",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "id": Object {
+                      "description": "ID of record",
+                      "type": "integer",
+                    },
+                    "role_id": Object {
+                      "description": "ID of the role applied to this user for this US State",
+                      "type": "integer",
+                    },
+                    "state_id": Object {
+                      "description": "2-letter US State or Territory abbreviation, lowercase",
+                      "type": "string",
+                    },
+                    "status": Object {
+                      "description": "The status of the user role for this US State",
+                      "enum": Array [
+                        "requested",
+                        "approved",
+                        "denied",
+                        "revoked",
+                      ],
+                      "type": "string",
+                    },
+                    "updated_at": Object {
+                      "description": "Timestamp of last update",
+                      "format": "date-time",
+                      "type": "string",
+                    },
+                    "user_id": Object {
+                      "description": "ID of user",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "A single user affiliation with a US State",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+          "404": Object {
+            "description": "The affiliation does not exist",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+      "patch": Object {
+        "description": "Update a user affiliation with a US State",
+        "parameters": Array [
+          Object {
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "in": "path",
+            "name": "stateId",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          Object {
+            "description": "ID of record",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "roleId": Object {
+                    "description": "ID of the role applied to this user for this US State",
+                    "type": "integer",
+                  },
+                  "status": Object {
+                    "description": "The status of the user role for this US State",
+                    "enum": Array [
+                      "requested",
+                      "approved",
+                      "denied",
+                      "revoked",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "Record was updated",
+          },
+          "400": Object {
+            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "tags": Array [
+          "Affiliations",
+        ],
+      },
+    },
+    "/users/{id}": Object {
+      "get": Object {
+        "description": "Get a specific user in the system",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the user to fetch",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "activities": Object {
+                      "items": Object {
+                        "description": "Names of system activities this user can perform for the selected state",
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "affiliation": Object {
+                      "properties": Object {
+                        "created_at": Object {
+                          "type": "string",
+                        },
+                        "expires_at": Object {
+                          "type": "string",
+                        },
+                        "id": Object {
+                          "type": "string",
+                        },
+                        "role_id": Object {
+                          "type": "string",
+                        },
+                        "state": Object {
+                          "type": "string",
+                        },
+                        "state_id": Object {
+                          "type": "string",
+                        },
+                        "updated_at": Object {
+                          "type": "string",
+                        },
+                        "user_id": Object {
+                          "type": "string",
+                        },
+                        "username": Object {
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "id": Object {
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                      "type": "string",
+                    },
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "permissions": Object {
+                      "items": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[A-Za-z]{2}$": Object {
+                            "items": Object {
+                              "description": "Names of system activities this user can perform for that state",
+                              "type": "string",
+                            },
+                            "type": "array",
+                          },
+                        },
+                      },
+                      "type": "array",
+                    },
+                    "role": Object {
+                      "description": "The user's access role",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "Lowercase 2-letter code",
+                          "type": "string",
+                        },
+                        "medicaid_office": Object {
+                          "properties": Object {
+                            "address1": Object {
+                              "type": "string",
+                            },
+                            "city": Object {
+                              "type": "string",
+                            },
+                            "director": Object {
+                              "properties": Object {
+                                "email": Object {
+                                  "type": "string",
+                                },
+                                "name": Object {
+                                  "type": "string",
+                                },
+                                "phone": Object {
+                                  "type": "string",
+                                },
+                              },
+                              "type": "object",
+                            },
+                            "state": Object {
+                              "type": "string",
+                            },
+                            "zip": Object {
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "name": Object {
+                          "description": "State/territory/district full name",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "states": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[A-Za-z]{2}$": Object {
+                          "description": "The affiliation status for the state in the field",
+                          "enum": Array [
+                            "requested",
+                            "approved",
+                            "denied",
+                            "revoked",
+                          ],
+                          "type": "string",
+                        },
+                      },
+                    },
+                    "username": Object {
+                      "description": "User's unique username",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The matching user",
+          },
+          "401": Object {
+            "description": "The user is not logged in",
+          },
+          "403": Object {
+            "description": "The user does not have permission to perform this activity",
+          },
+          "404": Object {
+            "description": "The user ID does not match any known users",
+          },
+        },
+        "security": Array [
+          Object {
+            "bearerAuth": Array [],
+          },
+        ],
+        "summary": "Gets the information for a specific user",
+        "tags": Array [
+          "Users",
+        ],
+      },
+    },
+  },
+}
+`;

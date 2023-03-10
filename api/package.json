@@ -23,11 +23,11 @@
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test node --experimental-vm-modules ../node_modules/.bin/jest",
-    "test-endpoints": "yarn jest --runInBand",
+    "test-endpoints": "yarn jest --runInBand --forceExit",
     "tap": "NODE_ENV=test TAP_DIAG=1 tap --jobs=1 --no-browser --no-timeout",
     "test": "NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' yarn tap --jobs=1 --coverage",
     "test-specific": "yarn tap --no-coverage",
-    "endpointFullTest": "./endpoint-tests/endpoint.sh",
+    "endpointFullTest": "./endpoint-tests/endpoint.sh --detectOpenHandles",
     "fullTest": "./unit-test.sh"
   },
   "repository": {

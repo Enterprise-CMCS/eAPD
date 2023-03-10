@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  apiAllPermission,
+  apiAllPermissions,
   apiAsStateAdmin,
   apiNoPermissionsNoState,
   unauthenticatedTest,
@@ -28,7 +28,7 @@ describe('APD endpoint', () => {
 
     describe('when authenticated', () => {
       it('as a user with all permissions', async () => {
-        const response = await apiAllPermission.get(url);
+        const response = await apiAllPermissions.get(url);
         expect(response.status).toEqual(200);
       });
     });
