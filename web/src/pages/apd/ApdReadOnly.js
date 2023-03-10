@@ -112,7 +112,10 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ApdSummary />
       <hr className="section-rule" />
-      <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
+      <ApdStateProfile
+        keyStatePersonnel={apd.keyStatePersonnel}
+        apdType={apd.apdType}
+      />
       <hr className="section-rule" />
       <PreviousActivities />
       <hr className="section-rule" />

@@ -46,18 +46,11 @@ export const testDefaultKeyStatePersonnel = function () {
     cy.goToExportView();
 
     cy.findByRole('heading', { name: /Key State Personnel/i })
-      .parent()
-      .as('personnel');
-
-    cy.get('@personnel')
-      .findByRole('heading', { name: /Medicaid director/i })
       .next()
-      .should('have.text', 'Name:  Email: Phone: '); // Name has a mysterious extra space...
-
-    cy.get('@personnel')
-      .findByRole('heading', { name: /Medicaid office address/i })
-      .next()
-      .should('have.text', 'No response was provided');
+      .should(
+        'have.text',
+        'No Medicaid director and corresponding Medicaid office address was provided'
+      );
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
@@ -207,7 +200,7 @@ export const testKeyStatePersonnelWithData = function () {
         .next()
         .should(
           'have.text',
-          `Name:  ${
+          `${
             userData[0].name // Mysterious extra space
           }Email: ${userData[0].email}Phone: ${userData[0].phone}`
         );
