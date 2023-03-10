@@ -32,11 +32,36 @@ MMISApdSummaryStory.decorators = [
           data: {
             apdType: 'MMIS',
             name: 'My Fancy APD',
+            years: ['2021', '2023'],
             apdOverview: {
+              updateStatus: {
+                isUpdateAPD: false,
+                annualUpdate: true,
+                asNeededUpdate: true
+              },
               narrativeHIE: '',
               narrativeHIT: '',
               narrativeMMIS: '',
-              programOverview: 'mmis overview'
+              programOverview: 'mmis overview',
+              medicaidBusinessAreas: {
+                waiverSupportSystems: true,
+                assetVerificationSystem: true,
+                claimsProcessing: true,
+                decisionSupportSystemDW: false,
+                electronicVisitVerification: false,
+                encounterProcessingSystemMCS: false,
+                financialManagement: true,
+                healthInformationExchange: false,
+                longTermServicesSupports: false,
+                memberManagement: false,
+                pharmacyBenefitManagementPOS: false,
+                programIntegrity: true,
+                providerManagement: false,
+                thirdPartyLiability: false,
+                other: true,
+                otherMedicaidBusinessAreas:
+                  'This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. '
+              }
             }
           }
         }
@@ -58,6 +83,11 @@ HITECHApdSummaryStory.decorators = [
           data: {
             apdType: 'HITECH',
             apdOverview: {
+              updateStatus: {
+                isUpdateAPD: false,
+                annualUpdate: false,
+                asNeededUpdate: false
+              },
               narrativeHIE: '',
               narrativeHIT: '',
               narrativeMMIS: '',

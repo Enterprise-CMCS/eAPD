@@ -1,23 +1,38 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { APD_TYPE } from '@cms-eapd/common';
+import {
+  APD_TYPE,
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
+} from '@cms-eapd/common';
 
-import { getAPDName } from '../../../redux/reducers/apd.js';
+import { getAPDYearRange } from '../../../redux/reducers/apd.js';
 import {
   selectSummary,
-  selectApdType
+  selectStatus,
+  selectApdType,
+  selectMedicaidBusinessAreas
 } from '../../../redux/selectors/apd.selectors';
 
 const ApdSummary = ({
-  narrativeHIE,
-  narrativeHIT,
-  narrativeMMIS,
   programOverview,
+  narrativeHIT,
+  narrativeHIE,
+  narrativeMMIS,
+  name,
   apdType,
-  apdName
+  apdYears,
+  isUpdateAPD,
+  annualUpdate,
+  asNeededUpdate,
+  medicaidBusinessAreas
 }) => {
+  console.log('medicaidBusinessAreas', medicaidBusinessAreas);
+  const businessAreas = Object.keys(medicaidBusinessAreas).filter(
+    businessArea => medicaidBusinessAreas[businessArea] === true
+  );
+  console.log('businessAreas', businessAreas);
   /* eslint-disable react/no-danger */
   if (apdType === APD_TYPE.HITECH) {
     return (
@@ -60,83 +75,103 @@ const ApdSummary = ({
     return (
       <div>
         <h2>APD Overview</h2>
-        <h3>Program introduction</h3>
-        <ul class="ds-c-list--bare">
-          <li>
-            <strong>APD Name:</strong> {apdName}
+        <ul className="ds-c-list--bare">
+          <li className="ds-u-margin-top--2">
+            <strong>APD Name:</strong> {name}
           </li>
-          <li>
-            <strong>Total Computable Medicaid Cost:</strong> <span>$0</span> (
-            <span>$0</span> Federal share)
+          <li className="ds-u-margin-top--2">
+            <strong>Program Funding Source: </strong>MMIS (Medicaid Management
+            Information System)
           </li>
-          <li>
-            <strong>Total funding request:</strong> <span>$0</span>
+          <li className="ds-u-margin-top--2">
+            <strong>APD Type:</strong> {apdType}
           </li>
-          <li class="ds-u-margin-top--2">
-            <strong>FFY 2023:</strong> <span>$0</span> |{' '}
-            <strong>Total Computable Medicaid Cost:</strong> <span>$0</span> (
-            <span>$0</span> Federal share)
+          <li className="ds-u-margin-top--2">
+            <strong>Federal Fiscal Year (FFY): </strong>
+            {apdYears}
           </li>
-          <li class="">
-            <strong>FFY 2024:</strong> <span>$0</span> |{' '}
-            <strong>Total Computable Medicaid Cost:</strong> <span>$0</span> (
-            <span>$0</span> Federal share)
+          <li className="ds-u-margin-top--2">
+            <strong>Update Type: </strong>
+            {annualUpdate === true &&
+              asNeededUpdate === false &&
+              'Annual update'}{' '}
+            {annualUpdate === true &&
+              asNeededUpdate === true &&
+              'Annual as-needed update'}{' '}
+            <strong></strong>
+          </li>
+          <li className="ds-u-margin-top--2">
+            <strong>Medicaid Business Areas: </strong>
+            <ol>
+              {businessAreas.map(businessArea => (
+                <Fragment key={businessArea}>
+                  {businessArea !== 'other' && (
+                    <li className="ds-u-margin-top--1">
+                      {
+                        MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[
+                          businessArea
+                        ]
+                      }
+                    </li>
+                  )}
+                  {businessArea === 'other' && (
+                    <li className="ds-u-margin-top--1">
+                      {
+                        MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[
+                          businessArea
+                        ]
+                      }
+                      <span className="border-left--primary ds-u-padding-left--2 ds-u-padding-y--1 ds-u-margin-left--2 position-absolute">
+                        {/* eslint-disable react/prop-types */}
+                        {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+                      </span>
+                    </li>
+                  )}
+                </Fragment>
+              ))}
+            </ol>
+            {/* Ordered list of business areas */}
           </li>
         </ul>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: programOverview || 'No response was provided'
-          }}
-        />
-
-        <hr className="subsection-rule" />
-        <h3>HIT overview</h3>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: narrativeHIT || 'No response was provided'
-          }}
-        />
-
-        <hr className="subsection-rule" />
-        <h3>HIE overview</h3>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: narrativeHIE || 'No response was provided'
-          }}
-        />
-
-        <hr className="subsection-rule" />
-        <h3>MMIS overview</h3>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: narrativeMMIS || 'No response was provided'
-          }}
-        />
       </div>
     );
   }
 };
 
 ApdSummary.propTypes = {
-  narrativeHIE: PropTypes.string,
-  narrativeHIT: PropTypes.string,
-  narrativeMMIS: PropTypes.string,
   programOverview: PropTypes.string,
-  apdType: PropTypes.string
+  narrativeHIT: PropTypes.string,
+  narrativeHIE: PropTypes.string,
+  narrativeMMIS: PropTypes.string,
+  name: PropTypes.string,
+  apdType: PropTypes.string,
+  apdYears: PropTypes.string,
+  isUpdateAPD: PropTypes.bool,
+  annualUpdate: PropTypes.bool,
+  asNeededUpdate: PropTypes.bool,
+  medicaidBusinessAreas: PropTypes.object
 };
 
 ApdSummary.defaultProps = {
-  narrativeHIE: '',
-  narrativeHIT: '',
-  narrativeMMIS: '',
   programOverview: '',
-  apdType: APD_TYPE.HITECH
+  narrativeHIT: '',
+  narrativeHIE: '',
+  narrativeMMIS: '',
+  name: '',
+  apdType: APD_TYPE.HITECH,
+  apdYears: '',
+  isUpdateAPD: false,
+  annualUpdate: false,
+  asNeededUpdate: false,
+  medicaidBusinessAreas: {}
 };
 
 const mapStateToProps = state => ({
   apdType: selectApdType(state),
-  apdName: getAPDName(state),
-  ...selectSummary(state)
+  apdYears: getAPDYearRange(state),
+  ...selectStatus(state),
+  ...selectSummary(state),
+  ...selectMedicaidBusinessAreas(state)
 });
 
 export default connect(mapStateToProps)(ApdSummary);
