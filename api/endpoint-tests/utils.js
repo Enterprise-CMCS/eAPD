@@ -4,6 +4,11 @@ import knex from 'knex';
 import knexConfig from '../knexfile.js';
 import loggerFactory from '../logger/index.js';
 
+import {
+  setup as setupMongo,
+  teardown as teardownMongo
+} from '../db/mongodb.js';
+
 const logger = loggerFactory('endpoint-utils');
 
 const { API_HOST, API_PORT, PORT } = process.env;
@@ -15,12 +20,13 @@ const baseURL = `http://${host}:${port}`;
 
 const axiosDefaults = {
   baseURL,
+  timeout: 3000,
   validateStatus: status => status < 500
 };
 
 export const api = axios.create(axiosDefaults);
 
-export const apiKeyAuth = token => {
+export const apiKeyAuth = (token, controller = null) => {
   const ip = token || '10.0.0.0';
   const options = {
     ...axiosDefaults,
@@ -28,10 +34,13 @@ export const apiKeyAuth = token => {
       'x-forwarded-for': ip
     }
   };
+  if (controller) {
+    options.signal = controller.signal;
+  }
   return axios.create(options);
 };
 
-export const login = token => {
+export const login = (token, controller = null) => {
   const jwt = token || 'all-permissions';
   const options = {
     ...axiosDefaults,
@@ -39,6 +48,9 @@ export const login = token => {
       Authorization: `Bearer ${jwt}`
     }
   };
+  if (controller) {
+    options.signal = controller.signal;
+  }
   return axios.create(options);
 };
 
@@ -61,10 +73,13 @@ export const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
 
 export const setupDB = async db => {
   await db.seed.run({ specific: 'main.js' });
+  await teardownMongo();
+  await setupMongo();
 };
 
 export const teardownDB = async db => {
   await db.destroy();
+  await teardownMongo();
   logger.verbose('Database teardown complete.');
 };
 

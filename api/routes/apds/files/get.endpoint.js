@@ -14,23 +14,25 @@ import {
 } from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
-  describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login(null, controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
+  describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
     const url = (apdID, fileID) => `/apds/${apdID}/files/${fileID}`;
 
     unauthenticatedTest('get', url(0));
     unauthorizedTest('get', url(0));
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-
-      beforeAll(async () => {
-        api = login();
-      });
-
       it('with a non-existant apd ID', async () => {
         const response = await api.get(
           url(badAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')

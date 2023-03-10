@@ -10,14 +10,18 @@ import { getAllActiveRoles } from '../../../db/roles.js';
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();
+  const controller = new AbortController();
+  let api;
   let stateStaffId = 0;
   beforeAll(async () => {
+    api = login('state-admin', controller);
     await setupDB(db);
     const [{ id }] = await getAllActiveRoles(['eAPD State Staff'], { db });
     stateStaffId = id;
   });
   afterAll(async () => {
     await teardownDB(db);
+    controller.abort();
   });
 
   const url = (stateId, affiliationId) =>
@@ -27,12 +31,6 @@ describe('Affiliations endpoint | PATCH', () => {
   unauthorizedTest('patch', url('ak', 4000));
 
   describe('when authenticated', () => {
-    let api;
-
-    beforeAll(() => {
-      api = login('state-admin');
-    });
-
     ['approved', 'denied', 'revoked'].forEach(status => {
       it(`returns 200, when an affiliation is ${status}`, async () => {
         const response = await api.patch(url('ak', 4000), {
@@ -44,9 +42,11 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it('returns 400 when US state is incorrect for a fed admin', async () => {
-      const fedAdminApi = login('fed-admin');
+      const controllerFed = new AbortController();
+      const fedAdminApi = login('fed-admin', controllerFed);
       const response = await fedAdminApi.patch(url('zz', 4000));
       expect(response.status).toEqual(400);
+      controllerFed.abort();
     });
 
     it('returns 403 when US state is not authorized', async () => {

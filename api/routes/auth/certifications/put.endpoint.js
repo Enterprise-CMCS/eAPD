@@ -8,11 +8,19 @@ import {
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications put endpoint', () => {
-  describe('PUT /auth/certifications', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('fed-admin', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
+  describe('PUT /auth/certifications', () => {
     const url = '/auth/certifications';
 
     const payload = {
@@ -26,11 +34,6 @@ describe('auth/certifications put endpoint', () => {
     unauthorizedTest('put', url);
 
     describe('when authenticated as a user with permissions', () => {
-      let api;
-      beforeAll(async () => {
-        api = login('fed-admin');
-      });
-
       it('with no request body', async () => {
         const response = await api.put(url, {});
 

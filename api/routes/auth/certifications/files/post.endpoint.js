@@ -2,12 +2,27 @@ import fs from 'fs';
 import FormData from 'form-data';
 import {
   buildForm,
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../../endpoint-tests/utils.js';
 
 describe('auth/certifications/files endpoints', () => {
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login(null, controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
+
   describe('Upload a state certification letter/file | POST /auth/certifications/files', () => {
     const form = buildForm({ file: 'this is my file' });
     const url = '/auth/certifications/files';
@@ -16,11 +31,6 @@ describe('auth/certifications/files endpoints', () => {
     unauthorizedTest('post', url);
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(() => {
-        api = login();
-      });
-
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url, form);
 

@@ -17,14 +17,18 @@ describe('Submissions endpoint | GET', () => {
   });
 
   it('it returns 403 when the IP is not allowed', async () => {
-    const api = apiKeyAuth('bad ip');
+    const controller = new AbortController();
+    const api = apiKeyAuth('bad ip', controller);
     const response = await api.get('/apds/submissions');
     expect(response.status).toBe(403);
+    controller.abort();
   });
 
   it('returns 200 when the IP is allowed', async () => {
-    const api = apiKeyAuth();
+    const controller = new AbortController();
+    const api = apiKeyAuth(null, controller);
     const response = await api.get('/apds/submissions');
     expect(response.status).toEqual(200);
+    controller.abort();
   });
 });

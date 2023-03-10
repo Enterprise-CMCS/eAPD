@@ -1,6 +1,9 @@
 import fs from 'fs';
 import FormData from 'form-data';
 import {
+  getDB,
+  setupDB,
+  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
@@ -13,6 +16,18 @@ import {
 } from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('state-staff', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
+
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
     const url = id => `/apds/${id}/files`;
 
@@ -34,11 +49,6 @@ describe('APD files endpoints', () => {
     unauthorizedTest('post', url(akAPDId));
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(() => {
-        api = login('state-staff');
-      });
-
       it('with a non-existant apd ID', async () => {
         const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(

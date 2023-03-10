@@ -8,22 +8,25 @@ import {
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications get endpoint', () => {
-  describe('GET /auth/certifications', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('fed-admin', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
+  describe('GET /auth/certifications', () => {
     const url = '/auth/certifications';
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(async () => {
-        api = login('fed-admin');
-      });
-
       it('valid request', async () => {
         const response = await api.get(url);
 

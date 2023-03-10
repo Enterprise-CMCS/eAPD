@@ -9,17 +9,25 @@ import {
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth roles endpoint get endpoint', () => {
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login(null, controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
+
   describe('GET /auth/state/:stateId', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
     const url = '/auth/state';
 
     unauthenticatedTest('get', `${url}/ak`);
     unauthorizedTest('get', `${url}/ak`);
 
     it('when authenticated', async () => {
-      const api = login();
       const response = await api.get(`${url}/md`);
 
       expect(response.status).toEqual(200);

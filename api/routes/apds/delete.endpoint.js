@@ -14,15 +14,19 @@ import {
 } from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
-  describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {
-    const db = getDB();
-    beforeAll(async () => {
-      await setupDB(db);
-    });
-    afterAll(async () => {
-      await teardownDB(db);
-    });
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('state-admin', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
+  describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {
     const url = id => `/apds/${id}`;
 
     unauthenticatedTest('delete', url(0));
@@ -30,7 +34,6 @@ describe('APD endpoint', () => {
 
     describe('when authenticated as a user', () => {
       it('with a non-existant apd ID', async () => {
-        const api = login('state-admin');
         const response = await api.delete(url(badAPDId));
 
         expect(response.status).toEqual(404);
@@ -38,7 +41,6 @@ describe('APD endpoint', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const api = login('state-admin');
         const response = await api.delete(url(mnAPDId));
 
         expect(response.status).toEqual(403);
@@ -46,7 +48,6 @@ describe('APD endpoint', () => {
       });
 
       it('with an APD that is not in draft', async () => {
-        const api = login('state-admin');
         const response = await api.delete(url(finalAPDId));
 
         expect(response.status).toEqual(400);
@@ -54,13 +55,15 @@ describe('APD endpoint', () => {
       });
 
       it('with a valid update', async () => {
-        const api = login('state-admin');
-        const response = await api.delete(url(akAPDId), {
+        const controllerAdmin = new AbortController();
+        const apiAdmin = login('state-admin', controllerAdmin);
+        const response = await apiAdmin.delete(url(akAPDId), {
           programOverview: 'new overview'
         });
 
         expect(response.status).toEqual(204);
         expect(response.data).toMatchSnapshot();
+        controllerAdmin.abort();
       });
     });
   });

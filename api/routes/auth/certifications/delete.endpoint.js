@@ -8,22 +8,25 @@ import {
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications delete endpoint', () => {
-  describe('DELETE /auth/certifications', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login(null, controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
+  describe('DELETE /auth/certifications', () => {
     const url = '/auth/certifications';
 
     unauthenticatedTest('delete', url);
     unauthorizedTest('delete', url);
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(async () => {
-        api = login();
-      });
-
       it('with an invalid request', async () => {
         const request = {
           data: {

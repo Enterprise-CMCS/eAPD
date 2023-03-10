@@ -7,13 +7,16 @@ import {
 } from '../../../endpoint-tests/utils.js';
 
 describe('Affiliations endpoint | POST', () => {
-  const api = login('no-permissions');
   const db = getDB();
+  const controller = new AbortController();
+  let api;
   beforeAll(async () => {
+    api = login('no-permissions', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
+    controller.abort();
   });
 
   unauthenticatedTest('post', '/states/ak/affiliations');

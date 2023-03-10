@@ -10,8 +10,16 @@ import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('state-admin', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
   describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';
@@ -21,9 +29,11 @@ describe('APD endpoint', () => {
 
     describe('when authenticated', () => {
       it('as a user with all permissions', async () => {
-        const api = login('all-permissions');
-        const response = await api.get(url);
+        const controllerAll = new AbortController();
+        const apiAll = login('all-permissions', controllerAll);
+        const response = await apiAll.get(url);
         expect(response.status).toEqual(200);
+        controllerAll.abort();
       });
     });
   });
@@ -36,17 +46,14 @@ describe('APD endpoint', () => {
 
     describe('when authenticated', () => {
       it('as a user without a state', async () => {
-        const api = login('all-permissions-no-state');
-        const response = await api.get(url(mnAPDId));
+        const controllerNoState = new AbortController();
+        const apiNoState = login('all-permissions-no-state', controllerNoState);
+        const response = await apiNoState.get(url(mnAPDId));
         expect(response.status).toEqual(401);
+        controllerNoState.abort();
       });
 
       describe('as a user with a state', () => {
-        let api;
-        beforeAll(async () => {
-          api = login('state-admin');
-        });
-
         it('when requesting an APD that does not exist', async () => {
           const response = await api.get(url(badAPDId));
           expect(response.status).toEqual(404);

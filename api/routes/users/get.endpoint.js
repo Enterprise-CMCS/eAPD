@@ -8,16 +8,22 @@ import {
 } from '../../endpoint-tests/utils.js';
 
 const url = '/users';
+const controller = new AbortController();
 
 const get = (id = '') => {
-  const api = login();
+  const api = login(null, controller);
   return api.get(`${url}/${id}`);
 };
 
 describe('users endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
 
   describe('users endpoint | GET /users/:userID', () => {
     unauthenticatedTest('get', `${url}/some-id`);

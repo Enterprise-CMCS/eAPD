@@ -10,17 +10,25 @@ import {
 
 describe('auth roles endpoint get endpoint', () => {
   jest.setTimeout(300000);
+  const db = getDB();
+  const controller = new AbortController();
+  let api;
+  beforeAll(async () => {
+    api = login('state-admin', controller);
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+    controller.abort();
+  });
+
   describe('GET /auth/roles', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
     const url = '/auth/roles';
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
 
     it('when authenticated', async () => {
-      const api = login('state-admin');
       const response = await api.get(url);
       const roles = response.data.map(r => ({
         activities: r.activities,

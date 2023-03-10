@@ -10,11 +10,15 @@ import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
+  const controller = new AbortController();
+  let api;
   beforeAll(async () => {
+    api = login('state-staff', controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
+    controller.abort();
   });
 
   const url = apdID => `/apds/${apdID}`;
@@ -23,11 +27,6 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   unauthorizedTest('patch', url(1));
 
   describe('when authenticated as a user with permission', () => {
-    let api;
-    beforeAll(() => {
-      api = login('state-staff');
-    });
-
     it('with a non-existant apd ID', async () => {
       const response = await api.patch(url(badAPDId));
 

@@ -10,11 +10,15 @@ import {
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();
+  const controller = new AbortController();
+  let api;
   beforeAll(async () => {
+    api = login(null, controller);
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
+    controller.abort();
   });
 
   const url = `/apds`;
@@ -23,7 +27,6 @@ describe('APD endpoint | POST /apds', () => {
   unauthorizedTest('post', url);
 
   it('when authenticated as a user with permission', async () => {
-    const api = login();
     const response = await api.post(url, {
       apdType: APD_TYPE.MMIS
     });
