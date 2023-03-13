@@ -220,12 +220,6 @@ describe('<ExecutiveSummary />', () => {
           apd: {
             data: {
               activities: [],
-              statePrioritiesAndScope: {
-                medicaidProgramAndPriorities:
-                  '<p>Medicaid program and priorities</p>',
-                mesIntroduction: '<p>Introduction</p>',
-                scopeOfAPD: '<p>scope</p>'
-              },
               years: ['3000', '3001']
             }
           }
@@ -239,11 +233,6 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'APD Overview Summary' })
     ).toBeTruthy();
     expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
-    expect(
-      screen.getByRole('heading', {
-        name: 'State Priorities and Scope of APD'
-      })
-    ).toBeTruthy();
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();

@@ -8,11 +8,6 @@ helpText: >-
 total: Total
 overviewSummary:
   title: APD Overview Summary
-statePrioritiesAndScope:
-  title: State Priorities and Scope of APD
-  medicaidProgramAndPriorities: Medicaid Program and Priorities
-  mesIntroduction: Medicaid Enterprise System Introduction
-  scopeOfAPD: Scope of APD
 activitiesSummary:
   title: Activities Summary
   instruction:

@@ -12,7 +12,6 @@ import { Section, Subsection } from '../../../components/Section';
 
 import HitechBudgetSummary from './HitechBudgetSummary';
 import ActivityExecutiveSummary from './ActivityExecutiveSummary';
-import MmisSpecificFields from './MmisSpecificFields';
 import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -118,7 +117,6 @@ const ExecutiveSummary = ({
             {renderMedicaidBusinessAreas()}
           </ul>
         </Subsection>
-        {isApdMmis ? <MmisSpecificFields /> : null}
         <Waypoint id="executive-activities-summary" />
         <Subsection
           id="executive-activities-summary"
