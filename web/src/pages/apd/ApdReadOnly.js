@@ -129,20 +129,20 @@ const ApdViewOnly = ({
       <ExecutiveSummary apdId={apd.id} />
       <hr className="section-rule ds-u-margin-y--5" />
       {renderApdTypeSpecificSummary(apdType)}
-      <hr className="section-rule" />
+      <hr className="section-rule ds-u-margin-y--5" />
       <ApdStateProfile
         keyStatePersonnel={apd.keyStatePersonnel}
         apdType={apd.apdType}
       />
-      {/* <hr className="section-rule" />
-      <PreviousActivities /> */}
-      {/* <hr className="section-rule" />
+      <hr className="section-rule ds-u-margin-y--5" />
+      <PreviousActivities />
+      <hr className="section-rule ds-u-margin-bottom--7 ds-u-margin-bottom--5" />
       <Activities
         apdId={apd.id}
         activities={apd.activities}
         years={budget.years}
         apdType={apdType}
-      /> */}
+      />
       {/* <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
       <ScheduleSummary /> */}
       {/* <hr className="section-rule" />

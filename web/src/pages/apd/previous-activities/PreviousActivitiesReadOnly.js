@@ -18,8 +18,8 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <h2>Results of Previous Activities</h2>
       <h3>Prior Activities Overview</h3>
       <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
-      <hr className="subsection-rule" />
-      <h3>Actual Expenditures</h3>
+      <hr className="section-rule ds-u-margin-y--3" />
+      <h2>Actual Expenditures</h2>
       {apdType === 'HITECH' && <ApdPreviousActivityTableHI isViewOnly />}
       <ApdPreviousActivityTableMMIS isViewOnly />
       <ApdPreviousActivityTableTotal />

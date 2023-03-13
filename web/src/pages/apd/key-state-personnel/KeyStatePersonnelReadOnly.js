@@ -149,7 +149,7 @@ const ApdStateProfile = ({ keyStatePersonnel, apdType }) => {
       <Fragment>
         <h3>Medicaid director</h3>
         <MedicaidDirector medicaidDirector={medicaidDirector} />
-        <br/>
+        <br />
         <h3>Medicaid office address</h3>
         <MedicaidOffice medicaidOffice={medicaidOffice} />
       </Fragment>
@@ -167,7 +167,7 @@ const ApdStateProfile = ({ keyStatePersonnel, apdType }) => {
         medicaidDirector={keyStatePersonnel.medicaidDirector}
         medicaidOffice={keyStatePersonnel.medicaidOffice}
       />
-      <hr className="section-rule" />
+      <hr className="section-rule ds-u-margin-y--5" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0" key="key-personnel">
         {keyPersonnel.length > 0
