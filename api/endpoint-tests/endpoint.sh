@@ -11,7 +11,9 @@ echo "[]" > endpoint-data.json
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn test-endpoints $@
 EXIT_CODE=$? # this must stay right after the test run so that the EXIT_CODE is properly reported
 
-docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
+docker cp api-container:/app/api/coverage-endpoint .
+docker cp api-container:/app/api/endpoint-data.json .
+
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
 mv endpoint-data.json ./endpoint-tests

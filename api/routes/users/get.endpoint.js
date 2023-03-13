@@ -2,22 +2,23 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
 
 const url = '/users';
 
-const get = (id = '') => {
-  const api = login();
-  return api.get(`${url}/${id}`);
-};
+const get = (id = '') => apiAllPermissions.get(`${url}/${id}`);
 
 describe('users endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('users endpoint | GET /users/:userID', () => {
     unauthenticatedTest('get', `${url}/some-id`);
