@@ -28,11 +28,28 @@ const ApdSummary = ({
   asNeededUpdate,
   medicaidBusinessAreas
 }) => {
-  console.log('medicaidBusinessAreas', medicaidBusinessAreas);
   const businessAreas = Object.keys(medicaidBusinessAreas).filter(
     businessArea => medicaidBusinessAreas[businessArea] === true
   );
-  console.log('businessAreas', businessAreas);
+
+  const getUpdateType = ({ isUpdateAPD, annualUpdate, asNeededUpdate }) => {
+    if (isUpdateAPD) {
+      if (!annualUpdate && !asNeededUpdate) {
+        return 'No update type selected';
+      }
+      if (annualUpdate && !asNeededUpdate) {
+        return 'Annual update';
+      }
+      if (!annualUpdate && asNeededUpdate) {
+        return 'As-needed update';
+      }
+      if (annualUpdate && asNeededUpdate) {
+        return 'Annual and As-needed update';
+      }
+    }
+    return 'New project';
+  };
+
   /* eslint-disable react/no-danger */
   if (apdType === APD_TYPE.HITECH) {
     return (
@@ -84,24 +101,22 @@ const ApdSummary = ({
             Information System)
           </li>
           <li className="ds-u-margin-top--2">
-            <strong>APD Type:</strong> {apdType}
+            <strong>APD Type:</strong> Implementation
           </li>
           <li className="ds-u-margin-top--2">
             <strong>Federal Fiscal Year (FFY): </strong>
-            {apdYears}
+            {apdYears || 'No Federal Fiscal Year(s) selected'}
           </li>
           <li className="ds-u-margin-top--2">
             <strong>Update Type: </strong>
-            {annualUpdate === true &&
-              asNeededUpdate === false &&
-              'Annual update'}{' '}
-            {annualUpdate === true &&
-              asNeededUpdate === true &&
-              'Annual as-needed update'}{' '}
+            {getUpdateType({ isUpdateAPD, annualUpdate, asNeededUpdate })}
             <strong></strong>
           </li>
           <li className="ds-u-margin-top--2">
             <strong>Medicaid Business Areas: </strong>
+            {businessAreas.length === 0 && (
+              <Fragment>No Medicaid Business Areas selected</Fragment>
+            )}
             <ol>
               {businessAreas.map(businessArea => (
                 <Fragment key={businessArea}>
@@ -121,16 +136,17 @@ const ApdSummary = ({
                           businessArea
                         ]
                       }
-                      <span className="border-left--primary ds-u-padding-left--2 ds-u-padding-y--1 ds-u-margin-left--2 position-absolute">
-                        {/* eslint-disable react/prop-types */}
-                        {medicaidBusinessAreas.otherMedicaidBusinessAreas}
-                      </span>
+                      {medicaidBusinessAreas.otherMedicaidBusinessAreas && (
+                        <span className="border-left--primary ds-u-padding-left--2 ds-u-padding-y--1 ds-u-margin-left--2 position-absolute">
+                          {/* eslint-disable react/prop-types */}
+                          {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+                        </span>
+                      )}
                     </li>
                   )}
                 </Fragment>
               ))}
             </ol>
-            {/* Ordered list of business areas */}
           </li>
         </ul>
       </div>
