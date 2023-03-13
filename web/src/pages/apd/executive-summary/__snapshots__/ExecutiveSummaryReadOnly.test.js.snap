@@ -5,345 +5,332 @@ exports[`executive summary component renders correctly 1`] = `
   <h2>
     Executive Summary
   </h2>
-  <Review
-    ariaLabel={null}
+  <h3
     className="ds-u-border--0"
-    editHref={null}
-    heading="Total Cost of All Activities"
-    headingLevel="3"
-    objType={null}
-    onDeleteClick={null}
-    onDeleteLabel={null}
-    onEditClick={null}
-    skipConfirmation={false}
-    title={null}
   >
-    <ul
-      className="ds-c-list--bare"
-    >
-      <li>
-        <strong>
-          Federal Fiscal Years requested:
-        </strong>
-         FFY
-         
-        1, 2
-      </li>
-      <li>
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          30
-        </Dollars>
-         (
-        <Dollars>
-          20
-        </Dollars>
-         Federal share)
-      </li>
-      <li>
-        <strong>
-          Total funding request:
-        </strong>
-         
-        <Dollars>
-          10
-        </Dollars>
-      </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          5232
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          23626
-        </Dollars>
-         (
-        <Dollars>
-          2883
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          848622
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2468252
-        </Dollars>
-         (
-        <Dollars>
-          826
-        </Dollars>
-         
-        Federal share)
-      </li>
-    </ul>
-  </Review>
-  <Review
-    ariaLabel={null}
-    className=""
-    editHref={null}
-    heading="Activity 1: Activity 1"
-    headingLevel="3"
-    key="a1"
-    objType={null}
-    onDeleteClick={null}
-    onDeleteLabel={null}
-    onEditClick={null}
-    skipConfirmation={false}
-    title={null}
-  >
-    <p
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "first activity",
-        }
-      }
-    />
-    <ul
-      className="ds-c-list--bare"
-    >
-      <li>
-        <strong>
-          Start date - End date:
-        </strong>
-         
-      </li>
-      <li>
-        <strong>
-          Total cost of activity:
-        </strong>
-         
-        <Dollars>
-          950
-        </Dollars>
-      </li>
-      <li>
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          1150
-        </Dollars>
-         (
-        <Dollars>
-          1050
-        </Dollars>
-         Federal share)
-      </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          5232
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          23626
-        </Dollars>
-         (
-        <Dollars>
-          2883
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          848622
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2468252
-        </Dollars>
-         (
-        <Dollars>
-          826
-        </Dollars>
-         
-        Federal share)
-      </li>
-    </ul>
-  </Review>
-  <Review
-    ariaLabel={null}
-    className="ds-u-border-bottom--0"
-    editHref={null}
-    heading="Activity 2: Untitled"
-    headingLevel="3"
-    key="a2"
-    objType={null}
-    onDeleteClick={null}
-    onDeleteLabel={null}
-    onEditClick={null}
-    skipConfirmation={false}
-    title={null}
-  >
-    <p
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "second activity",
-        }
-      }
-    />
-    <ul
-      className="ds-c-list--bare"
-    >
-      <li>
-        <strong>
-          Start date - End date:
-        </strong>
-         
-      </li>
-      <li>
-        <strong>
-          Total cost of activity:
-        </strong>
-         
-        <Dollars>
-          310
-        </Dollars>
-      </li>
-      <li>
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2150
-        </Dollars>
-         (
-        <Dollars>
-          2050
-        </Dollars>
-         Federal share)
-      </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          26926
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          989264
-        </Dollars>
-         (
-        <Dollars>
-          2356
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          54634738
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          73
-        </Dollars>
-         (
-        <Dollars>
-          643
-        </Dollars>
-         
-        Federal share)
-      </li>
-    </ul>
-  </Review>
-  <hr
-    className="subsection-rule"
-  />
-  <h3>
-    Program Budget Tables
+    Total cost of all activities
   </h3>
+  <ul
+    className="ds-c-list--bare"
+  >
+    <li
+      className="ds-u-margin-top--1"
+    >
+      <strong>
+        Federal Fiscal Years requested:
+      </strong>
+       FFY
+       
+      1, 2
+    </li>
+    <li
+      className="ds-u-margin-top--1"
+    >
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        30
+      </Dollars>
+       (
+      <Dollars>
+        20
+      </Dollars>
+       Federal share)
+    </li>
+    <li
+      className="ds-u-margin-top--1"
+    >
+      <strong>
+        Total funding request:
+      </strong>
+       
+      <Dollars>
+        10
+      </Dollars>
+    </li>
+    <li
+      className="ds-u-margin-top--4"
+      key="1"
+    >
+      <strong>
+        FFY 
+        1
+        :
+      </strong>
+       
+      <Dollars>
+        5232
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        23626
+      </Dollars>
+       (
+      <Dollars>
+        2883
+      </Dollars>
+       
+      Federal share)
+    </li>
+    <li
+      className="ds-u-margin-top--1"
+      key="2"
+    >
+      <strong>
+        FFY 
+        2
+        :
+      </strong>
+       
+      <Dollars>
+        848622
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        2468252
+      </Dollars>
+       (
+      <Dollars>
+        826
+      </Dollars>
+       
+      Federal share)
+    </li>
+  </ul>
+  <hr
+    className="section-rule ds-u-margin-top--5 ds-u-margin-bottom--3"
+  />
+  <h2>
+    Activity 1: activity 1
+  </h2>
+  <p
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "first activity",
+      }
+    }
+  />
+  <ul
+    className="ds-c-list--bare"
+  >
+    <li
+      className="ds-u-margin-top--3 ds-u-margin-bottom--1"
+    >
+      <strong>
+        Start date - End date:
+      </strong>
+       
+    </li>
+    <li
+      className="ds-u-margin-y--1"
+    >
+      <strong>
+        Total cost of activity:
+      </strong>
+       
+      <Dollars>
+        950
+      </Dollars>
+    </li>
+    <li
+      className="ds-u-margin-top--1 ds-u-margin-bottom--3"
+    >
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        1150
+      </Dollars>
+       (
+      <Dollars>
+        1050
+      </Dollars>
+       Federal share)
+    </li>
+    <li
+      className="ds-u-margin-y--2"
+      key="1"
+    >
+      <strong>
+        FFY 
+        1
+        :
+      </strong>
+       
+      <Dollars>
+        5232
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        23626
+      </Dollars>
+       (
+      <Dollars>
+        2883
+      </Dollars>
+       Federal share)
+    </li>
+    <li
+      className=""
+      key="2"
+    >
+      <strong>
+        FFY 
+        2
+        :
+      </strong>
+       
+      <Dollars>
+        848622
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        2468252
+      </Dollars>
+       (
+      <Dollars>
+        826
+      </Dollars>
+       Federal share)
+    </li>
+  </ul>
+  <hr
+    className="subsection-rule ds-u-margin-y--4"
+  />
+  <h2>
+    Activity 2: Untitled
+  </h2>
+  <p
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "second activity",
+      }
+    }
+  />
+  <ul
+    className="ds-c-list--bare"
+  >
+    <li
+      className="ds-u-margin-top--3 ds-u-margin-bottom--1"
+    >
+      <strong>
+        Start date - End date:
+      </strong>
+       
+    </li>
+    <li
+      className="ds-u-margin-y--1"
+    >
+      <strong>
+        Total cost of activity:
+      </strong>
+       
+      <Dollars>
+        310
+      </Dollars>
+    </li>
+    <li
+      className="ds-u-margin-top--1 ds-u-margin-bottom--3"
+    >
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        2150
+      </Dollars>
+       (
+      <Dollars>
+        2050
+      </Dollars>
+       Federal share)
+    </li>
+    <li
+      className="ds-u-margin-y--2"
+      key="1"
+    >
+      <strong>
+        FFY 
+        1
+        :
+      </strong>
+       
+      <Dollars>
+        26926
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        989264
+      </Dollars>
+       (
+      <Dollars>
+        2356
+      </Dollars>
+       Federal share)
+    </li>
+    <li
+      className=""
+      key="2"
+    >
+      <strong>
+        FFY 
+        2
+        :
+      </strong>
+       
+      <Dollars>
+        54634738
+      </Dollars>
+       |
+       
+      <strong>
+        Total Computable Medicaid Cost:
+      </strong>
+       
+      <Dollars>
+        73
+      </Dollars>
+       (
+      <Dollars>
+        643
+      </Dollars>
+       Federal share)
+    </li>
+  </ul>
+  <hr
+    className="section-rule ds-u-margin-y--5"
+  />
+  <h2>
+    Program Budget Tables
+  </h2>
   <Connect(ExecutiveSummaryBudget) />
 </div>
 `;

@@ -198,7 +198,7 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
     expect(
-      screen.getByRole('heading', { name: 'Program Budget Table' })
+      screen.getByRole('heading', { name: 'Program Budget Tables' })
     ).toBeTruthy();
     expect(
       screen.getByRole('table', { name: 'HIT + HIE executive summary' })
@@ -248,7 +248,7 @@ describe('<ExecutiveSummary />', () => {
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
     expect(
-      screen.getByRole('heading', { name: 'Program Budget Table' })
+      screen.getByRole('heading', { name: 'Program Budget Tables' })
     ).toBeTruthy();
     expect(
       screen.queryByRole('table', { name: 'HIT + HIE executive summary' })

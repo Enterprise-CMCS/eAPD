@@ -2,21 +2,39 @@ import PropTypes from 'prop-types';
 import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Dollars from '../../../components/Dollars';
 import { t } from '../../../i18n';
 
-import { selectApdYears } from '../../../redux/selectors/apd.selectors';
+import {
+  selectApdType,
+  selectApdYears
+} from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../../../redux/selectors/budget.selectors';
 import { ffyList } from '../../../util/apd';
+import { APD_TYPE } from '@cms-eapd/common';
+
+import HitechBudgetSummary from './HitechBudgetSummary';
+import MmisBudgetSummary from './MmisBudgetSummary';
 
 class ExecutiveSummary extends PureComponent {
   render() {
-    const { data, total, years } = this.props;
+    const { apdType, data, total, years } = this.props;
     const noYears = !years;
+
+    function renderApdTypeSpecificFields() {
+      switch (apdType) {
+        case APD_TYPE.HITECH:
+          return <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />;
+        case APD_TYPE.MMIS:
+          return <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />;
+        default:
+          null;
+      }
+    }
+
     return (
       <div>
         <h2>Executive Summary</h2>
@@ -86,19 +104,21 @@ class ExecutiveSummary extends PureComponent {
         ))}
         <hr className="section-rule ds-u-margin-y--5" />
         <h2>Program Budget Tables</h2>
-        <ExecutiveSummaryBudget />
+        {renderApdTypeSpecificFields()}
       </div>
     );
   }
 }
 
 ExecutiveSummary.propTypes = {
+  apdType: PropTypes.string,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
+  apdType: selectApdType(state),
   data: selectBudgetExecutiveSummary(state),
   total: selectBudgetGrandTotal(state),
   years: selectApdYears(state)
