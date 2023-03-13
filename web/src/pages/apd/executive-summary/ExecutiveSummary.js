@@ -87,9 +87,23 @@ const ExecutiveSummary = ({
   function renderApdTypeSpecificBudgets(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
-        return <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />;
+        return (
+          <Subsection
+            id="executive-summary-budget-table"
+            resource="executiveSummary.budgetTable"
+          >
+            <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />
+          </Subsection>
+        );
       case APD_TYPE.MMIS:
-        return <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />;
+        return (
+          <Subsection
+            id="executive-summary-budget-table"
+            resource="executiveSummary.budgetTable"
+          >
+            <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />
+          </Subsection>
+        );
       default:
         null;
     }

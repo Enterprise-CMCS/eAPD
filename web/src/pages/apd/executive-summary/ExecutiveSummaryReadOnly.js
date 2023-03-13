@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Dollars from '../../../components/Dollars';
-import Review from '../../../components/Review';
 import { t } from '../../../i18n';
 
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
@@ -54,7 +53,7 @@ class ExecutiveSummary extends PureComponent {
             )}
           </ul>
         </Fragment>
-        <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
+        <hr className="section-rule ds-u-margin-top--5 ds-u-margin-bottom--3" />
         {data.map((activity, i) => (
           <Fragment key={activity.activityId}>
             <h2>{`Activity ${i + 1}: ${
@@ -80,9 +79,12 @@ class ExecutiveSummary extends PureComponent {
               </li>
               {!noYears && ffyList(activity.ffys)}
             </ul>
-            <hr className="section-rule ds-u-margin-top--2 ds-u-margin-bottom--1" />
+            {i + 1 != data.length && (
+              <hr className="subsection-rule ds-u-margin-y--4" />
+            )}
           </Fragment>
         ))}
+        <hr className="section-rule ds-u-margin-y--5" />
         <ExecutiveSummaryBudget />
       </div>
     );

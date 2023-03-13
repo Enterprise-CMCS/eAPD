@@ -26,23 +26,9 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
   function renderApdTypeSpecificFields(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
-        return (
-          <HitechBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
+        return <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />;
       case APD_TYPE.MMIS:
-        return (
-          <MmisBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
+        return <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />;
       default:
         null;
     }
