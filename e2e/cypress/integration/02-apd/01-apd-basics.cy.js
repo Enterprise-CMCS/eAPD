@@ -386,6 +386,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         'exist'
       );
 
+      cy.get('.ds-c-tooltip__container').should('exist');
+      cy.get('.ds-c-tooltip__container').trigger('mouseover');
+      cy.contains('All fields are required before saving.');
+      cy.get('.ds-c-tooltip__container').trigger('mouseout');
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
       cy.get('[data-cy="key-person-0__name"]').type(keyPersons[0].name);
@@ -400,6 +404,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
       cy.get('[data-cy="key-person-0__name"]').focus().blur();
 
+      cy.get('.ds-c-tooltip__container').should('not.exist');
       cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
         .click();
