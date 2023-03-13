@@ -124,7 +124,6 @@ const ApdViewOnly = ({
           {apd.name}
         </span>
       </h1>
-      <HitechSummary />
       <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
       <hr className="section-rule ds-u-margin-y--5" />
@@ -143,12 +142,12 @@ const ApdViewOnly = ({
         years={budget.years}
         apdType={apdType}
       />
-      {/* <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
-      <ScheduleSummary /> */}
-      {/* <hr className="section-rule" />
-      <ProposedBudget /> */}
-      {/* <hr className="section-rule" />
-      <AssuranceAndCompliance /> */}
+      <hr className="ds-u-border--dark ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--1" />
+      <ScheduleSummary />
+      <hr className="section-rule" />
+      <ProposedBudget />
+      <hr className="section-rule" />
+      <AssuranceAndCompliance />
       <a href="#top-anchor" className="visibility--screen">
         ^ Return to the top of the page
       </a>
