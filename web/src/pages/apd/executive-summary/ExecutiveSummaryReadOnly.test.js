@@ -5,6 +5,7 @@ import {
   plain as ExecutiveSummaryReadOnly,
   mapStateToProps
 } from './ExecutiveSummaryReadOnly';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const mockPush = jest.fn();
 
@@ -18,6 +19,7 @@ jest.mock('react-router-dom', () => {
 
 describe('executive summary component', () => {
   const props = {
+    apdType: APD_TYPE.HITECH,
     apdId: '0123456789abcdef01234567',
     data: [
       {
@@ -91,6 +93,7 @@ describe('executive summary component', () => {
     const state = {
       apd: {
         data: {
+          apdType: APD_TYPE.HITECH,
           activities: [
             {
               activityId: 'a1',
@@ -142,6 +145,30 @@ describe('executive summary component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
+      apdType: APD_TYPE.HITECH,
+      budget: {
+        activities: {
+          a1: {
+            costsByFFY: {
+              1: 'a1 ffy 1 costs',
+              2: 'a1 ffy 2 costs',
+              total: { federal: 1050, medicaid: 1150, total: 950 }
+            }
+          },
+          a2: {
+            costsByFFY: {
+              1: 'a2 ffy 1 costs',
+              2: 'a2 ffy 2 costs',
+              total: { federal: 410, medicaid: 510, total: 310 }
+            }
+          }
+        },
+        combined: {
+          1: 'ffy 1 combined costs',
+          2: 'ffy 2 combined costs',
+          total: { federal: 1360, medicaid: 1460, total: 1260 }
+        }
+      },
       data: [
         {
           activityId: 'a1',

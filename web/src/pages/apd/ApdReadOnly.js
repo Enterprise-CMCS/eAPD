@@ -22,8 +22,6 @@ import Loading from '../../components/Loading';
 
 import ExportInstructions from './export/ExportReadOnly';
 import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
-import HitechSummary from './export/ReadOnlyHitech';
-import MmisSummary from './export/ReadOnlyMmis';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
@@ -98,17 +96,6 @@ const ApdViewOnly = ({
     return null;
   }
 
-  function renderApdTypeSpecificSummary(apdType) {
-    switch (apdType) {
-      case APD_TYPE.HITECH:
-        return <HitechSummary />;
-      case APD_TYPE.MMIS:
-        return <MmisSummary />;
-      default:
-        return null;
-    }
-  }
-
   return (
     <main id="start-main-content" className="ds-l-container ds-u-padding--3">
       <div className="anchor" id="top-anchor">
@@ -130,7 +117,6 @@ const ApdViewOnly = ({
       <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
       <hr className="section-rule ds-u-margin-y--5" />
-      {renderApdTypeSpecificSummary(apdType)}
       <hr className="section-rule ds-u-margin-y--5" />
       <ApdStateProfile
         keyStatePersonnel={apd.keyStatePersonnel}

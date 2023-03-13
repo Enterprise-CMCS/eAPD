@@ -21,8 +21,12 @@ import MmisBudgetSummary from './MmisBudgetSummary';
 
 class ExecutiveSummary extends PureComponent {
   render() {
-    const { apdType, data, total, years } = this.props;
+    const { apdType, budget, data, total, years } = this.props;
     const noYears = !years;
+    const rowKeys = [
+      ...years.map(year => ({ year, display: t('ffy', { year }) })),
+      { year: 'total', display: 'Total' }
+    ];
 
     function renderApdTypeSpecificFields() {
       switch (apdType) {
@@ -112,6 +116,7 @@ class ExecutiveSummary extends PureComponent {
 
 ExecutiveSummary.propTypes = {
   apdType: PropTypes.string,
+  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
@@ -119,6 +124,7 @@ ExecutiveSummary.propTypes = {
 
 const mapStateToProps = state => ({
   apdType: selectApdType(state),
+  budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
   total: selectBudgetGrandTotal(state),
   years: selectApdYears(state)

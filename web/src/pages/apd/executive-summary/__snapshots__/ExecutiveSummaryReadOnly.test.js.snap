@@ -331,6 +331,23 @@ exports[`executive summary component renders correctly 1`] = `
   <h2>
     Program Budget Tables
   </h2>
-  <Connect(ExecutiveSummaryBudget) />
+  <HitechBudgetSummary
+    rowKeys={
+      Array [
+        Object {
+          "display": "FFY 1",
+          "year": "1",
+        },
+        Object {
+          "display": "FFY 2",
+          "year": "2",
+        },
+        Object {
+          "display": "Total",
+          "year": "total",
+        },
+      ]
+    }
+  />
 </div>
 `;
