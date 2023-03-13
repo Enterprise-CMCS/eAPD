@@ -20,13 +20,15 @@ import Loading from '../../components/Loading';
 
 import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
-import ApdSummary from './export/ReadOnlyApd';
 import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
 import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
 import ExportInstructions from './export/ExportReadOnly';
+import HitechSummary from './export/ReadOnlyHitech';
+import MmisSummary from './export/ReadOnlyMmis';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const ApdViewOnly = ({
   apd,
@@ -93,6 +95,17 @@ const ApdViewOnly = ({
     return null;
   }
 
+  function renderApdTypeSpecificSummary(apdType) {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return <HitechSummary />;
+      case APD_TYPE.MMIS:
+        return <MmisSummary />;
+      default:
+        return null;
+    }
+  }
+
   return (
     <main id="start-main-content" className="ds-l-container ds-u-padding--3">
       <div className="anchor" id="top-anchor">
@@ -111,10 +124,11 @@ const ApdViewOnly = ({
           {apd.name}
         </span>
       </h1>
+      <HitechSummary />
       <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
       <hr className="section-rule ds-u-margin-y--5" />
-      <ApdSummary />
+      {renderApdTypeSpecificSummary(apdType)}
       {/* <hr className="section-rule" />
       <ApdStateProfile
         keyStatePersonnel={apd.keyStatePersonnel}
