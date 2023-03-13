@@ -1036,15 +1036,15 @@ export const sumShareCostsForFundingCategory = ({
 
         // add to combined (total for all funding) for the particular year
         updatedBudget['combined'][year].total += costTotal;
-        updatedBudget['combined'][year].medicaid += costTotal;
-        updatedBudget['combined'][year].federal += costTotal;
-        updatedBudget['combined'][year].state += costTotal;
+        updatedBudget['combined'][year].medicaid += medicaidShare;
+        updatedBudget['combined'][year].federal += fedShare;
+        updatedBudget['combined'][year].state += stateShare;
 
         // add to combined (total for all funding) total for all the years
         updatedBudget['combined'].total.total += costTotal;
-        updatedBudget['combined'].total.medicaid += costTotal;
-        updatedBudget['combined'].total.federal += costTotal;
-        updatedBudget['combined'].total.state += costTotal;
+        updatedBudget['combined'].total.medicaid += medicaidShare;
+        updatedBudget['combined'].total.federal += fedShare;
+        updatedBudget['combined'].total.state += stateShare;
       }
     });
   }
