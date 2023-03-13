@@ -51,10 +51,10 @@ export const setPreviousActivityApprovedExpense = (
   year,
   expense,
   level,
-  fundingType
+  fundingCategory
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/${fundingType}/${level}/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/${fundingCategory}/${level}/totalApproved`,
   value: expense
 });
 
@@ -69,9 +69,9 @@ export const setPreviousActivityFederalActualExpense = (
   year,
   expense,
   level,
-  fundingType
+  fundingCategory
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivities/actualExpenditures/${year}/${fundingType}/${level}/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/${fundingCategory}/${level}/federalActual`,
   value: expense
 });

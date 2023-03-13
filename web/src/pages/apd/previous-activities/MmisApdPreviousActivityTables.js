@@ -9,7 +9,7 @@ import {
   setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousMMISActivitiesMMIS } from '../../../redux/selectors/apd.selectors';
+import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
 
 const MmisApdPreviousActivityTables = ({
   isViewOnly,
@@ -200,7 +200,7 @@ MmisApdPreviousActivityTables.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  previousActivityExpenses: selectPreviousMMISActivitiesMMIS(state)
+  previousActivityExpenses: selectPreviousActivities(state)
 });
 
 const mapDispatchToProps = {
