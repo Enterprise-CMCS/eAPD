@@ -58,10 +58,8 @@ exports[`apd export component renders correctly 1`] = `
     Once you’ve exported a PDF of a completed APD, submit it for state officer review by emailing the PDF to
      
     <a
-      href="mailto:MedicaidHITECH@cms.hhs.gov"
-    >
-      MedicaidHITECH@cms.hhs.gov
-    </a>
+      href="mailto:null"
+    />
     .
   </p>
   <Button
