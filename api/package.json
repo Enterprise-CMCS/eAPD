@@ -22,12 +22,11 @@
     "seed": "yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
-    "jest": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest --maxWorkers=50%",
-    "tap": "NODE_ENV=test TAP_DIAG=1 tap -J --no-browser --no-coverage --no-timeout",
-    "test": "NODE_ENV=test tap -J --coverage-report=text-lcov --no-browser",
-    "test-endpoints": "yarn jest --detectOpenHandles --forceExit --maxWorkers=50%",
-    "test-specific": "NODE_ENV=test tap --no-coverage --no-browser",
-    "endpointFullTest": "./endpoint-tests/endpoint.sh",
+    "jest": "NODE_ENV=test node --experimental-vm-modules ../node_modules/.bin/jest",
+    "test-endpoints": "yarn jest --runInBand --forceExit",
+    "tap": "NODE_ENV=test TAP_DIAG=1 tap --jobs=1 --no-browser --no-timeout --node-arg=-r --node-arg=@babel/register --no-coverage",
+    "test": "c8 yarn tap --jobs=1",
+    "endpointFullTest": "./endpoint-tests/endpoint.sh --detectOpenHandles",
     "fullTest": "./unit-test.sh"
   },
   "repository": {
@@ -48,7 +47,6 @@
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.6.0",
     "axios": "0.27.2",
-    "babel-plugin-istanbul": "^6.1.1",
     "body-parser": "1.20.1",
     "chalk": "4.1.2",
     "compression": "1.7.4",
@@ -73,22 +71,29 @@
     "newrelic": "8.16.0",
     "pg": "8.9.0",
     "sanitize-html": "2.8.1",
-    "sharp": "0.30.7",
+    "sharp": "0.31.3",
     "swagger-ui-express": "4.6.0",
     "uuid": "8.3.2",
     "winston": "3.8.2",
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "babel-jest": "27.5.1",
+    "@babel/plugin-transform-modules-commonjs": "7.21.2",
+    "@istanbuljs/esm-loader-hook": "0.2.0",
+    "babel-plugin-istanbul": "6.1.1",
+    "c8": "7.13.0",
     "colors": "1.4.0",
-    "core-js": "3.27.2",
+    "core-js": "3.29.0",
+    "cross-env": "7.0.3",
     "eslint": "8.33.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.5",
-    "jest": "27.5.1",
+    "istanbul": "0.4.5",
+    "jest-environment-jsdom": "^29.5.0",
+    "leaked-handles": "5.2.0",
     "nodemon": "2.0.20",
+    "nyc": "15.1.0",
     "sinon": "14.0.0",
     "supertest": "6.3.3",
     "tap": "16.3.4"
@@ -98,7 +103,6 @@
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
   "jest": {
-    "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -107,12 +111,20 @@
     "globalSetup": "<rootDir>/jest.setup.js",
     "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
+    "testEnvironment": "node",
     "testTimeout": 30000,
-    "testEnvironment": "jest-environment-node",
-    "transform": {},
+    "transform": {
+      "^.+\\.(t|j)sx?$": "babel-jest"
+    },
     "moduleFileExtensions": [
       "js",
       "jsx"
+    ],
+    "coverageDirectory": "./coverage-endpoint/",
+    "coverageProvider": "babel",
+    "coverageReporters": [
+      "lcov",
+      "text"
     ],
     "collectCoverageFrom": [
       "routes/**/*.{js,jsx}",
@@ -122,29 +134,45 @@
     ]
   },
   "tap": {
-    "files": "!(node_modules|coverage|dist)/**/*.test.js",
+    "files": [
+      "*.test.js",
+      "!(node_modules|coverage)/**/*.test.js"
+    ],
     "lines": 75,
     "functions": 60,
     "branches": 49,
     "statements": 75,
     "nyc-arg": [
-      "--reporter-dir=./coverage/",
-      "--include=./**/*.js",
-      "--exclude=./**/*.endpoint.js",
-      "--exclude=./**/index.js",
-      "--exclude=./**/migrations/**",
-      "--exclude=./**/mongo-migrations/**",
-      "--exclude=./**/openAPI.js",
-      "--exclude=./**/routes/**/index.js",
-      "--exclude=./**/seeds/**",
-      "--exclude=./**/test-data/**",
-      "--exclude=./**/node_modules/**",
-      "--exclude=./**/__snapshots__/**",
-      "--exclude=./**/audit.js",
-      "--exclude=./**/auth/mockedOktaAuth.js",
-      "--exclude=./**/db/knex.js",
-      "--exclude=./**/db/mongodb.js",
-      "--exclude=./**/seeds/development/apds.js"
+      "--reporter=lcov",
+      "--reporter=text",
+      "--all=true",
+      "--include=**/*.js",
+      "--exclude=.hygen.js",
+      "--exclude=audit.js",
+      "--exclude=jest.*.js",
+      "--exclude=knexfile.js",
+      "--exclude=knexrepl.js",
+      "--exclude=main.js",
+      "--exclude=shared.js",
+      "--exclude=**/*.endpoint.js",
+      "--exclude=**/*.brokentest.js",
+      "--exclude=**/index.js",
+      "--exclude=**/openAPI.js",
+      "--exclude=**/routes/**/index.js",
+      "--exclude=__snapshots__/**",
+      "--exclude=auth/mockedOktaAuth.js",
+      "--exclude=coverage-endpoint",
+      "--exclude=db/knex.js",
+      "--exclude=db/mongodb.js",
+      "--exclude=endpoint-tests/**",
+      "--exclude=logger/**",
+      "--exclude=middleware/endpointCoverage.js",
+      "--exclude=migrations/**",
+      "--exclude=mongo-migrations/**",
+      "--exclude=seeds/**",
+      "--exclude=test-data/**",
+      "--exclude=node_modules/**",
+      "--exclude=seeds/development/apds.js"
     ]
   }
 }

@@ -1,20 +1,26 @@
 import {
-  login,
+  getDB,
+  setupDB,
+  teardownDB,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../../endpoint-tests/utils.js';
 
 describe('auth/certifications/files endpoints', () => {
+  const db = getDB();
+  const api = apiAllPermissions;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
+
   describe('Get a file by fileId | GET /auth/certifications/:fileID', () => {
     const url = fileID => `/auth/certifications/files/${fileID}`;
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-
-      beforeAll(async () => {
-        api = login();
-      });
-
       unauthenticatedTest('get', url(0));
       unauthorizedTest('get', url(0));
 

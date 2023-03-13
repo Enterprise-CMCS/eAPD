@@ -7,11 +7,15 @@ tap.beforeEach(() => {
   process.env = { ...initialProcessEnv };
 });
 
+tap.afterEach(() => {
+  process.env = { ...initialProcessEnv };
+});
+
 tap.test('environment setup', async envTest => {
   const knownEnvironmentVariables = [
     { name: 'FILE_PATH', type: 'string' },
     { name: 'FILE_STORE', type: 'string' },
-    { name: 'PORT', type: 'number' },
+    { name: 'PORT', type: 'string' },
     { name: 'NODE_ENV', type: 'string' },
     { name: 'LOG_LEVEL', type: 'string' },
     { name: 'LOG_FILE', type: 'string' },
