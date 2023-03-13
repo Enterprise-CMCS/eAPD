@@ -3,12 +3,54 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { selectSummary } from '../../../redux/selectors/apd.selectors';
-import { getUpdateStatus, getAPDYearRange } from '../../../redux/reducers/apd';
+import {
+  getUpdateStatus,
+  getAPDYearRange,
+  getMedicaidBusinessAreas
+} from '../../../redux/reducers/apd';
 
-import { arrayOfObjectsToStringList } from '../../../util/apd';
-import { APD_TYPE } from '@cms-eapd/common';
+import {
+  arrayOfObjectsToStringList,
+  businessAreaChoices
+} from '../../../util/apd';
+import {
+  APD_TYPE,
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
+} from '@cms-eapd/common';
 
 const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
+  const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
+
+  function otherDetails() {
+    return (
+      <li>
+        <div className="other-summary">
+          <div>{MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.other}: </div>
+          <div className="ds-c-choice__checkedChild">
+            {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+          </div>
+        </div>
+      </li>
+    );
+  }
+
+  function renderMedicaidAreasNumberList() {
+    if (!businessAreasList.length) {
+      return 'Provide at least one Medicaid Business Area.';
+    }
+    return (
+      <ol>
+        {businessAreasList.map(obj => {
+          if (obj.checked) {
+            return <li>{obj.label}</li>;
+          }
+        })}
+
+        {medicaidBusinessAreas.other && otherDetails()}
+      </ol>
+    );
+  }
+
   return (
     <Fragment>
       <h2>APD Overview</h2>
@@ -34,6 +76,7 @@ const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
         </li>
         <li>
           <strong>Medicaid Business Areas:</strong>{' '}
+          {renderMedicaidAreasNumberList()}
         </li>
       </ul>
     </Fragment>
