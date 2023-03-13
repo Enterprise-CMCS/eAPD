@@ -16,19 +16,21 @@ import { selectBudget } from '../../redux/selectors/budget.selectors';
 import { getAPDYearRange } from '../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import Loading from '../../components/Loading';
 
-import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
-import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
-import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
-import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
 import ExportInstructions from './export/ExportReadOnly';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
 import HitechSummary from './export/ReadOnlyHitech';
 import MmisSummary from './export/ReadOnlyMmis';
+import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
-import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
-import { APD_TYPE } from '@cms-eapd/common';
+import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import SecuritySummary from './security-planning/SecurityPlanningReadOnly';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
 
 const ApdViewOnly = ({
   apd,
@@ -44,6 +46,7 @@ const ApdViewOnly = ({
   const apdId = apd.id || null;
   const { apdId: paramApdId } = useParams();
   const history = useHistory();
+  const isApdMmis = apdType === APD_TYPE.MMIS;
 
   useEffect(
     () => {
@@ -135,7 +138,7 @@ const ApdViewOnly = ({
       />
       <hr className="section-rule ds-u-margin-y--5" />
       <PreviousActivities />
-      <hr className="section-rule ds-u-margin-bottom--7 ds-u-margin-bottom--5" />
+      <hr className="section-rule ds-u-margin-bottom--7" />
       <Activities
         apdId={apd.id}
         activities={apd.activities}
@@ -146,7 +149,8 @@ const ApdViewOnly = ({
       <ScheduleSummary />
       <hr className="section-rule" />
       <ProposedBudget />
-      <hr className="section-rule" />
+      {isApdMmis && <SecuritySummary />}
+      <hr className="section-rule ds-u-margin-y--5" />
       <AssuranceAndCompliance />
       <a href="#top-anchor" className="visibility--screen">
         ^ Return to the top of the page
