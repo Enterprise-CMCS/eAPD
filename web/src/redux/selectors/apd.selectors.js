@@ -72,19 +72,7 @@ export const selectPreviousHITHIEActivities = createSelector(
     )
 );
 
-export const selectPreviousMMISActivitiesHITECH = createSelector(
-  [selectApdData],
-  ({ previousActivities }) =>
-    Object.entries(previousActivities.actualExpenditures).reduce(
-      (o, [year, expenses]) => ({
-        ...o,
-        [year]: expenses
-      }),
-      {}
-    )
-);
-
-export const selectPreviousMMISActivitiesMMIS = createSelector(
+export const selectPreviousActivities = createSelector(
   [selectApdData],
   ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(

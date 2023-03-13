@@ -12,6 +12,18 @@ import {
   selectApdType
 } from '../../../redux/selectors/apd.selectors';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
+const activityTablesMapping = {
+  [APD_TYPE.HITECH]: <HitechApdPreviousActivityTables isViewOnly />,
+  [APD_TYPE.MMIS]: <MmisApdPreviousActivityTable isViewOnly />
+};
+
+const activityTableTotalsMapping = {
+  [APD_TYPE.HITECH]: <HitechPreviousActivityTotalsTable isViewOnly />,
+  [APD_TYPE.MMIS]: <MmisPreviousActivityTotalsTable isViewOnly />
+};
+
 const PreviousActivities = ({ previousActivitySummary, apdType }) => {
   /* eslint-disable react/no-danger */
   return (
@@ -21,11 +33,9 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
       <hr className="subsection-rule" />
       <h3>Actual Expenditures</h3>
-      {apdType === 'HITECH' && <HitechApdPreviousActivityTables isViewOnly />}
-      {apdType === 'HITECH' && <HitechPreviousActivityTotalsTable />}
 
-      {apdType === 'MMIS' && <MmisApdPreviousActivityTable isViewOnly />}
-      {apdType === 'MMIS' && <MmisPreviousActivityTotalsTable isViewOnly />}
+      {activityTablesMapping[apdType]}
+      {activityTableTotalsMapping[apdType]}
     </div>
   );
 };

@@ -11,7 +11,7 @@ import {
   setPreviousActivityApprovedExpense
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousMMISActivitiesHITECH } from '../../../redux/selectors/apd.selectors';
+import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
 
 const HitechApdPreviousActivityTables = ({
   isViewOnly,
@@ -228,7 +228,7 @@ HitechApdPreviousActivityTables.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  previousActivityExpenses: selectPreviousMMISActivitiesHITECH(state)
+  previousActivityExpenses: selectPreviousActivities(state)
 });
 
 const mapDispatchToProps = {

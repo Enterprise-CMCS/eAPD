@@ -10,7 +10,7 @@ import {
   selectPreviousActivityExpensesTotalsHITECH,
   selectPreviousActivitySummary,
   selectPreviousHITHIEActivities,
-  selectPreviousMMISActivitiesHITECH,
+  selectPreviousActivities,
   selectPreviousActivityExpensesTotalsMMIS,
   selectKeyStatePersonnel,
   selectSummary
@@ -228,7 +228,7 @@ describe('APD selectors', () => {
 
   it('selects previous MMIS activity costs for the current APD', () => {
     expect(
-      selectPreviousMMISActivitiesHITECH({
+      selectPreviousActivities({
         apd: {
           data: {
             previousActivities: {

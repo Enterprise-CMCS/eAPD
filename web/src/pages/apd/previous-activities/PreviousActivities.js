@@ -17,6 +17,17 @@ import {
   selectApdType
 } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
+import { APD_TYPE } from '@cms-eapd/common';
+
+const activityTablesMapping = {
+  [APD_TYPE.HITECH]: <HitechApdPreviousActivityTables />,
+  [APD_TYPE.MMIS]: <MmisApdPreviousActivityTables />
+};
+
+const activityTableTotalsMapping = {
+  [APD_TYPE.HITECH]: <HitechPreviousActivityTotalsTable />,
+  [APD_TYPE.MMIS]: <MmisPreviousActivityTotalsTable />
+};
 
 const PreviousActivities = ({
   previousActivitySummary,
@@ -54,11 +65,8 @@ const PreviousActivities = ({
           id="prev-activities-table"
           resource="previousActivities.actualExpenses"
         >
-          {apdType === 'HITECH' && <HitechApdPreviousActivityTables />}
-          {apdType === 'HITECH' && <HitechPreviousActivityTotalsTable />}
-
-          {apdType === 'MMIS' && <MmisApdPreviousActivityTables />}
-          {apdType === 'MMIS' && <MmisPreviousActivityTotalsTable />}
+          {activityTablesMapping[apdType]}
+          {activityTableTotalsMapping[apdType]}
         </Subsection>
       </Section>
     </React.Fragment>
