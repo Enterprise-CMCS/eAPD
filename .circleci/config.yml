@@ -881,7 +881,11 @@ jobs:
           name: report coverage for e2e
           when: always
           working_directory: ~/project/e2e/cypress
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F web
 
   chromatic deployment:
     parameters:
@@ -1013,7 +1017,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/api
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F api
 
   # ===== Common jobs ===== #
   # Runs common tests and reports coverage to codecov.io.
@@ -1041,7 +1049,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/common
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F common
 
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
@@ -1123,7 +1135,11 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/web
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN} -F web
 
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.
@@ -1171,24 +1187,7 @@ jobs:
             
             echo "containers created"
             sleep 200;
-            echo "waiting for api-for-testing..."
-
-            is_healthy() {
-                service="$1"
-                container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
-                health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
-
-                if [ "$health_status" = "healthy" ]; then
-                    return 0
-                else
-                    echo '.'
-                    return 1
-                fi
-            }
-
-            while ! is_healthy api-for-testing; do sleep 60; done
-            echo "api-for-testing is running"
-
+            
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:

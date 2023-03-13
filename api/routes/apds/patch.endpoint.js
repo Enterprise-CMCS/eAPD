@@ -2,7 +2,7 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateStaff,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
@@ -10,6 +10,7 @@ import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
+  const api = apiAsStateStaff;
   beforeAll(async () => {
     await setupDB(db);
   });
@@ -23,11 +24,6 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   unauthorizedTest('patch', url(1));
 
   describe('when authenticated as a user with permission', () => {
-    let api;
-    beforeAll(() => {
-      api = login('state-staff');
-    });
-
     it('with a non-existant apd ID', async () => {
       const response = await api.patch(url(badAPDId));
 
