@@ -85,6 +85,7 @@ class ExecutiveSummary extends PureComponent {
           </Fragment>
         ))}
         <hr className="section-rule ds-u-margin-y--5" />
+        <h2>Program Budget Tables</h2>
         <ExecutiveSummaryBudget />
       </div>
     );

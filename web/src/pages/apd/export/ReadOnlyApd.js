@@ -61,7 +61,7 @@ const ApdSummary = ({
     }
   }
 
-  return <Fragment>{renderSpecificApdSummary(apdType)}</Fragment>;
+  return renderSpecificApdSummary(apdType);
 };
 
 ApdSummary.propTypes = {

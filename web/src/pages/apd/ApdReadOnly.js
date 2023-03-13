@@ -15,16 +15,18 @@ import {
 import { selectBudget } from '../../redux/selectors/budget.selectors';
 import { getAPDYearRange } from '../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
+
+import Loading from '../../components/Loading';
+
+import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from './export/ReadOnlyApd';
-import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
-import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
-import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
-import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
 import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
 import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
 import ExportInstructions from './export/ExportReadOnly';
-import Loading from '../../components/Loading';
+import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
+import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 
 const ApdViewOnly = ({
   apd,
@@ -111,9 +113,9 @@ const ApdViewOnly = ({
       </h1>
       <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
-      <hr className="section-rule ds-u-margin-bottom--3" />
+      <hr className="section-rule ds-u-margin-y--5" />
       <ApdSummary />
-      <hr className="section-rule" />
+      {/* <hr className="section-rule" />
       <ApdStateProfile
         keyStatePersonnel={apd.keyStatePersonnel}
         apdType={apd.apdType}
@@ -132,7 +134,7 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ProposedBudget />
       <hr className="section-rule" />
-      <AssuranceAndCompliance />
+      <AssuranceAndCompliance /> */}
       <a href="#top-anchor" className="visibility--screen">
         ^ Return to the top of the page
       </a>
