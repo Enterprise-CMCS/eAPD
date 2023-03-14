@@ -2,17 +2,22 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications endpoints', () => {
-  describe('POST /auth/certifications', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const api = apiAsFedAdmin;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
+  describe('POST /auth/certifications', () => {
     const validRequestBody = {
       ffy: 2021,
       name: 'Roger Klotz',
@@ -27,11 +32,6 @@ describe('auth/certifications endpoints', () => {
     unauthorizedTest('post', url);
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(async () => {
-        api = login('fed-admin');
-      });
-
       it('with no request body', async () => {
         const response = await api.post(url, {});
 

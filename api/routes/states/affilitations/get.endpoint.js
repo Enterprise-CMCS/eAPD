@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -11,10 +12,14 @@ import {
 // list so it will be the first affiliation loaded into the
 // user, change once user is set
 describe('Affiliations endpoint | GET', () => {
-  const api = login('state-admin');
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  const api = apiAsStateAdmin;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/ak/affiliations');
@@ -26,8 +31,7 @@ describe('Affiliations endpoint | GET', () => {
     });
     // Figure this out when we have the
     it('returns 200 for the "federal" state', async () => {
-      const fedAdminApi = login('fed-admin');
-      const response = await fedAdminApi.get('/states/fd/affiliations');
+      const response = await apiAsFedAdmin.get('/states/fd/affiliations');
       expect(response.status).toEqual(200);
     });
   });

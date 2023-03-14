@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`open-api endpoint | GET /open-api 1`] = `
+exports[`Open-API endpoint open-api endpoint | GET /open-api 1`] = `
 Object {
   "components": Object {
     "schemas": Object {
