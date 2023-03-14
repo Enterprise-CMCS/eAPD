@@ -1,7 +1,7 @@
 import React from 'react';
 import PreviousActivities from './PreviousActivities';
 import { withDesign } from 'storybook-addon-designs';
-import { renderWithProvider } from 'apd-storybook-library';
+import { renderWithProviderAndRouter } from 'apd-storybook-library';
 import { APD_TYPE } from '@cms-eapd/common';
 
 export default {
@@ -158,86 +158,149 @@ const MMISPreviousActivitiesWithData = {
   }
 };
 
+const nav = {
+  apdId: '12345',
+  continueLink: {
+    label: 'Key State Personnel',
+    url: '/apd/12345/executive-summary',
+    selected: false
+  },
+  previousLink: {
+    label: 'Activities Dashboard',
+    url: '/apd/12345/activities',
+    selected: false
+  },
+  items: []
+};
+
 const Template = () => <PreviousActivities />;
 
-export const HitechDefaultPreviousActivities = Template.bind({});
-HitechDefaultPreviousActivities.decorators = [
+export const HitechDefaultPreviousActivitiesStory = Template.bind({});
+HitechDefaultPreviousActivitiesStory.decorators = [
   story =>
-    renderWithProvider({
+    renderWithProviderAndRouter({
       initialState: {
         apd: {
           data: {
+            id: '12345',
             apdType: APD_TYPE.HITECH,
             years: ['2023', '2024'],
             yearsOptions: ['2023', '2024', '2025'],
-            ...HitechPreviousActivitiesEmpty
+            previousActivities: {
+              ...HitechPreviousActivitiesEmpty
+            },
+            activities: []
           }
+        },
+        router: {
+          location: {
+            pathname: '/apd/12345/previous-activities'
+          }
+        },
+        nav: {
+          ...nav
         }
       },
       story
     })
 ];
 
-export const HitechDataPreviousActivities = Template.bind({});
-HitechDataPreviousActivities.decorators = [
+export const HitechDataPreviousActivitiesStory = Template.bind({});
+HitechDataPreviousActivitiesStory.decorators = [
   story =>
-    renderWithProvider({
+    renderWithProviderAndRouter({
       initialState: {
         apd: {
           data: {
+            id: '12345',
             apdType: APD_TYPE.HITECH,
             years: ['2023', '2024'],
             yearsOptions: ['2023', '2024', '2025'],
-            ...HitechPreviousActivitiesWithData
+            previousActivities: {
+              ...HitechPreviousActivitiesWithData
+            },
+            activities: []
           }
+        },
+        router: {
+          location: {
+            pathname: '/apd/12345/previous-activities'
+          }
+        },
+        nav: {
+          ...nav
         }
       },
       story
     })
 ];
 
-export const MmisDefaultPreviousActivities = Template.bind({});
-MmisDefaultPreviousActivities.parameters = {
+export const MmisDefaultPreviousActivitiesStory = Template.bind({});
+MmisDefaultPreviousActivitiesStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=3591%3A19693&t=3OLhy1ZwzoZ5VM0E-4'
   }
 };
-MmisDefaultPreviousActivities.decorators = [
+MmisDefaultPreviousActivitiesStory.decorators = [
   story =>
-    renderWithProvider({
+    renderWithProviderAndRouter({
       initialState: {
         apd: {
           data: {
+            id: '12345',
             apdType: APD_TYPE.MMIS,
             years: ['2023', '2024'],
             yearsOptions: ['2023', '2024', '2025'],
-            ...MMISPreviousActivitiesEmpty
+            previousActivities: {
+              ...MMISPreviousActivitiesEmpty
+            },
+            activities: []
           }
+        },
+        router: {
+          location: {
+            pathname: '/apd/12345/previous-activities'
+          }
+        },
+        nav: {
+          ...nav
         }
       },
       story
     })
 ];
 
-export const MmisDataPreviousActivities = Template.bind({});
-MmisDataPreviousActivities.parameters = {
+export const MmisDataPreviousActivitiesStory = Template.bind({});
+MmisDataPreviousActivitiesStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=3548%3A20855&t=3OLhy1ZwzoZ5VM0E-4'
   }
 };
-MmisDataPreviousActivities.decorators = [
+MmisDataPreviousActivitiesStory.decorators = [
   story =>
-    renderWithProvider({
+    renderWithProviderAndRouter({
       initialState: {
         apd: {
           data: {
+            id: '12345',
             apdType: APD_TYPE.MMIS,
             years: ['2023', '2024'],
             yearsOptions: ['2023', '2024', '2025'],
-            ...MMISPreviousActivitiesWithData
+            previousActivities: {
+              ...MMISPreviousActivitiesWithData
+            },
+            activities: []
           }
+        },
+        router: {
+          location: {
+            pathname: '/apd/12345/previous-activities'
+          }
+        },
+        nav: {
+          ...nav
         }
       },
       story
