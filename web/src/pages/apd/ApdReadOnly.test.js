@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import Router from 'react-router-dom';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
@@ -61,7 +61,6 @@ describe('<ApdViewOnly/>', () => {
       },
       initialHistory: ['/apd/1']
     });
-    // added waitFor because the it was taking time to load.
     expect(screen.findByText('MMIS IAPD')).toBeTruthy();
     expect(await screen.findByText('2023-2024 APD')).toBeTruthy();
     // Overview Summary
