@@ -12,7 +12,6 @@ const HitechSummary = ({
 }) => {
   return (
     <Fragment>
-      <h2>APD Overview</h2>
       <h3>Program introduction</h3>
       <p
         dangerouslySetInnerHTML={{

@@ -11,7 +11,8 @@ import {
 
 import {
   arrayOfObjectsToStringList,
-  businessAreaChoices
+  businessAreaChoices,
+  updateStatusChoices
 } from '../../../util/apd';
 import {
   APD_TYPE,
@@ -20,6 +21,7 @@ import {
 
 const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
   const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
+  console.log({ updateStatus });
 
   function otherDetails() {
     return (
@@ -53,7 +55,6 @@ const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
 
   return (
     <Fragment>
-      <h2>APD Overview</h2>
       <ul className="ds-c-list--bare read-only-summary-list">
         <li>
           <strong>APD Name:</strong> {name}

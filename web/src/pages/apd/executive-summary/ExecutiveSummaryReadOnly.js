@@ -23,6 +23,7 @@ class ExecutiveSummary extends PureComponent {
   render() {
     const { apdType, budget, data, total, years } = this.props;
     const noYears = !years;
+
     const rowKeys = [
       ...years.map(year => ({ year, display: t('ffy', { year }) })),
       { year: 'total', display: 'Total' }
