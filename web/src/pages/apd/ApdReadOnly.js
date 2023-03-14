@@ -21,8 +21,8 @@ import { APD_TYPE } from '@cms-eapd/common';
 import Loading from '../../components/Loading';
 
 import ExportInstructions from './export/ExportReadOnly';
-import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
-import OverviewSummary from './apd-overview/ReadOnlyApdOverview';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';\
+import ApdSummary from './export/ReadOnlyApd';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
@@ -118,7 +118,7 @@ const ApdViewOnly = ({
       <hr className="section-rule ds-u-margin-bottom--3" />
       <ExecutiveSummary apdId={apd.id} />
       <hr className="section-rule ds-u-margin-y--5" />
-      <OverviewSummary />
+      <ApdSummary />
       <hr className="section-rule ds-u-margin-y--5" />
       <ApdStateProfile
         keyStatePersonnel={apd.keyStatePersonnel}
