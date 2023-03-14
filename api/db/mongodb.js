@@ -10,7 +10,7 @@ const getConnectionString = () =>
 
 const getDBName = () => process.env.MONGO_DATABASE || 'eapd';
 
-export const connect = async () => {
+export const connect = async (config = {}) => {
   logger.verbose('Setting up MongoDB connection');
   const connectionString = getConnectionString();
   const dbName = getDBName();
@@ -20,8 +20,7 @@ export const connect = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       dbName,
-      keepAlive: true,
-      keepAliveInitialDelay: 300000
+      ...config
     });
     logger.verbose('MongoDB connected');
     return null;

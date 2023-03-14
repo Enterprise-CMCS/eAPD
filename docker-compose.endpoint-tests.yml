@@ -53,12 +53,6 @@ services:
       - API_PORT=8000
       - API_HOST=api-for-testing
     command: yarn start
-    healthcheck:
-      test: curl --fail http://localhost:8000/heartbeat || exit 1
-      interval: 30s
-      retries: 100
-      start_period: 180s
-      timeout: 30s
     expose:
       - 8000
     volumes:

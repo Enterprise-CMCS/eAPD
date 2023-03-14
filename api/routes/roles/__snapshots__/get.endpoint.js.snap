@@ -16,12 +16,12 @@ Array [
 
 exports[`Roles endpoint GET /roles returns expected roles given a system admin 1`] = `
 Array [
+  "eAPD No Permissions",
   "eAPD System Admin",
   "eAPD Federal Admin",
   "eAPD State Admin",
   "eAPD State Staff",
   "eAPD State Contractor",
   "eAPD Tester",
-  "eAPD No Permissions",
 ]
 `;

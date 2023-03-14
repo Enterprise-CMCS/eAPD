@@ -272,7 +272,6 @@ describe('cost allocation validation', () => {
           },
           { abortEarly: false }
         );
-      console.log({ schemaValidation });
       expect(schemaValidation.length).toEqual(3);
       expect(schemaValidation[0].message).toEqual(
         'Select a federal-state split.'

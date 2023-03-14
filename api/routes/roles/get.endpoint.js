@@ -2,18 +2,23 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
+  apiNoPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
 
 describe('Roles endpoint', () => {
   const db = getDB();
+  const controller = new AbortController();
   beforeAll(async () => {
     await setupDB(db);
   });
   afterAll(async () => {
     await teardownDB(db);
+    controller.abort();
   });
 
   describe('GET /roles', () => {
@@ -21,38 +26,33 @@ describe('Roles endpoint', () => {
     unauthorizedTest('get', '/roles');
 
     it('returns expected roles given a system admin', async () => {
-      const authedClient = login('all-permissions');
-      const response = await authedClient.get('/roles');
+      const response = await apiAllPermissions.get('/roles');
       const roles = response.data.map(r => r.name);
       expect(response.status).toEqual(200);
       expect(roles).toMatchSnapshot();
     });
 
     it('returns expected roles given a fed admin', async () => {
-      const authedClient = login('fed-admin');
-      const response = await authedClient.get('/roles');
+      const response = await apiAsFedAdmin.get('/roles');
       const roles = response.data.map(r => r.name);
       expect(response.status).toEqual(200);
       expect(roles).toMatchSnapshot();
     });
 
     it('returns expected roles given a state admin', async () => {
-      const authedClient = login('state-admin');
-      const response = await authedClient.get('/roles');
+      const response = await apiAsStateAdmin.get('/roles');
       const roles = response.data.map(r => r.name);
       expect(response.status).toEqual(200);
       expect(roles).toMatchSnapshot();
     });
 
     it('returns 200', async () => {
-      const authedClient = login();
-      const response = await authedClient.get('/roles');
+      const response = await apiAllPermissions.get('/roles');
       expect(response.status).toEqual(200);
     });
 
     it('returns 403', async () => {
-      const unauthedClient = login('no-permissions');
-      const response = await unauthedClient.get('/roles');
+      const response = await apiNoPermissions.get('/roles');
       expect(response.status).toEqual(403);
     });
   });

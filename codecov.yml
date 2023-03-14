@@ -19,42 +19,31 @@ coverage:
   status:
     changes: false
     default_rules:
-      flag_coverage_not_uploaded_behavior: include
+      flag_coverage_not_uploaded_behavior: exclude
     project:
       default:
-        target: 60% #overall project/ repo coverage
+        target: auto
+        threshold: 0%
+        only_pulls: true
+        removed_code_behavior: adjust_base
       api:
         target: 73%
+        paths: #note, accepts globs, not regexes
+          - api/
         flags:
           - api
       common:
         target: 73%
+        paths:
+          - common/
         flags:
           - common
       web:
         target: 73%
+        paths:
+          - web/
         flags:
           - web
-
-flags:
-  api:
-    paths: #note, accepts globs, not regexes
-      - api/
-    carryforward: true
-  common:
-    paths:
-      - common/
-    carryforward: true
-  e2e:
-    paths:
-      - e2e/
-    carryforward: true
-  web:
-    paths:
-      - web/
-    carryforward: true
-    # If no Carryfoward flag specified in YAML, the
-    # default configuration is false.
 
 parsers:
   gcov:

@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "stryker": "TZ=utc stryker run",
-    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
+    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --coverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
     "npm-check": "npx npm-check-updates"
   },
@@ -33,7 +33,6 @@
   },
   "packageManager": "yarn@1.22.18",
   "jest": {
-    "coverageDirectory": "./coverage/",
     "rootDir": "./",
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -43,8 +42,18 @@
     "testEnvironment": "node",
     "testTimeout": 30000,
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.(t|j)sx?$": "babel-jest"
     },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "coverageDirectory": "./coverage/",
+    "coverageProvider": "babel",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/schemas/**",
