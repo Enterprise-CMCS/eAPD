@@ -178,4 +178,38 @@ describe('renders correctly', () => {
       )
     ).toMatchSnapshot();
   });
+
+  it('renders internal cost summary rows component with highlightedSubtotals', () => {
+    expect(
+      shallow(
+        <CostSummaryRows
+          highlightSubtotals={true}
+          items={[
+            {
+              // shows unit cost, units, and math symbols
+              description: 'item 1',
+              totalCost: 100,
+              unitCost: 10,
+              units: '10 items'
+            },
+            {
+              // shows none of those things
+              description: 'item 2',
+              totalCost: 200,
+              unitCost: null,
+              units: null
+            },
+            {
+              // show medicaid share %
+              description: 'share percent',
+              totalCost: 200,
+              unitCost: 1,
+              units: 'fte',
+              medicaidShare: '50'
+            }
+          ]}
+        />
+      )
+    ).toMatchSnapshot();
+  });
 });
