@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -33,17 +33,17 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           yarn build:storybook
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        # Chromatic GitHub Action options
-        with:
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GH_TOKEN }}
-          storybookBuildDir: docs-build
-          allowConsoleErrors: true
+      # - name: Publish to Chromatic
+      #   uses: chromaui/action@v1
+      #   # Chromatic GitHub Action options
+      #   with:
+      #     # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     token: ${{ secrets.GH_TOKEN }}
+      #     storybookBuildDir: docs-build
+      #     allowConsoleErrors: true
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.8
+        uses: JamesIves/github-pages-deploy-action@4.4.1
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: docs-build # The folder that the build:storybook script generates files.
