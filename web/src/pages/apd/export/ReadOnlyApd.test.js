@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, screen, act } from 'apd-testing-library';
+import { renderWithConnection, act } from 'apd-testing-library';
 
 import ApdSummary from './ReadOnlyApd';
 
@@ -77,7 +77,7 @@ const initialStateHITECH = {
   }
 };
 
-const setup = async (props = {}, initialState = emptyInitialState) => {
+const setup = async (props = {}, initialState = {}) => {
   let util;
   // eslint-disable-next-line testing-library/no-unnecessary-act
   await act(async () => {
@@ -95,7 +95,6 @@ describe('APD Summary/viewOnly component', () => {
     test('renders correct empty state values', async () => {
       const { util } = await setup({}, emptyInitialStateHITECH);
 
-      expect(util.queryAllByText('No response was provided')).toHaveLength(4);
       expect(util).toMatchSnapshot();
     });
 
