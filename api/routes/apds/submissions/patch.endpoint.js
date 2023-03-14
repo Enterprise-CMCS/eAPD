@@ -1,4 +1,5 @@
 import {
+  apiNoKey,
   apiKeyAuth,
   getDB,
   setupDB,
@@ -16,8 +17,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 403 when the IP is not allowed', async () => {
-    const api = apiKeyAuth('bad ip');
-    const response = await api.patch('/apds/submissions', [
+    const response = await apiNoKey.patch('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
@@ -27,8 +27,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 400 when body is invalid', async () => {
-    const api = apiKeyAuth();
-    const response = await api.patch('/apds/submissions', {
+    const response = await apiKeyAuth.patch('/apds/submissions', {
       apdId: badAPDId,
       newStatus: 'approved'
     });
@@ -36,8 +35,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('returns 200', async () => {
-    const api = apiKeyAuth();
-    const response = await api.patch('/apds/submissions', [
+    const response = await apiKeyAuth.patch('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'

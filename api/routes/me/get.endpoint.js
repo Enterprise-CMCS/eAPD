@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
+  apiNoPermissions,
   unauthenticatedTest
 } from '../../endpoint-tests/utils.js';
 
@@ -10,6 +11,7 @@ const url = '/me';
 
 describe('/me endpoint | GET', () => {
   const db = getDB();
+  const api = apiAllPermissions;
   beforeAll(async () => {
     await setupDB(db);
   });
@@ -23,19 +25,16 @@ describe('/me endpoint | GET', () => {
     // no-permissions is now tied into the actual database
     // so it has to have an affiliation, wy is used because
     // it's the end of the alphabetic list
-    const api = login('no-permissions');
-    const response = await api.get(url);
+    const response = await apiNoPermissions.get(url);
     expect(response.status).toEqual(200);
     expect(response.data.states).toEqual({ wy: 'approved' });
   });
 
   describe('user is authenticated, with all permissions', () => {
-    let api;
     let response;
     let user;
 
     beforeEach(async () => {
-      api = login('all-permissions');
       response = await api.get(url);
       user = response.data;
     });

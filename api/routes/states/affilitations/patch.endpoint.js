@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
@@ -10,6 +11,7 @@ import { getAllActiveRoles } from '../../../db/roles.js';
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();
+  const api = apiAsStateAdmin;
   let stateStaffId = 0;
   beforeAll(async () => {
     await setupDB(db);
@@ -27,12 +29,6 @@ describe('Affiliations endpoint | PATCH', () => {
   unauthorizedTest('patch', url('ak', 4000));
 
   describe('when authenticated', () => {
-    let api;
-
-    beforeAll(() => {
-      api = login('state-admin');
-    });
-
     ['approved', 'denied', 'revoked'].forEach(status => {
       it(`returns 200, when an affiliation is ${status}`, async () => {
         const response = await api.patch(url('ak', 4000), {
@@ -44,8 +40,7 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it('returns 400 when US state is incorrect for a fed admin', async () => {
-      const fedAdminApi = login('fed-admin');
-      const response = await fedAdminApi.patch(url('zz', 4000));
+      const response = await apiAsFedAdmin.patch(url('zz', 4000));
       expect(response.status).toEqual(400);
     });
 

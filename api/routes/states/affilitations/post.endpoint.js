@@ -2,13 +2,13 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiNoPermissions,
   unauthenticatedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('Affiliations endpoint | POST', () => {
-  const api = login('no-permissions');
   const db = getDB();
+  const api = apiNoPermissions;
   beforeAll(async () => {
     await setupDB(db);
   });
