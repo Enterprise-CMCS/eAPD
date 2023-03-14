@@ -4,7 +4,7 @@ import Dollars from '../../../../components/Dollars';
 import { APD_TYPE } from '@cms-eapd/common';
 
 export const CostSummaryRows = ({ items, defaultMessage }) => {
-  if (!items || items.length === 0) {
+  if (defaultMessage && (!items || items.length === 0)) {
     return (
       <tr>
         <td className="title">{defaultMessage || ''}</td>
@@ -83,7 +83,9 @@ const CostAllocationRows = ({
     )}
     <CostSummaryRows
       items={years[ffy].statePersonnel}
-      defaultMessage="State staff not specified."
+      defaultMessage={
+        apdType === APD_TYPE.MMIS ? 'State staff not specified.' : null
+      }
     />
     {otherFunding && (
       <tr>
@@ -115,7 +117,9 @@ const CostAllocationRows = ({
     </tr>
     <CostSummaryRows
       items={years[ffy].nonPersonnel}
-      defaultMessage="Other state expenses not specified."
+      defaultMessage={
+        apdType === APD_TYPE.MMIS ? 'Other state expenses not specified.' : null
+      }
     />
     {otherFunding && (
       <tr>
@@ -147,7 +151,9 @@ const CostAllocationRows = ({
     </tr>
     <CostSummaryRows
       items={years[ffy].contractorResources}
-      defaultMessage="Contractor name not specified."
+      defaultMessage={
+        apdType === APD_TYPE.MMIS ? 'Contractor name not specified.' : null
+      }
     />
     {otherFunding && (
       <tr>

@@ -26,74 +26,7 @@ const apdTwoYearsEmpty = {
     id: '63dd7bff09f7e000e87e41e8',
     state: 'ak',
     keyStatePersonnel: {
-      keyPersonnel: [
-        {
-          costs: {
-            2023: 0,
-            2024: 0
-          },
-          email: 'tshelby@email.com',
-          expanded: true,
-          hasCosts: true,
-          isPrimary: true,
-          fte: {
-            2023: 0,
-            2024: 0
-          },
-          split: {
-            2023: {
-              federal: 90,
-              state: 10,
-              fundingCategory: 'DDI'
-            },
-            2024: {
-              federal: 90,
-              state: 10,
-              fundingCategory: 'DDI'
-            }
-          },
-          medicaidShare: {
-            2023: 0,
-            2024: 0
-          },
-          name: 'Tommy Shelby',
-          position: 'Program Manager',
-          key: 'cf40591e'
-        },
-        {
-          costs: {
-            2023: 0,
-            2024: 0
-          },
-          email: 'pshelby@email.com',
-          expanded: true,
-          hasCosts: true,
-          isPrimary: false,
-          fte: {
-            2023: 0,
-            2024: 0
-          },
-          split: {
-            2023: {
-              federal: 90,
-              state: 10,
-              fundingCategory: 'DDI'
-            },
-            2024: {
-              federal: 90,
-              state: 10,
-              fundingCategory: 'DDI'
-            }
-          },
-          medicaidShare: {
-            2023: 0,
-            2024: 0
-          },
-          name: 'Polly Shelby',
-          position: 'Director',
-          key: '99227dde'
-        }
-      ]
+      keyPersonnel: []
     },
     years: ['2023', '2024'],
     yearOptions: ['2023', '2024', '2025'],
