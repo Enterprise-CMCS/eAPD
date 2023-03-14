@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, screen } from 'apd-testing-library';
+import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import Router from 'react-router-dom';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
@@ -8,7 +8,7 @@ import ApdViewOnly from './ApdReadOnly';
 
 import apd from '../../fixtures/ak-apd.json';
 import budget from '../../fixtures/ak-budget.json';
-import mmis from '../../fixtures/ak-apd-mmis.json';
+import mmisApd from '../../fixtures/ak-apd-mmis.json';
 import mmisBudget from '../../fixtures/ak-budget-mmis.json';
 
 jest.mock('react-router-dom', () => ({
@@ -32,11 +32,11 @@ describe('<ApdViewOnly/>', () => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
     resetLDMocks();
-    mockFlags({ mmisEnable: true });
+    mockFlags({ enableMmis: true });
   });
 
-  test('renders HITECH Read Only correctly and tests Back to APD button', async () => {
-    const { user } = setup(null, {
+  test('renders HITECH Read Only correctly', async () => {
+    setup(null, {
       initialState: {
         ...apd,
         ...budget
@@ -45,6 +45,40 @@ describe('<ApdViewOnly/>', () => {
     });
     expect(await screen.findByText('HITECH IAPD')).toBeTruthy();
     expect(await screen.findByText('2020-2021 APD')).toBeTruthy();
+    // Overview Summary
+    expect(await screen.findByText(/Program introduction/)).toBeTruthy();
+    expect(await screen.queryByText(/Medicaid Business Areas/)).toBeFalsy();
+    // Security Planning should not be present
+    expect(await screen.queryByText(/Security Planning/)).toBeFalsy();
+  });
+
+  test('renders MMIS Read Only correctly', async () => {
+    mockFlags({ enableMmis: true });
+    await setup(null, {
+      initialState: {
+        ...mmisApd,
+        ...mmisBudget
+      },
+      initialHistory: ['/apd/1']
+    });
+    // added waitFor because the it was taking time to load.
+    await waitFor(() => expect(screen.findByText('MMIS IAPD')).toBeTruthy());
+    expect(await screen.findByText('2023-2024 APD')).toBeTruthy();
+    // Overview Summary
+    expect(await screen.queryByText(/Program introduction/)).toBeFalsy();
+    expect(await screen.findByText(/Medicaid Business Areas/)).toBeTruthy();
+    // Security Planning should not be present
+    expect(await screen.findByText(/Security Planning/)).toBeTruthy();
+  });
+
+  test('Back to APD button', async () => {
+    const { user } = setup(null, {
+      initialState: {
+        ...apd,
+        ...budget
+      },
+      initialHistory: ['/apd/1']
+    });
 
     await user.click(screen.getByRole('button', { name: '< Back to APD' }));
     expect(history.length).toEqual(1);
