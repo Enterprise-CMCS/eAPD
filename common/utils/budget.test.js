@@ -1,5 +1,6 @@
 import { APD_TYPE } from './constants.js';
 import {
+  addCostSharesToCombinedTotals,
   calculateCategoryPercentages,
   calculateOtherFundingByYear,
   calculateShareCostsByCategory,
@@ -8,6 +9,57 @@ import {
 } from './budget.js';
 
 describe('budget calculate methods', () => {
+  describe('addCostSharesToCombinedTotals', () => {
+    test('with default values', () => {
+      const expected = {};
+      const actual = addCostSharesToCombinedTotals();
+      expect(actual).toEqual(expected);
+    });
+
+    test('adds values to the combined totals for the year and overall total', () => {
+      const year = '2024';
+      const medicaidShare = 10;
+      const fedShare = 9;
+      const stateShare = 1;
+      const budget = {
+        combined: {
+          2024: {
+            medicaid: 100,
+            federal: 90,
+            state: 10
+          },
+          total: {
+            medicaid: 1000,
+            federal: 900,
+            state: 100
+          }
+        }
+      };
+      const expected = {
+        combined: {
+          2024: {
+            medicaid: 110,
+            federal: 99,
+            state: 11
+          },
+          total: {
+            medicaid: 1010,
+            federal: 909,
+            state: 101
+          }
+        }
+      };
+      const actual = addCostSharesToCombinedTotals({
+        budget,
+        year,
+        medicaidShare,
+        fedShare,
+        stateShare
+      });
+      expect(actual).toEqual(expected);
+    });
+  });
+
   describe('calculateCategoryPercentages', () => {
     test('with default values', () => {
       const expected = [0, 0, 0];
