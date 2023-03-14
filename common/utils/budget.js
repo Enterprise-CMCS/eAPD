@@ -235,7 +235,6 @@ export const defaultMMISBudgetObject = (years = []) => ({
   mando: getDefaultFundingSourceByCategoryObject(years),
   combined: getDefaultFundingSourceObject(years),
   activityTotals: [],
-  activities: {},
   years
 });
 
@@ -285,7 +284,6 @@ export const defaultMMISBudgetObject = (years = []) => ({
 export const defaultBudgetObject = (years = []) => ({
   combined: getDefaultFundingSourceObject(years),
   activityTotals: [],
-  activities: {},
   years
 });
 
@@ -659,7 +657,7 @@ export const addCostSharesToCombinedTotals = ({
   medicaidShare = 0,
   fedShare = 0,
   stateShare = 0
-}) => {
+} = {}) => {
   const updatedBudget = deepCopy(budget);
   if (year) {
     // add to combined (total for all funding) for the particular year
@@ -944,7 +942,7 @@ export const sumShareCostsForFundingSource = ({
   totalMedicaidCostShares,
   costCategoryShare
 } = {}) => {
-  const updatedBudget = deepCopy(budget);
+  let updatedBudget = deepCopy(budget);
   if (budget && year && costCategoryShare && totalMedicaidCostShares) {
     // Update the three cost categories for the funding source
     if (
@@ -989,7 +987,8 @@ export const sumShareCostsForFundingSource = ({
       updatedBudget[fundingSource].combined.total.medicaid += totalMedicaidCost;
     }
     if (fundingSource !== 'hitAndHie') {
-      addCostSharesToCombinedTotals({
+      // Add to the budget's overall combined totals
+      updatedBudget = addCostSharesToCombinedTotals({
         budget: updatedBudget,
         year,
         medicaidShare: totalMedicaidCost,
@@ -1621,6 +1620,11 @@ export const calculateBudget = apd => {
           statePersonnel: activity.statePersonnel,
           keyPersonnel
         });
+
+        // Create a default quarterly FFP per activity object,
+        // so that all of the properties and stuff will exist
+        newBudget.activities[activity.activityId] =
+          defaultQuarterlyFFPObject(years);
       }
 
       // We need to know the funding source so we know where to apply
@@ -1633,11 +1637,6 @@ export const calculateBudget = apd => {
       // And of course we need to know how the costs are allocated between
       // the state and federal shares.
       const allocation = activity.costAllocation;
-
-      // Create a default quarterly FFP per activity object,
-      // so that all of the properties and stuff will exist
-      newBudget.activities[activity.activityId] =
-        defaultQuarterlyFFPObject(years);
 
       // Sum up the total cost of each cost category per fiscal year for the activity
       let activityTotals = sumActivityTotals({ activity, years });

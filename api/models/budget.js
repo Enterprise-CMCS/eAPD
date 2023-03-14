@@ -87,7 +87,7 @@ const costPercentByCostTypeByQuarter = new mongoose.Schema(
   { _id: false }
 );
 
-const activities = new mongoose.Schema({
+export const activities = new mongoose.Schema({
   costsByFFY: {
     type: Map,
     of: fedStateSplit
@@ -152,11 +152,7 @@ const budgetSchema = new mongoose.Schema({
         }
       }
     }
-  ],
-  activities: {
-    type: Map,
-    of: activities
-  }
+  ]
 });
 
 export default mongoose.model('Budget', budgetSchema);
