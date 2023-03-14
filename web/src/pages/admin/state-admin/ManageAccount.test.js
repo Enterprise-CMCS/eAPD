@@ -93,7 +93,7 @@ describe('<ManageAccount />', () => {
       '{arrowdown}{enter}'
     );
 
-    expect(screen.getByText('Alabama')).toBeTruthy();
+    expect(screen.getAllByText('Alabama').length).toBeGreaterThan(0);
     await user.click(screen.getByRole('button', { name: 'Submit' }));
   });
 });

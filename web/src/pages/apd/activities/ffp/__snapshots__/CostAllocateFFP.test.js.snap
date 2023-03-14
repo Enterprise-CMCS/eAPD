@@ -49,6 +49,30 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         Total cost
       </th>
     </tr>
+    <tr>
+      <td
+        class="title"
+      >
+        State staff not specified.
+      </td>
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number ds-u-padding--0"
+      />
+      <td
+        class="budget-table--number ds-u-text-align--left"
+      />
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number"
+      >
+        $0
+      </td>
+    </tr>
     <tr
       class="budget-table--total budget-table--row__highlight"
     >
@@ -77,6 +101,30 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         Other State Expenses
       </th>
     </tr>
+    <tr>
+      <td
+        class="title"
+      >
+        Other state expenses not specified.
+      </td>
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number ds-u-padding--0"
+      />
+      <td
+        class="budget-table--number ds-u-text-align--left"
+      />
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number"
+      >
+        $0
+      </td>
+    </tr>
     <tr
       class="budget-table--total budget-table--row__highlight"
     >
@@ -104,6 +152,30 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       >
         Private Contractor
       </th>
+    </tr>
+    <tr>
+      <td
+        class="title"
+      >
+        Contractor name not specified.
+      </td>
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number ds-u-padding--0"
+      />
+      <td
+        class="budget-table--number ds-u-text-align--left"
+      />
+      <td
+        class="budget-table--number"
+      />
+      <td
+        class="budget-table--number"
+      >
+        $0
+      </td>
     </tr>
     <tr
       class="budget-table--total budget-table--row__highlight"

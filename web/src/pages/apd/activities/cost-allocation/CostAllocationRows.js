@@ -1,9 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
+import { APD_TYPE } from '@cms-eapd/common';
 
-export const CostSummaryRows = ({ items }) =>
-  items.map(
+export const CostSummaryRows = ({ items, defaultMessage }) => {
+  if (!items || items.length === 0) {
+    return (
+      <tr>
+        <td className="title">{defaultMessage || ''}</td>
+        <td className="budget-table--number"></td>
+        <td className="budget-table--number ds-u-padding--0"></td>
+        <td className="budget-table--number ds-u-text-align--left"></td>
+        <td className="budget-table--number"></td>
+        <td className="budget-table--number">
+          <Dollars>$0</Dollars>
+        </td>
+      </tr>
+    );
+  }
+  return items.map(
     ({ key, description, totalCost, unitCost, units, medicaidShare }) => (
       <tr key={key || description}>
         <td className="title">{description || 'Category Not Selected'}</td>
@@ -26,12 +41,23 @@ export const CostSummaryRows = ({ items }) =>
       </tr>
     )
   );
-
-CostSummaryRows.propTypes = {
-  items: PropTypes.array.isRequired
 };
 
-const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
+CostSummaryRows.propTypes = {
+  items: PropTypes.array.isRequired,
+  defaultMessage: PropTypes.string
+};
+CostSummaryRows.defaultProps = {
+  defaultMessage: null
+};
+
+const CostAllocationRows = ({
+  years,
+  ffy,
+  otherFunding,
+  activityIndex,
+  apdType
+}) => (
   <Fragment>
     {otherFunding && (
       <tr className="budget-table--row__header">
@@ -52,8 +78,13 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         <th scope="col">Total cost</th>
       </tr>
     )}
-    <CostSummaryRows items={years[ffy].keyPersonnel} />
-    <CostSummaryRows items={years[ffy].statePersonnel} />
+    {apdType === APD_TYPE.HITECH && (
+      <CostSummaryRows items={years[ffy].keyPersonnel} />
+    )}
+    <CostSummaryRows
+      items={years[ffy].statePersonnel}
+      defaultMessage="State staff not specified."
+    />
     {otherFunding && (
       <tr>
         <td className="title" colSpan="4">
@@ -82,7 +113,10 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         Other State Expenses
       </th>
     </tr>
-    <CostSummaryRows items={years[ffy].nonPersonnel} />
+    <CostSummaryRows
+      items={years[ffy].nonPersonnel}
+      defaultMessage="Other state expenses not specified."
+    />
     {otherFunding && (
       <tr>
         <td className="title" colSpan="4">
@@ -111,7 +145,10 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
         Private Contractor
       </th>
     </tr>
-    <CostSummaryRows items={years[ffy].contractorResources} />
+    <CostSummaryRows
+      items={years[ffy].contractorResources}
+      defaultMessage="Contractor name not specified."
+    />
     {otherFunding && (
       <tr>
         <td className="title" colSpan="4">
@@ -155,6 +192,7 @@ const CostAllocationRows = ({ years, ffy, otherFunding, activityIndex }) => (
 CostAllocationRows.propTypes = {
   years: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired,
   otherFunding: PropTypes.shape({
     statePersonnel: PropTypes.object,
     expenses: PropTypes.object,

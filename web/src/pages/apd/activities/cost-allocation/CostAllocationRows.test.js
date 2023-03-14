@@ -1,8 +1,9 @@
-import { mount, shallow } from 'enzyme';
 import React from 'react';
+import { render, screen } from 'apd-testing-library';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
+import { APD_TYPE } from '@cms-eapd/common';
 
-const props = {
+const defaultProps = {
   ffy: '1990',
   years: {
     1990: {
@@ -123,59 +124,91 @@ const otherFunding = {
   }
 };
 
+const setupCostAllocationRows = async (props = {}) => {
+  return render(
+    <table>
+      <tbody>
+        <CostAllocationRows {...defaultProps} {...props} />
+      </tbody>
+    </table>
+  );
+};
+
+const setupCostSummaryRows = async (props = {}) => {
+  return render(<CostSummaryRows {...props} />);
+};
+
+/* eslint-disable testing-library/no-node-access */
 describe('renders correctly', () => {
-  it('renders correctly without otherFunding', () => {
-    const component = mount(
-      <table>
-        <tbody>
-          <CostAllocationRows {...props} />
-        </tbody>
-      </table>
-    );
-    expect(component).toMatchSnapshot();
+  it('renders correctly without otherFunding', async () => {
+    await setupCostAllocationRows();
+    expect(screen.queryAllByText(/Other Funding/).length).toEqual(0);
   });
 
-  it('renders correctly with otherFunding', () => {
-    const component = mount(
-      <table>
-        <tbody>
-          <CostAllocationRows {...props} otherFunding={otherFunding} />
-        </tbody>
-      </table>
-    );
-    expect(component).toMatchSnapshot();
+  it('renders correctly with otherFunding', async () => {
+    await setupCostAllocationRows({ otherFunding });
+    expect(screen.getAllByText(/Other Funding/).length).toEqual(3);
   });
 
-  it('renders internal cost summary rows component', () => {
+  it('renders key state personnel for HITECH', async () => {
+    await setupCostAllocationRows({ apdType: APD_TYPE.HITECH });
     expect(
-      shallow(
-        <CostSummaryRows
-          items={[
-            {
-              // shows unit cost, units, and math symbols
-              description: 'item 1',
-              totalCost: 100,
-              unitCost: 10,
-              units: '10 items'
-            },
-            {
-              // shows none of those things
-              description: 'item 2',
-              totalCost: 200,
-              unitCost: null,
-              units: null
-            },
-            {
-              // show medicaid share %
-              description: 'share percent',
-              totalCost: 200,
-              unitCost: 1,
-              units: 'fte',
-              medicaidShare: '50'
-            }
-          ]}
-        />
-      )
-    ).toMatchSnapshot();
+      screen.getAllByText(/key person \(APD Key Personnel\)/i).length
+    ).toEqual(1);
+  });
+
+  it('does not render key state personnel for MMIS', async () => {
+    await setupCostAllocationRows({ apdType: APD_TYPE.MMIS });
+    expect(
+      screen.queryAllByText(/key person \(APD Key Personnel\)/i).length
+    ).toEqual(0);
+  });
+
+  it('renders internal cost summary rows component', async () => {
+    await setupCostSummaryRows({
+      items: [
+        {
+          // shows unit cost, units, and math symbols
+          description: 'item 1',
+          totalCost: 100,
+          unitCost: 10,
+          units: '10 items'
+        },
+        {
+          // shows none of those things
+          description: 'item 2',
+          totalCost: 200,
+          unitCost: null,
+          units: null
+        },
+        {
+          // show medicaid share %
+          description: 'share percent',
+          totalCost: 200,
+          unitCost: 1,
+          units: 'fte',
+          medicaidShare: '50'
+        }
+      ]
+    });
+    expect(screen.getByText(/item 1/).closest('tr')).toHaveTextContent(
+      'item 1$10×10 items=$100'
+    );
+    expect(screen.getByText(/item 2/).closest('tr')).toHaveTextContent(
+      'item 2$200'
+    );
+    expect(screen.getByText(/share percent/).closest('tr')).toHaveTextContent(
+      'share percent$1×fte× 50%=$200'
+    );
+  });
+
+  it('renders internal cost summary rows component with empty items array', async () => {
+    await setupCostSummaryRows({
+      items: [],
+      defaultMessage: 'State staff not specified.'
+    });
+    expect(
+      screen.getByText(/State staff not specified/).closest('tr')
+    ).toHaveTextContent('State staff not specified.$0');
   });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import CostAllocateFFP from './CostAllocateFFP';
 import { withDesign } from 'storybook-addon-designs';
 import { renderWithProvider } from 'apd-storybook-library';
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   title: 'Pages/Apd/Activities/FFP/Cost Allocate FFP',
@@ -19,6 +19,99 @@ export default {
   args: {
     activityIndex: 0
   }
+};
+
+const apdTwoYearsEmpty = {
+  data: {
+    id: '63dd7bff09f7e000e87e41e8',
+    state: 'ak',
+    keyStatePersonnel: {
+      keyPersonnel: [
+        {
+          costs: {
+            2023: 0,
+            2024: 0
+          },
+          email: 'tshelby@email.com',
+          expanded: true,
+          hasCosts: true,
+          isPrimary: true,
+          fte: {
+            2023: 0,
+            2024: 0
+          },
+          split: {
+            2023: {
+              federal: 90,
+              state: 10,
+              fundingCategory: 'DDI'
+            },
+            2024: {
+              federal: 90,
+              state: 10,
+              fundingCategory: 'DDI'
+            }
+          },
+          medicaidShare: {
+            2023: 0,
+            2024: 0
+          },
+          name: 'Tommy Shelby',
+          position: 'Program Manager',
+          key: 'cf40591e'
+        },
+        {
+          costs: {
+            2023: 0,
+            2024: 0
+          },
+          email: 'pshelby@email.com',
+          expanded: true,
+          hasCosts: true,
+          isPrimary: false,
+          fte: {
+            2023: 0,
+            2024: 0
+          },
+          split: {
+            2023: {
+              federal: 90,
+              state: 10,
+              fundingCategory: 'DDI'
+            },
+            2024: {
+              federal: 90,
+              state: 10,
+              fundingCategory: 'DDI'
+            }
+          },
+          medicaidShare: {
+            2023: 0,
+            2024: 0
+          },
+          name: 'Polly Shelby',
+          position: 'Director',
+          key: '99227dde'
+        }
+      ]
+    },
+    years: ['2023', '2024'],
+    yearOptions: ['2023', '2024', '2025'],
+    activities: [
+      {
+        id: null,
+        key: '5caaaf1c',
+        activityId: '5caaaf1c',
+        name: 'Program Administration',
+        milestones: [],
+        outcomes: [],
+        statePersonnel: [],
+        expenses: [],
+        contractorResources: []
+      }
+    ]
+  },
+  byId: {}
 };
 
 const apdTwoYears = {
@@ -354,8 +447,8 @@ const user = {
 
 const Template = args => <CostAllocateFFP {...args} />;
 
-export const HitechDefaultCostAllocateFFPStory = Template.bind({});
-HitechDefaultCostAllocateFFPStory.decorators = [
+export const Hitech0100CostAllocateFFPStory = Template.bind({});
+Hitech0100CostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -723,8 +816,86 @@ Hitech5050CostAllocateFFPStory.decorators = [
     })
 ];
 
-export const HitechDefaultErrorCostAllocateFFPStory = Template.bind({});
-HitechDefaultErrorCostAllocateFFPStory.decorators = [
+export const HitechNoOtherFundingCostAllocateFFPStory = Template.bind({});
+HitechNoOtherFundingCostAllocateFFPStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdOneYear,
+          data: {
+            ...apdOneYear.data,
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                ...apdOneYear.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 50,
+                      state: 50,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: 'Program Administration',
+              fundingSource: 'HIT',
+              data: {
+                combined: {
+                  2023: 356400,
+                  total: 356400
+                },
+                contractors: {
+                  2023: 7500,
+                  total: 7500
+                },
+                expenses: {
+                  2023: 400,
+                  total: 400
+                },
+                statePersonnel: {
+                  2023: 348500,
+                  total: 348500
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 178200,
+                  medicaid: 356400,
+                  state: 178200,
+                  total: 356400
+                },
+                total: {
+                  federal: 178200,
+                  medicaid: 356400,
+                  state: 178200,
+                  total: 356400
+                }
+              }
+            }
+          }
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ErrorHitechCostAllocateFFPStory = Template.bind({});
+ErrorHitechCostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -837,14 +1008,14 @@ HitechDefaultErrorCostAllocateFFPStory.decorators = [
     })
 ];
 
-export const MmisDefaultCostAllocateFFPStory = Template.bind({});
-MmisDefaultCostAllocateFFPStory.parameters = {
+export const Mmis0100CostAllocateFFPStory = Template.bind({});
+Mmis0100CostAllocateFFPStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=601%3A12578&t=kQLtdXv0QLAfe7eb-1'
   }
 };
-MmisDefaultCostAllocateFFPStory.decorators = [
+Mmis0100CostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -1229,14 +1400,98 @@ Mmis5050CostAllocateFFPStory.decorators = [
     })
 ];
 
-export const MmisDefaultErrorCostAllocateFFPStory = Template.bind({});
-MmisDefaultErrorCostAllocateFFPStory.parameters = {
+export const MmisNoOtherFundingCostAllocateFFPStory = Template.bind({});
+MmisNoOtherFundingCostAllocateFFPStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A18378&t=59IHBhQMA8GUYsUh-1'
+  }
+};
+MmisNoOtherFundingCostAllocateFFPStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdOneYear,
+          data: {
+            ...apdOneYear.data,
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                ...apdOneYear.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 50,
+                      state: 50,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: '',
+              fundingSource: null,
+              data: {
+                combined: {
+                  2023: 356400,
+                  total: 356400
+                },
+                contractors: {
+                  2023: 7500,
+                  total: 7500
+                },
+                expenses: {
+                  2023: 400,
+                  total: 400
+                },
+                statePersonnel: {
+                  2023: 348500,
+                  total: 348500
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 178200,
+                  medicaid: 356400,
+                  state: 178200,
+                  total: 356400
+                },
+                total: {
+                  federal: 178200,
+                  medicaid: 356400,
+                  state: 178200,
+                  total: 356400
+                }
+              }
+            }
+          }
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ErrorMmis0100CostAllocateFFPStory = Template.bind({});
+ErrorMmis0100CostAllocateFFPStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A17365&t=bYwei0FSqJHDsgkT-1'
   }
 };
-MmisDefaultErrorCostAllocateFFPStory.decorators = [
+ErrorMmis0100CostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -1348,14 +1603,14 @@ MmisDefaultErrorCostAllocateFFPStory.decorators = [
     })
 ];
 
-export const Mmis7525ErrorCostAllocateFFPStory = Template.bind({});
-Mmis7525ErrorCostAllocateFFPStory.parameters = {
+export const ErrorMmis7525CostAllocateFFPStory = Template.bind({});
+ErrorMmis7525CostAllocateFFPStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A17365&t=bYwei0FSqJHDsgkT-1'
   }
 };
-Mmis7525ErrorCostAllocateFFPStory.decorators = [
+ErrorMmis7525CostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -1443,14 +1698,14 @@ Mmis7525ErrorCostAllocateFFPStory.decorators = [
     })
 ];
 
-export const Mmis5050ErrorCostAllocateFFPStory = Template.bind({});
-Mmis5050ErrorCostAllocateFFPStory.parameters = {
+export const ErrorMmis5050CostAllocateFFPStory = Template.bind({});
+ErrorMmis5050CostAllocateFFPStory.parameters = {
   design: {
     type: 'figma',
     url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A17365&t=bYwei0FSqJHDsgkT-1'
   }
 };
-Mmis5050ErrorCostAllocateFFPStory.decorators = [
+ErrorMmis5050CostAllocateFFPStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {
@@ -1531,6 +1786,473 @@ Mmis5050ErrorCostAllocateFFPStory.decorators = [
               }
             }
           }
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ReadOnlyEmptyHitechCostAllocateFfpStory = Template.bind({});
+ReadOnlyEmptyHitechCostAllocateFfpStory.args = {
+  isViewOnly: true
+};
+ReadOnlyEmptyHitechCostAllocateFfpStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdTwoYearsEmpty,
+          data: {
+            ...apdTwoYearsEmpty.data,
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                ...apdTwoYearsEmpty.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 0,
+                      state: 100,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  },
+                  2024: {
+                    ffp: {
+                      federal: 0,
+                      state: 100,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: 'Program Administration',
+              fundingSource: 'HIT',
+              data: {
+                combined: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                contractors: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                expenses: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                otherFunding: {
+                  2023: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  },
+                  2024: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  }
+                },
+                statePersonnel: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                },
+                2024: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                },
+                total: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                }
+              }
+            }
+          },
+          years: ['2023', '2024']
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ReadOnlyEmptyMmisCostAllocateFfpStory = Template.bind({});
+ReadOnlyEmptyMmisCostAllocateFfpStory.args = {
+  isViewOnly: true
+};
+ReadOnlyEmptyMmisCostAllocateFfpStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=4185%3A19804&t=7Ty8nZjJ3Woq2nJt-1'
+  }
+};
+ReadOnlyEmptyMmisCostAllocateFfpStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdTwoYearsEmpty,
+          data: {
+            ...apdTwoYearsEmpty.data,
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                ...apdTwoYearsEmpty.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 90,
+                      state: 10,
+                      fundingCategory: APD_TYPE.HITECH
+                    },
+                    other: 0
+                  },
+                  2024: {
+                    ffp: {
+                      federal: 75,
+                      state: 25,
+                      fundingCategory: APD_TYPE.MANDO
+                    },
+                    other: 0
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: 'Program Administration',
+              fundingSource: 'HIT',
+              data: {
+                combined: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                contractors: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                expenses: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                },
+                otherFunding: {
+                  2023: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  },
+                  2024: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  }
+                },
+                statePersonnel: {
+                  2023: 0,
+                  2024: 0,
+                  total: 0
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                },
+                2024: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                },
+                total: {
+                  federal: 0,
+                  medicaid: 0,
+                  state: 0,
+                  total: 0
+                }
+              }
+            }
+          },
+          years: ['2023', '2024']
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ReadOnlyDataHitechCostAllocateFfpStory = Template.bind({});
+ReadOnlyDataHitechCostAllocateFfpStory.args = {
+  isViewOnly: true
+};
+ReadOnlyDataHitechCostAllocateFfpStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdTwoYears,
+          data: {
+            ...apdTwoYears.data,
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                ...apdTwoYears.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 90,
+                      state: 10,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  },
+                  2024: {
+                    ffp: {
+                      federal: 90,
+                      state: 10,
+                      fundingCategory: null
+                    },
+                    other: 0
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: 'Program Administration',
+              fundingSource: 'HIT',
+              data: {
+                combined: {
+                  2023: 356400,
+                  2024: 337500,
+                  total: 693900
+                },
+                contractors: {
+                  2023: 7500,
+                  2024: 9500,
+                  total: 17000
+                },
+                expenses: {
+                  2023: 400,
+                  2024: 500,
+                  total: 900
+                },
+                otherFunding: {
+                  2023: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  },
+                  2024: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  }
+                },
+                statePersonnel: {
+                  2023: 348500,
+                  2024: 327500,
+                  total: 676000
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 0,
+                  medicaid: 356400,
+                  state: 356400,
+                  total: 356400
+                },
+                2024: {
+                  federal: 0,
+                  medicaid: 337500,
+                  state: 337500,
+                  total: 337500
+                },
+                total: {
+                  federal: 0,
+                  medicaid: 693900,
+                  state: 693900,
+                  total: 693900
+                }
+              }
+            }
+          },
+          years: ['2023', '2024']
+        },
+        user
+      },
+      story
+    })
+];
+
+export const ReadOnlyDataMmisCostAllocateFfpStory = Template.bind({});
+ReadOnlyDataMmisCostAllocateFfpStory.args = {
+  isViewOnly: true
+};
+ReadOnlyDataMmisCostAllocateFfpStory.paramters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=4181%3A19630&t=dlil2Cb95kKIKRmP-1'
+  }
+};
+ReadOnlyDataMmisCostAllocateFfpStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          ...apdTwoYears,
+          data: {
+            ...apdTwoYears.data,
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                ...apdTwoYears.data.activities[0],
+                costAllocation: {
+                  2023: {
+                    ffp: {
+                      federal: 90,
+                      state: 10,
+                      fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+                    },
+                    other: 0
+                  },
+                  2024: {
+                    ffp: {
+                      federal: 50,
+                      state: 50,
+                      fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        budget: {
+          activityTotals: [
+            {
+              id: '5caaaf1c',
+              name: 'Program Administration',
+              fundingSource: 'HIT',
+              data: {
+                combined: {
+                  2023: 356400,
+                  2024: 337500,
+                  total: 693900
+                },
+                contractors: {
+                  2023: 7500,
+                  2024: 9500,
+                  total: 17000
+                },
+                expenses: {
+                  2023: 400,
+                  2024: 500,
+                  total: 900
+                },
+                otherFunding: {
+                  2023: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  },
+                  2024: {
+                    contractors: 0,
+                    expenses: 0,
+                    statePersonnel: 0,
+                    total: 0
+                  }
+                },
+                statePersonnel: {
+                  2023: 348500,
+                  2024: 327500,
+                  total: 676000
+                }
+              }
+            }
+          ],
+          activities: {
+            '5caaaf1c': {
+              costsByFFY: {
+                2023: {
+                  federal: 356400,
+                  medicaid: 356400,
+                  state: 356400,
+                  total: 356400
+                },
+                2024: {
+                  federal: 337500,
+                  medicaid: 337500,
+                  state: 337500,
+                  total: 337500
+                },
+                total: {
+                  federal: 693900,
+                  medicaid: 693900,
+                  state: 693900,
+                  total: 693900
+                }
+              }
+            }
+          },
+          years: ['2023', '2024']
         },
         user
       },

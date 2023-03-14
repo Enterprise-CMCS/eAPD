@@ -5,10 +5,12 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../redux/selectors/activities.selectors';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 import CostAllocationRows from '../activities/cost-allocation/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
   ffy,
+  apdType,
   activityIndex,
   costSummary,
   activityName,
@@ -45,6 +47,7 @@ const SummaryActivityBreakdownTable = ({
           ffy={ffy}
           otherFunding={otherFunding}
           activityIndex={activityIndex}
+          apdType={apdType}
         />
       </tbody>
     </table>
@@ -53,6 +56,7 @@ const SummaryActivityBreakdownTable = ({
 
 SummaryActivityBreakdownTable.propTypes = {
   ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
   costSummary: PropTypes.object.isRequired,
@@ -65,7 +69,8 @@ const mapStateToProps = (
   { activityIndex },
   {
     getActivity = selectActivityByIndex,
-    getCostSummary = selectActivityCostSummary
+    getCostSummary = selectActivityCostSummary,
+    getApdType = selectApdType
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
@@ -73,7 +78,8 @@ const mapStateToProps = (
   return {
     activityName: activity.name,
     fundingSource: activity.fundingSource,
-    costSummary: getCostSummary(state, { activityIndex })
+    costSummary: getCostSummary(state, { activityIndex }),
+    apdType: getApdType(state)
   };
 };
 
