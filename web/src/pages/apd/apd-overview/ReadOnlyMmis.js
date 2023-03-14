@@ -21,7 +21,7 @@ import {
 
 const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
   const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
-  console.log({ updateStatus });
+  const statusList = updateStatusChoices(updateStatus);
 
   function otherDetails() {
     return (
@@ -42,9 +42,9 @@ const MmisSummary = ({ name, medicaidBusinessAreas, updateStatus, year }) => {
     }
     return (
       <ol>
-        {businessAreasList.map(obj => {
+        {businessAreasList.map((obj, index) => {
           if (obj.checked) {
-            return <li>{obj.label}</li>;
+            return <li key={index}>{obj.label}</li>;
           }
         })}
 

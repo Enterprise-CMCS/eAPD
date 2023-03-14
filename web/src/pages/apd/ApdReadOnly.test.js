@@ -8,6 +8,8 @@ import ApdViewOnly from './ApdReadOnly';
 
 import apd from '../../fixtures/ak-apd.json';
 import budget from '../../fixtures/ak-budget.json';
+import mmis from '../../fixtures/ak-apd-mmis.json';
+import mmisBudget from '../../fixtures/ak-budget-mmis.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -29,9 +31,11 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
+    resetLDMocks();
+    mockFlags({ mmisEnable: true });
   });
 
-  test('renders correctly and tests Back to APD button', async () => {
+  test('renders HITECH Read Only correctly and tests Back to APD button', async () => {
     const { user } = setup(null, {
       initialState: {
         ...apd,
