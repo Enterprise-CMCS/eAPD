@@ -62,12 +62,12 @@ describe('<ApdViewOnly/>', () => {
       initialHistory: ['/apd/1']
     });
     expect(screen.findByText('MMIS IAPD')).toBeTruthy();
-    expect(await screen.findByText('2023-2024 APD')).toBeTruthy();
+    expect(screen.findByText('2023-2024 APD')).toBeTruthy();
     // Overview Summary
     expect(screen.queryByText(/Program introduction/)).toBeFalsy();
-    expect(await screen.findByText(/Medicaid Business Areas/)).toBeTruthy();
+    expect(screen.findByText(/Medicaid Business Areas/)).toBeTruthy();
     // Security Planning should not be present
-    expect(await screen.findByText(/Security Planning/)).toBeTruthy();
+    expect(screen.findByText(/Security Planning/)).toBeTruthy();
   });
 
   test('Back to APD button', async () => {
