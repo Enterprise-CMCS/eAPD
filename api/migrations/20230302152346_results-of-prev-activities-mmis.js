@@ -19,7 +19,7 @@ export const up = async () => {
     const years = apd.years;
     let prevYears = [];
 
-    [0, 1, 2].map(past => prevYears.unshift(years[0] - past));
+    [1, 2, 3].map(past => prevYears.unshift(years[0] - past));
 
     if (apd.previousActivities.actualExpenditures[prevYears[0]].ddi) {
       return apd;
