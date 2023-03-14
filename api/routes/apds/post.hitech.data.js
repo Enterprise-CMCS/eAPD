@@ -54,7 +54,7 @@ const getNewHitechApd = (years, yearOptions) => {
             50: { federalActual: 0, totalApproved: 0 }
           }
         },
-        [1, 2, 3].map(past => yearOptions[0] - past)
+        [0, 1, 2].map(past => yearOptions[0] - past)
       )
     },
     activities: [
