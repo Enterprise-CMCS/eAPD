@@ -644,6 +644,38 @@ export const getPropCostType = category =>
   category === 'contractors' ? 'contractors' : 'inHouse';
 
 /**
+ * Add cost share totals of each category (medicaid, federal, state) to
+ * the budget's combined total for the particular year and the total of all the years.
+ * @param {Object} budget The budget object
+ * @param {Number} year The FFY
+ * @param {Number} medicaidShare The medicaid share are total costs to be paid by both federal and state
+ * @param {Number} fedShare The federal share of the costs to be paid
+ * @param {Number} stateShare The state share of the costs to be paid
+ * @returns {Object} the updated budget
+ */
+export const addCostSharesToCombinedTotals = ({
+  budget,
+  year,
+  medicaidShare = 0,
+  fedShare = 0,
+  stateShare = 0
+}) => {
+  const updatedBudget = deepCopy(budget);
+  if (year) {
+    // add to combined (total for all funding) for the particular year
+    updatedBudget['combined'][year].medicaid += medicaidShare;
+    updatedBudget['combined'][year].federal += fedShare;
+    updatedBudget['combined'][year].state += stateShare;
+
+    // add to combined (total for all funding) total for all the years
+    updatedBudget['combined'].total.medicaid += medicaidShare;
+    updatedBudget['combined'].total.federal += fedShare;
+    updatedBudget['combined'].total.state += stateShare;
+  }
+  return updatedBudget;
+};
+
+/**
  * Sums up the total costs for the category type and adds them to the
  * activity totals for the category for each year and the total of all
  * years for the category, and the combined cost of all categories
@@ -957,12 +989,13 @@ export const sumShareCostsForFundingSource = ({
       updatedBudget[fundingSource].combined.total.medicaid += totalMedicaidCost;
     }
     if (fundingSource !== 'hitAndHie') {
-      updatedBudget.combined[year].federal += totalMedicaidCostShares.fedShare;
-      updatedBudget.combined.total.federal += totalMedicaidCostShares.fedShare;
-      updatedBudget.combined[year].state += totalMedicaidCostShares.stateShare;
-      updatedBudget.combined.total.state += totalMedicaidCostShares.stateShare;
-      updatedBudget.combined[year].medicaid += totalMedicaidCost;
-      updatedBudget.combined.total.medicaid += totalMedicaidCost;
+      addCostSharesToCombinedTotals({
+        budget: updatedBudget,
+        year,
+        medicaidShare: totalMedicaidCost,
+        fedShare: totalMedicaidCostShares.fedShare,
+        stateShare: totalMedicaidCostShares.stateShare
+      });
     }
   }
 
@@ -974,7 +1007,6 @@ export const sumShareCostsForFundingSource = ({
  * - by funding category (ddi, mando) and cost category ('contractors', 'expenses', 'statePersonnel')
  *     for each year and the total of all the years
  * - by funding category for each year and the total of all the years
- * - combined for each year and the total of all the years
  * @param {Object} budget The budget object
  * @param {Number} year The FFY
  * @param {String} fundingCategory The funding category key name (i.e. 'ddi', 'mando')
@@ -1033,18 +1065,6 @@ export const sumShareCostsForFundingCategory = ({
           medicaidShare;
         updatedBudget[fundingCategory]['combined'].total.federal += fedShare;
         updatedBudget[fundingCategory]['combined'].total.state += stateShare;
-
-        // add to combined (total for all funding) for the particular year
-        updatedBudget['combined'][year].total += costTotal;
-        updatedBudget['combined'][year].medicaid += medicaidShare;
-        updatedBudget['combined'][year].federal += fedShare;
-        updatedBudget['combined'][year].state += stateShare;
-
-        // add to combined (total for all funding) total for all the years
-        updatedBudget['combined'].total.total += costTotal;
-        updatedBudget['combined'].total.medicaid += medicaidShare;
-        updatedBudget['combined'].total.federal += fedShare;
-        updatedBudget['combined'].total.state += stateShare;
       }
     });
   }
@@ -1678,47 +1698,67 @@ export const calculateBudget = apd => {
           categoryPercentages
         });
 
-        // Record these costs for each FFY of the activity
-        newBudget.activities[activity.activityId].costsByFFY = sumCostsByFFY({
-          costsByFFY: newBudget.activities[activity.activityId].costsByFFY,
-          year,
-          totalCost,
-          totalMedicaidCostShares,
-          totalMedicaidCost
-        });
+        switch (apdType) {
+          case APD_TYPE.HITECH:
+            // Record these costs for each FFY of the activity
+            newBudget.activities[activity.activityId].costsByFFY =
+              sumCostsByFFY({
+                costsByFFY:
+                  newBudget.activities[activity.activityId].costsByFFY,
+                year,
+                totalCost,
+                totalMedicaidCostShares,
+                totalMedicaidCost
+              });
 
-        // Calculate the federal, state, and medicaid shares per
-        // funding source (including MMIS) by FFY
-        newBudget = sumShareCosts({
-          budget: newBudget,
-          fundingSource,
-          year,
-          totalCost,
-          totalMedicaidCost,
-          allocation,
-          totalMedicaidCostShares,
-          costCategoryShare
-        });
+            // Calculate the federal, state, and medicaid shares per
+            // funding source (including MMIS) by FFY
+            newBudget = sumShareCosts({
+              budget: newBudget,
+              fundingSource,
+              year,
+              totalCost,
+              totalMedicaidCost,
+              allocation,
+              totalMedicaidCostShares,
+              costCategoryShare
+            });
 
-        // Calcuate the federal, state, and medicaid shares per
-        // funding category by FFY
-        newBudget = sumShareCostsForFundingCategory({
-          budget: newBudget,
-          year,
-          fundingCategory,
-          activityTotals,
-          costCategoryShare
-        });
-
-        // Now we compute the federal share per fiscal quarter for
-        // this activity.
-        newBudget = calculateQuarterlyCosts({
-          budget: newBudget,
-          activity,
-          fundingSource,
-          year,
-          costCategoryShare
-        });
+            // Now we compute the federal share per fiscal quarter for
+            // this activity.
+            newBudget = calculateQuarterlyCosts({
+              budget: newBudget,
+              activity,
+              fundingSource,
+              year,
+              costCategoryShare
+            });
+            break;
+          case APD_TYPE.MMIS:
+            // Calculate the funding source ('mmis') by FFY
+            // This will populate values in the budget's 'mmis' key
+            // AND also add values to the budget's 'combined' key
+            newBudget = sumShareCostsForFundingSource({
+              budget: newBudget,
+              fundingSource,
+              year,
+              totalMedicaidCost,
+              totalMedicaidCostShares,
+              costCategoryShare
+            });
+            // Calcuate the federal, state, and medicaid shares per
+            // funding category by FFY
+            newBudget = sumShareCostsForFundingCategory({
+              budget: newBudget,
+              year,
+              fundingCategory,
+              activityTotals,
+              costCategoryShare
+            });
+            break;
+          default:
+            break;
+        }
       });
 
       // Add the updated activity totals for the activity to the budget
