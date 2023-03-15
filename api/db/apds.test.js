@@ -131,10 +131,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     const mmisApd = await MMIS.findOne({ _id: newId }, 'apdType budget');
     // eslint-disable-next-line no-underscore-dangle
     test.ok(mmisApd.apdType === APD_TYPE.MMIS, 'MMIS APD found');
-    const mmisBudget = await MMISBudget.findOne(
-      { _id: mmisApd.budget },
-      'activityTotals'
-    );
+    const mmisBudget = await MMISBudget.findOne({ _id: mmisApd.budget }, 'ddi');
     test.ok(mmisBudget?.ddi && mmisBudget?.ddi !== {}, 'MMIS Budget was found');
 
     const hitechApd = await HITECH.findOne({ _id: newId }, 'apdType budget');
