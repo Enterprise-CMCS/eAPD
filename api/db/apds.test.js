@@ -135,7 +135,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       { _id: mmisApd.budget },
       'activityTotals'
     );
-    test.ok(!mmisBudget?.activityTotals, 'MMIS Budget was found');
+    test.ok(mmisBudget?.ddi && mmisBudget?.ddi !== {}, 'MMIS Budget was found');
 
     const hitechApd = await HITECH.findOne({ _id: newId }, 'apdType budget');
     test.ok(!hitechApd, 'APD is not an HITECH');
