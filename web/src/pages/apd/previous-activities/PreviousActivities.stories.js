@@ -1,5 +1,5 @@
 import React from 'react';
-import PreviousActivities from './PreviousActivities';
+import PreviousActivities from './PreviousActivitiesReadOnly';
 import { withDesign } from 'storybook-addon-designs';
 import { renderWithProviderAndRouter } from 'apd-storybook-library';
 import { APD_TYPE } from '@cms-eapd/common';
@@ -173,7 +173,7 @@ const nav = {
   items: []
 };
 
-const Template = () => <PreviousActivities />;
+const Template = () => <PreviousActivities isViewOnly />;
 
 export const HitechDefaultPreviousActivitiesStory = Template.bind({});
 HitechDefaultPreviousActivitiesStory.decorators = [
