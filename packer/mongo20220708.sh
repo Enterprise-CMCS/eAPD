@@ -15,19 +15,19 @@ yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
 yum -y install newrelic-infra
 
 # Setup PostGres for Mongo Migraton
-rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-yum install -y postgresql10-server
+rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum install -y postgresql13-server-13.4-1PGDG.rhel7
 
 #postgresql-setup initdb
-/usr/pgsql-10/bin/postgresql-10-setup initdb
+/usr/pgsql-13/bin/postgresql-13-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/10/data/pg_hba.conf
-systemctl enable postgresql-10
-systemctl start postgresql-10
+" > /var/lib/pgsql/13/data/pg_hba.conf
+systemctl enable postgresql-13
+systemctl start postgresql-13
 
 # Setup Mongo Repo
 touch /etc/yum.repos.d/mongodb-org-5.0.repo
@@ -108,12 +108,12 @@ PG_USER
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16, and we don't care about minor/patch versions, so always
-# get the latest.
-nvm install 16.19.0
-nvm alias default 16.19.0
-nvm use 16.19.0
+# We're using Node 16.19.1, we care about minor/patch versions
+nvm install 16.19.1
+nvm alias default 16.19.1
+nvm use 16.19.1
 npm i -g yarn@1.22.18
+npm i -g knex
 
 git clone --single-branch https://github.com/Enterprise-CMCS/eAPD.git
 cd ~/eAPD
@@ -307,8 +307,8 @@ CWVAROPTCONFIG
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 
 #Remove PostGres
-systemctl stop postgresql
-systemctl disable postgresql
+systemctl stop postgresql-13
+systemctl disable postgresql-13
 rm -rf /var/lib/pgsql
 yum remove postgresql* -y
 

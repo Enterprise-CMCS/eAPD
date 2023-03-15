@@ -13,6 +13,7 @@ variable "database_url" {}
 variable "okta_domain" {}
 variable "okta_api_key" {}
 variable "environment" {}
+variable "ami_prefix" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -24,7 +25,7 @@ source "amazon-ebs" "Golden_Image" {
     region        = ""
     source_ami_filter {
         filters = {
-            name                = "EAST-RH 7-9 Gold Image V.*"
+            name                = "${var.ami_prefix}*"
             root-device-type    = "ebs"
             virtualization-type = "hvm"
         }
