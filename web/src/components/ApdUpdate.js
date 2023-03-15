@@ -151,12 +151,8 @@ const ApdUpdate = ({
 ApdUpdate.propTypes = {
   apdType: PropTypes.string,
   setUpdateStatusField: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   updateStatus: PropTypes.object.isRequired
-};
-
-ApdUpdate.defaultProps = {
-  adminCheck: false
 };
 
 const mapStateToProps = state => ({
