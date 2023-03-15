@@ -150,7 +150,6 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
-        activities: {},
         years: []
       };
       const actual = defaultBudgetObject();
@@ -165,7 +164,6 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
-        activities: {},
         years: [2017, 2018]
       };
       const actual = defaultBudgetObject([2017, 2018]);
@@ -444,12 +442,6 @@ describe('budget getDefault methods', () => {
   describe('defaultMMISBudgetObject', () => {
     test('with no years', () => {
       const expected = {
-        federalShareByFFYQuarter: {
-          mmis: {
-            years: {},
-            total: { inHouse: 0, contractors: 0, combined: 0 }
-          }
-        },
         mmis: {
           statePersonnel: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
@@ -464,17 +456,28 @@ describe('budget getDefault methods', () => {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           }
         },
-        mmisByFFP: {
-          '90-10': {
+        ddi: {
+          statePersonnel: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '75-25': {
+          contractors: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '50-50': {
+          expenses: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '0-100': {
+          combined: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mando: {
+          statePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
           combined: {
@@ -485,7 +488,6 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
-        activities: {},
         years: []
       };
       const actual = defaultMMISBudgetObject();
@@ -494,27 +496,6 @@ describe('budget getDefault methods', () => {
 
     test('with years', () => {
       const expected = {
-        federalShareByFFYQuarter: {
-          mmis: {
-            years: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              }
-            },
-            total: { inHouse: 0, contractors: 0, combined: 0 }
-          }
-        },
         mmis: {
           statePersonnel: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -537,23 +518,40 @@ describe('budget getDefault methods', () => {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           }
         },
-        mmisByFFP: {
-          '90-10': {
+        ddi: {
+          statePersonnel: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '75-25': {
+          contractors: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '50-50': {
+          expenses: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
-          '0-100': {
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mando: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
@@ -570,7 +568,6 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
-        activities: {},
         years: [2017, 2018]
       };
       const actual = defaultMMISBudgetObject([2017, 2018]);

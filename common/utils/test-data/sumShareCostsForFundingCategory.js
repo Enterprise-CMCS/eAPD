@@ -40,67 +40,6 @@ export const activityTotalsProp = {
   }
 };
 
-const newExpected = {
-  mando: {
-    statePersonnel: {
-      2023: {
-        total: 2494150,
-        federal: 1871134,
-        medicaid: 2494845,
-        state: 623711
-      },
-      total: {
-        total: 2494150,
-        federal: 1871134,
-        medicaid: 2494845,
-        state: 623711
-      }
-    },
-    contractors: {
-      2023: {
-        total: 2665512,
-        federal: 1375115,
-        medicaid: 1833487,
-        state: 458372
-      },
-      total: {
-        total: 2665512,
-        federal: 1375115,
-        medicaid: 1833487,
-        state: 458372
-      }
-    },
-    expenses: {
-      2023: {
-        total: 1550000,
-        federal: 619308,
-        medicaid: 825744,
-        state: 206436
-      },
-      total: {
-        total: 1550000,
-        federal: 619308,
-        medicaid: 825744,
-        state: 206436
-      }
-    },
-    combined: {
-      2023: {
-        total: 6709662,
-        federal: 3865557,
-        medicaid: 5154076,
-        state: 1288519
-      },
-      total: {
-        total: 6709662,
-        federal: 3865557,
-        medicaid: 5154076,
-        state: 1288519
-      }
-    }
-  }
-};
-
 export const simplifiedBudgetProp = {
   mando: {
     statePersonnel: {

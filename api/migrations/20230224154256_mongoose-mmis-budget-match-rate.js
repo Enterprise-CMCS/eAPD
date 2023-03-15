@@ -32,8 +32,4 @@ export const up = async () => {
   await teardown();
 };
 
-/**
- * TODO: Create the down function. Would it just be recalculating the budget again??
- * Make any changes that UNDO the up function side effects here (if possible)
- */
 export const down = async () => {};

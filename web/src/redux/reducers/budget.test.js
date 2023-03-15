@@ -4,7 +4,6 @@ import { LOAD_BUDGET } from '../actions/budget';
 
 describe('budget reducer', () => {
   const initialState = {
-    activities: {},
     combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
     activityTotals: [],
     years: []

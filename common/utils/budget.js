@@ -651,7 +651,7 @@ export const getPropCostType = category =>
  * @param {Number} stateShare The state share of the costs to be paid
  * @returns {Object} the updated budget
  */
-export const addCostSharesToCombinedTotals = ({
+export const sumShareCostsForCombinedTotals = ({
   budget,
   year,
   medicaidShare = 0,
@@ -988,7 +988,7 @@ export const sumShareCostsForFundingSource = ({
     }
     if (fundingSource !== 'hitAndHie') {
       // Add to the budget's overall combined totals
-      updatedBudget = addCostSharesToCombinedTotals({
+      updatedBudget = sumShareCostsForCombinedTotals({
         budget: updatedBudget,
         year,
         medicaidShare: totalMedicaidCost,

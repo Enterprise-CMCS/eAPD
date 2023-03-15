@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.MMIS,

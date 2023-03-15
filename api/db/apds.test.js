@@ -125,23 +125,17 @@ tap.test('database wrappers / apds', async apdsTests => {
     const apd = await APD.findOne({ _id: newId }, 'apdType budget');
     // eslint-disable-next-line no-underscore-dangle
     test.ok(apd.apdType === APD_TYPE.MMIS, 'APD was found');
-    const budget = await Budget.findOne(
-      { _id: apd.budget },
-      'federalShareByFFYQuarter'
-    );
-    test.ok(budget?.federalShareByFFYQuarter, 'Budget was found');
+    const budget = await Budget.findOne({ _id: apd.budget }, 'activityTotals');
+    test.ok(budget?.activityTotals, 'Budget was found');
 
     const mmisApd = await MMIS.findOne({ _id: newId }, 'apdType budget');
     // eslint-disable-next-line no-underscore-dangle
     test.ok(mmisApd.apdType === APD_TYPE.MMIS, 'MMIS APD found');
     const mmisBudget = await MMISBudget.findOne(
       { _id: mmisApd.budget },
-      'federalShareByFFYQuarter'
+      'activityTotals'
     );
-    test.ok(
-      !mmisBudget?.federalShareByFFYQuarter?.hitAndHie,
-      'MMIS Budget was found'
-    );
+    test.ok(!mmisBudget?.activityTotals, 'MMIS Budget was found');
 
     const hitechApd = await HITECH.findOne({ _id: newId }, 'apdType budget');
     test.ok(!hitechApd, 'APD is not an HITECH');

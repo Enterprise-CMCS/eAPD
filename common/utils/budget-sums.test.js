@@ -5,12 +5,20 @@ import {
   sumCostsForFundingSourceByCategory,
   sumTotalCostsByCategory,
   sumCostsByFFY,
+  sumShareCostsForCombinedTotals,
+  sumShareCostsForFundingCategory,
   sumShareCostsForFundingSource,
   sumMMISbyFFP,
   sumShareCosts,
   sumActivityQuarterlyFFP,
   sumQuarterlyFFP
 } from './budget.js';
+import {
+  activityTotalsProp,
+  budgetProp,
+  costCategoryShareProp,
+  simplifiedBudgetProp
+} from './test-data/sumShareCostsForFundingCategory.js';
 
 describe('budget summing methods', () => {
   describe('sumActivityTotalByCategories', () => {
@@ -3676,6 +3684,461 @@ describe('budget summing methods', () => {
         totalMedicaidCost: 400
       });
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('sumShareCostsForCombinedTotals', () => {
+    test('with default values', () => {
+      const expected = {};
+      const actual = sumShareCostsForCombinedTotals();
+      expect(actual).toEqual(expected);
+    });
+
+    test('adds values to the combined totals for the year and overall total', () => {
+      const year = '2024';
+      const medicaidShare = 10;
+      const fedShare = 9;
+      const stateShare = 1;
+      const budget = {
+        combined: {
+          2024: {
+            medicaid: 100,
+            federal: 90,
+            state: 10
+          },
+          total: {
+            medicaid: 1000,
+            federal: 900,
+            state: 100
+          }
+        }
+      };
+      const expected = {
+        combined: {
+          2024: {
+            medicaid: 110,
+            federal: 99,
+            state: 11
+          },
+          total: {
+            medicaid: 1010,
+            federal: 909,
+            state: 101
+          }
+        }
+      };
+      const actual = sumShareCostsForCombinedTotals({
+        budget,
+        year,
+        medicaidShare,
+        fedShare,
+        stateShare
+      });
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('sumShareCostsForFundingCategory', () => {
+    test('with default values', () => {
+      const expected = {};
+      const actual = sumShareCostsForFundingCategory();
+      expect(actual).toEqual(expected);
+    });
+
+    test('returns original budget unchanged when there is no fundingCategory', () => {
+      const activityTotals = activityTotalsProp;
+      const budget = budgetProp;
+      const costCategoryShare = costCategoryShareProp;
+      const fundingCategory = null;
+      const year = '2024';
+      const actual = sumShareCostsForFundingCategory({
+        activityTotals,
+        budget,
+        costCategoryShare,
+        fundingCategory,
+        year
+      });
+      expect(actual).toEqual(budgetProp);
+    });
+
+    test("updates budget with new values for each cost category's year and total", () => {
+      const activityTotals = activityTotalsProp;
+      const budget = simplifiedBudgetProp;
+      const costCategoryShare = costCategoryShareProp;
+      const fundingCategory = 'mando';
+      const year = '2023';
+      const expected = {
+        mando: {
+          statePersonnel: {
+            2023: {
+              total: 2494150,
+              federal: 1871134,
+              medicaid: 2494845,
+              state: 623711
+            },
+            total: {
+              total: 2494150,
+              federal: 1871134,
+              medicaid: 2494845,
+              state: 623711
+            }
+          },
+          contractors: {
+            2023: {
+              total: 2665512,
+              federal: 1375115,
+              medicaid: 1833487,
+              state: 458372
+            },
+            total: {
+              total: 2665512,
+              federal: 1375115,
+              medicaid: 1833487,
+              state: 458372
+            }
+          },
+          expenses: {
+            2023: {
+              total: 1550000,
+              federal: 619308,
+              medicaid: 825744,
+              state: 206436
+            },
+            total: {
+              total: 1550000,
+              federal: 619308,
+              medicaid: 825744,
+              state: 206436
+            }
+          },
+          combined: {
+            2023: {
+              total: 6709662,
+              federal: 3865557,
+              medicaid: 5154076,
+              state: 1288519
+            },
+            total: {
+              total: 6709662,
+              federal: 3865557,
+              medicaid: 5154076,
+              state: 1288519
+            }
+          }
+        }
+      };
+      const actual = sumShareCostsForFundingCategory({
+        activityTotals,
+        budget,
+        costCategoryShare,
+        fundingCategory,
+        year
+      });
+      expect(actual).toEqual(expected);
+
+      // Below are the nitty gritty calculation checks
+
+      // statePersonnel section -------
+
+      // Amounts to add to the cost category
+      const statePersonnelTotalToAdd =
+        activityTotals.data.statePersonnel['2023'];
+      const statePersonnelMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.statePersonnel;
+      const statePersonnelFedShareToAdd =
+        costCategoryShare.fedShare.statePersonnel;
+      const statePersonnelStateShareToAdd =
+        costCategoryShare.stateShare.statePersonnel;
+
+      // Amounts for the cost category (CC)'s year
+      const statePersonnelOldCCYearTotal =
+        simplifiedBudgetProp.mando.statePersonnel['2023'].total;
+      const statePersonnelOldCCYearMedicaid =
+        simplifiedBudgetProp.mando.statePersonnel['2023'].medicaid;
+      const statePersonnelOldCCYearFederal =
+        simplifiedBudgetProp.mando.statePersonnel['2023'].federal;
+      const statePersonnelOldCCYearState =
+        simplifiedBudgetProp.mando.statePersonnel['2023'].state;
+      const statePersonnelNewCCYearTotal =
+        actual.mando.statePersonnel['2023'].total;
+      const statePersonnelNewCCYearMedicaid =
+        actual.mando.statePersonnel['2023'].medicaid;
+      const statePersonnelNewCCYearFederal =
+        actual.mando.statePersonnel['2023'].federal;
+      const statePersonnelNewCCYearState =
+        actual.mando.statePersonnel['2023'].state;
+
+      const expectedStatePersonnelCCYearTotal =
+        statePersonnelOldCCYearTotal + statePersonnelTotalToAdd;
+      const expectedStatePersonnelCCYearMedicaid =
+        statePersonnelOldCCYearMedicaid + statePersonnelMedicaidShareToAdd;
+      const expectedStatePersonnelCCYearFederal =
+        statePersonnelOldCCYearFederal + statePersonnelFedShareToAdd;
+      const expectedStatePersonnelCCYearState =
+        statePersonnelOldCCYearState + statePersonnelStateShareToAdd;
+
+      expect(statePersonnelNewCCYearTotal).toEqual(
+        expectedStatePersonnelCCYearTotal
+      );
+      expect(statePersonnelNewCCYearMedicaid).toEqual(
+        expectedStatePersonnelCCYearMedicaid
+      );
+      expect(statePersonnelNewCCYearFederal).toEqual(
+        expectedStatePersonnelCCYearFederal
+      );
+      expect(statePersonnelNewCCYearState).toEqual(
+        expectedStatePersonnelCCYearState
+      );
+
+      // Amounts for the cost category's total
+      const statePersonnelOldCCTotal =
+        simplifiedBudgetProp.mando.statePersonnel.total.total;
+      const statePersonnelOldCCMedicaid =
+        simplifiedBudgetProp.mando.statePersonnel.total.medicaid;
+      const statePersonnelOldCCFederal =
+        simplifiedBudgetProp.mando.statePersonnel.total.federal;
+      const statePersonnelOldCCState =
+        simplifiedBudgetProp.mando.statePersonnel.total.state;
+      const statePersonnelNewCCTotal = actual.mando.statePersonnel.total.total;
+      const statePersonnelNewCCMedicaid =
+        actual.mando.statePersonnel.total.medicaid;
+      const statePersonnelNewCCFederal =
+        actual.mando.statePersonnel.total.federal;
+      const statePersonnelNewCCState = actual.mando.statePersonnel.total.state;
+
+      const expectedStatePersonnelCCTotal =
+        statePersonnelOldCCTotal + statePersonnelTotalToAdd;
+      const expectedStatePersonnelCCMedicaid =
+        statePersonnelOldCCMedicaid + statePersonnelMedicaidShareToAdd;
+      const expectedStatePersonnelCCFederal =
+        statePersonnelOldCCFederal + statePersonnelFedShareToAdd;
+      const expectedStatePersonnelCCState =
+        statePersonnelOldCCState + statePersonnelStateShareToAdd;
+
+      expect(statePersonnelNewCCTotal).toEqual(expectedStatePersonnelCCTotal);
+      expect(statePersonnelNewCCMedicaid).toEqual(
+        expectedStatePersonnelCCMedicaid
+      );
+      expect(statePersonnelNewCCFederal).toEqual(
+        expectedStatePersonnelCCFederal
+      );
+      expect(statePersonnelNewCCState).toEqual(expectedStatePersonnelCCState);
+
+      // contractors section -------
+
+      // Amounts to add to the cost category
+      const contractorsTotalToAdd = activityTotals.data.contractors['2023'];
+      const contractorsMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.contractors;
+      const contractorsFedShareToAdd = costCategoryShare.fedShare.contractors;
+      const contractorsStateShareToAdd =
+        costCategoryShare.stateShare.contractors;
+
+      // Amounts for the cost category (CC)'s year
+      const contractorsOldCCYearTotal =
+        simplifiedBudgetProp.mando.contractors['2023'].total;
+      const contractorsOldCCYearMedicaid =
+        simplifiedBudgetProp.mando.contractors['2023'].medicaid;
+      const contractorsOldCCYearFederal =
+        simplifiedBudgetProp.mando.contractors['2023'].federal;
+      const contractorsOldCCYearState =
+        simplifiedBudgetProp.mando.contractors['2023'].state;
+      const contractorsNewCCYearTotal = actual.mando.contractors['2023'].total;
+      const contractorsNewCCYearMedicaid =
+        actual.mando.contractors['2023'].medicaid;
+      const contractorsNewCCYearFederal =
+        actual.mando.contractors['2023'].federal;
+      const contractorsNewCCYearState = actual.mando.contractors['2023'].state;
+
+      const expectedcontractorsCCYearTotal =
+        contractorsOldCCYearTotal + contractorsTotalToAdd;
+      const expectedcontractorsCCYearMedicaid =
+        contractorsOldCCYearMedicaid + contractorsMedicaidShareToAdd;
+      const expectedcontractorsCCYearFederal =
+        contractorsOldCCYearFederal + contractorsFedShareToAdd;
+      const expectedcontractorsCCYearState =
+        contractorsOldCCYearState + contractorsStateShareToAdd;
+
+      expect(contractorsNewCCYearTotal).toEqual(expectedcontractorsCCYearTotal);
+      expect(contractorsNewCCYearMedicaid).toEqual(
+        expectedcontractorsCCYearMedicaid
+      );
+      expect(contractorsNewCCYearFederal).toEqual(
+        expectedcontractorsCCYearFederal
+      );
+      expect(contractorsNewCCYearState).toEqual(expectedcontractorsCCYearState);
+
+      // Amounts for the cost category's total
+      const contractorsOldCCTotal =
+        simplifiedBudgetProp.mando.contractors.total.total;
+      const contractorsOldCCMedicaid =
+        simplifiedBudgetProp.mando.contractors.total.medicaid;
+      const contractorsOldCCFederal =
+        simplifiedBudgetProp.mando.contractors.total.federal;
+      const contractorsOldCCState =
+        simplifiedBudgetProp.mando.contractors.total.state;
+      const contractorsNewCCTotal = actual.mando.contractors.total.total;
+      const contractorsNewCCMedicaid = actual.mando.contractors.total.medicaid;
+      const contractorsNewCCFederal = actual.mando.contractors.total.federal;
+      const contractorsNewCCState = actual.mando.contractors.total.state;
+
+      const expectedcontractorsCCTotal =
+        contractorsOldCCTotal + contractorsTotalToAdd;
+      const expectedcontractorsCCMedicaid =
+        contractorsOldCCMedicaid + contractorsMedicaidShareToAdd;
+      const expectedcontractorsCCFederal =
+        contractorsOldCCFederal + contractorsFedShareToAdd;
+      const expectedcontractorsCCState =
+        contractorsOldCCState + contractorsStateShareToAdd;
+
+      expect(contractorsNewCCTotal).toEqual(expectedcontractorsCCTotal);
+      expect(contractorsNewCCMedicaid).toEqual(expectedcontractorsCCMedicaid);
+      expect(contractorsNewCCFederal).toEqual(expectedcontractorsCCFederal);
+      expect(contractorsNewCCState).toEqual(expectedcontractorsCCState);
+
+      // expenses section -------
+
+      // Amounts to add to the cost category
+      const expensesTotalToAdd = activityTotals.data.expenses['2023'];
+      const expensesMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.expenses;
+      const expensesFedShareToAdd = costCategoryShare.fedShare.expenses;
+      const expensesStateShareToAdd = costCategoryShare.stateShare.expenses;
+
+      // Amounts for the cost category (CC)'s year
+      const expensesOldCCYearTotal =
+        simplifiedBudgetProp.mando.expenses['2023'].total;
+      const expensesOldCCYearMedicaid =
+        simplifiedBudgetProp.mando.expenses['2023'].medicaid;
+      const expensesOldCCYearFederal =
+        simplifiedBudgetProp.mando.expenses['2023'].federal;
+      const expensesOldCCYearState =
+        simplifiedBudgetProp.mando.expenses['2023'].state;
+      const expensesNewCCYearTotal = actual.mando.expenses['2023'].total;
+      const expensesNewCCYearMedicaid = actual.mando.expenses['2023'].medicaid;
+      const expensesNewCCYearFederal = actual.mando.expenses['2023'].federal;
+      const expensesNewCCYearState = actual.mando.expenses['2023'].state;
+
+      const expectedexpensesCCYearTotal =
+        expensesOldCCYearTotal + expensesTotalToAdd;
+      const expectedexpensesCCYearMedicaid =
+        expensesOldCCYearMedicaid + expensesMedicaidShareToAdd;
+      const expectedexpensesCCYearFederal =
+        expensesOldCCYearFederal + expensesFedShareToAdd;
+      const expectedexpensesCCYearState =
+        expensesOldCCYearState + expensesStateShareToAdd;
+
+      expect(expensesNewCCYearTotal).toEqual(expectedexpensesCCYearTotal);
+      expect(expensesNewCCYearMedicaid).toEqual(expectedexpensesCCYearMedicaid);
+      expect(expensesNewCCYearFederal).toEqual(expectedexpensesCCYearFederal);
+      expect(expensesNewCCYearState).toEqual(expectedexpensesCCYearState);
+
+      // Amounts for the cost category's total
+      const expensesOldCCTotal =
+        simplifiedBudgetProp.mando.expenses.total.total;
+      const expensesOldCCMedicaid =
+        simplifiedBudgetProp.mando.expenses.total.medicaid;
+      const expensesOldCCFederal =
+        simplifiedBudgetProp.mando.expenses.total.federal;
+      const expensesOldCCState =
+        simplifiedBudgetProp.mando.expenses.total.state;
+      const expensesNewCCTotal = actual.mando.expenses.total.total;
+      const expensesNewCCMedicaid = actual.mando.expenses.total.medicaid;
+      const expensesNewCCFederal = actual.mando.expenses.total.federal;
+      const expensesNewCCState = actual.mando.expenses.total.state;
+
+      const expectedexpensesCCTotal = expensesOldCCTotal + expensesTotalToAdd;
+      const expectedexpensesCCMedicaid =
+        expensesOldCCMedicaid + expensesMedicaidShareToAdd;
+      const expectedexpensesCCFederal =
+        expensesOldCCFederal + expensesFedShareToAdd;
+      const expectedexpensesCCState =
+        expensesOldCCState + expensesStateShareToAdd;
+
+      expect(expensesNewCCTotal).toEqual(expectedexpensesCCTotal);
+      expect(expensesNewCCMedicaid).toEqual(expectedexpensesCCMedicaid);
+      expect(expensesNewCCFederal).toEqual(expectedexpensesCCFederal);
+      expect(expensesNewCCState).toEqual(expectedexpensesCCState);
+
+      // combined section -------
+
+      // Amounts for the combined year [of a funding category (e.g. mando)]
+      const oldCombinedYearTotal =
+        simplifiedBudgetProp.mando.combined['2023'].total;
+      const oldCombinedYearMedicaid =
+        simplifiedBudgetProp.mando.combined['2023'].medicaid;
+      const oldCombinedYearFederal =
+        simplifiedBudgetProp.mando.combined['2023'].federal;
+      const oldCombinedYearState =
+        simplifiedBudgetProp.mando.combined['2023'].state;
+      const newCombinedYearTotal = actual.mando.combined['2023'].total;
+      const newCombinedYearMedicaid = actual.mando.combined['2023'].medicaid;
+      const newCombinedYearFederal = actual.mando.combined['2023'].federal;
+      const newCombinedYearState = actual.mando.combined['2023'].state;
+
+      const expectedCombinedYearTotal =
+        oldCombinedYearTotal +
+        statePersonnelTotalToAdd +
+        contractorsTotalToAdd +
+        expensesTotalToAdd;
+      const expectedCombinedYearMedicaid =
+        oldCombinedYearMedicaid +
+        statePersonnelMedicaidShareToAdd +
+        contractorsMedicaidShareToAdd +
+        expensesMedicaidShareToAdd;
+      const expectedCombinedYearFederal =
+        oldCombinedYearFederal +
+        statePersonnelFedShareToAdd +
+        contractorsFedShareToAdd +
+        expensesFedShareToAdd;
+      const expectedCombinedYearState =
+        oldCombinedYearState +
+        statePersonnelStateShareToAdd +
+        contractorsStateShareToAdd +
+        expensesStateShareToAdd;
+
+      expect(newCombinedYearTotal).toEqual(expectedCombinedYearTotal);
+      expect(newCombinedYearMedicaid).toEqual(expectedCombinedYearMedicaid);
+      expect(newCombinedYearFederal).toEqual(expectedCombinedYearFederal);
+      expect(newCombinedYearState).toEqual(expectedCombinedYearState);
+
+      // Amounts for the combined total [of a funding category (e.g. mando)]
+      const oldCombinedTotal = simplifiedBudgetProp.mando.combined.total.total;
+      const oldCombinedMedicaid =
+        simplifiedBudgetProp.mando.combined.total.medicaid;
+      const oldCombinedFederal =
+        simplifiedBudgetProp.mando.combined.total.federal;
+      const oldCombinedState = simplifiedBudgetProp.mando.combined.total.state;
+      const newCombinedTotal = actual.mando.combined.total.total;
+      const newCombinedMedicaid = actual.mando.combined.total.medicaid;
+      const newCombinedFederal = actual.mando.combined.total.federal;
+      const newCombinedState = actual.mando.combined.total.state;
+
+      const expectedCombinedTotal =
+        oldCombinedTotal +
+        statePersonnelTotalToAdd +
+        contractorsTotalToAdd +
+        expensesTotalToAdd;
+      const expectedCombinedMedicaid =
+        oldCombinedMedicaid +
+        statePersonnelMedicaidShareToAdd +
+        contractorsMedicaidShareToAdd +
+        expensesMedicaidShareToAdd;
+      const expectedCombinedFederal =
+        oldCombinedFederal +
+        statePersonnelFedShareToAdd +
+        contractorsFedShareToAdd +
+        expensesFedShareToAdd;
+      const expectedCombinedState =
+        oldCombinedState +
+        statePersonnelStateShareToAdd +
+        contractorsStateShareToAdd +
+        expensesStateShareToAdd;
+
+      expect(newCombinedTotal).toEqual(expectedCombinedTotal);
+      expect(newCombinedMedicaid).toEqual(expectedCombinedMedicaid);
+      expect(newCombinedFederal).toEqual(expectedCombinedFederal);
+      expect(newCombinedState).toEqual(expectedCombinedState);
     });
   });
 
