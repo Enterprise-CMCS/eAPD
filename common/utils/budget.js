@@ -1697,6 +1697,7 @@ export const calculateBudget = apd => {
           categoryPercentages
         });
 
+        // Finish computing sections of the budget that are specific to APD type
         switch (apdType) {
           case APD_TYPE.HITECH:
             // Record these costs for each FFY of the activity
