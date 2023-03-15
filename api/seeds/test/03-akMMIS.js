@@ -112,6 +112,7 @@ export default {
       },
       activityId: '152a1e2b',
       name: '',
+      fundingSource: 'MMIS',
       activitySchedule: {
         plannedEndDate: null,
         plannedStartDate: null
