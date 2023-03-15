@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from 'apd-testing-library';
 import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
 import { APD_TYPE } from '@cms-eapd/common';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 const defaultProps = {
   ffy: '1990',
@@ -140,6 +141,12 @@ const setupCostSummaryRows = async (props = {}) => {
 
 /* eslint-disable testing-library/no-node-access */
 describe('renders correctly', () => {
+  beforeEach(() => {
+    // reset before each test case
+    resetLDMocks();
+    mockFlags({ emptyBudgetWording: false });
+  });
+
   it('renders correctly without otherFunding', async () => {
     await setupCostAllocationRows();
     expect(screen.queryAllByText(/Other Funding/).length).toEqual(0);
