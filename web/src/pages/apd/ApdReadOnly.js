@@ -111,7 +111,10 @@ const ApdViewOnly = ({
       <ExportInstructions />
       <h1 className="ds-h1 ds-u-margin-top--2">
         {place.name} {year} APD
-        <span className="ds-h6 ds-u-font-size--lg ds-u-display--block ds-u-margin-top--2">
+        <span
+          className="ds-h6 ds-u-font-size--lg ds-u-display--block ds-u-margin-top--2"
+          data-testid="apdName"
+        >
           {apd.name}
         </span>
       </h1>
