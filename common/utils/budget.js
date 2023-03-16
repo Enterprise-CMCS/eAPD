@@ -235,6 +235,7 @@ export const defaultMMISBudgetObject = (years = []) => ({
   mando: getDefaultFundingSourceByCategoryObject(years),
   combined: getDefaultFundingSourceObject(years),
   activityTotals: [],
+  activities: {},
   years
 });
 
@@ -284,6 +285,7 @@ export const defaultMMISBudgetObject = (years = []) => ({
 export const defaultBudgetObject = (years = []) => ({
   combined: getDefaultFundingSourceObject(years),
   activityTotals: [],
+  activities: {},
   years
 });
 
@@ -298,24 +300,6 @@ export const defaultBudgetObject = (years = []) => ({
  *     2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *     2024: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *     total: { federal: 0, medicaid: 0, state: 0, total: 0 },
- *   },
- *   quarterlyFFP: {
- *     years:  {
- *       2022: {
- *         1: {
- *           combined: { dollars: 0, percent: 0 },
- *           contractors: { dollars: 0, percent: 0 },
- *           inHouse: { dollars: 0, percent: 0 }
- *         },
- *         2: {...}, // same as 1
- *         3: {...}, // same as 1
- *         4: {...}, // same as 1
- *         subtotal: {...} // same as 1
- *       }
- *     },
- *     2023: {...}, // same as 2022
- *     2024: {...}, // same as 2022
- *     total: { combined: 0, contractors: 0, inHouse: 0 }
  *   }
  * }
  */
@@ -333,7 +317,43 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
       state: 0,
       total: 0
     }
-  },
+  }
+});
+
+/**
+ * Creates a default quarterly FFP object by FFYs
+ * @param {Array} years The list of years in the APD
+ * @returns the default quarterly FFP
+ * e.g. for years: [2022, 2023, 2024] the object would look like
+ * {
+ *   quarterlyFFP: {
+ *     years:  {
+ *       2022: {
+ *         1: {
+ *           combined: { dollars: 0, percent: 0 },
+ *           contractors: { dollars: 0, percent: 0 },
+ *           inHouse: { dollars: 0, percent: 0 }
+ *         },
+ *         2: {...}, // same as 1
+ *         3: {...}, // same as 1
+ *         4: {...}, // same as 1
+ *         subtotal: {...} // same as 1
+ *       }
+ *     },
+ *     2023: {...}, // same as 2022
+ *     2024: {...}, // same as 2022
+ *     total: { combined: 0, contractors: 0, inHouse: 0 }
+ *   },
+ *   costsByFFY: {
+ *     2022: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2024: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     total: { federal: 0, medicaid: 0, state: 0, total: 0 }
+ *     // see defaultQuarterlyFFPObject for details
+ *   }
+ * }
+ */
+export const defaultHITECHQuarterlyFFPObject = (years = []) => ({
   quarterlyFFP: {
     years: {
       ...arrToObj(years, () => ({
@@ -354,7 +374,8 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
       contractors: 0,
       inHouse: 0
     }
-  }
+  },
+  ...defaultQuarterlyFFPObject(years)
 });
 
 /**
@@ -1613,26 +1634,45 @@ export const calculateBudget = apd => {
     // exception of key state personnel in MMIS-type APDs), we'll start by
     // looking at all of them and doing Magic Math™. (It's not magic.)
     activities.forEach(activity => {
-      // Update the statePersonnel with keyPersonnel, if applicable
-      if (apdType === APD_TYPE.HITECH) {
-        activity.statePersonnel = updateStatePersonnel({
-          name: activity.name,
-          statePersonnel: activity.statePersonnel,
-          keyPersonnel
-        });
+      let fundingSource;
 
-        // Create a default quarterly FFP per activity object,
-        // so that all of the properties and stuff will exist
-        newBudget.activities[activity.activityId] =
-          defaultQuarterlyFFPObject(years);
+      // Handle variations that are specific to APD type
+      // - key state personnel
+      // - structure of activities key broken up by activity id
+      // - funding source
+      switch (apdType) {
+        case APD_TYPE.HITECH:
+          // Update the statePersonnel with keyPersonnel, if applicable
+          activity.statePersonnel = updateStatePersonnel({
+            name: activity.name,
+            statePersonnel: activity.statePersonnel,
+            keyPersonnel
+          });
+
+          // Create a default quarterly FFP per activity object,
+          // so that all of the properties and stuff will exist
+          newBudget.activities[activity.activityId] =
+            defaultHITECHQuarterlyFFPObject(years);
+
+          // We need to know the funding source so we know where to apply
+          // this data in the big rollup budget.
+          fundingSource = activity.fundingSource?.toLowerCase();
+          break;
+
+        case APD_TYPE.MMIS:
+          // Create a default quarterly FFP per activity object,
+          // so that all of the properties and stuff will exist
+          newBudget.activities[activity.activityId] =
+            defaultQuarterlyFFPObject(years);
+
+          // We need to know the funding source so we know where to apply
+          // this data in the big rollup budget.
+          fundingSource = 'mmis';
+          break;
+
+        default:
+          break;
       }
-
-      // We need to know the funding source so we know where to apply
-      // this data in the big rollup budget.
-      const fundingSource =
-        apdType === APD_TYPE.MMIS
-          ? 'mmis'
-          : activity.fundingSource?.toLowerCase();
 
       // And of course we need to know how the costs are allocated between
       // the state and federal shares.
@@ -1697,20 +1737,18 @@ export const calculateBudget = apd => {
           categoryPercentages
         });
 
+        // Record these costs for each FFY of the activity
+        newBudget.activities[activity.activityId].costsByFFY = sumCostsByFFY({
+          costsByFFY: newBudget.activities[activity.activityId].costsByFFY,
+          year,
+          totalCost,
+          totalMedicaidCostShares,
+          totalMedicaidCost
+        });
+
         // Finish computing sections of the budget that are specific to APD type
         switch (apdType) {
           case APD_TYPE.HITECH:
-            // Record these costs for each FFY of the activity
-            newBudget.activities[activity.activityId].costsByFFY =
-              sumCostsByFFY({
-                costsByFFY:
-                  newBudget.activities[activity.activityId].costsByFFY,
-                year,
-                totalCost,
-                totalMedicaidCostShares,
-                totalMedicaidCost
-              });
-
             // Calculate the federal, state, and medicaid shares per
             // funding source (including MMIS) by FFY
             newBudget = sumShareCosts({
@@ -1734,6 +1772,7 @@ export const calculateBudget = apd => {
               costCategoryShare
             });
             break;
+
           case APD_TYPE.MMIS:
             // Calculate the funding source ('mmis') by FFY
             // This will populate values in the budget's 'mmis' key
@@ -1746,6 +1785,7 @@ export const calculateBudget = apd => {
               totalMedicaidCostShares,
               costCategoryShare
             });
+
             // Calcuate the federal, state, and medicaid shares per
             // funding category by FFY
             newBudget = sumShareCostsForFundingCategory({
@@ -1756,6 +1796,7 @@ export const calculateBudget = apd => {
               costCategoryShare
             });
             break;
+
           default:
             break;
         }

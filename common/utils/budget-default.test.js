@@ -6,6 +6,7 @@ import {
   defaultHITECHBudgetObject,
   defaultMMISBudgetObject,
   defaultQuarterlyFFPObject,
+  defaultHITECHQuarterlyFFPObject,
   defaultActivityTotalsDataObject
 } from './budget.js';
 
@@ -150,6 +151,7 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
+        activities: {},
         years: []
       };
       const actual = defaultBudgetObject();
@@ -164,6 +166,7 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
+        activities: {},
         years: [2017, 2018]
       };
       const actual = defaultBudgetObject([2017, 2018]);
@@ -488,6 +491,7 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
+        activities: {},
         years: []
       };
       const actual = defaultMMISBudgetObject();
@@ -568,6 +572,7 @@ describe('budget getDefault methods', () => {
           total: { total: 0, federal: 0, medicaid: 0, state: 0 }
         },
         activityTotals: [],
+        activities: {},
         years: [2017, 2018]
       };
       const actual = defaultMMISBudgetObject([2017, 2018]);
@@ -580,13 +585,37 @@ describe('budget getDefault methods', () => {
       const expected = {
         costsByFFY: {
           total: { federal: 0, medicaid: 0, state: 0, total: 0 }
+        }
+      };
+      const actual = defaultQuarterlyFFPObject();
+      expect(actual).toEqual(expected);
+    });
+
+    test('with years', () => {
+      const expected = {
+        costsByFFY: {
+          2017: { federal: 0, medicaid: 0, state: 0, total: 0 },
+          2018: { federal: 0, medicaid: 0, state: 0, total: 0 },
+          total: { federal: 0, medicaid: 0, state: 0, total: 0 }
+        }
+      };
+      const actual = defaultQuarterlyFFPObject([2017, 2018]);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('defaultHITECHQuarterlyFFPObject', () => {
+    test('with no years', () => {
+      const expected = {
+        costsByFFY: {
+          total: { federal: 0, medicaid: 0, state: 0, total: 0 }
         },
         quarterlyFFP: {
           years: {},
           total: { combined: 0, contractors: 0, inHouse: 0 }
         }
       };
-      const actual = defaultQuarterlyFFPObject();
+      const actual = defaultHITECHQuarterlyFFPObject();
       expect(actual).toEqual(expected);
     });
 
@@ -657,7 +686,7 @@ describe('budget getDefault methods', () => {
           total: { combined: 0, contractors: 0, inHouse: 0 }
         }
       };
-      const actual = defaultQuarterlyFFPObject([2017, 2018]);
+      const actual = defaultHITECHQuarterlyFFPObject([2017, 2018]);
       expect(actual).toEqual(expected);
     });
   });

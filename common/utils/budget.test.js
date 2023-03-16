@@ -4111,6 +4111,7 @@ describe('budget calculate methods', () => {
   describe('calculateBudget', () => {
     test('with default values', () => {
       const expected = {
+        activities: {},
         combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
         activityTotals: [],
         years: []
@@ -5585,6 +5586,52 @@ describe('budget calculate methods', () => {
             }
           }
         ],
+        activities: {
+          1: {
+            costsByFFY: {
+              2017: {
+                federal: 4860,
+                state: 540,
+                medicaid: 5400,
+                total: 5400
+              },
+              2018: {
+                federal: 4680,
+                state: 520,
+                medicaid: 5200,
+                total: 5200
+              },
+              total: {
+                federal: 9540,
+                state: 1060,
+                medicaid: 10600,
+                total: 10600
+              }
+            }
+          },
+          2: {
+            costsByFFY: {
+              2017: {
+                federal: 2700,
+                state: 300,
+                medicaid: 3000,
+                total: 3000
+              },
+              2018: {
+                federal: 2700,
+                state: 300,
+                medicaid: 3000,
+                total: 3000
+              },
+              total: {
+                federal: 5400,
+                state: 600,
+                medicaid: 6000,
+                total: 6000
+              }
+            }
+          }
+        },
         years: ['2017', '2018']
       };
       const actual = calculateBudget(mmisApd);

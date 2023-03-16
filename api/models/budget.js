@@ -76,7 +76,7 @@ const costPercentByCostType = new mongoose.Schema(
   { _id: false }
 );
 
-const costPercentByCostTypeByQuarter = new mongoose.Schema(
+export const costPercentByCostTypeByQuarter = new mongoose.Schema(
   {
     1: costPercentByCostType,
     2: costPercentByCostType,
@@ -91,13 +91,6 @@ export const activities = new mongoose.Schema({
   costsByFFY: {
     type: Map,
     of: fedStateSplit
-  },
-  quarterlyFFP: {
-    years: {
-      type: Map,
-      of: costPercentByCostTypeByQuarter
-    },
-    total: shareByCostType
   }
 });
 
@@ -152,7 +145,11 @@ const budgetSchema = new mongoose.Schema({
         }
       }
     }
-  ]
+  ],
+  activities: {
+    type: Map,
+    of: activities
+  }
 });
 
 export default mongoose.model('Budget', budgetSchema);
