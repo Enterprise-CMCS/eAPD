@@ -1,0 +1,903 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD Summary/viewOnly component for HITECH apds renders correct empty state values 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <h2>
+          APD Overview
+        </h2>
+        <h3>
+          Program introduction
+        </h3>
+        <p>
+          No response was provided
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          HIT overview
+        </h3>
+        <p>
+          No response was provided
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          HIE overview
+        </h3>
+        <p>
+          No response was provided
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          MMIS overview
+        </h3>
+        <p>
+          No response was provided
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <h2>
+        APD Overview
+      </h2>
+      <h3>
+        Program introduction
+      </h3>
+      <p>
+        No response was provided
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        HIT overview
+      </h3>
+      <p>
+        No response was provided
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        HIE overview
+      </h3>
+      <p>
+        No response was provided
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        MMIS overview
+      </h3>
+      <p>
+        No response was provided
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "canGo": [Function],
+    "createHref": [Function],
+    "entries": Array [
+      Object {
+        "hash": "",
+        "key": "fixed",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "index": 0,
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "key": "fixed",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": Object {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
+
+exports[`APD Summary/viewOnly component for HITECH apds renders correctly with valid data 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <h2>
+          APD Overview
+        </h2>
+        <h3>
+          Program introduction
+        </h3>
+        <p>
+          This is the program overview
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          HIT overview
+        </h3>
+        <p>
+          My narrative for HIT
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          HIE overview
+        </h3>
+        <p>
+          My narrative for HIE
+        </p>
+        <hr
+          class="subsection-rule"
+        />
+        <h3>
+          MMIS overview
+        </h3>
+        <p>
+          My narrative for MMIS
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <h2>
+        APD Overview
+      </h2>
+      <h3>
+        Program introduction
+      </h3>
+      <p>
+        This is the program overview
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        HIT overview
+      </h3>
+      <p>
+        My narrative for HIT
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        HIE overview
+      </h3>
+      <p>
+        My narrative for HIE
+      </p>
+      <hr
+        class="subsection-rule"
+      />
+      <h3>
+        MMIS overview
+      </h3>
+      <p>
+        My narrative for MMIS
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "canGo": [Function],
+    "createHref": [Function],
+    "entries": Array [
+      Object {
+        "hash": "",
+        "key": "fixed",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "index": 0,
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "key": "fixed",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": Object {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
+
+exports[`APD Summary/viewOnly component for MMIS apds renders correct empty state values 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <h2>
+          APD Overview
+        </h2>
+        <ul
+          class="ds-c-list--bare"
+        >
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              APD Name:
+            </strong>
+             
+            
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Program Funding Source: 
+            </strong>
+            MMIS (Medicaid Management Information System)
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              APD Type:
+            </strong>
+             Implementation
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Federal Fiscal Year (FFY): 
+            </strong>
+            No Federal Fiscal Year(s) selected
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Update Type: 
+            </strong>
+            New project
+            <strong />
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Medicaid Business Areas: 
+            </strong>
+            No Medicaid Business Areas selected
+            <ol />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <h2>
+        APD Overview
+      </h2>
+      <ul
+        class="ds-c-list--bare"
+      >
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            APD Name:
+          </strong>
+           
+          
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Program Funding Source: 
+          </strong>
+          MMIS (Medicaid Management Information System)
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            APD Type:
+          </strong>
+           Implementation
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Federal Fiscal Year (FFY): 
+          </strong>
+          No Federal Fiscal Year(s) selected
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Update Type: 
+          </strong>
+          New project
+          <strong />
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Medicaid Business Areas: 
+          </strong>
+          No Medicaid Business Areas selected
+          <ol />
+        </li>
+      </ul>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "canGo": [Function],
+    "createHref": [Function],
+    "entries": Array [
+      Object {
+        "hash": "",
+        "key": "fixed",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "index": 0,
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "key": "fixed",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": Object {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
+
+exports[`APD Summary/viewOnly component for MMIS apds renders correctly with valid data 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <h2>
+          APD Overview
+        </h2>
+        <ul
+          class="ds-c-list--bare"
+        >
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              APD Name:
+            </strong>
+             
+            My Fancy APD
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Program Funding Source: 
+            </strong>
+            MMIS (Medicaid Management Information System)
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              APD Type:
+            </strong>
+             Implementation
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Federal Fiscal Year (FFY): 
+            </strong>
+            2021-2023
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Update Type: 
+            </strong>
+            As-needed update
+            <strong />
+          </li>
+          <li
+            class="ds-u-margin-top--2"
+          >
+            <strong>
+              Medicaid Business Areas: 
+            </strong>
+            <ol>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                1115 or Waiver Support Systems
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Asset Verification System
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Claims Processing
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Decision Support System & Data Warehouse
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Electronic Visit Verification (EVV)
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Financial Management
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Health Information Exchange (HIE)
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Member Management
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Program Integrity
+              </li>
+              <li
+                class="ds-u-margin-top--1"
+              >
+                Other
+                <span
+                  class="border-left--primary ds-u-padding-left--2 ds-u-padding-y--1 ds-u-margin-left--2 position-absolute"
+                >
+                  This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. 
+                </span>
+              </li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <h2>
+        APD Overview
+      </h2>
+      <ul
+        class="ds-c-list--bare"
+      >
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            APD Name:
+          </strong>
+           
+          My Fancy APD
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Program Funding Source: 
+          </strong>
+          MMIS (Medicaid Management Information System)
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            APD Type:
+          </strong>
+           Implementation
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Federal Fiscal Year (FFY): 
+          </strong>
+          2021-2023
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Update Type: 
+          </strong>
+          As-needed update
+          <strong />
+        </li>
+        <li
+          class="ds-u-margin-top--2"
+        >
+          <strong>
+            Medicaid Business Areas: 
+          </strong>
+          <ol>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              1115 or Waiver Support Systems
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Asset Verification System
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Claims Processing
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Decision Support System & Data Warehouse
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Electronic Visit Verification (EVV)
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Financial Management
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Health Information Exchange (HIE)
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Member Management
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Program Integrity
+            </li>
+            <li
+              class="ds-u-margin-top--1"
+            >
+              Other
+              <span
+                class="border-left--primary ds-u-padding-left--2 ds-u-padding-y--1 ds-u-margin-left--2 position-absolute"
+              >
+                This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. This is my other business area. 
+              </span>
+            </li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "canGo": [Function],
+    "createHref": [Function],
+    "entries": Array [
+      Object {
+        "hash": "",
+        "key": "fixed",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "index": 0,
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "key": "fixed",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": Object {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
