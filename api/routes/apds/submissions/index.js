@@ -1,7 +1,7 @@
 import get from './get.js';
-import patch from './patch.js';
+import post from './post.js';
 
-export default (app, { getEndpoint = get, patchEndpoint = patch } = {}) => {
+export default (app, { getEndpoint = get, postEndpoint = post } = {}) => {
   getEndpoint(app);
-  patchEndpoint(app);
+  postEndpoint(app);
 };
