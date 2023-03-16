@@ -16,8 +16,8 @@ describe(' /apds/submissions', () => {
     await teardownDB(db);
   });
 
-  it('it returns 403 when the IP is not allowed', async () => {
-    const response = await apiNoKey.patch('/apds/submissions', [
+  it('it returns 403 when there is no api key', async () => {
+    const response = await apiNoKey.post('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
@@ -27,15 +27,15 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 400 when body is invalid', async () => {
-    const response = await apiKeyAuth.patch('/apds/submissions', {
+    const response = await apiKeyAuth.post('/apds/submissions', {
       apdId: badAPDId,
       newStatus: 'approved'
     });
     expect(response.status).toBe(400);
   });
 
-  it('returns 200', async () => {
-    const response = await apiKeyAuth.patch('/apds/submissions', [
+  it('returns 200 when there is an api key and the body is valid', async () => {
+    const response = await apiKeyAuth.post('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
