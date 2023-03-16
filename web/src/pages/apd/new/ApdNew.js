@@ -131,7 +131,7 @@ const ApdNew = ({ createApd: create }) => {
     }
 
     setSubmitDisabled(!isValid);
-  }, [enableMmis, isValid]);
+  }, [enableMmis, isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isLoading) {
     return (
