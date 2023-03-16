@@ -65,6 +65,12 @@ summaryBudgetMMIS:
       categories by program area with the calculated Federal share by FFP rate
       and the associated state share. The final table in this section provides
       the total Medicaid cost for all activities in this APD by FFY.
+
+      <h3>MMIS Activities by Fiscal Year</h3> <p>Below is the state expense and
+      private contractor share broken down into dollars, calculated from your
+      previous match rate selections (FFP). From there, the Medicaid Total
+      Computable is calculated by adding up both the federal and state
+      totals.</p>
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:
