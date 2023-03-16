@@ -17,7 +17,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 403 when there is no api key', async () => {
-    const response = await apiNoKey.patch('/apds/submissions', [
+    const response = await apiNoKey.post('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'
@@ -27,7 +27,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('it returns 400 when body is invalid', async () => {
-    const response = await apiKeyAuth.patch('/apds/submissions', {
+    const response = await apiKeyAuth.post('/apds/submissions', {
       apdId: badAPDId,
       newStatus: 'approved'
     });
@@ -35,7 +35,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('returns 200 when there is an api key and the body is valid', async () => {
-    const response = await apiKeyAuth.patch('/apds/submissions', [
+    const response = await apiKeyAuth.post('/apds/submissions', [
       {
         apdId: mnAPDId,
         newStatus: 'approved'

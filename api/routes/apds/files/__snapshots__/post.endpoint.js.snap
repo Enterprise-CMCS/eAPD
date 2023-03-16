@@ -4,7 +4,7 @@ exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (gif) 1`] = `
 Object {
-  "url": "/apds/eeac3c9865059f26eccb0600/files/5e2a1199ef4bed6563331995449ff477f918b40005c0008ee6f9d339fa13d876",
+  "url": "/apds/eeac3c9865059f26eccb0600/files/42c8716dc8ee5dbeefc7492fe38792f8f6e2c2434b9ef1e9ddc3e9619eba6c8c",
 }
 `;
 
@@ -16,7 +16,7 @@ Object {
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with a valid request (tiff) 1`] = `
 Object {
-  "url": "/apds/eeac3c9865059f26eccb0600/files/c956d2961b10745920a24a31aa6a9184f5851ae5bfbc6f3c636dbefd8f4e97a3",
+  "url": "/apds/eeac3c9865059f26eccb0600/files/9402d9428aeade0a21877c897ae4e4b2131360e83f92dc04b36e30eae9961271",
 }
 `;
 
