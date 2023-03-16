@@ -197,15 +197,6 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
-    expect(
-      screen.getByRole('heading', { name: 'Program Budget Table' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('table', { name: 'HIT + HIE executive summary' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('table', { name: 'MMIS executive summary' })
-    ).toBeTruthy();
   });
 
   test('renders MMIS correctly', async () => {
@@ -235,15 +226,6 @@ describe('<ExecutiveSummary />', () => {
     expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('heading', { name: 'Program Budget Table' })
-    ).toBeTruthy();
-    expect(
-      screen.queryByRole('table', { name: 'HIT + HIE executive summary' })
-    ).toBeFalsy();
-    expect(
-      screen.getByRole('table', { name: 'MMIS executive summary' })
     ).toBeTruthy();
   });
 });

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 import { useParams } from 'react-router-dom';
 
