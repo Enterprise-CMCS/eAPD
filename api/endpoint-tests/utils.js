@@ -25,18 +25,19 @@ const axiosDefaults = {
 };
 
 const apiKeyHeader = token => {
-  const ip = token || '10.0.0.0';
   const options = {
-    ...axiosDefaults,
-    headers: {
-      'x-forwarded-for': ip
-    }
+    ...axiosDefaults
   };
+  if (token) {
+    options.headers = {
+      apikey: token
+    };
+  }
   return axios.create(options);
 };
 
-export const apiNoKey = apiKeyHeader('bad ip');
-export const apiKeyAuth = apiKeyHeader();
+export const apiNoKey = apiKeyHeader();
+export const apiKeyAuth = apiKeyHeader('apikey');
 
 const login = token => {
   const jwt = token || 'all-permissions';

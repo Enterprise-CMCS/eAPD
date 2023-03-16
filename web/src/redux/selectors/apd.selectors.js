@@ -42,6 +42,28 @@ export const selectSummary = ({
   yearOptions
 });
 
+export const selectStatus = ({
+  apd: {
+    data: {
+      apdOverview: {
+        updateStatus: { isUpdateAPD, annualUpdate, asNeededUpdate } = {}
+      } = {}
+    }
+  }
+}) => ({
+  isUpdateAPD,
+  annualUpdate,
+  asNeededUpdate
+});
+
+export const selectMedicaidBusinessAreas = ({
+  apd: {
+    data: { apdOverview: { medicaidBusinessAreas = {} } = {} }
+  }
+}) => ({
+  medicaidBusinessAreas
+});
+
 export const selectPriorities = state =>
   state.apd.data.statePrioritiesAndScope.medicaidProgramAndPriorities;
 export const selectMesIntro = state =>
