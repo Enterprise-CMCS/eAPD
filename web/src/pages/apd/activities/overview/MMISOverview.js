@@ -14,6 +14,7 @@ import {
 import RichText from '../../../../components/RichText';
 import Instruction from '../../../../components/Instruction';
 import NameForm from './NameForm';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../components/Section';
 
@@ -224,7 +225,7 @@ MMISActivityOverview.propTypes = {
 const mapStateToProps = (state, { activityIndex }) => {
   return {
     activity: selectActivityByIndex(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck?.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

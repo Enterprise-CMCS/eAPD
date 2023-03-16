@@ -19,13 +19,13 @@ export default {
 
 const router = {
   location: {
-    pathname: '/apd/63dc42496379ad06919f1666/assurances-and-compliance',
+    pathname: '/apd/640f5418f30a270090db1668/activity/0/alternatives-and-risks',
     search: '',
     hash: '',
-    key: 'c0vj28',
+    key: 'f1am94',
     query: {}
   },
-  action: 'REPLACE'
+  action: 'PUSH'
 };
 
 const nav = {
@@ -48,6 +48,9 @@ const nav = {
 const Template = args => <AlternativesAndRisks {...args} />;
 
 export const DefaultAlternativesAndRisksStory = Template.bind({});
+DefaultAlternativesAndRisksStory.args = {
+  activityIndex: 0
+};
 DefaultAlternativesAndRisksStory.parameters = {
   design: {
     type: 'figma',
@@ -60,10 +63,57 @@ DefaultAlternativesAndRisksStory.decorators = [
       initialState: {
         apd: {
           data: {
-            activities: [{}]
+            activities: [
+              {
+                analysisOfAlternativesAndRisks: {
+                  alternativeAnalysis: '',
+                  costBenefitAnalysis: '',
+                  feasibilityStudy: '',
+                  requirementsAnalysis: '',
+                  forseeableRisks: ''
+                }
+              }
+            ]
           }
         },
-        router
+        router,
+        nav
+      },
+      story
+    })
+];
+
+export const DataAlternativesAndRisksStory = Template.bind({});
+DataAlternativesAndRisksStory.args = {
+  activityIndex: 0
+};
+DataAlternativesAndRisksStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=8%3A9073&t=mGt24KbjGnzNLsGJ-1'
+  }
+};
+DataAlternativesAndRisksStory.decorators = [
+  story =>
+    renderWithProviderAndRouter({
+      initialState: {
+        apd: {
+          data: {
+            activities: [
+              {
+                analysisOfAlternativesAndRisks: {
+                  alternativeAnalysis: 'Example of an alternative analysis',
+                  costBenefitAnalysis: 'Example of a cost benefit analysis',
+                  feasibilityStudy: 'Example of a feasibility study',
+                  requirementsAnalysis: 'Example of a requirements analysis',
+                  forseeableRisks: 'Example of forseeable risks'
+                }
+              }
+            ]
+          }
+        },
+        router,
+        nav
       },
       story
     })

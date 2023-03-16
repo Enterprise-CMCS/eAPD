@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Subsection } from '../../../../components/Section';
@@ -7,7 +7,7 @@ import RichText from '../../../../components/RichText';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { analysisOfAlternativesAndRisksSchema } from '@cms-eapd/common';
+import { analysisOfAlternativesAndRisksSchema as schema } from '@cms-eapd/common';
 import Instruction from '../../../../components/Instruction';
 
 import {
@@ -21,11 +21,17 @@ import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selecto
 import { selectAlternativesAndRisksByActivityIndex } from '../../../../redux/selectors/activities.selectors';
 
 const AlternativesAndRisks = ({
+  activityIndex,
   alternativeAnalysis,
   costBenefitAnalysis,
   feasibilityStudy,
   requirementsAnalysis,
   forseeableRisks,
+  setAlternativeAnalysis,
+  setCostBenefitAnalysis,
+  setFeasibilityStudy,
+  setRequirementsAnalysis,
+  setForseeableRisks,
   adminCheck
 }) => {
   const {
@@ -34,8 +40,25 @@ const AlternativesAndRisks = ({
     trigger,
     clearErrors
   } = useForm({
-    defaultValues: {}
+    defaultValues: {
+      alternativeAnalysis,
+      costBenefitAnalysis,
+      feasibilityStudy,
+      requirementsAnalysis,
+      forseeableRisks
+    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(schema)
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Subsection
@@ -57,6 +80,7 @@ const AlternativesAndRisks = ({
               iframe_aria_text="Alternative Analysis Text Area"
               content={alternativeAnalysis}
               onSync={html => {
+                setAlternativeAnalysis(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -80,6 +104,7 @@ const AlternativesAndRisks = ({
               iframe_aria_text="Alternative Analysis Text Area"
               content={costBenefitAnalysis}
               onSync={html => {
+                setCostBenefitAnalysis(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -103,6 +128,7 @@ const AlternativesAndRisks = ({
               iframe_aria_text="Alternative Analysis Text Area"
               content={feasibilityStudy}
               onSync={html => {
+                setFeasibilityStudy(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -126,6 +152,7 @@ const AlternativesAndRisks = ({
               iframe_aria_text="Alternative Analysis Text Area"
               content={requirementsAnalysis}
               onSync={html => {
+                setRequirementsAnalysis(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -149,6 +176,7 @@ const AlternativesAndRisks = ({
               iframe_aria_text="Alternative Analysis Text Area"
               content={forseeableRisks}
               onSync={html => {
+                setForseeableRisks(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -162,7 +190,6 @@ const AlternativesAndRisks = ({
 };
 
 AlternativesAndRisks.propTypes = {
-  activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   alternativeAnalysis: PropTypes.string.isRequired,
   costBenefitAnalysis: PropTypes.string.isRequired,

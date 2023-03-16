@@ -24,7 +24,7 @@ const MedicaidBusinessAreas = ({
     } else {
       clearErrors();
     }
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const otherMedicaidBusinessAreaComponent = (
     <div className="ds-c-choice__checkedChild">

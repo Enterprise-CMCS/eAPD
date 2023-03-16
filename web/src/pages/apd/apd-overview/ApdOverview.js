@@ -262,11 +262,7 @@ ApdOverview.propTypes = {
   setName: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
   yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  adminCheck: PropTypes.bool
-};
-
-ApdOverview.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
