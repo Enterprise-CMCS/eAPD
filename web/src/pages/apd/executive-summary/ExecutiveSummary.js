@@ -54,7 +54,7 @@ const ExecutiveSummary = ({
     if (updateStatus.isUpdateAPD) {
       return <h3>MMIS Implementation APD Update (MMIS IAPD-U)</h3>;
     }
-    return <h3>MMIS Implementation APD New Project (MMIS IAPD)</h3>;
+    return <h3>MMIS Implementation APD (MMIS IAPD)</h3>;
   }
 
   function otherDetails() {
