@@ -1671,6 +1671,10 @@ export const calculateBudget = apd => {
           break;
 
         default:
+          // Create a default quarterly FFP per activity object,
+          // so that all of the properties and stuff will exist
+          newBudget.activities[activity.activityId] =
+            defaultQuarterlyFFPObject(years);
           break;
       }
 
