@@ -5,8 +5,8 @@ import {
   defaultBudgetObject,
   defaultHITECHBudgetObject,
   defaultMMISBudgetObject,
-  defaultQuarterlyFFPObject,
-  defaultHITECHQuarterlyFFPObject,
+  defaultActivitiesFFPObject,
+  defaultHITECHActivitiesFFPObject,
   defaultActivityTotalsDataObject
 } from './budget.js';
 
@@ -580,14 +580,14 @@ describe('budget getDefault methods', () => {
     });
   });
 
-  describe('defaultQuarterlyFFPObject', () => {
+  describe('defaultActivitiesFFPObject', () => {
     test('with no years', () => {
       const expected = {
         costsByFFY: {
           total: { federal: 0, medicaid: 0, state: 0, total: 0 }
         }
       };
-      const actual = defaultQuarterlyFFPObject();
+      const actual = defaultActivitiesFFPObject();
       expect(actual).toEqual(expected);
     });
 
@@ -599,12 +599,12 @@ describe('budget getDefault methods', () => {
           total: { federal: 0, medicaid: 0, state: 0, total: 0 }
         }
       };
-      const actual = defaultQuarterlyFFPObject([2017, 2018]);
+      const actual = defaultActivitiesFFPObject([2017, 2018]);
       expect(actual).toEqual(expected);
     });
   });
 
-  describe('defaultHITECHQuarterlyFFPObject', () => {
+  describe('defaultHITECHActivitiesFFPObject', () => {
     test('with no years', () => {
       const expected = {
         costsByFFY: {
@@ -615,7 +615,7 @@ describe('budget getDefault methods', () => {
           total: { combined: 0, contractors: 0, inHouse: 0 }
         }
       };
-      const actual = defaultHITECHQuarterlyFFPObject();
+      const actual = defaultHITECHActivitiesFFPObject();
       expect(actual).toEqual(expected);
     });
 
@@ -686,7 +686,7 @@ describe('budget getDefault methods', () => {
           total: { combined: 0, contractors: 0, inHouse: 0 }
         }
       };
-      const actual = defaultHITECHQuarterlyFFPObject([2017, 2018]);
+      const actual = defaultHITECHActivitiesFFPObject([2017, 2018]);
       expect(actual).toEqual(expected);
     });
   });

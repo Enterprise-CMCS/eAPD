@@ -303,7 +303,7 @@ export const defaultBudgetObject = (years = []) => ({
  *   }
  * }
  */
-export const defaultQuarterlyFFPObject = (years = []) => ({
+export const defaultActivitiesFFPObject = (years = []) => ({
   costsByFFY: {
     ...arrToObj(years, () => ({
       federal: 0,
@@ -349,11 +349,11 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
  *     2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *     2024: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *     total: { federal: 0, medicaid: 0, state: 0, total: 0 }
- *     // see defaultQuarterlyFFPObject for details
+ *     // see defaultActivitiesFFPObject for details
  *   }
  * }
  */
-export const defaultHITECHQuarterlyFFPObject = (years = []) => ({
+export const defaultHITECHActivitiesFFPObject = (years = []) => ({
   quarterlyFFP: {
     years: {
       ...arrToObj(years, () => ({
@@ -375,7 +375,7 @@ export const defaultHITECHQuarterlyFFPObject = (years = []) => ({
       inHouse: 0
     }
   },
-  ...defaultQuarterlyFFPObject(years)
+  ...defaultActivitiesFFPObject(years)
 });
 
 /**
@@ -1652,7 +1652,7 @@ export const calculateBudget = apd => {
           // Create a default quarterly FFP per activity object,
           // so that all of the properties and stuff will exist
           newBudget.activities[activity.activityId] =
-            defaultHITECHQuarterlyFFPObject(years);
+            defaultHITECHActivitiesFFPObject(years);
 
           // We need to know the funding source so we know where to apply
           // this data in the big rollup budget.
@@ -1663,7 +1663,7 @@ export const calculateBudget = apd => {
           // Create a default quarterly FFP per activity object,
           // so that all of the properties and stuff will exist
           newBudget.activities[activity.activityId] =
-            defaultQuarterlyFFPObject(years);
+            defaultActivitiesFFPObject(years);
 
           // We need to know the funding source so we know where to apply
           // this data in the big rollup budget.
@@ -1674,7 +1674,7 @@ export const calculateBudget = apd => {
           // Create a default quarterly FFP per activity object,
           // so that all of the properties and stuff will exist
           newBudget.activities[activity.activityId] =
-            defaultQuarterlyFFPObject(years);
+            defaultActivitiesFFPObject(years);
           break;
       }
 
