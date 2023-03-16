@@ -1,28 +1,13 @@
 import loggerFactory from '../../../logger/index.js';
-import { getLaunchDarklyFlag as flag } from '../../../middleware/launchDarkly.js';
 import { getAllSubmittedAPDs as sub } from '../../../db/apds.js';
 
 const logger = loggerFactory('apds/submissions get');
 
-export default (
-  app,
-  { getAllSubmittedAPDs = sub, getLaunchDarklyFlag = flag } = {}
-) => {
+export default (app, { getAllSubmittedAPDs = sub } = {}) => {
   logger.silly('setting up GET /apds/submissions route');
 
   app.get('/apds/submissions', async (req, res, next) => {
-    let ip = req?.headers?.['x-forwarded-for'] || req?.ip || '';
-    ip = ip.toString().replace('::ffff:', '');
-    const sharepoint = await getLaunchDarklyFlag(
-      'sharepoint-endpoints-4196',
-      {
-        key: 'anonymous',
-        anonymous: true,
-        ip
-      },
-      false
-    );
-    if (sharepoint !== true) {
+    if (!req?.headers?.apikey) {
       return res.status(403).end();
     }
 
