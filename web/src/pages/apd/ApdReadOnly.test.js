@@ -43,10 +43,10 @@ describe('<ApdViewOnly/>', () => {
       },
       initialHistory: ['/apd/1']
     });
-    expect(await screen.getByText('HITECH IAPD')).toBeTruthy();
-    expect(await screen.getByText('2020-2021 APD')).toBeTruthy();
+    expect(screen.getByText('HITECH IAPD')).toBeTruthy();
+    expect(screen.getByText('2020-2021 APD')).toBeTruthy();
     // Overview Summary
-    expect(await screen.getByText(/Program introduction/)).toBeTruthy();
+    expect(screen.getByText(/Program introduction/)).toBeTruthy();
     expect(screen.queryByText(/Medicaid Business Areas/)).toBeFalsy();
     // Security Planning should not be present
     expect(screen.queryByText(/Security Planning/)).toBeFalsy();
@@ -64,12 +64,12 @@ describe('<ApdViewOnly/>', () => {
     expect(screen.getByTestId('apdName')).toHaveTextContent(
       'MMIS IAPD for Alaska'
     );
-    expect(await screen.getByText('2023-2024 APD')).toBeTruthy();
+    expect(screen.getByText('2023-2024 APD')).toBeTruthy();
     // Overview Summary
     expect(screen.queryByText(/Program introduction/)).toBeFalsy();
-    expect(await screen.getByText(/Medicaid Business Areas/)).toBeTruthy();
+    expect(screen.getByText(/Medicaid Business Areas/)).toBeTruthy();
     // Security Planning should not be present
-    expect(await screen.getByText(/Security Planning/)).toBeTruthy();
+    expect(screen.getByText(/Security Planning/)).toBeTruthy();
   });
 
   test('Back to APD button', async () => {
