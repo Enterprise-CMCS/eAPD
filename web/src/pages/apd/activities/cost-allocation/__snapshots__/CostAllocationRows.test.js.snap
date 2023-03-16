@@ -7,6 +7,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
       activityIndex={-1}
       ffy="1990"
       highlightSubtotals={false}
+      highlightTotal={false}
       otherFunding={
         Object {
           "1990": Object {
@@ -23,6 +24,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
           },
         }
       }
+      showUnitCostHeader={false}
       years={
         Object {
           "1990": Object {
@@ -517,7 +519,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__header budget-table--row__highlight"
+        className="budget-table--total budget-table--row__header "
       >
         <td
           colSpan="5"
@@ -548,7 +550,9 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
       activityIndex={-1}
       ffy="1990"
       highlightSubtotals={false}
+      highlightTotal={false}
       otherFunding={null}
+      showUnitCostHeader={false}
       years={
         Object {
           "1990": Object {
@@ -1007,7 +1011,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--total budget-table--row__header budget-table--row__highlight"
+        className="budget-table--total budget-table--row__header "
       >
         <td
           colSpan="5"

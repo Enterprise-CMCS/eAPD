@@ -47,7 +47,9 @@ const CostAllocationRows = ({
   ffy,
   otherFunding,
   activityIndex,
-  highlightSubtotals
+  highlightSubtotals,
+  showUnitCostHeader,
+  highlightTotal
 }) => {
   const budgetTableClassName = classNames({
     'budget-table--number': true,
@@ -58,9 +60,24 @@ const CostAllocationRows = ({
     <Fragment>
       {otherFunding && (
         <tr className="budget-table--row__header">
-          <th scope="row" colSpan="6">
-            State Staff
-          </th>
+          {!showUnitCostHeader && (
+            <th scope="row" colSpan="6">
+              State Staff
+            </th>
+          )}
+          {showUnitCostHeader && (
+            <Fragment>
+              <th scope="row" colSpan="1">
+                State Staff
+              </th>
+              <th scope="col" colSpan="4">
+                Personnel Cost × FTE
+              </th>
+              <th scope="col" className="ds-u-text-align--right">
+                Total cost
+              </th>
+            </Fragment>
+          )}
         </tr>
       )}
       {!otherFunding && (
@@ -195,7 +212,11 @@ const CostAllocationRows = ({
           </Dollars>
         </td>
       </tr>
-      <tr className="budget-table--total budget-table--row__header budget-table--row__highlight">
+      <tr
+        className={`budget-table--total budget-table--row__header ${
+          highlightTotal ? 'budget-table--row__highlight' : ''
+        }`}
+      >
         <td colSpan="5">
           Activity {activityIndex >= 0 && activityIndex + 1} Total Computable
           Medicaid Cost
@@ -222,13 +243,17 @@ CostAllocationRows.propTypes = {
     total: PropTypes.number
   }),
   activityIndex: PropTypes.number,
-  highlightSubtotals: PropTypes.bool
+  highlightSubtotals: PropTypes.bool,
+  showUnitCostHeader: PropTypes.bool,
+  highlightTotal: PropTypes.bool
 };
 
 CostAllocationRows.defaultProps = {
   otherFunding: null,
   activityIndex: -1,
-  highlightSubtotals: false
+  highlightSubtotals: false,
+  showUnitCostHeader: false,
+  highlightTotal: false
 };
 
 export default CostAllocationRows;

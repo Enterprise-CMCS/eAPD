@@ -10,6 +10,7 @@ exports[`State and Contractor Cost Breakdown Table renders correctly renders cor
       className="budget-table--row__primary-header"
     >
       <th
+        colSpan={6}
         scope="col"
       >
         Activity 
@@ -26,18 +27,6 @@ exports[`State and Contractor Cost Breakdown Table renders correctly renders cor
            (HIE)
         </span>
       </th>
-      <th
-        colSpan="4"
-        scope="col"
-      >
-        Personnel Cost × FTE
-      </th>
-      <th
-        className="ds-u-text-align--right"
-        scope="col"
-      >
-        Total cost
-      </th>
     </tr>
   </thead>
   <tbody>
@@ -45,6 +34,7 @@ exports[`State and Contractor Cost Breakdown Table renders correctly renders cor
       activityIndex={2}
       ffy="2016"
       highlightSubtotals={true}
+      highlightTotal={true}
       otherFunding={
         Object {
           "2016": Object {
@@ -61,6 +51,7 @@ exports[`State and Contractor Cost Breakdown Table renders correctly renders cor
           },
         }
       }
+      showUnitCostHeader={true}
       years={
         Object {
           "2016": Object {

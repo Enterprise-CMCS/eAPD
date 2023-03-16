@@ -124,7 +124,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       </td>
     </tr>
     <tr
-      class="budget-table--total budget-table--row__header budget-table--row__highlight"
+      class="budget-table--total budget-table--row__header "
     >
       <td
         colspan="5"

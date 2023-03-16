@@ -12,7 +12,6 @@ import { t } from '../../../i18n';
 import { LinkOrText } from './AssurancesAndCompliance';
 
 const AssurancesAndCompliance = ({ citations, apdType }) => {
-  console.log({ regLinks, apdType });
   return (
     <div>
       <h2>Assurances and Compliance</h2>
