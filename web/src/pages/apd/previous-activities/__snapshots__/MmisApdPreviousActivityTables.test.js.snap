@@ -77,7 +77,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/10 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi90-1"
             onChange={[Function]}
@@ -127,7 +127,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/10 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi90-2"
             onChange={[Function]}
@@ -236,7 +236,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/25 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi75-1"
             onChange={[Function]}
@@ -286,7 +286,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/25 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi75-2"
             onChange={[Function]}
@@ -382,7 +382,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/25 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mando75-1"
             onChange={[Function]}
@@ -432,7 +432,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/25 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mando75-2"
             onChange={[Function]}
@@ -541,7 +541,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/50 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi50-1"
             onChange={[Function]}
@@ -591,7 +591,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/50 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-ddi50-2"
             onChange={[Function]}
@@ -687,7 +687,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/50 level for FFY 1, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 1, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mando50-1"
             onChange={[Function]}
@@ -737,7 +737,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           <DollarField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the [object Object]/50 level for FFY 2, state plus federal"
+            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 2, state plus federal"
             labelClassName="ds-u-visibility--screen-reader"
             name="approved-total-mando50-2"
             onChange={[Function]}
