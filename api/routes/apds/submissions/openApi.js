@@ -24,7 +24,7 @@ export default {
         }
       }
     },
-    patch: {
+    post: {
       tags: ['APDs'],
       summary: 'Update the APD status',
       description: 'Update the APD status',
