@@ -197,15 +197,6 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
-    expect(
-      screen.getByRole('heading', { name: 'Program Budget Tables' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('table', { name: 'HIT + HIE executive summary' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('table', { name: 'MMIS executive summary' })
-    ).toBeTruthy();
   });
 
   test('renders MMIS correctly', async () => {
@@ -220,12 +211,6 @@ describe('<ExecutiveSummary />', () => {
           apd: {
             data: {
               activities: [],
-              statePrioritiesAndScope: {
-                medicaidProgramAndPriorities:
-                  '<p>Medicaid program and priorities</p>',
-                mesIntroduction: '<p>Introduction</p>',
-                scopeOfAPD: '<p>scope</p>'
-              },
               years: ['3000', '3001']
             }
           }
@@ -240,21 +225,7 @@ describe('<ExecutiveSummary />', () => {
     ).toBeTruthy();
     expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
     expect(
-      screen.getByRole('heading', {
-        name: 'State Priorities and Scope of APD'
-      })
-    ).toBeTruthy();
-    expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole('heading', { name: 'Program Budget Tables' })
-    ).toBeTruthy();
-    expect(
-      screen.queryByRole('table', { name: 'HIT + HIE executive summary' })
-    ).toBeFalsy();
-    expect(
-      screen.getByRole('table', { name: 'MMIS executive summary' })
     ).toBeTruthy();
   });
 });

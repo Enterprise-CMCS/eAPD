@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 import { useParams } from 'react-router-dom';
 
@@ -10,10 +9,8 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';
 
-import HitechBudgetSummary from './HitechBudgetSummary';
 import ActivityExecutiveSummary from './ActivityExecutiveSummary';
-import MmisSpecificFields from './MmisSpecificFields';
-import MmisBudgetSummary from './MmisBudgetSummary';
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import { APD_TYPE } from '@cms-eapd/common';
 
 import {
@@ -38,7 +35,6 @@ import {
 const ExecutiveSummary = ({
   apdName,
   apdType,
-  budget,
   data,
   medicaidBusinessAreas,
   total,
@@ -51,6 +47,16 @@ const ExecutiveSummary = ({
   const noYears = !years.length;
   const statusList = updateStatusChoices(updateStatus);
 
+  function renderSubtitle(apdType, updateStatus) {
+    if (apdType === APD_TYPE.HITECH) {
+      return <h3>HITECH Implementation APD Update (HITECH IAPD-U)</h3>;
+    }
+    if (updateStatus.isUpdateAPD) {
+      return <h3>MMIS Implementation APD Update (MMIS IAPD-U)</h3>;
+    }
+    return <h3>MMIS Implementation APD (MMIS IAPD)</h3>;
+  }
+
   function otherDetails() {
     if (medicaidBusinessAreas.other) {
       return (
@@ -60,11 +66,6 @@ const ExecutiveSummary = ({
       );
     }
   }
-
-  const rowKeys = [
-    ...years.map(year => ({ year, display: t('ffy', { year }) })),
-    { year: 'total', display: 'Total' }
-  ];
 
   function renderMedicaidBusinessAreas() {
     if (isApdMmis) {
@@ -84,31 +85,6 @@ const ExecutiveSummary = ({
     return null;
   }
 
-  function renderApdTypeSpecificBudgets(apdType) {
-    switch (apdType) {
-      case APD_TYPE.HITECH:
-        return (
-          <Subsection
-            id="executive-summary-budget-table"
-            resource="executiveSummary.budgetTable"
-          >
-            <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />
-          </Subsection>
-        );
-      case APD_TYPE.MMIS:
-        return (
-          <Subsection
-            id="executive-summary-budget-table"
-            resource="executiveSummary.budgetTable"
-          >
-            <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />
-          </Subsection>
-        );
-      default:
-        null;
-    }
-  }
-
   return (
     <React.Fragment>
       <Waypoint />
@@ -119,6 +95,7 @@ const ExecutiveSummary = ({
           id="executive-overview-summary"
           resource="executiveSummary.overviewSummary"
         >
+          {renderSubtitle(apdType, updateStatus)}
           <ul className="ds-c-list--bare">
             <li className="ds-u-margin-top--1">
               <strong>APD Name :</strong> {apdName}
@@ -127,7 +104,7 @@ const ExecutiveSummary = ({
               <strong>Update Type :</strong>{' '}
               {updateStatus.isUpdateAPD
                 ? arrayOfObjectsToStringList(statusList)
-                : 'No update type was specified.'}
+                : 'New Project'}
             </li>
             {renderMedicaidBusinessAreas()}
           </ul>
@@ -180,7 +157,7 @@ const ExecutiveSummary = ({
 
         <Waypoint id="executive-summary-budget-table" />
         {/* Show relevant budgets based on APD type selected */}
-        {!noYears && renderApdTypeSpecificBudgets(apdType)}
+        {!noYears && <ExecutiveSummaryBudget />}
       </Section>
     </React.Fragment>
   );
@@ -189,7 +166,6 @@ const ExecutiveSummary = ({
 ExecutiveSummary.propTypes = {
   apdName: PropTypes.string,
   apdType: PropTypes.string,
-  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   medicaidBusinessAreas: PropTypes.object,
   total: PropTypes.object.isRequired,
@@ -200,7 +176,6 @@ ExecutiveSummary.propTypes = {
 const mapStateToProps = state => ({
   apdName: getAPDName(state),
   apdType: selectApdType(state),
-  budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
   medicaidBusinessAreas: getMedicaidBusinessAreas(state),
   total: selectBudgetGrandTotal(state),

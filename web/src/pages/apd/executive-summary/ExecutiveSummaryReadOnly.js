@@ -1,72 +1,47 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { titleCase } from 'title-case';
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Dollars from '../../../components/Dollars';
+import Review from '../../../components/Review';
 import { t } from '../../../i18n';
 
-import {
-  selectApdType,
-  selectApdYears
-} from '../../../redux/selectors/apd.selectors';
+import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../../../redux/selectors/budget.selectors';
-import { ffyList } from '../../../util/apd';
-import { APD_TYPE } from '@cms-eapd/common';
-
-import HitechBudgetSummary from './HitechBudgetSummary';
-import MmisBudgetSummary from './MmisBudgetSummary';
 
 class ExecutiveSummary extends PureComponent {
   render() {
-    const { apdType, budget, data, total, years } = this.props;
-    const noYears = !years;
-
-    const rowKeys = [
-      ...years.map(year => ({ year, display: t('ffy', { year }) })),
-      { year: 'total', display: 'Total' }
-    ];
-
-    function renderApdTypeSpecificFields() {
-      switch (apdType) {
-        case APD_TYPE.HITECH:
-          return <HitechBudgetSummary budget={budget} rowKeys={rowKeys} />;
-        case APD_TYPE.MMIS:
-          return <MmisBudgetSummary budget={budget} rowKeys={rowKeys} />;
-        default:
-          null;
-      }
-    }
-
+    const { data, total, years } = this.props;
     return (
       <div>
         <h2>Executive Summary</h2>
-        <Fragment>
-          <h3 className="ds-u-border--0">Total cost of all activities</h3>
+        <Review
+          heading="Total Cost of All Activities"
+          headingLevel="3"
+          className="ds-u-border--0"
+        >
           <ul className="ds-c-list--bare">
-            <li className="ds-u-margin-top--1">
+            <li>
               <strong>Federal Fiscal Years requested:</strong> FFY{' '}
               {years.join(', ')}
             </li>
-            <li className="ds-u-margin-top--1">
+            <li>
               <strong>Total Computable Medicaid Cost:</strong>{' '}
               <Dollars>{total.medicaid}</Dollars> (
               <Dollars>{total.federal}</Dollars> Federal share)
             </li>
-            <li className="ds-u-margin-top--1">
+            <li>
               <strong>Total funding request:</strong>{' '}
               <Dollars>{total.combined}</Dollars>
             </li>
             {Object.entries(total.ffys).map(
               ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
-                <li
-                  key={ffy}
-                  className={
-                    i === 0 ? 'ds-u-margin-top--4' : 'ds-u-margin-top--1'
-                  }
-                >
+                <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
                   <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
                   <strong>Total Computable Medicaid Cost:</strong>{' '}
                   <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
@@ -75,57 +50,63 @@ class ExecutiveSummary extends PureComponent {
               )
             )}
           </ul>
-        </Fragment>
-        <hr className="section-rule ds-u-margin-top--5 ds-u-margin-bottom--3" />
+        </Review>
         {data.map((activity, i) => (
-          <Fragment key={activity.activityId}>
-            <h2>{`Activity ${i + 1}: ${
-              activity.name || t('activities.noNameYet')
-            }`}</h2>
+          <Review
+            key={activity.activityId}
+            heading={titleCase(
+              `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
+            )}
+            headingLevel="3"
+            className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
+          >
             {activity.summary && (
               /* eslint-disable react/no-danger */
               <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
             )}
 
             <ul className="ds-c-list--bare">
-              <li className="ds-u-margin-top--3 ds-u-margin-bottom--1">
+              <li>
                 <strong>Start date - End date:</strong> {activity.dateRange}
               </li>
-              <li className="ds-u-margin-y--1">
+              <li>
                 <strong>Total cost of activity:</strong>{' '}
                 <Dollars>{activity.combined}</Dollars>
               </li>
-              <li className="ds-u-margin-top--1 ds-u-margin-bottom--3">
+              <li>
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
                 <Dollars>{activity.medicaid}</Dollars> (
                 <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
-              {!noYears && ffyList(activity.ffys)}
+              {Object.entries(activity.ffys).map(
+                ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
+                  <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
+                    <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
+                    <strong>Total Computable Medicaid Cost:</strong>{' '}
+                    <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
+                    Federal share)
+                  </li>
+                )
+              )}
             </ul>
-            {i + 1 != data.length && (
-              <hr className="subsection-rule ds-u-margin-y--4" />
-            )}
-          </Fragment>
+          </Review>
         ))}
-        <hr className="section-rule ds-u-margin-y--5" />
-        <h2>Program Budget Tables</h2>
-        {renderApdTypeSpecificFields()}
+
+        <hr className="subsection-rule" />
+        <h3>Program Budget Tables</h3>
+        <ExecutiveSummaryBudget />
       </div>
     );
   }
 }
 
 ExecutiveSummary.propTypes = {
-  apdType: PropTypes.string,
-  budget: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  apdType: selectApdType(state),
-  budget: state.budget,
   data: selectBudgetExecutiveSummary(state),
   total: selectBudgetGrandTotal(state),
   years: selectApdYears(state)
