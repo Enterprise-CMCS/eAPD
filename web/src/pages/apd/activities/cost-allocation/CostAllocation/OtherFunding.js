@@ -19,7 +19,10 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../../../redux/selectors/activities.selectors';
-import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectApdType
+} from '../../../../../redux/selectors/apd.selectors';
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
@@ -32,7 +35,8 @@ const OtherFunding = ({
   costSummary,
   setOtherFunding,
   syncOtherFunding,
-  adminCheck
+  adminCheck,
+  apdType
 }) => {
   const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
     activity;
@@ -87,7 +91,7 @@ const OtherFunding = ({
           <div className="data-entry-box">
             <Instruction
               labelFor={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              source="activities.otherFunding.description.instruction"
+              source={`activities.otherFunding.${apdType}.description.instruction`}
               headingDisplay={{
                 level: 'h4',
                 className: 'ds-h5'
@@ -130,7 +134,7 @@ const OtherFunding = ({
 
           <div className="data-entry-box ds-u-margin-bottom--5">
             <Instruction
-              source="activities.otherFunding.amount.instruction"
+              source={`activities.otherFunding.${apdType}.amount.instruction`}
               headingDisplay={{
                 level: 'h4',
                 className: 'ds-h5'
@@ -190,7 +194,8 @@ OtherFunding.propTypes = {
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
   syncOtherFunding: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  adminCheck: PropTypes.bool.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (
@@ -207,7 +212,8 @@ const mapStateToProps = (
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    adminCheck: selectAdminCheckEnabled(state)
+    adminCheck: selectAdminCheckEnabled(state),
+    apdType: selectApdType(state)
   };
 };
 
