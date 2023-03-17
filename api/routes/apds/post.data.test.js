@@ -429,22 +429,34 @@ tap.test('APD data initializer', async apdTests => {
         previousActivitySummary: '',
         actualExpenditures: {
           1997: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
           1996: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
           1995: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
@@ -520,22 +532,34 @@ tap.test('APD data initializer', async apdTests => {
         previousActivitySummary: '',
         actualExpenditures: {
           1997: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
           1996: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
           },
           1995: {
-            mmis: {
+            ddi: {
               90: { federalActual: 0, totalApproved: 0 },
+              75: { federalActual: 0, totalApproved: 0 },
+              50: { federalActual: 0, totalApproved: 0 }
+            },
+            mando: {
               75: { federalActual: 0, totalApproved: 0 },
               50: { federalActual: 0, totalApproved: 0 }
             }
