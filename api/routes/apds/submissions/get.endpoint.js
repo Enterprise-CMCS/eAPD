@@ -1,5 +1,6 @@
 import { jest } from '@jest/globals';
 import {
+  apiNoKey,
   apiKeyAuth,
   getDB,
   setupDB,
@@ -16,15 +17,13 @@ describe('Submissions endpoint | GET', () => {
     await teardownDB(db);
   });
 
-  it('it returns 403 when the IP is not allowed', async () => {
-    const api = apiKeyAuth('bad ip');
-    const response = await api.get('/apds/submissions');
+  it('it returns 403 when there is no api key', async () => {
+    const response = await apiNoKey.get('/apds/submissions');
     expect(response.status).toBe(403);
   });
 
-  it('returns 200 when the IP is allowed', async () => {
-    const api = apiKeyAuth();
-    const response = await api.get('/apds/submissions');
+  it('returns 200 when there is an api key', async () => {
+    const response = await apiKeyAuth.get('/apds/submissions');
     expect(response.status).toEqual(200);
   });
 });

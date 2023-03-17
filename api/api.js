@@ -25,7 +25,10 @@ const logger = loggerFactory('main');
 
 (async () => {
   try {
-    await mongoSetup();
+    await mongoSetup({
+      keepAlive: true,
+      keepAliveInitialDelay: 300000
+    });
     logger.info('Mongo connected');
   } catch (err) {
     logger.error(`Error setting up MongoDB: ${err}`);

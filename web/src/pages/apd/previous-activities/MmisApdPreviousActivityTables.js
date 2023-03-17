@@ -130,7 +130,9 @@ const MmisApdPreviousActivityTables = ({
                       <DollarField
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
-                        label={`approved total computable Medicaid funding for MMIS at the ${level}/${
+                        label={`approved total computable Medicaid funding for MMIS at the ${
+                          level.ffp
+                        }/${
                           100 - level.ffp
                         } level for FFY ${year}, state plus federal`}
                         labelClassName="ds-u-visibility--screen-reader"
