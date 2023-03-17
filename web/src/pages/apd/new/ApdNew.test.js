@@ -96,10 +96,16 @@ describe('<ApdNew />', () => {
         ).not.toBeChecked();
       });
 
-      user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+      user.click(
+        screen.getByRole('checkbox', {
+          name: /Annual Update/i
+        })
+      );
       await waitFor(() => {
         expect(
-          screen.getByRole('checkbox', { name: /Annual update/i })
+          screen.getByRole('checkbox', {
+            name: /Annual Update/i
+          })
         ).toBeChecked();
       });
       await waitFor(() => {
@@ -200,10 +206,16 @@ describe('<ApdNew />', () => {
           ).not.toBeChecked();
         });
 
-        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        user.click(
+          screen.getByRole('checkbox', {
+            name: /Annual Update/i
+          })
+        );
         await waitFor(() => {
           expect(
-            screen.getByRole('checkbox', { name: /Annual update/i })
+            screen.getByRole('checkbox', {
+              name: /Annual Update/i
+            })
           ).toBeChecked();
         });
         await waitFor(() => {
@@ -334,10 +346,16 @@ describe('<ApdNew />', () => {
           expect(disabledBtn).toBeDisabled();
         });
 
-        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        user.click(
+          screen.getByRole('checkbox', {
+            name: /Annual Update/i
+          })
+        );
         await waitFor(() => {
           expect(
-            screen.getByRole('checkbox', { name: /Annual update/i })
+            screen.getByRole('checkbox', {
+              name: /Annual Update/i
+            })
           ).toBeChecked();
         });
         await waitFor(() => {
