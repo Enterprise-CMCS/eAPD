@@ -309,6 +309,17 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
     });
 
+    it('tests Results of Previous Activities page', () => {
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('MMIS DDI at 90% FFP');
+      cy.findAllByText('MMIS DDI at 75% FFP');
+      cy.findAllByText('MMIS M&O at 75% FFP');
+      cy.findAllByText('MMIS DDI at 50% FFP');
+      cy.findAllByText('MMIS M&O at 50% FFP');
+      cy.findAllByText('MMIS Grand Totals');
+    });
+
     it('test MMIS APD Basics', function () {
       const mmisBasics = this.mmisBasics;
       // Key State Personnel
