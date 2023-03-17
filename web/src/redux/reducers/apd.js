@@ -352,6 +352,28 @@ export const getAPDName = ({
   }
 }) => name;
 
+export const getUpdateStatus = ({
+  apd: {
+    data: {
+      apdOverview: { updateStatus }
+    }
+  }
+}) => updateStatus;
+
+export const getMedicaidBusinessAreas = ({
+  apd: {
+    data: {
+      apdOverview: { medicaidBusinessAreas }
+    }
+  }
+}) => medicaidBusinessAreas;
+
+export const getPrioritiesAndScope = ({
+  apd: {
+    data: { statePrioritiesAndScope }
+  }
+}) => statePrioritiesAndScope;
+
 export const getAPDYearRange = ({
   apd: {
     data: { years }
