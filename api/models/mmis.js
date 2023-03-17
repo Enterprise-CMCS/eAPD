@@ -45,7 +45,7 @@ const mmisSchema = new mongoose.Schema(
         type: Map,
         of: new mongoose.Schema(
           {
-            mmis: {
+            ddi: {
               50: {
                 federalActual: {
                   type: Number,
@@ -67,6 +67,28 @@ const mmisSchema = new mongoose.Schema(
                 }
               },
               90: {
+                federalActual: {
+                  type: Number,
+                  default: 0
+                },
+                totalApproved: {
+                  type: Number,
+                  default: 0
+                }
+              }
+            },
+            mando: {
+              50: {
+                federalActual: {
+                  type: Number,
+                  default: 0
+                },
+                totalApproved: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              75: {
                 federalActual: {
                   type: Number,
                   default: 0
