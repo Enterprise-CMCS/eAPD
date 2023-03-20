@@ -395,22 +395,34 @@ tap.test('apds POST endpoint', async endpointTest => {
             previousActivitySummary: '',
             actualExpenditures: {
               2004: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }
               },
               2003: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }
               },
               2002: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }

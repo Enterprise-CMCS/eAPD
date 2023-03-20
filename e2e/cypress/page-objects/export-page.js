@@ -46,24 +46,24 @@ class ExportPage {
   getPrevActExpenditureVals() {
     this.prevActYears.forEach(prevActYear => {
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_total prev_act_hithie_total_approved"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_total prev_act_hithie90_total_approved"]`
       )
         .invoke('text')
         .then(text => {
           this.expenditures.hithie.approved.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_federal prev_act_hithie_federal_approved"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_federal prev_act_hithie90_federal_approved"]`
       )
         .invoke('text')
         .then(text => {
           this.expenditures.hithie.FFP.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_federal prev_act_hithie_federal_actual"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_federal prev_act_hithie90_federal_actual"]`
       )
         .invoke('text')
         .then(text => {
