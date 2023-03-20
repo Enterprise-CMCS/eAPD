@@ -617,9 +617,8 @@ class ExportPage {
         if (shortOverview) {
           cy.contains(shortOverview);
         }
-        cy.contains('Start date - End date:')
-          .parent()
-          .should('contain', getDateRange(startDate, endDate));
+        cy.contains(`Start date: ${startDate}`);
+        cy.contains(`End date: ${endDate}`);
         cy.contains('Total cost of activity:')
           .next()
           .shouldBeCloseTo(activityTotalCosts);
