@@ -91,7 +91,6 @@ const NonPersonnelCostForm = forwardRef(
           render={({ field: { value, ...props } }) => (
             <Dropdown
               {...props}
-              autoFocus
               label="Category"
               name="category"
               options={categories}
