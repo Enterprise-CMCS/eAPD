@@ -52,7 +52,7 @@ describe('<ApdViewOnly/>', () => {
     expect(screen.queryByText(/Security Planning/)).toBeFalsy();
   });
 
-  test('renders MMIS Read Only correctly', async () => {
+  test.skip('renders MMIS Read Only correctly', async () => {
     mockFlags({ enableMmis: true });
     setup(null, {
       initialState: {

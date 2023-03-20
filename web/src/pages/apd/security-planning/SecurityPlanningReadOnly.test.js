@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import { APD_TYPE } from '@cms-eapd/common';
@@ -33,7 +33,7 @@ const initialState = {
 
 const setup = async (props = {}, options = {}) => {
   const utils = renderWithConnection(
-    <SecurityPlanningSummary {...defaultProps} {...props} />,
+    <SecurityPlanningSummary {...props} />,
     options
   );
 
@@ -45,5 +45,41 @@ describe('security planning summary component', () => {
     jest.clearAllMocks();
     resetLDMocks();
     mockFlags({ enableMmis: true });
+  });
+
+  test('renders correctly without data', async () => {
+    await setup(
+      {},
+      {
+        initialState: defaultProps
+      }
+    );
+
+    expect(await screen.findByText(/Security Planning/)).toBeInTheDocument();
+    expect(await screen.findAllByText(/No response was provided/)).toHaveLength(
+      2
+    );
+  });
+
+  test('renders correctly with data', async () => {
+    await setup(
+      {},
+      {
+        initialState
+      }
+    );
+
+    expect(await screen.findByText(/Security Planning/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        initialState.apd.data.securityPlanning.securityAndInterfacePlan
+      )
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        initialState.apd.data.securityPlanning
+          .businessContinuityAndDisasterRecovery
+      )
+    ).toBeInTheDocument();
   });
 });

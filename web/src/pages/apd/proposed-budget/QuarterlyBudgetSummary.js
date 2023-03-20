@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Dollars from '../../../components/Dollars';
 import { t } from '../../../i18n';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const FUNDING_SOURCES = [
   ['hitAndHie', 'HIT and HIE'],
@@ -16,9 +17,9 @@ const EXPENSE_NAME_DISPLAY = {
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
-const QuarterlyBudgetSummary = ({ budget, years }) => {
+const QuarterlyBudgetSummary = ({ apdType, budget, years }) => {
   // wait until budget is loaded
-  if (!years.length) return null;
+  if (!years.length || apdType === APD_TYPE.MMIS) return null;
 
   return (
     <div>
@@ -119,11 +120,13 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
 };
 
 QuarterlyBudgetSummary.propTypes = {
+  apdType: PropTypes.string,
   budget: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = ({ budget, apd }) => ({
+  apdType: apd.data.apdType,
   budget: budget.federalShareByFFYQuarter,
   years: apd.data.years
 });
