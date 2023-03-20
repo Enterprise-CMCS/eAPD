@@ -204,8 +204,7 @@ export const testExecutiveSummaryWithData = function () {
     });
   });
 
-  // To Do: Fix test
-  it.skip('should display the default values in the export view', function () {
+  it('should display the default values in the export view', function () {
     const years = this.years;
     const activityData = this.activityData;
     const executiveSummaryData = this.executiveSummaryData;
