@@ -22,7 +22,7 @@ costBenefitAnalysis:
   heading: Cost Benefit Analysis
   detail: >-
     Provide the results of the state's cost benefit analysis associated with
-    this activity. Explain how the results of this analysis information how the
+    this activity. Explain how the results of this analysis informed how the
     final solution was selected. If a cost benefit analysis was not conducted or
     needed, explain why it was not applicable to this activity.
 
@@ -31,7 +31,7 @@ feasibilityStudy:
   detail: >-
     Provide the results of the state's feasibility study. If no feasibility
     study was conducted, explain why not and whether or not the feasibility
-    study was waive by law or not required in regulation. Note: CMS regulations
+    study was waived by law or not required in regulation. Note: CMS regulations
     only allow 50 percent Federal Financial Participation (FFP) for feasibility
     studies.
 
