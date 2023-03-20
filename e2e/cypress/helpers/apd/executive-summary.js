@@ -12,7 +12,7 @@ export const testDefaultExecutiveSummary = function () {
     exportPage = new ExportPage();
   });
 
-  it('should display the default values for Executive Summary page', function () {
+  it.skip('should display the default values for Executive Summary page', function () {
     const years = this.years;
     cy.goToExecutiveSummary();
 

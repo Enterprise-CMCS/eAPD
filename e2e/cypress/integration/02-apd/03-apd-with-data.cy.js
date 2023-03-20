@@ -104,8 +104,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       testHitechAssurancesAndComplianceWithData();
     });
 
-    // To do: Fix tests
-    describe.skip('Executive Summary', function () {
+    describe('Executive Summary', function () {
       testExecutiveSummaryWithData();
     });
   });
