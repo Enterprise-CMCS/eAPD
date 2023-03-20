@@ -35,7 +35,7 @@ const PreviousActivities = ({ previousActivitySummary, apdType }) => {
       <h3>Actual Expenditures</h3>
 
       {activityTablesMapping[apdType]}
-      {activityTableTotalsMapping[apdType]}=
+      {activityTableTotalsMapping[apdType]}
     </div>
   );
 };
