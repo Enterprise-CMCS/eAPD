@@ -109,7 +109,6 @@ const ExecutiveSummary = ({
             {renderMedicaidBusinessAreas()}
           </ul>
         </Subsection>
-        {isApdMmis ? <MmisSpecificFields /> : null}
         <Waypoint id="executive-activities-summary" />
         <Subsection
           id="executive-activities-summary"
