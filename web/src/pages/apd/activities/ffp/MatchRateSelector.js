@@ -143,11 +143,7 @@ MatchRateSelector.propTypes = {
   ffp: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
   setMatchRate: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-MatchRateSelector.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export default MatchRateSelector;

@@ -131,11 +131,7 @@ SecurityPlanning.propTypes = {
   BCDRPlan: PropTypes.string,
   setPlanForSI: PropTypes.func.isRequired,
   setPlanforBCDR: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-SecurityPlanning.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

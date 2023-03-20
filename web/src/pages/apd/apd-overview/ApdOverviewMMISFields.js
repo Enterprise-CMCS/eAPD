@@ -156,11 +156,7 @@ const ApdOverviewMMISFields = ({
 ApdOverviewMMISFields.propTypes = {
   medicaidBusinessAreas: PropTypes.object.isRequired,
   setBusinessAreaField: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-ApdOverviewMMISFields.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

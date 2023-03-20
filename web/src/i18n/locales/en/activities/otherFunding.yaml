@@ -22,12 +22,12 @@ amount:
       the activity to calculate the total computable Medicaid cost for this
       activity.
     helpText: >-
-      Example: For a $1,000,000 project that is 80% cost allocated to Medicaid
-      (related to 80% Medicaid transaction volume, for example) and 20% for all
-      other stakeholders, enter $200,000 (20% of $1,000,000).
+      **Example:** For a $1,000,000 project that is 80% cost allocated to
+      Medicaid (related to 80% Medicaid transaction volume, for example) and 20%
+      for all other stakeholders, enter $200,000 (20% of $1,000,000).
 
 
-      Example: For a $1,000,000 project which receives a $100,000 grant (i.e.
-      other funding) prior to cost allocation and is cost allocated to Medicaid
-      at 80%, enter $280,000 ($100,000 [other funding] + $180,000 [20% of the
-      remaining $900,000]).
+      **Example:** For a $1,000,000 project which receives a $100,000 grant
+      (i.e. other funding) prior to cost allocation and is cost allocated to
+      Medicaid at 80%, enter $280,000 ($100,000 [other funding] + $180,000 [20%
+      of the remaining $900,000]).

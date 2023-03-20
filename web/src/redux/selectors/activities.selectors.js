@@ -341,3 +341,8 @@ export const getAllFundingSources = state => {
     return activity.fundingSource;
   });
 };
+
+export const selectAlternativesAndRisksByActivityIndex = createSelector(
+  [selectActivityByIndex],
+  ({ analysisOfAlternativesAndRisks }) => analysisOfAlternativesAndRisks
+);
