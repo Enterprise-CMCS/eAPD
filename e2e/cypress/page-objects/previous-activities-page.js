@@ -13,7 +13,7 @@ class PreviousActivitiesPage {
   getYears() {
     if (this.years.length > 0) return this;
     return cy
-      .contains('HIT + HIE Federal share 90% FFP')
+      .contains('HIT + HIE')
       .parent()
       .find('[data-cy="yearRow"]')
       .each($el => {
@@ -30,10 +30,10 @@ class PreviousActivitiesPage {
 
   setExpenditures(expenditures) {
     this.years.forEach((year, i) => {
-      cy.get(`[name='hithie-approved-total-${year}']`)
+      cy.get(`[name='approved-total-hithie90-${year}']`)
         .clear()
         .type(expenditures.hithie.approved[i]);
-      cy.get(`[name='hithie-actual-federal-${year}']`)
+      cy.get(`[name='actual-federal-hithie90-${year}']`)
         .clear()
         .type(expenditures.hithie.actual[i]);
 
@@ -68,14 +68,14 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       // HIT + HIE
       // Get input value for approved medicaid funding
-      cy.get(`[name='hithie-approved-total-${year}']`)
+      cy.get(`[name='approved-total-hithie90-${year}']`)
         .invoke('val')
         .then(val => {
           const share = 0.9;
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.get(`[data-cy="prev_act_hithie_federal_approved_${year}"]`)
+          cy.get(`[data-cy="prev_act_hithie90_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
@@ -143,7 +143,7 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      cy.get(`[data-cy="prev_act_hithie_federal_approved_${year}"]`)
+      cy.get(`[data-cy="prev_act_hithie90_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
@@ -183,7 +183,7 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      cy.get(`[name='hithie-actual-federal-${year}']`)
+      cy.get(`[name='actual-federal-hithie90-${year}']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);

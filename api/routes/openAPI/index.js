@@ -896,7 +896,7 @@ const openapi = {
                   '^[0-9]{4}$': {
                     type: 'object',
                     properties: {
-                      mmis: {
+                      ddi: {
                         type: 'object',
                         description: 'MMIS-funded expenses',
                         properties: {
@@ -931,6 +931,42 @@ const openapi = {
                             }
                           },
                           90: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          }
+                        }
+                      },
+                      mando: {
+                        type: 'object',
+                        description: 'MMIS-funded expenses',
+                        properties: {
+                          50: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          },
+                          75: {
                             type: 'object',
                             properties: {
                               federalActual: {

@@ -13,6 +13,8 @@ import {
 } from '../../src/redux/selectors/apd.selectors';
 import { setUpdateStatusField } from '../../src/redux/actions/editApd';
 
+import { updateStatusChoices } from '../util/apd';
+
 const ApdUpdate = ({
   apdType,
   setUpdateStatusField,
@@ -62,18 +64,7 @@ const ApdUpdate = ({
                 Keep in mind, an as needed update can serve as an annual update.
               </div>
             }
-            choices={[
-              {
-                label: 'Annual update',
-                value: 'annualUpdate',
-                checked: updateStatus.annualUpdate
-              },
-              {
-                label: 'As-needed update',
-                value: 'asNeededUpdate',
-                checked: updateStatus.asNeededUpdate
-              }
-            ]}
+            choices={updateStatusChoices(updateStatus)}
             type="checkbox"
             onChange={e => {
               setUpdateStatusField(e.target.value, e.target.checked);
