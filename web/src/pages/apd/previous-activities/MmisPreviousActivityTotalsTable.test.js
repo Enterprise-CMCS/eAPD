@@ -2,23 +2,18 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as ApdPreviousActivityTableTotal,
+  plain as MmisPreviousActivityTotalsTable,
   mapStateToProps
-} from './ApdPreviousActivityTableTotal';
+} from './MmisPreviousActivityTotalsTable';
 
 describe('apd previous activity table, grand total component', () => {
   const state = {
     apd: {
       data: {
-        apdType: 'HITECH',
         previousActivities: {
           actualExpenditures: {
             1: {
-              hithie: {
-                federalActual: 1000,
-                totalApproved: 2000
-              },
-              mmis: {
+              ddi: {
                 90: {
                   federalActual: 10,
                   totalApproved: 20
@@ -31,14 +26,20 @@ describe('apd previous activity table, grand total component', () => {
                   federalActual: 50,
                   totalApproved: 60
                 }
+              },
+              mando: {
+                75: {
+                  federalActual: 3000,
+                  totalApproved: 400
+                },
+                50: {
+                  federalActual: 5000,
+                  totalApproved: 6000
+                }
               }
             },
             2: {
-              hithie: {
-                federalActual: 3000,
-                totalApproved: 4000
-              },
-              mmis: {
+              ddi: {
                 90: {
                   federalActual: 100,
                   totalApproved: 200
@@ -51,6 +52,16 @@ describe('apd previous activity table, grand total component', () => {
                   federalActual: 500,
                   totalApproved: 600
                 }
+              },
+              mando: {
+                75: {
+                  federalActual: 3000,
+                  totalApproved: 4000
+                },
+                50: {
+                  federalActual: 5000,
+                  totalApproved: 6000
+                }
               }
             }
           }
@@ -60,22 +71,21 @@ describe('apd previous activity table, grand total component', () => {
   };
 
   const props = {
-    apdType: 'HITECH',
     totals: {
       1: {
-        actual: 1090,
-        approved: 1878
+        actual: 8090,
+        approved: 3378
       },
       2: {
-        actual: 3900,
-        approved: 4380
+        actual: 8900,
+        approved: 6780
       }
     }
   };
 
   test('renders correctly', () => {
     expect(
-      shallow(<ApdPreviousActivityTableTotal {...props} />)
+      shallow(<MmisPreviousActivityTotalsTable {...props} />)
     ).toMatchSnapshot();
   });
 
