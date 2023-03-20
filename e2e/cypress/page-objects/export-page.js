@@ -610,6 +610,7 @@ class ExportPage {
   }) => {
     cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
       .parent()
+      .parent()
       .contains('h2', `Activity ${index + 1}: ${activityName}`)
       .next()
       .within(() => {

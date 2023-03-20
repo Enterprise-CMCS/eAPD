@@ -1,7 +1,7 @@
 import ExecutiveSummaryPage from '../../page-objects/executive-summary-page.js';
 import ExportPage from '../../page-objects/export-page.js';
 
-const tableTitles = ['HIT + HIE'];
+const tableTitles = ['HIT + HIE', 'MMIS'];
 
 export const testDefaultExecutiveSummary = function () {
   let summaryPage;
