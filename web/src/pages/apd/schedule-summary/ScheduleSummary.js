@@ -21,9 +21,9 @@ const ScheduleSummary = ({ activities }) => (
         ) : (
           <table className="budget-table">
             <thead>
-              <tr className="budget-table--row__primary-header">
+              <tr>
                 <th scope="col">Activity List Overview</th>
-                <th scope="col" className="ds-u-text-align--left">
+                <th scope="col" className="ds-u-text-align--right">
                   Activity Date Range
                 </th>
               </tr>
@@ -40,7 +40,7 @@ const ScheduleSummary = ({ activities }) => (
                   >
                     Activity {i + 1}: {activityName || 'Untitled'} Milestones
                   </td>
-                  <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
+                  <td className="ds-u-font-weight--bold ds-u-text-align--right ds-u-border-left--0 budget-table--cell__nowrap">
                     {dateRange}
                   </td>
                 </tr>
@@ -62,30 +62,34 @@ const ScheduleSummary = ({ activities }) => (
             <table key={activityName} className="budget-table">
               <thead>
                 <tr className="budget-table--row__primary-header">
-                  <th scope="col" style={{ width: '70%' }}>
-                    Activity Milestones
-                  </th>
-                  <th scope="col" className="ds-u-text-align--left">
-                    Target Completion Date
+                  <th scope="col" colSpan={2} style={{ width: '70%' }}>
+                    Activity {i + 1}: {activityName || 'Untitled'}
                   </th>
                 </tr>
                 <tr>
-                  <th
-                    className="ds-u-font-weight--bold ds-u-border-right--0"
-                    colSpan={2}
-                  >
-                    Activity {i + 1}: {activityName || 'Untitled'} Milestones
+                  <th className="ds-u-font-weight--bold ds-u-border-right--0 indent-title">
+                    Milestone List
+                  </th>
+                  <th className="ds-u-font-weight--bold ds-u-border-right--0 ds-u-text-align--right">
+                    Target Completion Date
                   </th>
                 </tr>
               </thead>
               <tbody>
+                {milestones.length === 0 && (
+                  <tr>
+                    <td className="ds-u-border-right--0">
+                      No milestones to display.
+                    </td>
+                  </tr>
+                )}
                 {milestones.map(
                   ({ end: milestoneEnd, name: milestoneName }) => (
                     <tr key={`${milestoneName}-${milestoneEnd}`}>
-                      <td className="ds-u-border-right--0">
+                      <td className="ds-u-border-right--0 indent-title">
                         {milestoneName || 'Milestone not specified'}
                       </td>
-                      <td className="ds-u-border-left--0 ds-u-text-align--left">
+                      <td className="ds-u-border-left--0 ds-u-text-align--right">
                         {milestoneEnd}
                       </td>
                     </tr>

@@ -27,7 +27,7 @@ const testActivityMilestone = page => {
     ];
     milestones.forEach(({ names, dates }, index) => {
       const activityId = index + 1; // Activity Id is 1-base and index is 0-based
-      const activityName = `Activity ${activityId}: ${data.activityOverview[index].name} Milestones`;
+      const activityName = `Activity ${activityId}: ${data.activityOverview[index].name}`;
       page
         .getActivityScheduleMilestoneTableName(index)
         .should('eq', activityName);
@@ -75,9 +75,11 @@ export const testDefaultActivityScheduleSummary = function () {
 
     schedulePage
       .getActivityScheduleMilestoneTableName(0)
-      .should('eq', 'Activity 1: Program Administration Milestones');
+      .should('eq', 'Activity 1: Program Administration');
 
-    schedulePage.getAllActivityScheduleMilestones(0).should('not.exist');
+    schedulePage
+      .getAllActivityScheduleMilestones(0)
+      .should('contain', 'No milestones to display.');
   });
 
   it('should have the default values for Activity Schedule Summary in the export view', function () {
@@ -100,7 +102,7 @@ export const testDefaultActivityScheduleSummary = function () {
 
     exportPage
       .getActivityScheduleMilestoneTableName(0)
-      .should('eq', 'Activity 1: Program Administration Milestones');
+      .should('eq', 'Activity 1: Program Administration');
 
     exportPage
       .getAllActivityScheduleMilestones(0)

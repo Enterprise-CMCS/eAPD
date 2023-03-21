@@ -313,6 +313,7 @@ const validHitechActivity = {
 const validMmisActivity = {
   ...validActivity,
   name: 'Activity 2',
+  fundingSource: 'MMIS',
   activityOverview: {
     activitySnapshot: 'Snapshot',
     problemStatement: 'Problem statement',
@@ -752,6 +753,7 @@ const invalidHitechActivity = {
 const invalidMmisActivity = {
   ...invalidActivity,
   name: '',
+  fundingSource: 'MMIS',
   activityOverview: {
     activitySnapshot: 'Snapshot',
     problemStatement: '',
@@ -1609,6 +1611,7 @@ const mockMmisApdRandomInvalid = {
   activities: [
     {
       name: 'Information Technology',
+      fundingSource: 'MMIS',
       activityOverview: {
         activitySnapshot: '',
         problemStatement: 'Problem statement',
@@ -1827,6 +1830,7 @@ const mockMmisApdRandomInvalid = {
     },
     {
       name: 'Printing Supplies',
+      fundingSource: 'MMIS',
       activityOverview: {
         activitySnapshot: 'Snapshot',
         problemStatement: 'Problem statement',

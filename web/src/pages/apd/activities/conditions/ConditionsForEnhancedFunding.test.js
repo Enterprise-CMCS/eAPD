@@ -7,8 +7,8 @@ import ConditionsForEnhancedFunding, {
   mapDispatchToProps
 } from './ConditionsForEnhancedFunding';
 import {
-  setEnhancedFundingQualification,
-  setEnhancedFundingJustification
+  setEnhancedFundingQualification as setQualification,
+  setEnhancedFundingJustification as setJustification
 } from '../../../../redux/actions/editActivity/conditionsForEnhancedFunding';
 
 const defaultProps = {
@@ -313,7 +313,7 @@ describe('Conditions for Enhanced Funding', () => {
     ).toEqual(2);
     expect(
       screen.queryByText(/Provide an Enhanced Funding Justification/i)
-    ).toBeNull();
+    ).toBeNull(); // doesn't appear in document because Yes has not be selected
 
     // Select no and error messages are resolved
     user.click(
@@ -367,10 +367,41 @@ describe('Conditions for Enhanced Funding', () => {
         screen.getByLabelText(/Enhanced Funding Justification/i)
       ).toHaveValue('This is a justification');
     });
-    // await waitFor(() => {
-    //   expect(
-    //     screen.queryByText(/Provide an Enhanced Funding Justification/i)
-    //   ).toBeNull();
-    // });
+  });
+
+  it('maps redux state to component props', () => {
+    expect(
+      mapStateToProps(
+        {
+          apd: {
+            data: {
+              activities: [
+                {
+                  conditionsForEnhancedFunding: {
+                    enhancedFundingQualification: true,
+                    enhancedFundingJustification: 'Test justification'
+                  }
+                }
+              ]
+            },
+            adminCheck: {
+              enabled: true
+            }
+          }
+        },
+        { activityIndex: 0 }
+      )
+    ).toEqual({
+      adminCheck: true,
+      enhancedFundingQualification: true,
+      enhancedFundingJustification: 'Test justification'
+    });
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setQualification,
+      setJustification
+    });
   });
 });

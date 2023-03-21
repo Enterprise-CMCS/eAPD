@@ -501,7 +501,7 @@ class ExportPage {
     return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('thead>tr')
-      .last()
+      .first()
       .invoke('text');
   };
 
