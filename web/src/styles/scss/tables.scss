@@ -39,7 +39,7 @@ td {
     /* override for design system where first-child has a top margin of 0 */
     &.ds-h3,
     &.ds-h4 {
-      margin-top: $spacer-4 !important;
+      margin-top: $spacer-1 !important;
     }
   }
 
