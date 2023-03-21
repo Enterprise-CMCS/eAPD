@@ -5,7 +5,8 @@ import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 import HitechBudgetSummary from './HitechBudgetSummary';
-import MmisBudgetSummary from './MmisBudgetSummary';
+// TODO (#4474): return the following once the component is compatible with new MMIS budget structure
+// import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 const thId = (program, share) =>
