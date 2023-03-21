@@ -32,10 +32,7 @@ const initialState = {
 };
 
 const setup = async (props = {}, options = {}) => {
-  const utils = renderWithConnection(
-    <SecurityPlanningSummary {...props} />,
-    options
-  );
+  renderWithConnection(<SecurityPlanningSummary {...props} />, options);
 
   expect(await screen.findByText(/Security Planning/)).toBeInTheDocument();
 };
