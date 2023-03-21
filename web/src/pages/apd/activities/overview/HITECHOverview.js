@@ -15,6 +15,7 @@ import FundingSourceForm from './FundingSourceForm';
 import Instruction from '../../../../components/Instruction';
 import NameForm from './NameForm';
 import RichText from '../../../../components/RichText';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../components/Section';
 
@@ -225,7 +226,7 @@ HITECHOverview.propTypes = {
 const mapStateToProps = (state, { activityIndex }) => {
   return {
     activity: selectActivityByIndex(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck?.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 
