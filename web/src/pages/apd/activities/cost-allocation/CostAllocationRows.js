@@ -4,6 +4,8 @@ import Dollars from '../../../../components/Dollars';
 import { APD_TYPE } from '@cms-eapd/common';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
+import classNames from 'classnames';
+
 export const CostSummaryRows = ({ items, defaultMessage }) => {
   if (defaultMessage && (!items || items.length === 0)) {
     return (
@@ -36,7 +38,11 @@ export const CostSummaryRows = ({ items, defaultMessage }) => {
           </td>
         )}
         <td className="budget-table--number">{unitCost !== null && '='}</td>
-        <td className="budget-table--number">
+        <td
+          className={`budget-table--number ${
+            highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+          }`}
+        >
           <Dollars>{totalCost}</Dollars>
         </td>
       </tr>
@@ -46,10 +52,12 @@ export const CostSummaryRows = ({ items, defaultMessage }) => {
 
 CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired,
-  defaultMessage: PropTypes.string
+  defaultMessage: PropTypes.string,
+  highlightSubtotals: PropTypes.bool
 };
 CostSummaryRows.defaultProps = {
-  defaultMessage: null
+  defaultMessage: null,
+  highlightSubtotals: false
 };
 
 const CostAllocationRows = ({
@@ -57,7 +65,10 @@ const CostAllocationRows = ({
   ffy,
   otherFunding,
   activityIndex,
-  apdType
+  apdType,
+  highlightSubtotals,
+  showUnitCostHeader,
+  highlightTotal
 }) => {
   const { emptyBudgetWording } = useFlags();
   const [emptyStateStaff, setEmptyStateStaff] = useState(
@@ -86,33 +97,57 @@ const CostAllocationRows = ({
     );
   }, [emptyBudgetWording]);
 
+  const budgetTableClassName = classNames({
+    'budget-table--number': true,
+    'budget-table--cell__hightlight-lighter': highlightSubtotals
+  });
+
   return (
     <Fragment>
       {otherFunding && (
         <tr className="budget-table--row__header">
-          <th scope="row" colSpan="6">
-            State Staff
-          </th>
+          {!showUnitCostHeader && (
+            <th scope="row" colSpan="6">
+              State Staff
+            </th>
+          )}
+          {showUnitCostHeader && (
+            <Fragment>
+              <th scope="row" colSpan="1">
+                State Staff
+              </th>
+              <th scope="col" colSpan="4">
+                Personnel Cost × FTE
+              </th>
+              <th scope="col" className="ds-u-text-align--right">
+                Total cost
+              </th>
+            </Fragment>
+          )}
         </tr>
       )}
       {!otherFunding && (
         <tr className="budget-table--row__header">
           <th scope="col">State Staff</th>
           <th scope="col" colSpan="2">
-            <span className="sr-only">unit cost</span>
+            <span className="ds-u-visibility--screen-reader">unit cost</span>
           </th>
           <th scope="col" colSpan="2">
-            <span className="sr-only">units</span>
+            <span className="ds-u-visibility--screen-reader">units</span>
           </th>
           <th scope="col">Total cost</th>
         </tr>
       )}
       {apdType === APD_TYPE.HITECH && (
-        <CostSummaryRows items={years[ffy].keyPersonnel} />
+        <CostSummaryRows
+          items={years[ffy].keyPersonnel}
+          highlightSubtotals={highlightSubtotals}
+        />
       )}
       <CostSummaryRows
         items={years[ffy].statePersonnel}
         defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateStaff : null}
+        highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
         <tr>
@@ -120,16 +155,21 @@ const CostAllocationRows = ({
             Other Funding Amount
           </td>
           <td>-</td>
-          <td className="budget-table--number">
+          <td className={budgetTableClassName}>
             <Dollars>{otherFunding[ffy].statePersonnel}</Dollars>
           </td>
         </tr>
       )}
-      <tr className="budget-table--total budget-table--row__highlight">
+      <tr className="budget-table--total budget-table--row__highlight-lighter">
         <td className="title" colSpan="5">
           State Staff Total
         </td>
-        <td className="budget-table--number" data-cy="total">
+        <td
+          className={`budget-table--number ${
+            highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+          }`}
+          data-cy="total"
+        >
           <Dollars>
             {otherFunding
               ? years[ffy].statePersonnelTotal -
@@ -146,6 +186,7 @@ const CostAllocationRows = ({
       <CostSummaryRows
         items={years[ffy].nonPersonnel}
         defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateExpense : null}
+        highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
         <tr>
@@ -153,16 +194,25 @@ const CostAllocationRows = ({
             Other Funding Amount
           </td>
           <td>-</td>
-          <td className="budget-table--number">
+          <td
+            className={`budget-table--number ${
+              highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+            }`}
+          >
             <Dollars>{otherFunding[ffy].expenses}</Dollars>
           </td>
         </tr>
       )}
-      <tr className="budget-table--total budget-table--row__highlight">
+      <tr className="budget-table--total budget-table--row__highlight-lighter">
         <td className="title" colSpan="5">
           Other State Expenses Total
         </td>
-        <td className="budget-table--number" data-cy="total">
+        <td
+          className={`budget-table--number ${
+            highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+          }`}
+          data-cy="total"
+        >
           <Dollars>
             {otherFunding
               ? years[ffy].nonPersonnelTotal - otherFunding[ffy].expenses
@@ -180,6 +230,7 @@ const CostAllocationRows = ({
         defaultMessage={
           apdType === APD_TYPE.MMIS ? emptyPrivateContractor : null
         }
+        highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
         <tr>
@@ -187,16 +238,25 @@ const CostAllocationRows = ({
             Other Funding Amount
           </td>
           <td>-</td>
-          <td className="budget-table--number">
+          <td
+            className={`budget-table--number ${
+              highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+            }`}
+          >
             <Dollars>{otherFunding[ffy].contractors}</Dollars>
           </td>
         </tr>
       )}
-      <tr className="budget-table--total budget-table--row__highlight">
+      <tr className="budget-table--total budget-table--row__highlight-lighter">
         <td className="title" colSpan="5">
           Private Contractor Total
         </td>
-        <td className="budget-table--number" data-cy="total">
+        <td
+          className={`budget-table--number ${
+            highlightSubtotals ? 'budget-table--cell__hightlight-lighter' : ''
+          }`}
+          data-cy="total"
+        >
           <Dollars>
             {otherFunding
               ? years[ffy].contractorResourcesTotal -
@@ -205,7 +265,11 @@ const CostAllocationRows = ({
           </Dollars>
         </td>
       </tr>
-      <tr className="budget-table--total budget-table--row__header">
+      <tr
+        className={`budget-table--total budget-table--row__header ${
+          highlightTotal ? 'budget-table--row__highlight' : ''
+        }`}
+      >
         <td colSpan="5">
           Activity {activityIndex >= 0 && activityIndex + 1} Total Computable
           Medicaid Cost
@@ -232,12 +296,18 @@ CostAllocationRows.propTypes = {
     contractors: PropTypes.object,
     total: PropTypes.number
   }),
-  activityIndex: PropTypes.number
+  activityIndex: PropTypes.number,
+  highlightSubtotals: PropTypes.bool,
+  showUnitCostHeader: PropTypes.bool,
+  highlightTotal: PropTypes.bool
 };
 
 CostAllocationRows.defaultProps = {
   otherFunding: null,
-  activityIndex: -1
+  activityIndex: -1,
+  highlightSubtotals: false,
+  showUnitCostHeader: false,
+  highlightTotal: false
 };
 
 export default CostAllocationRows;

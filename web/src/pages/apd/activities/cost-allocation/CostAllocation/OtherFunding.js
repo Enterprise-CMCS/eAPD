@@ -26,6 +26,39 @@ import RichText from '../../../../../components/RichText';
 
 import { costAllocationOtherSchema as schema } from '@cms-eapd/common';
 
+export const ActivityTotalCostTable = ({ years, ffy }) => {
+  return (
+    <table className="budget-table activity-budget-table">
+      <tbody>
+        <tr className="budget-table--subtotal budget-table--row__header">
+          <th colSpan="2">Activity Total Cost</th>
+          <td className="budget-table--number">
+            <Dollars>{years[ffy].totalCost}</Dollars>
+          </td>
+        </tr>
+        <tr>
+          <td className="title">Other Funding</td>
+          <td>-</td>
+          <td className="budget-table--number">
+            <Dollars>{years[ffy].otherFunding}</Dollars>
+          </td>
+        </tr>
+        <tr className="budget-table--subtotal budget-table--row__highlight">
+          <td className="title">Total Computable Medicaid Cost</td>
+          <td colSpan="2" className="budget-table--number">
+            <Dollars>{years[ffy].medicaidShare}</Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+ActivityTotalCostTable.propTypes = {
+  years: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired
+};
+
 const OtherFunding = ({
   activityIndex,
   activity,
@@ -145,7 +178,7 @@ const OtherFunding = ({
                   {...props}
                   value={value}
                   label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
+                  labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
                   errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
@@ -153,30 +186,7 @@ const OtherFunding = ({
               )}
             />
           </div>
-
-          <table className="budget-table activity-budget-table">
-            <tbody>
-              <tr className="budget-table--subtotal budget-table--row__header">
-                <th colSpan="2">Activity Total Cost</th>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].totalCost}</Dollars>
-                </td>
-              </tr>
-              <tr>
-                <td className="title">Other Funding</td>
-                <td>-</td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].otherFunding}</Dollars>
-                </td>
-              </tr>
-              <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title">Total Computable Medicaid Cost</td>
-                <td colSpan="2" className="budget-table--number">
-                  <Dollars>{years[ffy].medicaidShare}</Dollars>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ActivityTotalCostTable years={years} ffy={ffy} />
         </div>
       ))}
     </Fragment>

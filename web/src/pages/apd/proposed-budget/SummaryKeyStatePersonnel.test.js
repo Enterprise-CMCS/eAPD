@@ -22,7 +22,7 @@ describe('<SummaryKeyStatePersonnel />', () => {
 
     expect(
       screen.getByRole('row', {
-        name: `${mmisApd.apd.data.name} Personnel Cost × FTE x Medicaid Share (%) Total cost`
+        name: `Key State Personnel Personnel Cost × FTE × Medicaid Share (%) Total cost`
       })
     );
 
