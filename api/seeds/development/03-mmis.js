@@ -188,6 +188,7 @@ export default {
     {
       activityId: '152a1e2b',
       name: 'Activity 1',
+      fundingSource: 'MMIS',
       activityOverview: {
         activitySnapshot: 'This is a snapshot',
         problemStatement: 'This is a problem statement',
