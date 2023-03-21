@@ -3,6 +3,7 @@ import activitySchema from './apdActivity.js';
 
 const mmisActivitySchema = new mongoose.Schema({
   _id: false,
+  fundingSource: { type: String, default: 'MMIS' },
   activityOverview: {
     activitySnapshot: String,
     problemStatement: String,
