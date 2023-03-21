@@ -24,7 +24,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
           </span>
         </caption>
         <thead>
-          <tr>
+          <tr className="budget-table--row__highlight-gray-dark">
             <td className="th" id="program-budget-table-null1" />
             <th colSpan="2" id={thId('hit')}>
               {titleCase(t('executiveSummary.budgetTable.hit'))}
@@ -36,7 +36,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
               {titleCase(t('executiveSummary.budgetTable.hitHie'))}
             </th>
           </tr>
-          <tr>
+          <tr className="budget-table--row__highlight-gray-light">
             <td className="th" id="program-budget-table-null2" />
             <th className="ds-u-text-align--right" id={thId('hit', 'fed')}>
               {titleCase(t('executiveSummary.budgetTable.fedShare'))}
@@ -73,7 +73,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
               key={year}
               className={
                 display === 'Total'
-                  ? 'budget-table--total budget-table--row__highlight'
+                  ? 'budget-table--total budget-table--row__highlight-lighter'
                   : ''
               }
             >
@@ -108,6 +108,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
                 headers={tdHdrs('combined', 'state')}
               />
               <DollarCell
+                className={'budget-table--cell__hightlight-lighter'}
                 value={hitAndHie.combined[year].medicaid}
                 headers={tdHdrs('combined', 'total')}
               />
@@ -124,7 +125,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
           </span>
         </caption>
         <thead>
-          <tr>
+          <tr className="budget-table--row__highlight-gray-dark">
             <td className="th" id="program-budget-table-null3" />
             <th colSpan="2" id={thId('mmis90')}>
               {titleCase(t('executiveSummary.budgetTable.mmis90'))}
@@ -139,7 +140,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
               {titleCase(t('executiveSummary.budgetTable.mmisTotal'))}
             </th>
           </tr>
-          <tr>
+          <tr className="budget-table--row__highlight-gray-light">
             <td className="th" id="program-budget-table-null4" />
             <th className="ds-u-text-align--right" id={thId('mmis90', 'fed')}>
               {titleCase(t('executiveSummary.budgetTable.fedShare'))}
@@ -185,7 +186,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
               key={year}
               className={
                 display === 'Total'
-                  ? 'budget-table--total budget-table--row__highlight'
+                  ? 'budget-table--total budget-table--row__highlight-lighter'
                   : ''
               }
             >
@@ -228,6 +229,7 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
                 headers={tdHdrs('mmisTotal', 'state')}
               />
               <DollarCell
+                className={'budget-table--cell__hightlight-lighter'}
                 value={mmisByFFP.combined[year].medicaid}
                 headers={tdHdrs('mmisTotal', 'total')}
               />
