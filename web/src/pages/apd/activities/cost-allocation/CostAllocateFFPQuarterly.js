@@ -302,12 +302,11 @@ CostAllocateFFPQuarterly.propTypes = {
   setContractorFFP: PropTypes.func.isRequired,
   setInHouseFFP: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool
+  adminCheck: PropTypes.bool.isRequired
 };
 
 CostAllocateFFPQuarterly.defaultProps = {
-  quarterlyFFP: null,
-  adminCheck: false
+  quarterlyFFP: null
 };
 
 const makeMapStateToProps = () => {
