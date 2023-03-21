@@ -5439,20 +5439,76 @@ describe('budget calculate methods', () => {
           }
         },
         ddi: {
-          statePersonnel: {
-            2017: { total: 2400, federal: 2160, medicaid: 2400, state: 240 },
-            2018: { total: 2200, federal: 1980, medicaid: 2200, state: 220 },
-            total: { total: 4600, federal: 4140, medicaid: 4600, state: 460 }
+          '90-10': {
+            statePersonnel: {
+              2017: { total: 2400, federal: 2160, medicaid: 2400, state: 240 },
+              2018: { total: 2200, federal: 1980, medicaid: 2200, state: 220 },
+              total: { total: 4600, federal: 4140, medicaid: 4600, state: 460 }
+            },
+            contractors: {
+              2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+            },
+            expenses: {
+              2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+            },
+            combined: {
+              2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
+              2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
+              total: {
+                total: 16600,
+                federal: 14940,
+                medicaid: 16600,
+                state: 1660
+              }
+            }
           },
-          contractors: {
-            2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
-            2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
-            total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+          '75-25': {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
-          expenses: {
-            2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
-            2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
-            total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+          '50-50': {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
           combined: {
             2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
@@ -5466,20 +5522,49 @@ describe('budget calculate methods', () => {
           }
         },
         mando: {
-          statePersonnel: {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          '75-25': {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
-          contractors: {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
-          },
-          expenses: {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          '50-50': {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
           combined: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },

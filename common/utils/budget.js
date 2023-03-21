@@ -10,7 +10,9 @@ export const CATEGORY_NAMES = [
   'combined'
 ];
 
+export const DDI_OPTIONS = new Set(['90-10', '75-25', '50-50']);
 export const FFP_OPTIONS = new Set(['90-10', '75-25', '50-50', '0-100']);
+export const MANDO_OPTIONS = new Set(['75-25', '50-50']);
 
 /**
  * Creates a default Funding Source object with years and total.
@@ -79,6 +81,50 @@ export const getDefaultFundingSourceByCategoryObject = (
     }),
     {}
   );
+
+/**
+ * Creates a default Federal Share object by year and total.
+ * @param {Array} years The list of years in the APD
+ * @param {Array} fedStateSplitOptions The list of years in the APD
+ * @returns the default Funding Category object
+ * e.g. for years: [2022, 2023] and fedStateSplitOptions: ['90-10', '75-25', '50-50'] the object would look like
+ * {
+ *   '90-10': {
+ *     statePersonnel: {
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *     },
+ *     contractors: {...}, // same as statePersonnel
+ *     expenses: {...}, // same as statePersonnel
+ *     combined: {...} // same as statePersonnel
+ *     // see getDefaultFundingSourceByCategoryObject for details
+ *   },
+ *   '75-25': {...}, // same as '90-10'
+ *   '50-50': {...}, // same as '90-10'
+ *   combined: {
+ *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *     // see getDefaultFundingSourceObject for details
+ *   }
+ * }
+ */
+export const getDefaultFundingCategoryByFedStateSplitObject = (
+  years = [],
+  fedStateSplitOptions = []
+) => {
+  let fundingCategoryObject = fedStateSplitOptions.reduce(
+    (o, fedStateSplit) => ({
+      ...o,
+      [fedStateSplit]: getDefaultFundingSourceByCategoryObject(years)
+    }),
+    {}
+  );
+  fundingCategoryObject.combined = getDefaultFundingSourceObject(years);
+  return fundingCategoryObject;
+};
 
 /**
  * Creates a default Federal Share object by year and total.
@@ -210,12 +256,27 @@ export const defaultHITECHBudgetObject = (years = []) => ({
  *     // see getDefaultFundingSourceByCategoryObject for details
  *   },
  *   ddi: {
- *     statePersonnel: {...}, contractors: {...}, expenses: {...}, combined: {...}
- *     // see getDefaultFundingSourceByCategoryObject for details
+ *     '90-10': {
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *       // see getDefaultFundingSourceObject for details
+ *     },
+ *     '75-25': {...}, // same as '90-10'
+ *     '50-50': {...}, // same as '90-10'
+ *     combined: {...} // same as '90-10'
  *   },
  *   mando: {
- *     statePersonnel: {...}, contractors: {...}, expenses: {...}, combined: {...}
- *     // see getDefaultFundingSourceByCategoryObject for details
+ *     '75-25': {
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *       // see getDefaultFundingSourceObject for details
+ *     },
+ *     '50-50': {...}, // same as '90-10'
+ *     combined: {...} // same as '90-10'
  *   },
  *   combined: {
  *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -229,15 +290,21 @@ export const defaultHITECHBudgetObject = (years = []) => ({
  *   years: [2022, 2023, 2024]
  * }
  */
-export const defaultMMISBudgetObject = (years = []) => ({
-  mmis: getDefaultFundingSourceByCategoryObject(years),
-  ddi: getDefaultFundingSourceByCategoryObject(years),
-  mando: getDefaultFundingSourceByCategoryObject(years),
-  combined: getDefaultFundingSourceObject(years),
-  activityTotals: [],
-  activities: {},
-  years
-});
+export const defaultMMISBudgetObject = (years = []) => {
+  return {
+    mmis: getDefaultFundingSourceByCategoryObject(years),
+    ddi: getDefaultFundingCategoryByFedStateSplitObject(years, [
+      ...DDI_OPTIONS
+    ]),
+    mando: getDefaultFundingCategoryByFedStateSplitObject(years, [
+      ...MANDO_OPTIONS
+    ]),
+    combined: getDefaultFundingSourceObject(years),
+    activityTotals: [],
+    activities: {},
+    years
+  };
+};
 
 /**
  * Creates a default Budget object by years
@@ -245,31 +312,6 @@ export const defaultMMISBudgetObject = (years = []) => ({
  * @returns the default Budget object
  * e.g, for years: [2022, 2023, 2024] the object would look like
  * {
- *   mmis: {
- *     hitAndHie: {
- *       years: {
- *         2022: {...}, 2023: {...}, 2024: {...}, total: {...}
- *       }
- *       // see defaultFederalShareByFFYQuarterObject for details
- *     }
- *   },
- *   mmis: {
- *     statePersonnel: {...}, contractors: {...}, expenses: {...}, combined: {...}
- *     // see getDefaultFundingSourceByCategoryObject for details
- *   },
- *   mmisByFFP: {
- *     '90-10': {
- *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
- *       // see getDefaultFundingSourceObject for details
- *     },
- *     '75-25': {...}, // same as '90-10'
- *     '50-50': {...}, // same as '90-10'
- *     '0-100': {...}, // same as '90-10'
- *     combined: {...} // same as '90-10'
- *   },
  *   combined: {
  *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
  *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -1024,8 +1066,10 @@ export const sumShareCostsForFundingSource = ({
 
 /**
  * Sum up the federal, state, and medicaid costs for the activity:
- * - by funding category (ddi, mando) and cost category ('contractors', 'expenses', 'statePersonnel')
+ * - by funding category (ddi, mando), fed-state split (75-25, etc.),
+ *     and cost category ('contractors', 'expenses', 'statePersonnel')
  *     for each year and the total of all the years
+ * - by funding category and fed-state split for each year and the total of all the years
  * - by funding category for each year and the total of all the years
  * @param {Object} budget The budget object
  * @param {Number} year The FFY
@@ -1036,50 +1080,93 @@ export const sumShareCostsForFundingSource = ({
  */
 export const sumShareCostsForFundingCategory = ({
   budget,
-  year,
-  fundingCategory,
   activityTotals,
-  costCategoryShare
+  allocation,
+  costCategoryShare,
+  fundingCategory,
+  year
 } = {}) => {
   const updatedBudget = deepCopy(budget);
   if (
     budget &&
-    year &&
-    fundingCategory &&
     activityTotals &&
-    costCategoryShare
+    allocation &&
+    costCategoryShare &&
+    fundingCategory &&
+    year
   ) {
+    const fedStateSplit = `${allocation[year].ffp.federal}-${allocation[year].ffp.state}`;
     ['contractors', 'expenses', 'statePersonnel'].forEach(costCategory => {
       if (
-        updatedBudget?.[fundingCategory]?.[costCategory]?.[year] !== undefined
+        updatedBudget?.[fundingCategory]?.[fedStateSplit]?.[costCategory]?.[
+          year
+        ] !== undefined
       ) {
         const costTotal = activityTotals.data[costCategory][year];
         const medicaidShare = costCategoryShare.medicaidShare[costCategory];
         const fedShare = costCategoryShare.fedShare[costCategory];
         const stateShare = costCategoryShare.stateShare[costCategory];
 
-        // add to costCategory for the particular year (for particular funding category)
-        updatedBudget[fundingCategory][costCategory][year].total += costTotal;
-        updatedBudget[fundingCategory][costCategory][year].medicaid +=
-          medicaidShare;
-        updatedBudget[fundingCategory][costCategory][year].federal += fedShare;
-        updatedBudget[fundingCategory][costCategory][year].state += stateShare;
+        // add to costCategory for the particular year (for particular funding category & fed-state split)
+        updatedBudget[fundingCategory][fedStateSplit][costCategory][
+          year
+        ].total += costTotal;
+        updatedBudget[fundingCategory][fedStateSplit][costCategory][
+          year
+        ].medicaid += medicaidShare;
+        updatedBudget[fundingCategory][fedStateSplit][costCategory][
+          year
+        ].federal += fedShare;
+        updatedBudget[fundingCategory][fedStateSplit][costCategory][
+          year
+        ].state += stateShare;
 
-        // add to costCategory total for all the years (for particular funding category)
-        updatedBudget[fundingCategory][costCategory].total.total += costTotal;
-        updatedBudget[fundingCategory][costCategory].total.medicaid +=
-          medicaidShare;
-        updatedBudget[fundingCategory][costCategory].total.federal += fedShare;
-        updatedBudget[fundingCategory][costCategory].total.state += stateShare;
+        // add to costCategory total for all the years (for particular funding category & fed-state split)
+        updatedBudget[fundingCategory][fedStateSplit][
+          costCategory
+        ].total.total += costTotal;
+        updatedBudget[fundingCategory][fedStateSplit][
+          costCategory
+        ].total.medicaid += medicaidShare;
+        updatedBudget[fundingCategory][fedStateSplit][
+          costCategory
+        ].total.federal += fedShare;
+        updatedBudget[fundingCategory][fedStateSplit][
+          costCategory
+        ].total.state += stateShare;
 
-        // add to combined (total for all costCategories) for the particular year (for particular funding category)
+        // add to combined (total for all costCategories) for the particular year (for particular funding category & fed-state split)
+        updatedBudget[fundingCategory][fedStateSplit]['combined'][year].total +=
+          costTotal;
+        updatedBudget[fundingCategory][fedStateSplit]['combined'][
+          year
+        ].medicaid += medicaidShare;
+        updatedBudget[fundingCategory][fedStateSplit]['combined'][
+          year
+        ].federal += fedShare;
+        updatedBudget[fundingCategory][fedStateSplit]['combined'][year].state +=
+          stateShare;
+
+        // add to combined (total for all costCategories) total for all the years (for particular funding category & fed-state split)
+        updatedBudget[fundingCategory][fedStateSplit]['combined'].total.total +=
+          costTotal;
+        updatedBudget[fundingCategory][fedStateSplit][
+          'combined'
+        ].total.medicaid += medicaidShare;
+        updatedBudget[fundingCategory][fedStateSplit][
+          'combined'
+        ].total.federal += fedShare;
+        updatedBudget[fundingCategory][fedStateSplit]['combined'].total.state +=
+          stateShare;
+
+        // add to combined (total for all fed-state splits) for the particular year (for particular funding category)
         updatedBudget[fundingCategory]['combined'][year].total += costTotal;
         updatedBudget[fundingCategory]['combined'][year].medicaid +=
           medicaidShare;
         updatedBudget[fundingCategory]['combined'][year].federal += fedShare;
         updatedBudget[fundingCategory]['combined'][year].state += stateShare;
 
-        // add to combined (total for all costCategories) total for all the years (for particular funding category)
+        // add to combined (total for all fed-state splits) total for all the years (for particular funding category)
         updatedBudget[fundingCategory]['combined'].total.total += costTotal;
         updatedBudget[fundingCategory]['combined'].total.medicaid +=
           medicaidShare;
@@ -1794,10 +1881,11 @@ export const calculateBudget = apd => {
             // funding category by FFY
             newBudget = sumShareCostsForFundingCategory({
               budget: newBudget,
-              year,
-              fundingCategory,
               activityTotals,
-              costCategoryShare
+              allocation,
+              costCategoryShare,
+              fundingCategory,
+              year
             });
             break;
 

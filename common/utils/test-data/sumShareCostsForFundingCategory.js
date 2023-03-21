@@ -1,401 +1,360 @@
 export const activityTotalsProp = {
-  id: '152a1e2b',
-  name: 'Activity 1',
+  id: '3110a314',
+  name: 'Activity 2',
   fundingSource: null,
   data: {
-    combined: {
-      2023: 3354831,
-      2024: 1904245,
-      total: 5259076
-    },
-    contractors: {
-      2023: 1332756,
-      2024: 542444,
-      total: 1875200
-    },
-    expenses: {
-      2023: 775000,
-      2024: 75000,
-      total: 850000
-    },
+    combined: { 2023: 1803000, 2024: 3093000, total: 4896000 },
+    contractors: { 2023: 650000, 2024: 1750000, total: 2400000 },
+    expenses: { 2023: 0, 2024: 0, total: 0 },
     otherFunding: {
-      2023: {
-        contractors: 41713,
-        expenses: 24256,
-        statePersonnel: 39031,
-        total: 105000
-      },
-      2024: {
-        contractors: 0,
-        expenses: 0,
-        statePersonnel: 0,
-        total: 0
-      }
+      2023: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
+      2024: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
     },
-    statePersonnel: {
-      2023: 1247075,
-      2024: 1286801,
-      total: 2533876
-    }
+    statePersonnel: { 2023: 1153000, 2024: 1343000, total: 2496000 }
   }
 };
 
-export const simplifiedBudgetProp = {
-  mando: {
-    statePersonnel: {
-      2023: {
-        total: 1247075,
-        federal: 906033,
-        medicaid: 1208044,
-        state: 302011
-      },
-      total: {
-        total: 1247075,
-        federal: 906033,
-        medicaid: 1208044,
-        state: 302011
-      }
-    },
-    contractors: {
-      2023: {
-        total: 1332756,
-        federal: 968282,
-        medicaid: 1291043,
-        state: 322761
-      },
-      total: {
-        total: 1332756,
-        federal: 968282,
-        medicaid: 1291043,
-        state: 322761
-      }
-    },
-    expenses: {
-      2023: {
-        total: 775000,
-        federal: 563058,
-        medicaid: 750744,
-        state: 187686
-      },
-      total: {
-        total: 775000,
-        federal: 563058,
-        medicaid: 750744,
-        state: 187686
-      }
-    },
-    combined: {
-      2023: {
-        total: 3354831,
-        federal: 2437373,
-        medicaid: 3249831,
-        state: 812458
-      },
-      total: {
-        total: 3354831,
-        federal: 2437373,
-        medicaid: 3249831,
-        state: 812458
-      }
-    }
-  }
+export const allocationProp = {
+  2023: { ffp: { federal: 90, state: 10, fundingCategory: 'DDI' }, other: 0 },
+  2024: { ffp: { federal: 75, state: 25, fundingCategory: 'DDI' }, other: 0 }
 };
 
 export const budgetProp = {
   mmis: {
     statePersonnel: {
       2023: {
-        total: 1247075,
-        federal: 906033,
-        medicaid: 1208044,
-        state: 302011
+        total: 2400075,
+        federal: 2124939,
+        medicaid: 2361044,
+        state: 236104
       },
       2024: {
-        total: 1286801,
-        federal: 965101,
-        medicaid: 1286801,
-        state: 321700
+        total: 2629801,
+        federal: 1972351,
+        medicaid: 2629801,
+        state: 657450
       },
       total: {
-        total: 2533876,
-        federal: 1871134,
-        medicaid: 2494845,
-        state: 623711
+        total: 5029876,
+        federal: 4097290,
+        medicaid: 4990845,
+        state: 893554
       }
     },
     contractors: {
       2023: {
-        total: 1332756,
-        federal: 968282,
-        medicaid: 1291043,
-        state: 322761
+        total: 1982756,
+        federal: 1746939,
+        medicaid: 1941043,
+        state: 194104
       },
       2024: {
-        total: 542444,
-        federal: 406833,
-        medicaid: 542444,
-        state: 135611
+        total: 2292444,
+        federal: 1719333,
+        medicaid: 2292444,
+        state: 573111
       },
       total: {
-        total: 1875200,
-        federal: 1375115,
-        medicaid: 1833487,
-        state: 458372
+        total: 4275200,
+        federal: 3466272,
+        medicaid: 4233487,
+        state: 767215
       }
     },
     expenses: {
-      2023: {
-        total: 775000,
-        federal: 563058,
-        medicaid: 750744,
-        state: 187686
-      },
-      2024: {
-        total: 75000,
-        federal: 56250,
-        medicaid: 75000,
-        state: 18750
-      },
-      total: {
-        total: 850000,
-        federal: 619308,
-        medicaid: 825744,
-        state: 206436
-      }
+      2023: { total: 775000, federal: 675670, medicaid: 750744, state: 75075 },
+      2024: { total: 75000, federal: 56250, medicaid: 75000, state: 18750 },
+      total: { total: 850000, federal: 731920, medicaid: 825744, state: 93825 }
     },
     combined: {
       2023: {
-        total: 3454831,
-        federal: 2518373,
-        medicaid: 3339831,
-        state: 821458
+        total: 5257831,
+        federal: 4628548,
+        medicaid: 5142831,
+        state: 514283
       },
       2024: {
-        total: 2004245,
-        federal: 1473184,
-        medicaid: 1954245,
-        state: 481061
+        total: 5097245,
+        federal: 3792934,
+        medicaid: 5047245,
+        state: 1254311
       },
       total: {
-        total: 5459076,
-        federal: 3991557,
-        medicaid: 5294076,
-        state: 1302519
+        total: 10355076,
+        federal: 8421482,
+        medicaid: 10190076,
+        state: 1768594
       }
     },
     keyStatePersonnel: {
-      2023: {
-        total: 100000,
-        federal: 81000,
-        medicaid: 90000,
-        state: 9000
-      },
-      2024: {
-        total: 100000,
-        federal: 45000,
-        medicaid: 50000,
-        state: 5000
-      },
-      total: {
-        total: 200000,
-        federal: 126000,
-        medicaid: 140000,
-        state: 14000
-      }
+      2023: { total: 100000, federal: 81000, medicaid: 90000, state: 9000 },
+      2024: { total: 100000, federal: 45000, medicaid: 50000, state: 5000 },
+      total: { total: 200000, federal: 126000, medicaid: 140000, state: 14000 }
     }
   },
   ddi: {
-    statePersonnel: {
-      2023: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+    '90-10': {
+      statePersonnel: {
+        2023: {
+          total: 2400075,
+          federal: 2124939,
+          medicaid: 2361044,
+          state: 236104
+        },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: {
+          total: 2400075,
+          federal: 2124939,
+          medicaid: 2361044,
+          state: 236104
+        }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      contractors: {
+        2023: {
+          total: 1982756,
+          federal: 1746939,
+          medicaid: 1941043,
+          state: 194104
+        },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: {
+          total: 1982756,
+          federal: 1746939,
+          medicaid: 1941043,
+          state: 194104
+        }
       },
-      total: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      expenses: {
+        2023: {
+          total: 775000,
+          federal: 675670,
+          medicaid: 750744,
+          state: 75075
+        },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: {
+          total: 775000,
+          federal: 675670,
+          medicaid: 750744,
+          state: 75075
+        }
+      },
+      combined: {
+        2023: {
+          total: 5157831,
+          federal: 4547548,
+          medicaid: 5052831,
+          state: 505283
+        },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: {
+          total: 5157831,
+          federal: 4547548,
+          medicaid: 5052831,
+          state: 505283
+        }
       }
     },
-    contractors: {
-      2023: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+    '75-25': {
+      statePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      contractors: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      total: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      expenses: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
+      combined: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       }
     },
-    expenses: {
-      2023: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+    '50-50': {
+      statePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      contractors: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      total: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      expenses: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
+      combined: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       }
     },
     combined: {
       2023: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+        total: 5157831,
+        federal: 4547548,
+        medicaid: 5052831,
+        state: 505283
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
-      },
+      2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
       total: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+        total: 5157831,
+        federal: 4547548,
+        medicaid: 5052831,
+        state: 505283
       }
     }
   },
   mando: {
-    statePersonnel: {
-      2023: {
-        total: 1247075,
-        federal: 906033,
-        medicaid: 1208044,
-        state: 302011
+    '75-25': {
+      statePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: {
+          total: 1286801,
+          federal: 965101,
+          medicaid: 1286801,
+          state: 321700
+        },
+        total: {
+          total: 1286801,
+          federal: 965101,
+          medicaid: 1286801,
+          state: 321700
+        }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      contractors: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: {
+          total: 542444,
+          federal: 406833,
+          medicaid: 542444,
+          state: 135611
+        },
+        total: {
+          total: 542444,
+          federal: 406833,
+          medicaid: 542444,
+          state: 135611
+        }
       },
-      total: {
-        total: 1247075,
-        federal: 906033,
-        medicaid: 1208044,
-        state: 302011
+      expenses: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 75000, federal: 56250, medicaid: 75000, state: 18750 },
+        total: { total: 75000, federal: 56250, medicaid: 75000, state: 18750 }
+      },
+      combined: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: {
+          total: 1904245,
+          federal: 1428184,
+          medicaid: 1904245,
+          state: 476061
+        },
+        total: {
+          total: 1904245,
+          federal: 1428184,
+          medicaid: 1904245,
+          state: 476061
+        }
       }
     },
-    contractors: {
-      2023: {
-        total: 1332756,
-        federal: 968282,
-        medicaid: 1291043,
-        state: 322761
+    '50-50': {
+      statePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+      contractors: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      total: {
-        total: 1332756,
-        federal: 968282,
-        medicaid: 1291043,
-        state: 322761
-      }
-    },
-    expenses: {
-      2023: {
-        total: 775000,
-        federal: 563058,
-        medicaid: 750744,
-        state: 187686
+      expenses: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       },
-      2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
-      },
-      total: {
-        total: 775000,
-        federal: 563058,
-        medicaid: 750744,
-        state: 187686
+      combined: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
       }
     },
     combined: {
-      2023: {
-        total: 3354831,
-        federal: 2437373,
-        medicaid: 3249831,
-        state: 812458
-      },
+      2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
       2024: {
-        total: 0,
-        federal: 0,
-        medicaid: 0,
-        state: 0
+        total: 1904245,
+        federal: 1428184,
+        medicaid: 1904245,
+        state: 476061
       },
       total: {
-        total: 3354831,
-        federal: 2437373,
-        medicaid: 3249831,
-        state: 812458
+        total: 1904245,
+        federal: 1428184,
+        medicaid: 1904245,
+        state: 476061
       }
     }
   },
   combined: {
     2023: {
-      total: 6809662,
-      federal: 5873204,
-      medicaid: 6694662,
-      state: 4176289
+      total: 5257831,
+      federal: 4628548,
+      medicaid: 5142831,
+      state: 514283
     },
     2024: {
-      total: 2004245,
-      federal: 1473184,
-      medicaid: 1954245,
-      state: 481061
+      total: 5097245,
+      federal: 3792934,
+      medicaid: 5047245,
+      state: 1254311
     },
     total: {
-      total: 8813907,
-      federal: 7346388,
-      medicaid: 8648907,
-      state: 4657350
+      total: 10355076,
+      federal: 8421482,
+      medicaid: 10190076,
+      state: 1768594
     }
   },
-  activityTotals: [],
+  activityTotals: [
+    {
+      id: '152a1e2b',
+      name: 'Activity 1',
+      fundingSource: null,
+      data: {
+        combined: { 2023: 3354831, 2024: 1904245, total: 5259076 },
+        contractors: { 2023: 1332756, 2024: 542444, total: 1875200 },
+        expenses: { 2023: 775000, 2024: 75000, total: 850000 },
+        otherFunding: {
+          2023: {
+            contractors: 41713,
+            expenses: 24256,
+            statePersonnel: 39031,
+            total: 105000
+          },
+          2024: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+        },
+        statePersonnel: { 2023: 1247075, 2024: 1286801, total: 2533876 }
+      }
+    }
+  ],
   activities: {
     '152a1e2b': {
       costsByFFY: {
         2023: {
-          federal: 2437373,
+          federal: 2924848,
           medicaid: 3249831,
-          state: 812458,
+          state: 324983,
           total: 3354831
         },
         2024: {
@@ -405,163 +364,32 @@ export const budgetProp = {
           total: 1904245
         },
         total: {
-          federal: 3865557,
+          federal: 4353032,
           medicaid: 5154076,
-          state: 1288519,
+          state: 801044,
           total: 5259076
         }
-      },
-      quarterlyFFP: {
-        years: {
-          2023: {
-            1: {
-              combined: {
-                dollars: 609345,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242071,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 367274,
-                percent: 0.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 609344,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242071,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 367273,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 609342,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242070,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 367272,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 609342,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242070,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 367272,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 2437373,
-                percent: 0
-              },
-              contractors: {
-                dollars: 968282,
-                percent: 1
-              },
-              inHouse: {
-                dollars: 1469091,
-                percent: 1
-              }
-            }
-          },
-          2024: {
-            1: {
-              combined: {
-                dollars: 0,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0
-              }
-            },
-            2: {
-              combined: {
-                dollars: 0,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0
-              }
-            },
-            3: {
-              combined: {
-                dollars: 0,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0
-              }
-            },
-            4: {
-              combined: {
-                dollars: 0,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 0,
-                percent: 0
-              },
-              contractors: {
-                dollars: 0,
-                percent: 0
-              },
-              inHouse: {
-                dollars: 0,
-                percent: 0
-              }
-            }
-          }
+      }
+    },
+    '3110a314': {
+      costsByFFY: {
+        2023: {
+          federal: 1622700,
+          medicaid: 1803000,
+          state: 180300,
+          total: 1803000
+        },
+        2024: {
+          federal: 2319750,
+          medicaid: 3093000,
+          state: 773250,
+          total: 3093000
         },
         total: {
-          combined: 2437373,
-          contractors: 968282,
-          inHouse: 1469091
+          federal: 3942450,
+          medicaid: 4896000,
+          state: 953550,
+          total: 4896000
         }
       }
     }
@@ -570,19 +398,7 @@ export const budgetProp = {
 };
 
 export const costCategoryShareProp = {
-  fedShare: {
-    contractors: 406833,
-    expenses: 56250,
-    statePersonnel: 965101
-  },
-  stateShare: {
-    contractors: 135611,
-    expenses: 18750,
-    statePersonnel: 321700
-  },
-  medicaidShare: {
-    contractors: 542444,
-    expenses: 75000,
-    statePersonnel: 1286801
-  }
+  fedShare: { contractors: 1312500, expenses: 0, statePersonnel: 1007250 },
+  stateShare: { contractors: 437500, expenses: 0, statePersonnel: 335750 },
+  medicaidShare: { contractors: 1750000, expenses: 0, statePersonnel: 1343000 }
 };
