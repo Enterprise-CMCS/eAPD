@@ -6,7 +6,11 @@ import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import classNames from 'classnames';
 
-export const CostSummaryRows = ({ items, defaultMessage }) => {
+export const CostSummaryRows = ({
+  items,
+  defaultMessage,
+  highlightSubtotals
+}) => {
   if (defaultMessage && (!items || items.length === 0)) {
     return (
       <tr>

@@ -191,7 +191,7 @@ describe('renders correctly', () => {
         {
           // show medicaid share %
           description: 'share percent',
-          totalCost: 200,
+          totalCost: 300,
           unitCost: 1,
           units: 'fte',
           medicaidShare: '50'
@@ -205,7 +205,17 @@ describe('renders correctly', () => {
       'item 2$200'
     );
     expect(screen.getByText(/share percent/).closest('tr')).toHaveTextContent(
-      'share percent$1×fte× 50%=$200'
+      'share percent$1×fte× 50%=$300'
+    );
+
+    expect(screen.getByText('$100').closest('td')).toHaveClass(
+      'budget-table--number'
+    );
+    expect(screen.getByText('$200').closest('td')).toHaveClass(
+      'budget-table--number'
+    );
+    expect(screen.getByText('$300').closest('td')).toHaveClass(
+      'budget-table--number'
     );
   });
 
@@ -219,37 +229,43 @@ describe('renders correctly', () => {
     ).toHaveTextContent('State staff not specified.$0');
   });
 
-  it('renders internal cost summary rows component with highlightedSubtotals', () => {
-    expect(
-      shallow(
-        <CostSummaryRows
-          highlightSubtotals={true}
-          items={[
-            {
-              // shows unit cost, units, and math symbols
-              description: 'item 1',
-              totalCost: 100,
-              unitCost: 10,
-              units: '10 items'
-            },
-            {
-              // shows none of those things
-              description: 'item 2',
-              totalCost: 200,
-              unitCost: null,
-              units: null
-            },
-            {
-              // show medicaid share %
-              description: 'share percent',
-              totalCost: 200,
-              unitCost: 1,
-              units: 'fte',
-              medicaidShare: '50'
-            }
-          ]}
-        />
-      )
-    ).toMatchSnapshot();
+  it('renders internal cost summary rows component with highlightedSubtotals', async () => {
+    await setupCostSummaryRows({
+      highlightSubtotals: true,
+      items: [
+        {
+          // shows unit cost, units, and math symbols
+          description: 'item 1',
+          totalCost: 100,
+          unitCost: 10,
+          units: '10 items'
+        },
+        {
+          // shows none of those things
+          description: 'item 2',
+          totalCost: 200,
+          unitCost: null,
+          units: null
+        },
+        {
+          // show medicaid share %
+          description: 'share percent',
+          totalCost: 300,
+          unitCost: 1,
+          units: 'fte',
+          medicaidShare: '50'
+        }
+      ]
+    });
+
+    expect(screen.getByText('$100').closest('td')).toHaveClass(
+      'budget-table--number budget-table--cell__hightlight-lighter'
+    );
+    expect(screen.getByText('$200').closest('td')).toHaveClass(
+      'budget-table--number budget-table--cell__hightlight-lighter'
+    );
+    expect(screen.getByText('$300').closest('td')).toHaveClass(
+      'budget-table--number budget-table--cell__hightlight-lighter'
+    );
   });
 });
