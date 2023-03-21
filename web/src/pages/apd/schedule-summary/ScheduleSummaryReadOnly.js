@@ -73,19 +73,16 @@ const ScheduleSummary = ({ activities }) => (
           </caption>
           <thead>
             <tr className="budget-table--row__primary-header">
-              <th scope="col" style={{ width: '70%' }}>
-                Activity Milestones
-              </th>
-              <th scope="col" className="ds-u-text-align--left">
-                Target Completion Date
+              <th scope="col" colSpan={2} style={{ width: '70%' }}>
+                Activity {i + 1}: {activityName || 'Untitled'}
               </th>
             </tr>
             <tr>
-              <th
-                className="ds-u-font-weight--bold ds-u-border-right--0"
-                colSpan={2}
-              >
-                Activity {i + 1}: {activityTitle(activityName, milestones)}
+              <th className="ds-u-font-weight--bold ds-u-border-right--0">
+                Milestone List
+              </th>
+              <th className="ds-u-font-weight--bold ds-u-border-right--0">
+                Target Completion Date
               </th>
             </tr>
           </thead>
@@ -99,7 +96,7 @@ const ScheduleSummary = ({ activities }) => (
             )}
             {milestones.map(({ end: milestoneEnd, name: milestoneName }) => (
               <tr key={milestoneName}>
-                <td className="ds-u-border-right--0">
+                <td className="ds-u-border-right--0 indent-title">
                   {milestoneName || 'Milestone not specified.'}
                 </td>
                 <td className="ds-u-border-left--0 ds-u-text-align--left">
