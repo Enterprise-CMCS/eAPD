@@ -116,10 +116,7 @@ const CostAllocateFFPQuarterly = ({
                   {titleCase(t('table.quarter', { q }))}
                 </th>
               ))}
-              <th
-                scope="col"
-                className="budget-table--subtotal ds-u-text-align--right"
-              >
+              <th scope="col" className="ds-u-text-align--right">
                 {titleCase(t('table.subtotal'))}
               </th>
             </Fragment>
@@ -154,7 +151,7 @@ const CostAllocateFFPQuarterly = ({
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
-                        labelClassName="sr-only"
+                        labelClassName="ds-u-visibility--screen-reader"
                         onChange={setInHouse(q)}
                         onBlur={onBlur}
                         round
@@ -218,7 +215,7 @@ const CostAllocateFFPQuarterly = ({
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, contractors`}
-                        labelClassName="sr-only"
+                        labelClassName="ds-u-visibility--screen-reader"
                         onChange={setContractor(q)}
                         onBlur={onBlur}
                         round

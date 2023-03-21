@@ -3,24 +3,28 @@
 exports[`budget summary component data row group renders 1`] = `
 <Fragment>
   <DataRow
+    apdType="HITECH"
     category="statePersonnel"
     data={Object {}}
     key="0"
     title="State Staff"
   />
   <DataRow
+    apdType="HITECH"
     category="expenses"
     data={Object {}}
     key="1"
     title="Other State Expenses"
   />
   <DataRow
+    apdType="HITECH"
     category="contractors"
     data={Object {}}
     key="2"
     title="Private Contractor"
   />
   <DataRow
+    apdType="HITECH"
     category="combined"
     data={Object {}}
     key="3"
@@ -32,30 +36,35 @@ exports[`budget summary component data row group renders 1`] = `
 exports[`budget summary component data row group renders with keyStatePersonnel 1`] = `
 <Fragment>
   <DataRow
+    apdType="MMIS"
     category="keyStatePersonnel"
     data={Object {}}
     key="0"
     title="Key State Personnel"
   />
   <DataRow
+    apdType="MMIS"
     category="statePersonnel"
     data={Object {}}
     key="1"
     title="State Staff"
   />
   <DataRow
+    apdType="MMIS"
     category="expenses"
     data={Object {}}
     key="2"
     title="Other State Expenses"
   />
   <DataRow
+    apdType="MMIS"
     category="contractors"
     data={Object {}}
     key="3"
     title="Private Contractor"
   />
   <DataRow
+    apdType="MMIS"
     category="combined"
     data={Object {}}
     key="4"
@@ -66,9 +75,11 @@ exports[`budget summary component data row group renders with keyStatePersonnel 
 
 exports[`budget summary component data row renders with data 1`] = `
 <tr
-  className=""
+  className="
+      "
 >
   <th
+    className="indent-title budget-table--col-divider__right"
     scope="row"
   >
     title text
@@ -77,14 +88,14 @@ exports[`budget summary component data row renders with data 1`] = `
     className="budget-table--number"
   >
     <Dollars>
-      2
+      1
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
     <Dollars>
-      1
+      2
     </Dollars>
   </td>
   <td
@@ -99,9 +110,11 @@ exports[`budget summary component data row renders with data 1`] = `
 
 exports[`budget summary component data row renders with no data 1`] = `
 <tr
-  className=""
+  className="
+      "
 >
   <th
+    className="indent-title budget-table--col-divider__right"
     scope="row"
   >
     title text
@@ -142,13 +155,13 @@ exports[`budget summary component header row renders 1`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Federal Share
   </th>
   <th
     className="ds-u-text-align--right"
     scope="col"
   >
-    Federal Total
+    State Share
   </th>
   <th
     className="ds-u-text-align--right"
@@ -171,13 +184,13 @@ exports[`budget summary component header row renders 2`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Federal Share
   </th>
   <th
     className="ds-u-text-align--right"
     scope="col"
   >
-    Federal Total
+    State Share
   </th>
   <th
     className="ds-u-text-align--right"
@@ -506,13 +519,13 @@ exports[`budget summary component renders correctly for hitech apds 1`] = `
           className="ds-u-text-align--right"
           scope="col"
         >
-          State Total
+          Federal Total
         </th>
         <th
           className="ds-u-text-align--right"
           scope="col"
         >
-          Federal Total
+          State Total
         </th>
         <th
           className="ds-u-text-align--right"
@@ -524,26 +537,26 @@ exports[`budget summary component renders correctly for hitech apds 1`] = `
     </thead>
     <tbody>
       <tr
-        className=""
+        className="budget-table--row__highlight budget-table--total"
         key="1"
       >
         <th
           scope="row"
         >
-          FFY 1
+          Activities Grand Total
         </th>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            2
+            1
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            1
+            2
           </Dollars>
         </td>
         <td
@@ -564,17 +577,17 @@ exports[`budget summary component renders correctly for hitech apds 1`] = `
           FFY 2
         </th>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            20
+            10
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            10
+            20
           </Dollars>
         </td>
         <td
@@ -712,13 +725,13 @@ exports[`budget summary component renders correctly for mmis apds 1`] = `
           className="ds-u-text-align--right"
           scope="col"
         >
-          State Total
+          Federal Total
         </th>
         <th
           className="ds-u-text-align--right"
           scope="col"
         >
-          Federal Total
+          State Total
         </th>
         <th
           className="ds-u-text-align--right"
@@ -730,26 +743,26 @@ exports[`budget summary component renders correctly for mmis apds 1`] = `
     </thead>
     <tbody>
       <tr
-        className=""
+        className="budget-table--row__highlight budget-table--total"
         key="1"
       >
         <th
           scope="row"
         >
-          FFY 1
+          Activities Grand Total
         </th>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            2
+            1
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            1
+            2
           </Dollars>
         </td>
         <td
@@ -770,17 +783,17 @@ exports[`budget summary component renders correctly for mmis apds 1`] = `
           FFY 2
         </th>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            20
+            10
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            10
+            20
           </Dollars>
         </td>
         <td

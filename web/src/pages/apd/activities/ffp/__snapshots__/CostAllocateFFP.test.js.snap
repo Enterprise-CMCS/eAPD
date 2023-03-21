@@ -28,7 +28,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         scope="col"
       >
         <span
-          class="sr-only"
+          class="ds-u-visibility--screen-reader"
         >
           unit cost
         </span>
@@ -38,7 +38,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         scope="col"
       >
         <span
-          class="sr-only"
+          class="ds-u-visibility--screen-reader"
         >
           units
         </span>
@@ -50,7 +50,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--total budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight-lighter"
     >
       <td
         class="title"
@@ -59,7 +59,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         State Staff Total
       </td>
       <td
-        class="budget-table--number"
+        class="budget-table--number "
         data-cy="total"
       >
         <span>
@@ -78,7 +78,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--total budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight-lighter"
     >
       <td
         class="title"
@@ -87,7 +87,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         Other State Expenses Total
       </td>
       <td
-        class="budget-table--number"
+        class="budget-table--number "
         data-cy="total"
       >
         <span>
@@ -106,7 +106,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       </th>
     </tr>
     <tr
-      class="budget-table--total budget-table--row__highlight"
+      class="budget-table--total budget-table--row__highlight-lighter"
     >
       <td
         class="title"
@@ -115,7 +115,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
         Private Contractor Total
       </td>
       <td
-        class="budget-table--number"
+        class="budget-table--number "
         data-cy="total"
       >
         <span>
@@ -124,7 +124,7 @@ exports[`the CostAllocateFFP component renders table correctly 1`] = `
       </td>
     </tr>
     <tr
-      class="budget-table--total budget-table--row__header"
+      class="budget-table--total budget-table--row__header "
     >
       <td
         colspan="5"

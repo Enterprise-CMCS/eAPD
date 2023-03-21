@@ -8,11 +8,11 @@ import {
 import CostAllocationRows from '../activities/cost-allocation/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
-  ffy,
-  activityIndex,
+  ffy, // prop
+  activityIndex, // prop
   costSummary,
   activityName,
-  otherFunding,
+  otherFunding, // prop
   fundingSource
 }) => {
   const { years } = costSummary;
@@ -24,18 +24,12 @@ const SummaryActivityBreakdownTable = ({
     >
       <thead>
         <tr className="budget-table--row__primary-header">
-          <th scope="col">
+          <th scope="col" colSpan={6}>
             Activity {activityIndex + 1}{' '}
             <span style={{ fontWeight: '100' }}>
               {activityName || 'Untitled'}
               {fundingSource ? ` (${fundingSource})` : ''}
             </span>
-          </th>
-          <th scope="col" colSpan="4">
-            Personnel Cost × FTE
-          </th>
-          <th scope="col" className="ds-u-text-align--right">
-            Total cost
           </th>
         </tr>
       </thead>
@@ -45,6 +39,9 @@ const SummaryActivityBreakdownTable = ({
           ffy={ffy}
           otherFunding={otherFunding}
           activityIndex={activityIndex}
+          highlightSubtotals={true}
+          showUnitCostHeader={true}
+          highlightTotal={true}
         />
       </tbody>
     </table>

@@ -140,7 +140,7 @@ const IncentivePayments = ({
                               aria-labelledby={`q${q} eh-payments`}
                               label={`ehAmt payments for ${year}, quarter ${q}`}
                               data-testid={`ehAmt ${year} ${q}`}
-                              labelClassName="sr-only"
+                              labelClassName="ds-u-visibility--screen-reader"
                               value={data.ehAmt[year][q] || '0'}
                               onChange={({ target: { value } }) => {
                                 setEHPayment(year, q, value);
@@ -181,7 +181,7 @@ const IncentivePayments = ({
                           fieldClassName="budget-table--input__number"
                           aria-labelledby={`q${q} eh-count`}
                           label={`ehCt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
+                          labelClassName="ds-u-visibility--screen-reader"
                           name={`ehCt-payments-${year}-q${q}`}
                           value={data.ehCt[year][q] || ''}
                           onChange={updateEHCount(year, q)}
@@ -223,7 +223,7 @@ const IncentivePayments = ({
                               }
                               aria-labelledby={`q${q} ep-payments`}
                               label={`epAmt payments for ${year}, quarter ${q}`}
-                              labelClassName="sr-only"
+                              labelClassName="ds-u-visibility--screen-reader"
                               value={data.epAmt[year][q] || '0'}
                               data-testid={`epAmt ${year} ${q}`}
                               onChange={({ target: { value } }) => {
@@ -265,7 +265,7 @@ const IncentivePayments = ({
                           fieldClassName="budget-table--input__number"
                           aria-labelledby={`q${q} ep-count`}
                           label={`epCt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
+                          labelClassName="ds-u-visibility--screen-reader"
                           name={`epCt-payments-${year}-q${q}`}
                           value={data.epCt[year][q] || ''}
                           onChange={updateEPCount(year, q)}
