@@ -56,7 +56,7 @@ export const apiAsStateAdmin = login('state-admin');
 export const apiAsStateStaff = login('state-staff');
 export const apiNoPermissionsNoState = login('all-permissions-no-state');
 export const apiNoPermissions = login('no-permissions');
-const apiNoAuth = axios.create(axiosDefaults);
+export const apiNoAuth = axios.create(axiosDefaults);
 
 export const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {

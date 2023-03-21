@@ -3,7 +3,6 @@ import loggerFactory from '../logger/index.js';
 import affiliations from './affiliations/index.js';
 import apds from './apds/index.js';
 import auth from './auth/index.js';
-import docs from './docs/index.js';
 import roles from './roles/index.js';
 import states from './states/index.js';
 import users from './users/index.js';
@@ -18,7 +17,6 @@ export default (
     affiliationsEndpoint = affiliations,
     apdsEndpoint = apds,
     authEndpoint = auth,
-    docsEndpoint = docs,
     rolesEndpoint = roles,
     statesEndpoint = states,
     usersEndpoint = users,
@@ -31,8 +29,6 @@ export default (
   apdsEndpoint(app);
   logger.debug('setting up routes for auth');
   authEndpoint(app);
-  logger.debug('setting up routes for docs');
-  docsEndpoint(app);
   logger.debug('setting up routes for roles');
   rolesEndpoint(app);
   logger.debug('setting up routes for states');
