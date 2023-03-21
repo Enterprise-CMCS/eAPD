@@ -3763,7 +3763,7 @@ describe('budget summing methods', () => {
       expect(actual).toEqual(budgetProp);
     });
 
-    test("updates budget with new values for each cost category's year and total", () => {
+    test("updates budget with new values for each cost category's values", () => {
       const activityTotals = activityTotalsProp;
       const allocation = allocationProp;
       const budget = budgetProp;
@@ -4236,6 +4236,289 @@ describe('budget summing methods', () => {
         year
       });
       expect(actual).toEqual(expected);
+
+      // Below are the nitty gritty calculation checks
+
+      // statePersonnel section -------
+
+      // Amounts to add to the cost category
+      const statePersonnelTotalToAdd =
+        activityTotals.data.statePersonnel['2024'];
+      const statePersonnelMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.statePersonnel;
+      const statePersonnelFedShareToAdd =
+        costCategoryShare.fedShare.statePersonnel;
+      const statePersonnelStateShareToAdd =
+        costCategoryShare.stateShare.statePersonnel;
+
+      // Amounts for the cost category (CC)'s year
+      const statePersonnelOldCCYearTotal =
+        budgetProp.ddi['75-25'].statePersonnel['2024'].total;
+      const statePersonnelOldCCYearMedicaid =
+        budgetProp.ddi['75-25'].statePersonnel['2024'].medicaid;
+      const statePersonnelOldCCYearFederal =
+        budgetProp.ddi['75-25'].statePersonnel['2024'].federal;
+      const statePersonnelOldCCYearState =
+        budgetProp.ddi['75-25'].statePersonnel['2024'].state;
+      const statePersonnelNewCCYearTotal =
+        actual.ddi['75-25'].statePersonnel['2024'].total;
+      const statePersonnelNewCCYearMedicaid =
+        actual.ddi['75-25'].statePersonnel['2024'].medicaid;
+      const statePersonnelNewCCYearFederal =
+        actual.ddi['75-25'].statePersonnel['2024'].federal;
+      const statePersonnelNewCCYearState =
+        actual.ddi['75-25'].statePersonnel['2024'].state;
+
+      expect(statePersonnelNewCCYearTotal).toEqual(
+        statePersonnelOldCCYearTotal + statePersonnelTotalToAdd
+      );
+      expect(statePersonnelNewCCYearMedicaid).toEqual(
+        statePersonnelOldCCYearMedicaid + statePersonnelMedicaidShareToAdd
+      );
+      expect(statePersonnelNewCCYearFederal).toEqual(
+        statePersonnelOldCCYearFederal + statePersonnelFedShareToAdd
+      );
+      expect(statePersonnelNewCCYearState).toEqual(
+        statePersonnelOldCCYearState + statePersonnelStateShareToAdd
+      );
+
+      // Amounts for the cost category's total
+      const statePersonnelOldCCTotal =
+        budgetProp.ddi['75-25'].statePersonnel.total.total;
+      const statePersonnelOldCCMedicaid =
+        budgetProp.ddi['75-25'].statePersonnel.total.medicaid;
+      const statePersonnelOldCCFederal =
+        budgetProp.ddi['75-25'].statePersonnel.total.federal;
+      const statePersonnelOldCCState =
+        budgetProp.ddi['75-25'].statePersonnel.total.state;
+      const statePersonnelNewCCTotal =
+        actual.ddi['75-25'].statePersonnel.total.total;
+      const statePersonnelNewCCMedicaid =
+        actual.ddi['75-25'].statePersonnel.total.medicaid;
+      const statePersonnelNewCCFederal =
+        actual.ddi['75-25'].statePersonnel.total.federal;
+      const statePersonnelNewCCState =
+        actual.ddi['75-25'].statePersonnel.total.state;
+
+      expect(statePersonnelNewCCTotal).toEqual(
+        statePersonnelOldCCTotal + statePersonnelTotalToAdd
+      );
+      expect(statePersonnelNewCCMedicaid).toEqual(
+        statePersonnelOldCCMedicaid + statePersonnelMedicaidShareToAdd
+      );
+      expect(statePersonnelNewCCFederal).toEqual(
+        statePersonnelOldCCFederal + statePersonnelFedShareToAdd
+      );
+      expect(statePersonnelNewCCState).toEqual(
+        statePersonnelOldCCState + statePersonnelStateShareToAdd
+      );
+
+      // contractors section -------
+
+      // Amounts to add to the cost category
+      const contractorsTotalToAdd = activityTotals.data.contractors['2024'];
+      const contractorsMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.contractors;
+      const contractorsFedShareToAdd = costCategoryShare.fedShare.contractors;
+      const contractorsStateShareToAdd =
+        costCategoryShare.stateShare.contractors;
+
+      // Amounts for the cost category (CC)'s year
+      const contractorsOldCCYearTotal =
+        budgetProp.ddi['75-25'].contractors['2024'].total;
+      const contractorsOldCCYearMedicaid =
+        budgetProp.ddi['75-25'].contractors['2024'].medicaid;
+      const contractorsOldCCYearFederal =
+        budgetProp.ddi['75-25'].contractors['2024'].federal;
+      const contractorsOldCCYearState =
+        budgetProp.ddi['75-25'].contractors['2024'].state;
+      const contractorsNewCCYearTotal =
+        actual.ddi['75-25'].contractors['2024'].total;
+      const contractorsNewCCYearMedicaid =
+        actual.ddi['75-25'].contractors['2024'].medicaid;
+      const contractorsNewCCYearFederal =
+        actual.ddi['75-25'].contractors['2024'].federal;
+      const contractorsNewCCYearState =
+        actual.ddi['75-25'].contractors['2024'].state;
+
+      expect(contractorsNewCCYearTotal).toEqual(
+        contractorsOldCCYearTotal + contractorsTotalToAdd
+      );
+      expect(contractorsNewCCYearMedicaid).toEqual(
+        contractorsOldCCYearMedicaid + contractorsMedicaidShareToAdd
+      );
+      expect(contractorsNewCCYearFederal).toEqual(
+        contractorsOldCCYearFederal + contractorsFedShareToAdd
+      );
+      expect(contractorsNewCCYearState).toEqual(
+        contractorsOldCCYearState + contractorsStateShareToAdd
+      );
+
+      // Amounts for the cost category's total
+      const contractorsOldCCTotal =
+        budgetProp.ddi['75-25'].contractors.total.total;
+      const contractorsOldCCMedicaid =
+        budgetProp.ddi['75-25'].contractors.total.medicaid;
+      const contractorsOldCCFederal =
+        budgetProp.ddi['75-25'].contractors.total.federal;
+      const contractorsOldCCState =
+        budgetProp.ddi['75-25'].contractors.total.state;
+      const contractorsNewCCTotal = actual.ddi['75-25'].contractors.total.total;
+      const contractorsNewCCMedicaid =
+        actual.ddi['75-25'].contractors.total.medicaid;
+      const contractorsNewCCFederal =
+        actual.ddi['75-25'].contractors.total.federal;
+      const contractorsNewCCState = actual.ddi['75-25'].contractors.total.state;
+
+      expect(contractorsNewCCTotal).toEqual(
+        contractorsOldCCTotal + contractorsTotalToAdd
+      );
+      expect(contractorsNewCCMedicaid).toEqual(
+        contractorsOldCCMedicaid + contractorsMedicaidShareToAdd
+      );
+      expect(contractorsNewCCFederal).toEqual(
+        contractorsOldCCFederal + contractorsFedShareToAdd
+      );
+      expect(contractorsNewCCState).toEqual(
+        contractorsOldCCState + contractorsStateShareToAdd
+      );
+
+      // expenses section -------
+
+      // Amounts to add to the cost category
+      const expensesTotalToAdd = activityTotals.data.expenses['2024'];
+      const expensesMedicaidShareToAdd =
+        costCategoryShare.medicaidShare.expenses;
+      const expensesFedShareToAdd = costCategoryShare.fedShare.expenses;
+      const expensesStateShareToAdd = costCategoryShare.stateShare.expenses;
+
+      // Amounts for the cost category (CC)'s year
+      const expensesOldCCYearTotal =
+        budgetProp.ddi['75-25'].expenses['2024'].total;
+      const expensesOldCCYearMedicaid =
+        budgetProp.ddi['75-25'].expenses['2024'].medicaid;
+      const expensesOldCCYearFederal =
+        budgetProp.ddi['75-25'].expenses['2024'].federal;
+      const expensesOldCCYearState =
+        budgetProp.ddi['75-25'].expenses['2024'].state;
+      const expensesNewCCYearTotal = actual.ddi['75-25'].expenses['2024'].total;
+      const expensesNewCCYearMedicaid =
+        actual.ddi['75-25'].expenses['2024'].medicaid;
+      const expensesNewCCYearFederal =
+        actual.ddi['75-25'].expenses['2024'].federal;
+      const expensesNewCCYearState = actual.ddi['75-25'].expenses['2024'].state;
+
+      expect(expensesNewCCYearTotal).toEqual(
+        expensesOldCCYearTotal + expensesTotalToAdd
+      );
+      expect(expensesNewCCYearMedicaid).toEqual(
+        expensesOldCCYearMedicaid + expensesMedicaidShareToAdd
+      );
+      expect(expensesNewCCYearFederal).toEqual(
+        expensesOldCCYearFederal + expensesFedShareToAdd
+      );
+      expect(expensesNewCCYearState).toEqual(
+        expensesOldCCYearState + expensesStateShareToAdd
+      );
+
+      // Amounts for the cost category's total
+      const expensesOldCCTotal = budgetProp.ddi['75-25'].expenses.total.total;
+      const expensesOldCCMedicaid =
+        budgetProp.ddi['75-25'].expenses.total.medicaid;
+      const expensesOldCCFederal =
+        budgetProp.ddi['75-25'].expenses.total.federal;
+      const expensesOldCCState = budgetProp.ddi['75-25'].expenses.total.state;
+      const expensesNewCCTotal = actual.ddi['75-25'].expenses.total.total;
+      const expensesNewCCMedicaid = actual.ddi['75-25'].expenses.total.medicaid;
+      const expensesNewCCFederal = actual.ddi['75-25'].expenses.total.federal;
+      const expensesNewCCState = actual.ddi['75-25'].expenses.total.state;
+
+      expect(expensesNewCCTotal).toEqual(
+        expensesOldCCTotal + expensesTotalToAdd
+      );
+      expect(expensesNewCCMedicaid).toEqual(
+        expensesOldCCMedicaid + expensesMedicaidShareToAdd
+      );
+      expect(expensesNewCCFederal).toEqual(
+        expensesOldCCFederal + expensesFedShareToAdd
+      );
+      expect(expensesNewCCState).toEqual(
+        expensesOldCCState + expensesStateShareToAdd
+      );
+
+      // combined sections -------
+
+      // Amounts for the combined year for the defined fed-state split
+      const oldCombinedSplitYearTotal = budgetProp.ddi.combined['2024'].total;
+      const oldCombinedSplitYearMedicaid =
+        budgetProp.ddi.combined['2024'].medicaid;
+      const oldCombinedSplitYearFederal =
+        budgetProp.ddi.combined['2024'].federal;
+      const oldCombinedSplitYearState = budgetProp.ddi.combined['2024'].state;
+      const newCombinedSplitYearTotal = actual.ddi.combined['2024'].total;
+      const newCombinedSplitYearMedicaid = actual.ddi.combined['2024'].medicaid;
+      const newCombinedSplitYearFederal = actual.ddi.combined['2024'].federal;
+      const newCombinedSplitYearState = actual.ddi.combined['2024'].state;
+
+      expect(newCombinedSplitYearTotal).toEqual(
+        oldCombinedSplitYearTotal +
+          statePersonnelTotalToAdd +
+          contractorsTotalToAdd +
+          expensesTotalToAdd
+      );
+      expect(newCombinedSplitYearMedicaid).toEqual(
+        oldCombinedSplitYearMedicaid +
+          statePersonnelMedicaidShareToAdd +
+          contractorsMedicaidShareToAdd +
+          expensesMedicaidShareToAdd
+      );
+      expect(newCombinedSplitYearFederal).toEqual(
+        oldCombinedSplitYearFederal +
+          statePersonnelFedShareToAdd +
+          contractorsFedShareToAdd +
+          expensesFedShareToAdd
+      );
+      expect(newCombinedSplitYearState).toEqual(
+        oldCombinedSplitYearState +
+          statePersonnelStateShareToAdd +
+          contractorsStateShareToAdd +
+          expensesStateShareToAdd
+      );
+
+      // Amounts for the combined total [for all fed-state splits of funding category (e.g. ddi)]
+      const oldCombinedTotal = budgetProp.ddi.combined.total.total;
+      const oldCombinedMedicaid = budgetProp.ddi.combined.total.medicaid;
+      const oldCombinedFederal = budgetProp.ddi.combined.total.federal;
+      const oldCombinedState = budgetProp.ddi.combined.total.state;
+      const newCombinedTotal = actual.ddi.combined.total.total;
+      const newCombinedMedicaid = actual.ddi.combined.total.medicaid;
+      const newCombinedFederal = actual.ddi.combined.total.federal;
+      const newCombinedState = actual.ddi.combined.total.state;
+
+      expect(newCombinedTotal).toEqual(
+        oldCombinedTotal +
+          statePersonnelTotalToAdd +
+          contractorsTotalToAdd +
+          expensesTotalToAdd
+      );
+      expect(newCombinedMedicaid).toEqual(
+        oldCombinedMedicaid +
+          statePersonnelMedicaidShareToAdd +
+          contractorsMedicaidShareToAdd +
+          expensesMedicaidShareToAdd
+      );
+      expect(newCombinedFederal).toEqual(
+        oldCombinedFederal +
+          statePersonnelFedShareToAdd +
+          contractorsFedShareToAdd +
+          expensesFedShareToAdd
+      );
+      expect(newCombinedState).toEqual(
+        oldCombinedState +
+          statePersonnelStateShareToAdd +
+          contractorsStateShareToAdd +
+          expensesStateShareToAdd
+      );
     });
   });
 
