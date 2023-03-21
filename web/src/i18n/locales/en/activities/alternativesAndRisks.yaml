@@ -1,1 +1,57 @@
 title: Analysis of Alternatives and Risk
+instruction:
+  detail: >-
+    Provide context on the process for selection of the approach described in
+    this activity and alternatives considered.
+
+
+    If this is a previously approved activity, only use this section to discuss
+    alternative considerations made for substantive changes/decisions made
+    during the implementation of the project. Don't include historical
+    considerations in this current activity.
+
+alternativeAnalysis:
+  heading: Alternative Analysis
+  detail: >-
+    Describe any alternatives considered regarding this activity, including how
+    each potential approach was studied or assessed. Provide a brief description
+    of each option considered, and a justification for the approach or option
+    that was ultimately selected.
+
+costBenefitAnalysis:
+  heading: Cost Benefit Analysis
+  detail: >-
+    Provide the results of the state's cost benefit analysis associated with
+    this activity. Explain how the results of this analysis informed how the
+    final solution was selected. If a cost benefit analysis was not conducted or
+    needed, explain why it was not applicable to this activity.
+
+feasibilityStudy:
+  heading: Feasibility Study
+  detail: >-
+    Provide the results of the state's feasibility study. If no feasibility
+    study was conducted, explain why not and whether or not the feasibility
+    study was waived by law or not required in regulation. Note: CMS regulations
+    only allow 50 percent Federal Financial Participation (FFP) for feasibility
+    studies.
+
+requirementsAnalysis:
+  heading: Requirements Analysis
+  detail: >-
+    If a requirements analysis was conducted for this activity, provide a
+    summary of the analysis and the results. If no requirements analysis was
+    conducted, explain the reason. Indicate whether a requirements analysis is
+    waived by law or is not required in regulation.
+
+forseeableRisks:
+  heading: Forseeable Risks
+  detail: >-
+    Describe any forseeable risks associated with your proposed solution,
+    including the strategy for mitigation of the identified risk(s).
+  helpText: >-
+    **Example:** A potential risk to the proposed solution is system outage and
+    downtime. The state has determined the risk can be minimized when proper
+    precautions are in place and a plan for communications for outages has been
+    established. The state accepts this risk and will oversee the mitigation
+    efforts through monitoring and oversight of contract service level
+    agreements.

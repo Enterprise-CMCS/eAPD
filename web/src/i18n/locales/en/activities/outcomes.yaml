@@ -46,7 +46,7 @@ outcomesHITECH:
     input:
       label: Goal name
       hint: >-
-        Examples of goals include: improved health outcomes for benficiaries,
+        Examples of goals include: improved health outcomes for beneficiaries,
         transformation of public health services, enabling implementation of
         other initiatives, etc.
 
@@ -78,7 +78,7 @@ outcomesMMIS:
       §433.112.
 
     helpText: >-
-      **CMS Required Outcome Exmaple:**
+      **CMS Required Outcome Example:**
 
       Outcome: A provider can initiate, save, and apply to be a Medicaid
       provider.
@@ -121,7 +121,7 @@ outcomesMMIS:
     input:
       label: Goal name
       hint: >-
-        Examples of goals include: improved health outcomes for benficiaries,
+        Examples of goals include: improved health outcomes for beneficiaries,
         transformation of public health services, enabling implementation of
         other initiatives, etc.
 

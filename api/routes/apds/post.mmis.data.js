@@ -43,8 +43,12 @@ const getNewMmisApd = (years, yearOptions) => {
       previousActivitySummary: '',
       actualExpenditures: forAllYears(
         {
-          mmis: {
+          ddi: {
             90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          },
+          mando: {
             75: { federalActual: 0, totalApproved: 0 },
             50: { federalActual: 0, totalApproved: 0 }
           }

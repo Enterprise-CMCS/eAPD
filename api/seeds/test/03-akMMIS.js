@@ -54,7 +54,7 @@ export default {
     previousActivitySummary: '',
     actualExpenditures: {
       2021: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -64,13 +64,23 @@ export default {
             totalApproved: 0
           },
           90: {
+            federalActual: 0,
+            totalApproved: 0
+          }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
             federalActual: 0,
             totalApproved: 0
           }
         }
       },
       2022: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -83,10 +93,20 @@ export default {
             federalActual: 0,
             totalApproved: 0
           }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
+            federalActual: 0,
+            totalApproved: 0
+          }
         }
       },
       2023: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -96,6 +116,16 @@ export default {
             totalApproved: 0
           },
           90: {
+            federalActual: 0,
+            totalApproved: 0
+          }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
             federalActual: 0,
             totalApproved: 0
           }

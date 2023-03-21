@@ -1,8 +1,11 @@
-import { shallow } from 'enzyme';
 import React from 'react';
 import Router from 'react-router-dom';
+import { renderWithConnection, act, screen } from 'apd-testing-library';
+import userEvent from '@testing-library/user-event';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
-import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
+import { plain as ExecutiveSummary } from './ExecutiveSummary';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const mockPush = jest.fn();
 
@@ -13,177 +16,216 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }));
 
-describe('executive summary component', () => {
-  const props = {
-    apdId: '0123456789abcdef01234567',
-    data: [
-      {
-        activityId: 'a1',
-        name: 'activity 1',
-        summary: 'first activity',
-        combined: 950,
-        federal: 1050,
-        medicaid: 1150,
-        ffys: {
-          1: {
-            total: 5232,
-            federal: 2883,
-            medicaid: 23626
-          },
-          2: {
-            total: 848622,
-            federal: 826,
-            medicaid: 2468252
-          }
-        }
+const defaultCostsByFFY = {
+  3000: 'a1 ffy 1 costs',
+  3001: 'a1 ffy 2 costs',
+  total: { federal: 0, medicaid: 0, total: 0 }
+};
+
+const defaultCosts = {
+  3000: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  },
+  3001: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  },
+  total: {
+    federal: 0,
+    medicaid: 0,
+    state: 0,
+    total: 0
+  }
+};
+
+const defaultProps = {
+  apdType: APD_TYPE.HITECH,
+  budget: {
+    activities: {
+      a1: {
+        costsByFFY: defaultCostsByFFY
       },
-      {
-        activityId: 'a2',
-        name: '',
-        summary: 'second activity',
-        combined: 310,
-        federal: 2050,
-        medicaid: 2150,
-        ffys: {
-          1: {
-            total: 26926,
-            federal: 2356,
-            medicaid: 989264
-          },
-          2: {
-            total: 54634738,
-            federal: 643,
-            medicaid: 73
-          }
-        }
-      }
-    ],
-    jumpAction: jest.fn(),
-    total: {
-      combined: 10,
-      federal: 20,
-      medicaid: 30,
-      ffys: {
-        1: {
-          total: 5232,
-          federal: 2883,
-          medicaid: 23626
-        },
-        2: {
-          total: 848622,
-          federal: 826,
-          medicaid: 2468252
-        }
+      a2: {
+        costsByFFY: defaultCostsByFFY
       }
     },
-    years: ['1', '2']
-  };
+    combined: {
+      3000: 'ffy 1 combined costs',
+      3001: 'ffy 2 combined costs',
+      total: { federal: 0, medicaid: 0, total: 0 }
+    },
+    hit: {
+      combined: defaultCosts
+    },
+    hie: {
+      combined: defaultCosts
+    },
+    hitAndHie: {
+      combined: defaultCosts
+    },
+    mmisByFFP: {
+      '90-10': defaultCosts,
+      '75-25': defaultCosts,
+      '50-50': defaultCosts,
+      '0-100': defaultCosts,
+      combined: defaultCosts
+    }
+  },
+  data: [
+    {
+      activityId: 'a1',
+      dateRange: '1/3/3000 - 2/25/3001',
+      name: 'activity 1',
+      summary: 'first activity',
+      combined: 0,
+      federal: 0,
+      medicaid: 0,
+      ffys: {
+        3000: 'a1 ffy 1 costs',
+        3001: 'a1 ffy 2 costs'
+      }
+    },
+    {
+      activityId: 'a2',
+      dateRange: 'Date not specified - Date not specified',
+      name: '',
+      summary: 'second activity',
+      combined: 0,
+      federal: 0,
+      medicaid: 0,
+      ffys: {
+        3000: 'a2 ffy 1 costs',
+        3001: 'a2 ffy 2 costs'
+      }
+    }
+  ],
+  total: {
+    combined: 0,
+    federal: 0,
+    medicaid: 0,
+    ffys: {
+      3000: 'ffy 1 combined costs',
+      3001: 'ffy 2 combined costs'
+    }
+  },
+  updateStatus: {
+    isUpdateAPD: true,
+    annualUpdate: true,
+    asNeededUpdate: false
+  },
+  years: ['3000', '3001']
+};
 
-  it('renders correctly', () => {
-    jest
-      .spyOn(Router, 'useHistory')
-      .mockReturnValue({ push: () => mockPush() });
-    jest.spyOn(Router, 'useRouteMatch').mockReturnValue({ path: '---path---' });
-    jest
-      .spyOn(Router, 'useParams')
-      .mockReturnValue({ apdId: '0123456789abcdef01234560' });
-    const component = shallow(<ExecutiveSummary {...props} />);
-    expect(component).toMatchSnapshot();
+const defaultMedicaidBusinessAreas = {
+  waiverSupportSystems: false,
+  assetVerificationSystem: false,
+  claimsProcessing: true,
+  decisionSupportSystemDW: false,
+  electronicVisitVerification: false,
+  encounterProcessingSystemMCS: false,
+  financialManagement: true,
+  healthInformationExchange: false,
+  longTermServicesSupports: false,
+  memberManagement: false,
+  pharmacyBenefitManagementPOS: false,
+  programIntegrity: true,
+  providerManagement: false,
+  thirdPartyLiability: false,
+  other: false,
+  otherMedicaidBusinessAreas: ''
+};
+
+const setup = async (props = {}, options = {}) => {
+  jest.spyOn(Router, 'useHistory').mockReturnValue({ push: () => mockPush() });
+  jest.spyOn(Router, 'useRouteMatch').mockReturnValue({ path: '---path---' });
+  jest
+    .spyOn(Router, 'useParams')
+    .mockReturnValue({ apdId: '0123456789abcdef01234560' });
+  let util;
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  await act(async () => {
+    util = renderWithConnection(
+      <ExecutiveSummary {...defaultProps} {...props} />,
+      options
+    );
+  });
+  const user = userEvent.setup();
+  return {
+    util,
+    user
+  };
+};
+
+describe('<ExecutiveSummary />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    resetLDMocks();
   });
 
-  it('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          activities: [
-            {
-              activityId: 'a1',
-              name: 'activity 1',
-              activityOverview: {
-                summary: 'first activity'
-              },
-              activitySchedule: {
-                // Shirley Chisholm is seated to the United States House of Representatives
-                plannedStartDate: '1969-01-03',
-                // Hiram Revels is seated to the United States Senate
-                plannedEndDate: '1870-02-25'
-              }
-            },
-            {
-              activityId: 'a2',
-              name: '',
-              activityOverview: {
-                summary: 'second activity'
-              }
-            }
-          ],
-          years: ['1', '2']
-        }
-      },
-      budget: {
-        activities: {
-          a1: {
-            costsByFFY: {
-              1: 'a1 ffy 1 costs',
-              2: 'a1 ffy 2 costs',
-              total: { federal: 1050, medicaid: 1150, total: 950 }
-            }
-          },
-          a2: {
-            costsByFFY: {
-              1: 'a2 ffy 1 costs',
-              2: 'a2 ffy 2 costs',
-              total: { federal: 410, medicaid: 510, total: 310 }
+  test('renders HITECH correctly', async () => {
+    mockFlags({ enableMmis: false });
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              activities: [],
+              years: ['3000', '3001']
             }
           }
-        },
-        combined: {
-          1: 'ffy 1 combined costs',
-          2: 'ffy 2 combined costs',
-          total: { federal: 1360, medicaid: 1460, total: 1260 }
         }
       }
-    };
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Executive Summary' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'APD Overview Summary' })
+    ).toBeTruthy();
+    expect(
+      screen.queryByRole('heading', {
+        name: 'State Priorities and Scope of APD'
+      })
+    ).toBeFalsy();
+    expect(screen.queryByText('Medicaid Business Area(s)')).toBeFalsy();
+    expect(
+      screen.getByRole('heading', { name: 'Activities Summary' })
+    ).toBeTruthy();
+  });
 
-    expect(mapStateToProps(state)).toEqual({
-      data: [
-        {
-          activityId: 'a1',
-          dateRange: '1/3/1969 - 2/25/1870',
-          name: 'activity 1',
-          summary: 'first activity',
-          combined: 950,
-          federal: 1050,
-          medicaid: 1150,
-          ffys: {
-            1: 'a1 ffy 1 costs',
-            2: 'a1 ffy 2 costs'
-          }
-        },
-        {
-          activityId: 'a2',
-          dateRange: 'Date not specified - Date not specified',
-          name: '',
-          summary: 'second activity',
-          combined: 310,
-          federal: 410,
-          medicaid: 510,
-          ffys: {
-            1: 'a2 ffy 1 costs',
-            2: 'a2 ffy 2 costs'
-          }
-        }
-      ],
-      total: {
-        combined: 1260,
-        federal: 1360,
-        medicaid: 1460,
-        ffys: {
-          1: 'ffy 1 combined costs',
-          2: 'ffy 2 combined costs'
-        }
+  test('renders MMIS correctly', async () => {
+    mockFlags({ enableMmis: true });
+    await setup(
+      {
+        apdType: APD_TYPE.MMIS,
+        medicaidBusinessAreas: defaultMedicaidBusinessAreas
       },
-      years: ['1', '2']
-    });
+      {
+        initialState: {
+          apd: {
+            data: {
+              activities: [],
+              years: ['3000', '3001']
+            }
+          }
+        }
+      }
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Executive Summary' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'APD Overview Summary' })
+    ).toBeTruthy();
+    expect(screen.getByText('Medicaid Business Area(s) :')).toBeTruthy();
+    expect(
+      screen.getByRole('heading', { name: 'Activities Summary' })
+    ).toBeTruthy();
   });
 });

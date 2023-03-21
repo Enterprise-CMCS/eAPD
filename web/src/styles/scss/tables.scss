@@ -21,6 +21,10 @@ td {
   vertical-align: top;
 }
 
+#summary-budget-null1 {
+  background-color: transparent;
+}
+
 .budget-table {
   font-size: 12px;
   input,
@@ -34,12 +38,24 @@ td {
     margin-top: $spacer-2;
   }
 
+  .budget-table--category-row_highlight {
+    background-color: #f1f1f1;
+  }
+
+  .budget-table--category-row_highlight-lighter {
+    background-color: #fdf9eb;
+  }
+
+  .budget-table--cell__hightlight-lighter {
+    background-color: #fdf9eb;
+  }
+
   caption {
     text-align: left;
     /* override for design system where first-child has a top margin of 0 */
     &.ds-h3,
     &.ds-h4 {
-      margin-top: $spacer-4 !important;
+      margin-top: $spacer-1 !important;
     }
   }
 
@@ -68,9 +84,6 @@ td {
   }
 
   thead {
-    tr + tr {
-      border-top: 1px solid $color-gray-light;
-    }
     th,
     td.th {
       background-color: $color-gray-lighter;
@@ -80,14 +93,23 @@ td {
         background-color: $color-warn-lightest;
       }
     }
-    border-top: 1px solid $color-gray-light;
-    border-bottom: 1px solid $color-gray-light;
+    .budget-table--row__highlight-gray-dark {
+      td,
+      th {
+        background-color: $color-gray-dark;
+        color: $color-white;
+      }
+    }
+
+    .budget-table--row__highlight-gray-light {
+      td,
+      th {
+        background-color: #f1f1f1;
+      }
+    }
   }
 
   tbody {
-    th {
-      border-right: solid 2px $color-gray-lighter;
-    }
     tr {
       border-top: 1px dotted $color-gray-lighter;
       border-bottom: 1px dotted $color-gray-lighter;
@@ -108,9 +130,18 @@ td {
     .budget-table--row__highlight {
       td,
       th {
-        background-color: $color-warn-lightest;
+        background-color: #fad980;
       }
     }
+
+    /* used on a tr to highlight a whole row */
+    .budget-table--row__highlight-lighter {
+      td,
+      th {
+        background-color: #fdf9eb;
+      }
+    }
+
     /* used on a tr to highlight a whole row */
     .summary-table--gray_row__highlight {
       td,
@@ -161,6 +192,16 @@ tr.budget-table--row__primary-header {
   }
 }
 
+tr.budget-table--row__primary-header__light {
+  th,
+  td {
+    color: #323a44;
+    background-color: #d6d7d9;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+}
+
 tr.budget-table--row__primary-header {
   th {
     border-right: none;
@@ -169,6 +210,14 @@ tr.budget-table--row__primary-header {
 
 .indent-title {
   padding-left: 3em;
+}
+
+.budget-table--col-divider__right {
+  border-right: 3px solid #d6d7d9;
+}
+
+.budget-table--col-divider__left {
+  border-left: 3px solid #d6d7d9;
 }
 
 /* Custom borders to support highlighted rows for validation */

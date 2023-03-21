@@ -304,7 +304,7 @@ const CostAllocateFFP = ({
                 data-cy="FFPFedStateSplitTable"
               >
                 <tbody>
-                  <tr className="budget-table--subtotal budget-table--row__header">
+                  <tr className="budget-table--subtotal budget-table--row__highlight">
                     <th colSpan="5">Total Computable Medicaid Cost</th>
                     <td className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
