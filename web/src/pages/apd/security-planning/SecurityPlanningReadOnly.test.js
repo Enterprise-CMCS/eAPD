@@ -6,7 +6,7 @@ import { APD_TYPE } from '@cms-eapd/common';
 
 import SecurityPlanningSummary from './SecurityPlanningReadOnly';
 
-const defaultProps = {
+const emptyState = {
   apd: {
     data: {
       securityPlanning: {
@@ -48,7 +48,7 @@ describe('security planning summary component', () => {
     await setup(
       {},
       {
-        initialState: defaultProps
+        initialState: emptyState
       }
     );
 
