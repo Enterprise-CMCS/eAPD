@@ -1,6 +1,7 @@
 import {
   getDefaultFundingSourceObject,
   getDefaultFundingSourceByCategoryObject,
+  getDefaultFundingCategoryByFedStateSplitObject,
   defaultFederalShareByFFYQuarterObject,
   defaultBudgetObject,
   defaultHITECHBudgetObject,
@@ -104,6 +105,155 @@ describe('budget getDefault methods', () => {
       const actual = getDefaultFundingSourceByCategoryObject(
         [2017, 2018],
         ['90-10', '75-25', '50-50', 'combined']
+      );
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('getDefaultFundingCategoryByFedStateSplitObject', () => {
+    test('with no years, no fedStateSplitOptions', () => {
+      const expected = {
+        combined: {
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        }
+      };
+      const actual = getDefaultFundingCategoryByFedStateSplitObject();
+      expect(actual).toEqual(expected);
+    });
+
+    test('with years, no fedStateSplitOptions', () => {
+      const expected = {
+        combined: {
+          2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        }
+      };
+      const actual = getDefaultFundingCategoryByFedStateSplitObject([
+        2017, 2018
+      ]);
+      expect(actual).toEqual(expected);
+    });
+
+    test('with fedStateSplitOptions, no years', () => {
+      const expected = {
+        '90-10': {
+          statePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } },
+          combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
+        },
+        '75-25': {
+          statePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } },
+          combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
+        },
+        '50-50': {
+          statePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } },
+          combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
+        },
+        combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
+      };
+
+      const actual = getDefaultFundingCategoryByFedStateSplitObject(
+        [],
+        ['90-10', '75-25', '50-50']
+      );
+      expect(actual).toEqual(expected);
+    });
+
+    test('with years and fedStateSplitOptions', () => {
+      const expected = {
+        '90-10': {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        '75-25': {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        '50-50': {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        combined: {
+          2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        }
+      };
+      const actual = getDefaultFundingCategoryByFedStateSplitObject(
+        [2017, 2018],
+        ['90-10', '75-25', '50-50']
       );
       expect(actual).toEqual(expected);
     });
