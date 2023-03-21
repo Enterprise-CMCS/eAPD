@@ -46,7 +46,7 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit, adminCheck }) => {
           <Dropdown
             {...props}
             label="federal-state split"
-            labelClassName="sr-only"
+            labelClassName="ds-u-visibility--screen-reader"
             options={[
               { label: 'Select an option', value: '0-100' },
               { label: '90-10', value: '90-10' },
@@ -69,11 +69,7 @@ FedStateSelector.propTypes = {
   ffp: PropTypes.string.isRequired,
   ffy: PropTypes.string.isRequired,
   setFederalStateSplit: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-FedStateSelector.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export default FedStateSelector;
