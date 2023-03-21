@@ -14,7 +14,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   const affiliationsEndpoint = spy();
   const apdsEndpoint = spy();
   const authEndpoint = spy();
-  const docsEndpoint = spy();
   const meEndpoint = spy();
   const rolesEndpoint = spy();
   const statesEndpoint = spy();
@@ -25,7 +24,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
     affiliationsEndpoint,
     apdsEndpoint,
     authEndpoint,
-    docsEndpoint,
     rolesEndpoint,
     statesEndpoint,
     usersEndpoint,
@@ -43,10 +41,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   endpointTest.ok(
     authEndpoint.calledWith(app),
     'auth endpoint is setup with the app'
-  );
-  endpointTest.ok(
-    docsEndpoint.calledWith(app),
-    'docs endpoint is set up with the app'
   );
   endpointTest.notOk(
     meEndpoint.calledWith(app),
