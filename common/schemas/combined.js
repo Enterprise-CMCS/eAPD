@@ -113,6 +113,7 @@ export const mmisCombinedSchema = Joi.object({
     id: Joi.any(),
     activityId: Joi.any(),
     name: activityNameSchema,
+    fundingSource: Joi.string().valid('MMIS').required(),
     activityOverview: mmisActivityOverviewSchema,
     analysisOfAlternativesAndRisks: analysisOfAlternativesAndRisksSchema,
     conditionsForEnhancedFunding: conditionsForEnhancedFundingSchema,
