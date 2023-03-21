@@ -56,8 +56,8 @@ services:
     expose:
       - 8000
     volumes:
-      - api:/app/api # This can't be ./api:/app/api in CI/CD
-      - common:/app/common # This can't be ./common:/app/common in CI/CD
+      - ./api:/app/api # This can't be ./api:/app/api in CI/CD
+      - ./common:/app/common # This can't be ./common:/app/common in CI/CD
       - /app/node_modules
 
 volumes:
