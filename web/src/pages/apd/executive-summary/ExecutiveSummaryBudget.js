@@ -35,14 +35,16 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
           />
         );
       case APD_TYPE.MMIS:
-        return (
-          <MmisBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
+        return null;
+      // TODO (#4474): return the following once the component is compatible with new MMIS budget structure
+      // return (
+      //   <MmisBudgetSummary
+      //     budget={budget}
+      //     rowKeys={rowKeys}
+      //     tdHdrs={tdHdrs}
+      //     thId={thId}
+      //   />
+      // );
       default:
         null;
     }
