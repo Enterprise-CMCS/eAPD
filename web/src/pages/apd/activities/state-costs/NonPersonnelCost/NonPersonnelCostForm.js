@@ -84,7 +84,6 @@ const NonPersonnelCostForm = forwardRef(
           aria-label="submitButton"
         />
         <h4 className="ds-h4">Non-Personnel Cost {index + 1}:</h4>
-        {/* eslint-disable jsx-a11y/no-autofocus */}
         <Controller
           control={control}
           name="category"
