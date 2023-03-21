@@ -69,11 +69,7 @@ FedStateSelector.propTypes = {
   ffp: PropTypes.string.isRequired,
   ffy: PropTypes.string.isRequired,
   setFederalStateSplit: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-FedStateSelector.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export default FedStateSelector;

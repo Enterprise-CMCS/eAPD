@@ -194,12 +194,11 @@ ApdOverviewHITECHFields.propTypes = {
   setMMIS: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
   fundingSources: PropTypes.array,
-  adminCheck: PropTypes.bool
+  adminCheck: PropTypes.bool.isRequired
 };
 
 ApdOverviewHITECHFields.defaultProps = {
-  fundingSources: ['HIT'],
-  adminCheck: false
+  fundingSources: ['HIT']
 };
 
 const mapStateToProps = state => ({

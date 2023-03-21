@@ -66,12 +66,8 @@ const All = ({ addActivity, activities, adminCheck, apdType }) => {
 All.propTypes = {
   addActivity: PropTypes.func.isRequired,
   activities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   apdType: PropTypes.string
-};
-
-All.defaultProps = {
-  adminCheck: false
 };
 
 const mapStateToProps = state => ({

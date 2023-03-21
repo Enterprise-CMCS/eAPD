@@ -19,7 +19,8 @@ import { t } from '../../../i18n';
 import {
   selectApdYears,
   selectIncentivePayments,
-  selectIncentivePaymentTotals
+  selectIncentivePaymentTotals,
+  selectAdminCheckEnabled
 } from '../../../redux/selectors/apd.selectors';
 import { formatNum } from '../../../util/formats';
 
@@ -308,7 +309,7 @@ IncentivePayments.propTypes = {
   totals: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
-  adminCheck: PropTypes.bool
+  adminCheck: PropTypes.bool.isRequired
 };
 
 IncentivePayments.defaultProps = { isViewOnly: false };
@@ -317,7 +318,7 @@ const mapStateToProps = state => ({
   data: selectIncentivePayments(state),
   totals: selectIncentivePaymentTotals(state),
   years: selectApdYears(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {
