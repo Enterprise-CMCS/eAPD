@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, Fragment } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
-import { Dialog, HelpDrawer, Button } from '@cmsgov/design-system';
+import { HelpDrawer, Button } from '@cmsgov/design-system';
 import { ChevronRight } from './Icons';
 
 const StandardsAndConditionsHelpDrawer = () => {

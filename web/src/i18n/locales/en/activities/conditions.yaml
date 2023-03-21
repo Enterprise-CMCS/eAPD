@@ -6,3 +6,34 @@ instruction:
     rates.
 
 link: Review Conditions for Enhanced Funding Regulation
+
+qualification:
+  heading: Enhanced Funding Qualification
+  detail: >-
+    Indicate whether this activity qualifies for enhanced funding based on the
+    selected match rate.
+
+justification:
+  heading: Enhanced Funding Justification
+  detail: >-
+    Describe how this activity will or WILL NOT support the Medicaid Standards
+    and Conditions <a
+    href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-433/subpart-C/section-433.112">42
+    CFR 433.112</a>.
+  helpText: >-
+    **Example:** This activity addresses condition 5, 6, 7, 13, and
+    specifically, products delivered for this activity will be owned by the
+    state, and HHS will have a royalty free, non-exclusive, and irrevocable
+    license to reproduce, publish, or otherwise use and authorize other to use.
+    The costs of the system were determined in accordance with 45 CFR 75,
+    subpart E, and this activity will promote reuse of systems across our
+    systems enterprise.
+
+    Additionally, this activity will comply with all of the other conditions for
+    enhanced funding except for:
+
+    [ul]
+      3 - this is not a claims processing activity
+      4 - this is not a quality improvement activity
+      17 - this is not a MAGI-based system activity
+    [/ul]

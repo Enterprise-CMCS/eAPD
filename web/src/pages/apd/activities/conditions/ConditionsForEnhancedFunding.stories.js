@@ -36,7 +36,7 @@ NoQualificationStory.decorators = [
             activities: [
               {
                 conditionsForEnhancedFunding: {
-                  enhancedFundingQualification: null,
+                  enhancedFundingQualification: false,
                   enhancedFundingJustification: null
                 }
               }
@@ -64,7 +64,7 @@ YesQualificationStory.decorators = [
             activities: [
               {
                 conditionsForEnhancedFunding: {
-                  enhancedFundingQualification: null,
+                  enhancedFundingQualification: true,
                   enhancedFundingJustification: null
                 }
               }
@@ -92,7 +92,7 @@ HelpDrawerOpenStory.decorators = [
             activities: [
               {
                 conditionsForEnhancedFunding: {
-                  enhancedFundingQualification: null,
+                  enhancedFundingQualification: true,
                   enhancedFundingJustification: null
                 }
               }
@@ -125,6 +125,9 @@ QualificationErrorStory.decorators = [
                 }
               }
             ]
+          },
+          adminCheck: {
+            enabled: true
           }
         }
       },
@@ -148,11 +151,14 @@ JustificationErrorStory.decorators = [
             activities: [
               {
                 conditionsForEnhancedFunding: {
-                  enhancedFundingQualification: null,
+                  enhancedFundingQualification: true,
                   enhancedFundingJustification: null
                 }
               }
             ]
+          },
+          adminCheck: {
+            enabled: true
           }
         }
       },

@@ -1,7 +1,10 @@
 import Joi from 'joi';
 
 const conditionsForEnhancedFundingSchema = Joi.object({
-  enhancedFundingQualification: Joi.boolean(),
+  enhancedFundingQualification: Joi.boolean().required().messages({
+    'boolean.base': 'Select an Enhanced Funding Qualification',
+    'boolean.required': 'Select an Enhanced Funding Qualification'
+  }),
   enhancedFundingJustification: Joi.when('enhancedFundingQualification', {
     is: true,
     then: Joi.string().trim().required().messages({
