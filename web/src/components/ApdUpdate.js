@@ -7,7 +7,10 @@ import { apdTypeToOverviewSchemaMapping, APD_TYPE } from '@cms-eapd/common';
 import { ChoiceList } from '@cmsgov/design-system';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { selectAdminCheckEnabled } from '../../src/redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectApdType
+} from '../../src/redux/selectors/apd.selectors';
 import { setUpdateStatusField } from '../../src/redux/actions/editApd';
 
 import { updateStatusChoices } from '../util/apd';
@@ -142,16 +145,12 @@ const ApdUpdate = ({
 ApdUpdate.propTypes = {
   apdType: PropTypes.string,
   setUpdateStatusField: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   updateStatus: PropTypes.object.isRequired
 };
 
-ApdUpdate.defaultProps = {
-  adminCheck: false
-};
-
 const mapStateToProps = state => ({
-  apdType: state.apd.data.apdType,
+  apdType: selectApdType(state),
   adminCheck: selectAdminCheckEnabled(state),
   updateStatus: state.apd.data.apdOverview.updateStatus
 });

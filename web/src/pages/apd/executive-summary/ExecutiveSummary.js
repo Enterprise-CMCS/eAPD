@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectApdType } from '../../../redux/selectors/apd.selectors';
+import {
+  selectApdType,
+  selectApdYears
+} from '../../../redux/selectors/apd.selectors';
 import { useParams } from 'react-router-dom';
 
 import Waypoint from '../../../components/ConnectedWaypoint';
@@ -18,7 +21,6 @@ import {
   getMedicaidBusinessAreas,
   getUpdateStatus
 } from '../../../redux/reducers/apd';
-import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal

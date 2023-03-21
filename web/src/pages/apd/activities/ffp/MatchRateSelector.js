@@ -106,7 +106,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate, adminCheck }) => {
           <ChoiceList
             {...props}
             label="federal-state split"
-            labelClassName="sr-only"
+            labelClassName="ds-u-visibility--screen-reader"
             choices={[
               {
                 label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.DDI}`,
@@ -143,11 +143,7 @@ MatchRateSelector.propTypes = {
   ffp: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
   setMatchRate: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-MatchRateSelector.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export default MatchRateSelector;
