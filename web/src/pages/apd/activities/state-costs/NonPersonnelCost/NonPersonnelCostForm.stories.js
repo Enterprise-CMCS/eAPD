@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { APD_TYPE } from '@cms-eapd/common';
 
 export default {
-  title: 'Pages/Apd/Activities/StateCosts',
+  title: 'Pages/Apd/Activities/State Costs/Non-Personnel Cost Form',
   component: NonPersonnelCostForm,
   decorators: [],
   includeStories: /.*Story$/,
@@ -20,8 +20,8 @@ export default {
     index: 123,
     activityIndex: 42,
     item: {
-      category: 'Hardware, software, and licensing',
-      description: 'Test description',
+      category: '',
+      description: '',
       years: {
         2022: '100',
         2023: '200'
