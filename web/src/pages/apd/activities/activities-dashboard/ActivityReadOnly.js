@@ -6,6 +6,7 @@ import Dollars from '../../../../components/Dollars';
 
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
+import ConditionsForEnhancedFundingReadOnly from '../conditions/ConditionsForEnhancedFundingReadOnly';
 import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
@@ -155,6 +156,17 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         apdType={apdType}
       />
 
+      <h3>Milestones</h3>
+      {activity.milestones.length === 0 && 'No milestones were provided.'}
+      {activity.milestones.map((milestone, index) =>
+        buildMilestone(milestone, index)
+      )}
+
+      <ConditionsForEnhancedFundingReadOnly
+        activity={activity}
+        activityIndex={activityIndex}
+      />
+
       <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1}: {activity.name || 'Untitled'}
@@ -166,12 +178,6 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         'No outcome(s) and/or corresponding metric(s) were provided.'}
       <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
-
-      <h3>Milestones</h3>
-      {activity.milestones.length === 0 && 'No milestones were provided.'}
-      {activity.milestones.map((milestone, index) =>
-        buildMilestone(milestone, index)
-      )}
 
       <h3 className="viewonly-activity-header">
         <small>
