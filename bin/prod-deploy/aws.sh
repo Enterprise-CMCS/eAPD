@@ -176,6 +176,7 @@ function addBuildUrlToUserData() {
 # it into the user-data script.
 #
 # Expects global variables:
+#   AWS_REGION - AWS region used for read/write to S3
 #   API_AWS_ACCESS_KEY_ID - AWS key used for read/write to S3
 #   API_AWS_SECRET_ACCESS_KEY - AWS key used for read/write to S3
 #   API_PORT - port the API should listen on
@@ -193,6 +194,7 @@ function addEcosystemToUserData() {
       error_file: '/app/api/logs/eAPD-API-error-0.log',
       out_file: '/app/api/logs/eAPD-API-out-0.log',
       env: {
+        AWS_REGION: '$AWS_REGION',
         AWS_ACCESS_KEY_ID: '$API_AWS_ACCESS_KEY_ID',
         AWS_SECRET_ACCESS_KEY: '$API_AWS_SECRET_ACCESS_KEY',
         AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 5,

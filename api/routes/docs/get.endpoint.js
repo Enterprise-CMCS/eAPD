@@ -2,7 +2,8 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  apiAllPermissions
+  apiAllPermissions,
+  apiNoAuth
 } from '../../endpoint-tests/utils.js';
 
 describe('Document endpoints', () => {
@@ -26,7 +27,7 @@ describe('Document endpoints', () => {
     });
 
     it('when not authenticated', async () => {
-      const response = await api.get(url);
+      const response = await apiNoAuth.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
@@ -44,7 +45,25 @@ describe('Document endpoints', () => {
     });
 
     it('when not authenticated', async () => {
+      const response = await apiNoAuth.get(url);
+
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
+    });
+  });
+
+  describe('Get help doc | GET /docs/admin-registration', () => {
+    const url = '/docs/admin-registration';
+
+    it('when authenticated', async () => {
       const response = await api.get(url);
+
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
+    });
+
+    it('when not authenticated', async () => {
+      const response = await apiNoAuth.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
