@@ -12,6 +12,7 @@ import {
 } from '../../../../../redux/actions/editActivity';
 
 const initialState = {
+  apdType: 'HITECH',
   adminCheck: true,
   activityIndex: 1,
   activity: {
