@@ -49,3 +49,19 @@ HitechNonPersonnelCostFormStory.decorators = [
       story
     })
 ];
+
+export const MmisNonPersonnelCostFormStory = Template.bind({});
+MmisNonPersonnelCostFormStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            years: ['2022', '2023']
+          }
+        }
+      },
+      story
+    })
+];
