@@ -94,6 +94,22 @@ const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
               </a>
               .
             </p>
+            <h2 className="ds-h4 ds-u-color--base ds-u-padding-top--2">
+              State Administrator
+            </h2>
+            <p className="ds-u-margin-y--1">
+              If your state needs to add, transfer, or renew a state
+              administrator, complete the{' '}
+              <a
+                onClick={openHelpDoc}
+                data-doc-name="admin-registration"
+                href={`${apiUrl}/docs/admin-registration`}
+              >
+                State Administrator Authorization Form
+              </a>
+              .
+            </p>
+            <br />
             <p className="ds-u-margin-y--3">
               Still need help? Email us at{' '}
               <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
