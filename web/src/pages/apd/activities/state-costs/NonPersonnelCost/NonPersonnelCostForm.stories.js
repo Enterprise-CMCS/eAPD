@@ -1,25 +1,14 @@
 import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 import NonPersonnelCostForm from './NonPersonnelCostForm';
-import { renderWithProviderAndRouter } from 'apd-storybook-library';
+import { renderWithProvider } from 'apd-storybook-library';
 import { action } from '@storybook/addon-actions';
 import { APD_TYPE } from '@cms-eapd/common';
 
-const defaultItem = {
-  category: 'Hardware, software, and licensing',
-  description: 'Test description',
-  years: {
-    2022: '100',
-    2023: '200'
-  },
-  key: '123abc23'
-};
-
 export default {
-  title: 'Pages/Apd/SubForms/NonPersonnelCostForm',
+  title: 'Pages/Apd/Activities/StateCosts',
   component: NonPersonnelCostForm,
-  includeStories: /.*Story$/,
   decorators: [],
+  includeStories: /.*Story$/,
   parameters: {
     jest: ['NonPersonnelCostForm.test.js'],
     controls: {
@@ -27,37 +16,36 @@ export default {
       hideNoControlsWarning: true
     }
   },
-  argTypes: {
-    saveNonPersonnelCost: action('saveNonPersonnelCost'),
+  args: {
+    index: 123,
+    activityIndex: 42,
+    item: {
+      category: 'Hardware, software, and licensing',
+      description: 'Test description',
+      years: {
+        2022: '100',
+        2023: '200'
+      },
+      key: '123abc23'
+    },
     setFormValid: action('setFormValid')
   }
 };
 
-const Template = args => {
-  const methods = useForm();
-  return (
-    <FormProvider {...methods}>
-      <NonPersonnelCostForm
-        {...args}
-        index={123}
-        activityIndex={42}
-        item={defaultItem}
-      />
-    </FormProvider>
-  );
-};
+const Template = args => <NonPersonnelCostForm {...args} />;
 
-export const NonPersonnelCostFormStory = Template.bind({});
-
-NonPersonnelCostFormStory.decorators = [
-  story => {
-    renderWithProviderAndRouter({
+export const HitechNonPersonnelCostFormStory = Template.bind({});
+HitechNonPersonnelCostFormStory.decorators = [
+  story =>
+    renderWithProvider({
       initialState: {
         apd: {
-          data: {}
+          data: {
+            apdType: APD_TYPE.HITECH,
+            years: ['2022', '2023']
+          }
         }
       },
       story
-    });
-  }
+    })
 ];
