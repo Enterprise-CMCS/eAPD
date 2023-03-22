@@ -4,6 +4,10 @@ const config = {
   apiVersion: '2006-03-01'
 };
 
+if (process.env.AWS_REGION) {
+  config.region = process.env.AWS_REGION;
+}
+
 export const getFile = async (id, { S3 = awsS3 } = {}) => {
   if (!process.env.FILE_S3_BUCKET) {
     return Promise.reject(new Error('No S3 bucket specified'));
