@@ -82,6 +82,11 @@ services:
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
       - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
       - LD_API_KEY=${LD_API_KEY}
+      - FILE_STORE=${FILE_STORE}
+      - FILE_S3_BUCKET=${FILE_S3_BUCKET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     volumes:
       - type: bind
         source: ./api
