@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { APD_TYPE } from '@cms-eapd/common';
 import Dollars from '../../../../components/Dollars';
 
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
@@ -155,10 +156,12 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         years={years}
         apdType={apdType}
       />
-      <AlternativesAndRisksReadOnly
-        activity={activity}
-        activityIndex={activityIndex}
-      />
+      {apdType === APD_TYPE.MMIS && (
+        <AlternativesAndRisksReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
 
       <h3 className="viewonly-activity-header">
         <small>
