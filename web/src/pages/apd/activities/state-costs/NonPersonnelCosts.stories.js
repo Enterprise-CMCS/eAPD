@@ -1,7 +1,6 @@
 import React from 'react';
 import NonPersonnelCosts from './NonPersonnelCosts';
 import { renderWithProvider } from 'apd-storybook-library';
-import { action } from '@storybook/addon-actions';
 import { APD_TYPE } from '@cms-eapd/common';
 
 const oneExpense = [
