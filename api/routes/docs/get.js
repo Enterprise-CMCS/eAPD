@@ -5,6 +5,8 @@ const logger = loggerFactory('document routes');
 
 const ACCOUNT_REGISTRATION_DOC = 'EUAAccountRegistration.pdf';
 const SYSTEM_ACCESS_DOC = 'eAPDSystemAccess.pdf';
+const ADMIN_REGISTRATION_DOC =
+  'InstructionsAndDelegationForm-StateAdministrators.pdf';
 
 export default (app, { getFile = get } = {}) => {
   logger.silly('setting up GET /docs/account-registration route');
@@ -34,6 +36,24 @@ export default (app, { getFile = get } = {}) => {
       res.setHeader(
         'Content-Disposition',
         `attachment; filename=${SYSTEM_ACCESS_DOC}`
+      );
+      res.send(file).end();
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  logger.silly('setting up GET /docs/admin-registration route');
+
+  app.get('/docs/admin-registration', async (req, res, next) => {
+    try {
+      const file = await getFile(ADMIN_REGISTRATION_DOC);
+      console.log({ file });
+
+      res.setHeader('Content-Type', 'application/octet-stream');
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename=${ADMIN_REGISTRATION_DOC}`
       );
       res.send(file).end();
     } catch (e) {
