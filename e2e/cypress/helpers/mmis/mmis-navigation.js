@@ -47,8 +47,9 @@ export const testMmisNavigation = function () {
       label: 'APD Overview Summary',
       subnav: [
         '#executive-overview-summary',
-        '#executive-activities-summary',
-        '#executive-summary-budget-table'
+        '#executive-activities-summary'
+        // TODO (#4474): add the following back in once the component is compatible with new MMIS budget structure
+        // '#executive-summary-budget-table'
       ],
       type: 'h2'
     },
