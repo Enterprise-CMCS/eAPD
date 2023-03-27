@@ -330,9 +330,7 @@ const defaultProps = {
 
 describe('<MmisBudgetSummary />', () => {
   test('renders correctly with empty budget', () => {
-    const { asFragment, getByText } = render(
-      <MmisBudgetSummary {...defaultProps} />
-    );
+    const { asFragment } = render(<MmisBudgetSummary {...defaultProps} />);
     expect(screen.getByRole('heading')).toHaveTextContent(
       'Program Budget Tables'
     );
@@ -340,7 +338,7 @@ describe('<MmisBudgetSummary />', () => {
   });
 
   test('renders correctly with a valid budget', () => {
-    const { asFragment, getByText } = render(
+    const { asFragment } = render(
       <MmisBudgetSummary budget={sampleBudget} rowKeys={defaultProps.rowKeys} />
     );
 
