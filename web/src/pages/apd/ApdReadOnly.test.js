@@ -31,8 +31,10 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
+    
+    // reset before each test case
     resetLDMocks();
-    mockFlags({ enableMmis: true });
+    mockFlags({ emptyBudgetWording: false, enableMmis: true });
   });
 
   test('renders HITECH Read Only correctly', async () => {
