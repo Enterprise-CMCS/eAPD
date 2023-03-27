@@ -10,6 +10,7 @@ import { thId, tdHdrs } from '../../../util/apd';
 
 const MmisBudgetSummary = ({ budget, rowKeys }) => {
   const { ddi, mando } = budget;
+
   const ddiTableIsEmpty =
     ddi?.combined?.total?.medicaid === 0 &&
     ddi?.combined?.total?.federal === 0 &&
