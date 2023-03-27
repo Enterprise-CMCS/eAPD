@@ -26,7 +26,7 @@ const routes = activityIndex => [
     pageName: 'Outcomes and Metrics'
   },
   {
-    path: '/apd/:apdId/activity/:activityIndex/conditions',
+    path: '/apd/:apdId/activity/:activityIndex/enhanced-funding',
     children: (
       <Section>
         <ConditionsForEnhancedFunding activityIndex={activityIndex} />
