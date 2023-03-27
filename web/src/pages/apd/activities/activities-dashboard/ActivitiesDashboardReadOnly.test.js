@@ -3,6 +3,7 @@ import { renderWithConnection, within, screen } from 'apd-testing-library';
 import Activities from './ActivitiesDashboardReadOnly';
 import apd, { activities } from '../../../../fixtures/mo-hitech-apd';
 import budget from '../../../../fixtures/mo-hitech-budget.json';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 const defaultProps = {
   activities
@@ -18,6 +19,12 @@ const setup = (props = {}) =>
   });
 
 describe('viewOnly <Activities />', () => {
+  beforeEach(() => {
+    // reset before each test case
+    resetLDMocks();
+    mockFlags({ emptyBudgetWording: false });
+  });
+
   test('should show the activity list', () => {
     setup();
     const listHeader = screen.getByText(/^Activities$/i);
