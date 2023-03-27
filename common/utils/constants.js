@@ -8,6 +8,10 @@ export const FUNDING_CATEGORY_TYPE = {
   DDI: 'DDI',
   MANDO: 'MO'
 };
+export const FUNDING_CATEGORY_TYPE_KEY_LOOKUP = {
+  DDI: 'ddi',
+  MO: 'mando'
+};
 
 export const FUNDING_CATEGORY_LABEL_MAPPING = {
   DDI: 'Design, Development, and Installation (DDI)',
@@ -34,6 +38,11 @@ export const MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING = {
   thirdPartyLiability: 'Third Party Liability (TPL)',
   other: 'Other',
   otherMedicaidBusinessAreas: 'Other Medicaid Business Area(s)'
+};
+
+export const UPDATE_STATUS_LABEL_MAPPING = {
+  annualUpdate: 'Annual Update',
+  asNeededUpdate: 'As-Needed Update'
 };
 
 function returnArrayOfCheckBoxes(obj) {

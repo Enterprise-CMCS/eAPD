@@ -2,7 +2,9 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
+  apiAsStateAdmin,
+  apiNoPermissionsNoState,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
@@ -10,8 +12,13 @@ import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  const api = apiAsStateAdmin;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';
@@ -21,8 +28,7 @@ describe('APD endpoint', () => {
 
     describe('when authenticated', () => {
       it('as a user with all permissions', async () => {
-        const api = login('all-permissions');
-        const response = await api.get(url);
+        const response = await apiAllPermissions.get(url);
         expect(response.status).toEqual(200);
       });
     });
@@ -36,17 +42,11 @@ describe('APD endpoint', () => {
 
     describe('when authenticated', () => {
       it('as a user without a state', async () => {
-        const api = login('all-permissions-no-state');
-        const response = await api.get(url(mnAPDId));
+        const response = await apiNoPermissionsNoState.get(url(mnAPDId));
         expect(response.status).toEqual(401);
       });
 
       describe('as a user with a state', () => {
-        let api;
-        beforeAll(async () => {
-          api = login('state-admin');
-        });
-
         it('when requesting an APD that does not exist', async () => {
           const response = await api.get(url(badAPDId));
           expect(response.status).toEqual(404);

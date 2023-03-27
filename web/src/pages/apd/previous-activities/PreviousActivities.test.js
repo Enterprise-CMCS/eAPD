@@ -57,17 +57,25 @@ const mmisState = {
           previousActivitySummary: 'bob2',
           actualExpenditures: {
             2022: {
-              mmis: {
+              ddi: {
                 50: { federalActual: 129387, totalApproved: 375445 },
                 75: { federalActual: 413246, totalApproved: 654455 },
                 90: { federalActual: 614544, totalApproved: 863455 }
+              },
+              mando: {
+                50: { federalActual: 129387, totalApproved: 375445 },
+                75: { federalActual: 413246, totalApproved: 654455 }
               }
             },
             2023: {
-              mmis: {
+              ddi: {
                 50: { federalActual: 0, totalApproved: 0 },
                 75: { federalActual: 0, totalApproved: 0 },
                 90: { federalActual: 0, totalApproved: 0 }
+              },
+              mando: {
+                50: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 }
               }
             }
           }
@@ -143,7 +151,7 @@ describe('previous activities component', () => {
     setup(mmisProps, mmisState);
 
     await waitFor(() => {
-      expect(screen.getAllByRole('table')).toHaveLength(4);
+      expect(screen.getAllByRole('table')).toHaveLength(6);
     });
 
     expect(screen.getByRole('table', { name: 'Grand totals: Federal MMIS' }));

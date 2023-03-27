@@ -4,16 +4,14 @@ import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 import SecurityPlanning from './SecurityPlanning';
 
 const initialStateEmpty = {
-  initialState: {
-    apd: {
-      data: {
-        apdType: 'MMIS',
-        securityPlanning: {
-          securityAndInterfacePlan: '',
-          businessContinuityAndDisasterRecovery: ''
-        },
-        activities: []
-      }
+  apd: {
+    data: {
+      apdType: 'MMIS',
+      securityPlanning: {
+        securityAndInterfacePlan: '',
+        businessContinuityAndDisasterRecovery: ''
+      },
+      activities: []
     }
   }
 };
@@ -36,8 +34,23 @@ const setup = (props = {}, options = {}) =>
   renderWithConnection(<SecurityPlanning {...props} />, options);
 
 describe('<Security Planning />', () => {
-  it('should render correctly', () => {
-    setup({}, initialStateEmpty);
+  it('should render correctly', async () => {
+    setup({}, { initialState: initialStateEmpty });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', {
+          name: 'Security Planning',
+          level: 2
+        })
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByLabelText('Security and Interface Plan')).toHaveValue(
+      ''
+    );
+    expect(
+      screen.getByLabelText('Business Continuity and Disaster Recovery Plan')
+    ).toHaveValue('');
   });
 
   it('should load existing data', async () => {

@@ -12,6 +12,7 @@ import fileUpload from 'express-fileupload';
 import loggerFactory from './logger/index.js';
 import requestLoggerMiddleware from './logger/morgan.js';
 import jsonWebTokenMiddleware from './auth/jwtMiddleware.js';
+import docs from './routes/docs/index.js';
 import routes from './routes/index.js';
 import apiKeyRoutes from './routes/keyIndex.js';
 import endpointCoverage from './middleware/endpointCoverage.js';
@@ -25,7 +26,10 @@ const logger = loggerFactory('main');
 
 (async () => {
   try {
-    await mongoSetup();
+    await mongoSetup({
+      keepAlive: true,
+      keepAliveInitialDelay: 300000
+    });
     logger.info('Mongo connected');
   } catch (err) {
     logger.error(`Error setting up MongoDB: ${err}`);
@@ -136,6 +140,9 @@ api.get('/heartbeat-mongo', (_, res) => {
     res.status(503).json({ status }).end();
   }
 });
+
+logger.debug('setting up routes for eAPD docs');
+docs(api);
 
 logger.debug('setting up routes for API Keys');
 apiKeyRoutes(api);

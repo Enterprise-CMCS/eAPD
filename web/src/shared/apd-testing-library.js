@@ -20,15 +20,23 @@ import reducer from '../redux/reducers';
  * }
  * @returns an option with the rendered container, the store, the history, and related react-testing-library functions
  */
+
 const renderWithConnection = (ui, renderOptions = {}) => {
   const {
     initialHistory = ['/'],
-    history = createMemoryHistory({ initialEntries: initialHistory }),
+    history = createMemoryHistory({
+      initialEntries: initialHistory
+    }),
     initialState = undefined,
     enhancer = applyMiddleware(routerMiddleware(history), thunk),
     store = createStore(reducer(history), initialState, enhancer),
     ...options
   } = renderOptions;
+
+  /* this key is dynamic by default and throws off snapshot testing
+   * hence why we are setting it to a fixed value here */
+  history.location.key = 'fixed';
+
   const utils = rtlRender(
     <Provider store={store}>
       <ConnectedRouter history={history}>{ui}</ConnectedRouter>

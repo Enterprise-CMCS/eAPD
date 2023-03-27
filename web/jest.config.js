@@ -1,5 +1,4 @@
 module.exports = {
-  coverageDirectory: '../coverage/',
   rootDir: 'src',
   setupFiles: [
     '../polyfills.test.js',
@@ -15,15 +14,16 @@ module.exports = {
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.(t|j)sx?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
+  moduleFileExtensions: ['js', 'jsx', 'yaml'],
   transformIgnorePatterns: [
     'node_modules/(?!(d3-format|d3-geo|d3-array|@cms-eapd)/)',
     '\\.cy\\.js$'
   ],
-  moduleFileExtensions: ['js', 'jsx', 'yaml'],
+  coverageDirectory: '../coverage/',
   collectCoverageFrom: [
     '**/*.{js,jsx}',
     '!**/*.story.{js,jsx}',
@@ -32,9 +32,10 @@ module.exports = {
     '!**/*.cy.{js,jsx}',
     '!**/node_modules/**',
     '!**/__snapshots__/**',
+    '!**/__mocks__/**',
     '!**/shared/**',
     '!**/fixtures/**',
-    '!**/i18n/**',
+    '!**/i18n/locales/en/**',
     '!**/lazy/**',
     '!**/shared/**',
     '!**/static/**',

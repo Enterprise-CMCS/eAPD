@@ -24,7 +24,7 @@ const MedicaidBusinessAreas = ({
     } else {
       clearErrors();
     }
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const otherMedicaidBusinessAreaComponent = (
     <div className="ds-c-choice__checkedChild">
@@ -122,7 +122,7 @@ const MedicaidBusinessAreas = ({
 };
 
 MedicaidBusinessAreas.propTypes = {
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   controllerName: PropTypes.string.isRequired,
   controllerNameForOtherDetails: PropTypes.string.isRequired,
   errorMessage: PropTypes.string,

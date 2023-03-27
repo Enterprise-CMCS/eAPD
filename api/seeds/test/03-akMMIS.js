@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.MMIS,
@@ -54,7 +54,7 @@ export default {
     previousActivitySummary: '',
     actualExpenditures: {
       2021: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -64,13 +64,23 @@ export default {
             totalApproved: 0
           },
           90: {
+            federalActual: 0,
+            totalApproved: 0
+          }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
             federalActual: 0,
             totalApproved: 0
           }
         }
       },
       2022: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -83,10 +93,20 @@ export default {
             federalActual: 0,
             totalApproved: 0
           }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
+            federalActual: 0,
+            totalApproved: 0
+          }
         }
       },
       2023: {
-        mmis: {
+        ddi: {
           50: {
             federalActual: 0,
             totalApproved: 0
@@ -96,6 +116,16 @@ export default {
             totalApproved: 0
           },
           90: {
+            federalActual: 0,
+            totalApproved: 0
+          }
+        },
+        mando: {
+          50: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          75: {
             federalActual: 0,
             totalApproved: 0
           }
@@ -112,6 +142,7 @@ export default {
       },
       activityId: '152a1e2b',
       name: '',
+      fundingSource: 'MMIS',
       activitySchedule: {
         plannedEndDate: null,
         plannedStartDate: null
@@ -151,17 +182,17 @@ export default {
       costAllocation: {
         2023: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         },
         2024: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         }
@@ -240,17 +271,17 @@ export default {
       costAllocation: {
         2023: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
-          other: 0
+          other: 105000
         },
         2024: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         }
@@ -323,20 +354,33 @@ export default {
       costAllocation: {
         2023: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         },
         2024: {
           ffp: {
-            federal: 0,
-            state: 100,
-            fundingCategory: null
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
+      },
+      costAllocationNarrative: {
+        years: {
+          2023: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2022.</p>'
+          },
+          2024: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2023.</p>'
+          }
+        },
+        methodology: '<p>No cost allocation is necessary for this activity.</p>'
       },
       quarterlyFFP: {
         2023: {

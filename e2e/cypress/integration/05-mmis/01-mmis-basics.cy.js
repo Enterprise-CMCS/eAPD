@@ -1,3 +1,8 @@
+// import ActivityPage from '../../page-objects/activity-page';
+import BudgetPage from '../../page-objects/budget-page.js';
+import { testApdName } from '../../helpers/apd/apd-name.js';
+import { testMmisNavigation } from '../../helpers/mmis/mmis-navigation.js';
+
 /// <reference types="cypress" />
 
 // Tests performing basic MMIS APD tasks
@@ -174,6 +179,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     });
   });
 
+  describe('MMIS Navigation', function () {
+    testMmisNavigation();
+  });
+
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
       testApdName();
@@ -297,6 +306,17 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
           'This info in the text box should clear the error.'
         );
       });
+    });
+
+    it('tests Results of Previous Activities page', () => {
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('MMIS DDI at 90% FFP');
+      cy.findAllByText('MMIS DDI at 75% FFP');
+      cy.findAllByText('MMIS M&O at 75% FFP');
+      cy.findAllByText('MMIS DDI at 50% FFP');
+      cy.findAllByText('MMIS M&O at 50% FFP');
+      cy.findAllByText('MMIS Grand Totals');
     });
 
     it('test MMIS APD Basics', function () {

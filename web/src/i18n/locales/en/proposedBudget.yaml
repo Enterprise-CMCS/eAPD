@@ -58,13 +58,19 @@ summaryBudgetMMIS:
   title: Summary Budget Table
   instruction:
     detail: >-
-      These tables summarize the calculated Medicaid Total Computable (Total
-      Activity Cost minus any Other Funding amounts) for key state personnel, as
-      well as state personnel, private contractor, and other state expenses for
-      all activities by FFY. The tables provide subtotals for each of these
+      The following tables summarize the calculated Medicaid Total Computable
+      (Total Activity Cost minus any Other Funding amounts) for key state
+      personnel, state personnel, private contractor, and other state expenses
+      for all activities by FFY. The tables provide subtotals for each of these
       categories by program area with the calculated Federal share by FFP rate
       and the associated state share. The final table in this section provides
       the total Medicaid cost for all activities in this APD by FFY.
+
+      <h3>MMIS Activities by Fiscal Year</h3> <p>Below is the state expense and
+      private contractor share broken down into dollars, calculated from your
+      previous match rate selections (FFP). From there, the Medicaid Total
+      Computable is calculated by adding up both the federal and state
+      totals.</p>
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:

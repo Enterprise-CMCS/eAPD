@@ -1,14 +1,16 @@
 import {
-  api,
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
+  apiAsFedAdmin,
+  apiAsStateAdmin,
   unauthenticatedTest
 } from '../../endpoint-tests/utils.js';
 
 describe('US States endpoint', () => {
   const db = getDB();
+  const api = apiAllPermissions;
   beforeAll(async () => {
     await setupDB(db);
   });
@@ -30,30 +32,26 @@ describe('US States endpoint', () => {
     unauthenticatedTest('get', '/states/ak');
 
     it('returns 200', async () => {
-      const authedClient = login('state-admin');
-      const response = await authedClient.get('/states/ak');
+      const response = await apiAsStateAdmin.get('/states/ak');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
       expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);
     });
 
     it('returns 403', async () => {
-      const authedClient = login();
       // This state does not exist, therefore it can't be available to this user.
-      const response = await authedClient.get('/states/zz');
+      const response = await api.get('/states/zz');
       expect(response.status).toEqual(403);
     });
 
     it('works for a Federal Admin', async () => {
-      const authedClient = login('fed-admin');
-      const response = await authedClient.get('/states/mn');
+      const response = await apiAsFedAdmin.get('/states/mn');
       expect(response.status).toEqual(200);
     });
 
     it('gives a 404 to a Federal Admin for a fake state', async () => {
-      const authedClient = login('fed-admin');
       // This state does not exist, therefore it can't be available to this user.
-      const response = await authedClient.get('/states/zz');
+      const response = await apiAsFedAdmin.get('/states/zz');
       expect(response.status).toEqual(404);
     });
   });
