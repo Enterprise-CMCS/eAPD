@@ -2,10 +2,12 @@ import mongoose from 'mongoose';
 import {
   default as Budget,
   discriminatorOptions,
+  costPercentByCostTypeByQuarter,
   shareByCostTypeByQuarter,
   shareByCostType,
   fedStateSplitByCost,
-  fedStateSplit
+  fedStateSplit,
+  activities
 } from './budget.js';
 
 const hitechBudgetSchema = new mongoose.Schema(
@@ -51,6 +53,18 @@ const hitechBudgetSchema = new mongoose.Schema(
         type: Map,
         of: fedStateSplit
       }
+    },
+    activities: {
+      type: Map,
+      of: activities.add({
+        quarterlyFFP: {
+          years: {
+            type: Map,
+            of: costPercentByCostTypeByQuarter
+          },
+          total: shareByCostType
+        }
+      })
     }
   },
   discriminatorOptions

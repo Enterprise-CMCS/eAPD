@@ -7,6 +7,8 @@ import {
   useHistory as actualUseHistory
 } from 'react-router-dom';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import { selectApd } from '../../redux/actions/app';
 import {
   selectApdData,
@@ -15,16 +17,19 @@ import {
 import { selectBudget } from '../../redux/selectors/budget.selectors';
 import { getAPDYearRange } from '../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
+
+import Loading from '../../components/Loading';
+
+import ExportInstructions from './export/ExportReadOnly';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from './export/ReadOnlyApd';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import SecurityPlanningSummary from './security-planning/SecurityPlanningReadOnly';
 import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
-import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
-import ExportInstructions from './export/ExportReadOnly';
-import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({
   apd,
@@ -40,6 +45,7 @@ const ApdViewOnly = ({
   const apdId = apd.id || null;
   const { apdId: paramApdId } = useParams();
   const history = useHistory();
+  const isApdMmis = apdType === APD_TYPE.MMIS;
 
   useEffect(
     () => {
@@ -130,6 +136,7 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ProposedBudget />
       <hr className="section-rule" />
+      {isApdMmis && <SecurityPlanningSummary />}
       <AssuranceAndCompliance />
       <a href="#top-anchor" className="visibility--screen">
         ^ Return to the top of the page
