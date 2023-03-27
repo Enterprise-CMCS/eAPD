@@ -64,7 +64,7 @@ describe('tests state admin portal', () => {
 
         cy.turnOnAdminCheck();
 
-        cy.get('[data-cy="numRequired"]').should('have.text', '35');
+        cy.get('[data-cy="numRequired"]').should('have.text', '34');
 
         cy.findByRole('button', { name: /Collapse/i }).click({
           force: true
@@ -120,7 +120,7 @@ describe('tests state admin portal', () => {
         cy.get('[data-cy="validationError"]')
           .contains('Provide a brief introduction to the state program.')
           .should('not.exist');
-        cy.get('[data-cy="numRequired"]').should('have.text', '34');
+        cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
         cy.findByRole('button', { name: /Collapse/i }).click({
           force: true
@@ -138,7 +138,7 @@ describe('tests state admin portal', () => {
         );
 
         cy.get('[data-cy="validationError"]').should('not.exist');
-        cy.get('[data-cy="numRequired"]').should('have.text', '33');
+        cy.get('[data-cy="numRequired"]').should('have.text', '32');
 
         cy.findByRole('button', { name: /Expand/i }).click({
           force: true
@@ -154,7 +154,7 @@ describe('tests state admin portal', () => {
         cy.get('[data-cy="validationError"]')
           .contains('Provide a brief introduction to the state program.')
           .should('exist');
-        cy.get('[data-cy="numRequired"]').should('have.text', '34');
+        cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
         cy.findByRole('button', { name: /Collapse/i }).click({
           force: true
@@ -166,7 +166,7 @@ describe('tests state admin portal', () => {
         cy.get('[data-cy="validationError"]')
           .contains('Provide a summary of HIT-funded activities.')
           .should('exist');
-        cy.get('[data-cy="numRequired"]').should('have.text', '35');
+        cy.get('[data-cy="numRequired"]').should('have.text', '34');
 
         cy.findByRole('button', { name: /Expand/i }).click({
           force: true
