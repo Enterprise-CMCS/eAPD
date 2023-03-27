@@ -51,3 +51,8 @@ function returnArrayOfCheckBoxes(obj) {
 export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
 );
+
+export const DATE_EXTREMES = {
+  dateMin: '1960-01-01',
+  dateMax: '2151-12-31'
+};
