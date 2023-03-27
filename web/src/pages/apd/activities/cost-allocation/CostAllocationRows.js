@@ -1,11 +1,31 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Dollars from '../../../../components/Dollars';
+import { APD_TYPE } from '@cms-eapd/common';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import classNames from 'classnames';
 
-export const CostSummaryRows = ({ items, highlightSubtotals }) =>
-  items.map(
+export const CostSummaryRows = ({
+  items,
+  defaultMessage,
+  highlightSubtotals
+}) => {
+  if (defaultMessage && (!items || items.length === 0)) {
+    return (
+      <tr>
+        <td className="title">{defaultMessage || ''}</td>
+        <td className="budget-table--number"></td>
+        <td className="budget-table--number ds-u-padding--0"></td>
+        <td className="budget-table--number ds-u-text-align--left"></td>
+        <td className="budget-table--number"></td>
+        <td className="budget-table--number">
+          <Dollars>$0</Dollars>
+        </td>
+      </tr>
+    );
+  }
+  return items.map(
     ({ key, description, totalCost, unitCost, units, medicaidShare }) => (
       <tr key={key || description}>
         <td className="title">{description || 'Category Not Selected'}</td>
@@ -32,13 +52,15 @@ export const CostSummaryRows = ({ items, highlightSubtotals }) =>
       </tr>
     )
   );
+};
 
 CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired,
+  defaultMessage: PropTypes.string,
   highlightSubtotals: PropTypes.bool
 };
-
 CostSummaryRows.defaultProps = {
+  defaultMessage: null,
   highlightSubtotals: false
 };
 
@@ -47,10 +69,38 @@ const CostAllocationRows = ({
   ffy,
   otherFunding,
   activityIndex,
+  apdType,
   highlightSubtotals,
   showUnitCostHeader,
   highlightTotal
 }) => {
+  const { emptyBudgetWording } = useFlags();
+  const [emptyStateStaff, setEmptyStateStaff] = useState(
+    'State staff not specified.'
+  );
+  const [emptyStateExpense, setEmptyStateExpense] = useState(
+    'Other state expenses not specified.'
+  );
+  const [emptyPrivateContractor, setEmptyPrivateContractor] = useState(
+    'Private contractor not specified.'
+  );
+
+  useEffect(() => {
+    setEmptyStateStaff(
+      emptyBudgetWording ? 'State staff not specified.' : 'State staff'
+    );
+    setEmptyStateExpense(
+      emptyBudgetWording
+        ? 'Other state expenses not specified.'
+        : 'Other state expense'
+    );
+    setEmptyPrivateContractor(
+      emptyBudgetWording
+        ? 'Private contractor not specified.'
+        : 'Private contractor'
+    );
+  }, [emptyBudgetWording]);
+
   const budgetTableClassName = classNames({
     'budget-table--number': true,
     'budget-table--cell__hightlight-lighter': highlightSubtotals
@@ -92,12 +142,15 @@ const CostAllocationRows = ({
           <th scope="col">Total cost</th>
         </tr>
       )}
-      <CostSummaryRows
-        items={years[ffy].keyPersonnel}
-        highlightSubtotals={highlightSubtotals}
-      />
+      {apdType === APD_TYPE.HITECH && (
+        <CostSummaryRows
+          items={years[ffy].keyPersonnel}
+          highlightSubtotals={highlightSubtotals}
+        />
+      )}
       <CostSummaryRows
         items={years[ffy].statePersonnel}
+        defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateStaff : null}
         highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
@@ -136,6 +189,7 @@ const CostAllocationRows = ({
       </tr>
       <CostSummaryRows
         items={years[ffy].nonPersonnel}
+        defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateExpense : null}
         highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
@@ -177,6 +231,9 @@ const CostAllocationRows = ({
       </tr>
       <CostSummaryRows
         items={years[ffy].contractorResources}
+        defaultMessage={
+          apdType === APD_TYPE.MMIS ? emptyPrivateContractor : null
+        }
         highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
@@ -236,6 +293,7 @@ const CostAllocationRows = ({
 CostAllocationRows.propTypes = {
   years: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired,
   otherFunding: PropTypes.shape({
     statePersonnel: PropTypes.object,
     expenses: PropTypes.object,

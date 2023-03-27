@@ -8,6 +8,7 @@ import Dollars from '../../../../components/Dollars';
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
 import ConditionsForEnhancedFundingReadOnly from '../conditions/ConditionsForEnhancedFundingReadOnly';
+import AlternativesAndRisksReadOnly from '../alternatives-and-risks/AlternativesAndRisksReadOnly';
 import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
@@ -156,6 +157,12 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         years={years}
         apdType={apdType}
       />
+      {apdType === APD_TYPE.MMIS && (
+        <AlternativesAndRisksReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
 
       <h3>Milestones</h3>
       {activity.milestones.length === 0 && 'No milestones were provided.'}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import { APD_TYPE } from '@cms-eapd/common';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import Activity from './ActivityReadOnly';
 
@@ -421,6 +422,12 @@ const setup = async (props = {}, options = {}) =>
 
 /* eslint-disable testing-library/no-node-access */
 describe('<Activity /> component', () => {
+  beforeEach(() => {
+    // reset before each test case
+    resetLDMocks();
+    mockFlags({ emptyBudgetWording: false });
+  });
+
   it('renders HITECH dates correctly', async () => {
     await setup({ activity: activityHitech, apdType: APD_TYPE.HITECH });
     expect(screen.getByText(/Start date/i).closest('p')).toHaveTextContent(

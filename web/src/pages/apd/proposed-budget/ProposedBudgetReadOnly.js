@@ -7,6 +7,7 @@ import CombinedActivityCosts from './CombinedActivityCosts';
 import BudgetSummary from './BudgetSummary';
 import IncentivePayments from './IncentivePayments';
 import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const ProposedBudget = ({ apdType }) => (
   <div>
@@ -18,11 +19,14 @@ const ProposedBudget = ({ apdType }) => (
     <h3>Summary Budget Table</h3>
     <BudgetSummary apdType={apdType} />
 
-    <h3>Quarterly Federal Share</h3>
-    <QuarterlyBudgetSummary />
-
-    <h3>Estimated Quarterly Incentive Payments</h3>
-    <IncentivePayments isViewOnly />
+    {apdType === APD_TYPE.HITECH && (
+      <div>
+        <h3>Quarterly Federal Share</h3>
+        <QuarterlyBudgetSummary />
+        <h3>Estimated Quarterly Incentive Payments</h3>
+        <IncentivePayments isViewOnly />
+      </div>
+    )}
   </div>
 );
 
