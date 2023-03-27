@@ -53,6 +53,6 @@ export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
 );
 
 export const DATE_EXTREMES = {
-  dateMin: '1960-01-01',
-  dateMax: '2151-12-31'
+  min: '1960-01-01',
+  max: '2151-12-31'
 };
