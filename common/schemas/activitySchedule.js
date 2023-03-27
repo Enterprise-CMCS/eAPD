@@ -16,8 +16,8 @@ const activityScheduleSchema = Joi.object({
       'date.base': 'Provide a start date.',
       'date.empty': 'Provide a start date.',
       'date.format': 'Provide a start date.',
-      'date.max': 'Provide a valid year.',
-      'date.min': 'Provide a valid year.'
+      'date.max': 'Provide a valid start year.',
+      'date.min': 'Provide a valid start year.'
     }),
   plannedEndDate: Joi.date()
     .format('YYYY-MM-DD')
@@ -28,9 +28,9 @@ const activityScheduleSchema = Joi.object({
     .messages({
       'date.base': 'Provide an end date.',
       'date.format': 'Provide an end date.',
+      'any.ref': 'Provide an end date that is after the start date.',
       'date.min': 'Provide an end date that is after the start date.',
-      'date.max': 'Provide a valid year.',
-      'any.ref': 'Provide an end date that is after the start date.'
+      'date.max': 'Provide a valid end year.'
     })
 });
 
