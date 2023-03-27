@@ -37,21 +37,21 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         />
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis90_total_approved"
+          id="prev_act_mmis90_total_approved_ddi"
           scope="col"
         >
           Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis90_federal_approved"
+          id="prev_act_mmis90_federal_approved_ddi"
           scope="col"
         >
           Approved 90% FFP
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis90_federal_actual"
+          id="prev_act_mmis90_federal_actual_ddi"
           scope="col"
         >
           Actual FFP Expenditures
@@ -64,7 +64,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_90"
+          id="prev_act_mmis_row_1_90_ddi"
           scope="row"
         >
           FFY 1
@@ -72,7 +72,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis90_total_approved"
-          headers="prev_act_mmis_row_1_90"
+          headers="prev_act_mmis_row_1_90_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -87,7 +87,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis90_federal_approved_1"
-          headers="prev_act_mmis_row_1_90"
+          headers="prev_act_mmis_row_1_90_ddi"
         >
           <Dollars>
             18
@@ -96,7 +96,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis90_federal_actual"
-          headers="prev_act_mmis_row_1_90"
+          headers="prev_act_mmis_row_1_90_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -114,7 +114,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_2_90"
+          id="prev_act_mmis_row_2_90_ddi"
           scope="row"
         >
           FFY 2
@@ -122,7 +122,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis90_total_approved"
-          headers="prev_act_mmis_row_2_90"
+          headers="prev_act_mmis_row_2_90_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -137,7 +137,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis90_federal_approved_2"
-          headers="prev_act_mmis_row_2_90"
+          headers="prev_act_mmis_row_2_90_ddi"
         >
           <Dollars>
             180
@@ -146,7 +146,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis90_federal_actual"
-          headers="prev_act_mmis_row_2_90"
+          headers="prev_act_mmis_row_2_90_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -196,21 +196,21 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         />
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_total_approved"
+          id="prev_act_mmis75_total_approved_ddi"
           scope="col"
         >
           Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_approved"
+          id="prev_act_mmis75_federal_approved_ddi"
           scope="col"
         >
           Approved 75% FFP
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_actual"
+          id="prev_act_mmis75_federal_actual_ddi"
           scope="col"
         >
           Actual FFP Expenditures
@@ -223,7 +223,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_75"
+          id="prev_act_mmis_row_1_75_ddi"
           scope="row"
         >
           FFY 1
@@ -231,7 +231,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -246,7 +246,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis75_federal_approved_1"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_ddi"
         >
           <Dollars>
             30
@@ -255,7 +255,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -273,7 +273,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_2_75"
+          id="prev_act_mmis_row_2_75_ddi"
           scope="row"
         >
           FFY 2
@@ -281,7 +281,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -296,7 +296,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis75_federal_approved_2"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_ddi"
         >
           <Dollars>
             300
@@ -305,7 +305,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -342,21 +342,21 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         />
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_total_approved"
+          id="prev_act_mmis75_total_approved_mando"
           scope="col"
         >
           Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_approved"
+          id="prev_act_mmis75_federal_approved_mando"
           scope="col"
         >
           Approved 75% FFP
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_actual"
+          id="prev_act_mmis75_federal_actual_mando"
           scope="col"
         >
           Actual FFP Expenditures
@@ -369,7 +369,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_75"
+          id="prev_act_mmis_row_1_75_mando"
           scope="row"
         >
           FFY 1
@@ -377,7 +377,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -392,7 +392,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis75_federal_approved_1"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_mando"
         >
           <Dollars>
             30
@@ -401,7 +401,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_1_75_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -419,7 +419,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_2_75"
+          id="prev_act_mmis_row_2_75_mando"
           scope="row"
         >
           FFY 2
@@ -427,7 +427,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -442,7 +442,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis75_federal_approved_2"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_mando"
         >
           <Dollars>
             300
@@ -451,7 +451,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2_75_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -501,21 +501,21 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         />
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_total_approved"
+          id="prev_act_mmis50_total_approved_ddi"
           scope="col"
         >
           Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_approved"
+          id="prev_act_mmis50_federal_approved_ddi"
           scope="col"
         >
           Approved 50% FFP
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_actual"
+          id="prev_act_mmis50_federal_actual_ddi"
           scope="col"
         >
           Actual FFP Expenditures
@@ -528,7 +528,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_50"
+          id="prev_act_mmis_row_1_50_ddi"
           scope="row"
         >
           FFY 1
@@ -536,7 +536,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -551,7 +551,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis50_federal_approved_1"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_ddi"
         >
           <Dollars>
             30
@@ -560,7 +560,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -578,7 +578,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_2_50"
+          id="prev_act_mmis_row_2_50_ddi"
           scope="row"
         >
           FFY 2
@@ -586,7 +586,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -601,7 +601,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis50_federal_approved_2"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_ddi"
         >
           <Dollars>
             300
@@ -610,7 +610,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_ddi"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -647,21 +647,21 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         />
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_total_approved"
+          id="prev_act_mmis50_total_approved_mando"
           scope="col"
         >
           Approved Total Computable Medicaid
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_approved"
+          id="prev_act_mmis50_federal_approved_mando"
           scope="col"
         >
           Approved 50% FFP
         </th>
         <th
           className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_actual"
+          id="prev_act_mmis50_federal_actual_mando"
           scope="col"
         >
           Actual FFP Expenditures
@@ -674,7 +674,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_50"
+          id="prev_act_mmis_row_1_50_mando"
           scope="row"
         >
           FFY 1
@@ -682,7 +682,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -697,7 +697,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis50_federal_approved_1"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_mando"
         >
           <Dollars>
             30
@@ -706,7 +706,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_1_50_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -724,7 +724,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_2_50"
+          id="prev_act_mmis_row_2_50_mando"
           scope="row"
         >
           FFY 2
@@ -732,7 +732,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_mando"
         >
           <DollarField
             className="budget-table--input-holder"
@@ -747,7 +747,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className="budget-table--number"
           data-cy="prev_act_mmis50_federal_approved_2"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_mando"
         >
           <Dollars>
             300
@@ -756,7 +756,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2_50_mando"
         >
           <DollarField
             className="budget-table--input-holder"
