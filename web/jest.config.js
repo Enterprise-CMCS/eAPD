@@ -3,6 +3,7 @@ module.exports = {
   setupFiles: [
     '../polyfills.test.js',
     '../setup.enzyme.test.js',
+    '../setup.storybook.test.js',
     'jest-launchdarkly-mock'
   ],
   setupFilesAfterEnv: ['../setup.rtl.test.js'],
