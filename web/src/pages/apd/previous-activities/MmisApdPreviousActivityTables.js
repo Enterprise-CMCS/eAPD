@@ -78,7 +78,7 @@ const MmisApdPreviousActivityTables = ({
             <tr>
               <td className="th" aria-hidden="true" />
               <th
-                id={`prev_act_mmis${level.ffp}_total_approved`}
+                id={`prev_act_mmis${level.ffp}_total_approved_${level.fundingTypeSchema}`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
@@ -86,14 +86,14 @@ const MmisApdPreviousActivityTables = ({
               </th>
 
               <th
-                id={`prev_act_mmis${level.ffp}_federal_approved`}
+                id={`prev_act_mmis${level.ffp}_federal_approved_${level.fundingTypeSchema}`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
                 {TABLE_HEADERS.approved(level.ffp)}
               </th>
               <th
-                id={`prev_act_mmis${level.ffp}_federal_actual`}
+                id={`prev_act_mmis${level.ffp}_federal_actual_${level.fundingTypeSchema}`}
                 className="ds-u-text-align--right"
                 scope="col"
               >
@@ -113,14 +113,14 @@ const MmisApdPreviousActivityTables = ({
               return (
                 <tr key={year}>
                   <th
-                    id={`prev_act_mmis_row_${year}_${level.ffp}`}
+                    id={`prev_act_mmis_row_${year}_${level.ffp}_${level.fundingTypeSchema}`}
                     scope="row"
                     data-cy="yearRow"
                   >
                     {TABLE_HEADERS.ffy(year)}
                   </th>
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level.ffp}`}
+                    headers={`prev_act_mmis_row_${year}_${level.ffp}_${level.fundingTypeSchema}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
                     data-cy={`prev_act_mmis${level.ffp}_total_approved`}
                   >
@@ -148,7 +148,7 @@ const MmisApdPreviousActivityTables = ({
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level.ffp}`}
+                    headers={`prev_act_mmis_row_${year}_${level.ffp}_${level.fundingTypeSchema}`}
                     className="budget-table--number"
                     data-cy={`prev_act_mmis${level.ffp}_federal_approved_${year}`}
                   >
@@ -156,7 +156,7 @@ const MmisApdPreviousActivityTables = ({
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year}_${level.ffp}`}
+                    headers={`prev_act_mmis_row_${year}_${level.ffp}_${level.fundingTypeSchema}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
                     data-cy={`prev_act_mmis${level.ffp}_federal_actual`}
                   >

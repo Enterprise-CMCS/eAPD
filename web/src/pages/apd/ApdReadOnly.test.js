@@ -8,6 +8,8 @@ import ApdViewOnly from './ApdReadOnly';
 
 import apd from '../../fixtures/ak-apd.json';
 import budget from '../../fixtures/ak-budget.json';
+import mmisApd from '../../fixtures/ak-apd-mmis.json';
+import mmisBudget from '../../fixtures/ak-budget-mmis.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -29,12 +31,50 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
+    
     // reset before each test case
     resetLDMocks();
-    mockFlags({ emptyBudgetWording: false });
+    mockFlags({ emptyBudgetWording: false, enableMmis: true });
   });
 
-  test('renders correctly and tests Back to APD button', async () => {
+  test('renders HITECH Read Only correctly', async () => {
+    setup(null, {
+      initialState: {
+        ...apd,
+        ...budget
+      },
+      initialHistory: ['/apd/1']
+    });
+    expect(screen.getByText('HITECH IAPD')).toBeTruthy();
+    expect(screen.getByText('2020-2021 APD')).toBeTruthy();
+    // Overview Summary
+    expect(screen.getByText(/Program introduction/)).toBeTruthy();
+    expect(screen.queryByText(/Medicaid Business Areas/)).toBeFalsy();
+    // Security Planning should not be present
+    expect(screen.queryByText(/Security Planning/)).toBeFalsy();
+  });
+
+  test.skip('renders MMIS Read Only correctly', async () => {
+    mockFlags({ enableMmis: true });
+    setup(null, {
+      initialState: {
+        ...mmisApd,
+        ...mmisBudget
+      },
+      initialHistory: ['/apd/1']
+    });
+    expect(screen.getByTestId('apdName')).toHaveTextContent(
+      'MMIS IAPD for Alaska'
+    );
+    expect(screen.getByText('2023-2024 APD')).toBeTruthy();
+    // Overview Summary
+    expect(screen.queryByText(/Program introduction/)).toBeFalsy();
+    expect(screen.getByText(/Medicaid Business Areas/)).toBeTruthy();
+    // Security Planning should not be present
+    expect(screen.getByText(/Security Planning/)).toBeTruthy();
+  });
+
+  test('Back to APD button', async () => {
     const { user } = setup(null, {
       initialState: {
         ...apd,
@@ -42,8 +82,6 @@ describe('<ApdViewOnly/>', () => {
       },
       initialHistory: ['/apd/1']
     });
-    expect(await screen.findByText('HITECH IAPD')).toBeTruthy();
-    expect(await screen.findByText('2020-2021 APD')).toBeTruthy();
 
     await user.click(screen.getByRole('button', { name: '< Back to APD' }));
     expect(history.length).toEqual(1);

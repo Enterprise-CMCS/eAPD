@@ -8,6 +8,10 @@ export const FUNDING_CATEGORY_TYPE = {
   DDI: 'DDI',
   MANDO: 'MO'
 };
+export const FUNDING_CATEGORY_TYPE_KEY_LOOKUP = {
+  DDI: 'ddi',
+  MO: 'mando'
+};
 
 export const FUNDING_CATEGORY_LABEL_MAPPING = {
   DDI: 'Design, Development, and Installation (DDI)',
