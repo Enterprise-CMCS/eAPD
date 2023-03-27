@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ChoiceList } from '../../../components/ChoiceList';
+import ChoiceList from '../../../components/ChoiceList';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const MmisUpdateStatus = ({ updateStatus, setUpdateStatus, setUpdateAPD }) => {
