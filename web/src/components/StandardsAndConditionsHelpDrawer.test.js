@@ -6,7 +6,7 @@ import StandardsAndConditionsHelpDrawer from './StandardsAndConditionsHelpDrawer
 
 const setup = async () => {
   render(
-    <main id="start-main-content" class="site-main">
+    <main id="start-main-content" className="site-main">
       <StandardsAndConditionsHelpDrawer />
     </main>
   );

@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { HelpDrawer, Button } from '@cmsgov/design-system';
 import { ChevronRight } from './Icons';
 

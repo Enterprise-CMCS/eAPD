@@ -29,8 +29,7 @@ const ConditionsForEnhancedFunding = ({
     control,
     formState: { errors },
     trigger,
-    clearErrors,
-    getValues
+    clearErrors
   } = useForm({
     defaultValues: {
       enhancedFundingQualification,
