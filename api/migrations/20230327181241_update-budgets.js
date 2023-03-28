@@ -25,7 +25,7 @@ export const up = async () => {
   const hitech = await HITECH.find().lean({ virtuals: true });
   logger.info(`Update ${hitech.length} HITECH Budgets`);
 
-  await Promise.all(
+  const hitechResults = await Promise.allSettled(
     hitech.map(apd => {
       logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
 
@@ -33,17 +33,20 @@ export const up = async () => {
       return HITECHBudget.replaceOne(
         { _id: apd.budget },
         { ...budget },
-        { upsert: true }
+        {
+          multipleCastError: true
+        }
       );
     })
-  ).catch(err => logger.error(err));
+  );
+  logger.info(`HITECH results: ${JSON.stringify(hitechResults)}`);
 
   // Update MMIS Budgets
   // { virtuals: true } returns apdType along with __t
   const mmis = await MMIS.find().lean({ virtuals: true });
   logger.info(`Update ${mmis.length} MMIS Budgets`);
 
-  await Promise.all(
+  const mmisResults = await Promise.allSettled(
     mmis.map(apd => {
       logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
 
@@ -51,10 +54,13 @@ export const up = async () => {
       return MMISBudget.replaceOne(
         { _id: apd.budget },
         { ...budget },
-        { upsert: true }
+        {
+          multipleCastError: true
+        }
       );
     })
-  ).catch(err => logger.error(err));
+  );
+  logger.info(`MMIS results: ${JSON.stringify(mmisResults)}`);
 
   const apds = await APD.find({ __t: null }).lean();
   logger.info(`Found ${apds.length} plain APDs`);
