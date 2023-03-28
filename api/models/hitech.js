@@ -6,6 +6,7 @@ import {
   discriminatorOptions,
   federalCitation
 } from './apd.js';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const incentivePayment = new mongoose.Schema(
   {
@@ -131,6 +132,6 @@ const hitechSchema = new mongoose.Schema(
   discriminatorOptions
 );
 
-const HITECH = APD.discriminator('HITECH', hitechSchema);
+const HITECH = APD.discriminator(APD_TYPE.HITECH, hitechSchema);
 
 export default HITECH;
