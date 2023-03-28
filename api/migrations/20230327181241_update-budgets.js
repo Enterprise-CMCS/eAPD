@@ -1,6 +1,12 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { APD, getBudgetModel } from '../models/index.js';
+import {
+  APD,
+  HITECH,
+  HITECHBudget,
+  MMIS,
+  MMISBudget
+} from '../models/index.js';
 import { calculateBudget } from '@cms-eapd/common';
 
 const logger = loggerFactory('mongoose-migrate/updating-budgets');
@@ -13,28 +19,45 @@ const logger = loggerFactory('mongoose-migrate/updating-budgets');
 export const up = async () => {
   // Grab all APDs
   await setup();
-  // { virtuals: true } returns apdType along with __t
-  const apds = await APD.find().lean({ virtuals: true });
 
-  logger.info(`Update ${apds.length} Budgets`);
+  // Update HITECH Budgets
+  // { virtuals: true } returns apdType along with __t
+  const hitech = await HITECH.find().lean({ virtuals: true });
+  logger.info(`Update ${hitech.length} HITECH Budgets`);
 
   await Promise.all(
-    apds.map(apd => {
-      logger.info(
-        `Updating APD ${apd._id}, a ${apd.apdType} type, Budget ${apd.budget}`
-      );
+    hitech.map(apd => {
+      logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
 
-      const apdType = apd.__t;
-      const budget = calculateBudget({
-        ...apd,
-        apdType
-      });
-      return getBudgetModel(apdType).replaceOne(
+      const budget = calculateBudget({ ...apd });
+      return HITECHBudget.replaceOne(
         { _id: apd.budget },
-        { ...budget }
+        { ...budget },
+        { upsert: true }
       );
     })
   ).catch(err => logger.error(err));
+
+  // Update MMIS Budgets
+  // { virtuals: true } returns apdType along with __t
+  const mmis = await MMIS.find().lean({ virtuals: true });
+  logger.info(`Update ${mmis.length} MMIS Budgets`);
+
+  await Promise.all(
+    mmis.map(apd => {
+      logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
+
+      const budget = calculateBudget({ ...apd });
+      return MMISBudget.replaceOne(
+        { _id: apd.budget },
+        { ...budget },
+        { upsert: true }
+      );
+    })
+  ).catch(err => logger.error(err));
+
+  const apds = await APD.find({ __t: null }).lean();
+  logger.info(`Found ${apds.length} plain APDs`);
 
   await teardown();
 };
