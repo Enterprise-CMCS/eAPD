@@ -1,3 +1,6 @@
+import PopulatePage from '../../page-objects/populate-page';
+const populatePage = new PopulatePage();
+
 describe('tests state admin portal', () => {
   let apdUrl;
   let apdId;
@@ -175,6 +178,62 @@ describe('tests state admin portal', () => {
         cy.get('[class="eapd-admin-check-list"]').within(list => {
           cy.get(list).contains('APD Overview').should('exist');
         });
+      }
+    );
+
+    it(
+      'tests dates in activity schedule',
+      { tags: ['@state', '@admin'] },
+      function () {
+        cy.turnOnAdminCheck();
+        cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          force: true
+        });
+
+        cy.log('Start date required');
+        cy.goToActivitySchedule(0);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+          .contains('Provide a start date.')
+          .should('exist');
+        populatePage.fillDate('Start date', ['11', '16', '1990']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]').should(
+          'not.exist'
+        );
+
+        cy.log('Start date requires valid year (between 1960 and 2151)');
+        populatePage.fillDate('Start date', ['11', '16', '1900']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+          .contains('Provide a valid start year.')
+          .should('exist');
+        populatePage.fillDate('Start date', ['11', '16', '3000']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+          .contains('Provide a valid start year.')
+          .should('exist');
+        populatePage.fillDate('Start date', ['11', '16', '1990']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]').should(
+          'not.exist'
+        );
+
+        cy.log('End date required to be after start date');
+        populatePage.fillDate('End date', ['09', '15', '1990']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+          .contains('Provide an end date that is after the start date.')
+          .should('exist');
+        populatePage.fillDate('End date', ['09', '15', '1992']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]').should(
+          'not.exist'
+        );
+
+        cy.log('End date requires valid year (between 1960 and 2151)');
+        populatePage.fillDate('End date', ['09', '15', '3002']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+          .contains('Provide a valid end year.')
+          .should('exist');
+        populatePage.fillDate('End date', ['09', '15', '1992']);
+        cy.get('[class="ds-c-inline-error ds-c-field__error-message"]').should(
+          'not.exist'
+        );
       }
     );
 
