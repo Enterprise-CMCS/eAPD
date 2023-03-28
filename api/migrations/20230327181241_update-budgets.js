@@ -39,7 +39,7 @@ export const up = async () => {
       );
     })
   );
-  logger.info(`HITECH results: ${JSON.stringify(hitechResults, null, 2)}`);
+  logger.info(`HITECH results: ${JSON.stringify(hitechResults)}`);
 
   // Update MMIS Budgets
   // { virtuals: true } returns apdType along with __t
@@ -60,7 +60,7 @@ export const up = async () => {
       );
     })
   );
-  logger.info(`MMIS results: ${JSON.stringify(mmisResults, null, 2)}`);
+  logger.info(`MMIS results: ${JSON.stringify(mmisResults)}`);
 
   const apds = await APD.find({ __t: null }).lean();
   logger.info(`Found ${apds.length} plain APDs`);
