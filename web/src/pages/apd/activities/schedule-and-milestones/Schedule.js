@@ -52,8 +52,8 @@ const Schedule = ({
   const triggerDates = () => {
     if (adminCheck) {
       trigger();
-      // } else if (adminCheck && !plannedEndDate) {
-      //   trigger('plannedStartDate');
+    } else if (adminCheck && !plannedEndDate) {
+      trigger('plannedStartDate');
     }
   };
 
