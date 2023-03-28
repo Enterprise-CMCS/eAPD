@@ -44,9 +44,9 @@ const DateField = ({
       const lastDayOfMonth = new Date(parseInt(year), parseInt(month) - 1, 0);
       setInvalidObject({
         dayInvalid:
-          !isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1,
-        monthInvalid: !isNumeric(month) || month < 1 || month > 12,
-        yearInvalid: !isNumeric(year) || year < 1900 || year > 2100
+          !isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1,
+        monthInvalid: !isNumeric(month) || +month < 1 || +month > 12,
+        yearInvalid: !isNumeric(year) || +year < 1900 || +year > 2100
       });
     }
     if (!errorMessage) {
