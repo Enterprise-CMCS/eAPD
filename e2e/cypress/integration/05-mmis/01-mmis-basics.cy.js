@@ -638,7 +638,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
     });
 
-    it.only('mmis navigation and cypress-axe', function () {
+    it('mmis navigation and cypress-axe', function () {
       // Decided to omit the activities page since the first subnav doesn't match the page title
       const pageTitles = [
         ['APD Overview'],
@@ -699,86 +699,126 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         cy.checkPageA11y();
       });
 
-      // cy.log('Click through sidenav of an activity and runs cypress-axe');
-      // cy.goToActivityDashboard();
-      // cy.get('.ds-h2').should('contain', 'Activities');
+      cy.log('Click through sidenav of an activity and runs cypress-axe');
+      cy.goToActivityDashboard();
+      cy.get('.ds-h2').should('contain', 'Activities');
 
-      // cy.findAllByText('Add Activity').click();
+      cy.findAllByText('Add Activity').click();
 
       // TODO: Bug Ticket 4481, Uncomment code below to navigate via side panel
       // cy.get('.ds-c-vertical-nav__item').contains('Activity 1: Untitled').click();
 
-      // Once 4481 is fixed, the code above should expand the subnav of the activity, we can delete this line below
-      // cy.get('#activities').contains('Edit').click();
+      // Once 4481 is fixed, the code above should expand the subnav of the activity and we can delete this line below
+      cy.get('#activities').contains('Edit').click();
 
-      // activityPageTitles.forEach(title => {
-      //   if (title.length > 1) {
-      //     cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
-      //     title[1].forEach(altHeader => {
-      //       cy.get('.ds-h3').should('contain', altHeader);
-      //     });
-      //     cy.checkPageA11y();
-      //   } else {
-      //     cy.get('.ds-c-vertical-nav__item').contains(title).click();
-      //     cy.get('.ds-h3').should('contain', title);
-      //     cy.checkPageA11y();
-      //   }
-      // });
+      activityPageTitles.forEach(title => {
+        if (title.length > 1) {
+          cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+          title[1].forEach(altHeader => {
+            if (altHeader === 'Other Funding') {
+              cy.get('.ds-h2').should('contain', altHeader);
+            } else {
+              cy.get('.ds-h3').should('contain', altHeader);
+            }
+          });
+          cy.checkPageA11y();
+        } else {
+          cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+          if (title[0] === 'Budget and FFP') {
+            cy.get('.ds-h2').should('contain', title[0]);
+          } else {
+            cy.get('.ds-h3').should('contain', title[0]);
+          }
+          cy.checkPageA11y();
+        }
+      });
 
-      // cy.log('Click through Continue buttons');
-      // cy.goToApdOverview();
-      // pageTitles.forEach((titles, index) => {
-      //   cy.get('.ds-h2').should('contain', titles[0]);
-      //   if (index < pageTitles.length - 1) {
-      //     cy.get('#continue-button').click();
-      //     if (index === 3) {
-      //       // Activity page index
-      //       cy.get('#activities').contains('Edit').click();
-      //       activityPageTitles.forEach(titles => {
-      //         cy.get('.ds-h3').should('contain', titles);
-      //         cy.get('#continue-button').click();
-      //       });
-      //     }
-      //   }
-      // });
+      cy.log('Click through Continue buttons');
+      cy.goToApdOverview();
+      pageTitles.forEach((titles, index) => {
+        cy.get('.ds-h2').should('contain', titles[0]);
+        if (index < pageTitles.length - 1) {
+          cy.get('#continue-button').click();
+          if (index === 3) {
+            // Activity page index
+            cy.get('.ds-h2').should('contain', 'Activities');
+            cy.get('#activities').contains('Edit').click();
 
-      // cy.log('Click through Previous buttons');
-      // cy.get('.ds-c-vertical-nav__item').contains('Export and Submit').click();
-      // pageTitles.reverse().forEach((titles, index) => {
-      //   cy.get('.ds-h2').should('contain', titles[0]);
-      //   if (index < pageTitles.length - 1) {
-      //     cy.get('#previous-button').click();
-      //     if (index === 5) {
-      //       // Activity page index
-      //       cy.goToBudgetandFFP(0);
-      //       activityPageTitles.reverse().forEach(titles => {
-      //         cy.get('.ds-h3').should('contain', titles);
-      //         cy.get('#previous-button').click();
-      //       });
-      //     }
-      //   }
-      // });
+            activityPageTitles.forEach(title => {
+              if (title.length > 1) {
+                title[1].forEach(altHeader => {
+                  if (altHeader === 'Other Funding') {
+                    cy.get('.ds-h2').should('contain', altHeader);
+                  } else {
+                    cy.get('.ds-h3').should('contain', altHeader);
+                  }
+                });
+              } else {
+                if (title[0] === 'Budget and FFP') {
+                  cy.get('.ds-h2').should('contain', title[0]);
+                } else {
+                  cy.get('.ds-h3').should('contain', title[0]);
+                }
+              }
+              cy.get('#continue-button').click();
+            });
+          }
+        }
+      });
 
-      // cy.log(
-      //   'should go to the Activity Overview page when edit is clicked in Executive Summary'
-      // );
-      // cy.goToExecutiveSummary();
+      cy.log('Click through Previous buttons');
+      cy.get('.ds-c-vertical-nav__item').contains('Export and Submit').click();
+      pageTitles.reverse().forEach((titles, index) => {
+        cy.get('.ds-h2').should('contain', titles[0]);
+        if (index < pageTitles.length - 1) {
+          cy.get('#previous-button').click();
+          if (index === 5) {
+            // Activity page index
+            cy.goToBudgetAndFFP(0);
 
-      // cy.get('#executive-summary-summary')
-      //   .parent()
-      //   .contains('div', 'Activity 1: Untitled')
-      //   .parent()
-      //   .parent()
-      //   .findByRole('link', { name: 'Edit' })
-      //   .click();
+            activityPageTitles.reverse().forEach(title => {
+              if (title.length > 1) {
+                title[1].forEach(altHeader => {
+                  if (altHeader === 'Other Funding') {
+                    cy.get('.ds-h2').should('contain', altHeader);
+                  } else {
+                    cy.get('.ds-h3').should('contain', altHeader);
+                  }
+                });
+              } else {
+                if (title[0] === 'Budget and FFP') {
+                  cy.get('.ds-h2').should('contain', title[0]);
+                } else {
+                  cy.get('.ds-h3').should('contain', title[0]);
+                }
+              }
+              cy.get('#previous-button').click();
+            });
+            cy.get('.ds-h2').should('contain', 'Activities');
+            cy.get('#previous-button').click();
+          }
+        }
+      });
 
-      // cy.get('#activities').contains('Edit').click();
+      cy.log(
+        'should go to the Activity Overview page when edit is clicked in Executive Summary'
+      );
+      cy.goToExecutiveSummary();
 
-      // cy.findByRole('heading', {
-      //   name: /^Activity 1:/i,
-      //   level: 2
-      // }).should('exist');
-      // cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+      cy.findByRole('heading', { name: /^Activities Summary/i, level: 3 })
+        .next()
+        .next()
+        .contains('Edit')
+        .click();
+
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', {
+        name: /^Activity Overview/i,
+        level: 3
+      }).should('exist');
     });
   });
 });
