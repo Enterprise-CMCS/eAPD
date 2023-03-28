@@ -30,7 +30,14 @@ resource "aws_instance" "eapd_jumpbox_bb" {
         "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
-    }   
+    }
+    user_data = <<-EOL
+    #!/bin/bash -xe
+    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+    sudo yum upgrade -y
+    sudo yum update -y
+    EOL
+    user_data_replace_on_change = true
 }
 
 resource "aws_instance" "eapd_jumpbox_tf" {
@@ -53,6 +60,13 @@ resource "aws_instance" "eapd_jumpbox_tf" {
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
+    user_data = <<-EOL
+    #!/bin/bash -xe
+    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+    sudo yum upgrade -y
+    sudo yum update -y
+    EOL
+    user_data_replace_on_change = true    
 }
 resource "aws_instance" "eapd_jumpbox_tb" {
 
@@ -74,7 +88,14 @@ resource "aws_instance" "eapd_jumpbox_tb" {
         "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
-    }   
+    }
+    user_data = <<-EOL
+    #!/bin/bash -xe
+    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+    sudo yum upgrade -y
+    sudo yum update -y
+    EOL
+    user_data_replace_on_change = true    
 }
 
 resource "aws_instance" "eapd_jumpbox_nz" {
@@ -98,4 +119,11 @@ resource "aws_instance" "eapd_jumpbox_nz" {
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
+    user_data = <<-EOL
+    #!/bin/bash -xe
+    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+    sudo yum upgrade -y
+    sudo yum update -y
+    EOL
+    user_data_replace_on_change = true    
 }
