@@ -34,8 +34,6 @@ const DateField = ({
     yearInvalid: false
   });
 
-  console.log({ value });
-
   const [dateObject, setDateObject] = useState(dateParts(value));
 
   useEffect(() => {
