@@ -30,6 +30,7 @@ const StandardsAndConditionsHelpDrawer = () => {
                 <a
                   href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-433/subpart-C/section-433.112"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Review 42. CFR 433.112 documentation
                 </a>
