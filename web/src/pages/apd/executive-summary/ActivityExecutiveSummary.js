@@ -10,24 +10,24 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
   if (data.length === 0 && isApdMmis) {
     return (
       <Fragment>
-        <ul className="ds-c-list--bare ds-u-margin-bottom--3">
-          <li>
+        <div className="ds-c-list--bare ds-u-margin-bottom--3">
+          <p>
             <strong>No activities were added</strong>
-          </li>
-          <li>No description added.</li>
-          <li className="ds-u-margin-top--2">
+          </p>
+          <p>No description added.</p>
+          <p className="ds-u-margin-top--2">
             <strong>Start Date - End Date:</strong> Date not specified - Date
             not specified
-          </li>
-          <li>
+          </p>
+          <p>
             <strong>Total Cost of Activity:</strong> $0
-          </li>
-          <li>
+          </p>
+          <p>
             <strong>Total Computable Cost:</strong> $0 ($0 Federal share)
-          </li>
+          </p>
 
           {ffyList(ffys)}
-        </ul>
+        </div>
       </Fragment>
     );
   }
@@ -50,21 +50,21 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
             /* eslint-disable react/no-danger */
             <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
           )}
-          <ul className="ds-c-list--bare">
-            <li>
+          <div className="ds-c-list--bare">
+            <p>
               <strong>Start Date - End Date:</strong> {activity.dateRange}
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Total Cost of Activity:</strong>{' '}
               <Dollars>{activity.combined}</Dollars>
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Total Computable Medicaid Cost:</strong>{' '}
               <Dollars>{activity.medicaid}</Dollars> (
               <Dollars>{activity.federal}</Dollars> Federal share)
-            </li>
+            </p>
             {ffyList(activity.ffys)}
-          </ul>
+          </div>
         </Review>
       ))}
     </Fragment>
