@@ -58,6 +58,8 @@ const Spinner = ({ ...props }) => (
 const TimesCircle = () => <FontAwesomeIcon icon={faTimesCircle} />;
 const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
+const ChevronRight = () => <FontAwesomeIcon icon={faChevronRight} />;
+
 export {
   faArrowRight,
   faCheckCircle,
@@ -77,7 +79,7 @@ export {
   faTimesCircle,
   faUnlock,
   Check,
-  Xmark,
+  ChevronRight,
   CheckCircle,
   File,
   Envelope,
@@ -87,6 +89,7 @@ export {
   Spinner,
   TimesCircle,
   UnlockIcon,
+  Xmark,
   faUserCog,
   faUserShield,
   faUserPlus,
