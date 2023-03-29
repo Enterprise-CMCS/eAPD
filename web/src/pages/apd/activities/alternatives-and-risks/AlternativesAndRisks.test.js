@@ -2,7 +2,17 @@ import React from 'react';
 import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
-import AlternativesAndRisks from './AlternativesAndRisks';
+import AlternativesAndRisks, {
+  mapStateToProps,
+  mapDispatchToProps
+} from './AlternativesAndRisks';
+import {
+  setAlternativeAnalysis,
+  setCostBenefitAnalysis,
+  setFeasibilityStudy,
+  setRequirementsAnalysis,
+  setForseeableRisks
+} from '../../../../redux/actions/editActivity/alternativesAndRisks';
 
 const initialStateEmpty = {
   apd: {
@@ -177,5 +187,50 @@ describe('Alternatives and Risks', () => {
     expect(screen.getByLabelText(/Forseeable Risks/i)).toHaveValue(
       'Test forseeable risks'
     );
+  });
+
+  it('maps redux state to component props', () => {
+    expect(
+      mapStateToProps(
+        {
+          apd: {
+            data: {
+              activities: [
+                {
+                  analysisOfAlternativesAndRisks: {
+                    alternativeAnalysis: 'Test alternative analysis',
+                    costBenefitAnalysis: 'Test cost benefit analysis',
+                    feasibilityStudy: 'Test feasibility study',
+                    requirementsAnalysis: 'Test requirements analysis',
+                    forseeableRisks: 'Test forseeable risks'
+                  }
+                }
+              ]
+            },
+            adminCheck: {
+              enabled: true
+            }
+          }
+        },
+        { activityIndex: 0 }
+      )
+    ).toEqual({
+      adminCheck: true,
+      alternativeAnalysis: 'Test alternative analysis',
+      costBenefitAnalysis: 'Test cost benefit analysis',
+      feasibilityStudy: 'Test feasibility study',
+      requirementsAnalysis: 'Test requirements analysis',
+      forseeableRisks: 'Test forseeable risks'
+    });
+  });
+
+  it('maps dispatch action to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setAlternativeAnalysis,
+      setCostBenefitAnalysis,
+      setFeasibilityStudy,
+      setRequirementsAnalysis,
+      setForseeableRisks
+    });
   });
 });
