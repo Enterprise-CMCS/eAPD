@@ -1,6 +1,7 @@
 import { isPast } from 'date-fns';
 import { oktaClient } from '../auth/oktaAuth.js';
 import knex from './knex.js';
+import { getLaunchDarklyFlag } from '../middleware/launchDarkly.js';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -39,13 +40,21 @@ export const userLoggedIntoState = async (
   stateId = null,
   { auditUserLogin = actualAuditUserLogin } = {}
 ) => {
-  if (affiliation && (stateId || Object.keys(states).length === 1)) {
-    // we should only record the user logging in if they have specified a state
-    // or if they are only affiliated with one state
-    await auditUserLogin({
-      ...affiliation,
-      name: name || displayName
-    });
+  const sysAdmin = await getLaunchDarklyFlag(
+    'support-team',
+    { kind: 'user', key: affiliation.username, name: affiliation.username },
+    false
+  );
+
+  if (!sysAdmin) {
+    if (affiliation && (stateId || Object.keys(states).length === 1)) {
+      // we should only record the user logging in if they have specified a state
+      // or if they are only affiliated with one state
+      await auditUserLogin({
+        ...affiliation,
+        name: name || displayName
+      });
+    }
   }
 };
 
