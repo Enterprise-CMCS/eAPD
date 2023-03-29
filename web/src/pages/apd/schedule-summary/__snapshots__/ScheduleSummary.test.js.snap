@@ -19,16 +19,14 @@ exports[`schedule summary component renders correctly 1`] = `
         className="budget-table"
       >
         <thead>
-          <tr
-            className="budget-table--row__primary-header"
-          >
+          <tr>
             <th
               scope="col"
             >
               Activity List Overview
             </th>
             <th
-              className="ds-u-text-align--left"
+              className="ds-u-text-align--right"
               scope="col"
             >
               Activity Date Range
@@ -55,7 +53,7 @@ exports[`schedule summary component renders correctly 1`] = `
                Milestones
             </td>
             <td
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+              className="ds-u-font-weight--bold ds-u-text-align--right ds-u-border-left--0 budget-table--cell__nowrap"
             >
               date range 1
             </td>
@@ -79,7 +77,7 @@ exports[`schedule summary component renders correctly 1`] = `
                Milestones
             </td>
             <td
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+              className="ds-u-font-weight--bold ds-u-text-align--right ds-u-border-left--0 budget-table--cell__nowrap"
             >
               date range 2
             </td>
@@ -103,7 +101,7 @@ exports[`schedule summary component renders correctly 1`] = `
                Milestones
             </td>
             <td
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+              className="ds-u-font-weight--bold ds-u-text-align--right ds-u-border-left--0 budget-table--cell__nowrap"
             >
               date range 3
             </td>
@@ -126,6 +124,7 @@ exports[`schedule summary component renders correctly 1`] = `
             className="budget-table--row__primary-header"
           >
             <th
+              colSpan={2}
               scope="col"
               style={
                 Object {
@@ -133,25 +132,22 @@ exports[`schedule summary component renders correctly 1`] = `
                 }
               }
             >
-              Activity Milestones
-            </th>
-            <th
-              className="ds-u-text-align--left"
-              scope="col"
-            >
-              Target Completion Date
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="ds-u-font-weight--bold ds-u-border-right--0"
-              colSpan={2}
-            >
               Activity 
               1
               : 
               Number One
-               Milestones
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 indent-title"
+            >
+              Milestone List
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 ds-u-text-align--right"
+            >
+              Target Completion Date
             </th>
           </tr>
         </thead>
@@ -160,12 +156,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="one-one-03/16/1996"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               one-one
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               03/16/1996
             </td>
@@ -174,12 +170,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="one-two-05/23/1970"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               one-two
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               05/23/1970
             </td>
@@ -195,6 +191,7 @@ exports[`schedule summary component renders correctly 1`] = `
             className="budget-table--row__primary-header"
           >
             <th
+              colSpan={2}
               scope="col"
               style={
                 Object {
@@ -202,25 +199,22 @@ exports[`schedule summary component renders correctly 1`] = `
                 }
               }
             >
-              Activity Milestones
-            </th>
-            <th
-              className="ds-u-text-align--left"
-              scope="col"
-            >
-              Target Completion Date
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="ds-u-font-weight--bold ds-u-border-right--0"
-              colSpan={2}
-            >
               Activity 
               2
               : 
               Number 💩
-               Milestones
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 indent-title"
+            >
+              Milestone List
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 ds-u-text-align--right"
+            >
+              Target Completion Date
             </th>
           </tr>
         </thead>
@@ -229,12 +223,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="three-one-10/06/2016"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               three-one
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               10/06/2016
             </td>
@@ -243,12 +237,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="two-two-06/25/2014"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               two-two
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               06/25/2014
             </td>
@@ -257,12 +251,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="two-three-08/21/1965"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               two-three
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               08/21/1965
             </td>
@@ -278,6 +272,7 @@ exports[`schedule summary component renders correctly 1`] = `
             className="budget-table--row__primary-header"
           >
             <th
+              colSpan={2}
               scope="col"
               style={
                 Object {
@@ -285,25 +280,22 @@ exports[`schedule summary component renders correctly 1`] = `
                 }
               }
             >
-              Activity Milestones
-            </th>
-            <th
-              className="ds-u-text-align--left"
-              scope="col"
-            >
-              Target Completion Date
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="ds-u-font-weight--bold ds-u-border-right--0"
-              colSpan={2}
-            >
               Activity 
               3
               : 
               Number Three
-               Milestones
+            </th>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 indent-title"
+            >
+              Milestone List
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0 ds-u-text-align--right"
+            >
+              Target Completion Date
             </th>
           </tr>
         </thead>
@@ -312,12 +304,12 @@ exports[`schedule summary component renders correctly 1`] = `
             key="three-one-06/09/2018"
           >
             <td
-              className="ds-u-border-right--0"
+              className="ds-u-border-right--0 indent-title"
             >
               three-one
             </td>
             <td
-              className="ds-u-border-left--0 ds-u-text-align--left"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               06/09/2018
             </td>

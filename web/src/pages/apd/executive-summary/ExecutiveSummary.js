@@ -1,80 +1,133 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import {
+  selectApdType,
+  selectApdYears
+} from '../../../redux/selectors/apd.selectors';
 import { useParams } from 'react-router-dom';
 
-import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';
 
-import { selectApdYears } from '../../../redux/selectors/apd.selectors';
+import ActivityExecutiveSummary from './ActivityExecutiveSummary';
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
+import { APD_TYPE } from '@cms-eapd/common';
+
+import {
+  getAPDName,
+  getMedicaidBusinessAreas,
+  getUpdateStatus
+} from '../../../redux/reducers/apd';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-const ExecutiveSummary = ({ data, total, years }) => {
+import {
+  arrayOfObjectsToStringList,
+  businessAreaChoices,
+  ffyList,
+  updateStatusChoices
+} from '../../../util/apd';
+
+const ExecutiveSummary = ({
+  apdName,
+  apdType,
+  data,
+  medicaidBusinessAreas,
+  total,
+  updateStatus,
+  years
+}) => {
   const { apdId } = useParams();
+  const { ffys } = total;
+  const isApdMmis = apdType === APD_TYPE.MMIS;
+  const noYears = !years.length;
+  const statusList = updateStatusChoices(updateStatus);
+
+  function renderSubtitle(apdType, updateStatus) {
+    if (apdType === APD_TYPE.HITECH) {
+      return <h3>HITECH Implementation APD Update (HITECH IAPD-U)</h3>;
+    }
+    if (updateStatus.isUpdateAPD) {
+      return <h3>MMIS Implementation APD Update (MMIS IAPD-U)</h3>;
+    }
+    return <h3>MMIS Implementation APD (MMIS IAPD)</h3>;
+  }
+
+  function otherDetails() {
+    if (medicaidBusinessAreas.other) {
+      return (
+        <li className="ds-c-choice__checkedChild">
+          {medicaidBusinessAreas.otherMedicaidBusinessAreas}
+        </li>
+      );
+    }
+  }
+
+  function renderMedicaidBusinessAreas() {
+    if (isApdMmis) {
+      var businessAreasList = businessAreaChoices(medicaidBusinessAreas);
+      return (
+        <div>
+          <li className="ds-u-margin-top--1">
+            <strong>Medicaid Business Area(s) :</strong>{' '}
+            {!businessAreasList.length
+              ? 'Provide at least one Medicaid Business Area.'
+              : arrayOfObjectsToStringList(businessAreasList)}
+          </li>
+          {otherDetails()}
+        </div>
+      );
+    }
+    return null;
+  }
+
   return (
     <React.Fragment>
       <Waypoint />
       <AlertMissingFFY />
       <Section resource="executiveSummary">
-        <Waypoint id="executive-summary-summary" />
+        <Waypoint id="executive-overview-summary" />
         <Subsection
-          id="executive-summary-summary"
-          resource="executiveSummary.summary"
+          id="executive-overview-summary"
+          resource="executiveSummary.overviewSummary"
         >
-          {data.map((activity, i) => (
-            <Review
-              key={activity.activityId}
-              heading={
-                <Fragment>
-                  Activity {i + 1}: {activity.name || 'Untitled'}
-                </Fragment>
-              }
-              headingLevel="4"
-              editHref={`/apd/${apdId}/activity/${i}/overview`}
-              className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
-            >
-              {activity.summary && (
-                /* eslint-disable react/no-danger */
-                <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
-              )}
-              <ul className="ds-c-list--bare">
-                <li>
-                  <strong>Start Date - End Date:</strong> {activity.dateRange}
-                </li>
-                <li>
-                  <strong>Total Cost of Activity:</strong>{' '}
-                  <Dollars>{activity.combined}</Dollars>
-                </li>
-                <li>
-                  <strong>Total Computable Medicaid Cost:</strong>{' '}
-                  <Dollars>{activity.medicaid}</Dollars> (
-                  <Dollars>{activity.federal}</Dollars> Federal share)
-                </li>
-                {Object.entries(activity.ffys).map(
-                  ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-                    <li
-                      key={ffy}
-                      className={j === 0 ? 'ds-u-margin-top--2' : ''}
-                    >
-                      <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars>{' '}
-                      | <strong>Total Computable Medicaid Cost:</strong>{' '}
-                      <Dollars>{medicaid}</Dollars> (
-                      <Dollars>{federal}</Dollars> Federal share)
-                    </li>
-                  )
-                )}
-              </ul>
-            </Review>
-          ))}
+          {renderSubtitle(apdType, updateStatus)}
+          <ul className="ds-c-list--bare">
+            <li className="ds-u-margin-top--1">
+              <strong>APD Name :</strong> {apdName}
+            </li>
+            <li className="ds-u-margin-top--1">
+              <strong>Update Type :</strong>{' '}
+              {updateStatus.isUpdateAPD
+                ? arrayOfObjectsToStringList(statusList)
+                : 'New Project'}
+            </li>
+            {renderMedicaidBusinessAreas()}
+          </ul>
+        </Subsection>
+        <Waypoint id="executive-activities-summary" />
+        <Subsection
+          id="executive-activities-summary"
+          resource="executiveSummary.activitiesSummary"
+        >
+          {/* Show relevant activities fields based on APD type selected */}
+          {!noYears && (
+            <ActivityExecutiveSummary
+              apdId={apdId}
+              data={data}
+              ffys={ffys}
+              isApdMmis={isApdMmis}
+              noYears={noYears}
+            />
+          )}
 
-          <hr className="ds-u-border--dark ds-u-margin--0" />
+          <hr className="ds-u-margin--0" />
           <Review
             heading="Total Cost"
             headingLevel="4"
@@ -87,7 +140,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
             <ul className="ds-c-list--bare">
               <li>
                 <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
-                {years.join(', ')}
+                {!noYears && years.join(', ')}
               </li>
               <li>
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
@@ -98,40 +151,36 @@ const ExecutiveSummary = ({ data, total, years }) => {
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </li>
-              {Object.entries(total.ffys).map(
-                ([ffy, { medicaid, federal, total: ffyTotal }], i) => (
-                  <li key={ffy} className={i === 0 ? 'ds-u-margin-top--2' : ''}>
-                    <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
-                    <Dollars>{medicaid}</Dollars> Total Computable Medicaid Cost
-                    | <Dollars>{federal}</Dollars> Federal share
-                  </li>
-                )
-              )}
+              {!noYears && ffyList(total.ffys)}
             </ul>
           </Review>
         </Subsection>
 
         <Waypoint id="executive-summary-budget-table" />
-        <Subsection
-          id="executive-summary-budget-table"
-          resource="executiveSummary.budgetTable"
-        >
-          <ExecutiveSummaryBudget />
-        </Subsection>
+        {/* Show relevant budgets based on APD type selected */}
+        {!noYears && <ExecutiveSummaryBudget />}
       </Section>
     </React.Fragment>
   );
 };
 
 ExecutiveSummary.propTypes = {
+  apdName: PropTypes.string,
+  apdType: PropTypes.string,
   data: PropTypes.array.isRequired,
+  medicaidBusinessAreas: PropTypes.object,
   total: PropTypes.object.isRequired,
+  updateStatus: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
+  apdName: getAPDName(state),
+  apdType: selectApdType(state),
   data: selectBudgetExecutiveSummary(state),
+  medicaidBusinessAreas: getMedicaidBusinessAreas(state),
   total: selectBudgetGrandTotal(state),
+  updateStatus: getUpdateStatus(state),
   years: selectApdYears(state)
 });
 

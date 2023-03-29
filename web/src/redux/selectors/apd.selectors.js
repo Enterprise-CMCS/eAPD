@@ -42,6 +42,28 @@ export const selectSummary = ({
   yearOptions
 });
 
+export const selectStatus = ({
+  apd: {
+    data: {
+      apdOverview: {
+        updateStatus: { isUpdateAPD, annualUpdate, asNeededUpdate } = {}
+      } = {}
+    }
+  }
+}) => ({
+  isUpdateAPD,
+  annualUpdate,
+  asNeededUpdate
+});
+
+export const selectMedicaidBusinessAreas = ({
+  apd: {
+    data: { apdOverview: { medicaidBusinessAreas = {} } = {} }
+  }
+}) => ({
+  medicaidBusinessAreas
+});
+
 export const selectPriorities = state =>
   state.apd.data.statePrioritiesAndScope.medicaidProgramAndPriorities;
 export const selectMesIntro = state =>
@@ -72,19 +94,46 @@ export const selectPreviousHITHIEActivities = createSelector(
     )
 );
 
-export const selectPreviousMMISActivities = createSelector(
+export const selectPreviousActivities = createSelector(
   [selectApdData],
   ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
-        [year]: expenses.mmis
+        [year]: expenses
       }),
       {}
     )
 );
 
-export const selectPreviousActivityExpensesTotals = createSelector(
+export const selectPreviousActivityExpensesTotalsMMIS = createSelector(
+  [selectApdData],
+  ({ previousActivities }) =>
+    Object.entries(previousActivities.actualExpenditures).reduce(
+      (acc, [ffy, expenses]) => ({
+        ...acc,
+        [ffy]: {
+          actual: [75, 50].reduce(
+            (sum, ffp) =>
+              sum +
+              stringToNumber(expenses.mando[ffp].federalActual) +
+              stringToNumber(expenses.ddi[ffp].federalActual),
+            stringToNumber(expenses.ddi[90].federalActual)
+          ),
+          approved: [75, 50].reduce(
+            (sum, ffp) =>
+              sum +
+              (stringToNumber(expenses.mando[ffp].totalApproved) * ffp) / 100 +
+              (stringToNumber(expenses.ddi[ffp].totalApproved) * ffp) / 100,
+            (stringToNumber(expenses.ddi[90].totalApproved) * 90) / 100
+          )
+        }
+      }),
+      {}
+    )
+);
+
+export const selectPreviousActivityExpensesTotalsHITECH = createSelector(
   [selectApdData],
   ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(

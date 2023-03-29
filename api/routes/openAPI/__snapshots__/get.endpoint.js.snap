@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`open-api endpoint | GET /open-api 1`] = `
+exports[`Open-API endpoint open-api endpoint | GET /open-api 1`] = `
 Object {
   "components": Object {
     "schemas": Object {
@@ -2048,7 +2048,7 @@ Object {
                 "x-patternProperties": Object {
                   "^[0-9]{4}$": Object {
                     "properties": Object {
-                      "mmis": Object {
+                      "ddi": Object {
                         "description": "MMIS-funded expenses",
                         "properties": Object {
                           "50": Object {
@@ -2078,6 +2078,38 @@ Object {
                             "type": "object",
                           },
                           "90": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "mando": Object {
+                        "description": "MMIS-funded expenses",
+                        "properties": Object {
+                          "50": Object {
+                            "properties": Object {
+                              "federalActual": Object {
+                                "description": "Total federal share actually spent",
+                                "type": "number",
+                              },
+                              "totalApproved": Object {
+                                "description": "Total approved in the previous APD",
+                                "type": "number",
+                              },
+                            },
+                            "type": "object",
+                          },
+                          "75": Object {
                             "properties": Object {
                               "federalActual": Object {
                                 "description": "Total federal share actually spent",

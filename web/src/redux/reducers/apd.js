@@ -47,6 +47,13 @@ import {
   FUNDING_CATEGORY_TYPE
 } from '@cms-eapd/common';
 
+export const apdValid = apdType => {
+  if (apdType === APD_TYPE.HITECH || apdType === APD_TYPE.MMIS) {
+    return true;
+  }
+  return false;
+};
+
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
   const apdType = state.data.apdType;
@@ -138,6 +145,25 @@ export const getPatchesToAddYear = (state, year) => {
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
       value: 0
     });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`,
+      value:
+        apdType === APD_TYPE.HITECH
+          ? {
+              federal: 90,
+              state: 10,
+              fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+            }
+          : { federal: 0, state: 0, fundingCategory: null }
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`,
+      value: 0
+    });
   });
 
   return patches;
@@ -220,6 +246,16 @@ export const getPatchesToRemoveYear = (state, year) => {
     patches.push({
       op: 'remove',
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`
     });
   });
 
@@ -315,6 +351,28 @@ export const getAPDName = ({
     data: { name }
   }
 }) => name;
+
+export const getUpdateStatus = ({
+  apd: {
+    data: {
+      apdOverview: { updateStatus }
+    }
+  }
+}) => updateStatus;
+
+export const getMedicaidBusinessAreas = ({
+  apd: {
+    data: {
+      apdOverview: { medicaidBusinessAreas }
+    }
+  }
+}) => medicaidBusinessAreas;
+
+export const getPrioritiesAndScope = ({
+  apd: {
+    data: { statePrioritiesAndScope }
+  }
+}) => statePrioritiesAndScope;
 
 export const getAPDYearRange = ({
   apd: {

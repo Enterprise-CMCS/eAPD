@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, UPDATE_STATUS_LABEL_MAPPING } from '@cms-eapd/common';
 import ApdUpdate from './ApdUpdate';
 
 const setup = (props = {}, options = {}) => {
@@ -34,8 +34,12 @@ describe('APD Update for any APD type', () => {
     updateStatus.asNeededUpdate = true;
     setup(null, reduxState);
 
-    expect(screen.getByLabelText('Annual update')).toBeChecked();
-    expect(screen.getByLabelText('As-needed update')).toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.annualUpdate)
+    ).toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.asNeededUpdate)
+    ).toBeChecked();
   });
 });
 
@@ -59,8 +63,12 @@ describe('APD Update for MMIS APD type', () => {
     expect(screen.getByLabelText('Yes, it is an update.')).toBeChecked();
 
     expect(screen.getByText('Update Type')).toBeInTheDocument();
-    expect(screen.getByLabelText('Annual update')).toBeChecked();
-    expect(screen.getByLabelText('As-needed update')).not.toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.annualUpdate)
+    ).toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.asNeededUpdate)
+    ).not.toBeChecked();
   });
 
   it('renders "Is this an APD update?" options only when "isUpdateAPD" is false', () => {
@@ -107,8 +115,12 @@ describe('APD Update for HITECH APD type', () => {
     setup(null, reduxState);
 
     expect(screen.getByText('Update Type')).toBeInTheDocument();
-    expect(screen.getByLabelText('Annual update')).toBeChecked();
-    expect(screen.getByLabelText('As-needed update')).not.toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.annualUpdate)
+    ).toBeChecked();
+    expect(
+      screen.getByLabelText(UPDATE_STATUS_LABEL_MAPPING.asNeededUpdate)
+    ).not.toBeChecked();
 
     expect(
       screen.queryByText('Is this an APD update?')

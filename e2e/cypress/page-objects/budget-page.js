@@ -128,7 +128,7 @@ class BudgetPage {
   }) => {
     cy.wrap(federalSharePercentage + stateSharePercentage).should('equal', 1);
 
-    cy.get('[class="budget-table--subtotal budget-table--row__header"]')
+    cy.get('[class="budget-table--subtotal budget-table--row__highlight"]')
       .contains(/^Total Computable Medicaid Cost$/i)
       .parent()
       .should('contain', `$${addCommas(totalComputableMedicaidCost)}`)

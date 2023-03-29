@@ -320,11 +320,12 @@ tap.test('Local jwtUtils', async t => {
       getUser,
       auditUserLogin
     });
+
     t.ok(user.jwt, 'user has a JWT');
 
     t.ok(actualVerifyEAPDToken(user.jwt), 'user has a valid JWT set on them');
 
-    t.ok(user.uid, claims.uid, 'user has the expected value');
+    t.equal(user.uid, claims.uid, 'user has the expected value');
 
     t.ok(auditUserLogin.calledOnce, 'auditUserLogin was called');
   });
@@ -417,7 +418,7 @@ tap.test('Local jwtUtils', async t => {
       'user has a valid JWT set on them'
     );
 
-    t.ok(user.id, updatedUser.id, 'user has the expected value');
+    t.equal(user.id, updatedUser.id, 'user has the expected value');
   });
 
   t.test(

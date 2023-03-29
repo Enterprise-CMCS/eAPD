@@ -2,34 +2,29 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAsStateAdmin,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 import { akAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe('APD events endpoints', () => {
-  describe('Record an event associated with an APD | POST /apds/:id/events', () => {
-    const db = getDB();
-    beforeAll(async () => {
-      await setupDB(db);
-    });
-    afterAll(async () => {
-      await teardownDB(db);
-    });
+  const db = getDB();
+  const api = apiAsStateAdmin;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
+  describe('Record an event associated with an APD | POST /apds/:id/events', () => {
     const url = id => `/apds/${id}/events`;
 
     unauthenticatedTest('post', url(badAPDId));
     unauthorizedTest('post', url(badAPDId));
 
     describe('when authenticated as a user with permissions', () => {
-      let api;
-
-      beforeAll(() => {
-        api = login('state-admin');
-      });
-
       it('with a non-existant apd ID', async () => {
         const response = await api.post(url(badAPDId), { eventType: 'EXPORT' });
         expect(response.status).toEqual(404);

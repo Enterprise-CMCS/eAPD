@@ -19,12 +19,48 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../../../redux/selectors/activities.selectors';
-import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectApdType
+} from '../../../../../redux/selectors/apd.selectors';
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
 import { costAllocationOtherSchema as schema } from '@cms-eapd/common';
+
+export const ActivityTotalCostTable = ({ years, ffy }) => {
+  return (
+    <table className="budget-table activity-budget-table">
+      <tbody>
+        <tr className="budget-table--subtotal budget-table--row__header">
+          <th colSpan="2">Activity Total Cost</th>
+          <td className="budget-table--number">
+            <Dollars>{years[ffy].totalCost}</Dollars>
+          </td>
+        </tr>
+        <tr>
+          <td className="title">Other Funding</td>
+          <td>-</td>
+          <td className="budget-table--number">
+            <Dollars>{years[ffy].otherFunding}</Dollars>
+          </td>
+        </tr>
+        <tr className="budget-table--subtotal budget-table--row__highlight">
+          <td className="title">Total Computable Medicaid Cost</td>
+          <td colSpan="2" className="budget-table--number">
+            <Dollars>{years[ffy].medicaidShare}</Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+ActivityTotalCostTable.propTypes = {
+  years: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired
+};
 
 const OtherFunding = ({
   activityIndex,
@@ -32,7 +68,8 @@ const OtherFunding = ({
   costSummary,
   setOtherFunding,
   syncOtherFunding,
-  adminCheck
+  adminCheck,
+  apdType
 }) => {
   const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
     activity;
@@ -87,7 +124,7 @@ const OtherFunding = ({
           <div className="data-entry-box">
             <Instruction
               labelFor={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              source="activities.otherFunding.description.instruction"
+              source={`activities.otherFunding.${apdType}.description.instruction`}
               headingDisplay={{
                 level: 'h4',
                 className: 'ds-h5'
@@ -130,7 +167,7 @@ const OtherFunding = ({
 
           <div className="data-entry-box ds-u-margin-bottom--5">
             <Instruction
-              source="activities.otherFunding.amount.instruction"
+              source={`activities.otherFunding.${apdType}.amount.instruction`}
               headingDisplay={{
                 level: 'h4',
                 className: 'ds-h5'
@@ -145,7 +182,7 @@ const OtherFunding = ({
                   {...props}
                   value={value}
                   label={`FFY ${ffy}`}
-                  labelClassName="sr-only"
+                  labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
                   errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
@@ -153,30 +190,7 @@ const OtherFunding = ({
               )}
             />
           </div>
-
-          <table className="budget-table activity-budget-table">
-            <tbody>
-              <tr className="budget-table--subtotal budget-table--row__header">
-                <th colSpan="2">Activity Total Cost</th>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].totalCost}</Dollars>
-                </td>
-              </tr>
-              <tr>
-                <td className="title">Other Funding</td>
-                <td>-</td>
-                <td className="budget-table--number">
-                  <Dollars>{years[ffy].otherFunding}</Dollars>
-                </td>
-              </tr>
-              <tr className="budget-table--subtotal budget-table--row__highlight">
-                <td className="title">Total Computable Medicaid Cost</td>
-                <td colSpan="2" className="budget-table--number">
-                  <Dollars>{years[ffy].medicaidShare}</Dollars>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ActivityTotalCostTable years={years} ffy={ffy} />
         </div>
       ))}
     </Fragment>
@@ -190,7 +204,8 @@ OtherFunding.propTypes = {
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
   syncOtherFunding: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  adminCheck: PropTypes.bool.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (
@@ -207,7 +222,8 @@ const mapStateToProps = (
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    adminCheck: selectAdminCheckEnabled(state)
+    adminCheck: selectAdminCheckEnabled(state),
+    apdType: selectApdType(state)
   };
 };
 

@@ -145,17 +145,13 @@ const StatePrioritiesAndScope = ({
 };
 
 StatePrioritiesAndScope.propTypes = {
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   medicaidProgramAndPriorities: PropTypes.string.isRequired,
   mesIntroduction: PropTypes.string.isRequired,
   scopeOfAPD: PropTypes.string.isRequired,
   setPP: PropTypes.func.isRequired,
   setESI: PropTypes.func.isRequired,
   setScope: PropTypes.func.isRequired
-};
-
-StatePrioritiesAndScope.defaultProps = {
-  adminCheck: false
 };
 
 const mapStateToProps = state => ({
