@@ -4,6 +4,13 @@ export const APD_TYPE = {
   MMIS: 'MMIS'
 };
 
+export const BUDGET_TYPE = {
+  HITECH: 'HITECHBudget',
+  HITECH_BUDGET: 'HITECHBudget',
+  MMIS: 'MMISBudget',
+  MMIS_BUDGET: 'MMISBudget'
+};
+
 export const FUNDING_CATEGORY_TYPE = {
   DDI: 'DDI',
   MANDO: 'MO'
