@@ -1,54 +1,12 @@
 import fastPatch from 'fast-json-patch';
-import {
-  deepCopy,
-  calculateBudget,
-  hasBudgetUpdate,
-  APD_TYPE
-} from '@cms-eapd/common';
+import { deepCopy, calculateBudget, hasBudgetUpdate } from '@cms-eapd/common';
 import loggerFactory from '../logger/index.js';
 import { updateStateProfile } from './states.js';
 import adminCheckApd from '../util/adminCheck.js';
 import knex from './knex.js';
-import {
-  Budget,
-  HITECHBudget,
-  MMISBudget,
-  APD,
-  HITECH,
-  MMIS
-} from '../models/index.js';
+import { Budget, APD, getApdModel, getBudgetModel } from '../models/index.js';
 
 const logger = loggerFactory('db/apds');
-
-const getApdModel = apdType => {
-  let model;
-  switch (apdType) {
-    case APD_TYPE.HITECH:
-      model = HITECH;
-      break;
-    case APD_TYPE.MMIS:
-      model = MMIS;
-      break;
-    default:
-      model = APD;
-  }
-  return model;
-};
-
-const getBudgetModel = apdType => {
-  let model;
-  switch (apdType) {
-    case APD_TYPE.HITECH:
-      model = HITECHBudget;
-      break;
-    case APD_TYPE.MMIS:
-      model = MMISBudget;
-      break;
-    default:
-      model = Budget;
-  }
-  return model;
-};
 
 export const createAPD = async apd => {
   const apdJSON = deepCopy(apd);
