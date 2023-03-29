@@ -1,5 +1,8 @@
 import React from 'react';
-import { SummaryBudgetByActivityTotals } from './CombinedActivityCosts';
+import {
+  SummaryBudgetByActivityTotalsHITECH,
+  SummaryBudgetByActivityTotalsMMIS
+} from './CombinedActivityCosts';
 import { renderWithProviderAndRouter } from 'apd-storybook-library';
 
 const exampleHITECHBudget = {
@@ -468,7 +471,7 @@ const exampleMMISBudget = {
 
 export default {
   title: 'Pages/Apd/Tables/SummaryBudgetByActivityTotals',
-  component: SummaryBudgetByActivityTotals,
+  component: SummaryBudgetByActivityTotalsHITECH,
   includeStories: /.*Story$/,
   decorators: [],
   parameters: {
@@ -481,7 +484,7 @@ export default {
   argTypes: {}
 };
 
-const Template = args => <SummaryBudgetByActivityTotals {...args} />;
+const Template = args => <SummaryBudgetByActivityTotalsHITECH {...args} />;
 
 export const HITECHSummaryBudgetByActivityTotalsStory = Template.bind();
 HITECHSummaryBudgetByActivityTotalsStory.args = {

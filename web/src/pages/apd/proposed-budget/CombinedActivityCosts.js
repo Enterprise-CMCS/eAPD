@@ -68,6 +68,35 @@ const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
   );
 };
 
+const DataRowGroupMMIS = ({ data, year, groupTitle, apdType }) => {
+  const categories = [
+    { category: 'statePersonnel', title: 'State Staff Total' },
+    { category: 'expenses', title: 'Other State Expenses Total' },
+    { category: 'contractors', title: 'Private Contractor Total' },
+    { category: 'combined', title: 'Total' }
+  ];
+  apdType === APD_TYPE.MMIS
+    ? categories.splice(0, 0, {
+        category: 'keyStatePersonnel',
+        title: 'Key State Personnel Total'
+      })
+    : null;
+  return (
+    <Fragment>
+      {categories.map(({ category, title }) => (
+        <DataRow
+          key={`${groupTitle}-${category}-${title}`}
+          category={category}
+          data={data[category][year]}
+          title={title}
+          groupTitle={groupTitle}
+          apdType={apdType}
+        />
+      ))}
+    </Fragment>
+  );
+};
+
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
   year: PropTypes.string.isRequired,
@@ -75,7 +104,7 @@ DataRowGroup.propTypes = {
   apdType: PropTypes.string.isRequired
 };
 
-const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
+const SummaryBudgetByActivityTotalsHITECH = ({ data, ffy, apdType }) => {
   return (
     <table className="budget-table" data-cy="CACTable">
       <thead>
@@ -141,7 +170,55 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
   );
 };
 
-SummaryBudgetByActivityTotals.propTypes = {
+SummaryBudgetByActivityTotalsHITECH.propTypes = {
+  data: PropTypes.object.isRequired,
+  ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired
+};
+
+const SummaryBudgetByActivityTotalsMMIS = ({ data, ffy, apdType }) => {
+  return (
+    <table className="budget-table" data-cy="CACTable">
+      <thead>
+        <tr className="budget-table--row__highlight-gray-dark">
+          <th scope="col">
+            Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
+          </th>
+          <th scope="col" className="ds-u-text-align--right">
+            Total
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <Fragment>
+          <tr className="budget-table--category-row_highlight">
+            <th scope="row" colSpan="2">
+              MMIS
+            </th>
+          </tr>
+          <DataRowGroupMMIS
+            data={data.mmis}
+            year={ffy}
+            groupTitle={APD_TYPE.MMIS}
+            apdType={apdType}
+          />
+        </Fragment>
+
+        <tr
+          key={ffy}
+          className="budget-table--row__header budget-table--row__highlight"
+        >
+          <th scope="row">FFY {ffy} Total Computable Medicaid Cost</th>
+          <td className="budget-table--number budget-table--total">
+            <Dollars>{data.combined[ffy].medicaid}</Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+SummaryBudgetByActivityTotalsMMIS.propTypes = {
   data: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
   apdType: PropTypes.string.isRequired
@@ -174,7 +251,20 @@ const CombinedActivityCosts = ({ data, years, isViewOnly, apdType }) => {
           source={`proposedBudget.combinedActivityCosts.totalMedicaidCost${apdType}`}
         />
       )}
-      <SummaryBudgetByActivityTotals data={data} ffy={ffy} apdType={apdType} />
+      {apdType === APD_TYPE.HITECH && (
+        <SummaryBudgetByActivityTotalsHITECH
+          data={data}
+          ffy={ffy}
+          apdType={apdType}
+        />
+      )}
+      {apdType === APD_TYPE.MMIS && (
+        <SummaryBudgetByActivityTotalsMMIS
+          data={data}
+          ffy={ffy}
+          apdType={apdType}
+        />
+      )}
 
       <h4 className="ds-h4" aria-hidden="true">
         State and Contractor Cost Breakdown
@@ -212,6 +302,7 @@ export {
   mapStateToProps,
   DataRow,
   DataRowGroup,
-  SummaryBudgetByActivityTotals,
+  SummaryBudgetByActivityTotalsHITECH,
+  SummaryBudgetByActivityTotalsMMIS,
   SummaryBudgetByActivityBreakdown
 };

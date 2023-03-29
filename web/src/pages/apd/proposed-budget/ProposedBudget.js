@@ -17,7 +17,7 @@ const ProposedBudget = ({ apdType }) => (
   <React.Fragment>
     <Waypoint />
     <AlertMissingFFY />
-    <Section resource="proposedBudget">
+    <Section resource={`proposedBudget.${apdType}`}>
       <Waypoint id="combined-activity-costs-table" />
       <Subsection
         id="combined-activity-costs-table"

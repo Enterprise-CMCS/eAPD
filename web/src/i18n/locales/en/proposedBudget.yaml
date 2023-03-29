@@ -1,7 +1,14 @@
 title: Proposed Budget
-helpText: >-
-  Review topline budget data associated with this APD. Totals are based on the
-  information entered by the state. Capture incentive payments if applicable.
+MMIS:
+  title: Proposed Budget
+  helpText: >-
+    Review topline budget data associated with this APD. Totals are based on the
+    information entered by the state.
+HITECH:
+  title: Proposed Budget
+  helpText: >-
+    Review topline budget data associated with this APD. Totals are based on the
+    information entered by the state. Capture incentive payments if applicable.
 combinedActivityCosts:
   title: Combined Activity Costs
   totalMedicaidCostHITECH:
@@ -15,10 +22,10 @@ combinedActivityCosts:
       summary tables on this page.
   totalMedicaidCostMMIS:
     detail: >-
-      The following tables summarize the **Total Computable Medicaid Cost** for
-      all activities organized by their funding source (**MMIS**) and their cost
-      category (**Key State Personnel**, **State Personnel**, **Other State
-      Expenses**, and **Private Contractor Costs**) by FFY. Other funding
+      The tables below summarize the **Total Computable Medicaid Cost** for all
+      activities organized by their funding source (MMIS) and their cost
+      category (**Key State Personnel**, **State Staff**, **Other State
+      Expenses**, **and Private Contractor Costs**) by FFY. Other funding
       amounts described in the cost allocation section of the activities are not
       included in these tables, but can be reviewed in the individual activity
       summary tables on this page.
