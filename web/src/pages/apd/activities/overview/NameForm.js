@@ -15,6 +15,7 @@ const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
     control,
     trigger,
     clearErrors,
+    setValue,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -24,8 +25,12 @@ const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
   });
 
   useEffect(() => {
+    setValue('name', name);
+  }, [name, setValue]);
+
+  useEffect(() => {
     if (adminCheck) {
-      trigger(['name']);
+      trigger('name');
     } else {
       clearErrors();
     }
