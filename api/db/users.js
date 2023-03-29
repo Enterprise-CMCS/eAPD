@@ -2,6 +2,7 @@ import { isPast } from 'date-fns';
 import { oktaClient } from '../auth/oktaAuth.js';
 import knex from './knex.js';
 import { getLaunchDarklyFlag } from '../middleware/launchDarkly.js';
+import { FEATURE_FLAGS } from '@cms-eapd/common';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -15,6 +16,20 @@ import {
 import { updateAuthAffiliation as actualUpdateAuthAffiliation } from './affiliations.js';
 import { getStateById as actualGetStateById } from './states.js';
 import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers.js';
+
+const isSysAdmin = async name =>
+  getLaunchDarklyFlag(
+    FEATURE_FLAGS.SUPPORT_TEAM.FLAG,
+    { kind: 'user', key: `${name}-key`, name },
+    FEATURE_FLAGS.SUPPORT_TEAM.DEFAULT
+  );
+
+const hasSupportState = async name =>
+  getLaunchDarklyFlag(
+    FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.FLAG,
+    { kind: 'user', key: `${name}-key`, name },
+    FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.DEFAULT
+  );
 
 export const sanitizeUser = user => ({
   id: user.id,
@@ -86,7 +101,9 @@ export const populateUserRole = async (
     let affiliation = {};
     let role = '';
     let state = {};
-    const states = (await getUserAffiliatedStates(user.id)) || {};
+    let states = {};
+
+    states = (await getUserAffiliatedStates(user.id)) || {};
     if (Object.keys(states).length) {
       const selectedState = stateId || Object.keys(states)[0];
       affiliation = await getAffiliationByState(user.id, selectedState);
