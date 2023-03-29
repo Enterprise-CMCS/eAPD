@@ -27,7 +27,11 @@ const StandardsAndConditionsHelpDrawer = () => {
               <div className="ds-u-padding-bottom--1">
                 <strong>For more details on this regulation.</strong>
                 <br />
-                <a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-433/subpart-C/section-433.112">
+                <a
+                  href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-433/subpart-C/section-433.112"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Review 42. CFR 433.112 documentation
                 </a>
               </div>
