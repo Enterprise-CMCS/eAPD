@@ -6,32 +6,28 @@ const Joi = JoiImport.extend(DateExtension);
 
 const activityScheduleSchema = Joi.object({
   plannedStartDate: Joi.date()
-    .format('YYYY-MM-DD')
     .utc()
     .max(DATE_EXTREMES.max)
     .min(DATE_EXTREMES.min)
     .required()
     .messages({
-      'date.required': 'Provide a start date.',
-      'date.base': 'Provide a start date.',
-      'date.empty': 'Provide a start date.',
-      'date.format': 'Provide a start date.',
-      'date.utc': 'Provide a start date.',
+      'date.required': 'Provide a valid start date.',
+      'date.base': 'Provide a valid start date.',
+      'date.empty': 'Provide a valid start date.',
+      'date.utc': 'Provide a valid start date.',
       'date.max': 'Provide a valid start year.',
       'date.min': 'Provide a valid start year.'
     }),
   plannedEndDate: Joi.date()
-    .format('YYYY-MM-DD')
     .utc()
     .allow('', null)
-    .min(Joi.ref('plannedStartDate'))
+    .greater(Joi.ref('plannedStartDate'))
     .max(DATE_EXTREMES.max)
     .messages({
-      'date.base': 'Provide an end date.',
-      'date.format': 'Provide an end date.',
-      'date.utc': 'Provide an end date.',
+      'date.base': 'Provide a valid end date.',
+      'date.utc': 'Provide a valid end date.',
       'any.ref': 'Provide an end date that is after the start date.',
-      'date.min': 'Provide an end date that is after the start date.',
+      'date.greater': 'Provide an end date that is after the start date.',
       'date.max': 'Provide a valid end year.'
     })
 });

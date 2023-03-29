@@ -1,7 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import { isNumeric } from '../util/formats';
 
 const dateParts = value => {
@@ -17,7 +17,19 @@ const dateParts = value => {
 };
 
 const formatDate = ({ day = '', month = '', year = '' } = {}) => {
-  if (day === '' && month === '' && year === '') {
+  const ListOfDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  // Will return blank string if date cannot be valid
+  if (year.trim().length != 4) {
+    return '';
+  }
+
+  // Check for leap year
+  if ((!(year % 4) && year % 100) || !(year % 400)) {
+    ListOfDays[1] = 29;
+  }
+
+  if (day > ListOfDays[month - 1] || day < 1) {
     return '';
   }
 
