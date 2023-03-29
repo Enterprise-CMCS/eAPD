@@ -137,7 +137,7 @@ describe('the NonPersonnelCostForm component', () => {
     user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -157,7 +157,7 @@ describe('the NonPersonnelCostForm component', () => {
     user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 

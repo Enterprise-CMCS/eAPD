@@ -1,6 +1,6 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { APD, Budget, getApdModel } from '../models/index.js';
+import { APD, Budget } from '../models/index.js';
 import {
   APD_TYPE,
   BUDGET_TYPE,
@@ -121,8 +121,7 @@ export const up = async () => {
     await Promise.all(
       updatedApds.map(apd => {
         logger.info(`Updating APD ${apd._id} to add funding category`);
-        const apdType = apd.__t;
-        return getApdModel(apdType).replaceOne({ _id: apd._id }, { ...apd });
+        return APD.replaceOne({ _id: apd._id }, { ...apd, __t: apd.__t });
       })
     ).catch(err => logger.error(err));
     await Promise.all(
@@ -134,7 +133,7 @@ export const up = async () => {
           ...apd,
           apdType
         });
-        return Budget(apdType).replaceOne(
+        return Budget.replaceOne(
           { _id: apd.budget },
           { ...budget, __t: BUDGET_TYPE[apdType] }
         );
