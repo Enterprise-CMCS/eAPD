@@ -1,7 +1,7 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { MMIS, MMISBudget } from '../models/index.js';
-import { calculateBudget } from '@cms-eapd/common';
+import { MMIS, Budget } from '../models/index.js';
+import { BUDGET_TYPE, calculateBudget } from '@cms-eapd/common';
 
 const logger = loggerFactory('mongoose-migrate/mmis-budget-match-rate');
 
@@ -22,7 +22,10 @@ export const up = async () => {
       const budget = calculateBudget(apd);
 
       try {
-        return MMISBudget.replaceOne({ _id: apd.budget }, { ...budget });
+        return Budget.replaceOne(
+          { _id: apd.budget },
+          { ...budget, __t: BUDGET_TYPE.MMIS_BUDGET }
+        );
       } catch (err) {
         logger.error(err);
       }
