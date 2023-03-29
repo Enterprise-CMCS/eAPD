@@ -6,6 +6,7 @@ import {
   discriminatorOptions,
   federalCitation
 } from './apd.js';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const mmisSchema = new mongoose.Schema(
   {
@@ -124,4 +125,4 @@ const mmisSchema = new mongoose.Schema(
   discriminatorOptions
 );
 
-export default APD.discriminator('MMIS', mmisSchema);
+export default APD.discriminator(APD_TYPE.MMIS, mmisSchema);
