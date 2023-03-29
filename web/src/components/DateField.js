@@ -17,6 +17,10 @@ const dateParts = value => {
 };
 
 const formatDate = ({ day = '', month = '', year = '' } = {}) => {
+  if (day === '' && month === '' && year === '') {
+    return '';
+  }
+
   // Make sure it's an ISO-8601 date, which uses 2-digit month and day
   return format(new Date(year, month - 1, day), 'yyyy-MM-dd');
 };
