@@ -4,7 +4,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import { titleCase } from 'title-case';
 import Instruction from '../../../../components/Instruction';
 import CostAllocateFFPQuarterly from '../cost-allocation/CostAllocateFFPQuarterly';
 import FedStateSelector from './FedStateSelector';
@@ -30,7 +29,6 @@ import {
 import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
-import { t } from '../../../../i18n';
 
 import {
   hitechCostAllocationSchema,
@@ -200,6 +198,7 @@ const CostAllocateFFP = ({
                 ffy={ffy}
                 activityIndex={activityIndex}
                 otherFunding={otherFunding}
+                apdType={apdType}
               />
             </tbody>
           </table>
@@ -342,16 +341,6 @@ const CostAllocateFFP = ({
                     className: 'ds-h4'
                   }}
                 />
-              )}
-
-              {isViewOnly && (
-                <h4>
-                  {titleCase(
-                    t(
-                      'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                    )
-                  )}
-                </h4>
               )}
 
               <CostAllocateFFPQuarterly

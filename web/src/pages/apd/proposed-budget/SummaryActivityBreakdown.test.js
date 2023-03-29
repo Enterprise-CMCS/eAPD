@@ -4,6 +4,7 @@ import {
   plain as SummaryActivityBreakdownTable,
   mapStateToProps
 } from './SummaryActivityBreakdown';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const props = {
   ffy: '2016',
@@ -150,15 +151,19 @@ describe('State and Contractor Cost Breakdown Table renders correctly', () => {
     const getCostSummary = jest.fn();
     getCostSummary.mockReturnValue('cost summary');
 
+    const getApdType = jest.fn();
+    getApdType.mockReturnValue(APD_TYPE.HITECH);
+
     expect(
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostSummary }
+        { getActivity, getCostSummary, getApdType }
       )
     ).toEqual({
       activityName: 'activity name',
-      costSummary: 'cost summary'
+      costSummary: 'cost summary',
+      apdType: APD_TYPE.HITECH
     });
 
     expect(getActivity).toHaveBeenCalledWith('my state object', {
@@ -171,15 +176,18 @@ describe('State and Contractor Cost Breakdown Table renders correctly', () => {
     // Now test that it builds a default activity name if none is provided
     getActivity.mockReturnValue({ key: 'activity key', name: '' });
 
+    getApdType.mockReturnValue(APD_TYPE.MMIS);
+
     expect(
       mapStateToProps(
         'my state object',
         { activityIndex: 0 },
-        { getActivity, getCostSummary }
+        { getActivity, getCostSummary, getApdType }
       )
     ).toEqual({
       activityName: '',
-      costSummary: 'cost summary'
+      costSummary: 'cost summary',
+      apdType: APD_TYPE.MMIS
     });
   });
 });
