@@ -1,13 +1,7 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import {
-  APD,
-  HITECH,
-  HITECHBudget,
-  MMIS,
-  MMISBudget
-} from '../models/index.js';
-import { calculateBudget } from '@cms-eapd/common';
+import { APD, Budget, HITECH, MMIS } from '../models/index.js';
+import { BUDGET_TYPE, calculateBudget } from '@cms-eapd/common';
 
 const logger = loggerFactory('mongoose-migrate/updating-budgets');
 
@@ -30,11 +24,13 @@ export const up = async () => {
       logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
 
       const budget = calculateBudget({ ...apd });
-      return HITECHBudget.replaceOne(
+      return Budget.replaceOne(
         { _id: apd.budget },
-        { ...budget },
+        { ...budget, __t: BUDGET_TYPE.HITECH_BUDGET },
         {
-          multipleCastError: true
+          multipleCastError: true,
+          runValidators: false,
+          upsert: true
         }
       );
     })
@@ -51,11 +47,13 @@ export const up = async () => {
       logger.info(`Updating APD ${apd._id} Budget ${apd.budget}`);
 
       const budget = calculateBudget({ ...apd });
-      return MMISBudget.replaceOne(
+      return Budget.replaceOne(
         { _id: apd.budget },
-        { ...budget },
+        { ...budget, __t: BUDGET_TYPE.MMIS_BUDGET },
         {
-          multipleCastError: true
+          multipleCastError: true,
+          runValidators: false,
+          upsert: true
         }
       );
     })
