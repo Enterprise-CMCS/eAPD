@@ -71,6 +71,19 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
+    cy.log('test cancel button');
+
+    staffExpensesPage.addExpense();
+    cy.findByRole('heading', {
+      name: /Non-Personnel Cost/i,
+      level: 4
+    }).should('exist');
+    cy.findByRole('button', { name: /Cancel/i }).click();
+    cy.findByRole('heading', {
+      name: /Non-Personnel Cost/i,
+      level: 4
+    }).should('not.exist');
+
     for (let i = 0; i < staffList.length; i++) {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff({
