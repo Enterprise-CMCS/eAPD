@@ -9,6 +9,7 @@ import {
   fedStateSplit,
   activities
 } from './budget.js';
+import { BUDGET_TYPE } from '@cms-eapd/common';
 
 const hitechBudgetSchema = new mongoose.Schema(
   {
@@ -70,6 +71,9 @@ const hitechBudgetSchema = new mongoose.Schema(
   discriminatorOptions
 );
 
-const HITECHBudget = Budget.discriminator('HITECHBudget', hitechBudgetSchema);
+const HITECHBudget = Budget.discriminator(
+  BUDGET_TYPE.HITECH_BUDGET,
+  hitechBudgetSchema
+);
 
 export default HITECHBudget;
