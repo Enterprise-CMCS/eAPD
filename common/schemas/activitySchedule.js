@@ -21,13 +21,13 @@ const activityScheduleSchema = Joi.object({
   plannedEndDate: Joi.date()
     .utc()
     .allow('', null)
-    .greater(Joi.ref('plannedStartDate'))
+    .min(Joi.ref('plannedStartDate'))
     .max(DATE_EXTREMES.max)
     .messages({
       'date.base': 'Provide a valid end date.',
       'date.utc': 'Provide a valid end date.',
       'any.ref': 'Provide an end date that is after the start date.',
-      'date.greater': 'Provide an end date that is after the start date.',
+      'date.min': 'Provide an end date that is after the start date.',
       'date.max': 'Provide a valid end year.'
     })
 });
