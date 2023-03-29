@@ -14,6 +14,7 @@ import { getUserStateOrTerritory } from '../../../redux/selectors/user.selector'
 import ManageRoleDialog from '../ManageRoleDialog';
 import ConfirmationDialog from '../ConfirmationDialog';
 import ManageUserTable from './ManageUserTable';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const StateAdmin = ({
   currentState,
@@ -76,7 +77,7 @@ const StateAdmin = ({
         currentState.id,
         selectedAffiliation.id,
         roleId,
-        'approved'
+        AFFILIATION_STATUSES.APPROVED
       );
     }
     saveAffiliation().then(() => {
@@ -104,7 +105,9 @@ const StateAdmin = ({
   };
 
   const handleDenyOrRevoke = () => {
-    const permissionChangeType = isDenied ? 'denied' : 'revoked';
+    const permissionChangeType = isDenied
+      ? AFFILIATION_STATUSES.DENIED
+      : AFFILIATION_STATUSES.REVOKED;
 
     async function saveAffiliation() {
       await actualUpdateAffiliation(

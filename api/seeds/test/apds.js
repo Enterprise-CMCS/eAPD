@@ -1,3 +1,4 @@
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 import mongoose from 'mongoose';
 import mnAPD from './01-mnAPD.js';
 import akAPD from './02-akAPD.js';
@@ -57,6 +58,6 @@ export const data = [
     // Jackie Robinson joins the Brooklyn Dodgers
     updatedAt: '1947-04-10T00:00:00Z',
     stateId: 'ak',
-    status: 'approved'
+    status: AFFILIATION_STATUSES.APPROVED
   }
 ];

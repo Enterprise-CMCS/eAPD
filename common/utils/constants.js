@@ -55,3 +55,10 @@ function returnArrayOfCheckBoxes(obj) {
 export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
 );
+
+export const AFFILIATION_STATUSES = {
+  APPROVED: 'approved',
+  REVOKED: 'revoked',
+  DENIED: 'denied',
+  REQUESTED: 'requested'
+};

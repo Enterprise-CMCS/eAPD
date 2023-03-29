@@ -7,6 +7,7 @@ import AuthenticationForm from './AuthenticationForm';
 import { STATES } from '../../util/states';
 
 import axios from '../../util/api';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
 
@@ -49,13 +50,15 @@ const StateAccessRequest = ({
   });
 
   const pendingAffiliations = existingAffiliations.filter(
-    element => element.status === 'requested'
+    element => element.status === AFFILIATION_STATUSES.REQUESTED
   );
   const inactiveAffiliations = existingAffiliations.filter(
-    element => element.status === 'revoked' || element.status === 'denied'
+    element =>
+      element.status === AFFILIATION_STATUSES.REVOKED ||
+      element.status === AFFILIATION_STATUSES.DENIED
   );
   const activeAffiliations = existingAffiliations.filter(
-    element => element.status === 'approved'
+    element => element.status === AFFILIATION_STATUSES.APPROVED
   );
 
   const autocompleteLabel =

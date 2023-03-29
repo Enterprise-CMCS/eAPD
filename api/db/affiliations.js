@@ -1,6 +1,6 @@
 import loggerFactory from '../logger/index.js';
 import knex from './knex.js';
-import { defaultAPDYears } from '@cms-eapd/common';
+import { AFFILIATION_STATUSES, defaultAPDYears } from '@cms-eapd/common';
 
 const logger = loggerFactory('db/affiliations');
 
@@ -17,10 +17,15 @@ export const selectedColumns = [
 ];
 
 const statusConverter = {
-  pending: ['requested'],
-  active: ['approved'],
-  inactive: ['denied', 'revoked'],
-  null: ['requested', 'approved', 'denied', 'revoked']
+  pending: [AFFILIATION_STATUSES.REQUESTED],
+  active: [AFFILIATION_STATUSES.APPROVED],
+  inactive: [AFFILIATION_STATUSES.DENIED, AFFILIATION_STATUSES.REVOKED],
+  null: [
+    AFFILIATION_STATUSES.REQUESTED,
+    AFFILIATION_STATUSES.APPROVED,
+    AFFILIATION_STATUSES.DENIED,
+    AFFILIATION_STATUSES.REVOKED
+  ]
 };
 
 export const getAffiliationsByStateId = ({
@@ -173,11 +178,11 @@ export const getAffiliationMatches = async ({ stateId, db = knex }) => {
   return (
     query
       .where('state_id', stateId)
-      .andWhere('status', 'requested')
+      .andWhere('status', AFFILIATION_STATUSES.REQUESTED)
       // eslint-disable-next-line func-names
       .orWhere(function () {
         this.where('state_id', stateId)
-          .andWhere('status', 'approved')
+          .andWhere('status', AFFILIATION_STATUSES.APPROVED)
           .andWhere('auth_roles.name', 'eAPD State Staff');
       })
   );
@@ -267,7 +272,7 @@ export const updateAuthAffiliation = async ({
   }
 
   let expirationDate = null;
-  if (newStatus === 'approved') {
+  if (newStatus === AFFILIATION_STATUSES.APPROVED) {
     if (roleName === 'eAPD State Admin') {
       expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
@@ -277,7 +282,7 @@ export const updateAuthAffiliation = async ({
     user_id: affiliationUserId,
     original_role_id: originalRoleId,
     original_status: originalStatus,
-    new_role_id: newStatus !== 'approved' ? null : newRoleId,
+    new_role_id: newStatus !== AFFILIATION_STATUSES.APPROVED ? null : newRoleId,
     new_status: newStatus || null,
     changed_by: changedBy
   };
@@ -285,7 +290,7 @@ export const updateAuthAffiliation = async ({
   return (transaction || db)('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
     .update({
-      role_id: newStatus !== 'approved' ? null : newRoleId,
+      role_id: newStatus !== AFFILIATION_STATUSES.APPROVED ? null : newRoleId,
       status: newStatus,
       expires_at: expirationDate
     })

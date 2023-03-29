@@ -2,6 +2,7 @@
 import knex from './knex.js';
 
 import { updateAuthAffiliation } from './affiliations.js';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 export const addStateAdminCertification = (data, { db = knex } = {}) => {
   return db('state_admin_certifications')
@@ -85,14 +86,14 @@ export const getStateAdminCertifications = ({ db = knex } = {}) => {
     ])
     .leftOuterJoin('auth_roles', 'auth_roles.id', 'auth_affiliations.role_id')
     .where('auth_roles.name', '=', 'eAPD State Staff')
-    .orWhere('auth_affiliations.status', '=', 'requested')
+    .orWhere('auth_affiliations.status', '=', AFFILIATION_STATUSES.REQUESTED)
     // eslint-disable-next-line func-names
     .orWhere(function () {
-      this.where('auth_affiliations.status', '=', 'approved').andWhere(
-        'auth_roles.name',
+      this.where(
+        'auth_affiliations.status',
         '=',
-        'eAPD State Admin'
-      );
+        AFFILIATION_STATUSES.APPROVED
+      ).andWhere('auth_roles.name', '=', 'eAPD State Admin');
     })
     .as('affiliations');
 

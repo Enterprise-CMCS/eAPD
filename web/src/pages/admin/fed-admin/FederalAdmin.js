@@ -15,6 +15,7 @@ import ManageRoleDialog from '../ManageRoleDialog';
 import ConfirmationDialog from '../ConfirmationDialog';
 import ManageAllUsersTable from './ManageAllUsersTable';
 import StateAdminLetters from './StateAdminLetters';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const FederalAdmin = ({
   currentState,
@@ -119,7 +120,7 @@ const FederalAdmin = ({
 
   const saveAffiliation = async (roleId, deniedOrRevoked) => {
     const role = roleId || -1;
-    const changeType = deniedOrRevoked || 'approved';
+    const changeType = deniedOrRevoked || AFFILIATION_STATUSES.APPROVED;
     await actualUpdateAffiliation(
       selectedAffiliation.currentAffiliationState,
       selectedAffiliation.currentAffiliationId,
@@ -136,7 +137,9 @@ const FederalAdmin = ({
   };
 
   const handleDenyOrRevoke = () => {
-    const deniedOrRevoked = isDenied ? 'denied' : 'revoked';
+    const deniedOrRevoked = isDenied
+      ? AFFILIATION_STATUSES.DENIED
+      : AFFILIATION_STATUSES.REVOKED;
     saveAffiliation(null, deniedOrRevoked).then(() => {
       affiliations(currentState.id, activeTab);
       setConfirmationModalDisplay(false);

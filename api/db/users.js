@@ -2,7 +2,7 @@ import { isPast } from 'date-fns';
 import { oktaClient } from '../auth/oktaAuth.js';
 import knex from './knex.js';
 import { getLaunchDarklyFlag } from '../middleware/launchDarkly.js';
-import { FEATURE_FLAGS } from '@cms-eapd/common';
+import { AFFILIATION_STATUSES, FEATURE_FLAGS } from '@cms-eapd/common';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -55,13 +55,7 @@ export const userLoggedIntoState = async (
   stateId = null,
   { auditUserLogin = actualAuditUserLogin } = {}
 ) => {
-  const sysAdmin = await getLaunchDarklyFlag(
-    'support-team',
-    { kind: 'user', key: affiliation.username, name: affiliation.username },
-    false
-  );
-
-  if (!sysAdmin) {
+  if (!isSysAdmin(affiliation.username)) {
     if (affiliation && (stateId || Object.keys(states).length === 1)) {
       // we should only record the user logging in if they have specified a state
       // or if they are only affiliated with one state
@@ -112,21 +106,21 @@ export const populateUserRole = async (
           'eAPD State Admin'
         );
         if (
-          affiliation.status === 'approved' &&
+          affiliation.status === AFFILIATION_STATUSES.APPROVED &&
           affiliation.role_id === stateAdminId &&
           isPast(new Date(affiliation.expires_at))
         ) {
           await updateAuthAffiliation({
             affiliationId: affiliation.id,
             newRoleId: -1,
-            newStatus: 'revoked',
+            newStatus: AFFILIATION_STATUSES.REVOKED,
             changedBy: 'system',
             stateId: affiliation.state_id,
             ffy: null
           });
 
           affiliation.role_id = null;
-          affiliation.status = 'revoked';
+          affiliation.status = AFFILIATION_STATUSES.REVOKED;
         }
 
         const roles = (await getRolesAndActivities()) || [];
