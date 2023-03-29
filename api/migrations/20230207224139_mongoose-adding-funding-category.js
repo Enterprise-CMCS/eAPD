@@ -1,8 +1,9 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { APD, getApdModel, getBudgetModel } from '../models/index.js';
+import { APD, Budget, getApdModel } from '../models/index.js';
 import {
   APD_TYPE,
+  BUDGET_TYPE,
   FUNDING_CATEGORY_TYPE,
   calculateBudget,
   deepCopy
@@ -133,9 +134,9 @@ export const up = async () => {
           ...apd,
           apdType
         });
-        return getBudgetModel(apdType).replaceOne(
+        return Budget(apdType).replaceOne(
           { _id: apd.budget },
-          { ...budget }
+          { ...budget, __t: BUDGET_TYPE[apdType] }
         );
       })
     ).catch(err => logger.error(err));
