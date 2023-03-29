@@ -7,7 +7,7 @@ import Dollars from '../../../../components/Dollars';
 
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
-import ConditionsForEnhancedFundingReadOnly from '../conditions/ConditionsForEnhancedFundingReadOnly';
+import ConditionsForEnhancedFundingReadOnly from '../enhanced-funding/ConditionsForEnhancedFundingReadOnly';
 import AlternativesAndRisksReadOnly from '../alternatives-and-risks/AlternativesAndRisksReadOnly';
 import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
