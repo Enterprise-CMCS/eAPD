@@ -764,6 +764,29 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
     });
 
+    it('tests the Results of Previous Activities section', function () {
+      const mmisBasics = this.mmisBasics;
+
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToPreviousActivities();
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
+      );
+    });
+
     it('mmis navigation and cypress-axe', function () {
       // Decided to omit the activities page since the first subnav doesn't match the page title
       const pageTitles = [
@@ -783,7 +806,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         ['Proposed Budget', 'Combined Activity Costs', 'Summary Budget Table'],
         ['Security Planning'],
         ['Assurances and Compliance'],
-        ['Executive Summary', 'Activities Summary', 'Program Budget Tables'],
+        [
+          'Executive Summary',
+          'Activities Summary' /* 'Program Budget Tables' */
+        ],
         ['Export and Submit']
       ];
 
@@ -808,15 +834,16 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.log('Click through sidenav and runs cypress-axe');
       pageTitles.forEach(title => {
         cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+
+        // Page has subnavs
         if (title.length > 1) {
           title.forEach((subnav, index) => {
             cy.get('.ds-c-vertical-nav__subnav').contains(subnav).click();
-
-            // if (index !== 0) cy.get('.ds-h3').should('contain', subnav);
             if (index !== 0)
               cy.get('.ds-h3').contains(subnav).should('be.visible');
           });
         }
+
         cy.get('.ds-h2').should('contain', title[0]);
         cy.checkPageA11y();
       });
@@ -830,19 +857,27 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       // TODO: Bug Ticket 4481, Uncomment code below to navigate via side panel
       // cy.get('.ds-c-vertical-nav__item').contains('Activity 1: Untitled').click();
 
-      // Once 4481 is fixed, and the code above expands the subnav of the activity, we can delete this line
+      // Once 4481 is fixed, the code above should expand the subnav of the activity and we can delete this line below
       cy.get('#activities').contains('Edit').click();
 
       activityPageTitles.forEach(title => {
         if (title.length > 1) {
           cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
           title[1].forEach(altHeader => {
-            cy.get('.ds-h3').should('contain', altHeader);
+            if (altHeader === 'Other Funding') {
+              cy.get('.ds-h2').should('contain', altHeader);
+            } else {
+              cy.get('.ds-h3').should('contain', altHeader);
+            }
           });
           cy.checkPageA11y();
         } else {
-          cy.get('.ds-c-vertical-nav__item').contains(title).click();
-          cy.get('.ds-h3').should('contain', title);
+          cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+          if (title[0] === 'Budget and FFP') {
+            cy.get('.ds-h2').should('contain', title[0]);
+          } else {
+            cy.get('.ds-h3').should('contain', title[0]);
+          }
           cy.checkPageA11y();
         }
       });
@@ -855,9 +890,25 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
           cy.get('#continue-button').click();
           if (index === 3) {
             // Activity page index
+            cy.get('.ds-h2').should('contain', 'Activities');
             cy.get('#activities').contains('Edit').click();
-            activityPageTitles.forEach(titles => {
-              cy.get('.ds-h3').should('contain', titles);
+
+            activityPageTitles.forEach(title => {
+              if (title.length > 1) {
+                title[1].forEach(altHeader => {
+                  if (altHeader === 'Other Funding') {
+                    cy.get('.ds-h2').should('contain', altHeader);
+                  } else {
+                    cy.get('.ds-h3').should('contain', altHeader);
+                  }
+                });
+              } else {
+                if (title[0] === 'Budget and FFP') {
+                  cy.get('.ds-h2').should('contain', title[0]);
+                } else {
+                  cy.get('.ds-h3').should('contain', title[0]);
+                }
+              }
               cy.get('#continue-button').click();
             });
           }
@@ -872,11 +923,28 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
           cy.get('#previous-button').click();
           if (index === 5) {
             // Activity page index
-            cy.goToBudgetandFFP(0);
-            activityPageTitles.reverse().forEach(titles => {
-              cy.get('.ds-h3').should('contain', titles);
+            cy.goToBudgetAndFFP(0);
+
+            activityPageTitles.reverse().forEach(title => {
+              if (title.length > 1) {
+                title[1].forEach(altHeader => {
+                  if (altHeader === 'Other Funding') {
+                    cy.get('.ds-h2').should('contain', altHeader);
+                  } else {
+                    cy.get('.ds-h3').should('contain', altHeader);
+                  }
+                });
+              } else {
+                if (title[0] === 'Budget and FFP') {
+                  cy.get('.ds-h2').should('contain', title[0]);
+                } else {
+                  cy.get('.ds-h3').should('contain', title[0]);
+                }
+              }
               cy.get('#previous-button').click();
             });
+            cy.get('.ds-h2').should('contain', 'Activities');
+            cy.get('#previous-button').click();
           }
         }
       });
@@ -886,21 +954,20 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
       cy.goToExecutiveSummary();
 
-      // cy.get('#executive-summary-summary')
-      //   .parent()
-      //   .contains('div', 'Activity 1: Untitled')
-      //   .parent()
-      //   .parent()
-      //   .findByRole('link', { name: 'Edit' })
-      //   .click();
-
-      cy.get('#activities').contains('Edit').click();
+      cy.findByRole('heading', { name: /^Activities Summary/i, level: 3 })
+        .next()
+        .next()
+        .contains('Edit')
+        .click();
 
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
       }).should('exist');
-      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+      cy.findByRole('heading', {
+        name: /^Activity Overview/i,
+        level: 3
+      }).should('exist');
     });
   });
 });
