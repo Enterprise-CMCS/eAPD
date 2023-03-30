@@ -168,7 +168,7 @@ const SummaryBudgetByActivityTotalsMMIS = ({ data, ffy, apdType }) => {
             return;
           }
           return (
-            <Fragment>
+            <Fragment key={fedStateSplit}>
               <tr className="budget-table--row__primary-header__light">
                 <th scope="row">
                   MMIS DDI at {fedStateSplit.substring(0, 2)}% FFP
@@ -199,7 +199,7 @@ const SummaryBudgetByActivityTotalsMMIS = ({ data, ffy, apdType }) => {
             return;
           }
           return (
-            <Fragment>
+            <Fragment key={fedStateSplit}>
               <tr className="budget-table--row__primary-header__light">
                 <th scope="row">
                   MMIS M&O at {fedStateSplit.substring(0, 2)}% FFP
