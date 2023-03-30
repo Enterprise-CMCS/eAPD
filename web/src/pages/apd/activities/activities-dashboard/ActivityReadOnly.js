@@ -164,7 +164,13 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         />
       )}
 
-      <h3>Milestones</h3>
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
+        </small>
+        <br />
+        Milestones
+      </h3>
       {activity.milestones.length === 0 && 'No milestones were provided.'}
       {activity.milestones.map((milestone, index) =>
         buildMilestone(milestone, index)
@@ -186,7 +192,6 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
       </h3>
       {activity.outcomes.length === 0 &&
         'No outcome(s) and/or corresponding metric(s) were provided.'}
-      <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
 
       <h3 className="viewonly-activity-header">

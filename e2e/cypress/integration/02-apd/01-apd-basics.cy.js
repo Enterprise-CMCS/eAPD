@@ -963,13 +963,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .should('have.text', str);
 
       cy.findByRole('heading', {
-        name: /Activity 1: Program AdministrationOutcomes and Metrics/i
+        name: /Activity 1: Program AdministrationMilestones/i
       })
-        .next()
-        .next()
-        .next()
-        .next()
-        .next()
         .next()
         .should('have.text', "1. Miles's Milestone")
         .next()
