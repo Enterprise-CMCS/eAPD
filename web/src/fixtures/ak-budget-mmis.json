@@ -170,6 +170,520 @@
         }
       }
     },
+    "ddi": {
+      "90-10": {
+        "keyStatePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "statePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "contractors": {
+          "2023": {
+            "total": 2292444,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 4275200,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          }
+        },
+        "expenses": {
+          "2023": {
+            "total": 75000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 850000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          }
+        },
+        "combined": {
+          "2023": {
+            "total": 4997245,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 10155076,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          }
+        }
+      },
+      "75-25": {
+        "keyStatePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "statePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "contractors": {
+          "2023": {
+            "total": 2292444,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 4275200,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          }
+        },
+        "expenses": {
+          "2023": {
+            "total": 75000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 850000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          }
+        },
+        "combined": {
+          "2023": {
+            "total": 4997245,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 10155076,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          }
+        }
+      },
+      "50-50": {
+        "keyStatePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "statePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "contractors": {
+          "2023": {
+            "total": 2292444,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 4275200,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          }
+        },
+        "expenses": {
+          "2023": {
+            "total": 75000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 850000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          }
+        },
+        "combined": {
+          "2023": {
+            "total": 4997245,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 10155076,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          }
+        }
+      }
+    },
+    "mando": {
+      "75-25": {
+        "keyStatePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "statePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "contractors": {
+          "2023": {
+            "total": 2292444,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 4275200,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          }
+        },
+        "expenses": {
+          "2023": {
+            "total": 75000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 850000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          }
+        },
+        "combined": {
+          "2023": {
+            "total": 4997245,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 10155076,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          }
+        }
+      },
+      "50-50": {
+        "keyStatePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "statePersonnel": {
+          "2023": {
+            "total": 2629801,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 5029876,
+            "federal": 2302963,
+            "medicaid": 2558847,
+            "state": 255884
+          }
+        },
+        "contractors": {
+          "2023": {
+            "total": 2292444,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 4275200,
+            "federal": 2036280,
+            "medicaid": 2262534,
+            "state": 226253
+          }
+        },
+        "expenses": {
+          "2023": {
+            "total": 75000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 850000,
+            "federal": 63778,
+            "medicaid": 70864,
+            "state": 7087
+          }
+        },
+        "combined": {
+          "2023": {
+            "total": 4997245,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          },
+          "2024": {
+            "total": 0,
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0
+          },
+          "total": {
+            "total": 10155076,
+            "federal": 4403021,
+            "medicaid": 4892245,
+            "state": 489224
+          }
+        }
+      }
+    },
     "mmisByFFP": {
       "90-10": {
         "2023": {
