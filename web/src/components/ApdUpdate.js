@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { connect } from 'react-redux';
 
 import { apdTypeToOverviewSchemaMapping, APD_TYPE } from '@cms-eapd/common';
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from './ChoiceList';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import {
