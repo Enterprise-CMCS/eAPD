@@ -5,6 +5,7 @@ import {
   fedStateSplit,
   fedStateSplitByCost
 } from './budget.js';
+import { BUDGET_TYPE } from '@cms-eapd/common';
 
 const mmisBudgetSchema = new mongoose.Schema(
   {
@@ -30,4 +31,4 @@ const mmisBudgetSchema = new mongoose.Schema(
   discriminatorOptions
 );
 
-export default Budget.discriminator('MMISBudget', mmisBudgetSchema);
+export default Budget.discriminator(BUDGET_TYPE.MMIS_BUDGET, mmisBudgetSchema);
