@@ -2,7 +2,7 @@ import React from 'react';
 
 import AlternativesAndRisks from './alternatives-and-risks/AlternativesAndRisks';
 import ContractorResources from './contractor-costs/ContractorResources';
-import ConditionsForEnhancedFunding from './conditions/ConditionsForEnhancedFunding';
+import ConditionsForEnhancedFunding from './enhanced-funding/ConditionsForEnhancedFunding';
 import CostAllocation from './cost-allocation/CostAllocation';
 import FFP from './ffp/CostAllocateFFP';
 import Costs from './state-costs/Costs';
@@ -26,7 +26,7 @@ const routes = activityIndex => [
     pageName: 'Outcomes and Metrics'
   },
   {
-    path: '/apd/:apdId/activity/:activityIndex/conditions',
+    path: '/apd/:apdId/activity/:activityIndex/enhanced-funding',
     children: (
       <Section>
         <ConditionsForEnhancedFunding activityIndex={activityIndex} />
