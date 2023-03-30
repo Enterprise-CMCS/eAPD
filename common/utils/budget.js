@@ -618,7 +618,9 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
       if (keyPersonnel.hasCosts) {
         updatedBudget = years.reduce((budget, year) => {
           const fundingCategory =
-            keyPersonnel.split[year].fundingCategory.toLowerCase();
+            FUNDING_CATEGORY_TYPE_KEY_LOOKUP[
+              keyPersonnel.split[year].fundingCategory
+            ];
           const fedStateSplit = `${keyPersonnel.split[year].federal}-${keyPersonnel.split[year].state}`;
 
           const keyStatePersonnelTotal = calculateKeyStatePersonnelTotal(

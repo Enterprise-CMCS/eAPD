@@ -44,36 +44,7 @@ const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
     { category: 'statePersonnel', title: 'State Staff Total' },
     { category: 'expenses', title: 'Other State Expenses Total' },
     { category: 'contractors', title: 'Private Contractor Total' },
-    { category: 'combined', title: 'Total' }
-  ];
-  apdType === APD_TYPE.MMIS
-    ? categories.splice(0, 0, {
-        category: 'keyStatePersonnel',
-        title: 'Key State Personnel Total'
-      })
-    : null;
-  return (
-    <Fragment>
-      {categories.map(({ category, title }) => (
-        <DataRow
-          key={`${groupTitle}-${category}-${title}`}
-          category={category}
-          data={data[category][year]}
-          title={title}
-          groupTitle={groupTitle}
-          apdType={apdType}
-        />
-      ))}
-    </Fragment>
-  );
-};
-
-const DataRowGroupMMIS = ({ data, year, groupTitle, apdType }) => {
-  const categories = [
-    { category: 'statePersonnel', title: 'State Staff Total' },
-    { category: 'expenses', title: 'Other State Expenses Total' },
-    { category: 'contractors', title: 'Private Contractor Total' },
-    { category: 'combined', title: 'Total' }
+    { category: 'combined', title: 'Subtotal' }
   ];
   apdType === APD_TYPE.MMIS
     ? categories.splice(0, 0, {
@@ -181,28 +152,74 @@ const SummaryBudgetByActivityTotalsMMIS = ({ data, ffy, apdType }) => {
     <table className="budget-table" data-cy="CACTable">
       <thead>
         <tr className="budget-table--row__highlight-gray-dark">
-          <th scope="col">
+          <th scope="col" colSpan="2">
             Combined Activity Costs FFY {ffy} (Total Computable Medicaid Cost)
-          </th>
-          <th scope="col" className="ds-u-text-align--right">
-            Total
           </th>
         </tr>
       </thead>
       <tbody>
-        <Fragment>
-          <tr className="budget-table--category-row_highlight">
-            <th scope="row" colSpan="2">
-              MMIS
-            </th>
-          </tr>
-          <DataRowGroupMMIS
-            data={data.mmis}
-            year={ffy}
-            groupTitle={APD_TYPE.MMIS}
-            apdType={apdType}
-          />
-        </Fragment>
+        {Object.keys(data.ddi).map(fedStateSplit => {
+          // Ignore the combined
+          if (fedStateSplit === 'combined') {
+            return;
+          }
+          // Don't render tables with $0 totals
+          if (data.ddi[fedStateSplit].combined[ffy].total === 0) {
+            return;
+          }
+          return (
+            <Fragment>
+              <tr className="budget-table--row__primary-header__light">
+                <th scope="row">
+                  MMIS DDI at {fedStateSplit.substring(0, 2)}% FFP
+                </th>
+                <th scope="col" className="ds-u-text-align--right">
+                  Total
+                </th>
+              </tr>
+              <DataRowGroup
+                data={data.ddi[fedStateSplit]}
+                year={ffy}
+                groupTitle={`${fedStateSplit.substring(
+                  0,
+                  2
+                )}/${fedStateSplit.substring(3, 5)} DDI`}
+                apdType={apdType}
+              />
+            </Fragment>
+          );
+        })}
+
+        {Object.keys(data.mando).map(fedStateSplit => {
+          if (fedStateSplit === 'combined') {
+            return;
+          }
+          // Don't render tables with $0 totals
+          if (data.mando[fedStateSplit].combined[ffy].total === 0) {
+            return;
+          }
+          return (
+            <Fragment>
+              <tr className="budget-table--row__primary-header__light">
+                <th scope="row">
+                  MMIS M&O at {fedStateSplit.substring(0, 2)}% FFP
+                </th>
+                <th scope="col" className="ds-u-text-align--right">
+                  Total
+                </th>
+              </tr>
+              <DataRowGroup
+                data={data.mando[fedStateSplit]}
+                year={ffy}
+                groupTitle={`${fedStateSplit.substring(
+                  0,
+                  2
+                )}/${fedStateSplit.substring(3, 5)} M&O`}
+                apdType={apdType}
+              />
+            </Fragment>
+          );
+        })}
 
         <tr
           key={ffy}
