@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChoiceList wrapper component renders correctly with checkedChildren when checked 1`] = `
+<div>
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": true,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "firstChoice",
+          "value": "first",
+        },
+        Object {
+          "checked": false,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "secondChoice",
+          "value": "second",
+        },
+        Object {
+          "checked": false,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "thirdChoice",
+          "value": "third",
+        },
+      ]
+    }
+    label="choiceList-with-children"
+    name="choiceList-with-children"
+    size="small"
+    type="radio"
+  />
+</div>
+`;
+
+exports[`ChoiceList wrapper component renders correctly with checkedChildren when unchecked 1`] = `
+<div>
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "firstChoice",
+          "value": "first",
+        },
+        Object {
+          "checked": false,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "secondChoice",
+          "value": "second",
+        },
+        Object {
+          "checked": false,
+          "checkedChildren": <div
+            className="ds-c-choiceList__checkedChild"
+          >
+            <ChoiceListComponent
+              choices={
+                Array [
+                  Object {
+                    "checked": true,
+                    "label": "firstChild",
+                    "value": "firstChild",
+                  },
+                  Object {
+                    "checked": false,
+                    "label": "secondChild",
+                    "value": "secondChild",
+                  },
+                ]
+              }
+              label="checkedChlildrenChoiceList"
+              size="small"
+              type="radio"
+            />
+          </div>,
+          "label": "thirdChoice",
+          "value": "third",
+        },
+      ]
+    }
+    label="choiceList-with-children"
+    name="choiceList-with-children"
+    size="small"
+    type="radio"
+  />
+</div>
+`;
+
+exports[`ChoiceList wrapper component renders correctly without checkedChildren 1`] = `
+<div>
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "label": "firstChoice",
+          "value": "first",
+        },
+        Object {
+          "checked": false,
+          "label": "secondChoice",
+          "value": "second",
+        },
+        Object {
+          "checked": true,
+          "label": "thirdChoice",
+          "value": "third",
+        },
+      ]
+    }
+    label="choiceList-no-children"
+    size="small"
+    type="radio"
+  />
+</div>
+`;

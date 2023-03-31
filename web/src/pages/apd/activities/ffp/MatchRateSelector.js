@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from '../../../../components/ChoiceList';
 import PropTypes from 'prop-types';
 import Instruction from '../../../../components/Instruction';
 import {
