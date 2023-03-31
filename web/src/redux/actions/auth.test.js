@@ -1074,7 +1074,7 @@ describe('auth actions', () => {
       fetchMock.reset();
       jest.clearAllMocks();
 
-      fetchMock.onGet('/auth/state/ak').reply(200, {
+      fetchMock.onGet('/auth/state/na').reply(200, {
         jwt: mockValidJWT
       });
     });
@@ -1083,7 +1083,7 @@ describe('auth actions', () => {
       const setCookieSpy = jest.spyOn(mockAuth, 'setCookie');
       const store = mockStore({});
 
-      await store.dispatch(actions.selectAffiliation('ak', currentState));
+      await store.dispatch(actions.selectAffiliation('na', currentState));
       expect(setCookieSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -1099,7 +1099,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_SUCCESS }
       ];
 
-      await store.dispatch(actions.selectAffiliation('ak', currentState));
+      await store.dispatch(actions.selectAffiliation('na', currentState));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

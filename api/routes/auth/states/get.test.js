@@ -60,7 +60,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       'calls ChangeState if the user has the state to switch to',
       async validTest => {
         const user = {
-          states: { ak: 'approved', md: 'approved' }
+          states: { na: 'approved', md: 'approved' }
         };
 
         changeState.withArgs(user, 'na').resolves('JWT for AK');

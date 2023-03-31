@@ -11,7 +11,7 @@ const regularUser = {
     role: 'eAPD State Staff',
     state: {
       id: 'na',
-      name: 'Alaska'
+      name: 'New Apdland'
     }
   }
 };

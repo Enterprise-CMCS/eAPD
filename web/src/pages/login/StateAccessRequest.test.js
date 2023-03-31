@@ -87,7 +87,7 @@ describe('<StateAccessRequest />', () => {
     expect(await screen.findByText('Revoked')).toBeTruthy();
     expect(await screen.findByText('Maryland')).toBeTruthy();
     expect(await screen.findByText('Pending')).toBeTruthy();
-    expect(await screen.findByText('Alaska')).toBeTruthy();
+    expect(await screen.findByText('New Apdland')).toBeTruthy();
   });
 
   it('renders message when no affiliations exist per status', async () => {

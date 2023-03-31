@@ -48,10 +48,10 @@ mmisEnabledStory.decorators = [
           data: {
             state: {
               id: 'na',
-              state: 'Alaska'
+              state: 'New Apdland'
             },
             states: {
-              ak: 'requested'
+              na: 'requested'
             }
           }
         }
@@ -76,10 +76,10 @@ mmisDisabledStory.decorators = [
           data: {
             state: {
               id: 'na',
-              state: 'Alaska'
+              state: 'New Apdland'
             },
             states: {
-              ak: 'requested'
+              na: 'requested'
             }
           }
         }

@@ -49,7 +49,7 @@ describe('Switch Affiliation component', () => {
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();
-    expect(screen.getByLabelText('Alaska')).toBeTruthy();
+    expect(screen.getByLabelText('New Apdland')).toBeTruthy();
   });
   test('renders submit button', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
@@ -63,7 +63,7 @@ describe('Switch Affiliation component', () => {
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeChecked();
-    expect(screen.getByLabelText('Alaska')).not.toBeChecked();
+    expect(screen.getByLabelText('New Apdland')).not.toBeChecked();
   });
   test('allows different states to be selected', async () => {
     fetchMock
@@ -72,8 +72,8 @@ describe('Switch Affiliation component', () => {
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();
-    fireEvent.click(screen.getByLabelText('Alaska'));
-    expect(screen.getByLabelText('Alaska')).toBeChecked();
+    fireEvent.click(screen.getByLabelText('New Apdland'));
+    expect(screen.getByLabelText('New Apdland')).toBeChecked();
     expect(screen.getByLabelText('Maryland')).not.toBeChecked();
   });
 });

@@ -38,9 +38,9 @@ describe('utility functions', () => {
   });
 
   test('finds a state by two-letter code', () => {
-    expect(stateLookup('Mo')).toEqual({ id: 'mo', name: 'Missouri' });
-    expect(stateLookup('MO')).toEqual({ id: 'mo', name: 'Missouri' });
-    expect(stateLookup('mo')).toEqual({ id: 'mo', name: 'Missouri' });
+    expect(stateLookup('Na')).toEqual({ id: 'na', name: 'New Apdland' });
+    expect(stateLookup('NA')).toEqual({ id: 'na', name: 'New Apdland' });
+    expect(stateLookup('na')).toEqual({ id: 'na', name: 'New Apdland' });
     expect(stateLookup('bob')).toEqual(undefined);
   });
 

@@ -34,12 +34,12 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
     });
 
     it('should not ask the user to select an affiliation on next login', function () {
       cy.loginWithEnv('norole');
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
     });
 
     it('should let the user open the account management page', function () {
@@ -50,11 +50,11 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Pending/ }).should('exist');
       cy.findByRole('heading', { name: /Pending/ })
         .next()
-        .should('contain', 'Alaska');
+        .should('contain', 'New Apdland');
 
       cy.findByRole('button', { name: 'APD Home' }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
     });
 
     it('should let the user request additional affiliations', function () {
@@ -74,10 +74,10 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
-      cy.findByLabelText('Alaska').should('exist');
+      cy.findByLabelText('New Apdland').should('exist');
       cy.findByLabelText('Alabama').should('exist');
 
-      cy.findByText(/Alaska/).click();
+      cy.findByText(/New Apdland/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
 
       cy.findByRole('button', { name: /norole/ }).click();
@@ -88,20 +88,20 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Pending/ })
         .next('span')
         .within(() => {
-          cy.findByText(/Alaska/).should('exist');
+          cy.findByText(/New Apdland/).should('exist');
           cy.findByText(/Alabama/).should('exist');
         });
 
       cy.findByRole('button', { name: /AK APD Home/ }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
     });
 
     it('should allow the user to close the accounts management page', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
-      cy.findByText(/Alaska/).click();
+      cy.findByText(/New Apdland/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
 
       cy.findByRole('button', { name: /norole/ }).click();
@@ -109,14 +109,14 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
 
       cy.findByRole('button', { name: 'APD Home' }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
     });
 
     it('should show the newly requested affiliation on the switch states page', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
-      cy.findByLabelText(/Alaska/).should('exist');
+      cy.findByLabelText(/New Apdland/).should('exist');
       cy.findByLabelText(/Alabama/).should('exist');
       cy.findByText(/Alabama/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
@@ -128,7 +128,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
-      cy.findByText(/Alaska/).click();
+      cy.findByText(/New Apdland/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
 
       cy.findByRole('button', { name: /norole/ }).click();
@@ -168,7 +168,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByLabelText(/Alaska/).should('exist');
+      cy.findByLabelText(/New Apdland/).should('exist');
       cy.findByLabelText(/Alabama/).should('exist');
       cy.findByLabelText(/Colorado/).should('exist');
       cy.findByText(/Alabama/).click();
@@ -179,7 +179,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
 
       cy.loginWithEnv('norole');
 
-      cy.findByLabelText(/Alaska/).should('exist');
+      cy.findByLabelText(/New Apdland/).should('exist');
       cy.findByLabelText(/Alabama/).should('exist');
       cy.findByLabelText(/Colorado/).should('exist');
       cy.findByText(/Colorado/).click();
@@ -203,7 +203,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/ }).should('exist');
 
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();
@@ -224,7 +224,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
       cy.findByRole('heading', { name: /Thank you/ }).should('exist');
       cy.findByRole('button', { name: /Ok/ }).click();
 
-      cy.findByRole('heading', { name: /(Alabama|Alaska) APDs/ }).should(
+      cy.findByRole('heading', { name: /(Alabama|New Apdland) APDs/ }).should(
         'exist'
       );
 

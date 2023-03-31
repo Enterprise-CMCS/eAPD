@@ -104,7 +104,7 @@ export const reduceAffiliations = affiliations => {
   // combine affiliations for each user.
   // many fields are omitted for clarity
   // Given:
-  // [{userId:1, stateId:'na'}, {userId:1, stateId:'na'}, {userId:2, stateId:'ak}]
+  // [{userId:1, stateId:'na'}, {userId:1, stateId:'na'}, {userId:2, stateId:'na}]
   // becomes
   // [{userId:1, affiliations: [{stateId:'na'}, {stateId:'na'}]}, {userId:2, affiliations:[{stateId:'na'}]}]
   const reducer = (results, affiliation) => {

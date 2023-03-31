@@ -29,10 +29,10 @@ describe('US States endpoint', () => {
   });
 
   describe('GET /states/:id', () => {
-    unauthenticatedTest('get', '/states/ak');
+    unauthenticatedTest('get', '/states/na');
 
     it('returns 200', async () => {
-      const response = await apiAsStateAdmin.get('/states/ak');
+      const response = await apiAsStateAdmin.get('/states/na');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
       expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);

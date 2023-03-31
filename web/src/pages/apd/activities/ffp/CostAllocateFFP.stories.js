@@ -370,10 +370,10 @@ const user = {
     role: 'eAPD State Admin',
     state: {
       id: 'na',
-      name: 'Alaska'
+      name: 'New Apdland'
     },
     states: {
-      ak: 'approved'
+      na: 'approved'
     }
   }
 };

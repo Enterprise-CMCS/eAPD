@@ -37,7 +37,7 @@ describe('tests state admin portal', async function () {
     cy.loginWithEnv('norole');
     cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');
-    cy.contains('Alaska').click();
+    cy.contains('New Apdland').click();
     cy.findByRole('button', { name: 'Submit' }).click();
     cy.findByRole('button', { name: 'Ok' }).click();
     cy.logout();
@@ -46,7 +46,7 @@ describe('tests state admin portal', async function () {
     // cy.wait(2000);
     cy.contains('Active').click();
     cy.contains('Requests').click();
-    cy.contains('Alaska eAPD State Administrator Portal');
+    cy.contains('New Apdland eAPD State Administrator Portal');
 
     // Test approving access on Requested Role and Denying on No Role
     clickButton('Requested Role', 'Approve');
@@ -104,25 +104,25 @@ describe('tests state admin portal', async function () {
 
     // Verify Requested Role was approved
     cy.loginWithEnv('requestedrole');
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+    cy.findByRole('heading', { name: 'New Apdland APDs' }).should('exist');
     cy.contains('HITECH IAPD');
     cy.logout();
 
     // Verify State Contractor was revoked
     cy.loginWithEnv('statecontractor');
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+    cy.findByRole('heading', { name: 'New Apdland APDs' }).should('exist');
     cy.contains('Approval Permissions Revoked');
     cy.logout();
 
     // Verify Revoked Role has access
     cy.loginWithEnv('deniedrole');
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+    cy.findByRole('heading', { name: 'New Apdland APDs' }).should('exist');
     cy.contains('HITECH IAPD');
     cy.logout();
 
     // Verify No Role was denined
     cy.loginWithEnv('norole');
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+    cy.findByRole('heading', { name: 'New Apdland APDs' }).should('exist');
     cy.contains('Approval Has Been Denied');
   });
 });

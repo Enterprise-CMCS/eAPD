@@ -13,7 +13,7 @@ import { AFFILIATION_STATUSES } from '../../../constants';
 
 const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 
-fetchMock.onGet('/states/ak').reply(200, {
+fetchMock.onGet('/states/na').reply(200, {
   stateAdmins: [
     {
       email: 'a@email.com'
