@@ -8,7 +8,7 @@ import AffiliationStatus from './AffiliationStatus';
 import { plain as StateDashboard } from './StateDashboard';
 
 const initialProps = {
-  state: { id: 'ak' },
+  state: { id: 'na' },
   role: 'some role',
   approvalStatus: AFFILIATION_STATUSES.APPROVED
 };

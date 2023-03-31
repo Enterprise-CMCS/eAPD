@@ -71,7 +71,7 @@ StateStaffUserStory.decorators = [
             affiliation: {
               id: 399,
               user_id: '123',
-              state_id: 'ak',
+              state_id: 'na',
               role_id: 58,
               status: 'approved',
               username: 'statestaff'
@@ -90,7 +90,7 @@ StateStaffUserStory.decorators = [
             ],
             role: 'eAPD State Staff',
             state: {
-              id: 'ak',
+              id: 'na',
               name: 'Alaska'
             },
             states: {
@@ -137,7 +137,7 @@ StateAdminUserStory.decorators = [
             affiliation: {
               id: 396,
               user_id: '123',
-              state_id: 'ak',
+              state_id: 'na',
               status: 'approved',
               username: 'stateadmin'
             },
@@ -158,7 +158,7 @@ StateAdminUserStory.decorators = [
             ],
             role: 'eAPD State Admin',
             state: {
-              id: 'ak',
+              id: 'na',
               name: 'Alaska'
             },
             states: {

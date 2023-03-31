@@ -24,7 +24,7 @@ export default {
 const apdTwoYearsEmpty = {
   data: {
     id: '63dd7bff09f7e000e87e41e8',
-    state: 'ak',
+    state: 'na',
     keyStatePersonnel: {
       keyPersonnel: []
     },
@@ -50,7 +50,7 @@ const apdTwoYearsEmpty = {
 const apdTwoYears = {
   data: {
     id: '63dd7bff09f7e000e87e41e8',
-    state: 'ak',
+    state: 'na',
     keyStatePersonnel: {
       keyPersonnel: [
         {
@@ -218,7 +218,7 @@ const apdTwoYears = {
 const apdOneYear = {
   data: {
     id: '63dd7bff09f7e000e87e41e8',
-    state: 'ak',
+    state: 'na',
     keyStatePersonnel: {
       keyPersonnel: [
         {
@@ -369,7 +369,7 @@ const user = {
     username: 'em@il.com',
     role: 'eAPD State Admin',
     state: {
-      id: 'ak',
+      id: 'na',
       name: 'Alaska'
     },
     states: {

@@ -19,7 +19,7 @@ tap.test('Budget model test', async t => {
     budgetId = budget._id.toString();
     const { _id: apdObjId } = await MMIS.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...mmis,
       budget
     });

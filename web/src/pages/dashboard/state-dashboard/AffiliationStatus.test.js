@@ -26,7 +26,7 @@ fetchMock.onGet('/states/ak').reply(200, {
 
 const initialProps = {
   state: {
-    id: 'ak'
+    id: 'na'
   },
   approvalStatus: REQUESTED
 };
@@ -39,10 +39,10 @@ const setupAffiliationStatus = ({ approvalStatus = REQUESTED } = {}) =>
         user: {
           data: {
             state: {
-              id: 'ak'
+              id: 'na'
             },
             states: {
-              ak: approvalStatus
+              na: approvalStatus
             }
           }
         }

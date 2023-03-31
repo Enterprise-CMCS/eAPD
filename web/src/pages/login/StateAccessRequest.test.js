@@ -76,7 +76,7 @@ describe('<StateAccessRequest />', () => {
         status: 'revoked'
       },
       {
-        stateId: 'ak',
+        stateId: 'na',
         status: 'requested'
       }
     ]);
@@ -97,7 +97,7 @@ describe('<StateAccessRequest />', () => {
         status: 'requested'
       },
       {
-        stateId: 'ak',
+        stateId: 'na',
         status: 'revoked'
       }
     ]);

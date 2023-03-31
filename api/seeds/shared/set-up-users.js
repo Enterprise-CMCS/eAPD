@@ -86,7 +86,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (regularUser) {
     oktaAffiliations.push({
       user_id: regularUser.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateAdminRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       username: 'em@il.com',
@@ -111,7 +111,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       id: 1001, // manually set id for testing
       user_id: stateAdmin.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       username: stateAdmin.profile.login,
@@ -137,7 +137,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       id: 1002, // manually set id for testing
       ffy: currentFfy,
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
-      state: 'ak',
+      state: 'na',
       email: stateAdmin.profile.email,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
@@ -165,7 +165,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateStaff) {
     oktaAffiliations.push({
       user_id: stateStaff.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       username: stateStaff.profile.login
@@ -175,7 +175,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateContractor) {
     oktaAffiliations.push({
       user_id: stateContractor.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateContractorRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       username: stateContractor.profile.login
@@ -186,7 +186,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (resetmfa) {
     oktaAffiliations.push({
       user_id: resetmfa.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       username: resetmfa.profile.login
@@ -197,7 +197,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (requestedRole) {
     oktaAffiliations.push({
       user_id: requestedRole.id,
-      state_id: 'ak',
+      state_id: 'na',
       status: AFFILIATION_STATUSES.REQUESTED,
       username: requestedRole.profile.login
     });
@@ -207,7 +207,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (deniedRole) {
     oktaAffiliations.push({
       user_id: deniedRole.id,
-      state_id: 'ak',
+      state_id: 'na',
       status: AFFILIATION_STATUSES.DENIED,
       username: deniedRole.profile.login
     });
@@ -216,7 +216,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (revokedRole) {
     oktaAffiliations.push({
       user_id: revokedRole.id,
-      state_id: 'ak',
+      state_id: 'na',
       status: AFFILIATION_STATUSES.REVOKED,
       username: revokedRole.profile.login
     });

@@ -36,7 +36,7 @@ const seed = async knex => {
     {
       id: 4000,
       user_id: 2010,
-      state_id: 'ak',
+      state_id: 'na',
       status: AFFILIATION_STATUSES.REQUESTED
     },
     {
@@ -58,7 +58,7 @@ const seed = async knex => {
     {
       id: 4004,
       user_id: 'state-admin',
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateAdminRoleId,
       status: AFFILIATION_STATUSES.APPROVED,
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
@@ -66,14 +66,14 @@ const seed = async knex => {
     {
       id: 4005,
       user_id: 'state-admin-match',
-      state_id: 'ak',
+      state_id: 'na',
       role_id: null,
       status: AFFILIATION_STATUSES.REQUESTED
     },
     {
       id: 4006,
       user_id: 'state-staff',
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
       status: AFFILIATION_STATUSES.APPROVED
     },

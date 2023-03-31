@@ -7,7 +7,7 @@ import axios from '../../util/api';
 
 const defaultProps = {
   currentStateId: 'md',
-  availableAffiliations: ['md', 'ak']
+  availableAffiliations: ['md', 'na']
 };
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -45,7 +45,7 @@ describe('Switch Affiliation component', () => {
   test('renders correct set of radio options', async () => {
     fetchMock
       .onGet('/affiliations/me')
-      .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
+      .reply(200, [{ stateId: 'md' }, { stateId: 'na' }]);
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();
@@ -59,7 +59,7 @@ describe('Switch Affiliation component', () => {
   test('renders current state as default selected', async () => {
     fetchMock
       .onGet('/affiliations/me')
-      .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
+      .reply(200, [{ stateId: 'md' }, { stateId: 'na' }]);
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeChecked();
@@ -68,7 +68,7 @@ describe('Switch Affiliation component', () => {
   test('allows different states to be selected', async () => {
     fetchMock
       .onGet('/affiliations/me')
-      .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
+      .reply(200, [{ stateId: 'md' }, { stateId: 'na' }]);
     setup();
     await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();

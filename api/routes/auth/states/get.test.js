@@ -42,7 +42,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
               states: ['md']
             },
             params: {
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res
@@ -63,12 +63,12 @@ tap.test('auth roles GET endpoint', async endpointTest => {
           states: { ak: 'approved', md: 'approved' }
         };
 
-        changeState.withArgs(user, 'ak').resolves('JWT for AK');
+        changeState.withArgs(user, 'na').resolves('JWT for AK');
         await handler(
           {
             user,
             params: {
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res

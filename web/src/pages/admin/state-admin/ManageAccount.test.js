@@ -10,7 +10,7 @@ const regularUser = {
   data: {
     role: 'eAPD State Staff',
     state: {
-      id: 'ak',
+      id: 'na',
       name: 'Alaska'
     }
   }
@@ -54,7 +54,7 @@ describe('<ManageAccount />', () => {
       initialState: {
         user: regularUser,
         isAdmin: false,
-        data: { state: { name: 'Alaska', id: 'ak' } }
+        data: { state: { name: 'New Apdland', id: 'na' } }
       },
       initialHistory: ['/']
     });

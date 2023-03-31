@@ -21,7 +21,7 @@ const user = {
   user: {
     data: {
       state: {
-        id: 'ak',
+        id: 'na',
         name: 'Alaska',
         medicaid_office: {
           medicaidDirector: {
@@ -107,7 +107,7 @@ describe('apd (application) component', () => {
           data: {
             role: 'eAPD Federal Admin',
             state: {
-              id: 'ak',
+              id: 'na',
               name: 'Alaska',
               medicaid_office: {
                 medicaidDirector: {

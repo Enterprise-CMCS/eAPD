@@ -47,7 +47,7 @@ mmisEnabledStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
+              id: 'na',
               state: 'Alaska'
             },
             states: {
@@ -75,7 +75,7 @@ mmisDisabledStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
+              id: 'na',
               state: 'Alaska'
             },
             states: {

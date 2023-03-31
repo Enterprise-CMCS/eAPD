@@ -2,7 +2,7 @@ import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.HITECH,
-  name: 'MN-1921-07-11-HITECH-APD',
+  name: 'MD-1921-07-11-HITECH-APD',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
   apdOverview: {
