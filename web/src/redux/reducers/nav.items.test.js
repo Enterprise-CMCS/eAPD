@@ -1,4 +1,4 @@
-import staticItems, { getItems } from './nav.items';
+import { getItems } from './nav.items';
 
 describe('getItems', () => {
   describe('activities nav items', () => {
