@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 
 import Dollars from '../../../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../../../redux/selectors/budget.selectors';
@@ -171,32 +171,134 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               </table>
             ))}
           </div>
+          <div>
+            <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+              MMIS Activities
+            </h4>
+            {[...years, 'total'].map(yr => (
+              <table
+                className="budget-table"
+                key={yr}
+                data-cy="summaryBudgetMMIS"
+              >
+                <caption className="ds-u-visibility--screen-reader">
+                  FFY {yr} MMIS Activities
+                </caption>
+                <thead>
+                  <HeaderRow yr={yr} activity={'mmis'} />
+                </thead>
+                <tbody>
+                  <DataRowGroup
+                    data={data.mmis}
+                    entries={activities.mmis}
+                    year={yr}
+                    apdType={apdType}
+                  />
+                </tbody>
+              </table>
+            ))}
+          </div>
         </Fragment>
       )}
 
-      <div>
-        <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
-          MMIS Activities
-        </h4>
-        {[...years, 'total'].map(yr => (
-          <table className="budget-table" key={yr} data-cy="summaryBudgetMMIS">
-            <caption className="ds-u-visibility--screen-reader">
-              FFY {yr} MMIS Activities
-            </caption>
-            <thead>
-              <HeaderRow yr={yr} activity={'mmis'} />
-            </thead>
-            <tbody>
-              <DataRowGroup
-                data={data.mmis}
-                entries={activities.mmis}
-                year={yr}
-                apdType={apdType}
-              />
-            </tbody>
-          </table>
-        ))}
-      </div>
+      {apdType === APD_TYPE.MMIS && (
+        <div>
+          {Object.keys(data.ddi).map(fedStateSplit => {
+            // Ignore the combined
+            if (fedStateSplit === 'combined') {
+              return;
+            }
+            return (
+              <Fragment>
+                <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+                  {FUNDING_CATEGORY_LABEL_MAPPING['DDI']}{' '}
+                  {fedStateSplit.substring(0, 2)}/
+                  {fedStateSplit.substring(3, 5)} Match Rate
+                </h4>
+                {[...years].map(ffy => {
+                  // Don't render tables with $0 totals
+                  if (data.ddi[fedStateSplit].combined[ffy].total === 0) {
+                    return <div>no total</div>;
+                  }
+                  return (
+                    <Fragment>
+                      <table
+                        className="budget-table"
+                        key={ffy}
+                        data-cy="summaryBudgetMMIS"
+                      >
+                        <caption className="ds-u-visibility--screen-reader">
+                          {/* Todo: Update this title */}
+                          FFY {ffy} MMIS Activities
+                        </caption>
+                        <thead>
+                          <HeaderRow yr={ffy} activity={'mmis'} />
+                        </thead>
+                        <tbody>
+                          <DataRowGroup
+                            data={data.ddi[fedStateSplit]}
+                            entries={activities.mmis}
+                            year={ffy}
+                            apdType={apdType}
+                          />
+                        </tbody>
+                      </table>
+                    </Fragment>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
+
+          {/* loop over MANDO budgets */}
+          {Object.keys(data.mando).map(fedStateSplit => {
+            // Ignore the combined
+            if (fedStateSplit === 'combined') {
+              return;
+            }
+            return (
+              <Fragment>
+                <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+                  {FUNDING_CATEGORY_LABEL_MAPPING['MANDO']}{' '}
+                  {fedStateSplit.substring(0, 2)}/
+                  {fedStateSplit.substring(3, 5)} Match Rate
+                </h4>
+                {[...years].map(ffy => {
+                  // Don't render tables with $0 totals
+                  if (data.mando[fedStateSplit].combined[ffy].total === 0) {
+                    return <div>no total</div>;
+                  }
+                  return (
+                    <Fragment>
+                      <table
+                        className="budget-table"
+                        key={ffy}
+                        data-cy="summaryBudgetMMIS"
+                      >
+                        <caption className="ds-u-visibility--screen-reader">
+                          {/* Todo: Update this title */}
+                          FFY {ffy} MMIS Activities
+                        </caption>
+                        <thead>
+                          <HeaderRow yr={ffy} activity={'mmis'} />
+                        </thead>
+                        <tbody>
+                          <DataRowGroup
+                            data={data.mando[fedStateSplit]}
+                            entries={activities.mmis}
+                            year={ffy}
+                            apdType={apdType}
+                          />
+                        </tbody>
+                      </table>
+                    </Fragment>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
+        </div>
+      )}
 
       <table className="budget-table" data-cy="summaryBudgetTotals">
         <caption className="ds-h4">Activities Totals</caption>
