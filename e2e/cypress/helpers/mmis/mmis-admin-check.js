@@ -1,58 +1,84 @@
 export const testMmisAdminCheck = function () {
+  const fillDate = (string, list) => {
+    cy.findAllByText(string)
+      .parent()
+      .next()
+      .within(() => {
+        cy.findByLabelText('Month').clear().type(list[0]);
+        cy.findByLabelText('Day').clear().type(list[1]);
+        cy.findByLabelText('Year').clear().type(list[2]).blur();
+      });
+  };
+
+  const clearDate = string => {
+    cy.findAllByText(string)
+      .parent()
+      .next()
+      .within(() => {
+        cy.findByLabelText('Month').clear();
+        cy.findByLabelText('Day').clear();
+        cy.findByLabelText('Year').clear();
+      });
+  };
+
   const defaultAdminCheck = [
-    {
-      hyperlink: 'Key State Personnel',
-      header: '',
-      fieldType: ['textField', 'input[name="medicaidDirector.name"]'],
-      errorMessage: 'Provide the name of the State Medicaid Director.'
-    },
+    //add expected length to errorMessage
     {
       hyperlink: 'State Priorities and Scope',
-      header: '',
-      fieldType: ['tinyMCE'],
-      errorMessage: 'Provide Medicaid Program and Priorities.'
+      header: ['State Priorities and Scope', 2],
+      fieldType: ['tinyMCE', 'medicaid-program-priorities-field'],
+      errorMessage: ['Provide Medicaid Program and Priorities', 2]
+    },
+    {
+      hyperlink: 'Key State Personnel',
+      header: ['Key State Personnel', 2],
+      fieldType: ['textField', 'input[name="medicaidDirector.name"]'],
+      errorMessage: ['Provide the name of the State Medicaid Director.', 2]
     },
     {
       hyperlink: 'Activity 1 Activity Overview',
-      header: 'Activity Overview',
-      fieldType: ['textField'],
-      errorMessage: 'Provide an Activity name.'
-    },
-    {
-      hyperlink: 'Activity 1 Conditions for Enhanced Funding',
-      header: 'Conditions for Enhanced Funding',
-      fieldType: ['WHO KNOWS?'],
-      errorMessage: 'PLACE HOLDER ERROR MESSAGE'
+      header: ['Activity Overview', 3],
+      fieldType: ['textField', 'input[name="name"]'],
+      errorMessage: ['Provide an Activity name', 2]
     },
     {
       hyperlink: 'Activity 1 Activity Schedule',
-      header: 'Activity Schedule',
+      header: ['Activity Schedule', 3],
       fieldType: ['dateField'],
-      errorMessage: 'Provide the name of the State Medicaid Director.'
+      errorMessage: ['Provide a start date.', 3]
     },
     {
-      hyperlink: 'Activity 1 Budget and FFP',
-      header: 'Budget and FFP',
+      hyperlink: 'Activity 1 Conditions for Enhanced Funding',
+      header: ['Conditions for Enhanced Funding', 3],
       fieldType: ['radio'],
-      errorMessage: 'Select a federal-state split.'
+      errorMessage: ['Select an Enhanced Funding Qualification', 3]
     },
     {
       hyperlink: 'Activity 1 Cost Allocation',
-      header: 'Cost Allocation',
-      fieldType: ['tinyMCE'],
-      errorMessage: 'Provide a description of the cost allocation methodology.'
+      header: ['Cost Allocation', 3],
+      fieldType: ['tinyMCE', 'cost-allocation-methodology-field'],
+      errorMessage: [
+        'Provide a description of the cost allocation methodology.',
+        2
+      ]
+    },
+    {
+      hyperlink: 'Activity 1 Budget and FFP',
+      header: ['Budget and FFP', 2],
+      fieldType: ['radio'],
+      errorMessage: ['Select a federal-state split.', 6] // WEIRD CASE
     },
     {
       hyperlink: 'Security Planning',
-      header: '',
-      fieldType: ['tinyMCE'],
-      errorMessage: 'Provide Security and Interface Plan'
+      header: ['Security Planning', 2],
+      fieldType: ['tinyMCE', 'security-interface-plan'],
+      errorMessage: ['Provide Security and Interface Plan', 2]
     },
     {
       hyperlink: 'Assurances and Compliance',
-      header: '',
+      header: ['Assurances and Compliance', 2],
       fieldType: ['assurances'],
-      errorMessage: 'Select yes or no.' // Maybe some condition here to check no text box
+      errorMessage: ['Select yes or no', 30] // Maybe some condition here to check no text box
     } // Maybe have a list of all validation error messages? then loop through them?
   ];
 
@@ -67,17 +93,22 @@ export const testMmisAdminCheck = function () {
 
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
 
-      cy.goToApdOverview();
-      cy.get('[data-cy="validationError"]').should('exist');
+      cy.goToKeyStatePersonnel();
+      cy.findAllByText(
+        'Provide the name of the State Medicaid Director.'
+      ).should('have.length', 2);
 
       cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
         force: true
       });
-      cy.get('[data-cy="validationError"]').should('not.exist');
+      cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('not.exist');
+      cy.findAllByText(
+        'Provide the name of the State Medicaid Director.'
+      ).should('not.exist');
 
       cy.turnOnAdminCheck();
 
-      cy.get('[data-cy="numRequired"]').should('have.text', '31'); // GET RIGHT NUMBER
+      cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
       cy.findByRole('button', { name: /Collapse/i }).click({
         force: true
@@ -99,71 +130,75 @@ export const testMmisAdminCheck = function () {
 
       cy.goToApdOverview();
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.get('[data-cy="validationError"]')
-        .contains('Select at least one Medicaid Business Area.')
-        .should('exist');
-      cy.get('[class="eapd-admin-check-list"]')
-        .contains('Select at least one Medicaid Business Area.')
-        .should('exist');
+      cy.findAllByText('Select at least one Medicaid Business Area.').should(
+        'have.length',
+        3
+      );
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.get('[data-cy="validationError"]')
-        .contains('Select at least one Medicaid Business Area.')
-        .should('not.exist');
-      cy.get('[class="eapd-admin-check-list"]')
-        .contains('Select at least one Medicaid Business Area.')
-        .should('not.exist');
+      cy.findAllByText('Select at least one Medicaid Business Area.').should(
+        'not.exist'
+      );
 
       cy.findByRole('button', { name: /Collapse/i }).click({
         force: true
       });
-      cy.get('[data-cy="numRequired"]').should('have.text', '31'); // GET RIGHT NUMBER
+      cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.get('[data-cy="numRequired"]').should('have.text', '31'); // GET RIGHT NUMBER MINUS ONE
+      cy.get('[data-cy="numRequired"]').should('have.text', '34');
+
+      cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
+      cy.findByRole('button', { name: /Expand/i }).click({
+        force: true
+      });
 
       defaultAdminCheck.forEach(value => {
         const { hyperlink, header, fieldType, errorMessage } = value;
 
-        if (header) {
-          cy.checkAdminCheckHyperlinks(hyperlink, hyperlink, 2);
-        } else {
-          cy.checkAdminCheckHyperlinks(hyperlink, header, 3);
-        }
+        cy.checkAdminCheckHyperlinks(hyperlink, header[0], header[1]);
+        cy.findAllByText(errorMessage[0]).should(
+          'have.length',
+          errorMessage[1]
+        );
 
-        cy.get('[data-cy="validationError"]')
-          .contains(errorMessage)
-          .should('exist');
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          // Cypress cannot see field b/c admin check panel is in the way?
+          force: true
+        });
 
         // Validation message should disappear/re-appear when value is changed
         if (fieldType[0] === 'textField') {
           cy.get(fieldType[1]).clear().type('Test Name');
-          cy.get('[data-cy="validationError"]')
-            .contains(errorMessage)
-            .should('not.exist');
+          cy.findAllByText(errorMessage[0]).should('not.exist');
 
           cy.get(fieldType[1]).clear();
-          cy.get('[data-cy="validationError"]')
-            .contains(errorMessage)
-            .should('exist');
         } else if (fieldType[0] === 'tinyMCE') {
           cy.setTinyMceContent(fieldType[1], 'Test Value');
           cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-          cy.get('[data-cy="validationError"]')
-            .contains(errorMessage)
-            .should('not.exist');
+          cy.findAllByText([errorMessage[0]]).should('not.exist');
 
           cy.setTinyMceContent(fieldType[1], '');
           cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-          cy.get('[data-cy="validationError"]')
-            .contains(errorMessage)
-            .should('exist');
         } else if (fieldType[0] === 'radio') {
         } else if (fieldType[0] === 'dateField') {
+          fillDate('Start date', [1, 2, 2022]);
+          cy.findAllByText(errorMessage[0]).should('not.exist');
+
+          clearDate('Start date');
         } else if (fieldType[0] === 'assurances') {
         } else {
           throw new Error('Invalid field type!');
         }
+
+        cy.findByRole('button', { name: /Expand/i }).click({
+          force: true
+        });
+
+        cy.findAllByText(errorMessage[0]).should(
+          'have.length',
+          errorMessage[1]
+        );
       });
 
       // Test admin check on functionally complete APD!!!!!!!!!!!
