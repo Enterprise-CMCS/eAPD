@@ -1204,12 +1204,6 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            echo 'Checking to see if the server is running'
-            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-                sleep 10;
-                echo '.';
-            done;
-            echo 'Server is running and status is healthy'
 
             docker run \
               --network api_default \

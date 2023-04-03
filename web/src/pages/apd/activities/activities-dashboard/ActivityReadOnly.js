@@ -7,6 +7,7 @@ import Dollars from '../../../../components/Dollars';
 
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
+import ConditionsForEnhancedFundingReadOnly from '../enhanced-funding/ConditionsForEnhancedFundingReadOnly';
 import AlternativesAndRisksReadOnly from '../alternatives-and-risks/AlternativesAndRisksReadOnly';
 import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
@@ -168,18 +169,30 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
           Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
-        Outcomes and Metrics
+        Milestones
       </h3>
-      {activity.outcomes.length === 0 &&
-        'No outcome(s) and/or corresponding metric(s) were provided.'}
-      <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
-      {activity.outcomes.map(buildOutcome)}
-
-      <h3>Milestones</h3>
       {activity.milestones.length === 0 && 'No milestones were provided.'}
       {activity.milestones.map((milestone, index) =>
         buildMilestone(milestone, index)
       )}
+
+      {apdType === APD_TYPE.MMIS && (
+        <ConditionsForEnhancedFundingReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
+
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
+        </small>
+        <br />
+        Outcomes and Metrics
+      </h3>
+      {activity.outcomes.length === 0 &&
+        'No outcome(s) and/or corresponding metric(s) were provided.'}
+      {activity.outcomes.map(buildOutcome)}
 
       <h3 className="viewonly-activity-header">
         <small>
