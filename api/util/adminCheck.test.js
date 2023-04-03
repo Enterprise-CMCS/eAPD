@@ -2206,7 +2206,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'State Priorities and Scope',
     link: '/apd/632a0fbc5665670a34b3bbd7/state-priorities-and-scope',
-    fieldDescription: 'Provide Medicaid Program and Priorities'
+    fieldDescription: 'Provide Medicaid Program and Priorities.'
   },
   {
     section: 'Activity 1 Activity Overview',
@@ -2649,7 +2649,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'State Priorities and Scope',
           link: '/apd/632a0fbc5665670a34b3bbd7/state-priorities-and-scope',
-          fieldDescription: 'Provide a Medicaid Enterprise System Introduction'
+          fieldDescription: 'Provide a Medicaid Enterprise System Introduction.'
         }
       ]);
     }

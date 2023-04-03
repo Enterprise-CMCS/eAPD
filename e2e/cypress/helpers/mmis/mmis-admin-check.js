@@ -22,12 +22,11 @@ export const testMmisAdminCheck = function () {
   };
 
   const defaultAdminCheck = [
-    //add expected length to errorMessage
     {
       hyperlink: 'State Priorities and Scope',
       header: ['State Priorities and Scope', 2],
       fieldType: ['tinyMCE', 'medicaid-program-priorities-field'],
-      errorMessage: ['Provide Medicaid Program and Priorities', 2]
+      errorMessage: ['Provide Medicaid Program and Priorities.', 2]
     },
     {
       hyperlink: 'Key State Personnel',
@@ -50,8 +49,13 @@ export const testMmisAdminCheck = function () {
     {
       hyperlink: 'Activity 1 Conditions for Enhanced Funding',
       header: ['Conditions for Enhanced Funding', 3],
-      fieldType: ['radio'],
-      errorMessage: ['Select an Enhanced Funding Qualification', 3]
+      fieldType: [
+        'radio',
+        /Yes, this activity is qualified for enhanced funding./i
+      ],
+      errorMessage: ['Select an Enhanced Funding Qualification', 3],
+      subField: ['tinyMCE', 'justification-field'],
+      subFieldErrorMessage: ['Provide an Enhanced Funding Justification', 2]
     },
     {
       hyperlink: 'Activity 1 Cost Allocation',
@@ -65,8 +69,10 @@ export const testMmisAdminCheck = function () {
     {
       hyperlink: 'Activity 1 Budget and FFP',
       header: ['Budget and FFP', 2],
-      fieldType: ['radio'],
-      errorMessage: ['Select a federal-state split.', 6] // WEIRD CASE
+      fieldType: ['radio', /75\/25/],
+      errorMessage: ['Select a federal-state split.', 6, 4],
+      subField: ['radio', 'Maintenance & Operations (M&O)'],
+      subFieldErrorMessage: ['Select a funding category.', 2]
     },
     {
       hyperlink: 'Security Planning',
@@ -77,9 +83,11 @@ export const testMmisAdminCheck = function () {
     {
       hyperlink: 'Assurances and Compliance',
       header: ['Assurances and Compliance', 2],
-      fieldType: ['assurances'],
-      errorMessage: ['Select yes or no', 30] // Maybe some condition here to check no text box
-    } // Maybe have a list of all validation error messages? then loop through them?
+      fieldType: ['radio', /No/i],
+      errorMessage: ['Select yes or no', 30, 27],
+      subField: ['textField', 'textarea[name="procurement.0.explanation"]'],
+      subFieldErrorMessage: ['Provide an explanation', 2]
+    }
   ];
 
   it(
@@ -154,7 +162,14 @@ export const testMmisAdminCheck = function () {
       });
 
       defaultAdminCheck.forEach(value => {
-        const { hyperlink, header, fieldType, errorMessage } = value;
+        const {
+          hyperlink,
+          header,
+          fieldType,
+          errorMessage,
+          subField,
+          subFieldErrorMessage
+        } = value;
 
         cy.checkAdminCheckHyperlinks(hyperlink, header[0], header[1]);
         cy.findAllByText(errorMessage[0]).should(
@@ -168,37 +183,76 @@ export const testMmisAdminCheck = function () {
         });
 
         // Validation message should disappear/re-appear when value is changed
-        if (fieldType[0] === 'textField') {
-          cy.get(fieldType[1]).clear().type('Test Name');
-          cy.findAllByText(errorMessage[0]).should('not.exist');
+        if (fieldType[0] !== 'radio') {
+          if (fieldType[0] === 'textField') {
+            cy.get(fieldType[1]).clear().type('Test Name');
+            cy.findAllByText(errorMessage[0]).should('not.exist');
 
-          cy.get(fieldType[1]).clear();
-        } else if (fieldType[0] === 'tinyMCE') {
-          cy.setTinyMceContent(fieldType[1], 'Test Value');
-          cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-          cy.findAllByText([errorMessage[0]]).should('not.exist');
+            cy.get(fieldType[1]).clear();
+          } else if (fieldType[0] === 'tinyMCE') {
+            cy.setTinyMceContent(fieldType[1], 'Test Value');
+            cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+            cy.findAllByText([errorMessage[0]]).should('not.exist');
 
-          cy.setTinyMceContent(fieldType[1], '');
-          cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-        } else if (fieldType[0] === 'radio') {
-        } else if (fieldType[0] === 'dateField') {
-          fillDate('Start date', [1, 2, 2022]);
-          cy.findAllByText(errorMessage[0]).should('not.exist');
+            cy.setTinyMceContent(fieldType[1], '');
+            cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+          } else if (fieldType[0] === 'dateField') {
+            fillDate('Start date', [1, 2, 2022]);
+            cy.findAllByText(errorMessage[0]).should('not.exist');
 
-          clearDate('Start date');
-        } else if (fieldType[0] === 'assurances') {
+            clearDate('Start date');
+          }
+
+          cy.findByRole('button', { name: /Expand/i }).click({
+            force: true
+          });
+
+          cy.findAllByText(errorMessage[0]).should(
+            'have.length',
+            errorMessage[1]
+          );
         } else {
-          throw new Error('Invalid field type!');
+          // Split out radio since they cannot be unchecked
+          if (errorMessage[2]) {
+            cy.findAllByRole('radio', { name: fieldType[1] }).eq(0).click();
+            cy.findByRole('button', { name: /Expand/i }).click({
+              force: true
+            });
+            cy.findAllByText(errorMessage[0]).should(
+              'have.length',
+              errorMessage[2]
+            );
+          } else {
+            cy.findByRole('radio', { name: fieldType[1] }).click();
+            cy.findAllByText(errorMessage[0]).should('not.exist');
+            cy.findByRole('button', { name: /Expand/i }).click({
+              force: true
+            });
+          }
+
+          cy.findAllByText(subFieldErrorMessage[0]).should(
+            'have.length',
+            subFieldErrorMessage[1]
+          );
+          cy.findByRole('button', { name: /Collapse/i }).click({
+            force: true
+          });
+
+          if (subField[0] === 'textField') {
+            cy.get(subField[1]).type('Test value');
+            cy.findAllByText(subFieldErrorMessage[0]).should('not.exist');
+          } else if (subField[0] === 'tinyMCE') {
+            cy.setTinyMceContent(subField[1], 'Testing this field!');
+            cy.findAllByText(subFieldErrorMessage[0]).should('not.exist');
+          } else if (subField[0] === 'radio') {
+            cy.findByRole('radio', { name: subField[1] }).click();
+            cy.findAllByText(subFieldErrorMessage[0]).should('not.exist');
+          }
+
+          cy.findByRole('button', { name: /Expand/i }).click({
+            force: true
+          });
         }
-
-        cy.findByRole('button', { name: /Expand/i }).click({
-          force: true
-        });
-
-        cy.findAllByText(errorMessage[0]).should(
-          'have.length',
-          errorMessage[1]
-        );
       });
 
       // Test admin check on functionally complete APD!!!!!!!!!!!
