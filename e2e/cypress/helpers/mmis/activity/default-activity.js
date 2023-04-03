@@ -41,7 +41,7 @@ export const testDefaultMMISActivity = function () {
 
         cy.contains('Activity 2').should('not.exist');
 
-        cy.contains('Delete').should('not.exist');
+        cy.contains('Delete').should('exist');
 
         cy.get('#activities')
           .contains('Edit')
