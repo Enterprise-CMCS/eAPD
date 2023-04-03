@@ -5,7 +5,7 @@ import {
   calculateQuarterlyCosts,
   calculateBudget
 } from './budget.js';
-import { hitechApd, mmisApd } from './test-data/calculateBudget';
+import { hitechApd, mmisApd } from './test-data/calculateBudget.js';
 
 describe('budget calculate methods', () => {
   describe('calculateCategoryPercentages', () => {

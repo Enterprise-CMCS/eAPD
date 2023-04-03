@@ -12,6 +12,7 @@ const ApdPageRoutes = ({ apdId }) => {
   return (
     <Switch>
       <Route path={`${path}/activity/:activityIndex`}>
+        <ApdHeader />
         <EntryPage />
       </Route>
 
