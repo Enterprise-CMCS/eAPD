@@ -22,9 +22,9 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
   <Route
     contentType="form"
     isPublic={false}
-    key="/apd/:apdId/activity/:activityIndex/conditions"
+    key="/apd/:apdId/activity/:activityIndex/enhanced-funding"
     pageName="Conditions For Enhanced Funding"
-    path="/apd/:apdId/activity/:activityIndex/conditions"
+    path="/apd/:apdId/activity/:activityIndex/enhanced-funding"
     siteSection="APD - Activity"
   >
     <Section
