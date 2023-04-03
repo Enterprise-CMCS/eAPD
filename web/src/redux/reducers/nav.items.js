@@ -287,7 +287,7 @@ const buildActivitySection = (apdId, apdType, activityId) => {
         },
         {
           label: 'Conditions for Enhanced Funding',
-          url: `/apd/${apdId}/activity/${activityId}/conditions`
+          url: `/apd/${apdId}/activity/${activityId}/enhanced-funding`
         },
         {
           label: 'Outcomes and Metrics',

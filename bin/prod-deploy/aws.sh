@@ -302,7 +302,7 @@ function createNewInstance() {
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --key-name tforkner_eapd \
+    --key-name eapd_bbrooks \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
