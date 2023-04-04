@@ -41,6 +41,9 @@ export const testApdNavigation = function () {
   it('confirms Continue and Previous buttons', function () {
     cy.log('Click through Continue buttons');
     cy.wrap([...pages]).each((page, index) => {
+      // Tests that APD Header is visible on every page)
+      cy.get(`[data-cy='apd-name-header']`).should('exist');
+
       let title = page.title,
         type = page.type;
       cy.get('.ds-c-vertical-nav__item').contains(title).click();
