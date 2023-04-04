@@ -103,7 +103,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
   });
 
   describe('tests admin check validation errors', function () {
-    it.only('tests non-subform validation errors', function () {
+    it('tests non-subform validation errors', function () {
       cy.contains('Export and Submit').click();
       cy.findByRole('button', { name: /Run Administrative Check/i }).click({
         force: true
