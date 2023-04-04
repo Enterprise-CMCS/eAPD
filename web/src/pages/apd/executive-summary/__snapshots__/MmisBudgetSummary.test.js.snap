@@ -42,29 +42,34 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null3"
           />
           <th
+            class="ds-u-text-align--right"
             colspan="2"
             id="program-budget-table-mmis90"
           >
             MMIS DDI (90/10)
           </th>
           <th
+            class="ds-u-text-align--right"
             colspan="2"
             id="program-budget-table-mmis75"
           >
             MMIS DDI (75/25)
           </th>
           <th
+            class="ds-u-text-align--right"
             colspan="2"
             id="program-budget-table-mmis50"
           >
             MMIS DDI (50/50)
           </th>
           <th
-            colspan="3"
+            class="ds-u-text-align--right"
+            colspan="2"
             id="program-budget-table-mmisTotal"
           >
             MMIS DDI (Total)
           </th>
+          <th />
         </tr>
         <tr
           class="budget-table--row__highlight-gray-light"
@@ -400,23 +405,27 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null3"
           />
           <th
+            class="ds-u-text-align--right"
             colspan="2"
             id="program-budget-table-mmis75"
           >
             MMIS M&O (75/25)
           </th>
           <th
+            class="ds-u-text-align--right"
             colspan="2"
             id="program-budget-table-mmis50"
           >
             MMIS M&O (50/50)
           </th>
           <th
-            colspan="3"
+            class="ds-u-text-align--right"
+            colspan="2"
             id="program-budget-table-mmisTotal"
           >
             MMIS M&O (Total)
           </th>
+          <th />
         </tr>
         <tr
           class="budget-table--row__highlight-gray-light"
