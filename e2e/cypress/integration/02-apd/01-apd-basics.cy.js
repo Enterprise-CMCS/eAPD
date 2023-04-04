@@ -108,6 +108,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.findByRole('button', { name: /Run Administrative Check/i }).click({
         force: true
       });
+      cy.findByRole('button', { name: /Collapse/i }).click({
+        force: true
+      });
 
       cy.goToApdOverview();
       cy.get('[data-cy="validationError"]')
