@@ -184,7 +184,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     testMmisNavigation();
   });
 
-  describe.only('Default MMIS APD - Admin Check', function () {
+  describe('Default MMIS APD - Admin Check', function () {
     testMmisAdminCheck();
   });
 
