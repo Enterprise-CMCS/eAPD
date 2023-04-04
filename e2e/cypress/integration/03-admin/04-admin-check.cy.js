@@ -194,7 +194,7 @@ describe('tests state admin portal', () => {
         cy.log('Start date required');
         cy.goToActivitySchedule(0);
         cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
-          .contains('Provide a start date.')
+          .contains('Provide a valid start date.')
           .should('exist');
         populatePage.fillDate('Start date', ['11', '16', '1990']);
         cy.get('[class="ds-c-inline-error ds-c-field__error-message"]').should(

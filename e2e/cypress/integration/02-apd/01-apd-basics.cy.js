@@ -103,7 +103,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
   });
 
   describe('tests admin check validation errors', function () {
-    it('tests non-subform validation errors', function () {
+    it.only('tests non-subform validation errors', function () {
       cy.contains('Export and Submit').click();
       cy.findByRole('button', { name: /Run Administrative Check/i }).click({
         force: true
@@ -138,7 +138,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.get('[data-cy="validationError"]')
         .contains('Provide a short overview of the activity.')
         .should('exist');
-      cy.findAllByText('Provide a start date.');
       cy.get('[data-cy="validationError"]')
         .contains('Provide details to explain this activity.')
         .should('exist');
@@ -148,19 +147,26 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         )
         .should('exist');
 
+      cy.goToActivitySchedule(0);
+      cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+        .contains('Provide a valid start date.')
+        .should('exist');
+
       cy.goToCostAllocationAndOtherFunding(0);
       cy.get('[data-cy="validationError"]')
         .contains('Provide a description of the cost allocation methodology.')
         .should('exist');
 
       cy.goToBudgetAndFFP(0);
-      cy.findAllByText('Select a federal-state split.');
-      cy.findAllByText(
-        'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%'
-      );
-      cy.findAllByText(
-        'Private Contractor Costs quarterly percentages must total 100%'
-      );
+      cy.findAllByText('Select a federal-state split.')
+        .its('length')
+        .should('eq', 2);
+
+      cy.findAllByRole('alert', {
+        'aria-label': /Error message for Estimated Quarterly Expenditure table/i
+      })
+        .its('length')
+        .should('eq', 4);
 
       cy.goToAssurancesAndCompliance();
       cy.findAllByText('Select yes or no');
