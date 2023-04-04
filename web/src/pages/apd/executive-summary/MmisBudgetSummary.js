@@ -40,18 +40,35 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <thead>
             <tr className="budget-table--row__highlight-gray-dark">
               <td className="th" id="program-budget-table-null3" />
-              <th colSpan="2" id={thId('mmis90')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmis90')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisDdi90'))}
               </th>
-              <th colSpan="2" id={thId('mmis75')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmis75')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisDdi75'))}
               </th>
-              <th colSpan="2" id={thId('mmis50')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmis50')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisDdi50'))}
               </th>
-              <th colSpan="3" id={thId('mmisTotal')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmisTotal')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisDdiTotal'))}
               </th>
+              <th></th>
             </tr>
             <tr className="budget-table--row__highlight-gray-light">
               <td className="th" id="program-budget-table-null4" />
@@ -171,15 +188,28 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <thead>
             <tr className="budget-table--row__highlight-gray-dark">
               <td className="th" id="program-budget-table-null3" />
-              <th colSpan="2" id={thId('mmis75')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmis75')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisMando75'))}
               </th>
-              <th colSpan="2" id={thId('mmis50')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmis50')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisMando50'))}
               </th>
-              <th colSpan="3" id={thId('mmisTotal')}>
+              <th
+                className="ds-u-text-align--right"
+                colSpan="2"
+                id={thId('mmisTotal')}
+              >
                 {titleCase(t('executiveSummary.budgetTable.mmisMandoTotal'))}
               </th>
+              <th></th>
             </tr>
             <tr className="budget-table--row__highlight-gray-light">
               <td className="th" id="program-budget-table-null4" />
