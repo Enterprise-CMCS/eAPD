@@ -34,8 +34,6 @@ resource "aws_instance" "eapd_jumpbox_bb" {
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    sudo yum upgrade -y
-    sudo yum update -y
     EOL
     user_data_replace_on_change = true
 }
@@ -63,8 +61,6 @@ resource "aws_instance" "eapd_jumpbox_tf" {
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    sudo yum upgrade -y
-    sudo yum update -y
     EOL
     user_data_replace_on_change = true    
 }
@@ -92,8 +88,6 @@ resource "aws_instance" "eapd_jumpbox_tb" {
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    sudo yum upgrade -y
-    sudo yum update -y
     EOL
     user_data_replace_on_change = true    
 }
@@ -122,8 +116,6 @@ resource "aws_instance" "eapd_jumpbox_nz" {
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    sudo yum upgrade -y
-    sudo yum update -y
     EOL
     user_data_replace_on_change = true    
 }

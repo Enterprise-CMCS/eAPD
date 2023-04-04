@@ -10,10 +10,13 @@ sed -i 's|weekly|daily|g' /etc/logrotate.conf
 sed -i 's|rotate 12|rotate 5|g' /etc/logrotate.conf
 systemctl restart rsyslog
 
-# Install New Relic Infrastructure Monitor
-curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
+## Install New Relic Infrastructure Monitor
+#curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
+#yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
+#yum install newrelic-infra -y
+wget https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
+mv newrelic-infra.repo /etc/yum.repos.d/newrelic-infra.repo
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
-yum install newrelic-infra -y
 
 # Add a user group for the default user, and make it the owner of the /app
 # directory.  Unzip stuff there and then set permissions.
@@ -74,7 +77,8 @@ yum -y install nginx
 yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
 
 # Install CloudWatch Agent
-curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
+#curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
 rm ./amazon-cloudwatch-agent.rpm
 
@@ -83,7 +87,8 @@ openssl genrsa -des3 -passout pass:x -out /app/tls/server.pass.key 2048
 openssl rsa -passin pass:x -in /app/tls/server.pass.key -out /app/tls/server.key
 rm -f /app/tls/server.pass.key
 # Use the instance metadata service to get public hostname
-openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
+#openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
+openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(wget -qO- http://169.254.169.254/latest/meta-data/public-hostname)"
 openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
 rm -f /app/tls/server.csr
 
@@ -149,7 +154,8 @@ export TERM="xterm"
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+#curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+wget -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
 # We're using Node 16.19.1, we care about minor/patch versions
