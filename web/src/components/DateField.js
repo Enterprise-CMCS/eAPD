@@ -20,7 +20,7 @@ const formatDate = ({ day = '', month = '', year = '' } = {}) => {
   const dateString = year + '-' + month + '-' + day;
   const dateFormat = 'yyyy-mm-dd';
 
-  if (isExists(+year, +month, +day)) {
+  if (isExists(+year, +month - 1, +day)) {
     return format(parse(dateString, dateFormat, new Date()), dateFormat);
   }
 
