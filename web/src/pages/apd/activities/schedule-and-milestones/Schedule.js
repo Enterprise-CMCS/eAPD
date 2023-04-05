@@ -24,8 +24,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   const {
     control,
     formState: { errors },
-    trigger,
-    clearErrors
+    trigger
   } = useForm({
     defaultValues: {
       plannedStartDate,
@@ -33,6 +32,10 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
     },
     resolver: joiResolver(schema)
   });
+
+  useEffect(() => {
+    triggerDates();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const triggerDates = () => {
     if (plannedEndDate) {
