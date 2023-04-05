@@ -35,7 +35,20 @@ const schema = Joi.object().pattern(
       totalApproved: schemaRequirements,
       federalActual: schemaRequirements
     }),
-    mmis: Joi.object()
+    mmis: Joi.object({
+      50: Joi.object({
+        totalApproved: schemaRequirements,
+        federalActual: schemaRequirements
+      }),
+      75: Joi.object({
+        totalApproved: schemaRequirements,
+        federalActual: schemaRequirements
+      }),
+      90: Joi.object({
+        totalApproved: schemaRequirements,
+        federalActual: schemaRequirements
+      })
+    })
   })
 );
 
@@ -162,12 +175,16 @@ const HitechApdPreviousActivityTables = forwardRef(
             </thead>
             <tbody>
               {years.map(year => {
-                let expenses;
-                let err;
+                let errFederalActual, errTotalApproved, expenses;
+
                 if (level.fundingTypeSchema === 'hithie') {
                   expenses =
                     previousActivityExpenses[year][level.fundingTypeSchema];
-                  err =
+                  errFederalActual =
+                    errors && errors[`${year}`]
+                      ? errors[`${year}`]?.hithie?.federalActual?.message
+                      : '';
+                  errTotalApproved =
                     errors && errors[`${year}`]
                       ? errors[`${year}`]?.hithie?.totalApproved?.message
                       : '';
@@ -176,6 +193,16 @@ const HitechApdPreviousActivityTables = forwardRef(
                     previousActivityExpenses[year][level.fundingTypeSchema][
                       level.ffp
                     ];
+                  errFederalActual =
+                    errors && errors[`${year}`]
+                      ? errors[`${year}`]?.mmis[`${level.ffp}`]?.federalActual
+                          ?.message
+                      : '';
+                  errTotalApproved =
+                    errors && errors[`${year}`]
+                      ? errors[`${year}`]?.mmis[`${level.ffp}`]?.totalApproved
+                          ?.message
+                      : '';
                 }
 
                 const federalApproved =
@@ -199,7 +226,6 @@ const HitechApdPreviousActivityTables = forwardRef(
                         <Dollars>{expenses.totalApproved}</Dollars>
                       ) : (
                         <Controller
-                          // name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                           name={
                             level.fundingTypeSchema === 'hithie'
                               ? `${year}.hithie.totalApproved`
@@ -231,7 +257,7 @@ const HitechApdPreviousActivityTables = forwardRef(
                                     level.fundingTypeHeader
                                   );
                                 }}
-                                errorMessage={err}
+                                errorMessage={errTotalApproved}
                                 errorPlacement="bottom"
                               />
                             );
@@ -256,24 +282,42 @@ const HitechApdPreviousActivityTables = forwardRef(
                       {isViewOnly ? (
                         <Dollars>{expenses.federalActual}</Dollars>
                       ) : (
-                        <DollarField
-                          className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
-                          label={`actual ffp expenditures for ${
-                            level.fundingTypeHeader
-                          } at the ${level.ffp}/${
-                            100 - level
-                          } level for FFY ${year}`}
-                          labelClassName="ds-u-visibility--screen-reader"
-                          name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
-                          value={expenses.federalActual}
-                          onChange={e => {
-                            getActualsHandler(
-                              year,
-                              e.target.value,
-                              level.ffp,
-                              level.fundingTypeSchema,
-                              level.fundingTypeHeader
+                        <Controller
+                          name={
+                            level.fundingTypeSchema === 'hithie'
+                              ? `${year}.hithie.federalActual`
+                              : `${year}.mmis.${level.ffp}.federalActual`
+                          }
+                          control={control}
+                          render={({ field: { name, ...props } }) => {
+                            return (
+                              <DollarField
+                                {...props}
+                                className="budget-table--input-holder"
+                                fieldClassName="budget-table--input__number"
+                                label={`actual ffp expenditures for ${
+                                  level.fundingTypeHeader
+                                } at the ${level.ffp}/${
+                                  100 - level
+                                } level for FFY ${year}`}
+                                labelClassName="ds-u-visibility--screen-reader"
+                                name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
+                                value={expenses.federalActual}
+                                onChange={e => {
+                                  setValue(name, e.target.value, {
+                                    shouldValidate: true
+                                  });
+                                  getActualsHandler(
+                                    year,
+                                    e.target.value,
+                                    level.ffp,
+                                    level.fundingTypeSchema,
+                                    level.fundingTypeHeader
+                                  );
+                                }}
+                                errorMessage={errFederalActual}
+                                errorPlacement="bottom"
+                              />
                             );
                           }}
                         />
