@@ -94,9 +94,6 @@ export const testMmisAdminCheck = function () {
     'tests the Admin check for mmis pages',
     { tags: ['@state', '@admin'] },
     function () {
-      cy.goToActivityDashboard();
-      cy.findAllByText('Add Activity').click(); // Should already have an activity made from nav test, but keeping this here for now to so i dont need to run the nav test
-
       cy.turnOnAdminCheck(); // On each page verify the correct number of validation errors show
 
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
@@ -106,9 +103,7 @@ export const testMmisAdminCheck = function () {
         'Provide the name of the State Medicaid Director.'
       ).should('have.length', 2);
 
-      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
-        force: true
-      });
+      cy.turnOffAdminCheck();
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('not.exist');
       cy.findAllByText(
         'Provide the name of the State Medicaid Director.'
@@ -118,21 +113,16 @@ export const testMmisAdminCheck = function () {
 
       cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
-      cy.findByRole('button', { name: /Collapse/i }).click({
-        force: true
-      });
+      cy.collapseAdminCheck();
 
       cy.get('[class="eapd-admin-check-list"]').should('not.exist');
       cy.findByRole('button', {
         name: /Stop Administrative Check/i
       }).should('not.exist');
+      cy.expandAdminCheck();
 
-      cy.findByRole('button', { name: /Expand/i }).click({
-        force: true
-      });
-
-      // Check APD Overview validation errors since it's a wierd case where
-      // it has pre filled in values. We can also take this time to test that
+      // Check APD Overview validation errors; since it's a wierd case where
+      // it has pre filled in values. We can also take this time to test if
       // the error count changes in collapsed/expanded view, and the error
       // re-appears/disappears from the list
 
@@ -148,18 +138,14 @@ export const testMmisAdminCheck = function () {
         'not.exist'
       );
 
-      cy.findByRole('button', { name: /Collapse/i }).click({
-        force: true
-      });
+      cy.collapseAdminCheck();
       cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
       cy.get('[data-cy="numRequired"]').should('have.text', '34');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.findByRole('button', { name: /Expand/i }).click({
-        force: true
-      });
+      cy.expandAdminCheck();
 
       defaultAdminCheck.forEach(value => {
         const {
@@ -177,10 +163,7 @@ export const testMmisAdminCheck = function () {
           errorMessage[1]
         );
 
-        cy.findByRole('button', { name: /Collapse/i }).click({
-          // Cypress cannot see field b/c admin check panel is in the way?
-          force: true
-        });
+        cy.collapseAdminCheck();
 
         // Validation message should disappear/re-appear when value is changed
         if (fieldType[0] !== 'radio') {
@@ -203,9 +186,7 @@ export const testMmisAdminCheck = function () {
             clearDate('Start date');
           }
 
-          cy.findByRole('button', { name: /Expand/i }).click({
-            force: true
-          });
+          cy.expandAdminCheck();
 
           cy.findAllByText(errorMessage[0]).should(
             'have.length',
@@ -215,9 +196,7 @@ export const testMmisAdminCheck = function () {
           // Split out radio since they cannot be unchecked
           if (errorMessage[2]) {
             cy.findAllByRole('radio', { name: fieldType[1] }).eq(0).click();
-            cy.findByRole('button', { name: /Expand/i }).click({
-              force: true
-            });
+            cy.expandAdminCheck();
             cy.findAllByText(errorMessage[0]).should(
               'have.length',
               errorMessage[2]
@@ -225,18 +204,14 @@ export const testMmisAdminCheck = function () {
           } else {
             cy.findByRole('radio', { name: fieldType[1] }).click();
             cy.findAllByText(errorMessage[0]).should('not.exist');
-            cy.findByRole('button', { name: /Expand/i }).click({
-              force: true
-            });
+            cy.expandAdminCheck();
           }
 
           cy.findAllByText(subFieldErrorMessage[0]).should(
             'have.length',
             subFieldErrorMessage[1]
           );
-          cy.findByRole('button', { name: /Collapse/i }).click({
-            force: true
-          });
+          cy.collapseAdminCheck();
 
           if (subField[0] === 'textField') {
             cy.get(subField[1]).type('Test value');
@@ -249,13 +224,11 @@ export const testMmisAdminCheck = function () {
             cy.findAllByText(subFieldErrorMessage[0]).should('not.exist');
           }
 
-          cy.findByRole('button', { name: /Expand/i }).click({
-            force: true
-          });
+          cy.expandAdminCheck();
         }
-      });
 
-      // Test admin check on functionally complete APD!!!!!!!!!!!
+        // TODO: Create a fully valid MMIS APD seed and check admin check completion here
+      });
     }
   );
 };
