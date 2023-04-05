@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Alert } from '@cmsgov/design-system';
 
 import {
   APD_TYPE,
@@ -202,79 +203,282 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               </table>
             ))}
           </div>
+          <table className="budget-table" data-cy="summaryBudgetTotals">
+            <caption className="ds-h4">Activities Totals</caption>
+            <thead>
+              <tr>
+                <td className="th" id="summary-budget-null1" />
+                <th scope="col" className="ds-u-text-align--right">
+                  Federal Total
+                </th>
+                <th scope="col" className="ds-u-text-align--right">
+                  State Total
+                </th>
+                <th scope="col" className="ds-u-text-align--right">
+                  Medicaid Total Computable
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderedTotals.map((rowData, index) => {
+                const key = Object.keys(rowData)[0];
+                return (
+                  <tr
+                    key={key}
+                    className={
+                      index === 0
+                        ? 'budget-table--row__highlight budget-table--total'
+                        : ''
+                    }
+                  >
+                    <th scope="row">
+                      {index === 0 ? 'Activities Grand Total' : `FFY ${key}`}
+                    </th>
+                    <td className="budget-table--number budget-table--col-divider__left">
+                      <Dollars>{rowData[key].federal}</Dollars>
+                    </td>
+                    <td className="budget-table--number">
+                      <Dollars>{rowData[key].state}</Dollars>
+                    </td>
+                    <td className="budget-table--number">
+                      <Dollars>{rowData[key].medicaid}</Dollars>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </Fragment>
       )}
 
       {apdType === APD_TYPE.MMIS && (
-        <div>
-          {Object.keys(data.ddi).map(fedStateSplit => {
-            const fedStateSplitLabel = `${fedStateSplit.substring(
-              0,
-              2
-            )}/${fedStateSplit.substring(3, 5)}`;
+        <Fragment>
+          <div className="ds-u-padding-bottom--3">
+            {Object.keys(data.ddi).map(fedStateSplit => {
+              const fedStateSplitLabel = `${fedStateSplit.substring(
+                0,
+                2
+              )}/${fedStateSplit.substring(3, 5)}`;
 
-            // Ignore the combined
-            if (fedStateSplit === 'combined') {
-              return;
-            }
-            // Don't render tables with $0 totals
-            if (
-              data.ddi[fedStateSplit].combined[years[0]].total === 0 &&
-              data.ddi[fedStateSplit].combined[years[1]].total === 0
-            ) {
-              return;
-            }
+              // Ignore the combined
+              if (fedStateSplit === 'combined') {
+                return;
+              }
+              // Don't render tables with $0 totals
+              if (
+                data.ddi[fedStateSplit].combined[years[0]].total === 0 &&
+                data.ddi[fedStateSplit].combined[years[1]].total === 0
+              ) {
+                return;
+              }
 
-            return (
-              <Fragment>
-                <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
-                  {FUNDING_CATEGORY_LABEL_MAPPING['DDI']} {fedStateSplitLabel}{' '}
-                  Match Rate
-                </h4>
-                <table
-                  className="budget-table"
-                  key={`${apdType}-${fedStateSplit}`}
-                  data-cy="summaryBudgetMMIS"
-                >
-                  {[...years].map(ffy => {
-                    // Don't render tables with $0 totals
-                    if (data.ddi[fedStateSplit].combined[ffy].total === 0) {
-                      return;
-                    }
-                    return (
-                      <Fragment>
-                        <caption className="ds-u-visibility--screen-reader">
-                          {/* Todo: Update this title */}
-                          FFY {ffy} MMIS Activities
-                        </caption>
-                        <thead>
-                          <HeaderRow yr={ffy} activity={'mmis'} />
-                        </thead>
-                        <tbody>
-                          <DataRowGroup
-                            data={data.ddi[fedStateSplit]}
-                            entries={activities.mmis}
-                            year={ffy}
-                            apdType={apdType}
-                          />
-                        </tbody>
-                      </Fragment>
-                    );
-                  })}
-                  <tbody>
-                    <tr
-                      className={
-                        'budget-table--total budget-table--row__header budget-table--row__highlight'
+              return (
+                <Fragment>
+                  <h4
+                    className="ds-h4 header-with-top-margin"
+                    aria-hidden="true"
+                  >
+                    {FUNDING_CATEGORY_LABEL_MAPPING['DDI']} {fedStateSplitLabel}{' '}
+                    Match Rate
+                  </h4>
+                  <table
+                    className="budget-table"
+                    key={`${apdType}-${fedStateSplit}`}
+                    data-cy="summaryBudgetMMIS"
+                  >
+                    {[...years].map(ffy => {
+                      // Don't render tables with $0 totals
+                      if (data.ddi[fedStateSplit].combined[ffy].total === 0) {
+                        return;
                       }
-                    >
-                      <th
-                        scope="row"
-                        className="indent-title budget-table--col-divider__right"
+                      return (
+                        <Fragment>
+                          <caption className="ds-u-visibility--screen-reader">
+                            {/* Todo: Update this title */}
+                            FFY {ffy} MMIS Activities
+                          </caption>
+                          <thead>
+                            <HeaderRow yr={ffy} activity={'mmis'} />
+                          </thead>
+                          <tbody>
+                            <DataRowGroup
+                              data={data.ddi[fedStateSplit]}
+                              entries={activities.mmis}
+                              year={ffy}
+                              apdType={apdType}
+                            />
+                          </tbody>
+                        </Fragment>
+                      );
+                    })}
+                    <tbody>
+                      <tr
+                        className={
+                          'budget-table--total budget-table--row__header budget-table--row__highlight'
+                        }
                       >
-                        {fedStateSplitLabel} {FUNDING_CATEGORY_TYPE['DDI']}{' '}
-                        Total
+                        <th
+                          scope="row"
+                          className="indent-title budget-table--col-divider__right"
+                        >
+                          {fedStateSplitLabel} {FUNDING_CATEGORY_TYPE['DDI']}{' '}
+                          Total
+                        </th>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.ddi[fedStateSplit].combined.total.federal}
+                          </Dollars>
+                        </td>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.ddi[fedStateSplit].combined.total.state}
+                          </Dollars>
+                        </td>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.ddi[fedStateSplit].combined.total.medicaid}
+                          </Dollars>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Fragment>
+              );
+            })}
+
+            {Object.keys(data.mando).map(fedStateSplit => {
+              const fedStateSplitLabel = `${fedStateSplit.substring(
+                0,
+                2
+              )}/${fedStateSplit.substring(3, 5)}`;
+              // Ignore the combined
+              if (fedStateSplit === 'combined') {
+                return;
+              }
+
+              // Don't render tables with $0 totals
+              if (
+                data.mando[fedStateSplit].combined[years[0]].total === 0 &&
+                data.mando[fedStateSplit].combined[years[1]].total === 0
+              ) {
+                return;
+              }
+              return (
+                <Fragment>
+                  <h4
+                    className="ds-h4 header-with-top-margin"
+                    aria-hidden="true"
+                  >
+                    {FUNDING_CATEGORY_LABEL_MAPPING['MANDO']}{' '}
+                    {fedStateSplitLabel} Match Rate
+                  </h4>
+                  <table
+                    className="budget-table"
+                    key={`${apdType}-${fedStateSplit}`}
+                    data-cy="summaryBudgetMMIS"
+                  >
+                    {[...years].map(ffy => {
+                      // Don't render tables with $0 totals
+                      if (data.mando[fedStateSplit].combined[ffy].total === 0) {
+                        return;
+                      }
+                      return (
+                        <Fragment>
+                          <caption className="ds-u-visibility--screen-reader">
+                            {/* Todo: Update this title */}
+                            FFY {ffy} MMIS Activities
+                          </caption>
+                          <thead>
+                            <HeaderRow yr={ffy} activity={'mmis'} />
+                          </thead>
+                          <tbody>
+                            <DataRowGroup
+                              data={data.mando[fedStateSplit]}
+                              entries={activities.mmis}
+                              year={ffy}
+                              apdType={apdType}
+                            />
+                          </tbody>
+                        </Fragment>
+                      );
+                    })}
+                    <tbody>
+                      <tr
+                        className={
+                          'budget-table--total budget-table--row__header budget-table--row__highlight'
+                        }
+                      >
+                        <th
+                          scope="row"
+                          className="indent-title budget-table--col-divider__right"
+                        >
+                          {fedStateSplitLabel}{' '}
+                          {FUNDING_CATEGORY_TYPE['MANDOALT']} Total
+                        </th>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.mando[fedStateSplit].combined.total.federal}
+                          </Dollars>
+                        </td>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.mando[fedStateSplit].combined.total.state}
+                          </Dollars>
+                        </td>
+                        <td className="budget-table--number">
+                          <Dollars>
+                            {data.mando[fedStateSplit].combined.total.medicaid}
+                          </Dollars>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Fragment>
+              );
+            })}
+          </div>
+          <div className="ds-u-margin-bottom--5">
+            <h3>Medicaid Total Computable by Match Rate</h3>
+            <p>
+              The Medicaid total computable by match rate in the table below,
+              compiles the fiscal years into a subtotal by funding source.
+            </p>
+            <table className="budget-table" data-cy="summaryBudgetTotals">
+              <thead>
+                <tr>
+                  <th>Total</th>
+                  <th className="ds-u-text-align--right" scope="col">
+                    Federal Share
+                  </th>
+                  <th className="ds-u-text-align--right" scope="col">
+                    State Share
+                  </th>
+                  <th className="ds-u-text-align--right" scope="col">
+                    Medicaid Total Computable
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(data.ddi).map((fedStateSplit, index) => {
+                  const fedStateSplitLabel = `${fedStateSplit.substring(
+                    0,
+                    2
+                  )}/${fedStateSplit.substring(3, 5)}`;
+                  if (fedStateSplit === 'combined') {
+                    return;
+                  }
+                  if (data.ddi[fedStateSplit].combined.total.total === 0) {
+                    return;
+                  }
+                  return (
+                    <tr
+                      key={index}
+                      className="budget-table__alternate-striping"
+                    >
+                      <th className="indent-title" scope="row">
+                        {fedStateSplitLabel} DDI
                       </th>
-                      <td className="budget-table--number">
+                      <td className="budget-table--number budget-table--col-divider__left">
                         <Dollars>
                           {data.ddi[fedStateSplit].combined.total.federal}
                         </Dollars>
@@ -290,79 +494,28 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         </Dollars>
                       </td>
                     </tr>
-                  </tbody>
-                </table>
-              </Fragment>
-            );
-          })}
-
-          {Object.keys(data.mando).map(fedStateSplit => {
-            const fedStateSplitLabel = `${fedStateSplit.substring(
-              0,
-              2
-            )}/${fedStateSplit.substring(3, 5)}`;
-            // Ignore the combined
-            if (fedStateSplit === 'combined') {
-              return;
-            }
-
-            // Don't render tables with $0 totals
-            if (
-              data.mando[fedStateSplit].combined[years[0]].total === 0 &&
-              data.mando[fedStateSplit].combined[years[1]].total === 0
-            ) {
-              return;
-            }
-            return (
-              <Fragment>
-                <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
-                  {FUNDING_CATEGORY_LABEL_MAPPING['MANDO']} {fedStateSplitLabel}{' '}
-                  Match Rate
-                </h4>
-                <table
-                  className="budget-table"
-                  key={`${apdType}-${fedStateSplit}`}
-                  data-cy="summaryBudgetMMIS"
-                >
-                  {[...years].map(ffy => {
-                    // Don't render tables with $0 totals
-                    if (data.mando[fedStateSplit].combined[ffy].total === 0) {
-                      return;
-                    }
-                    return (
-                      <Fragment>
-                        <caption className="ds-u-visibility--screen-reader">
-                          {/* Todo: Update this title */}
-                          FFY {ffy} MMIS Activities
-                        </caption>
-                        <thead>
-                          <HeaderRow yr={ffy} activity={'mmis'} />
-                        </thead>
-                        <tbody>
-                          <DataRowGroup
-                            data={data.mando[fedStateSplit]}
-                            entries={activities.mmis}
-                            year={ffy}
-                            apdType={apdType}
-                          />
-                        </tbody>
-                      </Fragment>
-                    );
-                  })}
-                  <tbody>
+                  );
+                })}
+                {Object.keys(data.mando).map((fedStateSplit, index) => {
+                  const fedStateSplitLabel = `${fedStateSplit.substring(
+                    0,
+                    2
+                  )}/${fedStateSplit.substring(3, 5)}`;
+                  if (fedStateSplit === 'combined') {
+                    return;
+                  }
+                  if (data.mando[fedStateSplit].combined.total.total === 0) {
+                    return;
+                  }
+                  return (
                     <tr
-                      className={
-                        'budget-table--total budget-table--row__header budget-table--row__highlight'
-                      }
+                      key={index}
+                      className="budget-table__alternate-striping indent-title"
                     >
-                      <th
-                        scope="row"
-                        className="indent-title budget-table--col-divider__right"
-                      >
-                        {fedStateSplitLabel} {FUNDING_CATEGORY_TYPE['MANDOALT']}{' '}
-                        Total
+                      <th className="indent-title" scope="row">
+                        {fedStateSplitLabel} M&O
                       </th>
-                      <td className="budget-table--number">
+                      <td className="budget-table--number budget-table--col-divider__left">
                         <Dollars>
                           {data.mando[fedStateSplit].combined.total.federal}
                         </Dollars>
@@ -378,59 +531,85 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         </Dollars>
                       </td>
                     </tr>
-                  </tbody>
-                </table>
-              </Fragment>
-            );
-          })}
-        </div>
-      )}
+                  );
+                })}
+                <tr className="budget-table--total budget-table--row__header budget-table--row__highlight">
+                  <th scope="row">Match Rate Total</th>
+                  <td className="budget-table--number budget-table--col-divider__left">
+                    <Dollars>{data.combined.total.federal}</Dollars>
+                  </td>
+                  <td className="budget-table--number">
+                    <Dollars>{data.combined.total.federal}</Dollars>
+                  </td>
+                  <td className="budget-table--number">
+                    <Dollars>{data.combined.total.medicaid}</Dollars>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-      <table className="budget-table" data-cy="summaryBudgetTotals">
-        <caption className="ds-h4">Activities Totals</caption>
-        <thead>
-          <tr>
-            <td className="th" id="summary-budget-null1" />
-            <th scope="col" className="ds-u-text-align--right">
-              Federal Total
-            </th>
-            <th scope="col" className="ds-u-text-align--right">
-              State Total
-            </th>
-            <th scope="col" className="ds-u-text-align--right">
-              Medicaid Total Computable
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {orderedTotals.map((rowData, index) => {
-            const key = Object.keys(rowData)[0];
-            return (
-              <tr
-                key={key}
-                className={
-                  index === 0
-                    ? 'budget-table--row__highlight budget-table--total'
-                    : ''
-                }
-              >
-                <th scope="row">
-                  {index === 0 ? 'Activities Grand Total' : `FFY ${key}`}
+          <h3>Medicaid Total Computable by FFY</h3>
+          <p>
+            The Activities Total compiles all the summary budget tables by FFY
+            and funding source.
+          </p>
+          <Alert>
+            The Activities Grand Total is{' '}
+            <span className="ds-u-font-weight--bold">
+              <Dollars>{data.combined.total.medicaid}</Dollars>
+            </span>
+            .
+          </Alert>
+          <table
+            className="budget-table ds-u-margin-top--3"
+            data-cy="summaryBudgetTotals"
+          >
+            <thead>
+              <tr>
+                <td className="th" id="summary-budget-null1" />
+                <th scope="col" className="ds-u-text-align--right">
+                  Federal Total
                 </th>
-                <td className="budget-table--number budget-table--col-divider__left">
-                  <Dollars>{rowData[key].federal}</Dollars>
-                </td>
-                <td className="budget-table--number">
-                  <Dollars>{rowData[key].state}</Dollars>
-                </td>
-                <td className="budget-table--number">
-                  <Dollars>{rowData[key].medicaid}</Dollars>
-                </td>
+                <th scope="col" className="ds-u-text-align--right">
+                  State Total
+                </th>
+                <th scope="col" className="ds-u-text-align--right">
+                  Medicaid Total Computable
+                </th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {orderedTotals.map((rowData, index) => {
+                const key = Object.keys(rowData)[0];
+                return (
+                  <tr
+                    key={key}
+                    className={
+                      index === 0
+                        ? 'budget-table--row__highlight budget-table--total'
+                        : ''
+                    }
+                  >
+                    <th scope="row">
+                      {index === 0 ? 'Activities Grand Total' : `FFY ${key}`}
+                    </th>
+                    <td className="budget-table--number budget-table--col-divider__left">
+                      <Dollars>{rowData[key].federal}</Dollars>
+                    </td>
+                    <td className="budget-table--number">
+                      <Dollars>{rowData[key].state}</Dollars>
+                    </td>
+                    <td className="budget-table--number">
+                      <Dollars>{rowData[key].medicaid}</Dollars>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </Fragment>
+      )}
     </div>
   );
 };
