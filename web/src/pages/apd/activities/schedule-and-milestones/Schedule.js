@@ -11,18 +11,11 @@ import {
 import { Subsection } from '../../../../components/Section';
 import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
-import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
 import { activityScheduleSchema as schema } from '@cms-eapd/common';
 
-const Schedule = ({
-  activity,
-  activityIndex,
-  setEndDate,
-  setStartDate,
-  adminCheck
-}) => {
+const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   Schedule.displayName = 'Schedule';
 
   const { activitySchedule: { plannedStartDate, plannedEndDate } = {} } =
@@ -41,18 +34,10 @@ const Schedule = ({
     resolver: joiResolver(schema)
   });
 
-  useEffect(() => {
-    if (adminCheck) {
-      triggerDates();
-    } else {
-      clearErrors();
-    }
-  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const triggerDates = () => {
-    if (adminCheck && plannedEndDate) {
+    if (plannedEndDate) {
       trigger();
-    } else if (adminCheck && !plannedEndDate) {
+    } else if (!plannedEndDate) {
       trigger('plannedStartDate');
     }
   };
@@ -124,13 +109,11 @@ Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setEndDate: PropTypes.func.isRequired,
-  setStartDate: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  setStartDate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  activity: selectActivityByIndex(state, { activityIndex }),
-  adminCheck: selectAdminCheckEnabled(state)
+  activity: selectActivityByIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
