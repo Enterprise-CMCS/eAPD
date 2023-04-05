@@ -212,6 +212,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               0,
               2
             )}/${fedStateSplit.substring(3, 5)}`;
+
             // Ignore the combined
             if (fedStateSplit === 'combined') {
               return;
@@ -221,7 +222,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               data.ddi[fedStateSplit].combined[years[0]].total === 0 &&
               data.ddi[fedStateSplit].combined[years[1]].total === 0
             ) {
-              return <div>no total</div>;
+              return;
             }
 
             return (
@@ -238,7 +239,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                   {[...years].map(ffy => {
                     // Don't render tables with $0 totals
                     if (data.ddi[fedStateSplit].combined[ffy].total === 0) {
-                      return <div>no total</div>;
+                      return;
                     }
                     return (
                       <Fragment>
@@ -274,13 +275,19 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         Total
                       </th>
                       <td className="budget-table--number">
-                        <Dollars>{data.ddi['combined'].federal}</Dollars>
+                        <Dollars>
+                          {data.ddi[fedStateSplit].combined.total.federal}
+                        </Dollars>
                       </td>
                       <td className="budget-table--number">
-                        <Dollars>{data.ddi['combined'].state}</Dollars>
+                        <Dollars>
+                          {data.ddi[fedStateSplit].combined.total.state}
+                        </Dollars>
                       </td>
                       <td className="budget-table--number">
-                        <Dollars>{data.ddi['combined'].medicaid}</Dollars>
+                        <Dollars>
+                          {data.ddi[fedStateSplit].combined.total.medicaid}
+                        </Dollars>
                       </td>
                     </tr>
                   </tbody>
@@ -304,7 +311,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               data.mando[fedStateSplit].combined[years[0]].total === 0 &&
               data.mando[fedStateSplit].combined[years[1]].total === 0
             ) {
-              return <div>no total</div>;
+              return;
             }
             return (
               <Fragment>
@@ -320,7 +327,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                   {[...years].map(ffy => {
                     // Don't render tables with $0 totals
                     if (data.mando[fedStateSplit].combined[ffy].total === 0) {
-                      return <div>no total</div>;
+                      return;
                     }
                     return (
                       <Fragment>
@@ -352,17 +359,23 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         scope="row"
                         className="indent-title budget-table--col-divider__right"
                       >
-                        {fedStateSplitLabel} {FUNDING_CATEGORY_TYPE['MANDO']}{' '}
+                        {fedStateSplitLabel} {FUNDING_CATEGORY_TYPE['MANDOALT']}{' '}
                         Total
                       </th>
                       <td className="budget-table--number">
-                        <Dollars>{data.mando['combined'].federal}</Dollars>
+                        <Dollars>
+                          {data.mando[fedStateSplit].combined.total.federal}
+                        </Dollars>
                       </td>
                       <td className="budget-table--number">
-                        <Dollars>{data.mando['combined'].state}</Dollars>
+                        <Dollars>
+                          {data.mando[fedStateSplit].combined.total.state}
+                        </Dollars>
                       </td>
                       <td className="budget-table--number">
-                        <Dollars>{data.mando['combined'].medicaid}</Dollars>
+                        <Dollars>
+                          {data.mando[fedStateSplit].combined.total.medicaid}
+                        </Dollars>
                       </td>
                     </tr>
                   </tbody>
