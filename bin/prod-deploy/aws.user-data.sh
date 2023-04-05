@@ -239,6 +239,7 @@ pm2 start ecosystem.config.cjs
 E_USER
 
 # Restart New Relic Infrastructure Monitor
+yum install newrelic-infra -y
 systemctl enable newrelic-infra
 systemctl start newrelic-infra
 

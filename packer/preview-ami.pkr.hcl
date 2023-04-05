@@ -60,7 +60,7 @@ build {
             "PREVIEW_TEALIUM_TAG=${var.preview_tealium_tag}",
             "PREVIEW_TEALIUM_ENV=${var.preview_tealium_env}"
         ]        
-        script = "./preview20220608.sh"
+        script = "./preview20230405.sh"
     }
     provisioner "file" {
         source = "nginx.conf.tpl"
