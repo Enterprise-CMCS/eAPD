@@ -419,7 +419,11 @@ workflows:
             - frontend build prod
       - cleanup preview deploys:
           name: cleanup preview deploys
-          requires: preview deploy
+          filters:
+            branches:
+              only:
+                - main
+          requires: preview deploy                
 
 jobs:
   # ===== Independent jobs =====
