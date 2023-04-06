@@ -341,3 +341,13 @@ export const getAllFundingSources = state => {
     return activity.fundingSource;
   });
 };
+
+export const selectConditionsForEnhancedFundingByActivityIndex = createSelector(
+  [selectActivityByIndex],
+  ({ conditionsForEnhancedFunding }) => conditionsForEnhancedFunding
+);
+
+export const selectAlternativesAndRisksByActivityIndex = createSelector(
+  [selectActivityByIndex],
+  ({ analysisOfAlternativesAndRisks }) => analysisOfAlternativesAndRisks
+);

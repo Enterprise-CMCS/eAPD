@@ -2,10 +2,13 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { APD_TYPE } from '@cms-eapd/common';
 import Dollars from '../../../../components/Dollars';
 
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
+import ConditionsForEnhancedFundingReadOnly from '../enhanced-funding/ConditionsForEnhancedFundingReadOnly';
+import AlternativesAndRisksReadOnly from '../alternatives-and-risks/AlternativesAndRisksReadOnly';
 import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
@@ -154,6 +157,31 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
         years={years}
         apdType={apdType}
       />
+      {apdType === APD_TYPE.MMIS && (
+        <AlternativesAndRisksReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
+
+      <h3 className="viewonly-activity-header">
+        <small>
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
+        </small>
+        <br />
+        Milestones
+      </h3>
+      {activity.milestones.length === 0 && 'No milestones were provided.'}
+      {activity.milestones.map((milestone, index) =>
+        buildMilestone(milestone, index)
+      )}
+
+      {apdType === APD_TYPE.MMIS && (
+        <ConditionsForEnhancedFundingReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -164,14 +192,7 @@ const Activity = ({ activity, activityIndex, years, apdType }) => {
       </h3>
       {activity.outcomes.length === 0 &&
         'No outcome(s) and/or corresponding metric(s) were provided.'}
-      <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
-
-      <h3>Milestones</h3>
-      {activity.milestones.length === 0 && 'No milestones were provided.'}
-      {activity.milestones.map((milestone, index) =>
-        buildMilestone(milestone, index)
-      )}
 
       <h3 className="viewonly-activity-header">
         <small>

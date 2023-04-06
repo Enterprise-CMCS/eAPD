@@ -1204,12 +1204,6 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            echo 'Checking to see if the server is running'
-            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-                sleep 10;
-                echo '.';
-            done;
-            echo 'Server is running and status is healthy'
 
             docker run \
               --network api_default \
@@ -1248,6 +1242,7 @@ jobs:
             sudo apt-get -qq install jq -y
             pip install --quiet awscli
             ./aws.sh \
+              --AWS_REGION "${<< parameters.env >>_API_AWS_REGION}" \
               --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID}" \
               --API_AWS_SECRET_ACCESS_KEY "${<< parameters.env >>_API_AWS_SECRET_ACCESS_KEY}" \
               --API_DATABASE_URL "${<< parameters.env >>_API_DATABASE_URL}" \
@@ -1255,7 +1250,6 @@ jobs:
               --API_PBKDF2_ITERATIONS "${<< parameters.env >>_API_PBKDF2_ITERATIONS}" \
               --API_PORT "${<< parameters.env >>_API_PORT}" \
               --API_SESSION_SECRET "${<< parameters.env >>_API_SESSION_SECRET}" \
-              --AWS_REGION "${<< parameters.env >>_API_AWS_REGION}" \
               --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
               --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \

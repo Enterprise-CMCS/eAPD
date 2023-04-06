@@ -284,12 +284,27 @@ class ExportPage {
       .should('contain', doesNotSupportsMedicaid);
   };
 
+  checkMilestones = ({ milestone, milestoneCompletionDate } = {}) => {
+    if (!milestone) {
+      cy.contains('Milestones')
+        .next()
+        .should('contain', 'Outcomes and Metrics');
+    } else {
+      cy.contains(milestone)
+        .should('exist')
+        .parent()
+        .next()
+        .should('contain', milestoneCompletionDate);
+    }
+  };
+
   checkOutcomes = ({ outcome, metrics } = {}) => {
     if (!outcome) {
-      cy.contains('Outcomes and Metrics')
+      cy.contains('Milestones')
         .next()
+        .should('contain', 'Outcomes and Metrics')
         .next()
-        .should('contain', 'Milestones');
+        .should('contain', 'State staff');
     } else {
       cy.contains(outcome)
         .should('exist')
@@ -299,23 +314,6 @@ class ExportPage {
             cy.contains(`${index + 1}. ${metric}`).should('exist');
           });
         });
-    }
-  };
-
-  checkMilestones = ({ milestone, milestoneCompletionDate } = {}) => {
-    if (!milestone) {
-      cy.contains('Outcomes and Metrics')
-        .next()
-        .next()
-        .should('contain', 'Milestones')
-        .next()
-        .should('contain', 'State staff');
-    } else {
-      cy.contains(milestone)
-        .should('exist')
-        .parent()
-        .next()
-        .should('contain', milestoneCompletionDate);
     }
   };
 
@@ -501,7 +499,7 @@ class ExportPage {
     return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('thead>tr')
-      .last()
+      .first()
       .invoke('text');
   };
 

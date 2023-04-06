@@ -1,4 +1,6 @@
 export * from './activityList';
+export * from './conditionsForEnhancedFunding';
+export * from './alternativesAndRisks';
 export * from './contractorResources';
 export * from './costAllocate';
 export * from './nonPersonnelCosts';

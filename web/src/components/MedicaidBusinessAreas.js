@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TextArea from './TextArea';
 import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common';
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from './ChoiceList';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const MedicaidBusinessAreas = ({
@@ -122,7 +122,7 @@ const MedicaidBusinessAreas = ({
 };
 
 MedicaidBusinessAreas.propTypes = {
-  adminCheck: PropTypes.bool,
+  adminCheck: PropTypes.bool.isRequired,
   controllerName: PropTypes.string.isRequired,
   controllerNameForOtherDetails: PropTypes.string.isRequired,
   errorMessage: PropTypes.string,

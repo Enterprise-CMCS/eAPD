@@ -190,4 +190,5 @@ su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versi
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
 
+yum upgrade -y
 yum update -y

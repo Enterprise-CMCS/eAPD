@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from '../../../components/ChoiceList';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -156,11 +156,7 @@ const ApdOverviewMMISFields = ({
 ApdOverviewMMISFields.propTypes = {
   medicaidBusinessAreas: PropTypes.object.isRequired,
   setBusinessAreaField: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool
-};
-
-ApdOverviewMMISFields.defaultProps = {
-  adminCheck: false
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
