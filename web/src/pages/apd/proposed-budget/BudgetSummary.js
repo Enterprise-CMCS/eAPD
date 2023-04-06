@@ -273,7 +273,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               }
 
               return (
-                <Fragment>
+                <Fragment key={fedStateSplit}>
                   <h4
                     className="ds-h4 header-with-top-margin"
                     aria-hidden="true"
@@ -292,11 +292,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         return;
                       }
                       return (
-                        <Fragment>
-                          <caption className="ds-u-visibility--screen-reader">
-                            {/* Todo: Update this title */}
-                            FFY {ffy} MMIS Activities
-                          </caption>
+                        <Fragment key={`${fedStateSplit}-${ffy}`}>
                           <thead>
                             <HeaderRow yr={ffy} activity={'mmis'} />
                           </thead>
@@ -364,7 +360,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                 return;
               }
               return (
-                <Fragment>
+                <Fragment key={fedStateSplit}>
                   <h4
                     className="ds-h4 header-with-top-margin"
                     aria-hidden="true"
@@ -383,11 +379,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                         return;
                       }
                       return (
-                        <Fragment>
-                          <caption className="ds-u-visibility--screen-reader">
-                            {/* Todo: Update this title */}
-                            FFY {ffy} MMIS Activities
-                          </caption>
+                        <Fragment key={`${fedStateSplit}-${ffy}`}>
                           <thead>
                             <HeaderRow yr={ffy} activity={'mmis'} />
                           </thead>
@@ -459,7 +451,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                 </tr>
               </thead>
               <tbody>
-                {Object.keys(data.ddi).map((fedStateSplit, index) => {
+                {Object.keys(data.ddi).map(fedStateSplit => {
                   const fedStateSplitLabel = `${fedStateSplit.substring(
                     0,
                     2
@@ -472,7 +464,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                   }
                   return (
                     <tr
-                      key={index}
+                      key={fedStateSplit}
                       className="budget-table__alternate-striping"
                     >
                       <th className="indent-title" scope="row">
@@ -496,7 +488,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                     </tr>
                   );
                 })}
-                {Object.keys(data.mando).map((fedStateSplit, index) => {
+                {Object.keys(data.mando).map(fedStateSplit => {
                   const fedStateSplitLabel = `${fedStateSplit.substring(
                     0,
                     2
@@ -509,7 +501,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                   }
                   return (
                     <tr
-                      key={index}
+                      key={fedStateSplit}
                       className="budget-table__alternate-striping indent-title"
                     >
                       <th className="indent-title" scope="row">

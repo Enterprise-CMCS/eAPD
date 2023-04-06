@@ -605,116 +605,479 @@ exports[`budget summary component renders correctly for hitech apds 1`] = `
 
 exports[`budget summary component renders correctly for mmis apds 1`] = `
 <div>
-  <div>
+  <div
+    className="ds-u-padding-bottom--3"
+  >
     <h4
       aria-hidden="true"
       className="ds-h4 header-with-top-margin"
     >
-      MMIS Activities
+      Design, Development, and Installation (DDI)
+       
+      90/10
+       
+      Match Rate
     </h4>
     <table
       className="budget-table"
       data-cy="summaryBudgetMMIS"
-      key="1"
+      key="MMIS-90-10"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        FFY 
-        1
-         MMIS Activities
-      </caption>
       <thead>
         <HeaderRow
           activity="mmis"
-          yr="1"
+          yr="2023"
         />
       </thead>
       <tbody>
         <DataRowGroup
           apdType="MMIS"
-          data={Object {}}
+          data={
+            Object {
+              "combined": Object {
+                "2023": Object {
+                  "federal": 4547548,
+                  "medicaid": 5052831,
+                  "state": 505283,
+                  "total": 5157831,
+                },
+                "2024": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "total": Object {
+                  "federal": 4547548,
+                  "medicaid": 5052831,
+                  "state": 505283,
+                  "total": 5157831,
+                },
+              },
+              "contractors": Object {
+                "2023": Object {
+                  "federal": 1746939,
+                  "medicaid": 1941043,
+                  "state": 194104,
+                  "total": 1982756,
+                },
+                "2024": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "total": Object {
+                  "federal": 1746939,
+                  "medicaid": 1941043,
+                  "state": 194104,
+                  "total": 1982756,
+                },
+              },
+              "expenses": Object {
+                "2023": Object {
+                  "federal": 675670,
+                  "medicaid": 750744,
+                  "state": 75075,
+                  "total": 775000,
+                },
+                "2024": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "total": Object {
+                  "federal": 675670,
+                  "medicaid": 750744,
+                  "state": 75075,
+                  "total": 775000,
+                },
+              },
+              "statePersonnel": Object {
+                "2023": Object {
+                  "federal": 2124939,
+                  "medicaid": 2361044,
+                  "state": 236104,
+                  "total": 2400075,
+                },
+                "2024": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "total": Object {
+                  "federal": 2124939,
+                  "medicaid": 2361044,
+                  "state": 236104,
+                  "total": 2400075,
+                },
+              },
+            }
+          }
           entries={
             Array [
               "mmis data",
             ]
           }
-          year="1"
+          year="2023"
         />
       </tbody>
+      <tbody>
+        <tr
+          className="budget-table--total budget-table--row__header budget-table--row__highlight"
+        >
+          <th
+            className="indent-title budget-table--col-divider__right"
+            scope="row"
+          >
+            90/10
+             
+            DDI
+             
+            Total
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              4547548
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              505283
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              5052831
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
     </table>
+    <h4
+      aria-hidden="true"
+      className="ds-h4 header-with-top-margin"
+    >
+      Maintenance & Operations (M&O)
+       
+      75/25
+       Match Rate
+    </h4>
     <table
       className="budget-table"
       data-cy="summaryBudgetMMIS"
-      key="2"
+      key="MMIS-75-25"
     >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        FFY 
-        2
-         MMIS Activities
-      </caption>
       <thead>
         <HeaderRow
           activity="mmis"
-          yr="2"
+          yr="2024"
         />
       </thead>
       <tbody>
         <DataRowGroup
           apdType="MMIS"
-          data={Object {}}
+          data={
+            Object {
+              "combined": Object {
+                "2023": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "2024": Object {
+                  "federal": 1428184,
+                  "medicaid": 1904245,
+                  "state": 476061,
+                  "total": 1904245,
+                },
+                "total": Object {
+                  "federal": 1428184,
+                  "medicaid": 1904245,
+                  "state": 476061,
+                  "total": 1904245,
+                },
+              },
+              "contractors": Object {
+                "2023": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "2024": Object {
+                  "federal": 406833,
+                  "medicaid": 542444,
+                  "state": 135611,
+                  "total": 542444,
+                },
+                "total": Object {
+                  "federal": 406833,
+                  "medicaid": 542444,
+                  "state": 135611,
+                  "total": 542444,
+                },
+              },
+              "expenses": Object {
+                "2023": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "2024": Object {
+                  "federal": 56250,
+                  "medicaid": 75000,
+                  "state": 18750,
+                  "total": 75000,
+                },
+                "total": Object {
+                  "federal": 56250,
+                  "medicaid": 75000,
+                  "state": 18750,
+                  "total": 75000,
+                },
+              },
+              "statePersonnel": Object {
+                "2023": Object {
+                  "federal": 0,
+                  "medicaid": 0,
+                  "state": 0,
+                  "total": 0,
+                },
+                "2024": Object {
+                  "federal": 965101,
+                  "medicaid": 1286801,
+                  "state": 321700,
+                  "total": 1286801,
+                },
+                "total": Object {
+                  "federal": 965101,
+                  "medicaid": 1286801,
+                  "state": 321700,
+                  "total": 1286801,
+                },
+              },
+            }
+          }
           entries={
             Array [
               "mmis data",
             ]
           }
-          year="2"
+          year="2024"
         />
       </tbody>
-    </table>
-    <table
-      className="budget-table"
-      data-cy="summaryBudgetMMIS"
-      key="total"
-    >
-      <caption
-        className="ds-u-visibility--screen-reader"
-      >
-        FFY 
-        total
-         MMIS Activities
-      </caption>
-      <thead>
-        <HeaderRow
-          activity="mmis"
-          yr="total"
-        />
-      </thead>
       <tbody>
-        <DataRowGroup
-          apdType="MMIS"
-          data={Object {}}
-          entries={
-            Array [
-              "mmis data",
-            ]
-          }
-          year="total"
-        />
+        <tr
+          className="budget-table--total budget-table--row__header budget-table--row__highlight"
+        >
+          <th
+            className="indent-title budget-table--col-divider__right"
+            scope="row"
+          >
+            75/25
+             
+            M&O
+             Total
+          </th>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              1428184
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              476061
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              1904245
+            </Dollars>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
+  <div
+    className="ds-u-margin-bottom--5"
+  >
+    <h3>
+      Medicaid Total Computable by Match Rate
+    </h3>
+    <p>
+      The Medicaid total computable by match rate in the table below, compiles the fiscal years into a subtotal by funding source.
+    </p>
+    <table
+      className="budget-table"
+      data-cy="summaryBudgetTotals"
+    >
+      <thead>
+        <tr>
+          <th>
+            Total
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            scope="col"
+          >
+            Federal Share
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            scope="col"
+          >
+            State Share
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            scope="col"
+          >
+            Medicaid Total Computable
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="budget-table__alternate-striping"
+          key="90-10"
+        >
+          <th
+            className="indent-title"
+            scope="row"
+          >
+            90/10
+             DDI
+          </th>
+          <td
+            className="budget-table--number budget-table--col-divider__left"
+          >
+            <Dollars>
+              4547548
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              505283
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              5052831
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="budget-table__alternate-striping indent-title"
+          key="75-25"
+        >
+          <th
+            className="indent-title"
+            scope="row"
+          >
+            75/25
+             M&O
+          </th>
+          <td
+            className="budget-table--number budget-table--col-divider__left"
+          >
+            <Dollars>
+              1428184
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              476061
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              1904245
+            </Dollars>
+          </td>
+        </tr>
+        <tr
+          className="budget-table--total budget-table--row__header budget-table--row__highlight"
+        >
+          <th
+            scope="row"
+          >
+            Match Rate Total
+          </th>
+          <td
+            className="budget-table--number budget-table--col-divider__left"
+          >
+            <Dollars>
+              8421482
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              8421482
+            </Dollars>
+          </td>
+          <td
+            className="budget-table--number"
+          >
+            <Dollars>
+              10190076
+            </Dollars>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>
+    Medicaid Total Computable by FFY
+  </h3>
+  <p>
+    The Activities Total compiles all the summary budget tables by FFY and funding source.
+  </p>
+  <Alert
+    headingLevel="2"
+    role="region"
+  >
+    The Activities Grand Total is
+     
+    <span
+      className="ds-u-font-weight--bold"
+    >
+      <Dollars>
+        10190076
+      </Dollars>
+    </span>
+    .
+  </Alert>
   <table
-    className="budget-table"
+    className="budget-table ds-u-margin-top--3"
     data-cy="summaryBudgetTotals"
   >
-    <caption
-      className="ds-h4"
-    >
-      Activities Totals
-    </caption>
     <thead>
       <tr>
         <td
@@ -744,7 +1107,7 @@ exports[`budget summary component renders correctly for mmis apds 1`] = `
     <tbody>
       <tr
         className="budget-table--row__highlight budget-table--total"
-        key="1"
+        key="total"
       >
         <th
           scope="row"
@@ -755,52 +1118,83 @@ exports[`budget summary component renders correctly for mmis apds 1`] = `
           className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            1
+            8421482
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            2
+            1768594
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            1000
+            10190076
           </Dollars>
         </td>
       </tr>
       <tr
         className=""
-        key="2"
+        key="2023"
       >
         <th
           scope="row"
         >
-          FFY 2
+          FFY 2023
         </th>
         <td
           className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            10
+            4628548
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            20
+            514283
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            2000
+            5142831
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className=""
+        key="2024"
+      >
+        <th
+          scope="row"
+        >
+          FFY 2024
+        </th>
+        <td
+          className="budget-table--number budget-table--col-divider__left"
+        >
+          <Dollars>
+            3792934
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1254311
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            5047245
           </Dollars>
         </td>
       </tr>
