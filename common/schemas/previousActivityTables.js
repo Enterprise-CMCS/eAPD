@@ -17,7 +17,7 @@ const previousActivityObject = Joi.object({
   federalActual: dollarFieldReqAndMsg
 });
 
-export const previousActivitySchema = Joi.object().pattern(
+export const previousHitechActivitySchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object({
     hithie: previousActivityObject,

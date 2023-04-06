@@ -14,7 +14,7 @@ import {
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
-import { previousActivitySchema as schema } from '@/common/schemas/previousActivityTables';
+import { previousHitechActivitySchema as schema } from '@cms-eapd/common';
 
 const HitechApdPreviousActivityTables = ({
   isViewOnly,
