@@ -14,6 +14,21 @@ import {
 const sampleBudgetMMIS = {
   ddi: {
     '90-10': {
+      keyStatePersonnel: {
+        2023: {
+          total: 2400075,
+          federal: 2124939,
+          medicaid: 2361044,
+          state: 236104
+        },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: {
+          total: 2400075,
+          federal: 2124939,
+          medicaid: 2361044,
+          state: 236104
+        }
+      },
       statePersonnel: {
         2023: {
           total: 2400075,
@@ -76,6 +91,11 @@ const sampleBudgetMMIS = {
       }
     },
     '75-25': {
+      keyStatePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
       statePersonnel: {
         2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
         2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -98,6 +118,11 @@ const sampleBudgetMMIS = {
       }
     },
     '50-50': {
+      keyStatePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
       statePersonnel: {
         2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
         2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -137,6 +162,11 @@ const sampleBudgetMMIS = {
   },
   mando: {
     '75-25': {
+      keyStatePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
       statePersonnel: {
         2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
         2024: {
@@ -189,6 +219,11 @@ const sampleBudgetMMIS = {
       }
     },
     '50-50': {
+      keyStatePersonnel: {
+        2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+        total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+      },
       statePersonnel: {
         2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
         2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -282,6 +317,17 @@ describe('budget summary component', () => {
         }}
         data={sampleBudgetMMIS}
         years={['2023', '2024']}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders DataRowGroup correctly for mmis apds', () => {
+    const component = shallow(
+      <DataRowGroup
+        apdType={APD_TYPE.MMIS}
+        data={sampleBudgetMMIS.ddi['90-10']}
+        year={'2023'}
       />
     );
     expect(component).toMatchSnapshot();
