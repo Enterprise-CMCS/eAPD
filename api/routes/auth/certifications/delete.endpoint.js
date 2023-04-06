@@ -2,28 +2,28 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications delete endpoint', () => {
-  describe('DELETE /auth/certifications', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  const api = apiAllPermissions;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
+  describe('DELETE /auth/certifications', () => {
     const url = '/auth/certifications';
 
     unauthenticatedTest('delete', url);
     unauthorizedTest('delete', url);
 
     describe('when authenticated as a user with permission', () => {
-      let api;
-      beforeAll(async () => {
-        api = login();
-      });
-
       it('with an invalid request', async () => {
         const request = {
           data: {

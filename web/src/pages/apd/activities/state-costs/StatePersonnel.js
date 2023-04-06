@@ -9,11 +9,20 @@ import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 import { selectActivityStatePersonnel } from '../../../../redux/selectors/activities.selectors';
-import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectApdYears,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 import { newStatePerson } from '../../../../redux/reducers/activities';
 import { removePersonnel } from '../../../../redux/actions/editActivity';
 
-const StatePersonnel = ({ activityIndex, personnel, remove, years }) => {
+const StatePersonnel = ({
+  activityIndex,
+  personnel,
+  remove,
+  years,
+  apdType
+}) => {
   const [localList, setLocalList] = useState(personnel);
 
   useEffect(() => {
@@ -33,7 +42,7 @@ const StatePersonnel = ({ activityIndex, personnel, remove, years }) => {
 
   return (
     <Fragment>
-      <Instruction source="activities.statePersonnel.instruction" />
+      <Instruction source={`activities.statePersonnel.instruction${apdType}`} />
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText={t('activities.statePersonnel.addButtonText')}
@@ -54,12 +63,14 @@ StatePersonnel.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   personnel: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
   personnel: selectActivityStatePersonnel(state, { activityIndex }),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {

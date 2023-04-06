@@ -15,7 +15,7 @@ class ExecutiveSummaryPage {
     federalShareAmount,
     ffys
   }) => {
-    cy.get('#executive-summary-summary')
+    cy.get('#executive-activities-summary')
       .parent()
       .contains('h4', `Activity ${index + 1}: ${activityName}`)
       .next()
@@ -63,7 +63,7 @@ class ExecutiveSummaryPage {
     totalFederalShare,
     ffys
   }) => {
-    cy.get('#executive-summary-summary')
+    cy.get('#executive-activities-summary')
       .parent()
       .contains('h4', 'Total Cost')
       .next()

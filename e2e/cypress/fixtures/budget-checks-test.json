@@ -1,8 +1,8 @@
 {
   "afterKeyPersonnelNoCosts": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$0"],
-      ["State Staff Subtotal", "$0"]
+      ["State Staff Total", "$0"],
+      ["State Staff Total", "$0"]
     ],
     "CACTable": [{ "HIT Total": ["$0"] }, { "HIT Total": ["$0"] }],
     "FFPActivitiesTable": [
@@ -12,141 +12,141 @@
     "summaryBudgetTotals": {
       "FFY 2023": ["$0", "$0", "$0"],
       "FFY 2024": ["$0", "$0", "$0"],
-      "Total": ["$0", "$0", "$0"]
+      "Activities Grand Total": ["$0", "$0", "$0"]
     },
     "noFFP": false
   },
 
   "afterKeyPersonnelWithCosts": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$50,000"],
-      ["State Staff Subtotal", "$50,000"]
+      ["State Staff Total", "$50,000"],
+      ["State Staff Total", "$50,000"]
     ],
     "CACTable": [{ "HIT Total": ["$50,000"] }, { "HIT Total": ["$50,000"] }],
     "FFPActivitiesTable": [
       { "State Staff": ["$25,000", "$25,000", "$50,000"] },
-      { "State Staff": ["$5,000", "$45,000", "$50,000"] }
+      { "State Staff": ["$45,000", "$5,000", "$50,000"] }
     ],
     "summaryBudgetTotals": {
       "FFY 2023": ["$25,000", "$25,000", "$50,000"],
-      "FFY 2024": ["$5,000", "$45,000", "$50,000"],
-      "Total": ["$30,000", "$70,000", "$100,000"]
+      "FFY 2024": ["$45,000", "$5,000", "$50,000"],
+      "Activities Grand Total": ["$70,000", "$30,000", "$100,000"]
     },
     "noFFP": false
   },
 
   "afterStateStaffHIT": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$353,000"],
-      ["State Staff Subtotal", "$377,000"]
+      ["State Staff Total", "$353,000"],
+      ["State Staff Total", "$377,000"]
     ],
     "CACTable": [{ "HIT Total": ["$353,000"] }, { "HIT Total": ["$377,000"] }],
     "FFPActivitiesTable": [
       { "State Staff": ["$176,500", "$176,500", "$353,000"] },
-      { "State Staff": ["$37,700", "$339,300", "$377,000"] }
+      { "State Staff": ["$339,300", "$37,700", "$377,000"] }
     ],
     "summaryBudgetTotals": {
       "FFY 2023": ["$176,500", "$176,500", "$353,000"],
-      "FFY 2024": ["$37,700", "$339,300", "$377,000"],
-      "Total": ["$214,200", "$515,800", "$730,000"]
+      "FFY 2024": ["$339,300", "$37,700", "$377,000"],
+      "Activities Grand Total": ["$515,800", "$214,200", "$730,000"]
     },
     "noFFP": false
   },
 
   "afterStateExpenseHIT": {
     "budgetAndFFP": [
-      ["Other State Expenses Subtotal", "$35,000"],
-      ["Other State Expenses Subtotal", "$35,000"]
+      ["Other State Expenses Total", "$35,000"],
+      ["Other State Expenses Total", "$35,000"]
     ],
     "CACTable": [{ "HIT Total": ["$388,000"] }, { "HIT Total": ["$412,000"] }],
     "FFPActivitiesTable": [
       { "Other State Expenses": ["$17,500", "$17,500", "$35,000"] },
-      { "Other State Expenses": ["$3,500", "$31,500", "$35,000"] }
+      { "Other State Expenses": ["$31,500", "$3,500", "$35,000"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$462,959", "$559,215", "$1,022,174"],
-      "FFY 2024": ["$352,455", "$781,465", "$1,133,920"],
-      "Total": ["$815,414", "$1,340,680", "$2,156,094"]
+      "FFY 2023": ["$559,215", "$462,959", "$1,022,174"],
+      "FFY 2024": ["$781,465", "$352,455", "$1,133,920"],
+      "Activities Grand Total": ["$1,340,680", "$815,414", "$2,156,094"]
     },
     "noFFP": false
   },
 
   "afterContractorHIT": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$30,000"],
-      ["Private Contractor Subtotal", "$30,000"]
+      ["Private Contractor Total", "$30,000"],
+      ["Private Contractor Total", "$30,000"]
     ],
     "CACTable": [{ "HIT Total": ["$418,000"] }, { "HIT Total": ["$442,000"] }],
     "FFPActivitiesTable": [
       { "Private Contractor": ["$15,000", "$15,000", "$30,000"] },
-      { "Private Contractor": ["$3,000", "$27,000", "$30,000"] }
+      { "Private Contractor": ["$27,000", "$3,000", "$30,000"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$543,584", "$660,090", "$1,203,674"],
-      "FFY 2024": ["$418,680", "$922,940", "$1,341,620"],
-      "Total": ["$962,264", "$1,583,030", "$2,545,294"]
+      "FFY 2023": ["$660,090", "$543,584", "$1,203,674"],
+      "FFY 2024": ["$922,940", "$418,680", "$1,341,620"],
+      "Activities Grand Total": ["$1,583,030", "$962,264", "$2,545,294"]
     },
     "noFFP": false
   },
 
   "afterStateStaffHIE": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$192,512"],
-      ["State Staff Subtotal", "$196,102"]
+      ["State Staff Total", "$192,512"],
+      ["State Staff Total", "$196,102"]
     ],
     "CACTable": [{ "HIE Total": ["$192,512"] }, { "HIE Total": ["$196,102"] }],
     "FFPActivitiesTable": [
-      { "State Staff": ["$48,128", "$144,384", "$192,512"] },
+      { "State Staff": ["$144,384", "$48,128", "$192,512"] },
       { "State Staff": ["$98,051", "$98,051", "$196,102"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$224,628", "$320,884", "$545,512"],
-      "FFY 2024": ["$135,751", "$437,351", "$573,102"],
-      "Total": ["$360,379", "$758,235", "$1,118,614"]
+      "FFY 2023": ["$320,884", "$224,628", "$545,512"],
+      "FFY 2024": ["$437,351", "$135,751", "$573,102"],
+      "Activities Grand Total": ["$758,235", "$360,379", "$1,118,614"]
     },
     "noFFP": false
   },
 
   "afterStateExpenseHIE": {
     "budgetAndFFP": [
-      ["Other State Expenses Subtotal", "$40,500"],
-      ["Other State Expenses Subtotal", "$40,200"]
+      ["Other State Expenses Total", "$40,500"],
+      ["Other State Expenses Total", "$40,200"]
     ],
     "CACTable": [{ "HIE Total": ["$233,012"] }, { "HIE Total": ["$236,302"] }],
     "FFPActivitiesTable": [
-      { "Other State Expenses": ["$10,125", "$30,375", "$40,500"] },
+      { "Other State Expenses": ["$30,375", "$10,125", "$40,500"] },
       { "Other State Expenses": ["$20,100", "$20,100", "$40,200"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$473,084", "$589,590", "$1,062,674"],
-      "FFY 2024": ["$372,555", "$801,565", "$1,174,120"],
-      "Total": ["$845,639", "$1,391,155", "$2,236,794"]
+      "FFY 2023": ["$589,590", "$473,084", "$1,062,674"],
+      "FFY 2024": ["$801,565", "$372,555", "$1,174,120"],
+      "Activities Grand Total": ["$1,391,155", "$845,639", "$2,236,794"]
     },
     "noFFP": false
   },
 
   "afterContractorHIE": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$41,500"],
-      ["Private Contractor Subtotal", "$41,500"]
+      ["Private Contractor Total", "$41,500"],
+      ["Private Contractor Total", "$41,500"]
     ],
     "CACTable": [{ "HIE Total": ["$274,512"] }, { "HIE Total": ["$277,802"] }],
     "FFPActivitiesTable": [
-      { "Private Contractor": ["$10,375", "$31,125", "$41,500"] },
+      { "Private Contractor": ["$31,125", "$10,375", "$41,500"] },
       { "Private Contractor": ["$20,750", "$20,750", "$41,500"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$553,959", "$691,215", "$1,245,174"],
-      "FFY 2024": ["$439,430", "$943,690", "$1,383,120"],
-      "Total": ["$993,389", "$1,634,905", "$2,628,294"]
+      "FFY 2023": ["$691,215", "$553,959", "$1,245,174"],
+      "FFY 2024": ["$943,690", "$439,430", "$1,383,120"],
+      "Activities Grand Total": ["$1,634,905", "$993,389", "$2,628,294"]
     },
     "noFFP": false
   },
 
   "afterStateStaffMMIS": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$138,662"],
-      ["State Staff Subtotal", "$198,818"]
+      ["State Staff Total", "$138,662"],
+      ["State Staff Total", "$198,818"]
     ],
     "CACTable": [
       { "MMIS Total": ["$138,662"] },
@@ -154,20 +154,20 @@
     ],
     "FFPActivitiesTable": [
       { "State Staff": ["$69,331", "$69,331", "$138,662"] },
-      { "State Staff": ["$49,704", "$149,114", "$198,818"] }
+      { "State Staff": ["$149,114", "$49,704", "$198,818"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$293,959", "$390,215", "$684,174"],
-      "FFY 2024": ["$185,455", "$586,465", "$771,920"],
-      "Total": ["$479,414", "$976,680", "$1,456,094"]
+      "FFY 2023": ["$390,215", "$293,959", "$684,174"],
+      "FFY 2024": ["$586,465", "$185,455", "$771,920"],
+      "Activities Grand Total": ["$976,680", "$479,414", "$1,456,094"]
     },
     "noFFP": false
   },
 
   "afterStateExpenseMMIS": {
     "budgetAndFFP": [
-      ["Other State Expenses Subtotal", "$76,000"],
-      ["Other State Expenses Subtotal", "$102,500"]
+      ["Other State Expenses Total", "$76,000"],
+      ["Other State Expenses Total", "$102,500"]
     ],
     "CACTable": [
       { "MMIS Total": ["$214,662"] },
@@ -175,20 +175,20 @@
     ],
     "FFPActivitiesTable": [
       { "Other State Expenses": ["$38,000", "$38,000", "$76,000"] },
-      { "Other State Expenses": ["$25,625", "$76,875", "$102,500"] }
+      { "Other State Expenses": ["$76,875", "$25,625", "$102,500"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$511,084", "$627,590", "$1,138,674"],
-      "FFY 2024": ["$398,180", "$878,440", "$1,276,620"],
-      "Total": ["$909,264", "$1,506,030", "$2,415,294"]
+      "FFY 2023": ["$627,590", "$511,084", "$1,138,674"],
+      "FFY 2024": ["$878,440", "$398,180", "$1,276,620"],
+      "Activities Grand Total": ["$1,506,030", "$909,264", "$2,415,294"]
     },
     "noFFP": false
   },
 
   "afterContractorMMIS": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$33,000"],
-      ["Private Contractor Subtotal", "$37,000"]
+      ["Private Contractor Total", "$33,000"],
+      ["Private Contractor Total", "$37,000"]
     ],
     "CACTable": [
       { "MMIS Total": ["$247,662"] },
@@ -196,57 +196,57 @@
     ],
     "FFPActivitiesTable": [
       { "Private Contractor": ["$16,500", "$16,500", "$33,000"] },
-      { "Private Contractor": ["$9,250", "$27,750", "$37,000"] }
+      { "Private Contractor": ["$27,750", "$9,250", "$37,000"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$570,459", "$707,715", "$1,278,174"],
-      "FFY 2024": ["$448,680", "$971,440", "$1,420,120"],
-      "Total": ["$1,019,139", "$1,679,155", "$2,698,294"]
+      "FFY 2023": ["$707,715", "$570,459", "$1,278,174"],
+      "FFY 2024": ["$971,440", "$448,680", "$1,420,120"],
+      "Activities Grand Total": ["$1,679,155", "$1,019,139", "$2,698,294"]
     },
     "noFFP": false
   },
 
   "afterStateStaffNoFFP": {
     "budgetAndFFP": [
-      ["State Staff Subtotal", "$303,000"],
-      ["State Staff Subtotal", "$327,000"]
+      ["State Staff Total", "$303,000"],
+      ["State Staff Total", "$327,000"]
     ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$445,459", "$541,715", "$987,174"],
-      "FFY 2024": ["$348,955", "$749,965", "$1,098,920"],
-      "Total": ["$794,414", "$1,291,680", "$2,086,094"]
+      "FFY 2023": ["$541,715", "$445,459", "$987,174"],
+      "FFY 2024": ["$749,965", "$348,955", "$1,098,920"],
+      "Activities Grand Total": ["$1,291,680", "$794,414", "$2,086,094"]
     },
     "noFFP": true
   },
 
   "afterStateExpenseNoFFP": {
     "budgetAndFFP": [
-      ["Other State Expenses Subtotal", "$35,000"],
-      ["Other State Expenses Subtotal", "$35,000"]
+      ["Other State Expenses Total", "$35,000"],
+      ["Other State Expenses Total", "$35,000"]
     ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$528,584", "$645,090", "$1,173,674"],
-      "FFY 2024": ["$415,680", "$895,940", "$1,311,620"],
-      "Total": ["$944,264", "$1,541,030", "$2,485,294"]
+      "FFY 2023": ["$645,090", "$528,584", "$1,173,674"],
+      "FFY 2024": ["$895,940", "$415,680", "$1,311,620"],
+      "Activities Grand Total": ["$1,541,030", "$944,264", "$2,485,294"]
     },
     "noFFP": true
   },
 
   "afterContractorNoFFP": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$30,000"],
-      ["Private Contractor Subtotal", "$30,000"]
+      ["Private Contractor Total", "$30,000"],
+      ["Private Contractor Total", "$30,000"]
     ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$585,459", "$722,715", "$1,308,174"],
-      "FFY 2024": ["$463,680", "$986,440", "$1,450,120"],
-      "Total": ["$1,049,139", "$1,709,155", "$2,758,294"]
+      "FFY 2023": ["$722,715", "$585,459", "$1,308,174"],
+      "FFY 2024": ["$986,440", "$463,680", "$1,450,120"],
+      "Activities Grand Total": ["$1,709,155", "$1,049,139", "$2,758,294"]
     },
     "noFFP": true
   }

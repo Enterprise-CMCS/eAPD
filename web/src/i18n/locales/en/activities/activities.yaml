@@ -3,17 +3,20 @@ helpText: >-
   Activities are narrowly scoped bodies of work that comprise the APD. This
   section will help you  explain the goals, timelines, and cost of each
   activity.
-dashboardInstructions:
+
+dashboardInstructionsMMIS:
   instruction:
+    heading: Activities Dashboard
     helpText: >-
-      Examples of individual activities include but are not limited to: E&E
-      online application, E&E worker  portal, E&E noticing system, claims
-      processing engine, claims processing prior authorization, claims
-      processing record keeping, HIE interface(s), CQM databases, decision
-      support systems analytics  platform, provider enrollment screening,
-      provider fraud/waste/abuse, managed care member  enrollment, etc. For each
-      activity added, you will have the opportunity to provide details in their
-      own  respective subsections.
+      **Example of individual activities include, but are not limited to:**
+
+      1. API integration between two systems
+
+      2. Update to business rules engine
+
+      3. Data analytics and reporting
+
+      4. Re-procurement planning
 list:
   title: Activities Dashboard
   instruction:

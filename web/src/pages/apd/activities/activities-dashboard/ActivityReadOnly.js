@@ -2,14 +2,18 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { APD_TYPE } from '@cms-eapd/common';
 import Dollars from '../../../../components/Dollars';
 
-import CostAllocateFFP from '../ffp/CostAllocateFFP';
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
+import ActivitySummaryReadOnly from '../overview/ActivitySummaryReadOnly';
+import ConditionsForEnhancedFundingReadOnly from '../enhanced-funding/ConditionsForEnhancedFundingReadOnly';
+import AlternativesAndRisksReadOnly from '../alternatives-and-risks/AlternativesAndRisksReadOnly';
+import CostAllocateFFP from '../ffp/CostAllocateFFP';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
 
-const Activity = ({ activity, activityIndex }) => {
+const Activity = ({ activity, activityIndex, years, apdType }) => {
   const buildOutcome = outcome => {
     return (
       <Fragment key={uuidv4()}>
@@ -147,94 +151,37 @@ const Activity = ({ activity, activityIndex }) => {
 
   return (
     <div key={uuidv4()}>
-      <hr className="section-rule" />
-      <h2>
-        Activity {activityIndex + 1}: {activity.name || 'Untitled'}
-      </h2>
-      <strong>Provide a short overview of the activity: </strong>
-      {!activity.activityOverview.summary && (
-        <span>No response was provided.</span>
+      <ActivitySummaryReadOnly
+        activity={activity}
+        activityIndex={activityIndex}
+        years={years}
+        apdType={apdType}
+      />
+      {apdType === APD_TYPE.MMIS && (
+        <AlternativesAndRisksReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
       )}
-      <p
-        dangerouslySetInnerHTML={{ __html: activity.activityOverview.summary }}
-      />
-      <p>
-        <strong>Start date: </strong>
-        {stateDateToDisplay(activity.activitySchedule.plannedStartDate) ||
-          'None provided'}
-      </p>
-      <p>
-        <strong>End date: </strong>
-        {stateDateToDisplay(activity.activitySchedule.plannedEndDate) ||
-          'None provided'}
-      </p>
-      <hr className="subsection-rule" />
-      <h3>Activity Overview</h3>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: activity.activityOverview.description
-        }}
-      />
 
       <h3 className="viewonly-activity-header">
         <small>
           Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
-        Statement of Alternative Considerations and Supporting Justification
+        Milestones
       </h3>
-      <div
-        dangerouslySetInnerHTML={{
-          __html:
-            activity?.activityOverview?.alternatives ||
-            'No response was provided.'
-        }}
-      />
-
-      <h3 className="viewonly-activity-header">
-        <small>
-          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
-        </small>
-        <br /> Standards and Conditions
-      </h3>
-
-      <p>
-        <strong>
-          This activity supports the Medicaid standards and conditions from 42
-          CFR 433.112.
-        </strong>
-      </p>
-      {activity?.activityOverview?.standardsAndConditions?.supports ? (
-        <p
-          dangerouslySetInnerHTML={{
-            __html: activity?.activityOverview?.standardsAndConditions?.supports
-          }}
-        />
-      ) : (
-        <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
-        </p>
+      {activity.milestones.length === 0 && 'No milestones were provided.'}
+      {activity.milestones.map((milestone, index) =>
+        buildMilestone(milestone, index)
       )}
 
-      <div className="subform__container">
-        <p>
-          <strong>
-            This activity does not support the Medicaid standards and conditions
-            from 42 CFR 433.112.
-          </strong>
-        </p>
-        {activity?.activityOverview?.standardsAndConditions?.doesNotSupport ? (
-          <p>
-            {activity?.activityOverview?.standardsAndConditions?.doesNotSupport}
-          </p>
-        ) : (
-          <p>
-            No response was provided for how this activity will support the
-            Medicaid standards and conditions.
-          </p>
-        )}
-      </div>
+      {apdType === APD_TYPE.MMIS && (
+        <ConditionsForEnhancedFundingReadOnly
+          activity={activity}
+          activityIndex={activityIndex}
+        />
+      )}
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -245,14 +192,7 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       {activity.outcomes.length === 0 &&
         'No outcome(s) and/or corresponding metric(s) were provided.'}
-      <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
-
-      <h3>Milestones</h3>
-      {activity.milestones.length === 0 && 'No milestones were provided.'}
-      {activity.milestones.map((milestone, index) =>
-        buildMilestone(milestone, index)
-      )}
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -351,7 +291,9 @@ const Activity = ({ activity, activityIndex }) => {
 
 Activity.propTypes = {
   activity: PropTypes.object.isRequired,
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.number.isRequired,
+  years: PropTypes.array.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 export default Activity;

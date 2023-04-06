@@ -5,14 +5,16 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../redux/selectors/activities.selectors';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 import CostAllocationRows from '../activities/cost-allocation/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
   ffy,
+  apdType,
   activityIndex,
   costSummary,
   activityName,
-  otherFunding,
+  otherFunding, // prop
   fundingSource
 }) => {
   const { years } = costSummary;
@@ -24,18 +26,12 @@ const SummaryActivityBreakdownTable = ({
     >
       <thead>
         <tr className="budget-table--row__primary-header">
-          <th scope="col">
+          <th scope="col" colSpan={6}>
             Activity {activityIndex + 1}{' '}
             <span style={{ fontWeight: '100' }}>
               {activityName || 'Untitled'}
               {fundingSource ? ` (${fundingSource})` : ''}
             </span>
-          </th>
-          <th scope="col" colSpan="4">
-            Personnel Cost × FTE
-          </th>
-          <th scope="col" className="ds-u-text-align--right">
-            Total cost
           </th>
         </tr>
       </thead>
@@ -45,6 +41,10 @@ const SummaryActivityBreakdownTable = ({
           ffy={ffy}
           otherFunding={otherFunding}
           activityIndex={activityIndex}
+          apdType={apdType}
+          highlightSubtotals={true}
+          showUnitCostHeader={true}
+          highlightTotal={true}
         />
       </tbody>
     </table>
@@ -53,6 +53,7 @@ const SummaryActivityBreakdownTable = ({
 
 SummaryActivityBreakdownTable.propTypes = {
   ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
   costSummary: PropTypes.object.isRequired,
@@ -65,7 +66,8 @@ const mapStateToProps = (
   { activityIndex },
   {
     getActivity = selectActivityByIndex,
-    getCostSummary = selectActivityCostSummary
+    getCostSummary = selectActivityCostSummary,
+    getApdType = selectApdType
   } = {}
 ) => {
   const activity = getActivity(state, { activityIndex });
@@ -73,7 +75,8 @@ const mapStateToProps = (
   return {
     activityName: activity.name,
     fundingSource: activity.fundingSource,
-    costSummary: getCostSummary(state, { activityIndex })
+    costSummary: getCostSummary(state, { activityIndex }),
+    apdType: getApdType(state)
   };
 };
 

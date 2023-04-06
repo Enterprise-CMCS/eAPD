@@ -1,4 +1,4 @@
-import { Alert, Button } from '@cmsgov/design-system';
+import { Alert, Button, Tooltip, TooltipIcon } from '@cmsgov/design-system';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -55,6 +55,7 @@ const FormAndReviewItem = ({
       <Button onClick={() => handleCancel()} className="ds-u-margin-right--2">
         Cancel
       </Button>
+
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
@@ -67,6 +68,17 @@ const FormAndReviewItem = ({
       >
         Save
       </Button>
+      {!isFormValid ? (
+        <Tooltip
+          className="ds-c-tooltip__trigger-link"
+          component="a"
+          onClose={function noRefCheck() {}}
+          onOpen={function noRefCheck() {}}
+          title="All fields are required before saving."
+        >
+          <TooltipIcon />
+        </Tooltip>
+      ) : null}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-person
 import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities.js';
 import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary.js';
 import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget.js';
-import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance.js';
+import { testDefaultHitechAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance.js';
 import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary.js';
 import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-activity.js';
 
@@ -38,9 +38,11 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
   });
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -56,6 +58,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
   });
 
   after(function () {
+    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
@@ -65,7 +68,9 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
       testDefaultAPDOverview();
 
       it('should have two checked years', function () {
-        cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        cy.get('[data-cy=yearList]').within(() => {
+          cy.get('[type="checkbox"][checked]').should('have.length', 2);
+        });
       });
     });
 
@@ -90,7 +95,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
     });
 
     describe('default Assurances and Compliance', function () {
-      testDefaultAssurancesAndCompliance();
+      testDefaultHitechAssurancesAndCompliance();
     });
 
     describe('default Executive Summary', function () {

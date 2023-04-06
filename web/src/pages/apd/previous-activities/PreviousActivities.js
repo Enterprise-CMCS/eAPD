@@ -3,17 +3,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
-import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
-import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
+import HitechApdPreviousActivityTables from './HitechApdPreviousActivityTables';
+import MmisApdPreviousActivityTables from './MmisApdPreviousActivityTables';
+import HitechPreviousActivityTotalsTable from './HitechPreviousActivityTotalsTable';
+import MmisPreviousActivityTotalsTable from './MmisPreviousActivityTotalsTable';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import { setPreviousActivitySummary } from '../../../redux/actions/editApd';
 import RichText from '../../../components/RichText';
 import { Section, Subsection } from '../../../components/Section';
 import { t } from '../../../i18n';
-import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
+import {
+  selectPreviousActivitySummary,
+  selectApdType
+} from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
-import { selectApdType } from '../../../redux/selectors/apd.selectors';
+import { APD_TYPE } from '@cms-eapd/common';
+
+const activityTablesMapping = {
+  [APD_TYPE.HITECH]: <HitechApdPreviousActivityTables />,
+  [APD_TYPE.MMIS]: <MmisApdPreviousActivityTables />
+};
+
+const activityTableTotalsMapping = {
+  [APD_TYPE.HITECH]: <HitechPreviousActivityTotalsTable />,
+  [APD_TYPE.MMIS]: <MmisPreviousActivityTotalsTable />
+};
 
 const PreviousActivities = ({
   previousActivitySummary,
@@ -51,9 +65,8 @@ const PreviousActivities = ({
           id="prev-activities-table"
           resource="previousActivities.actualExpenses"
         >
-          {apdType === 'HITECH' && <ApdPreviousActivityTableHI />}
-          <ApdPreviousActivityTableMMIS />
-          <ApdPreviousActivityTableTotal />
+          {activityTablesMapping[apdType]}
+          {activityTableTotalsMapping[apdType]}
         </Subsection>
       </Section>
     </React.Fragment>

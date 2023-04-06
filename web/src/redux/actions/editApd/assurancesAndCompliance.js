@@ -95,3 +95,28 @@ export const setJustificationForSoftwareRights = (index, justification) => ({
   path: `/assurancesAndCompliances/softwareRights/${index}/explanation`,
   value: justification
 });
+
+/**
+ * Sets the complying true/false flag for one of the independent verification
+ * and validation citations
+ * @param {Number} index Which citation to update
+ * @param {Boolean} complying The new compliance value
+ * @returns {Object} A redux action, ready to be dispatched
+ */
+export const setComplyingWithIndependentVV = (index, complying) => ({
+  type: EDIT_APD,
+  path: `/assurancesAndCompliances/independentVV/${index}/checked`,
+  value: complying
+});
+
+/**
+ * Sets a justification for one of the independent verification and validation citations
+ * @param {Number} index Which citation to update
+ * @param {Boolean} complying The new justification
+ * @returns {Object} A redux action, ready to be dispatched
+ */
+export const setJustificationForIndependentVV = (index, justification) => ({
+  type: EDIT_APD,
+  path: `/assurancesAndCompliances/independentVV/${index}/explanation`,
+  value: justification
+});

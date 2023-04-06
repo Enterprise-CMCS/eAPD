@@ -1,11 +1,13 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 import { EDIT_APD } from '../editApd';
 import {
   setCostAllocationMethodology,
   setCostAllocationOtherFunding,
   setCostAllocationFFPFundingSplit,
+  setCostAllocationMatchRate,
   setCostAllocationFFPOtherFunding,
   setFFPForContractorCostsForFiscalQuarter,
   setFFPForInHouseCostsForFiscalQuarter
@@ -71,6 +73,29 @@ describe('APD activity edit actions for cost allocation section', () => {
         type: EDIT_APD,
         path: '/activities/1/costAllocation/2020/ffp/state',
         value: 400
+      }
+    ]);
+  });
+
+  it('dispatches an action for setting the cost allocation FFP other funding', () => {
+    store.dispatch(
+      setCostAllocationMatchRate(1, 2020, 90, 10, FUNDING_CATEGORY_TYPE.DDI)
+    );
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/activities/1/costAllocation/2020/ffp/federal',
+        value: 90
+      },
+      {
+        type: EDIT_APD,
+        path: '/activities/1/costAllocation/2020/ffp/state',
+        value: 10
+      },
+      {
+        type: EDIT_APD,
+        path: '/activities/1/costAllocation/2020/ffp/fundingCategory',
+        value: FUNDING_CATEGORY_TYPE.DDI
       }
     ]);
   });

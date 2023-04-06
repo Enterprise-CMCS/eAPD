@@ -858,6 +858,24 @@ const openapi = {
                       }
                     }
                   },
+                  split: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `The Federal-State split by year`
+                      }
+                    }
+                  },
+                  medicaidShare: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `The Medicaid Share as a percentage of an individual Key State Personnel by year`
+                      }
+                    }
+                  },
                   position: { type: 'string', description: `Person's position` }
                 }
               })
@@ -878,7 +896,7 @@ const openapi = {
                   '^[0-9]{4}$': {
                     type: 'object',
                     properties: {
-                      mmis: {
+                      ddi: {
                         type: 'object',
                         description: 'MMIS-funded expenses',
                         properties: {
@@ -913,6 +931,42 @@ const openapi = {
                             }
                           },
                           90: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          }
+                        }
+                      },
+                      mando: {
+                        type: 'object',
+                        description: 'MMIS-funded expenses',
+                        properties: {
+                          50: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          },
+                          75: {
                             type: 'object',
                             properties: {
                               federalActual: {

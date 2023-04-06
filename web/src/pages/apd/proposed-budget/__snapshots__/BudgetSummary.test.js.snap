@@ -3,24 +3,28 @@
 exports[`budget summary component data row group renders 1`] = `
 <Fragment>
   <DataRow
+    apdType="HITECH"
     category="statePersonnel"
     data={Object {}}
     key="0"
     title="State Staff"
   />
   <DataRow
+    apdType="HITECH"
     category="expenses"
     data={Object {}}
     key="1"
     title="Other State Expenses"
   />
   <DataRow
+    apdType="HITECH"
     category="contractors"
     data={Object {}}
     key="2"
     title="Private Contractor"
   />
   <DataRow
+    apdType="HITECH"
     category="combined"
     data={Object {}}
     key="3"
@@ -29,11 +33,53 @@ exports[`budget summary component data row group renders 1`] = `
 </Fragment>
 `;
 
+exports[`budget summary component data row group renders with keyStatePersonnel 1`] = `
+<Fragment>
+  <DataRow
+    apdType="MMIS"
+    category="keyStatePersonnel"
+    data={Object {}}
+    key="0"
+    title="Key State Personnel"
+  />
+  <DataRow
+    apdType="MMIS"
+    category="statePersonnel"
+    data={Object {}}
+    key="1"
+    title="State Staff"
+  />
+  <DataRow
+    apdType="MMIS"
+    category="expenses"
+    data={Object {}}
+    key="2"
+    title="Other State Expenses"
+  />
+  <DataRow
+    apdType="MMIS"
+    category="contractors"
+    data={Object {}}
+    key="3"
+    title="Private Contractor"
+  />
+  <DataRow
+    apdType="MMIS"
+    category="combined"
+    data={Object {}}
+    key="4"
+    title="Subtotal"
+  />
+</Fragment>
+`;
+
 exports[`budget summary component data row renders with data 1`] = `
 <tr
-  className=""
+  className="
+      "
 >
   <th
+    className="indent-title budget-table--col-divider__right"
     scope="row"
   >
     title text
@@ -42,14 +88,14 @@ exports[`budget summary component data row renders with data 1`] = `
     className="budget-table--number"
   >
     <Dollars>
-      2
+      1
     </Dollars>
   </td>
   <td
     className="budget-table--number"
   >
     <Dollars>
-      1
+      2
     </Dollars>
   </td>
   <td
@@ -64,9 +110,11 @@ exports[`budget summary component data row renders with data 1`] = `
 
 exports[`budget summary component data row renders with no data 1`] = `
 <tr
-  className=""
+  className="
+      "
 >
   <th
+    className="indent-title budget-table--col-divider__right"
     scope="row"
   >
     title text
@@ -107,13 +155,13 @@ exports[`budget summary component header row renders 1`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Federal Share
   </th>
   <th
     className="ds-u-text-align--right"
     scope="col"
   >
-    Federal Total
+    State Share
   </th>
   <th
     className="ds-u-text-align--right"
@@ -136,13 +184,13 @@ exports[`budget summary component header row renders 2`] = `
     className="ds-u-text-align--right"
     scope="col"
   >
-    State Total
+    Federal Share
   </th>
   <th
     className="ds-u-text-align--right"
     scope="col"
   >
-    Federal Total
+    State Share
   </th>
   <th
     className="ds-u-text-align--right"
@@ -153,7 +201,7 @@ exports[`budget summary component header row renders 2`] = `
 </tr>
 `;
 
-exports[`budget summary component renders correctly 1`] = `
+exports[`budget summary component renders correctly for hitech apds 1`] = `
 <div>
   <div>
     <h4
@@ -378,6 +426,7 @@ exports[`budget summary component renders correctly 1`] = `
       </thead>
       <tbody>
         <DataRowGroup
+          apdType="HITECH"
           data={Object {}}
           entries={
             Array [
@@ -408,6 +457,7 @@ exports[`budget summary component renders correctly 1`] = `
       </thead>
       <tbody>
         <DataRowGroup
+          apdType="HITECH"
           data={Object {}}
           entries={
             Array [
@@ -438,6 +488,7 @@ exports[`budget summary component renders correctly 1`] = `
       </thead>
       <tbody>
         <DataRowGroup
+          apdType="HITECH"
           data={Object {}}
           entries={
             Array [
@@ -468,13 +519,13 @@ exports[`budget summary component renders correctly 1`] = `
           className="ds-u-text-align--right"
           scope="col"
         >
-          State Total
+          Federal Total
         </th>
         <th
           className="ds-u-text-align--right"
           scope="col"
         >
-          Federal Total
+          State Total
         </th>
         <th
           className="ds-u-text-align--right"
@@ -486,26 +537,26 @@ exports[`budget summary component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        className=""
+        className="budget-table--row__highlight budget-table--total"
         key="1"
       >
         <th
           scope="row"
         >
-          FFY 1
+          Activities Grand Total
         </th>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--col-divider__left"
         >
           <Dollars>
-            2
+            1
           </Dollars>
         </td>
         <td
           className="budget-table--number"
         >
           <Dollars>
-            1
+            2
           </Dollars>
         </td>
         <td
@@ -526,6 +577,13 @@ exports[`budget summary component renders correctly 1`] = `
           FFY 2
         </th>
         <td
+          className="budget-table--number budget-table--col-divider__left"
+        >
+          <Dollars>
+            10
+          </Dollars>
+        </td>
+        <td
           className="budget-table--number"
         >
           <Dollars>
@@ -536,7 +594,206 @@ exports[`budget summary component renders correctly 1`] = `
           className="budget-table--number"
         >
           <Dollars>
+            2000
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`budget summary component renders correctly for mmis apds 1`] = `
+<div>
+  <div>
+    <h4
+      aria-hidden="true"
+      className="ds-h4 header-with-top-margin"
+    >
+      MMIS Activities
+    </h4>
+    <table
+      className="budget-table"
+      data-cy="summaryBudgetMMIS"
+      key="1"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        1
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          activity="mmis"
+          yr="1"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          apdType="MMIS"
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="1"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      data-cy="summaryBudgetMMIS"
+      key="2"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        2
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          activity="mmis"
+          yr="2"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          apdType="MMIS"
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="2"
+        />
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      data-cy="summaryBudgetMMIS"
+      key="total"
+    >
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 
+        total
+         MMIS Activities
+      </caption>
+      <thead>
+        <HeaderRow
+          activity="mmis"
+          yr="total"
+        />
+      </thead>
+      <tbody>
+        <DataRowGroup
+          apdType="MMIS"
+          data={Object {}}
+          entries={
+            Array [
+              "mmis data",
+            ]
+          }
+          year="total"
+        />
+      </tbody>
+    </table>
+  </div>
+  <table
+    className="budget-table"
+    data-cy="summaryBudgetTotals"
+  >
+    <caption
+      className="ds-h4"
+    >
+      Activities Totals
+    </caption>
+    <thead>
+      <tr>
+        <td
+          className="th"
+          id="summary-budget-null1"
+        />
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          Federal Total
+        </th>
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          State Total
+        </th>
+        <th
+          className="ds-u-text-align--right"
+          scope="col"
+        >
+          Medicaid Total Computable
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="budget-table--row__highlight budget-table--total"
+        key="1"
+      >
+        <th
+          scope="row"
+        >
+          Activities Grand Total
+        </th>
+        <td
+          className="budget-table--number budget-table--col-divider__left"
+        >
+          <Dollars>
+            1
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            2
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            1000
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className=""
+        key="2"
+      >
+        <th
+          scope="row"
+        >
+          FFY 2
+        </th>
+        <td
+          className="budget-table--number budget-table--col-divider__left"
+        >
+          <Dollars>
             10
+          </Dollars>
+        </td>
+        <td
+          className="budget-table--number"
+        >
+          <Dollars>
+            20
           </Dollars>
         </td>
         <td

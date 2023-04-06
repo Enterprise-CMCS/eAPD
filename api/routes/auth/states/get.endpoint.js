@@ -3,23 +3,28 @@ import {
   getDB,
   setupDB,
   teardownDB,
-  login,
+  apiAllPermissions,
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 
 describe('auth roles endpoint get endpoint', () => {
+  const db = getDB();
+  const api = apiAllPermissions;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
+
   describe('GET /auth/state/:stateId', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
     const url = '/auth/state';
 
     unauthenticatedTest('get', `${url}/ak`);
     unauthorizedTest('get', `${url}/ak`);
 
     it('when authenticated', async () => {
-      const api = login();
       const response = await api.get(`${url}/md`);
 
       expect(response.status).toEqual(200);

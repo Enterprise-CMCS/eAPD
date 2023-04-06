@@ -1,15 +1,18 @@
-import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import { titleCase } from 'title-case';
 import Instruction from '../../../../components/Instruction';
 import CostAllocateFFPQuarterly from '../cost-allocation/CostAllocateFFPQuarterly';
+import FedStateSelector from './FedStateSelector';
+import MatchRateSelector from './MatchRateSelector';
 
-import { setCostAllocationFFPFundingSplit } from '../../../../redux/actions/editActivity';
+import {
+  setCostAllocationFFPFundingSplit,
+  setCostAllocationMatchRate
+} from '../../../../redux/actions/editActivity';
 import Dollars from '../../../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
@@ -19,15 +22,23 @@ import {
 } from '../../../../redux/selectors/activities.selectors';
 import { getAPDYearRange } from '../../../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
-import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
-import { t } from '../../../../i18n';
 
-import { APD_TYPE, costAllocationSchema as schema } from '@cms-eapd/common';
+import {
+  hitechCostAllocationSchema,
+  mmisCostAllocationSchema,
+  APD_TYPE,
+  FUNDING_CATEGORY_TYPE
+} from '@cms-eapd/common';
 
 const AllFFYsSummaryNarrative = ({
+  apdType,
   activityName,
   costAllocation,
   costSummary: { total },
@@ -37,7 +48,15 @@ const AllFFYsSummaryNarrative = ({
   let fundingSplitBits = [];
 
   Object.keys(costAllocation).forEach(ffy => {
-    const split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+    let split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+    if (apdType === APD_TYPE.MMIS) {
+      let matchRate = '';
+      const fundingCategory = costAllocation[ffy].ffp.fundingCategory;
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.DDI) matchRate = ' DDI';
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.MANDO) matchRate = ' M&O';
+
+      split += `${matchRate}`;
+    }
 
     if (split !== lastSplit) {
       fundingSplitBits.push({ split, ffys: [] });
@@ -96,6 +115,7 @@ const AllFFYsSummaryNarrative = ({
 };
 
 AllFFYsSummaryNarrative.propTypes = {
+  apdType: PropTypes.string.isRequired,
   activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
@@ -112,17 +132,16 @@ const CostAllocateFFP = ({
   activityId,
   isViewOnly,
   setFundingSplit,
+  setFundingMatchRate,
   stateName,
   adminCheck,
   year
 }) => {
-  const {
-    control,
-    clearErrors,
-    formState: { errors },
-    trigger,
-    setValue
-  } = useForm({
+  const schema =
+    apdType === APD_TYPE.HITECH
+      ? hitechCostAllocationSchema
+      : mmisCostAllocationSchema;
+  const methods = useForm({
     defaultValues: {
       ...costAllocation
     },
@@ -130,6 +149,7 @@ const CostAllocateFFP = ({
     reValidateMode: 'onChange',
     resolver: joiResolver(schema)
   });
+  const { clearErrors, trigger } = methods;
 
   useEffect(() => {
     if (adminCheck) {
@@ -139,11 +159,15 @@ const CostAllocateFFP = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const setFederalStateSplit = year => e => {
-    const [federal, state] = e.target.value.split('-').map(Number);
+  const setFederalStateSplit = (year, federal, state) => {
     setFundingSplit(activityIndex, year, federal, state);
-    setValue(`[${year}].ffp.federal`, federal);
-    setValue(`[${year}].ffp.state`, state);
+    if (adminCheck) {
+      trigger();
+    }
+  };
+
+  const setMatchRate = (year, federal, state, fundingCategory) => {
+    setFundingMatchRate(activityIndex, year, federal, state, fundingCategory);
     if (adminCheck) {
       trigger();
     }
@@ -152,7 +176,7 @@ const CostAllocateFFP = ({
   const { years } = costSummary;
 
   return (
-    <Fragment>
+    <FormProvider {...methods}>
       {isViewOnly ? (
         <hr className="custom-hr" />
       ) : (
@@ -174,6 +198,7 @@ const CostAllocateFFP = ({
                 ffy={ffy}
                 activityIndex={activityIndex}
                 otherFunding={otherFunding}
+                apdType={apdType}
               />
             </tbody>
           </table>
@@ -257,43 +282,28 @@ const CostAllocateFFP = ({
                   </tr>
                 </tbody>
               </table>
-              <div className="data-entry-box ds-u-margin-bottom--5">
-                <Instruction
-                  source="activities.costAllocate.ffp.federalStateSplitInstruction"
-                  headingDisplay={{
-                    level: 'p',
-                    className: 'ds-h4'
-                  }}
+              {apdType === APD_TYPE.HITECH && (
+                <FedStateSelector
+                  ffp={costAllocation[ffy].ffp}
+                  ffy={ffy}
+                  setFederalStateSplit={setFederalStateSplit}
+                  adminCheck={adminCheck}
                 />
-                <Controller
-                  name={`${ffy}`}
-                  control={control}
-                  render={({ field: { ...props } }) => (
-                    <Dropdown
-                      {...props}
-                      label="federal-state split"
-                      labelClassName="sr-only"
-                      options={[
-                        { label: 'Select an option', value: '0-100' },
-                        { label: '90-10', value: '90-10' },
-                        { label: '75-25', value: '75-25' },
-                        { label: '50-50', value: '50-50' }
-                      ]}
-                      value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
-                      onChange={setFederalStateSplit(ffy)}
-                      errorMessage={errors[ffy]?.ffp?.state?.message}
-                      errorPlacement="bottom"
-                      data-cy="cost-allocation-dropdown"
-                    />
-                  )}
+              )}
+              {apdType === APD_TYPE.MMIS && (
+                <MatchRateSelector
+                  ffp={costAllocation[ffy].ffp}
+                  ffy={ffy}
+                  setMatchRate={setMatchRate}
+                  adminCheck={adminCheck}
                 />
-              </div>
+              )}
               <table
                 className="budget-table activity-budget-table"
                 data-cy="FFPFedStateSplitTable"
               >
                 <tbody>
-                  <tr className="budget-table--subtotal budget-table--row__header">
+                  <tr className="budget-table--subtotal budget-table--row__highlight">
                     <th colSpan="5">Total Computable Medicaid Cost</th>
                     <td className="budget-table--number">
                       <Dollars>{years[ffy].medicaidShare}</Dollars>
@@ -333,16 +343,6 @@ const CostAllocateFFP = ({
                 />
               )}
 
-              {isViewOnly && (
-                <h4>
-                  {titleCase(
-                    t(
-                      'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                    )
-                  )}
-                </h4>
-              )}
-
               <CostAllocateFFPQuarterly
                 id="ffp-quarterly-table"
                 activityIndex={activityIndex}
@@ -357,12 +357,13 @@ const CostAllocateFFP = ({
 
       <h3 className="subsection--title ds-h3">FFY {year} Totals</h3>
       <AllFFYsSummaryNarrative
+        apdType={apdType}
         activityName={activityName}
         costAllocation={costAllocation}
         costSummary={costSummary}
         stateName={stateName}
       />
-    </Fragment>
+    </FormProvider>
   );
 };
 
@@ -370,20 +371,20 @@ CostAllocateFFP.propTypes = {
   activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
-  apdType: PropTypes.string,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
+  setFundingMatchRate: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool,
+  apdType: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool.isRequired,
   year: PropTypes.string.isRequired
 };
 
 CostAllocateFFP.defaultProps = {
-  isViewOnly: false,
-  adminCheck: false
+  isViewOnly: false
 };
 
 const mapStateToProps = (
@@ -394,6 +395,7 @@ const mapStateToProps = (
     getCostAllocation = selectCostAllocationForActivityByIndex,
     getCostSummary = selectActivityCostSummary,
     getState = getUserStateOrTerritory,
+    getApdType = selectApdType,
     getActivityTotal = selectActivityTotalForBudgetByActivityIndex
   } = {}
 ) => {
@@ -403,10 +405,10 @@ const mapStateToProps = (
   return {
     activityId: activity.activityId,
     activityName: activity.name || 'Untitled',
-    apdType: state.apd.data.apdType,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
+    apdType: getApdType(state),
     otherFunding: activityTotal.data.otherFunding,
     adminCheck: selectAdminCheckEnabled(state),
     year: getAPDYearRange(state)
@@ -414,7 +416,8 @@ const mapStateToProps = (
 };
 
 const mapDispatchToProps = {
-  setFundingSplit: setCostAllocationFFPFundingSplit
+  setFundingSplit: setCostAllocationFFPFundingSplit,
+  setFundingMatchRate: setCostAllocationMatchRate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);

@@ -1,5 +1,4 @@
-FROM node:16.19.0-bullseye-slim
-RUN apt-get update && apt-get install build-essential curl -y
+FROM node:16.19.1-bullseye-slim
 
 RUN mkdir /app
 WORKDIR /app
@@ -13,6 +12,7 @@ RUN chown -R node:node /app
 USER node:node
 
 RUN yarn install --frozen-lockfile --non-interactive
+RUN npm rebuild
 
 WORKDIR /app/api
 CMD yarn run start-dev

@@ -188,8 +188,14 @@ tap.test('apds POST endpoint', async endpointTest => {
               expenses: [],
               contractorResources: [],
               costAllocation: {
-                2004: { ffp: { federal: 0, state: 100 }, other: 0 },
-                2005: { ffp: { federal: 0, state: 100 }, other: 0 }
+                2004: {
+                  ffp: { federal: 0, state: 100, fundingCategory: null },
+                  other: 0
+                },
+                2005: {
+                  ffp: { federal: 0, state: 100, fundingCategory: null },
+                  other: 0
+                }
               },
               costAllocationNarrative: {
                 methodology: '',
@@ -389,22 +395,34 @@ tap.test('apds POST endpoint', async endpointTest => {
             previousActivitySummary: '',
             actualExpenditures: {
               2004: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }
               },
               2003: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }
               },
               2002: {
-                mmis: {
+                ddi: {
                   90: { federalActual: 0, totalApproved: 0 },
+                  75: { federalActual: 0, totalApproved: 0 },
+                  50: { federalActual: 0, totalApproved: 0 }
+                },
+                mando: {
                   75: { federalActual: 0, totalApproved: 0 },
                   50: { federalActual: 0, totalApproved: 0 }
                 }
@@ -420,11 +438,11 @@ tap.test('apds POST endpoint', async endpointTest => {
             procurement: [
               { title: 'SMM, Part 11', checked: null, explanation: '' },
               { title: '45 CFR Part 95.615', checked: null, explanation: '' },
-              { title: '45 CFR Part 92.36', checked: null, explanation: '' }
+              { title: '45 CFR Part 75.326', checked: null, explanation: '' }
             ],
             recordsAccess: [
               {
-                title: '42 CFR Part 433.112(b)(5)-(9)',
+                title: '45 CFR Part 433.112 (b)(5)-(9)',
                 checked: null,
                 explanation: ''
               },
@@ -432,7 +450,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               { title: 'SMM Section 11267', checked: null, explanation: '' }
             ],
             softwareRights: [
-              { title: '45 CFR Part 95.617', checked: null, explanation: '' },
+              { title: '45 CFR 95.617', checked: null, explanation: '' },
               { title: '42 CFR Part 431.300', checked: null, explanation: '' },
               { title: '45 CFR Part 164', checked: null, explanation: '' }
             ],

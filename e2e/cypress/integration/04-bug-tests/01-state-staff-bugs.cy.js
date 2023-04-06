@@ -3,6 +3,9 @@
 // Tests out bugs that have been fixed
 // so the same bugs don't happen twice
 
+const activityIndex1Name = 'Cool Activity';
+const activityIndex2Name = 'Best Activity';
+
 describe('APD builder bugs', { tags: ['@apd'] }, function () {
   let apdUrl;
   let apdId;
@@ -28,9 +31,23 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-      years.push(list[index].value)
-    );
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
+    });
+
+    // Add additional activities and give them names
+    cy.goToActivityDashboard();
+    cy.contains('Add Activity').click();
+    cy.contains('Add Activity').click();
+    cy.goToActivityDashboard();
+    cy.get('#activities').findAllByText('Edit').eq(1).click();
+    cy.findByLabelText('Activity name').type(activityIndex1Name);
+    cy.goToActivityDashboard();
+    cy.get('#activities').findAllByText('Edit').eq(2).click();
+    cy.findByLabelText('Activity name').type(activityIndex2Name);
+    cy.waitForSave();
   });
 
   beforeEach(function () {
@@ -103,5 +120,17 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
     cy.contains('Export and Submit').click();
     cy.findByRole('button', { name: 'Continue to Review' }).click();
     cy.wait('@loadImage', { timeout: 30000 });
+  });
+
+  it('should display the correct activity name when navigating between activities, bug #4624', () => {
+    // Go to second activity and check displayed name
+    cy.goToActivityOverview(1);
+    cy.contains('Activity name').should('exist');
+    cy.checkTinyMCE('activity-name-field', activityIndex1Name);
+
+    // Go to third activity and check displayed name
+    cy.goToActivityOverview(2);
+    cy.contains('Activity name').should('exist');
+    cy.checkTinyMCE('activity-name-field', activityIndex2Name);
   });
 });

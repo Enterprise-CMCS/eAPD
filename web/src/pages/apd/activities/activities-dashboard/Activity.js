@@ -2,8 +2,9 @@ import { Button, Review } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-
 import { titleCase } from 'title-case';
+
+import { APD_TYPE } from '@cms-eapd/common';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { removeActivity } from '../../../../redux/actions/editActivity';
 import { selectApdType } from '../../../../redux/selectors/apd.selectors';
@@ -12,14 +13,14 @@ import NavLink from '../../../../layout/nav/NavLink';
 import { t } from '../../../../i18n';
 import DeleteModal from '../../../../components/DeleteModal';
 
-const makeTitle = ({ name, fundingSource, apdType }, i) => {
+const makeTitle = ({ name, fundingSource, apdIsHitech }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (name) {
     title += `: ${name}`;
   } else {
     title += `: Untitled`;
   }
-  if (fundingSource && apdType === 'HITECH') {
+  if (fundingSource && apdIsHitech) {
     title += ` (${fundingSource})`;
   }
   return titleCase(title);
@@ -34,19 +35,27 @@ const EntryDetails = ({
   remove,
   apdType
 }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const container = useRef();
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const apdIsHitech = useMemo(() => apdType === APD_TYPE.HITECH, [apdType]);
+
+  const title = useMemo(
+    () => makeTitle({ name, fundingSource, apdIsHitech }, activityIndex + 1),
+    [fundingSource, name, apdIsHitech, activityIndex]
+  );
+
+  // shows delete button except for the first activity of a HITECH type
+  const showDeleteButton = activityIndex => {
+    const activityIndexNotOnFirst = activityIndex !== 0;
+    return !apdIsHitech || (apdIsHitech && activityIndexNotOnFirst);
+  };
 
   const onRemove = () => {
     remove(activityIndex);
     setShowDeleteModal(false);
   };
-
-  const title = useMemo(
-    () => makeTitle({ name, fundingSource, apdType }, activityIndex + 1),
-    [fundingSource, name, activityIndex]
-  );
 
   const editContent = (
     <div className="nowrap visibility--screen">
@@ -59,7 +68,7 @@ const EntryDetails = ({
       >
         Edit
       </Button>
-      {activityIndex > 0 && (
+      {showDeleteButton(activityIndex) && (
         <Fragment>
           <span>|</span>
           <Button
@@ -115,7 +124,7 @@ EntryDetails.propTypes = {
   fundingSource: PropTypes.string,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired,
-  apdType: PropTypes.string
+  apdType: PropTypes.string.isRequired
 };
 
 EntryDetails.defaultProps = {

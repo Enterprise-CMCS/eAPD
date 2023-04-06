@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   _id: '62a76c5310a0f01aaa73788b',
@@ -38,21 +38,43 @@ export default {
     },
     keyPersonnel: [
       {
-        costs: {
-          2022: 134090,
-          2023: 292000,
-          2024: 340000
-        },
+        name: 'Rowan Wilks',
+        position: 'Consul of Food',
         email: 'RW@testing.ai',
-        hasCosts: true,
         isPrimary: true,
         fte: {
           2022: 2,
           2023: 2,
           2024: 2
         },
-        name: 'Rowan Wilks',
-        position: 'Consul of Food'
+        hasCosts: true,
+        costs: {
+          2022: 134090,
+          2023: 292000,
+          2024: 340000
+        },
+        split: {
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          },
+          2024: {
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100,
+          2024: 100
+        }
       }
     ]
   },
@@ -289,21 +311,24 @@ export default {
         2022: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 30000
         },
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 26000
         },
         2024: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 320000
         }

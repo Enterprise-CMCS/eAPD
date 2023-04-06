@@ -46,24 +46,24 @@ class ExportPage {
   getPrevActExpenditureVals() {
     this.prevActYears.forEach(prevActYear => {
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_total prev_act_hithie_total_approved"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_total prev_act_hithie90_total_approved"]`
       )
         .invoke('text')
         .then(text => {
           this.expenditures.hithie.approved.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_federal prev_act_hithie_federal_approved"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_federal prev_act_hithie90_federal_approved"]`
       )
         .invoke('text')
         .then(text => {
           this.expenditures.hithie.FFP.push(extractNumber(text));
         });
       cy.get(
-        `[headers="prev_act_hithie_row_${prevActYear} ` +
-          `prev_act_hithie_federal prev_act_hithie_federal_actual"]`
+        `[headers="prev_act_hithie90_row_${prevActYear} ` +
+          `prev_act_hithie90_federal prev_act_hithie90_federal_actual"]`
       )
         .invoke('text')
         .then(text => {
@@ -284,12 +284,27 @@ class ExportPage {
       .should('contain', doesNotSupportsMedicaid);
   };
 
+  checkMilestones = ({ milestone, milestoneCompletionDate } = {}) => {
+    if (!milestone) {
+      cy.contains('Milestones')
+        .next()
+        .should('contain', 'Outcomes and Metrics');
+    } else {
+      cy.contains(milestone)
+        .should('exist')
+        .parent()
+        .next()
+        .should('contain', milestoneCompletionDate);
+    }
+  };
+
   checkOutcomes = ({ outcome, metrics } = {}) => {
     if (!outcome) {
-      cy.contains('Outcomes and Metrics')
+      cy.contains('Milestones')
         .next()
+        .should('contain', 'Outcomes and Metrics')
         .next()
-        .should('contain', 'Milestones');
+        .should('contain', 'State staff');
     } else {
       cy.contains(outcome)
         .should('exist')
@@ -299,23 +314,6 @@ class ExportPage {
             cy.contains(`${index + 1}. ${metric}`).should('exist');
           });
         });
-    }
-  };
-
-  checkMilestones = ({ milestone, milestoneCompletionDate } = {}) => {
-    if (!milestone) {
-      cy.contains('Outcomes and Metrics')
-        .next()
-        .next()
-        .should('contain', 'Milestones')
-        .next()
-        .should('contain', 'State staff');
-    } else {
-      cy.contains(milestone)
-        .should('exist')
-        .parent()
-        .next()
-        .should('contain', milestoneCompletionDate);
     }
   };
 
@@ -501,7 +499,7 @@ class ExportPage {
     return this.getAllActivityScheduleMilestoneTables()
       .eq(activityIndex)
       .find('thead>tr')
-      .last()
+      .first()
       .invoke('text');
   };
 

@@ -1,85 +1,38 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
-import { removeActivity } from '../../../../redux/actions/editActivity';
+import { APD_TYPE } from '@cms-eapd/common';
+import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
+import userEvent from '@testing-library/user-event';
 
 import {
-  plain as EntryDetails,
+  default as EntryDetails,
   mapStateToProps,
   mapDispatchToProps
 } from './Activity';
+import { removeActivity } from '../../../../redux/actions/editActivity';
 
-const mockPush = jest.fn();
+const defaultProps = {
+  remove: jest.fn()
+};
 
-jest.mock('react-router-dom', () => {
-  return {
-    useHistory: jest.fn().mockReturnValue({ push: () => mockPush() }),
-    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
-  };
-});
+const setup = async (props = {}, options = {}) => {
+  renderWithConnection(<EntryDetails {...defaultProps} {...props} />, options);
+  await waitFor(() => {
+    expect(screen.getByRole('heading')).toHaveTextContent('Activity');
+  });
+  const user = userEvent.setup();
+  return { user };
+};
 
 describe('the (Activity) EntryDetails component', () => {
-  const props = {
-    apdId: '0123456789abcdef01234567',
-    activityIndex: 2,
-    activityId: 'activity key',
-    fundingSource: 'money pit',
-    jumpAction: jest.fn(),
-    name: 'activity name',
-    remove: jest.fn()
-  };
-
   beforeEach(() => {
-    if (mockPush) {
-      mockPush.mockReset();
-    }
-    props.jumpAction.mockReset();
-    props.remove.mockClear();
+    jest.resetAllMocks();
   });
 
-  test('renders correctly with no activity name', () => {
-    expect(shallow(<EntryDetails {...props} name={null} />)).toMatchSnapshot();
-  });
-
-  test('renders correctly with no activity funding source/program', () => {
-    expect(
-      shallow(<EntryDetails {...props} fundingSource={null} />)
-    ).toMatchSnapshot();
-  });
-
-  test('renders correctly with no activity name or funding source/program', () => {
-    expect(
-      shallow(<EntryDetails {...props} fundingSource={null} name={null} />)
-    ).toMatchSnapshot();
-  });
-
-  test('does not render the delete button on the first element', () => {
-    const firstActivityProps = {
-      apdId: '0123456789abcdef01234567',
-      activityIndex: 0,
-      activityId: 'activity 1 key',
-      fundingSource: 'money pit',
-      jumpAction: jest.fn(),
-      name: 'activity 1 name',
-      remove: jest.fn()
-    };
-    const component = shallow(<EntryDetails {...firstActivityProps} />);
-    expect(component).toMatchSnapshot();
-  });
-
-  test('deletes the element', () => {
-    const component = shallow(<EntryDetails {...props} />);
-    const review = component.find('Review').dive();
-    // Second button is the delete button
-    review.find('Button').at(1).simulate('click');
-    // The remove function should not have fired.
-    expect(props.remove).toHaveBeenCalledTimes(0);
-  });
-
-  test('maps state to props', () => {
+  it('maps state to props', () => {
     const state = {
       apd: {
         data: {
+          apdType: APD_TYPE.HITECH,
           activities: [
             {
               fundingSource: 'money pit',
@@ -108,15 +61,311 @@ describe('the (Activity) EntryDetails component', () => {
 
     expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
       activityId: 'key3',
-      apdType: 'HITECH',
+      apdType: APD_TYPE.HITECH,
       fundingSource: 'appropriations',
       name: 'Congress Dollars'
     });
   });
 
-  test('maps dispatch to props', () => {
+  it('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
       remove: removeActivity
     });
+  });
+
+  it('renders the correct activity based on the activity index given', async () => {
+    const props = {
+      activityIndex: 2,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'MMIS',
+                name: 'Cool Activity'
+              },
+              {
+                activityId: '3110a314',
+                fundingSource: 'MMIS',
+                name: 'Extra Activity'
+              },
+              {
+                activityId: '3110a314',
+                fundingSource: 'MMIS',
+                name: 'The Choose Me Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 3: The Choose Me Activity'
+    );
+  });
+
+  it('renders funding source in the heading for HITECH types', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'HIE',
+                name: 'Cool Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 1: Cool Activity (HIE)'
+    );
+  });
+
+  it('renders WITHOUT funding source in the heading for non-HITECH (e.g. MMIS) types', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'MMIS',
+                name: 'Cool Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 1: Cool Activity'
+    );
+  });
+
+  it('renders "Untitled" when there is no activity name', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'HIE',
+                name: null
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 1: Untitled (HIE)'
+    );
+  });
+
+  it('renders when there is no funding source', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: null,
+                name: 'Cool Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 1: Cool Activity'
+    );
+  });
+
+  it('renders when there is no name and no funding source', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: null,
+                name: null
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(screen.getByRole('heading').textContent).toBe(
+      'Activity 1: Untitled'
+    );
+  });
+
+  it('renders the edit link', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    const { user } = await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'MMIS',
+                name: 'Cool Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+
+    await user.click(
+      screen.getByRole('link', { name: 'Edit: Activity 1: Cool Activity' })
+    );
+  });
+
+  it('renders the delete button', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    const { user } = await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.MMIS,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'MMIS',
+                name: 'Cool Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+
+    await user.click(
+      screen.getByRole('button', { name: 'Delete: Activity 1: Cool Activity' })
+    );
+
+    // Delete modal pop up displays
+    await waitFor(() => {
+      screen.getByText(/Do you want to delete this activity?/i);
+    });
+    screen.getByRole('button', { name: 'Delete Activity' });
+    screen.getByRole('button', { name: 'Cancel' });
+  });
+
+  it('renders WITHOUT the delete button when activity index is 0 for HITECH APD type', async () => {
+    const props = {
+      activityIndex: 0,
+      apdId: '1234',
+      key: '152a1e2b'
+    };
+    await setup(props, {
+      initialState: {
+        apd: {
+          data: {
+            apdType: APD_TYPE.HITECH,
+            activities: [
+              {
+                activityId: '152a1e2b',
+                fundingSource: 'MMIS',
+                name: 'Cool Activity'
+              },
+              {
+                activityId: '3110a314',
+                fundingSource: 'MMIS',
+                name: 'Extra Activity'
+              }
+            ]
+          },
+          adminCheck: {
+            enabled: false
+          }
+        }
+      }
+    });
+    expect(
+      screen.queryByRole('button', {
+        name: 'Delete: Activity 1: Cool Activity'
+      })
+    ).not.toBeInTheDocument();
   });
 });

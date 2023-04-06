@@ -27,14 +27,14 @@ Object {
       Object {
         "checked": null,
         "explanation": "",
-        "title": "45 CFR Part 92.36",
+        "title": "45 CFR Part 75.326",
       },
     ],
     "recordsAccess": Array [
       Object {
         "checked": null,
         "explanation": "",
-        "title": "42 CFR Part 433.112(b)(5)-(9)",
+        "title": "45 CFR Part 433.112 (b)(5)-(9)",
       },
       Object {
         "checked": null,
@@ -51,7 +51,7 @@ Object {
       Object {
         "checked": null,
         "explanation": "",
-        "title": "45 CFR Part 95.617",
+        "title": "45 CFR 95.617",
       },
       Object {
         "checked": null,
@@ -84,7 +84,7 @@ Object {
   "previousActivities": Object {
     "actualExpenditures": Object {
       "2021": Object {
-        "mmis": Object {
+        "ddi": Object {
           "50": Object {
             "federalActual": 0,
             "totalApproved": 0,
@@ -94,13 +94,23 @@ Object {
             "totalApproved": 0,
           },
           "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+        "mando": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },
         },
       },
       "2022": Object {
-        "mmis": Object {
+        "ddi": Object {
           "50": Object {
             "federalActual": 0,
             "totalApproved": 0,
@@ -114,9 +124,19 @@ Object {
             "totalApproved": 0,
           },
         },
+        "mando": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
       },
       "2023": Object {
-        "mmis": Object {
+        "ddi": Object {
           "50": Object {
             "federalActual": 0,
             "totalApproved": 0,
@@ -126,6 +146,16 @@ Object {
             "totalApproved": 0,
           },
           "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+        "mando": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
             "federalActual": 0,
             "totalApproved": 0,
           },

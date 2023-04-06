@@ -39,8 +39,20 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { generateKey, defaultAPDYearOptions, APD_TYPE } from '@cms-eapd/common';
-import initialAssurances from '../../util/regulations';
+
+import {
+  generateKey,
+  defaultAPDYearOptions,
+  APD_TYPE,
+  FUNDING_CATEGORY_TYPE
+} from '@cms-eapd/common';
+
+export const apdValid = apdType => {
+  if (apdType === APD_TYPE.HITECH || apdType === APD_TYPE.MMIS) {
+    return true;
+  }
+  return false;
+};
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
@@ -133,6 +145,25 @@ export const getPatchesToAddYear = (state, year) => {
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
       value: 0
     });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`,
+      value:
+        apdType === APD_TYPE.HITECH
+          ? {
+              federal: 90,
+              state: 10,
+              fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+            }
+          : { federal: 0, state: 0, fundingCategory: null }
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`,
+      value: 0
+    });
   });
 
   return patches;
@@ -216,6 +247,16 @@ export const getPatchesToRemoveYear = (state, year) => {
       op: 'remove',
       path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
     });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/split/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/keyStatePersonnel/keyPersonnel/${i}/medicaidShare/${year}`
+    });
   });
 
   return patches;
@@ -243,27 +284,36 @@ const getHumanTimestamp = iso8601 => {
 };
 
 const getKeyPersonnelSplit = (years, apdType) => {
-  let split;
   switch (apdType) {
     case 'HITECH':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
+          }
+        }),
         {}
       );
-      break;
     case 'MMIS':
-      split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+      return years.reduce(
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
-      break;
     default:
       return years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
   }
-  return split;
 };
 
 export const getKeyPersonnel = (
@@ -301,6 +351,28 @@ export const getAPDName = ({
     data: { name }
   }
 }) => name;
+
+export const getUpdateStatus = ({
+  apd: {
+    data: {
+      apdOverview: { updateStatus }
+    }
+  }
+}) => updateStatus;
+
+export const getMedicaidBusinessAreas = ({
+  apd: {
+    data: {
+      apdOverview: { medicaidBusinessAreas }
+    }
+  }
+}) => medicaidBusinessAreas;
+
+export const getPrioritiesAndScope = ({
+  apd: {
+    data: { statePrioritiesAndScope }
+  }
+}) => statePrioritiesAndScope;
 
 export const getAPDYearRange = ({
   apd: {
@@ -359,11 +431,6 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
       return [{ op: 'add', path, value: null }];
   }
 };
-
-const getAssurancesAndCompliances = assurancesAndCompliances =>
-  Object.values(assurancesAndCompliances).every(regs => regs.length > 0)
-    ? assurancesAndCompliances
-    : initialAssurances;
 
 const initialState = {
   data: {},
@@ -585,9 +652,6 @@ const reducer = (state = initialState, action) => {
                 key: generateKey()
               }))
             })
-          ),
-          assurancesAndCompliances: getAssurancesAndCompliances(
-            action.data.apd.assurancesAndCompliances
           )
         },
         adminCheck: {

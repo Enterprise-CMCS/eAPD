@@ -1,33 +1,65 @@
 title: Other Funding
-description:
-  instruction:
-    heading: Other Funding Description
-    detail: >-
-      Provide a high level description of funds that are not directly tied to
-      the HITECH Medicaid grant. This funding may come from another federal
-      source, another state agency, and/or donations or contributions from a
-      third party such as payer and provider subscription fees. If other funds
-      will be used to cover the State share tied to the HITECH Medicaid grant,
-      please include a justification for this here. (Review SMD Letter 10‐016
-      for examples of grants for inclusion.)
-    helpText: ''
-amount:
-  instruction:
-    heading: Other Funding Amount
-    detail: >-
-      Provide the total amount of funds not associated with the HITECH Medicaid
-      grant (i.e. any cost allocated funding from all parties) and the amount
-      from other funding that will will not be used for the State share of the
-      HITECH Medicaid grant. This amount will be deducted from the total cost of
-      the activity to calculate the total computable Medicaid cost for this
-      activity.
-    helpText: >-
-      Example: For a $1,000,000 project that is 80% cost allocated to Medicaid
-      (related to 80% Medicaid transaction volume, for example) and 20% for all
-      other stakeholders, enter $200,000 (20% of $1,000,000).
+HITECH:
+  title: Other Funding
+  description:
+    instruction:
+      heading: Other Funding Description
+      detail: >-
+        Provide a high level description of funds that are not directly tied to
+        the HITECH Medicaid grant. This funding may come from another federal
+        source, another state agency, and/or donations or contributions from a
+        third party such as payer and provider subscription fees. If other funds
+        will be used to cover the State share tied to the HITECH Medicaid grant,
+        please include a justification for this here. (Review SMD Letter 10‐016
+        for examples of grants for inclusion.)
+      helpText: ''
+  amount:
+    instruction:
+      heading: Other Funding Amount
+      detail: >-
+        Provide the total amount of funds not associated with the HITECH
+        Medicaid grant (i.e. any cost allocated funding from all parties) and
+        the amount from other funding that will not be used for the State share
+        of the HITECH Medicaid grant. This amount will be deducted from the
+        total cost of the activity to calculate the total computable Medicaid
+        cost for this activity.
+      helpText: >-
+        **Example:** For a $1,000,000 project that is 80% cost allocated to
+        Medicaid (related to 80% Medicaid transaction volume, for example) and
+        20% for all other stakeholders, enter $200,000 (20% of $1,000,000). 
 
+        **Example:** For a $1,000,000 project which receives a $100,000 grant
+        (i.e. other funding) prior to cost allocation and is cost allocated to
+        Medicaid at 80%, enter $280,000 ($100,000 [other funding] + $180,000
+        [20% of the remaining $900,000]).
+MMIS:
+  title: Other Funding
+  description:
+    instruction:
+      heading: Other Funding Description
+      detail: >-
+        Provide a high-level description of funds that are not directly tied to
+        the Medicaid grant. This funding may come from another federal source,
+        another state agency, and/or donations or contributions from a third
+        party such as payer and provider subscription fees. If other funds will
+        be used to cover the State share tied to the Medicaid grant, please
+        include a justification for this here.
+      helpText: ''
+  amount:
+    instruction:
+      heading: Other Funding Amount
+      detail: >-
+        Provide the total amount of funds not associated with the Medicaid grant
+        (i.e. any cost allocated funding from all parties) and the amount from
+        other funding that will not be used for the State share of the Medicaid
+        grant. This amount will be deducted from the total cost of the activity
+        to calculate the total computable Medicaid cost for this activity.
+      helpText: >-
+        **Example:** For a $1,000,000 project that is 80% cost allocated to
+        Medicaid (related to 80% Medicaid transaction volume, for example) and
+        20% for all other stakeholders, enter $200,000 (20% of $1,000,000). 
 
-      Example: For a $1,000,000 project which receives a $100,000 grant (i.e.
-      other funding) prior to cost allocation and is cost allocated to Medicaid
-      at 80%, enter $280,000 ($100,000 [other funding] + $180,000 [20% of the
-      remaining $900,000]).
+        **Example:** For a $1,000,000 project which receives a $100,000 grant
+        (i.e. other funding) prior to cost allocation and is cost allocated to
+        Medicaid at 80%, enter $280,000 ($100,000 [other funding] + $180,000
+        [20% of the remaining $900,000]).

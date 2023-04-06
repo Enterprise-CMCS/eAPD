@@ -1,20 +1,33 @@
-import { login, api } from '../../endpoint-tests/utils.js';
+import {
+  getDB,
+  setupDB,
+  teardownDB,
+  apiAllPermissions,
+  apiNoAuth
+} from '../../endpoint-tests/utils.js';
 
 describe('Document endpoints', () => {
+  const db = getDB();
+  const api = apiAllPermissions;
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
+
   describe('Get help doc | GET /docs/account-registration', () => {
     const url = '/docs/account-registration';
 
     it('when authenticated', async () => {
-      const authApi = login();
-
-      const response = await authApi.get(url);
+      const response = await api.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
     });
 
     it('when not authenticated', async () => {
-      const response = await api.get(url);
+      const response = await apiNoAuth.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
@@ -25,16 +38,32 @@ describe('Document endpoints', () => {
     const url = '/docs/system-access';
 
     it('when authenticated', async () => {
-      const authApi = login();
-
-      const response = await authApi.get(url);
+      const response = await api.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();
     });
 
     it('when not authenticated', async () => {
+      const response = await apiNoAuth.get(url);
+
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
+    });
+  });
+
+  describe('Get help doc | GET /docs/admin-registration', () => {
+    const url = '/docs/admin-registration';
+
+    it('when authenticated', async () => {
       const response = await api.get(url);
+
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot();
+    });
+
+    it('when not authenticated', async () => {
+      const response = await apiNoAuth.get(url);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot();

@@ -47,7 +47,7 @@ const ContractorResourceReview = ({
           <strong>Total Contract Cost:</strong> <Dollars>{totalCost}</Dollars>
         </li>
         {apdFFYs.map(ffy =>
-          useHourly === 'no' || useHourly == false ? (
+          useHourly === 'false' || useHourly == false ? (
             <li key={ffy}>
               <strong>FFY {ffy} Cost:</strong> <Dollars>{years[ffy]}</Dollars>
             </li>

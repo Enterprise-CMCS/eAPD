@@ -27,11 +27,6 @@ exports[`Section component renders correctly with resource containing title but 
 <section
   id={null}
 >
-  <h2
-    className="ds-h2"
-  >
-    Outcomes and Metrics
-  </h2>
   outcomes test child
   <Connect(SecondaryNav) />
 </section>
@@ -41,14 +36,9 @@ exports[`Subsection component renders correctly 1`] = `
 <div
   className="subsection--title"
 >
-  <h3
-    className=" ds-h3"
-    id={null}
-  >
-    Outcomes and Metrics
-  </h3>
   <Instruction
     args={null}
+    disableTitleCaseConversion={false}
     headingDisplay={
       Object {
         "className": "ds-h3",
@@ -67,14 +57,9 @@ exports[`Subsection component uses the passed-in heading class 1`] = `
 <div
   className="subsection--title"
 >
-  <h3
-    className="bobs-burgers ds-h3"
-    id={null}
-  >
-    Outcomes and Metrics
-  </h3>
   <Instruction
     args={null}
+    disableTitleCaseConversion={false}
     headingDisplay={
       Object {
         "className": "ds-h3",

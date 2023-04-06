@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import {
   // activitiesDashboard,
+  apdNameSchema,
   hitechOverviewSchema,
   mmisOverviewSchema,
   keyStatePersonnelSchema,
@@ -18,7 +19,8 @@ import {
   statePersonnelSchema,
   expensesSchema,
   contractorResourcesSchema,
-  costAllocationSchema,
+  hitechCostAllocationSchema,
+  mmisCostAllocationSchema,
   costAllocationNarrativeSchema,
   proposedBudgetSchema,
   securityPlanningSchema,
@@ -39,10 +41,7 @@ export const hitechCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
-    'string.base': 'Provide an APD name',
-    'string.empty': 'Provide an APD name'
-  }),
+  name: apdNameSchema,
   years: Joi.any(),
   yearOptions: Joi.any(),
   apdOverview: hitechOverviewSchema,
@@ -67,7 +66,7 @@ export const hitechCombinedSchema = Joi.object({
       statePersonnel: Joi.array().items(statePersonnelSchema),
       expenses: Joi.array().items(expensesSchema),
       contractorResources: Joi.array().items(contractorResourcesSchema),
-      costAllocation: costAllocationSchema,
+      costAllocation: hitechCostAllocationSchema,
       costAllocationNarrative: costAllocationNarrativeSchema,
       quarterlyFFP: Joi.any() // quarterlyFFP is validated in the budget
     }),
@@ -102,10 +101,7 @@ export const mmisCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
-    'string.base': 'Provide an APD name',
-    'string.empty': 'Provide an APD name'
-  }),
+  name: apdNameSchema,
   years: Joi.any(),
   yearOptions: Joi.any(),
   apdOverview: mmisOverviewSchema,
@@ -117,6 +113,7 @@ export const mmisCombinedSchema = Joi.object({
     id: Joi.any(),
     activityId: Joi.any(),
     name: activityNameSchema,
+    fundingSource: Joi.string().valid('MMIS').required(),
     activityOverview: mmisActivityOverviewSchema,
     analysisOfAlternativesAndRisks: analysisOfAlternativesAndRisksSchema,
     conditionsForEnhancedFunding: conditionsForEnhancedFundingSchema,
@@ -126,7 +123,7 @@ export const mmisCombinedSchema = Joi.object({
     statePersonnel: Joi.array().items(statePersonnelSchema),
     expenses: Joi.array().items(expensesSchema),
     contractorResources: Joi.array().items(contractorResourcesSchema),
-    costAllocation: costAllocationSchema,
+    costAllocation: mmisCostAllocationSchema,
     costAllocationNarrative: costAllocationNarrativeSchema,
     quarterlyFFP: Joi.any() // quarterlyFFP is validated in the budget
   }),

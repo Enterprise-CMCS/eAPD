@@ -22,6 +22,14 @@ section > fieldset {
   }
 }
 
+fieldset.full-width {
+  max-width: max-content;
+
+  div.ds-c-choice-wrapper {
+    max-width: max-content;
+  }
+}
+
 button,
 .ds-c-button {
   &:disabled {

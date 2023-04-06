@@ -11,14 +11,19 @@ const contractorResourcesSchema = Joi.object({
     'string.empty': 'Provide a private contractor or vendor name.',
     'string.min': 'Provide a private contractor or vendor name.'
   }),
-  description: Joi.string().trim().min(1).required().messages({
-    'string.base':
-      'Provide a procurement methodology and description of services.',
-    'string.empty':
-      'Provide a procurement methodology and description of services.',
-    'string.min':
-      'Provide a procurement methodology and description of services.'
-  }),
+  description: Joi.string()
+    .trim()
+    .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+    .min(1)
+    .required()
+    .messages({
+      'string.base':
+        'Provide a procurement methodology and description of services.',
+      'string.empty':
+        'Provide a procurement methodology and description of services.',
+      'string.min':
+        'Provide a procurement methodology and description of services.'
+    }),
   start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
     'date.required': 'Provide a start date.',
     'date.base': 'Provide a start date.',
@@ -45,17 +50,16 @@ const contractorResourcesSchema = Joi.object({
     'number.positive': 'Provide a contract cost greater than or equal to $0.',
     'number.allow': 'Provide a contract cost greater than or equal to $0.'
   }),
-  useHourly: Joi.alternatives()
-    .try(Joi.string().min(1), Joi.boolean())
-    .required()
-    .messages({
-      'alternatives.match': 'Must select hourly or yearly.',
-      'alternatives.types': 'Must select hourly or yearly.',
-      'string.base': 'Must select hourly or yearly.',
-      'string.empty': 'Must select hourly or yearly.'
-    }),
+  useHourly: Joi.boolean().required().messages({
+    'alternatives.match': 'Must select hourly or yearly.',
+    'alternatives.types': 'Must select hourly or yearly.',
+    'string.base': 'Must select hourly or yearly.',
+    'string.empty': 'Must select hourly or yearly.',
+    'boolean.base': 'Must select hourly or yearly.',
+    'boolean.empty': 'Must select hourly or yearly.'
+  }),
   hourly: Joi.alternatives().conditional('useHourly', {
-    is: 'yes',
+    is: true,
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.object({
@@ -83,7 +87,7 @@ const contractorResourcesSchema = Joi.object({
     otherwise: Joi.any()
   }),
   years: Joi.alternatives().conditional('useHourly', {
-    is: 'no',
+    is: false,
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.number().positive().allow(0).required().messages({

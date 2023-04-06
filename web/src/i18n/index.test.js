@@ -13,7 +13,7 @@ describe('i18n translations', () => {
   beforeEach(async () => load());
 
   test('t function', () => {
-    expect(container.t('title', { year: 2018 })).toBe('2018 HITECH APD');
+    expect(container.t('title', { year: 2018 })).toBe('2018 APD');
     expect(container.t('nonsense')).toBe('[missing "en.nonsense" translation]');
   });
 

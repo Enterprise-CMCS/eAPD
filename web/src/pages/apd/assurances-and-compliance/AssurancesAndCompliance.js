@@ -1,10 +1,14 @@
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from '../../../components/ChoiceList';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
-import { hitechAssurancesAndComplianceSchema as schema } from '@cms-eapd/common';
+import {
+  APD_TYPE,
+  hitechAssurancesAndComplianceSchema,
+  mmisAssurancesAndComplianceSchema
+} from '@cms-eapd/common';
 
 import { titleCase } from 'title-case';
 import {
@@ -12,10 +16,12 @@ import {
   setComplyingWithRecordsAccess,
   setComplyingWithSecurity,
   setComplyingWithSoftwareRights,
+  setComplyingWithIndependentVV,
   setJustificationForProcurement,
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
-  setJustificationForSoftwareRights
+  setJustificationForSoftwareRights,
+  setJustificationForIndependentVV
 } from '../../../redux/actions/editApd';
 import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
@@ -23,7 +29,8 @@ import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
 import {
   selectFederalCitations,
-  selectAdminCheckEnabled
+  selectAdminCheckEnabled,
+  selectApdType
 } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
@@ -52,15 +59,28 @@ const AssurancesAndCompliance = ({
   complyingWithRecordsAccess,
   complyingWithSecurity,
   complyingWithSoftwareRights,
+  complyingWithIndependentVV,
   justificationForProcurement,
   justificationForRecordsAccess,
   justificationForSecurity,
   justificationForSoftwareRights,
+  justificationForIndependentVV,
+  apdType,
   adminCheck
 }) => {
   AssurancesAndCompliance.displayName = 'AssurancesAndCompliance';
 
-  const { procurement, recordsAccess, softwareRights, security } = citations;
+  const {
+    procurement = {},
+    recordsAccess = {},
+    softwareRights = {},
+    security = {},
+    independentVV = {}
+  } = citations;
+  const schema =
+    apdType === APD_TYPE.HITECH
+      ? hitechAssurancesAndComplianceSchema
+      : mmisAssurancesAndComplianceSchema;
 
   const {
     control,
@@ -73,7 +93,8 @@ const AssurancesAndCompliance = ({
       procurement,
       recordsAccess,
       softwareRights,
-      security
+      security,
+      independentVV
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -98,6 +119,8 @@ const AssurancesAndCompliance = ({
         return complyingWithSecurity(index, newValue);
       case 'softwareRights':
         return complyingWithSoftwareRights(index, newValue);
+      case 'independentVV':
+        return complyingWithIndependentVV(index, newValue);
       default:
         return null;
     }
@@ -113,6 +136,8 @@ const AssurancesAndCompliance = ({
         return justificationForSecurity(index, value);
       case 'softwareRights':
         return justificationForSoftwareRights(index, value);
+      case 'independentVV':
+        return justificationForIndependentVV(index, value);
       default:
         return null;
     }
@@ -126,8 +151,11 @@ const AssurancesAndCompliance = ({
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"
         >
-          {Object.entries(regLinks).map(([name, regulations]) => (
-            <div key={name} className="ds-u-margin-bottom--3">
+          {Object.entries(regLinks[apdType]).map(([name, regulations]) => (
+            <div
+              key={name}
+              className="ds-u-margin-top--6 ds-u-margin-bottom--0"
+            >
               <h4 className="ds-h4">
                 {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
               </h4>
@@ -201,6 +229,7 @@ const AssurancesAndCompliance = ({
                       ]}
                       type="radio"
                       size="small"
+                      className="ds-u-margin-top--0"
                       onChange={e => {
                         const boolValue = e.target.value === 'yes';
                         radioOnChange(boolValue);
@@ -228,19 +257,23 @@ const AssurancesAndCompliance = ({
 
 AssurancesAndCompliance.propTypes = {
   citations: PropTypes.object.isRequired,
+  apdType: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool.isRequired,
   complyingWithProcurement: PropTypes.func.isRequired,
   complyingWithRecordsAccess: PropTypes.func.isRequired,
   complyingWithSecurity: PropTypes.func.isRequired,
   complyingWithSoftwareRights: PropTypes.func.isRequired,
+  complyingWithIndependentVV: PropTypes.func.isRequired,
   justificationForProcurement: PropTypes.func.isRequired,
   justificationForRecordsAccess: PropTypes.func.isRequired,
   justificationForSecurity: PropTypes.func.isRequired,
   justificationForSoftwareRights: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  justificationForIndependentVV: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
+  apdType: (selectApdType(state) || '').toLowerCase(),
   adminCheck: selectAdminCheckEnabled(state)
 });
 
@@ -249,10 +282,12 @@ const mapDispatchToProps = {
   complyingWithRecordsAccess: setComplyingWithRecordsAccess,
   complyingWithSecurity: setComplyingWithSecurity,
   complyingWithSoftwareRights: setComplyingWithSoftwareRights,
+  complyingWithIndependentVV: setComplyingWithIndependentVV,
   justificationForProcurement: setJustificationForProcurement,
   justificationForRecordsAccess: setJustificationForRecordsAccess,
   justificationForSecurity: setJustificationForSecurity,
-  justificationForSoftwareRights: setJustificationForSoftwareRights
+  justificationForSoftwareRights: setJustificationForSoftwareRights,
+  justificationForIndependentVV: setJustificationForIndependentVV
 };
 
 export default connect(
