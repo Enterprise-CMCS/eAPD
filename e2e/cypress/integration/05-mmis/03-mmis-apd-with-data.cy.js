@@ -2,6 +2,7 @@ import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
 import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
+import { testKeyStatePersonnelWithDataMmis } from '../../helpers/apd/key-state-personnel.js';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -19,7 +20,10 @@ describe(
 
       cy.findAllByText('Create new').click();
       cy.findByRole('radio', { name: /MMIS/i }).click();
-      cy.findByLabelText('APD Name').clear().type('My MMIS IAPD').blur();
+      cy.findByLabelText('APD Name')
+        .clear()
+        .type('MMIS IAPD - Temp Name')
+        .blur();
       cy.findByRole('radio', {
         name: /No, this is for a new project./i
       }).click();
@@ -55,19 +59,23 @@ describe(
       cy.visit(apdUrl);
     });
 
-    after(function () {
-      cy.useStateStaff();
-      cy.visit('/');
-      cy.deleteAPD(this.apdId);
-    });
+    // after(function () {
+    //   cy.useStateStaff();
+    //   cy.visit('/');
+    //   cy.deleteAPD(this.apdId);
+    // });
 
     describe('Form View', function () {
       describe('MMIS APD Overview', function () {
         testMmisAPDOverviewWithData();
       });
 
-      describe('first', function () {
+      describe('State Priorities and Scope of APD', function () {
         testStatePrioritiesAndScopeWithData();
+      });
+
+      describe.only('Key State Personnel', function () {
+        testKeyStatePersonnelWithDataMmis();
       });
 
       describe('add activity', function () {

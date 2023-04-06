@@ -190,14 +190,76 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
-      testApdName(); // Try removing the describe above and moving testApdName to the it below
+      testApdName();
 
-      it('tests APD Update section', () => {
+      it('tests APD Update section and FFYs', () => {
+        const allYears = [];
+
         cy.goToApdOverview();
 
-        // When No is selected in the Is Update section, Update Type options do NOT display
+        // Check all of the years
+        cy.get('[data-cy=yearList]').within(() => {
+          cy.get("[class='ds-c-choice']").each(($el, index, list) => {
+            allYears.push(list[index].value);
+            if (!list[index].checked) {
+              cy.findByRole('checkbox', { name: list[index].value }).check({
+                force: true
+              });
+            }
+          });
+        });
+
+        cy.then(() => {
+          // The last FFY should be check
+          cy.get('#apd-header-info').should('contain', allYears[0]);
+          cy.get('#apd-header-info').should(
+            'contain',
+            allYears[allYears.length - 1]
+          );
+
+          // Testing delete(cancel) last FFY
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).uncheck({
+            force: true
+          });
+
+          // Cancel the delete
+          cy.contains('Delete FFY?').should('exist');
+          cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+          cy.get('button[id="dialog-cancel"]').click({ force: true });
+
+          // the last FFY should still be check
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).should('be.checked');
+          cy.get('#apd-header-info').should(
+            'contain',
+            allYears[allYears.length - 1]
+          );
+
+          // Testing delete(confirm) last FFY
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).uncheck({
+            force: true
+          });
+          cy.get('button[id="dialog-delete"]').click({ force: true });
+          cy.contains('Delete FFY?').should('not.exist');
+
+          // the last FFY should not be checked
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).should('not.be.checked');
+          cy.get('#apd-header-info').should(
+            'not.contain',
+            allYears[allYears.length - 1]
+          );
+        });
+
         cy.findByText('Is this an APD update?').should('exist');
 
+        // When No is selected in the Is Update section, Update Type options do NOT display
         cy.findByRole('radio', {
           name: /No, this is for a new project./i
         }).click();
