@@ -4,7 +4,8 @@
 sudo su <<R_USER
 #!/bin/bash
 yum upgrade -y
-yum update -y 
+yum update -y
+
 # Update Logrotate Configuration
 # Logs are offloaded to CloudWatch & Splunk
 sed -i 's|weekly|daily|g' /etc/logrotate.conf

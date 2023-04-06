@@ -84,7 +84,6 @@ openssl rsa -passin pass:x -in /app/tls/server.pass.key -out /app/tls/server.key
 rm -f /app/tls/server.pass.key
 
 # Use the instance metadata service to get public hostname
-#openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
 openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(wget -qO- http://169.254.169.254/latest/meta-data/public-hostname)"
 openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
 rm -f /app/tls/server.csr
