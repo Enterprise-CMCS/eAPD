@@ -75,3 +75,8 @@ export {
 export { hitechCombinedSchema, mmisCombinedSchema } from './combined.js';
 
 export { default as newApdSchema } from './apdNew.js';
+
+export {
+  dollarFieldReqAndMsg,
+  previousActivitySchema
+} from './previousActivityTables.js';

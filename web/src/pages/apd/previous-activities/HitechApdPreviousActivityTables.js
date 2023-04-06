@@ -3,7 +3,6 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
 
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
@@ -15,42 +14,7 @@ import {
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
-
-const schemaRequirements = Joi.number()
-  .positive()
-  .allow(0)
-  .required()
-  .messages({
-    'number.base': 'Provide a dollar amount greater than or equal to $0',
-    'number.empty': 'Provide a dollar amount greater than or equal to $0',
-    'number.format': 'Provide a dollar amount greater than or equal to $0',
-    'number.positive': 'Provide a dollar amount greater than or equal to $0',
-    'number.allow': 'Provide a dollar amount greater than or equal to $0'
-  });
-
-const schema = Joi.object().pattern(
-  /\d{4}/,
-  Joi.object({
-    hithie: Joi.object({
-      totalApproved: schemaRequirements,
-      federalActual: schemaRequirements
-    }),
-    mmis: Joi.object({
-      50: Joi.object({
-        totalApproved: schemaRequirements,
-        federalActual: schemaRequirements
-      }),
-      75: Joi.object({
-        totalApproved: schemaRequirements,
-        federalActual: schemaRequirements
-      }),
-      90: Joi.object({
-        totalApproved: schemaRequirements,
-        federalActual: schemaRequirements
-      })
-    })
-  })
-);
+import { previousActivitySchema as schema } from '@/common/schemas/previousActivityTables';
 
 const HitechApdPreviousActivityTables = ({
   isViewOnly,
