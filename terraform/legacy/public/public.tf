@@ -38,5 +38,6 @@ module "instances" {
     eapd_jumpbox_key_name_tb                  = var.eapd_jumpbox_key_name_tb
     eapd_jumpbox_vpc_security_group_ids       = var.eapd_jumpbox_vpc_security_group_ids
     eapd_jumpbox_subnet_id                    = var.eapd_jumpbox_subnet_id
+    newrelic_liscense_key                     = var.newrelic_liscense_key
 }
 
