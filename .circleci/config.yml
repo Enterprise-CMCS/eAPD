@@ -11,7 +11,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
     jobs:
       - cleanup preview deploys
 
@@ -23,7 +23,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
     jobs:
       - cleanup packer amis
 
@@ -417,6 +417,9 @@ workflows:
           requires:
             - dependency vulnerability scan
             - frontend build prod
+      - cleanup preview deploys:
+          name: cleanup preview deploys
+          requires: preview deploy
 
 jobs:
   # ===== Independent jobs =====
