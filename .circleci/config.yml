@@ -416,14 +416,7 @@ workflows:
               only: /^v.*/
           requires:
             - dependency vulnerability scan
-            - frontend build prod
-      - cleanup preview deploys:
-          name: cleanup preview deploys
-          filters:
-            branches:
-              only:
-                - main
-          requires: preview deploy                
+            - frontend build prod     
 
 jobs:
   # ===== Independent jobs =====
