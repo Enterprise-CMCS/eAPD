@@ -3,6 +3,7 @@ import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-pri
 import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 import { testKeyStatePersonnelWithDataMmis } from '../../helpers/apd/key-state-personnel.js';
+import { testMmisResultsOfPreviousActivitiesWithData } from '../../helpers/apd/results-of-previous-activities.js';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -74,8 +75,12 @@ describe(
         testStatePrioritiesAndScopeWithData();
       });
 
-      describe.only('Key State Personnel', function () {
+      describe('Key State Personnel', function () {
         testKeyStatePersonnelWithDataMmis();
+      });
+
+      describe.only('Results of Previous Activities', function () {
+        testMmisResultsOfPreviousActivitiesWithData();
       });
 
       describe('add activity', function () {

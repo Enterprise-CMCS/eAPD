@@ -102,81 +102,81 @@
   "previousActivities": {
     "previousActivitySummary": "This is the previous activities summary",
     "actualExpenditures": {
-      "2022": {
+      "2021": {
         "ddi": {
           "50": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 345623,
+            "totalApproved": 7234523
           },
           "75": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 56742,
+            "totalApproved": 95672
           },
           "90": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 896743,
+            "totalApproved": 45262
           }
         },
         "mando": {
           "50": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 845682,
+            "totalApproved": 907656
           },
           "75": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 63457,
+            "totalApproved": 84411
+          }
+        }
+      },
+      "2022": {
+        "ddi": {
+          "50": {
+            "federalActual": 84564,
+            "totalApproved": 67932
+          },
+          "75": {
+            "federalActual": 864567,
+            "totalApproved": 678343
+          },
+          "90": {
+            "federalActual": 23462,
+            "totalApproved": 67595
+          }
+        },
+        "mando": {
+          "50": {
+            "federalActual": 67953,
+            "totalApproved": 43563
+          },
+          "75": {
+            "federalActual": 28230,
+            "totalApproved": 37872
           }
         }
       },
       "2023": {
         "ddi": {
           "50": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 98445,
+            "totalApproved": 94221
           },
           "75": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 56245,
+            "totalApproved": 83345
           },
           "90": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 658234,
+            "totalApproved": 23459
           }
         },
         "mando": {
           "50": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 834545,
+            "totalApproved": 48523
           },
           "75": {
-            "federalActual": 0,
-            "totalApproved": 0
-          }
-        }
-      },
-      "2024": {
-        "ddi": {
-          "50": {
-            "federalActual": 0,
-            "totalApproved": 0
-          },
-          "75": {
-            "federalActual": 0,
-            "totalApproved": 0
-          },
-          "90": {
-            "federalActual": 0,
-            "totalApproved": 0
-          }
-        },
-        "mando": {
-          "50": {
-            "federalActual": 0,
-            "totalApproved": 0
-          },
-          "75": {
-            "federalActual": 0,
-            "totalApproved": 0
+            "federalActual": 11232,
+            "totalApproved": 85634
           }
         }
       }

@@ -150,7 +150,7 @@ const MmisApdPreviousActivityTables = ({
                   <td
                     headers={`prev_act_mmis_row_${year}_${level.ffp}_${level.fundingTypeSchema}`}
                     className="budget-table--number"
-                    data-cy={`prev_act_mmis${level.ffp}_federal_approved_${year}`}
+                    data-cy={`prev_act_mmis${level.ffp}_federal_approved_${level.fundingTypeSchema}_${year}`}
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
