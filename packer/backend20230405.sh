@@ -3,6 +3,8 @@
 # Become root user to perform installation and configuration
 sudo su <<R_USER
 #!/bin/bash
+yum upgrade -y
+yum update -y
 
 # Update Logrotate Configuration
 # Logs are offloaded to CloudWatch & Splunk
@@ -18,17 +20,13 @@ mkdir /app
 chown -R :eapd /app
 chmod g+w /app
 
-# Oddly, EC2 images don't have git installed.
+# Install Git
 yum -y install git
-
-# Install New Relic Infrastructure Monitor
-curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
-yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
-yum install newrelic-infra -y
 
 # Become the default user. Everything between "<<E_USER" and "E_USER" will be
 # run in the context of this su command.
 su ec2-user <<E_USER
+
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
