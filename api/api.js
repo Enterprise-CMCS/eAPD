@@ -47,8 +47,6 @@ const logger = loggerFactory('main');
 
 // deepcode ignore UseCsurfForExpress: we need a larger ticket to implement csurf
 const api = express();
-const router = express.Router();
-api.use('/api', router);
 
 // Turn off the X-Powered-By header that reveals information about the api
 // architecture. No need just giving away all the information, though this
