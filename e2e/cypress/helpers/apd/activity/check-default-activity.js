@@ -241,10 +241,10 @@ export const checkDefaultActivity = function () {
                   ...overviewData
                 });
 
+                exportPage.checkMilestones({});
+
                 // Check Outcomes and Metrics
                 exportPage.checkOutcomes({});
-
-                exportPage.checkMilestones({});
 
                 // Check State Staff and Expenses
                 exportPage.checkStateStaff({});

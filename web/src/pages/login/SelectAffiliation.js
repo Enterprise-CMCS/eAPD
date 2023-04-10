@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { ChoiceList } from '@cmsgov/design-system';
+import ChoiceList from '../../components/ChoiceList';
 import CardForm from '../../components/CardForm';
 
 import { STATES } from '../../util/states';

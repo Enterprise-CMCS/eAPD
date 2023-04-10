@@ -123,7 +123,7 @@ const ConditionsForEnhancedFunding = ({
               ]}
               type="radio"
               size="small"
-              className="ds-u-margin-top--0"
+              className="ds-u-margin-top--0 full-width"
               onChange={({ target: { value } }) => {
                 onRadioChange(value);
                 handleQualificationChange(value);
