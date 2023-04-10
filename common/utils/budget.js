@@ -650,8 +650,6 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
           budget['combined'][year].total += keyStatePersonnelTotal;
           budget['combined'].total.total += keyStatePersonnelTotal;
 
-          // get the fundingType and federal-state split from the `keyPersonnel`
-          // and do this for total cost, federal cost, state cost, and medicaid cost
           // Add total cost (before medicaid and fed-state split) to the mmis by category(ddi/mando) budget
           budget[fundingCategory][fedStateSplit]['keyStatePersonnel'][
             year
