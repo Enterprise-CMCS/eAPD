@@ -230,7 +230,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
     });
   });
 
-  test('handles changing expenses for mmis 75/75', async () => {
+  test('handles changing expenses for mmis 25/75', async () => {
     await setup({}, { initialState: initialState });
 
     waitFor(() => {
@@ -250,7 +250,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
     });
   });
 
-  test('handles changing expenses for mmis 90/90', async () => {
+  test('handles changing expenses for mmis 10/90', async () => {
     await setup({}, { initialState: initialState });
 
     waitFor(() => {

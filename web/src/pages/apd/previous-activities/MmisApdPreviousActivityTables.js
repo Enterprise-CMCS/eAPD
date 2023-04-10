@@ -34,7 +34,6 @@ const MmisApdPreviousActivityTables = ({
 
   useEffect(() => {
     trigger();
-    console.log(previousActivityExpenses);
   }, []);
 
   const years = Object.keys(previousActivityExpenses);
@@ -170,6 +169,7 @@ const MmisApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
+                              data-testid={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`approved total computable Medicaid funding for MMIS at the ${
@@ -222,6 +222,7 @@ const MmisApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
+                              data-testid={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`actual ffp expenditures for MMIS at the ${
@@ -233,7 +234,7 @@ const MmisApdPreviousActivityTables = ({
                                 setValue(name, e.target.value, {
                                   shouldValidate: true
                                 });
-                                getApprovedHandler(
+                                getActualsHandler(
                                   year,
                                   level.ffp,
                                   level.fundingTypeSchema
