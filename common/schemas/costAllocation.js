@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { FUNDING_CATEGORY_TYPE } from '../utils/constants.js';
+import { dollarFieldReqAndMsg } from './dollarFieldSchema.js';
 
 export const costAllocationSplitSchema = Joi.object().keys({
   federal: Joi.number().required(),
@@ -59,35 +60,15 @@ export const costAllocationMatchRateSchema = costAllocationSplitSchema.keys({
   })
 });
 
-export const costAllocationOtherSchema = Joi.number()
-  .positive()
-  .allow(0)
-  .required()
-  .messages({
-    'number.base':
-      'Provide an other funding amount greater than or equal to $0.',
-    'number.positive':
-      'Provide an other funding amount greater than or equal to $0.',
-    'number.allow':
-      'Provide an other funding amount greater than or equal to $0.',
-    'number.empty':
-      'Provide an other funding amount greater than or equal to $0.',
-    'number.format': 'Provide a valid funding amount.',
-    'any.required': 'Provide a valid funding amount.'
-  });
-
-export const hitechCostAllocationSchema = Joi.object().pattern(
-  /\d{4}/,
-  Joi.object({
-    ffp: costAllocationSplitSchema,
-    other: costAllocationOtherSchema
-  })
-);
+export const hitechCostAllocationSchema = Joi.object({
+  ffp: costAllocationSplitSchema,
+  other: dollarFieldReqAndMsg
+});
 
 export const mmisCostAllocationSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object({
     ffp: costAllocationMatchRateSchema,
-    other: costAllocationOtherSchema
+    other: dollarFieldReqAndMsg
   })
 );
