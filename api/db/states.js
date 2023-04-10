@@ -21,6 +21,10 @@ export const getStateById = (id, { db = knex } = {}) => {
   return db('states').select('*').where({ id }).first();
 };
 
+export const getAllStates = ({ db = knex } = {}) => {
+  return db('states').select('*');
+};
+
 export const getStateAdmins = (id, { db = knex } = {}) =>
   db('auth_affiliations')
     .join('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')

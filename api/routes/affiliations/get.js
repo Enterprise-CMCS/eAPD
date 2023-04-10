@@ -1,12 +1,18 @@
 import loggerFactory from '../../logger/index.js';
 import { getAffiliationsByUserId as _getAffiliationsByUserId } from '../../db/index.js';
 import { loggedIn } from '../../middleware/index.js';
+import { isSysAdmin } from '../../util/auth.js';
+import { getAllStates as _getAllStates } from '../../db/states.js';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const logger = loggerFactory('affiliations route get');
 
 export default (
   app,
-  { getAffiliationsByUserId = _getAffiliationsByUserId } = {}
+  {
+    getAffiliationsByUserId = _getAffiliationsByUserId,
+    getAllStates = _getAllStates
+  } = {}
 ) => {
   app.get('/affiliations/me', loggedIn, async (request, response, next) => {
     logger.info({
@@ -14,6 +20,17 @@ export default (
       message: `handling GET /me endpoint}`
     });
     try {
+      if (await isSysAdmin(request.user.username)) {
+        const allStates = await getAllStates();
+        const resp = allStates.map(state => ({
+          displayName: request.user.displayName,
+          userId: request.user.id,
+          stateId: state.id,
+          role: 'eAPD System Admin',
+          status: AFFILIATION_STATUSES.APPROVED
+        }));
+        return response.send(resp);
+      }
       const resp = await getAffiliationsByUserId(request.user.id);
       return response.send(resp);
     } catch (e) {

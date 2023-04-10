@@ -18,7 +18,7 @@ const setup = (props = {}) => {
       initialState: {
         user: {
           data: {
-            state: { name: 'Maryland', id: 'md' }
+            state: { name: 'New Apdland', id: 'na' }
           }
         }
       }
@@ -62,8 +62,8 @@ describe('Switch Affiliation component', () => {
       .reply(200, [{ stateId: 'md' }, { stateId: 'na' }]);
     setup();
     await screen.findByLabelText('Maryland');
-    expect(screen.getByLabelText('Maryland')).toBeChecked();
-    expect(screen.getByLabelText('New Apdland')).not.toBeChecked();
+    expect(screen.getByLabelText('Maryland')).not.toBeChecked();
+    expect(screen.getByLabelText('New Apdland')).toBeChecked();
   });
   test('allows different states to be selected', async () => {
     fetchMock

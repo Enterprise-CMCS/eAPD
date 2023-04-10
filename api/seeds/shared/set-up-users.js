@@ -1,7 +1,6 @@
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 import { format } from 'date-fns';
 import loggerFactory from '../../logger/index.js';
-import states from '../../util/states.js';
 
 const logger = loggerFactory('user seeder');
 
@@ -34,7 +33,6 @@ const formatOktaUser = oktaResult => {
 const createUsersToAdd = async (knex, oktaClient) => {
   logger.info('Retrieving user ids from Okta');
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
-  const sysAdmin = (await oktaClient.getUser('sysadmin')) || {};
   const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
   const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
   const stateStaff = (await oktaClient.getUser('statestaff')) || {};
@@ -45,10 +43,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
 
   logger.info('Retrieving role ids from database');
-  const sysAdminRoleId = await knex('auth_roles')
-    .where({ name: 'eAPD System Admin' })
-    .first()
-    .then(role => role.id);
   const fedAdminRoleId = await knex('auth_roles')
     .where({ name: 'eAPD Federal Admin' })
     .first()
@@ -71,18 +65,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const stateCertifications = [];
   const oktaUsers = [];
 
-  if (sysAdmin) {
-    states.forEach(state => {
-      oktaAffiliations.push({
-        user_id: sysAdmin.id,
-        state_id: state.id,
-        role_id: sysAdminRoleId,
-        status: AFFILIATION_STATUSES.APPROVED,
-        username: 'sysadmin'
-      });
-    });
-    oktaUsers.push(formatOktaUser(sysAdmin));
-  }
   if (regularUser) {
     oktaAffiliations.push({
       user_id: regularUser.id,

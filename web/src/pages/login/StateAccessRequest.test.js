@@ -76,7 +76,7 @@ describe('<StateAccessRequest />', () => {
         status: 'revoked'
       },
       {
-        stateId: 'na',
+        stateId: 'ak',
         status: 'requested'
       }
     ]);
@@ -87,7 +87,7 @@ describe('<StateAccessRequest />', () => {
     expect(await screen.findByText('Revoked')).toBeTruthy();
     expect(await screen.findByText('Maryland')).toBeTruthy();
     expect(await screen.findByText('Pending')).toBeTruthy();
-    expect(await screen.findByText('New Apdland')).toBeTruthy();
+    expect(await screen.findByText('Alaska')).toBeTruthy();
   });
 
   it('renders message when no affiliations exist per status', async () => {
@@ -97,7 +97,7 @@ describe('<StateAccessRequest />', () => {
         status: 'requested'
       },
       {
-        stateId: 'na',
+        stateId: 'ak',
         status: 'revoked'
       }
     ]);

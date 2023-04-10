@@ -1,8 +1,8 @@
 import { isPast } from 'date-fns';
 import { oktaClient } from '../auth/oktaAuth.js';
 import knex from './knex.js';
-import { getLaunchDarklyFlag } from '../middleware/launchDarkly.js';
-import { AFFILIATION_STATUSES, FEATURE_FLAGS } from '@cms-eapd/common';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
+import { isSysAdmin, hasSupportState } from '../util/auth.js';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -14,22 +14,12 @@ import {
 } from './auth.js';
 
 import { updateAuthAffiliation as actualUpdateAuthAffiliation } from './affiliations.js';
-import { getStateById as actualGetStateById } from './states.js';
+import {
+  getStateById as actualGetStateById,
+  getAllStates as actualGetAllStates
+} from './states.js';
+import { roleToActivityMappings } from '../util/roles.js';
 import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers.js';
-
-const isSysAdmin = async name =>
-  getLaunchDarklyFlag(
-    FEATURE_FLAGS.SUPPORT_TEAM.FLAG,
-    { kind: 'user', key: `${name}-key`, name },
-    FEATURE_FLAGS.SUPPORT_TEAM.DEFAULT
-  );
-
-const hasSupportState = async name =>
-  getLaunchDarklyFlag(
-    FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.FLAG,
-    { kind: 'user', key: `${name}-key`, name },
-    FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.DEFAULT
-  );
 
 export const sanitizeUser = user => ({
   id: user.id,
@@ -55,15 +45,13 @@ export const userLoggedIntoState = async (
   stateId = null,
   { auditUserLogin = actualAuditUserLogin } = {}
 ) => {
-  if (!isSysAdmin(affiliation.username)) {
-    if (affiliation && (stateId || Object.keys(states).length === 1)) {
-      // we should only record the user logging in if they have specified a state
-      // or if they are only affiliated with one state
-      await auditUserLogin({
-        ...affiliation,
-        name: name || displayName
-      });
-    }
+  if (affiliation && (stateId || Object.keys(states).length === 1)) {
+    // we should only record the user logging in if they have specified a state
+    // or if they are only affiliated with one state
+    await auditUserLogin({
+      ...affiliation,
+      name: name || displayName
+    });
   }
 };
 
@@ -87,6 +75,7 @@ export const populateUserRole = async (
     updateAuthAffiliation = actualUpdateAuthAffiliation,
     getRolesAndActivities = actualGetRolesAndActivities,
     getStateById = actualGetStateById,
+    getAllStates = actualGetAllStates,
     getUserPermissionsForStates = actualGetUserPermissionsForStates,
     getAuthRoleByName = actualGetAuthRoleByName
   } = {}
@@ -96,11 +85,37 @@ export const populateUserRole = async (
     let role = '';
     let state = {};
     let states = {};
+    const username = user.login || user.username;
+    const userIsSysAdmin = await isSysAdmin(username);
+    const userHasSupportState = await hasSupportState(username);
 
     states = (await getUserAffiliatedStates(user.id)) || {};
+    if (userHasSupportState) {
+      states.na = AFFILIATION_STATUSES.APPROVED;
+    }
+
+    if (userIsSysAdmin) {
+      const allStates = await getAllStates();
+      allStates.forEach(state => {
+        states[state.id] = AFFILIATION_STATUSES.APPROVED;
+      });
+    }
+
     if (Object.keys(states).length) {
       const selectedState = stateId || Object.keys(states)[0];
       affiliation = await getAffiliationByState(user.id, selectedState);
+      if (userIsSysAdmin) {
+        const { id: sysAdminId = 0 } = await getAuthRoleByName(
+          'eAPD System Admin'
+        );
+        affiliation = {
+          user_id: user.id,
+          state_id: selectedState,
+          role_id: sysAdminId,
+          status: AFFILIATION_STATUSES.APPROVED,
+          username
+        };
+      }
       if (affiliation) {
         const { id: stateAdminId = 0 } = await getAuthRoleByName(
           'eAPD State Admin'
@@ -115,6 +130,7 @@ export const populateUserRole = async (
             newRoleId: -1,
             newStatus: AFFILIATION_STATUSES.REVOKED,
             changedBy: 'system',
+            changedByRole: 'system',
             stateId: affiliation.state_id,
             ffy: null
           });
@@ -126,7 +142,10 @@ export const populateUserRole = async (
         const roles = (await getRolesAndActivities()) || [];
         role = affiliation && roles.find(r => r.id === affiliation.role_id);
         state = (await getStateById(selectedState)) || {};
-        const permissions = (await getUserPermissionsForStates(user.id)) || [];
+        let permissions = (await getUserPermissionsForStates(user.id)) || [];
+        if (userIsSysAdmin) {
+          permissions[selectedState] = roleToActivityMappings[role.name];
+        }
         return {
           ...user,
           state,

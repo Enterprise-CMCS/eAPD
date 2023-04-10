@@ -215,7 +215,8 @@ export const updateAuthAffiliation = async ({
 
   const validAssignableRoles = {
     'eAPD Federal Admin': ['eAPD State Admin'],
-    'eAPD State Admin': ['eAPD State Staff', 'eAPD State Contractor']
+    'eAPD State Admin': ['eAPD State Staff', 'eAPD State Contractor'],
+    system: ['eAPD State Admin']
   };
 
   // Lookup role name and set expiration date accordingly

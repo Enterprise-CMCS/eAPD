@@ -11,7 +11,11 @@ import axios from '../../util/api';
 
 import { selectAffiliation } from '../../redux/actions/auth';
 
-const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+const statesWithFederal = [
+  ...STATES,
+  { id: 'fd', name: 'Federal' },
+  { id: 'na', name: 'New Apdland' }
+];
 
 const SelectAffiliation = ({
   currentStateId,
