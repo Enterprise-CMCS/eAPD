@@ -74,14 +74,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis90_total_approved"
           headers="prev_act_mmis_row_1_90_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi90-1"
-            onChange={[Function]}
-            value={20}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.90.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -98,14 +331,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis90_federal_actual"
           headers="prev_act_mmis_row_1_90_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 90/10 level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi90-1"
-            onChange={[Function]}
-            value={10}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.90.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -124,14 +590,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis90_total_approved"
           headers="prev_act_mmis_row_2_90_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 90/10 level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi90-2"
-            onChange={[Function]}
-            value={200}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.90.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -148,14 +847,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis90_federal_actual"
           headers="prev_act_mmis_row_2_90_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 90/10 level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi90-2"
-            onChange={[Function]}
-            value={100}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.90.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -233,14 +1165,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_total_approved"
           headers="prev_act_mmis_row_1_75_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi75-1"
-            onChange={[Function]}
-            value={40}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.75.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -257,14 +1422,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_federal_actual"
           headers="prev_act_mmis_row_1_75_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi75-1"
-            onChange={[Function]}
-            value={30}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.75.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -283,14 +1681,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_total_approved"
           headers="prev_act_mmis_row_2_75_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi75-2"
-            onChange={[Function]}
-            value={400}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.75.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -307,14 +1938,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_federal_actual"
           headers="prev_act_mmis_row_2_75_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi75-2"
-            onChange={[Function]}
-            value={300}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.75.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -379,14 +2243,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_total_approved"
           headers="prev_act_mmis_row_1_75_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mando75-1"
-            onChange={[Function]}
-            value={40}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.mando.75.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -403,14 +2500,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_federal_actual"
           headers="prev_act_mmis_row_1_75_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mando75-1"
-            onChange={[Function]}
-            value={30}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.mando.75.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -429,14 +2759,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_total_approved"
           headers="prev_act_mmis_row_2_75_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 75/25 level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mando75-2"
-            onChange={[Function]}
-            value={400}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.mando.75.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -453,14 +3016,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis75_federal_actual"
           headers="prev_act_mmis_row_2_75_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 75/25 level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mando75-2"
-            onChange={[Function]}
-            value={300}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.mando.75.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -538,14 +3334,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_total_approved"
           headers="prev_act_mmis_row_1_50_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi50-1"
-            onChange={[Function]}
-            value={60}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.50.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -562,14 +3591,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_federal_actual"
           headers="prev_act_mmis_row_1_50_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi50-1"
-            onChange={[Function]}
-            value={50}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.ddi.50.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -588,14 +3850,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_total_approved"
           headers="prev_act_mmis_row_2_50_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-ddi50-2"
-            onChange={[Function]}
-            value={600}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.50.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -612,14 +4107,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_federal_actual"
           headers="prev_act_mmis_row_2_50_ddi"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-ddi50-2"
-            onChange={[Function]}
-            value={500}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.ddi.50.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -684,14 +4412,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_total_approved"
           headers="prev_act_mmis_row_1_50_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mando50-1"
-            onChange={[Function]}
-            value={60}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.mando.50.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -708,14 +4669,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_federal_actual"
           headers="prev_act_mmis_row_1_50_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mando50-1"
-            onChange={[Function]}
-            value={50}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="1.mando.50.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -734,14 +4928,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_total_approved"
           headers="prev_act_mmis_row_2_50_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS at the 50/50 level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mando50-2"
-            onChange={[Function]}
-            value={600}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.mando.50.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
@@ -758,14 +5185,247 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           data-cy="prev_act_mmis50_federal_actual"
           headers="prev_act_mmis_row_2_50_mando"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS at the 50/50 level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mando50-2"
-            onChange={[Function]}
-            value={500}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "1": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                    },
+                  },
+                  "2": Object {
+                    "ddi": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                    "mando": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "1": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                      },
+                    },
+                    "2": Object {
+                      "ddi": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                      "mando": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2.mando.50.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>

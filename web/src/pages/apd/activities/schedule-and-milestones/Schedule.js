@@ -38,12 +38,10 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const triggerDates = () => {
-    if (adminCheck) {
-      if (!plannedEndDate) {
-        trigger('plannedStartDate');
-      } else {
-        trigger();
-      }
+    if (!plannedEndDate) {
+      trigger('plannedStartDate');
+    } else {
+      trigger();
     }
   };
 

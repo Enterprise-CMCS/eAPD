@@ -85,7 +85,7 @@ describe('apd previous activity table, mmis component', () => {
 
   test('handles changing a 50/50 ddi approved expense', () => {
     shallow(<MmisApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="approved-total-ddi50-1"]')
+      .find('DollarField[name="1.ddi.50.totalApproved"]')
       .simulate('change', { target: { value: 'new value' } });
 
     expect(props.setApproved).toHaveBeenCalledWith('1', 'new value', 50, 'ddi');

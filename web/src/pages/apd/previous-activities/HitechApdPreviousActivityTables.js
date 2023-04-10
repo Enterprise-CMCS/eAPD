@@ -194,6 +194,7 @@ const HitechApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
+                              name={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`approved total computable Medicaid funding for ${

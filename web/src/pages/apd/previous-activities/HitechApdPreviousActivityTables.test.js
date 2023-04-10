@@ -17,7 +17,7 @@ import {
 describe('apd previous activity table, mmis component', () => {
   const props = {
     previousActivityExpenses: {
-      1: {
+      2019: {
         hithie: {
           federalActual: 10,
           totalApproved: 20
@@ -37,7 +37,7 @@ describe('apd previous activity table, mmis component', () => {
           }
         }
       },
-      2: {
+      2000: {
         hithie: {
           federalActual: 100,
           totalApproved: 200
@@ -79,10 +79,10 @@ describe('apd previous activity table, mmis component', () => {
 
   test('handles changing a 50/50 approved expense hitech', () => {
     shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="approved-total-hithie90-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+      .find('DollarField[name="2019.hithie.totalApproved"]')
+      .simulate('change', { target: { value: '555' } });
 
-    expect(props.setApprovedHitech).toHaveBeenCalledWith('1', 'new value');
+    expect(props.setApprovedHitech).toHaveBeenCalledWith('2022', '555');
   });
 
   test('handles changing a 50/50 actual expense hitech', () => {

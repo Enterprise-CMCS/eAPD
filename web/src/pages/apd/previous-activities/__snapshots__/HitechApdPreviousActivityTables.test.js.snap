@@ -50,84 +50,231 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        key="1"
+        key="2000"
       >
         <th
           data-cy="yearRow"
-          id="prev_act_hithie_row_1_90"
+          id="prev_act_hithie_row_2000_90"
           scope="row"
         >
-          FFY 1
+          FFY 2000
         </th>
         <td
           className=""
           data-cy="prev_act_hithie90_total_approved"
-          headers="prev_act_hithie_row_1_90"
+          headers="prev_act_hithie_row_2000_90"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for HIT + HIE  at the 90/NaN level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-hithie90-1"
-            onChange={[Function]}
-            value={20}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.hithie.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
           className="budget-table--number"
-          data-cy="prev_act_hithie90_federal_approved_1"
-          headers="prev_act_hithie_row_1_90"
-        >
-          <Dollars>
-            18
-          </Dollars>
-        </td>
-        <td
-          className=""
-          data-cy="prev_act_hithie90_federal_actual"
-          headers="prev_act_hithie_row_1_90"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for HIT + HIE  at the 90/NaN level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-hithie90-1"
-            onChange={[Function]}
-            value={10}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          data-cy="yearRow"
-          id="prev_act_hithie_row_2_90"
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className=""
-          data-cy="prev_act_hithie90_total_approved"
-          headers="prev_act_hithie_row_2_90"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for HIT + HIE  at the 90/NaN level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-hithie90-2"
-            onChange={[Function]}
-            value={200}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          data-cy="prev_act_hithie90_federal_approved_2"
-          headers="prev_act_hithie_row_2_90"
+          data-cy="prev_act_hithie90_federal_approved_2000"
+          headers="prev_act_hithie_row_2000_90"
         >
           <Dollars>
             180
@@ -136,16 +283,657 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_hithie90_federal_actual"
-          headers="prev_act_hithie_row_2_90"
+          headers="prev_act_hithie_row_2000_90"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for HIT + HIE  at the 90/NaN level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-hithie90-2"
-            onChange={[Function]}
-            value={100}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.hithie.federalActual"
+            render={[Function]}
+          />
+        </td>
+      </tr>
+      <tr
+        key="2019"
+      >
+        <th
+          data-cy="yearRow"
+          id="prev_act_hithie_row_2019_90"
+          scope="row"
+        >
+          FFY 2019
+        </th>
+        <td
+          className=""
+          data-cy="prev_act_hithie90_total_approved"
+          headers="prev_act_hithie_row_2019_90"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.hithie.totalApproved"
+            render={[Function]}
+          />
+        </td>
+        <td
+          className="budget-table--number"
+          data-cy="prev_act_hithie90_federal_approved_2019"
+          headers="prev_act_hithie_row_2019_90"
+        >
+          <Dollars>
+            18
+          </Dollars>
+        </td>
+        <td
+          className=""
+          data-cy="prev_act_hithie90_federal_actual"
+          headers="prev_act_hithie_row_2019_90"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.hithie.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -199,84 +987,231 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        key="1"
+        key="2000"
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_90"
+          id="prev_act_mmis_row_2000_90"
           scope="row"
         >
-          FFY 1
+          FFY 2000
         </th>
         <td
           className=""
           data-cy="prev_act_mmis90_total_approved"
-          headers="prev_act_mmis_row_1_90"
+          headers="prev_act_mmis_row_2000_90"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 90/NaN level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis90-1"
-            onChange={[Function]}
-            value={20}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.90.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
           className="budget-table--number"
-          data-cy="prev_act_mmis90_federal_approved_1"
-          headers="prev_act_mmis_row_1_90"
-        >
-          <Dollars>
-            18
-          </Dollars>
-        </td>
-        <td
-          className=""
-          data-cy="prev_act_mmis90_federal_actual"
-          headers="prev_act_mmis_row_1_90"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 90/NaN level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis90-1"
-            onChange={[Function]}
-            value={10}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          data-cy="yearRow"
-          id="prev_act_mmis_row_2_90"
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className=""
-          data-cy="prev_act_mmis90_total_approved"
-          headers="prev_act_mmis_row_2_90"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 90/NaN level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis90-2"
-            onChange={[Function]}
-            value={200}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          data-cy="prev_act_mmis90_federal_approved_2"
-          headers="prev_act_mmis_row_2_90"
+          data-cy="prev_act_mmis90_federal_approved_2000"
+          headers="prev_act_mmis_row_2000_90"
         >
           <Dollars>
             180
@@ -285,16 +1220,657 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis90_federal_actual"
-          headers="prev_act_mmis_row_2_90"
+          headers="prev_act_mmis_row_2000_90"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 90/NaN level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis90-2"
-            onChange={[Function]}
-            value={100}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.90.federalActual"
+            render={[Function]}
+          />
+        </td>
+      </tr>
+      <tr
+        key="2019"
+      >
+        <th
+          data-cy="yearRow"
+          id="prev_act_mmis_row_2019_90"
+          scope="row"
+        >
+          FFY 2019
+        </th>
+        <td
+          className=""
+          data-cy="prev_act_mmis90_total_approved"
+          headers="prev_act_mmis_row_2019_90"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.90.totalApproved"
+            render={[Function]}
+          />
+        </td>
+        <td
+          className="budget-table--number"
+          data-cy="prev_act_mmis90_federal_approved_2019"
+          headers="prev_act_mmis_row_2019_90"
+        >
+          <Dollars>
+            18
+          </Dollars>
+        </td>
+        <td
+          className=""
+          data-cy="prev_act_mmis90_federal_actual"
+          headers="prev_act_mmis_row_2019_90"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.90.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -348,84 +1924,231 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        key="1"
+        key="2000"
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_75"
+          id="prev_act_mmis_row_2000_75"
           scope="row"
         >
-          FFY 1
+          FFY 2000
         </th>
         <td
           className=""
           data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_1_75"
+          headers="prev_act_mmis_row_2000_75"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 75/NaN level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis75-1"
-            onChange={[Function]}
-            value={40}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.75.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
           className="budget-table--number"
-          data-cy="prev_act_mmis75_federal_approved_1"
-          headers="prev_act_mmis_row_1_75"
-        >
-          <Dollars>
-            30
-          </Dollars>
-        </td>
-        <td
-          className=""
-          data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_1_75"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 75/NaN level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis75-1"
-            onChange={[Function]}
-            value={30}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          data-cy="yearRow"
-          id="prev_act_mmis_row_2_75"
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className=""
-          data-cy="prev_act_mmis75_total_approved"
-          headers="prev_act_mmis_row_2_75"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 75/NaN level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis75-2"
-            onChange={[Function]}
-            value={400}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          data-cy="prev_act_mmis75_federal_approved_2"
-          headers="prev_act_mmis_row_2_75"
+          data-cy="prev_act_mmis75_federal_approved_2000"
+          headers="prev_act_mmis_row_2000_75"
         >
           <Dollars>
             300
@@ -434,16 +2157,657 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis75_federal_actual"
-          headers="prev_act_mmis_row_2_75"
+          headers="prev_act_mmis_row_2000_75"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 75/NaN level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis75-2"
-            onChange={[Function]}
-            value={300}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.75.federalActual"
+            render={[Function]}
+          />
+        </td>
+      </tr>
+      <tr
+        key="2019"
+      >
+        <th
+          data-cy="yearRow"
+          id="prev_act_mmis_row_2019_75"
+          scope="row"
+        >
+          FFY 2019
+        </th>
+        <td
+          className=""
+          data-cy="prev_act_mmis75_total_approved"
+          headers="prev_act_mmis_row_2019_75"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.75.totalApproved"
+            render={[Function]}
+          />
+        </td>
+        <td
+          className="budget-table--number"
+          data-cy="prev_act_mmis75_federal_approved_2019"
+          headers="prev_act_mmis_row_2019_75"
+        >
+          <Dollars>
+            30
+          </Dollars>
+        </td>
+        <td
+          className=""
+          data-cy="prev_act_mmis75_federal_actual"
+          headers="prev_act_mmis_row_2019_75"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.75.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
@@ -497,84 +2861,231 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        key="1"
+        key="2000"
       >
         <th
           data-cy="yearRow"
-          id="prev_act_mmis_row_1_50"
+          id="prev_act_mmis_row_2000_50"
           scope="row"
         >
-          FFY 1
+          FFY 2000
         </th>
         <td
           className=""
           data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_1_50"
+          headers="prev_act_mmis_row_2000_50"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 50/NaN level for FFY 1, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis50-1"
-            onChange={[Function]}
-            value={60}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.50.totalApproved"
+            render={[Function]}
           />
         </td>
         <td
           className="budget-table--number"
-          data-cy="prev_act_mmis50_federal_approved_1"
-          headers="prev_act_mmis_row_1_50"
-        >
-          <Dollars>
-            30
-          </Dollars>
-        </td>
-        <td
-          className=""
-          data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_1_50"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 50/NaN level for FFY 1"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis50-1"
-            onChange={[Function]}
-            value={50}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          data-cy="yearRow"
-          id="prev_act_mmis_row_2_50"
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className=""
-          data-cy="prev_act_mmis50_total_approved"
-          headers="prev_act_mmis_row_2_50"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="approved total computable Medicaid funding for MMIS  at the 50/NaN level for FFY 2, state plus federal"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="approved-total-mmis50-2"
-            onChange={[Function]}
-            value={600}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          data-cy="prev_act_mmis50_federal_approved_2"
-          headers="prev_act_mmis_row_2_50"
+          data-cy="prev_act_mmis50_federal_approved_2000"
+          headers="prev_act_mmis_row_2000_50"
         >
           <Dollars>
             300
@@ -583,16 +3094,657 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         <td
           className=""
           data-cy="prev_act_mmis50_federal_actual"
-          headers="prev_act_mmis_row_2_50"
+          headers="prev_act_mmis_row_2000_50"
         >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual ffp expenditures for MMIS  at the 50/NaN level for FFY 2"
-            labelClassName="ds-u-visibility--screen-reader"
-            name="actual-federal-mmis50-2"
-            onChange={[Function]}
-            value={500}
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2000.mmis.50.federalActual"
+            render={[Function]}
+          />
+        </td>
+      </tr>
+      <tr
+        key="2019"
+      >
+        <th
+          data-cy="yearRow"
+          id="prev_act_mmis_row_2019_50"
+          scope="row"
+        >
+          FFY 2019
+        </th>
+        <td
+          className=""
+          data-cy="prev_act_mmis50_total_approved"
+          headers="prev_act_mmis_row_2019_50"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.50.totalApproved"
+            render={[Function]}
+          />
+        </td>
+        <td
+          className="budget-table--number"
+          data-cy="prev_act_mmis50_federal_approved_2019"
+          headers="prev_act_mmis_row_2019_50"
+        >
+          <Dollars>
+            30
+          </Dollars>
+        </td>
+        <td
+          className=""
+          data-cy="prev_act_mmis50_federal_actual"
+          headers="prev_act_mmis_row_2019_50"
+        >
+          <Component
+            control={
+              Object {
+                "_defaultValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_executeSchema": [Function],
+                "_fields": Object {},
+                "_focusError": [Function],
+                "_formState": Object {
+                  "dirtyFields": Object {},
+                  "errors": Object {},
+                  "isDirty": false,
+                  "isLoading": true,
+                  "isSubmitSuccessful": false,
+                  "isSubmitted": false,
+                  "isSubmitting": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "submitCount": 0,
+                  "touchedFields": Object {},
+                },
+                "_formValues": Object {
+                  "2000": Object {
+                    "hithie": Object {
+                      "federalActual": 100,
+                      "totalApproved": 200,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 500,
+                        "totalApproved": 600,
+                      },
+                      "75": Object {
+                        "federalActual": 300,
+                        "totalApproved": 400,
+                      },
+                      "90": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                    },
+                  },
+                  "2019": Object {
+                    "hithie": Object {
+                      "federalActual": 10,
+                      "totalApproved": 20,
+                    },
+                    "mmis": Object {
+                      "50": Object {
+                        "federalActual": 50,
+                        "totalApproved": 60,
+                      },
+                      "75": Object {
+                        "federalActual": 30,
+                        "totalApproved": 40,
+                      },
+                      "90": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                    },
+                  },
+                },
+                "_getDirty": [Function],
+                "_getFieldArray": [Function],
+                "_getWatch": [Function],
+                "_names": Object {
+                  "array": Set {},
+                  "mount": Set {},
+                  "unMount": Set {},
+                  "watch": Set {},
+                },
+                "_options": Object {
+                  "defaultValues": Object {
+                    "2000": Object {
+                      "hithie": Object {
+                        "federalActual": 100,
+                        "totalApproved": 200,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 500,
+                          "totalApproved": 600,
+                        },
+                        "75": Object {
+                          "federalActual": 300,
+                          "totalApproved": 400,
+                        },
+                        "90": Object {
+                          "federalActual": 100,
+                          "totalApproved": 200,
+                        },
+                      },
+                    },
+                    "2019": Object {
+                      "hithie": Object {
+                        "federalActual": 10,
+                        "totalApproved": 20,
+                      },
+                      "mmis": Object {
+                        "50": Object {
+                          "federalActual": 50,
+                          "totalApproved": 60,
+                        },
+                        "75": Object {
+                          "federalActual": 30,
+                          "totalApproved": 40,
+                        },
+                        "90": Object {
+                          "federalActual": 10,
+                          "totalApproved": 20,
+                        },
+                      },
+                    },
+                  },
+                  "mode": "onChange",
+                  "reValidateMode": "onChange",
+                  "resolver": [Function],
+                  "shouldFocusError": true,
+                },
+                "_proxyFormState": Object {
+                  "dirtyFields": false,
+                  "errors": "all",
+                  "isDirty": false,
+                  "isValid": false,
+                  "isValidating": false,
+                  "touchedFields": false,
+                },
+                "_removeUnmounted": [Function],
+                "_reset": [Function],
+                "_stateFlags": Object {
+                  "action": false,
+                  "mount": false,
+                  "watch": false,
+                },
+                "_subjects": Object {
+                  "array": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "state": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                  "watch": Object {
+                    "next": [Function],
+                    "observers": Array [],
+                    "subscribe": [Function],
+                    "unsubscribe": [Function],
+                  },
+                },
+                "_updateFieldArray": [Function],
+                "_updateFormState": [Function],
+                "_updateValid": [Function],
+                "getFieldState": [Function],
+                "register": [Function],
+                "unregister": [Function],
+              }
+            }
+            name="2019.mmis.50.federalActual"
+            render={[Function]}
           />
         </td>
       </tr>
