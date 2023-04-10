@@ -12,7 +12,7 @@ export const dollarFieldReqAndMsg = Joi.number()
     'number.allow': 'Provide a dollar amount greater than or equal to $0'
   });
 
-const previousActivityObject = Joi.object({
+export const previousActivityObject = Joi.object({
   totalApproved: dollarFieldReqAndMsg,
   federalActual: dollarFieldReqAndMsg
 });

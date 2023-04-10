@@ -12,6 +12,24 @@ import {
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
+import { previousActivityObject } from '@cms-eapd/common';
+
+import Joi from 'joi';
+
+const schema = Joi.object().pattern(
+  /\d{4}/,
+  Joi.object({
+    ddi: Joi.object({
+      50: previousActivityObject,
+      75: previousActivityObject,
+      90: previousActivityObject
+    }),
+    mando: Joi.object({
+      50: previousActivityObject,
+      75: previousActivityObject
+    })
+  })
+);
 
 const MmisApdPreviousActivityTables = ({
   isViewOnly,
@@ -19,6 +37,23 @@ const MmisApdPreviousActivityTables = ({
   setActual,
   setApproved
 }) => {
+  const {
+    control,
+    formState: { errors },
+    setValue,
+    trigger
+  } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: previousActivityExpenses,
+    resolver: joiResolver(schema)
+  });
+
+  useEffect(() => {
+    trigger();
+    console.log(previousActivityExpenses);
+  }, []);
+
   const years = Object.keys(previousActivityExpenses);
 
   const getActualsHandler = (year, ffp, fundingType) => {
@@ -111,6 +146,22 @@ const MmisApdPreviousActivityTables = ({
                 ];
               const federalApproved =
                 (expenses.totalApproved * level.ffp) / 100;
+              const errTotalApproved =
+                errors &&
+                errors[`${year}`] &&
+                errors[`${year}`][level.fundingTypeSchema] &&
+                errors[`${year}`][level.fundingTypeSchema][level.ffp]
+                  ? errors[`${year}`][level.fundingTypeSchema][level.ffp]
+                      ?.totalApproved?.message
+                  : '';
+              const errFederalActual =
+                errors &&
+                errors[`${year}`] &&
+                errors[`${year}`][level.fundingTypeSchema] &&
+                errors[`${year}`][level.fundingTypeSchema][level.ffp]
+                  ? errors[`${year}`][level.fundingTypeSchema][level.ffp]
+                      ?.federalActual?.message
+                  : '';
 
               return (
                 <tr key={year}>
@@ -129,22 +180,38 @@ const MmisApdPreviousActivityTables = ({
                     {isViewOnly ? (
                       <Dollars>{expenses.totalApproved}</Dollars>
                     ) : (
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`approved total computable Medicaid funding for MMIS at the ${
-                          level.ffp
-                        }/${
-                          100 - level.ffp
-                        } level for FFY ${year}, state plus federal`}
-                        labelClassName="ds-u-visibility--screen-reader"
-                        name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
-                        value={expenses.totalApproved}
-                        onChange={getApprovedHandler(
-                          year,
-                          level.ffp,
-                          level.fundingTypeSchema
-                        )}
+                      <Controller
+                        name={`${year}.${level.fundingTypeSchema}.${level.ffp}.totalApproved`}
+                        control={control}
+                        render={({ field: { name, ...props } }) => {
+                          return (
+                            <DollarField
+                              {...props}
+                              className="budget-table--input-holder"
+                              fieldClassName="budget-table--input__number"
+                              label={`approved total computable Medicaid funding for MMIS at the ${
+                                level.ffp
+                              }/${
+                                100 - level.ffp
+                              } level for FFY ${year}, state plus federal`}
+                              labelClassName="ds-u-visibility--screen-reader"
+                              // name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
+                              value={expenses.totalApproved}
+                              onChange={e => {
+                                setValue(name, e.target.value, {
+                                  shouldValidate: true
+                                });
+                                getApprovedHandler(
+                                  year,
+                                  level.ffp,
+                                  level.fundingTypeSchema
+                                );
+                              }}
+                              errorMessage={errTotalApproved}
+                              errorPlacement="bottom"
+                            />
+                          );
+                        }}
                       />
                     )}
                   </td>
@@ -165,20 +232,35 @@ const MmisApdPreviousActivityTables = ({
                     {isViewOnly ? (
                       <Dollars>{expenses.federalActual}</Dollars>
                     ) : (
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`actual ffp expenditures for MMIS at the ${
-                          level.ffp
-                        }/${100 - level.ffp} level for FFY ${year}`}
-                        labelClassName="ds-u-visibility--screen-reader"
-                        name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
-                        value={expenses.federalActual}
-                        onChange={getActualsHandler(
-                          year,
-                          level.ffp,
-                          level.fundingTypeSchema
-                        )}
+                      <Controller
+                        name={`${year}.${level.fundingTypeSchema}.${level.ffp}.federalActual`}
+                        control={control}
+                        render={({ field: { name, ...props } }) => {
+                          return (
+                            <DollarField
+                              {...props}
+                              className="budget-table--input-holder"
+                              fieldClassName="budget-table--input__number"
+                              label={`actual ffp expenditures for MMIS at the ${
+                                level.ffp
+                              }/${100 - level.ffp} level for FFY ${year}`}
+                              labelClassName="ds-u-visibility--screen-reader"
+                              value={expenses.federalActual}
+                              onChange={e => {
+                                setValue(name, e.target.value, {
+                                  shouldValidate: true
+                                });
+                                getApprovedHandler(
+                                  year,
+                                  level.ffp,
+                                  level.fundingTypeSchema
+                                );
+                              }}
+                              errorMessage={errFederalActual}
+                              errorPlacement="bottom"
+                            />
+                          );
+                        }}
                       />
                     )}
                   </td>
