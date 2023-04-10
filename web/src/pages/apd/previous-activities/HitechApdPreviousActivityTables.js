@@ -194,7 +194,7 @@ const HitechApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
-                              name={name}
+                              data-testid={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`approved total computable Medicaid funding for ${
@@ -252,6 +252,7 @@ const HitechApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
+                              data-testid={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
                               label={`actual ffp expenditures for ${

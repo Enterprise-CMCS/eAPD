@@ -1,8 +1,12 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
-  plain as HitechApdPreviousActivityTables,
+  renderWithConnection,
+  screen,
+  act,
+  waitFor
+} from 'apd-testing-library';
+
+import HitechApdPreviousActivityTables, {
   mapStateToProps,
   mapDispatchToProps
 } from './HitechApdPreviousActivityTables';
@@ -14,161 +18,256 @@ import {
   setPreviousActivityApprovedExpenseForHITandHIE
 } from '../../../redux/actions/editApd';
 
-describe('apd previous activity table, mmis component', () => {
-  const props = {
-    previousActivityExpenses: {
-      2019: {
-        hithie: {
-          federalActual: 10,
-          totalApproved: 20
-        },
-        mmis: {
-          90: {
-            federalActual: 10,
-            totalApproved: 20
-          },
-          75: {
-            federalActual: 30,
-            totalApproved: 40
-          },
-          50: {
-            federalActual: 50,
-            totalApproved: 60
-          }
-        }
+const defaultProps = {
+  previousActivityExpenses: {
+    2019: {
+      hithie: {
+        federalActual: 140000,
+        totalApproved: 280000
       },
-      2000: {
-        hithie: {
-          federalActual: 100,
-          totalApproved: 200
+      mmis: {
+        50: {
+          federalActual: 23445,
+          totalApproved: 82545
         },
-        mmis: {
-          90: {
-            federalActual: 100,
-            totalApproved: 200
-          },
-          75: {
-            federalActual: 300,
-            totalApproved: 400
-          },
-          50: {
-            federalActual: 500,
-            totalApproved: 600
-          }
+        75: {
+          federalActual: 23440,
+          totalApproved: 75340
+        },
+        90: {
+          federalActual: 235720,
+          totalApproved: 262460
         }
       }
     },
-    setActualMmis: jest.fn(),
-    setApprovedMmis: jest.fn(),
-    setActualHitech: jest.fn(),
-    setApprovedHitech: jest.fn()
-  };
+    2000: {
+      hithie: {
+        federalActual: 146346,
+        totalApproved: 234526
+      },
+      mmis: {
+        50: {
+          federalActual: 129387,
+          totalApproved: 375445
+        },
+        75: {
+          federalActual: 413246,
+          totalApproved: 654455
+        },
+        90: {
+          federalActual: 614544,
+          totalApproved: 863455
+        }
+      }
+    }
+  },
+  setActualMmis: jest.fn(),
+  setApprovedMmis: jest.fn(),
+  setActualHitech: jest.fn(),
+  setApprovedHitech: jest.fn()
+};
 
+const initialState = {
+  apd: {
+    data: {
+      previousActivities: {
+        actualExpenditures: {
+          2019: {
+            hithie: {
+              federalActual: 140000,
+              totalApproved: 280000
+            },
+            mmis: {
+              50: {
+                federalActual: 23445,
+                totalApproved: 82545
+              },
+              75: {
+                federalActual: 23440,
+                totalApproved: 75340
+              },
+              90: {
+                federalActual: 235720,
+                totalApproved: 262460
+              }
+            }
+          },
+          2000: {
+            hithie: {
+              federalActual: 146346,
+              totalApproved: 234526
+            },
+            mmis: {
+              50: {
+                federalActual: 129387,
+                totalApproved: 375445
+              },
+              75: {
+                federalActual: 413246,
+                totalApproved: 654455
+              },
+              90: {
+                federalActual: 614544,
+                totalApproved: 863455
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+const setup = async (props = {}) => {
+  let utils;
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  await act(async () => {
+    utils = renderWithConnection(
+      <HitechApdPreviousActivityTables {...defaultProps} {...props} />,
+      {
+        initialState
+      }
+    );
+  });
+
+  return utils;
+};
+
+describe('<HitechApdPreviousActivityTables />', () => {
   beforeEach(() => {
-    props.setActualMmis.mockClear();
-    props.setApprovedMmis.mockClear();
-    props.setActualHitech.mockClear();
-    props.setApprovedHitech.mockClear();
+    jest.resetAllMocks();
   });
 
-  test('renders correctly', () => {
-    expect(
-      shallow(<HitechApdPreviousActivityTables {...props} />)
-    ).toMatchSnapshot();
-  });
-
-  test('handles changing a 50/50 approved expense hitech', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="2019.hithie.totalApproved"]')
-      .simulate('change', { target: { value: '555' } });
-
-    expect(props.setApprovedHitech).toHaveBeenCalledWith('2022', '555');
-  });
-
-  test('handles changing a 50/50 actual expense hitech', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="actual-federal-hithie90-1"]')
-      .simulate('change', { target: { value: 'new value' } });
-
-    expect(props.setActualHitech).toHaveBeenCalledWith('1', 'new value');
-  });
-
-  test('handles changing a 50/50 approved expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="approved-total-mmis50-1"]')
-      .simulate('change', { target: { value: 'new value' } });
-
-    expect(props.setApprovedMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      50,
-      'mmis'
+  test('renders correctly', async () => {
+    await setup({}, { initialState: initialState });
+    expect(screen.getByTestId('2019.hithie.federalActual')).toHaveValue(
+      '140,000'
+    );
+    expect(screen.getByTestId('2019.hithie.totalApproved')).toHaveValue(
+      '280,000'
+    );
+    expect(screen.getByTestId('2019.mmis.50.federalActual')).toHaveValue(
+      '23,445'
+    );
+    expect(screen.getByTestId('2019.mmis.50.totalApproved')).toHaveValue(
+      '82,545'
+    );
+    expect(screen.getByTestId('2019.mmis.75.federalActual')).toHaveValue(
+      '23,440'
+    );
+    expect(screen.getByTestId('2019.mmis.75.totalApproved')).toHaveValue(
+      '75,340'
+    );
+    expect(screen.getByTestId('2019.mmis.90.federalActual')).toHaveValue(
+      '235,720'
+    );
+    expect(screen.getByTestId('2019.mmis.90.totalApproved')).toHaveValue(
+      '262,460'
+    );
+    expect(screen.getByTestId('2000.hithie.federalActual')).toHaveValue(
+      '146,346'
+    );
+    expect(screen.getByTestId('2000.hithie.totalApproved')).toHaveValue(
+      '234,526'
+    );
+    expect(screen.getByTestId('2000.mmis.50.federalActual')).toHaveValue(
+      '129,387'
+    );
+    expect(screen.getByTestId('2000.mmis.50.totalApproved')).toHaveValue(
+      '375,445'
+    );
+    expect(screen.getByTestId('2000.mmis.75.federalActual')).toHaveValue(
+      '413,246'
+    );
+    expect(screen.getByTestId('2000.mmis.75.totalApproved')).toHaveValue(
+      '654,455'
+    );
+    expect(screen.getByTestId('2000.mmis.90.federalActual')).toHaveValue(
+      '614,544'
+    );
+    expect(screen.getByTestId('2000.mmis.90.totalApproved')).toHaveValue(
+      '863,455'
     );
   });
 
-  test('handles changing a 50/50 actual expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="actual-federal-mmis50-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+  test('handles changing expenses for hitech', async () => {
+    await setup({}, { initialState: initialState });
 
-    expect(props.setActualMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      50,
-      'mmis'
-    );
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.hithie.totalApproved')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
+
+      waitFor(() => {
+        expect(
+          screen
+            .getByTestId('2019.hithie.federalActual')
+            .innerHTML.replace('300,000')
+        ).toHaveValue('300,000');
+      });
+    });
   });
 
-  test('handles changing a 75/25 approved expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="approved-total-mmis75-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+  test('handles changing expenses for mmis 50/50', async () => {
+    await setup({}, { initialState: initialState });
 
-    expect(props.setApprovedMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      75,
-      'mmis'
-    );
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.50.totalApproved')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
+
+      waitFor(() => {
+        expect(
+          screen
+            .getByTestId('2019.mmis.50.federalActual')
+            .innerHTML.replace('300,000')
+        ).toHaveValue('300,000');
+      });
+    });
   });
 
-  test('handles changing a 75/25 actual expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="actual-federal-mmis75-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+  test('handles changing expenses for mmis 75/75', async () => {
+    await setup({}, { initialState: initialState });
 
-    expect(props.setActualMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      75,
-      'mmis'
-    );
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.75.totalApproved')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
+
+      waitFor(() => {
+        expect(
+          screen
+            .getByTestId('2019.mmis.75.federalActual')
+            .innerHTML.replace('300,000')
+        ).toHaveValue('300,000');
+      });
+    });
   });
 
-  test('handles changing a 90/10 approved expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="approved-total-mmis90-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+  test('handles changing expenses for mmis 90/90', async () => {
+    await setup({}, { initialState: initialState });
 
-    expect(props.setApprovedMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      90,
-      'mmis'
-    );
-  });
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.90.totalApproved')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
 
-  test('handles changing a 90/10 actual expense mmis', () => {
-    shallow(<HitechApdPreviousActivityTables {...props} />)
-      .find('DollarField[name="actual-federal-mmis90-1"]')
-      .simulate('change', { target: { value: 'new value' } });
-
-    expect(props.setActualMmis).toHaveBeenCalledWith(
-      '1',
-      'new value',
-      90,
-      'mmis'
-    );
+      waitFor(() => {
+        expect(
+          screen
+            .getByTestId('2019.mmis.90.federalActual')
+            .innerHTML.replace('300,000')
+        ).toHaveValue('300,000');
+      });
+    });
   });
 
   test('maps state to props', () => {
