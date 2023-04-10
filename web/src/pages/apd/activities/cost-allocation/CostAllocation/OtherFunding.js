@@ -27,13 +27,7 @@ import {
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
-import { hitechCostAllocationSchema } from '@cms-eapd/common';
-
-import Joi from 'joi';
-
-const schema = Joi.object({
-  costAllocation: Joi.object().pattern(/\d{4}/, hitechCostAllocationSchema)
-});
+import { hitechCostAllocationSchema as schema } from '@cms-eapd/common';
 
 export const ActivityTotalCostTable = ({ years, ffy }) => {
   return (
@@ -164,7 +158,7 @@ const OtherFunding = ({
               }}
             />
             <Controller
-              name={`costAllocation.${ffy}.other`}
+              name={`${ffy}.other`}
               control={control}
               value={costAllocation[ffy]?.other || '0'}
               render={({ field: { value, ...props } }) => (
@@ -174,13 +168,7 @@ const OtherFunding = ({
                   label={`FFY ${ffy}`}
                   labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
-                  errorMessage={
-                    errors &&
-                    errors.costAllocation &&
-                    errors.costAllocation[`${ffy}`]
-                      ? errors.costAllocation[`${ffy}`].other.message
-                      : ''
-                  }
+                  errorMessage={errors?.costAllocation[ffy]?.other?.message}
                   errorPlacement="bottom"
                 />
               )}
