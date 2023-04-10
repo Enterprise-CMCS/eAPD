@@ -21,6 +21,8 @@ import {
 import { roleToActivityMappings } from '../util/roles.js';
 import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers.js';
 
+const { APPROVED, REVOKED } = AFFILIATION_STATUSES;
+
 export const sanitizeUser = user => ({
   id: user.id,
   name: user.displayName,
@@ -91,13 +93,15 @@ export const populateUserRole = async (
 
     states = (await getUserAffiliatedStates(user.id)) || {};
     if (userHasSupportState) {
-      states.na = AFFILIATION_STATUSES.APPROVED;
+      if (!states.na) {
+        states.na = APPROVED;
+      }
     }
 
     if (userIsSysAdmin) {
       const allStates = await getAllStates();
       allStates.forEach(state => {
-        states[state.id] = AFFILIATION_STATUSES.APPROVED;
+        states[state.id] = APPROVED;
       });
     }
 
@@ -112,23 +116,24 @@ export const populateUserRole = async (
           user_id: user.id,
           state_id: selectedState,
           role_id: sysAdminId,
-          status: AFFILIATION_STATUSES.APPROVED,
+          status: APPROVED,
           username
         };
       }
+
       if (affiliation) {
         const { id: stateAdminId = 0 } = await getAuthRoleByName(
           'eAPD State Admin'
         );
         if (
-          affiliation.status === AFFILIATION_STATUSES.APPROVED &&
+          affiliation.status === APPROVED &&
           affiliation.role_id === stateAdminId &&
           isPast(new Date(affiliation.expires_at))
         ) {
           await updateAuthAffiliation({
             affiliationId: affiliation.id,
             newRoleId: -1,
-            newStatus: AFFILIATION_STATUSES.REVOKED,
+            newStatus: REVOKED,
             changedBy: 'system',
             changedByRole: 'system',
             stateId: affiliation.state_id,
@@ -136,7 +141,7 @@ export const populateUserRole = async (
           });
 
           affiliation.role_id = null;
-          affiliation.status = AFFILIATION_STATUSES.REVOKED;
+          affiliation.status = REVOKED;
         }
 
         const roles = (await getRolesAndActivities()) || [];
@@ -146,6 +151,7 @@ export const populateUserRole = async (
         if (userIsSysAdmin) {
           permissions[selectedState] = roleToActivityMappings[role.name];
         }
+
         return {
           ...user,
           state,

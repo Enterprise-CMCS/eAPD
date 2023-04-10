@@ -16,6 +16,8 @@ import ConfirmationDialog from '../ConfirmationDialog';
 import ManageUserTable from './ManageUserTable';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
+const { APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
+
 const StateAdmin = ({
   currentState,
   currentUser,
@@ -77,7 +79,7 @@ const StateAdmin = ({
         currentState.id,
         selectedAffiliation.id,
         roleId,
-        AFFILIATION_STATUSES.APPROVED
+        APPROVED
       );
     }
     saveAffiliation().then(() => {
@@ -105,9 +107,7 @@ const StateAdmin = ({
   };
 
   const handleDenyOrRevoke = () => {
-    const permissionChangeType = isDenied
-      ? AFFILIATION_STATUSES.DENIED
-      : AFFILIATION_STATUSES.REVOKED;
+    const permissionChangeType = isDenied ? DENIED : REVOKED;
 
     async function saveAffiliation() {
       await actualUpdateAffiliation(

@@ -2,6 +2,8 @@ import loggerFactory from '../logger/index.js';
 import knex from './knex.js';
 import { AFFILIATION_STATUSES, defaultAPDYears } from '@cms-eapd/common';
 
+const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
+
 const logger = loggerFactory('db/affiliations');
 
 export const selectedColumns = [
@@ -17,15 +19,10 @@ export const selectedColumns = [
 ];
 
 const statusConverter = {
-  pending: [AFFILIATION_STATUSES.REQUESTED],
-  active: [AFFILIATION_STATUSES.APPROVED],
-  inactive: [AFFILIATION_STATUSES.DENIED, AFFILIATION_STATUSES.REVOKED],
-  null: [
-    AFFILIATION_STATUSES.REQUESTED,
-    AFFILIATION_STATUSES.APPROVED,
-    AFFILIATION_STATUSES.DENIED,
-    AFFILIATION_STATUSES.REVOKED
-  ]
+  pending: [REQUESTED],
+  active: [APPROVED],
+  inactive: [DENIED, REVOKED],
+  null: [REQUESTED, APPROVED, DENIED, REVOKED]
 };
 
 export const getAffiliationsByStateId = ({
@@ -104,9 +101,9 @@ export const reduceAffiliations = affiliations => {
   // combine affiliations for each user.
   // many fields are omitted for clarity
   // Given:
-  // [{userId:1, stateId:'na'}, {userId:1, stateId:'na'}, {userId:2, stateId:'na}]
+  // [{userId:1, stateId:'na'}, {userId:1, stateId:'md'}, {userId:2, stateId:'na}]
   // becomes
-  // [{userId:1, affiliations: [{stateId:'na'}, {stateId:'na'}]}, {userId:2, affiliations:[{stateId:'na'}]}]
+  // [{userId:1, affiliations: [{stateId:'na'}, {stateId:'md'}]}, {userId:2, affiliations:[{stateId:'na'}]}]
   const reducer = (results, affiliation) => {
     const stateAffiliation = {
       role: affiliation.role,
@@ -178,11 +175,11 @@ export const getAffiliationMatches = async ({ stateId, db = knex }) => {
   return (
     query
       .where('state_id', stateId)
-      .andWhere('status', AFFILIATION_STATUSES.REQUESTED)
+      .andWhere('status', REQUESTED)
       // eslint-disable-next-line func-names
       .orWhere(function () {
         this.where('state_id', stateId)
-          .andWhere('status', AFFILIATION_STATUSES.APPROVED)
+          .andWhere('status', APPROVED)
           .andWhere('auth_roles.name', 'eAPD State Staff');
       })
   );
@@ -273,7 +270,7 @@ export const updateAuthAffiliation = async ({
   }
 
   let expirationDate = null;
-  if (newStatus === AFFILIATION_STATUSES.APPROVED) {
+  if (newStatus === APPROVED) {
     if (roleName === 'eAPD State Admin') {
       expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
@@ -283,7 +280,7 @@ export const updateAuthAffiliation = async ({
     user_id: affiliationUserId,
     original_role_id: originalRoleId,
     original_status: originalStatus,
-    new_role_id: newStatus !== AFFILIATION_STATUSES.APPROVED ? null : newRoleId,
+    new_role_id: newStatus !== APPROVED ? null : newRoleId,
     new_status: newStatus || null,
     changed_by: changedBy
   };
@@ -291,7 +288,7 @@ export const updateAuthAffiliation = async ({
   return (transaction || db)('auth_affiliations')
     .where({ state_id: stateId, id: affiliationId })
     .update({
-      role_id: newStatus !== AFFILIATION_STATUSES.APPROVED ? null : newRoleId,
+      role_id: newStatus !== APPROVED ? null : newRoleId,
       status: newStatus,
       expires_at: expirationDate
     })

@@ -6,6 +6,8 @@ import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const logger = loggerFactory('auth certifications put');
 
+const { APPROVED } = AFFILIATION_STATUSES;
+
 export default (
   app,
   {
@@ -37,7 +39,7 @@ export default (
           changedBy: req.user.id,
           changedByRole: req.user.role,
           newRoleId: stateAdminId,
-          newStatus: AFFILIATION_STATUSES.APPROVED
+          newStatus: APPROVED
         });
 
         if (error) {

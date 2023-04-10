@@ -7,16 +7,17 @@ import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 const logger = loggerFactory('affiliations');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = actions;
+const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
 
 // map affiliation status to audit actions
 const statusToAction = status => {
   switch (status) {
-    case AFFILIATION_STATUSES.APPROVED:
+    case APPROVED:
       return ENABLE_ACCOUNT;
-    case AFFILIATION_STATUSES.DENIED:
-    case AFFILIATION_STATUSES.REVOKED:
+    case DENIED:
+    case REVOKED:
       return DISABLE_ACCOUNT;
-    case AFFILIATION_STATUSES.REQUESTED:
+    case REQUESTED:
     default:
       return MODIFY_ACCOUNT;
   }

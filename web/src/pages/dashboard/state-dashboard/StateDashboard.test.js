@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 import ApdList from './ApdList';
 import AffiliationStatus from './AffiliationStatus';

@@ -2,6 +2,8 @@ import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 import { getAllActiveRoles } from '../../db/roles.js';
 import states from '../../util/states.js';
 
+const { REQUESTED, APPROVED } = AFFILIATION_STATUSES;
+
 const seed = async knex => {
   const [{ id: noPermissionsId }] = await getAllActiveRoles(
     ['eAPD No Permissions'],
@@ -27,7 +29,7 @@ const seed = async knex => {
     user_id: 'all-permissions',
     state_id: state.id,
     role_id: adminRoleId,
-    status: AFFILIATION_STATUSES.APPROVED,
+    status: APPROVED,
     expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
   }));
 
@@ -37,14 +39,14 @@ const seed = async knex => {
       id: 4000,
       user_id: 2010,
       state_id: 'na',
-      status: AFFILIATION_STATUSES.REQUESTED
+      status: REQUESTED
     },
     {
       id: 4001,
       user_id: 2020,
       state_id: 'md',
       role_id: stateStaffRoleId,
-      status: AFFILIATION_STATUSES.APPROVED,
+      status: APPROVED,
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
@@ -52,7 +54,7 @@ const seed = async knex => {
       user_id: 'fed-admin',
       state_id: 'fd',
       role_id: fedAdminRoleId,
-      status: AFFILIATION_STATUSES.APPROVED,
+      status: APPROVED,
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
@@ -60,7 +62,7 @@ const seed = async knex => {
       user_id: 'state-admin',
       state_id: 'na',
       role_id: stateAdminRoleId,
-      status: AFFILIATION_STATUSES.APPROVED,
+      status: APPROVED,
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
@@ -68,21 +70,21 @@ const seed = async knex => {
       user_id: 'state-admin-match',
       state_id: 'na',
       role_id: null,
-      status: AFFILIATION_STATUSES.REQUESTED
+      status: REQUESTED
     },
     {
       id: 4006,
       user_id: 'state-staff',
       state_id: 'na',
       role_id: stateStaffRoleId,
-      status: AFFILIATION_STATUSES.APPROVED
+      status: APPROVED
     },
     {
       id: 4007,
       user_id: 'no-permissions',
       state_id: 'wy',
       role_id: noPermissionsId,
-      status: AFFILIATION_STATUSES.APPROVED
+      status: APPROVED
     }
   ]);
   await knex('okta_users').del();

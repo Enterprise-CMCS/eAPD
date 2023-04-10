@@ -5,6 +5,8 @@ import { isSysAdmin } from '../../util/auth.js';
 import { getAllStates as _getAllStates } from '../../db/states.js';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
+const { APPROVED } = AFFILIATION_STATUSES;
+
 const logger = loggerFactory('affiliations route get');
 
 export default (
@@ -27,7 +29,7 @@ export default (
           userId: request.user.id,
           stateId: state.id,
           role: 'eAPD System Admin',
-          status: AFFILIATION_STATUSES.APPROVED
+          status: APPROVED
         }));
         return response.send(resp);
       }

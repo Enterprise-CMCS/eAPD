@@ -6,10 +6,12 @@ import FederalAdmin from '../../admin/fed-admin/FederalAdmin';
 import { ApprovalStatus } from '../state-dashboard/AffiliationStatus';
 
 import { getUserStateOrTerritoryStatus } from '../../../redux/selectors/user.selector';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
+
+const { REQUESTED, APPROVED } = AFFILIATION_STATUSES;
 
 const FederalDashboard = ({ approvalStatus }) => {
-  const isApproved = approvalStatus === AFFILIATION_STATUSES.APPROVED;
+  const isApproved = approvalStatus === APPROVED;
 
   return (
     <main
@@ -34,8 +36,7 @@ FederalDashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  approvalStatus:
-    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
+  approvalStatus: getUserStateOrTerritoryStatus(state) || REQUESTED
 });
 
 export default connect(mapStateToProps)(FederalDashboard);
