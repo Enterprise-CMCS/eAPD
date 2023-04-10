@@ -28,3 +28,18 @@ export const previousHitechActivitySchema = Joi.object().pattern(
     })
   })
 );
+
+export const previousMmisActivitySchema = Joi.object().pattern(
+  /\d{4}/,
+  Joi.object({
+    ddi: Joi.object({
+      50: previousActivityObject,
+      75: previousActivityObject,
+      90: previousActivityObject
+    }),
+    mando: Joi.object({
+      50: previousActivityObject,
+      75: previousActivityObject
+    })
+  })
+);

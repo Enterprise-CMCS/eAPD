@@ -12,24 +12,7 @@ import {
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
-import { previousActivityObject } from '@cms-eapd/common';
-
-import Joi from 'joi';
-
-const schema = Joi.object().pattern(
-  /\d{4}/,
-  Joi.object({
-    ddi: Joi.object({
-      50: previousActivityObject,
-      75: previousActivityObject,
-      90: previousActivityObject
-    }),
-    mando: Joi.object({
-      50: previousActivityObject,
-      75: previousActivityObject
-    })
-  })
-);
+import { previousMmisActivitySchema as schema } from '@cms-eapd/common';
 
 const MmisApdPreviousActivityTables = ({
   isViewOnly,

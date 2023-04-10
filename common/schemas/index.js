@@ -79,5 +79,6 @@ export { default as newApdSchema } from './apdNew.js';
 export {
   dollarFieldReqAndMsg,
   previousActivityObject,
-  previousHitechActivitySchema
-} from './previousActivityTables.js';
+  previousHitechActivitySchema,
+  previousMmisActivitySchema
+} from './dollarFieldSchema.js';
