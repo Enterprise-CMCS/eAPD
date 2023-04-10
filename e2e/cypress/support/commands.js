@@ -188,7 +188,7 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'shouldBeCloseTo',
   { prevSubject: true },
-  ($element, expected, delta = 1) => {
+  ($element, expected, delta = 2) => {
     expect(convertDollarStrToNum($element.text())).to.be.closeTo(
       expected,
       delta

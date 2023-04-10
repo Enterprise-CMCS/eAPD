@@ -197,12 +197,7 @@ class PreviousActivitiesPage {
 
               cy.get(
                 `[data-cy="prev_act_mmis${level}_federal_approved_ddi_${year}"]`
-              )
-                .invoke('text')
-                .then(text => {
-                  const ffp = extractNumber(text);
-                  cy.wrap(ffp).shouldBeCloseTo(expectedFFP);
-                });
+              ).shouldBeCloseTo(expectedFFP);
             });
         } else {
           cy.get(`[name="approved-total-ddi${level}-${year}"]`)
@@ -214,12 +209,7 @@ class PreviousActivitiesPage {
 
               cy.get(
                 `[data-cy="prev_act_mmis${level}_federal_approved_ddi_${year}"]`
-              )
-                .invoke('text')
-                .then(text => {
-                  const ffp = extractNumber(text);
-                  cy.wrap(ffp).shouldBeCloseTo(expectedFFP);
-                });
+              ).shouldBeCloseTo(expectedFFP);
             });
 
           cy.get(`[name="approved-total-mando${level}-${year}"]`)
@@ -231,12 +221,7 @@ class PreviousActivitiesPage {
 
               cy.get(
                 `[data-cy="prev_act_mmis${level}_federal_approved_mando_${year}"]`
-              )
-                .invoke('text')
-                .then(text => {
-                  const ffp = extractNumber(text);
-                  cy.wrap(ffp).shouldBeCloseTo(expectedFFP);
-                });
+              ).shouldBeCloseTo(expectedFFP);
             });
         }
       });
@@ -285,20 +270,18 @@ class PreviousActivitiesPage {
   }
 
   verifyTotalMmisFFP() {
-    const totals = {};
+    const totals = [0, 0, 0];
     const levels = [90, 75, 50];
 
-    levels.forEach(level => {
-      this.years.forEach(year => {
-        totals[year] = 0;
-
+    this.years.forEach((year, index) => {
+      levels.forEach(level => {
         if (level === 90) {
           cy.get(
             `[data-cy="prev_act_mmis${level}_federal_approved_ddi_${year}"]`
           )
             .invoke('text')
             .then(text => {
-              totals[year] += extractNumber(text);
+              totals[index] = totals[index] + extractNumber(text);
             });
         } else {
           cy.get(
@@ -306,7 +289,7 @@ class PreviousActivitiesPage {
           )
             .invoke('text')
             .then(text => {
-              totals[year] += extractNumber(text);
+              totals[index] = totals[index] + extractNumber(text);
             });
 
           cy.get(
@@ -314,16 +297,15 @@ class PreviousActivitiesPage {
           )
             .invoke('text')
             .then(text => {
-              totals[year] += extractNumber(text);
+              totals[index] = totals[index] + extractNumber(text);
+
+              if (level === 50) {
+                cy.get(
+                  `[headers="prev_act_total_row_${year} prev_act_total_approved"]`
+                ).shouldBeCloseTo(totals[index]);
+              }
             });
         }
-
-        cy.get(`[headers="prev_act_total_row_${year} prev_act_total_approved"]`)
-          .invoke('text')
-          .then(text => {
-            const yearlyTotalFFP = extractNumber(text);
-            cy.wrap(yearlyTotalFFP).shouldBeCloseTo(totals[year]);
-          });
       });
     });
 
@@ -371,37 +353,36 @@ class PreviousActivitiesPage {
   }
 
   verifyTotalMmisExpenditures() {
-    const totals = {};
+    const totals = [0, 0, 0];
     const levels = [90, 75, 50];
 
-    levels.forEach(level => {
-      this.years.forEach(year => {
+    this.years.forEach((year, index) => {
+      levels.forEach(level => {
         if (level === 90) {
           cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
             .invoke('val')
             .then(val => {
-              totals[year] += extractNumber(val);
+              totals[index] += extractNumber(val);
             });
         } else {
           cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
             .invoke('val')
             .then(val => {
-              totals[year] += extractNumber(val);
+              totals[index] += extractNumber(val);
             });
 
           cy.get(`[name="actual-federal-mando${level}-${year}"]`)
             .invoke('val')
             .then(val => {
-              totals[year] += extractNumber(val);
+              totals[index] += extractNumber(val);
+
+              if (level === 50) {
+                cy.get(
+                  `[headers="prev_act_total_row_${year} prev_act_total_actual"`
+                ).shouldBeCloseTo(totals[index]);
+              }
             });
         }
-
-        cy.get(`[headers="prev_act_total_row_${year} prev_act_total_actual"`)
-          .invoke('text')
-          .then(text => {
-            const yearlyTotalExpenditure = extractNumber(text);
-            cy.wrap(yearlyTotalExpenditure).shouldBeCloseTo(totals[year]);
-          });
       });
     });
     return this;

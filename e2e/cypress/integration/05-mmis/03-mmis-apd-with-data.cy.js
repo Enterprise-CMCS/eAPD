@@ -75,11 +75,11 @@ describe(
         testStatePrioritiesAndScopeWithData();
       });
 
-      describe('Key State Personnel', function () {
+      describe.only('Key State Personnel', function () {
         testKeyStatePersonnelWithDataMmis();
       });
 
-      describe.only('Results of Previous Activities', function () {
+      describe('Results of Previous Activities', function () {
         testMmisResultsOfPreviousActivitiesWithData();
       });
 

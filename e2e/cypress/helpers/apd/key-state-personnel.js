@@ -344,30 +344,21 @@ export const testKeyStatePersonnelWithDataMmis = function () {
       cy.findByRole('button', { name: /Save/i }).click();
       cy.waitForSave();
 
-      if (index === 0) {
-        cy.get('.ds-c-review__heading')
-          .contains('1.')
-          .should('have.text', `1. ${person.name}`);
-        cy.get('.ds-c-review__heading')
-          .contains('1.')
-          .next()
-          .find('li')
-          .should($lis => {
+      cy.get('.ds-c-review__heading')
+        .contains(`${index + 1}.`)
+        .should('have.text', `${index + 1}. ${person.name}`);
+      cy.get('.ds-c-review__heading')
+        .contains(`${index + 1}.`)
+        .next()
+        .find('li')
+        .should($lis => {
+          if (person.isPrimary) {
             expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
             expect($lis.eq(1)).to.contain(person.position);
-          });
-      } else {
-        cy.get('.ds-c-review__heading')
-          .contains(`${index + 1}.`)
-          .should('have.text', `${index + 1}. ${person.name}`);
-        cy.get('.ds-c-review__heading')
-          .contains(`${index + 1}.`)
-          .next()
-          .find('li')
-          .should($lis => {
+          } else {
             expect($lis.eq(0)).to.contain(person.position);
-          });
-      }
+          }
+        });
     });
   });
 

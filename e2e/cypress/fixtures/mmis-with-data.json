@@ -91,6 +91,23 @@
           "2023": 75,
           "2024": 75
         }
+      },
+      {
+        "name": "Sam Smith",
+        "position": "Creative Lead Design",
+        "email": "HamSamSmith@tycho.com",
+        "isPrimary": false,
+        "fte": { "2023": 0.5, "2024": 0.8 },
+        "hasCosts": true,
+        "costs": { "2023": 19750, "2024": 14320 },
+        "split": {
+          "2023": { "federal": 90, "state": 10, "fundingCategory": "DDI" },
+          "2024": { "federal": 90, "state": 10, "fundingCategory": "DDI" }
+        },
+        "medicaidShare": {
+          "2023": 75,
+          "2024": 25
+        }
       }
     ]
   },

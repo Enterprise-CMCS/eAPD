@@ -156,7 +156,7 @@ export const testMmisResultsOfPreviousActivitiesWithData = function () {
     cy.fixture('mmis-with-data.json').as('mmisData');
   });
 
-  it('fill form', function () {
+  it('fill out Results of Previous Activities', function () {
     const mmisData = this.mmisData;
     const resultsOfPreviousActivitiesData = mmisData.previousActivities;
 
