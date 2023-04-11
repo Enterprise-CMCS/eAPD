@@ -2,7 +2,7 @@ import { isPast } from 'date-fns';
 import { oktaClient } from '../auth/oktaAuth.js';
 import knex from './knex.js';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
-import { isSysAdmin, hasSupportState } from '../util/auth.js';
+import { isSysAdmin } from '../util/auth.js';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -89,14 +89,8 @@ export const populateUserRole = async (
     let states = {};
     const username = user.login || user.username;
     const userIsSysAdmin = await isSysAdmin(username);
-    const userHasSupportState = await hasSupportState(username);
 
     states = (await getUserAffiliatedStates(user.id)) || {};
-    if (userHasSupportState) {
-      if (!states.na) {
-        states.na = APPROVED;
-      }
-    }
 
     if (userIsSysAdmin) {
       const allStates = await getAllStates();

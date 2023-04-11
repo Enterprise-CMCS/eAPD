@@ -2,16 +2,13 @@ import PropTypes from 'prop-types';
 import React, { useReducer, Fragment, useState, useEffect } from 'react';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
-import AuthenticationForm from './AuthenticationForm';
-
-import { STATES } from '../../util/states';
-
-import axios from '../../util/api';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
-const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
+import AuthenticationForm from './AuthenticationForm';
+import axios from '../../util/api';
+import { useAvailableStates } from '../../util/hooks';
 
-const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
 
 const StateAccessRequest = ({
   saveAction,
@@ -20,13 +17,34 @@ const StateAccessRequest = ({
   fetching,
   secondaryButtonText
 }) => {
+  const allowedStates = useAvailableStates();
   const [existingAffiliations, setExistingAffiliations] = useState([]);
+  const [availableStates, setAvailableStates] = useState([]);
+
+  const initialState = {
+    fullStateList: availableStates,
+    filteredStates: availableStates,
+    selectedStates: [],
+    inputValue: ''
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const updatedStates = allowedStates.filter(item => {
+      return !existingAffiliations.find(affiliation => {
+        return affiliation.id === item.id;
+      });
+    });
+    setAvailableStates(updatedStates);
+    dispatch({ type: 'update', payload: updatedStates });
+  }, [allowedStates]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     (async () => {
       const affiliations = await axios.get('/affiliations/me');
       const results = affiliations.data.map(affiliation => {
-        const stateDetails = statesWithFederal.find(
+        const stateDetails = allowedStates.find(
           item => item.id === affiliation.stateId
         );
         return {
@@ -37,7 +55,7 @@ const StateAccessRequest = ({
       });
       setExistingAffiliations(results);
     })();
-  }, []);
+  }, [allowedStates]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
   const existingAffiliations = Object.keys(currentAffiliations).map(stateId => {
@@ -45,11 +63,6 @@ const StateAccessRequest = ({
     return { id: stateId, name: stateDetails.name, status: currentAffiliations[stateId] }
   });
   */
-  const availableStates = statesWithFederal.filter(item => {
-    return !existingAffiliations.find(affiliation => {
-      return affiliation.id === item.id;
-    });
-  });
 
   const pendingAffiliations = existingAffiliations.filter(
     element => element.status === REQUESTED
@@ -66,15 +79,13 @@ const StateAccessRequest = ({
       ? 'Request a new State Affiliation'
       : 'Select your State Affiliation';
 
-  const initialState = {
-    fullStateList: availableStates,
-    filteredStates: availableStates,
-    selectedStates: [],
-    inputValue: ''
-  };
-
   function reducer(state, action) {
     switch (action.type) {
+      case 'update':
+        return {
+          ...state,
+          fullStateList: action.payload
+        };
       case 'filter':
         return {
           ...state,
@@ -99,7 +110,7 @@ const StateAccessRequest = ({
           ...state,
           fullStateList: [
             ...state.fullStateList,
-            statesWithFederal.find(item => item.id === action.payload)
+            allowedStates.find(item => item.id === action.payload)
           ].sort((a, b) => a.name.localeCompare(b.name)),
           selectedStates: state.selectedStates.filter(
             item => item.id !== action.payload
@@ -112,8 +123,6 @@ const StateAccessRequest = ({
         );
     }
   }
-
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleOnChange = selection => {
     // onChange can be triggered by hitting escape which will

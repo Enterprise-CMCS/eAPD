@@ -73,7 +73,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {
-      cy.contains('AK APD Home').click();
+      cy.contains('NA APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.contains(

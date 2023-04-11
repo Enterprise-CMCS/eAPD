@@ -13,7 +13,9 @@ const App = () => {
   const username = useSelector(state => state?.user?.data?.username || '');
 
   useEffect(() => {
-    ldClient?.identify({ kind: 'user', key: username, name: username });
+    if (ldClient) {
+      ldClient.identify({ kind: 'user', key: username, name: username });
+    }
   }, [username, ldClient]);
 
   return (
