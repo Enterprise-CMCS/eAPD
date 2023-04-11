@@ -584,8 +584,8 @@
     }
   ],
   "securityPlanning": {
-    "securityAndInterfacePlan": "This is the Security Interface plan",
-    "businessContinuityAndDisasterRecovery": "This is the Business Continuity and Disaster Recovery plan"
+    "securityAndInterfacePlan": "In the event of a security breach, please call the local Ghostbuster in your area.",
+    "businessContinuityAndDisasterRecovery": "Bunsiness continuity and disaster recovery does not exist for this project."
   },
   "assurancesAndCompliances": {
     "procurement": [

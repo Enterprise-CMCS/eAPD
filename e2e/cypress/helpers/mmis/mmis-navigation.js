@@ -103,7 +103,7 @@ export const testMmisNavigation = function () {
     }
   ];
 
-  it('is my version of main side nav navigation', function () {
+  it('tests main side nav navigation', function () {
     cy.wrap(pages).each(index => {
       const { title, subnav, type } = index;
 
@@ -121,7 +121,7 @@ export const testMmisNavigation = function () {
     });
   });
 
-  it('is my version of activity side nav navigation', function () {
+  it('tests side nav navigation for activities', function () {
     cy.goToActivityDashboard();
     cy.get('.ds-h2').should('contain', 'Activities');
 
@@ -149,7 +149,7 @@ export const testMmisNavigation = function () {
     });
   });
 
-  it('is my version of Continue and Previous buttons', function () {
+  it('tests Continue and Previous buttons', function () {
     cy.log('Click through Continue buttons');
     cy.goToApdOverview();
 

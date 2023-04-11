@@ -94,7 +94,7 @@ export const testMmisAdminCheck = function () {
     'tests the Admin check for mmis pages',
     { tags: ['@state', '@admin'] },
     function () {
-      cy.turnOnAdminCheck(); // On each page verify the correct number of validation errors show
+      cy.turnOnAdminCheck();
 
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
 
