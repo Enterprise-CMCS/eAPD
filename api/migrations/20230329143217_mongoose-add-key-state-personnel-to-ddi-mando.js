@@ -26,7 +26,7 @@ export const up = async () => {
       try {
         return Budget.replaceOne(
           { _id: apd.budget },
-          { ...budget, __t: BUDGET_TYPE['MMIS'] }
+          { ...budget, __t: BUDGET_TYPE.MMIS_BUDGET }
         );
       } catch (err) {
         logger.error(err);
