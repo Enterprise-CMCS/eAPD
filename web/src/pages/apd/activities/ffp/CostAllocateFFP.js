@@ -31,7 +31,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 
 import {
-  hitechCostAllocationSchema,
+  hitechCostAllocationFFP,
   mmisCostAllocationSchema,
   APD_TYPE,
   FUNDING_CATEGORY_TYPE
@@ -139,7 +139,7 @@ const CostAllocateFFP = ({
 }) => {
   const schema =
     apdType === APD_TYPE.HITECH
-      ? hitechCostAllocationSchema
+      ? hitechCostAllocationFFP
       : mmisCostAllocationSchema;
   const methods = useForm({
     defaultValues: {
