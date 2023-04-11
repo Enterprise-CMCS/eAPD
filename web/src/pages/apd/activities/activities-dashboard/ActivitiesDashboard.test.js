@@ -178,6 +178,33 @@ describe('ActivitiesDashboard component', () => {
     ).toBeInTheDocument();
   });
 
+  it('should remove error message when there activities added', async () => {
+    setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            adminCheck: {
+              enabled: true
+            },
+            data: {
+              years: ['2022', '2023'],
+              activities: []
+            }
+          }
+        }
+      }
+    );
+    expect(
+      screen.getByText('Activities have not been added for this APD.')
+    ).toBeInTheDocument();
+    await fireEvent.click(screen.getByRole('button', { name: 'Add Activity' }));
+
+    expect(
+      screen.queryByText('Activities have not been added for this APD.')
+    ).not.toBeInTheDocument();
+  });
+
   // calls addActivity when the button component is clicked
   it('should add a new activity when Add Activity button is clicked', async () => {
     setup({}, hitechApd);
