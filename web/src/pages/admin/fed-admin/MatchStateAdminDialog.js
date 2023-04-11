@@ -1,15 +1,25 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect, useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import axios from '../../../util/api';
 import { STATES } from '../../../util/states';
-import PropTypes from 'prop-types';
 
 const MatchStateAdminDialog = ({ certification, hideModal }) => {
+  const { supportStateAvailable } = useFlags();
+
   const [stateAffiliations, setStateAffiliations] = useState([]);
   const [selectedAffiliation, setSelectedAffiliation] = useState({});
+
+  const availableStates = useMemo(() => {
+    const tempStates = [...STATES];
+    if (supportStateAvailable) {
+      tempStates.push({ id: 'na', name: 'New Apdland' });
+    }
+    return tempStates;
+  }, [supportStateAvailable]);
 
   useEffect(
     () => {
@@ -52,9 +62,10 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
     hideModal();
   };
 
-  const stateName = STATES.find(
-    state => state.id === certification.state.toLowerCase()
-  ).name;
+  const stateName =
+    availableStates.find(
+      state => state.id === certification.state.toLowerCase()
+    )?.name || '';
 
   const dropdownOptions = stateAffiliations.map(item => {
     return {
