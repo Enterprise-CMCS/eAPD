@@ -192,81 +192,81 @@ describe('<HitechApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for hitech', async () => {
     await setup({}, { initialState: initialState });
-
+    // eslint-disable-next-line await-async-utils
     waitFor(() => {
       expect(
         screen
           .getByTestId('2019.hithie.totalApproved')
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
-
-      waitFor(() => {
-        expect(
-          screen
-            .getByTestId('2019.hithie.federalActual')
-            .innerHTML.replace('300,000')
-        ).toHaveValue('300,000');
-      });
+    });
+    // eslint-disable-next-line await-async-utils
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.hithie.federalActual')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
     });
   });
 
   test('handles changing expenses for mmis 50/50', async () => {
     await setup({}, { initialState: initialState });
-
+    // eslint-disable-next-line await-async-utils
     waitFor(() => {
       expect(
         screen
           .getByTestId('2019.mmis.50.totalApproved')
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
-
-      waitFor(() => {
-        expect(
-          screen
-            .getByTestId('2019.mmis.50.federalActual')
-            .innerHTML.replace('300,000')
-        ).toHaveValue('300,000');
-      });
+    });
+    // eslint-disable-next-line await-async-utils
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.50.federalActual')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
     });
   });
 
   test('handles changing expenses for mmis 25/75', async () => {
     await setup({}, { initialState: initialState });
-
+    // eslint-disable-next-line await-async-utils
     waitFor(() => {
       expect(
         screen
           .getByTestId('2019.mmis.75.totalApproved')
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
-
-      waitFor(() => {
-        expect(
-          screen
-            .getByTestId('2019.mmis.75.federalActual')
-            .innerHTML.replace('300,000')
-        ).toHaveValue('300,000');
-      });
+    });
+    // eslint-disable-next-line await-async-utils
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.75.federalActual')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
     });
   });
 
   test('handles changing expenses for mmis 10/90', async () => {
     await setup({}, { initialState: initialState });
-
+    // eslint-disable-next-line await-async-utils
     waitFor(() => {
       expect(
         screen
           .getByTestId('2019.mmis.90.totalApproved')
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
-
-      waitFor(() => {
-        expect(
-          screen
-            .getByTestId('2019.mmis.90.federalActual')
-            .innerHTML.replace('300,000')
-        ).toHaveValue('300,000');
-      });
+    });
+    // eslint-disable-next-line await-async-utils
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('2019.mmis.90.federalActual')
+          .innerHTML.replace('300,000')
+      ).toHaveValue('300,000');
     });
   });
 
