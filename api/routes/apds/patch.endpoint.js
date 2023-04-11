@@ -6,7 +6,7 @@ import {
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
-import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
+import { mdAPDId, naAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
@@ -32,7 +32,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
     });
 
     it(`with an APD in a state other than the user's state`, async () => {
-      const response = await api.patch(url(mnAPDId));
+      const response = await api.patch(url(mdAPDId));
 
       expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
@@ -41,7 +41,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
     it(`with a body that is not valid`, async () => {
       const data = 'update something';
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
 
       expect(response.status).toEqual(400);
       expect(response.data.errors).not.toBeNull();
@@ -57,7 +57,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
 
       expect(response.status).toEqual(200);
       expect(response.data).toMatchSnapshot({
@@ -87,7 +87,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
@@ -130,7 +130,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
@@ -159,7 +159,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
       const { apd: { apdOverview: { programOverview } } = {} } = response.data;
 
       expect(response.status).toEqual(200);
@@ -181,7 +181,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(akAPDId), data);
+      const response = await api.patch(url(naAPDId), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something

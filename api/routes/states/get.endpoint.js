@@ -22,7 +22,7 @@ describe('US States endpoint', () => {
     it('returns 200', async () => {
       const response = await api.get('/states');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toEqual(57);
+      expect(response.data.length).toEqual(58);
       const keys = Object.keys(response.data[0]);
       expect(keys).toEqual(['id', 'name']);
     });

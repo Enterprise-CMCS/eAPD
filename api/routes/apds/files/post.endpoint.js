@@ -9,8 +9,8 @@ import {
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 import {
-  mnAPDId,
-  akAPDId,
+  mdAPDId,
+  naAPDId,
   finalAPDId,
   badAPDId
 } from '../../../seeds/test/apds.js';
@@ -42,8 +42,8 @@ describe('APD files endpoints', () => {
       return { formData, options };
     };
 
-    unauthenticatedTest('post', url(akAPDId));
-    unauthorizedTest('post', url(akAPDId));
+    unauthenticatedTest('post', url(naAPDId));
+    unauthorizedTest('post', url(naAPDId));
 
     describe('when authenticated as a user with permission', () => {
       it('with a non-existant apd ID', async () => {
@@ -61,7 +61,7 @@ describe('APD files endpoints', () => {
       it(`with an APD in a state other than the user's state`, async () => {
         const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(
-          url(mnAPDId),
+          url(mdAPDId),
           formData.getBuffer(),
           options
         );
@@ -94,7 +94,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
+        await api.post(url(naAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -112,7 +112,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
+        await api.post(url(naAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -130,7 +130,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
+        await api.post(url(naAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -149,13 +149,13 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(akAPDId),
+          url(naAPDId),
           formData.getBuffer(),
           options
         );
 
         expect(response.status).toEqual(200);
-        const re = new RegExp(`apds/${akAPDId}/files/[a-f0-9]{64}`);
+        const re = new RegExp(`apds/${naAPDId}/files/[a-f0-9]{64}`);
         expect(response.data.url).toEqual(expect.stringMatching(re));
       });
 
@@ -172,7 +172,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(akAPDId),
+          url(naAPDId),
           formData.getBuffer(),
           options
         );
@@ -194,7 +194,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(akAPDId),
+          url(naAPDId),
           formData.getBuffer(),
           options
         );
@@ -216,7 +216,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(akAPDId),
+          url(naAPDId),
           formData.getBuffer(),
           options
         );

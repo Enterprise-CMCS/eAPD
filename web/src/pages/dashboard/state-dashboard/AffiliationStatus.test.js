@@ -9,7 +9,7 @@ import {
   plain as AffiliationStatus,
   ApprovalStatus
 } from './AffiliationStatus';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 

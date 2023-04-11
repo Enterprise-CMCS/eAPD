@@ -7,9 +7,9 @@ import {
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
 import {
-  mnAPDId,
-  akAPDId,
-  akMMISId,
+  mdAPDId,
+  naAPDId,
+  naMMISId,
   badAPDId
 } from '../../../seeds/test/apds.js';
 
@@ -41,7 +41,7 @@ describe('APD files endpoints', () => {
 
       it(`with an APD in a state other than the user's state`, async () => {
         const response = await api.get(
-          url(mnAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(mdAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(400);
@@ -50,7 +50,7 @@ describe('APD files endpoints', () => {
 
       it('with an APD that is not associated with the file', async () => {
         const response = await api.get(
-          url(akMMISId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(naMMISId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(400);
@@ -59,7 +59,7 @@ describe('APD files endpoints', () => {
 
       it('with a valid request', async () => {
         const response = await api.get(
-          url(akAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(naAPDId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(200);

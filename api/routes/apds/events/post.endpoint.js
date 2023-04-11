@@ -6,7 +6,7 @@ import {
   unauthenticatedTest,
   unauthorizedTest
 } from '../../../endpoint-tests/utils.js';
-import { akAPDId, badAPDId } from '../../../seeds/test/apds.js';
+import { naAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe('APD events endpoints', () => {
   const db = getDB();
@@ -31,7 +31,7 @@ describe('APD events endpoints', () => {
       });
 
       it('with a valid request', async () => {
-        const response = await api.post(url(akAPDId), { eventType: 'EXPORT' });
+        const response = await api.post(url(naAPDId), { eventType: 'EXPORT' });
         expect(response.status).toEqual(200);
         expect(response.data.success).toEqual(true);
       });
