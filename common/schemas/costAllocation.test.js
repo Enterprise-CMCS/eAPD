@@ -164,8 +164,8 @@ describe('cost allocation validation', () => {
       const { error: { details: schemaValidation = [] } = {} } =
         hitechCostAllocationSchema.validate(
           {
-            2022: { ffp: { federal: 75, state: 25 } },
-            2023: { ffp: { federal: 50, state: 50 } }
+            2022: { ffp: { federal: 75, state: 25 }, other: 0 },
+            2023: { ffp: { federal: 50, state: 50 }, other: 0 }
           },
           { abortEarly: false }
         );
@@ -176,10 +176,8 @@ describe('cost allocation validation', () => {
       const { error: { details: schemaValidation = [] } = {} } =
         hitechCostAllocationSchema.validate(
           {
-            costAllocation: {
-              2022: { ffp: { federal: 0, state: 100 }, other: 0 },
-              2023: { ffp: { federal: 90, state: 10 }, other: 0 }
-            }
+            2022: { ffp: { federal: 0, state: 100 }, other: 0 },
+            2023: { ffp: { federal: 90, state: 10 }, other: 0 }
           },
           { abortEarly: false }
         );
