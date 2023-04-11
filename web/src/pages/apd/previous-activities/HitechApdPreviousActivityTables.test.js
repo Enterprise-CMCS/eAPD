@@ -192,7 +192,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for hitech', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -200,7 +200,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -212,7 +212,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for mmis 50/50', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -220,7 +220,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -232,7 +232,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for mmis 25/75', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -240,7 +240,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -252,7 +252,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for mmis 10/90', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -260,7 +260,7 @@ describe('<HitechApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen

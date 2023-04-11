@@ -226,7 +226,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for ddi 50/50', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -234,7 +234,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -246,7 +246,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for ddi 25/75', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -254,7 +254,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -266,7 +266,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for ddi 10/90', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -274,7 +274,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -286,7 +286,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for mmis 50/50', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -294,7 +294,7 @@ describe('<MmisApdPreviousActivityTables />', () => {
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
     });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
@@ -306,14 +306,14 @@ describe('<MmisApdPreviousActivityTables />', () => {
 
   test('handles changing expenses for mmis 25/75', async () => {
     await setup({}, { initialState: initialState });
-    // eslint-disable-next-line await-async-utils
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
       expect(
         screen
           .getByTestId('2021.mmis.75.federalActual')
           .innerHTML.replace('300,000')
       ).toHaveValue('300,000');
-      // eslint-disable-next-line await-async-utils
+      // eslint-disable-next-line testing-library/await-async-utils
       waitFor(() => {
         expect(
           screen
