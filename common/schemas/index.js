@@ -46,7 +46,6 @@ export { default as contractorResourcesSchema } from './contractorResources.js';
 export {
   costAllocationSplitSchema,
   costAllocationMatchRateSchema,
-  hitechCostAllocationFFP,
   hitechCostAllocationSchema,
   mmisCostAllocationSchema
 } from './costAllocation.js';

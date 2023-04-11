@@ -1,7 +1,6 @@
 import {
   costAllocationSplitSchema,
   costAllocationMatchRateSchema,
-  hitechCostAllocationFFP,
   hitechCostAllocationSchema,
   mmisCostAllocationSchema
 } from './costAllocation.js';
@@ -163,7 +162,7 @@ describe('cost allocation validation', () => {
   describe('cost allocation', () => {
     test('valid cost allocation with split', () => {
       const { error: { details: schemaValidation = [] } = {} } =
-        hitechCostAllocationFFP.validate(
+        hitechCostAllocationSchema.validate(
           {
             2022: { ffp: { federal: 75, state: 25 } },
             2023: { ffp: { federal: 50, state: 50 } }
