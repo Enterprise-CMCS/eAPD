@@ -1,6 +1,6 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { MMIS, MMISBudget, Budget } from '../models/index.js';
+import { MMIS, Budget } from '../models/index.js';
 import { calculateBudget, BUDGET_TYPE } from '@cms-eapd/common';
 
 const logger = loggerFactory(
