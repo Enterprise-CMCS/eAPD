@@ -158,7 +158,7 @@ const OtherFunding = ({
               }}
             />
             <Controller
-              name={`costAllocation.${ffy}.other`}
+              name={`${ffy}.other`}
               control={control}
               value={costAllocation[ffy]?.other || '0'}
               render={({ field: { value, ...props } }) => (
@@ -168,13 +168,7 @@ const OtherFunding = ({
                   label={`FFY ${ffy}`}
                   labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
-                  errorMessage={
-                    errors &&
-                    errors.costAllocation &&
-                    errors.costAllocation[`${ffy}`]
-                      ? errors.costAllocation[`${ffy}`].other.message
-                      : ''
-                  }
+                  errorMessage={errors?.costAllocation[ffy]?.other?.message}
                   errorPlacement="bottom"
                 />
               )}

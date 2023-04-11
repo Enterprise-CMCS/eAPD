@@ -60,22 +60,13 @@ export const costAllocationMatchRateSchema = costAllocationSplitSchema.keys({
   })
 });
 
-export const hitechCostAllocationFFP = Joi.object().pattern(
+export const hitechCostAllocationSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object({
-    ffp: costAllocationSplitSchema
+    ffp: costAllocationSplitSchema,
+    other: dollarFieldReqAndMsg
   })
 );
-
-export const hitechCostAllocationSchema = Joi.object({
-  costAllocation: Joi.object().pattern(
-    /\d{4}/,
-    Joi.object({
-      ffp: costAllocationSplitSchema,
-      other: dollarFieldReqAndMsg
-    })
-  )
-});
 
 export const mmisCostAllocationSchema = Joi.object().pattern(
   /\d{4}/,
