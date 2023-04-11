@@ -265,10 +265,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
                 return;
               }
               // Don't render tables with $0 totals
-              if (
-                data.ddi[fedStateSplit].combined[years[0]].total === 0 &&
-                data.ddi[fedStateSplit].combined[years[1]].total === 0
-              ) {
+              if (data.ddi[fedStateSplit].combined.total.total === 0) {
                 return;
               }
 
@@ -353,10 +350,7 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
               }
 
               // Don't render tables with $0 totals
-              if (
-                data.mando[fedStateSplit].combined[years[0]].total === 0 &&
-                data.mando[fedStateSplit].combined[years[1]].total === 0
-              ) {
+              if (data.mando[fedStateSplit].combined.total.total === 0) {
                 return;
               }
               return (
