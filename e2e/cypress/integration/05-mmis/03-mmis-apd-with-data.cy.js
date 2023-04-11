@@ -84,11 +84,11 @@ describe(
         testMmisResultsOfPreviousActivitiesWithData();
       });
 
-      describe('add activity', function () {
+      describe('add activities', function () {
         addMMISActivity();
       });
 
-      describe.only('Security Planning', function () {
+      describe('Security Planning', function () {
         testSecurityPlanning();
       });
 
