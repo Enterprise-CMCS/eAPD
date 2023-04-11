@@ -1,7 +1,7 @@
 import loggerFactory from '../logger/index.js';
 import { setup, teardown } from '../db/mongodb.js';
-import { MMIS, MMISBudget } from '../models/index.js';
-import { calculateBudget } from '@cms-eapd/common';
+import { MMIS, MMISBudget, Budget } from '../models/index.js';
+import { calculateBudget, BUDGET_TYPE } from '@cms-eapd/common';
 
 const logger = loggerFactory(
   'mongoose-migrate/add-key-state-personnel-ddi-mando'
@@ -24,9 +24,9 @@ export const up = async () => {
       const budget = calculateBudget(apd);
 
       try {
-        return MMISBudget.replaceOne(
+        return Budget.replaceOne(
           { _id: apd.budget },
-          { ...budget, __t: apd.__t }
+          { ...budget, __t: BUDGET_TYPE['MMIS'] }
         );
       } catch (err) {
         logger.error(err);

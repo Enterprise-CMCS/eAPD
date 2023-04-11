@@ -5810,7 +5810,7 @@ describe('budget calculate methods', () => {
         years: ['2017', '2018']
       };
       const actual = calculateBudget(mmisApd);
-      console.log('actual', actual);
+
       expect(actual).toEqual(expected);
     });
   });
