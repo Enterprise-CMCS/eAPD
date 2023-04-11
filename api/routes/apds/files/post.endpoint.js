@@ -200,7 +200,11 @@ describe('APD files endpoints', () => {
         );
 
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
+        expect(response.data).toMatchSnapshot({
+          url: expect.stringMatching(
+            /^\/apds\/eeac3c9865059f26eccb0600\/files\/\w{64}$/
+          )
+        });
       });
 
       it('with a valid request (tiff)', async () => {
@@ -222,7 +226,11 @@ describe('APD files endpoints', () => {
         );
 
         expect(response.status).toEqual(200);
-        expect(response.data).toMatchSnapshot();
+        expect(response.data).toMatchSnapshot({
+          url: expect.stringMatching(
+            /^\/apds\/eeac3c9865059f26eccb0600\/files\/\w{64}$/
+          )
+        });
       });
     });
   });
