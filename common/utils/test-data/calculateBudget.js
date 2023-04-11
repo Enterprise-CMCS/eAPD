@@ -1,4 +1,4 @@
-import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '../constants';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '../constants.js';
 
 export const hitechApd = {
   apdType: APD_TYPE.HITECH,

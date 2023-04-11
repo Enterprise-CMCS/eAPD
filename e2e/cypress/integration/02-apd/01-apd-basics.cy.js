@@ -108,6 +108,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.findByRole('button', { name: /Run Administrative Check/i }).click({
         force: true
       });
+      cy.findByRole('button', { name: /Collapse/i }).click({
+        force: true
+      });
 
       cy.goToApdOverview();
       cy.get('[data-cy="validationError"]')
@@ -135,7 +138,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.get('[data-cy="validationError"]')
         .contains('Provide a short overview of the activity.')
         .should('exist');
-      cy.findAllByText('Provide a start date.');
       cy.get('[data-cy="validationError"]')
         .contains('Provide details to explain this activity.')
         .should('exist');
@@ -145,19 +147,26 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         )
         .should('exist');
 
+      cy.goToActivitySchedule(0);
+      cy.get('[class="ds-c-inline-error ds-c-field__error-message"]')
+        .contains('Provide a valid start date.')
+        .should('exist');
+
       cy.goToCostAllocationAndOtherFunding(0);
       cy.get('[data-cy="validationError"]')
         .contains('Provide a description of the cost allocation methodology.')
         .should('exist');
 
       cy.goToBudgetAndFFP(0);
-      cy.findAllByText('Select a federal-state split.');
-      cy.findAllByText(
-        'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%'
-      );
-      cy.findAllByText(
-        'Private Contractor Costs quarterly percentages must total 100%'
-      );
+      cy.findAllByText('Select a federal-state split.')
+        .its('length')
+        .should('eq', 2);
+
+      cy.findAllByRole('alert', {
+        'aria-label': /Error message for Estimated Quarterly Expenditure table/i
+      })
+        .its('length')
+        .should('eq', 4);
 
       cy.goToAssurancesAndCompliance();
       cy.findAllByText('Select yes or no');
@@ -172,6 +181,34 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
     let proposedBudgetPage;
     let fillOutActivityPage;
 
+    const keyPersons = [
+      {
+        name: 'Jean Luc Picard',
+        email: 'jpicard@gmail.com',
+        position: 'Captain'
+      },
+      {
+        name: 'William Riker',
+        email: 'riker@gmail.com',
+        position: 'First Officer'
+      },
+      {
+        name: 'Data Soong',
+        email: 'data@gmail.com',
+        position: 'Second Officer'
+      }
+    ];
+
+    const privateContractor = {
+      name: 'Test Private Contractor',
+      description: 'Test description',
+      start: [1, 1, 2020],
+      end: [1, 2, 2023],
+      totalCosts: 0,
+      hourly: false,
+      FFYcosts: [0, 0]
+    };
+
     before(function () {
       activityPage = new ActivityPage();
       budgetPage = new BudgetPage();
@@ -181,26 +218,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       fillOutActivityPage = new FillOutActivityPage();
     });
 
-    it('should handle entering data', function () {
-      const keyPersons = [
-        {
-          name: 'Jean Luc Picard',
-          email: 'jpicard@gmail.com',
-          position: 'Captain'
-        },
-        {
-          name: 'William Riker',
-          email: 'riker@gmail.com',
-          position: 'First Officer'
-        },
-        {
-          name: 'Data Soong',
-          email: 'data@gmail.com',
-          position: 'Second Officer'
-        }
-      ];
-
+    it('should handle entering data for key personnel', function () {
       cy.log('Key State Personnel');
+
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
       cy.findByRole('button', { name: /Add Primary Contact/i }).should(
@@ -322,7 +342,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.get('.ds-c-review__heading')
         .contains(keyPersons[1].name)
         .should('exist');
-
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       cy.get('[data-cy="key-person-2__name"]').type(keyPersons[2].name);
       cy.get('[data-cy="key-person-2__email"]').type(keyPersons[2].email);
@@ -363,7 +382,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
 
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
+    });
 
+    it('should handle entering data for activity milestones and outcomes', function () {
       cy.log('Activity Dashboard');
       cy.goToActivityDashboard();
 
@@ -376,13 +397,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       cy.waitForSave();
       cy.contains('Activity 2').should('not.exist');
 
-      const outcomes = [
-        {
-          outcome: 'This is an outcome.',
-          metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']
-        }
-      ];
-
+      cy.log('Activity Schedule and Milestones');
       const milestones = [
         {
           milestoneName: "Miles's Milestone",
@@ -392,7 +407,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         }
       ];
 
-      cy.log('Activity Schedule and Milestones');
       cy.goToActivitySchedule(0);
 
       cy.wrap(milestones).each((element, index) => {
@@ -445,11 +459,20 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       });
 
       cy.log('Outcomes and Metrics');
+      const outcomes = [
+        {
+          outcome: 'This is an outcome.',
+          metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']
+        }
+      ];
+
       cy.goToOutcomesAndMetrics(0);
+      cy.get('.form-and-review-list')
+        .contains('Add at least one outcome for this activity.')
+        .should('exist');
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-
         cy.findByRole('button', { name: /Add Outcome/i }).should('not.exist');
         cy.get(`[data-cy='outcome-${index}']`)
           .click()
@@ -460,11 +483,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
-
-        cy.get('.form-and-review-list')
-          .contains('Add at least one outcome for this activity.')
-          .should('exist');
-
         cy.findByRole('button', { name: /Add Outcome/i }).click();
 
         cy.get(`[data-cy='outcome-${index}']`)
@@ -493,55 +511,54 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
               'not.be.disabled'
             );
           });
+
+          cy.findByRole('button', { name: /Save/i }).click();
+
+          activityPage.checkOutcomeOutput({
+            outcome: element.outcome,
+            metrics: element.metrics
+          });
         }
 
-        cy.findByRole('button', { name: /Save/i }).click();
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
 
-        cy.get('.form-and-review-list')
-          .eq(0)
-          .findAllByRole('button', { name: /Edit/i })
-          .click();
-
-        cy.get(`[data-cy='outcome-${index}']`)
-          .click()
-          .clear()
-          .type(`Test cancel`);
+        cy.get(`[data-cy='outcome-1']`).click().clear().type(`Test cancel`);
 
         cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
 
-        cy.get(`[data-cy=metric-${index}-0]`).click().type('do not save this');
+        cy.get(`[data-cy=metric-1-0]`).click().type('do not save this');
 
         cy.get('.form-and-review-list')
           .eq(0)
           .findByRole('button', { name: /Cancel/i })
           .click();
 
-        activityPage.checkOutcomeOutput({
-          outcome: element.outcome,
-          metrics: element.metrics
-        });
+        cy.get('.form-and-review-list')
+          .eq(0)
+          .findByRole('button', { name: /Edit/i })
+          .click();
+
+        cy.get('[class="ds-c-review"]')
+          .eq(1)
+          .within(() => {
+            cy.contains('Remove').should('exist');
+          });
+
+        cy.get('[class="ds-c-review"]')
+          .eq(0)
+          .within(() => {
+            cy.contains('Remove').should('exist').click();
+          });
+
+        cy.findByRole('button', { name: /Save/i })
+          .should('not.be.disabled')
+          .click();
+
+        cy.get('[class="ds-c-review"]').should('have.length', 1);
       });
+    });
 
-      cy.contains('Edit').click();
-
-      cy.get('[class="ds-c-review"]')
-        .eq(1)
-        .within(() => {
-          cy.contains('Remove').should('exist');
-        });
-
-      cy.get('[class="ds-c-review"]')
-        .eq(0)
-        .within(() => {
-          cy.contains('Remove').should('exist').click();
-        });
-
-      cy.findByRole('button', { name: /Save/i })
-        .should('not.be.disabled')
-        .click();
-
-      cy.get('[class="ds-c-review"]').should('have.length', 1);
-
+    it('should handle entering data for activity state staff and expenses', function () {
       cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
 
@@ -670,17 +687,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .eq(1)
         .findByRole('button', { name: /Cancel/i })
         .click();
+    });
 
-      const privateContractor = {
-        name: 'Test Private Contractor',
-        description: 'Test description',
-        start: [1, 1, 2020],
-        end: [1, 2, 2023],
-        totalCosts: 0,
-        hourly: false,
-        FFYcosts: [0, 0]
-      };
-
+    it('should handle entering data for activity private contractor', function () {
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
@@ -765,7 +774,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         years: this.years,
         FFYcosts: privateContractor.FFYcosts
       });
+    });
 
+    it('should handle entering data for activity budget and ffp', function () {
       cy.log('Budget and FFP');
       cy.goToBudgetAndFFP(0);
 
@@ -847,7 +858,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
             });
         });
       });
+    });
 
+    it('should show milestones on activity schedule', function () {
       cy.log('Activity Schedule Summary');
       cy.goToActivityScheduleSummary();
       schedulePage
@@ -864,7 +877,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
       schedulePage
         .getActivityScheduleMilestoneName(0, 0)
         .should('eq', "Miles's Milestone");
+    });
 
+    it('should handle entering data for proposed budget', function () {
       cy.log('Proposed Budget');
       cy.goToProposedBudget();
 
@@ -912,7 +927,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
             .should('have.text', 'Test Private Contractor$0');
         });
       });
+    });
 
+    it('should compile all in export views', function () {
       cy.log('Export Views');
       cy.goToExportView();
 
@@ -963,13 +980,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .should('have.text', str);
 
       cy.findByRole('heading', {
-        name: /Activity 1: Program AdministrationOutcomes and Metrics/i
+        name: /Activity 1: Program AdministrationMilestones/i
       })
-        .next()
-        .next()
-        .next()
-        .next()
-        .next()
         .next()
         .should('have.text', "1. Miles's Milestone")
         .next()
