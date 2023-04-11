@@ -30,31 +30,31 @@ class PreviousActivitiesPage {
 
   setExpenditures(expenditures) {
     this.years.forEach((year, i) => {
-      cy.get(`[name='approved-total-hithie90-${year}']`)
+      cy.get(`[data-cy='${year}.hithie.totalApproved']`)
         .clear()
         .type(expenditures.hithie.approved[i]);
-      cy.get(`[name='actual-federal-hithie90-${year}']`)
+      cy.get(`[data-cy='${year}.hithie.federalActual']`)
         .clear()
         .type(expenditures.hithie.actual[i]);
 
-      cy.get(`[name='approved-total-mmis90-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.90.totalApproved']`)
         .clear()
         .type(expenditures.mmis90.approved[i]);
-      cy.get(`[name='actual-federal-mmis90-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.90.federalActual']`)
         .clear()
         .type(expenditures.mmis90.actual[i]);
 
-      cy.get(`[name='approved-total-mmis75-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.75.totalApproved']`)
         .clear()
         .type(expenditures.mmis75.approved[i]);
-      cy.get(`[name='actual-federal-mmis75-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.75.federalActual']`)
         .clear()
         .type(expenditures.mmis75.actual[i]);
 
-      cy.get(`[name='approved-total-mmis50-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.50.totalApproved']`)
         .clear()
         .type(expenditures.mmis50.approved[i]);
-      cy.get(`[name='actual-federal-mmis50-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.50.federalActual']`)
         .clear()
         .type(expenditures.mmis50.actual[i])
         .blur();
@@ -68,7 +68,7 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       // HIT + HIE
       // Get input value for approved medicaid funding
-      cy.get(`[name='approved-total-hithie90-${year}']`)
+      cy.get(`[data-cy='${year}.hithie.totalApproved']`)
         .invoke('val')
         .then(val => {
           const share = 0.9;
@@ -85,7 +85,7 @@ class PreviousActivitiesPage {
 
       // MMIS 90% FFP
       // Get input value for approved medicaid funding
-      cy.get(`[name='approved-total-mmis90-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.90.totalApproved']`)
         .invoke('val')
         .then(val => {
           const share = 0.9;
@@ -102,7 +102,7 @@ class PreviousActivitiesPage {
 
       // MMIS 75% FFP
       // Get input value for approved medicaid funding
-      cy.get(`[name='approved-total-mmis75-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.75.totalApproved']`)
         .invoke('val')
         .then(val => {
           const share = 0.75;
@@ -119,7 +119,7 @@ class PreviousActivitiesPage {
 
       // MMIS 50% FFP
       // Get input value for approved medicaid funding
-      cy.get(`[name='approved-total-mmis50-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.50.totalApproved']`)
         .invoke('val')
         .then(val => {
           const share = 0.5;
@@ -183,25 +183,25 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      cy.get(`[name='actual-federal-hithie90-${year}']`)
+      cy.get(`[data-cy='${year}.hithie.federalActual']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);
         });
 
-      cy.get(`[name='actual-federal-mmis90-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.90.federalActual']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);
         });
 
-      cy.get(`[name='actual-federal-mmis75-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.75.federalActual']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);
         });
 
-      cy.get(`[name='actual-federal-mmis50-${year}']`)
+      cy.get(`[data-cy='${year}.mmis.50.federalActual']`)
         .invoke('val')
         .then(val => {
           totals[year] += extractNumber(val);
