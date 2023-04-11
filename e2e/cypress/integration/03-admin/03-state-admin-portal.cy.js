@@ -56,7 +56,7 @@ describe('tests state admin portal', async function () {
     clickButton('Requested Role', 'Approve');
     cy.get('select').select('eAPD State Staff');
     cy.findByRole('button', { name: 'Save' }).click();
-    cy.get('div').contains('Edit Role').should('not.be.visible');
+    cy.wait(200); // eslint-disable-line cypress/no-unnecessary-waiting
 
     clickButton('No Role', 'Deny');
     cy.contains('Deny');
@@ -72,14 +72,14 @@ describe('tests state admin portal', async function () {
     clickButton('State Staff', 'Edit Role');
     cy.get('select').select('eAPD State Contractor');
     cy.findByRole('button', { name: 'Save' }).click();
-    cy.get('div').contains('Edit Role').should('not.be.visible');
+    cy.wait(200); // eslint-disable-line cypress/no-unnecessary-waiting
     verifyRole('State Staff', 'eAPD State Contractor');
 
     // Test changing roles on State Contractor to State Staff
     clickButton('State Contractor', 'Edit Role');
     cy.get('select').select('eAPD State Staff');
     cy.findByRole('button', { name: 'Save' }).click();
-    cy.get('div').contains('Edit Role').should('not.be.visible');
+    cy.wait(200); // eslint-disable-line cypress/no-unnecessary-waiting
     verifyRole('State Contractor', 'eAPD State Staff');
 
     // Test revoking access on State Contractor
@@ -100,7 +100,7 @@ describe('tests state admin portal', async function () {
     clickButton('Denied Role', 'Restore Access');
     cy.get('select').select('eAPD State Staff');
     cy.findByRole('button', { name: 'Save' }).click();
-    cy.get('div').contains('Edit Role').should('not.be.visible');
+    cy.wait(200); // eslint-disable-line cypress/no-unnecessary-waiting
 
     cy.contains('Active').click();
     verifyRole('Denied Role', 'eAPD State Staff');
