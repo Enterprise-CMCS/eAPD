@@ -47,7 +47,8 @@ export {
   costAllocationSplitSchema,
   costAllocationMatchRateSchema,
   hitechCostAllocationSchema,
-  mmisCostAllocationSchema
+  mmisCostAllocationSchema,
+  otherFundingSchema
 } from './costAllocation.js';
 export {
   default as costAllocationNarrativeSchema,

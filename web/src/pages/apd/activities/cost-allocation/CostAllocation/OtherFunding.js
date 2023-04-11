@@ -26,8 +26,7 @@ import {
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
-
-import { hitechCostAllocationSchema as schema } from '@cms-eapd/common';
+import { otherFundingSchema as schema } from '@cms-eapd/common';
 
 export const ActivityTotalCostTable = ({ years, ffy }) => {
   return (
@@ -99,7 +98,6 @@ const OtherFunding = ({
     ffy =>
     ({ target: { value } }) => {
       setValue(`costAllocation.${ffy}.other`, value, { shouldValidate: true });
-      console.log(errors);
       setOtherFunding(activityIndex, ffy, value);
     };
 
@@ -168,12 +166,7 @@ const OtherFunding = ({
                   label={`FFY ${ffy}`}
                   labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
-                  errorMessage={
-                    errors &&
-                    errors?.costAllocation &&
-                    errors?.costAllocation[ffy] &&
-                    errors?.costAllocation[ffy]?.other?.message
-                  }
+                  errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
                   errorPlacement="bottom"
                 />
               )}
