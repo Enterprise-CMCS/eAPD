@@ -47,7 +47,7 @@
     "babelify": "^10.0.0",
     "connected-react-router": "6.9.3",
     "css-loader": "6.7.3",
-    "cypress": "12.4.1",
+    "cypress": "12.9",
     "cypress-audit": "1.1.0",
     "cypress-axe": "1.3.0",
     "cypress-file-upload": "5.0.8",
