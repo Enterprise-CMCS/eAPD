@@ -13,7 +13,8 @@ export const BUDGET_TYPE = {
 
 export const FUNDING_CATEGORY_TYPE = {
   DDI: 'DDI',
-  MANDO: 'MO'
+  MANDO: 'MO',
+  MANDOALT: 'M&O'
 };
 export const FUNDING_CATEGORY_TYPE_KEY_LOOKUP = {
   DDI: 'ddi',
