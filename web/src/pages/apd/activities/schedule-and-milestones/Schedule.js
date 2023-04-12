@@ -83,7 +83,9 @@ const Schedule = ({
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
 
-                    trigger();
+                    if (adminCheck) {
+                      trigger();
+                    }
                   }}
                   errorMessage={adminCheck && errors?.plannedEndDate?.message}
                   errorPlacement="bottom"
