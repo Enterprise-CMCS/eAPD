@@ -5440,6 +5440,26 @@ describe('budget calculate methods', () => {
         },
         ddi: {
           '90-10': {
+            keyStatePersonnel: {
+              2017: {
+                total: 100000,
+                federal: 45000,
+                medicaid: 50000,
+                state: 5000
+              },
+              2018: {
+                total: 75000,
+                federal: 67500,
+                medicaid: 75000,
+                state: 7500
+              },
+              total: {
+                total: 175000,
+                federal: 112500,
+                medicaid: 125000,
+                state: 12500
+              }
+            },
             statePersonnel: {
               2017: { total: 2400, federal: 2160, medicaid: 2400, state: 240 },
               2018: { total: 2200, federal: 1980, medicaid: 2200, state: 220 },
@@ -5456,17 +5476,32 @@ describe('budget calculate methods', () => {
               total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
             },
             combined: {
-              2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-              2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
+              2017: {
+                total: 108400,
+                federal: 52560,
+                medicaid: 58400,
+                state: 5840
+              },
+              2018: {
+                total: 83200,
+                federal: 74880,
+                medicaid: 83200,
+                state: 8320
+              },
               total: {
-                total: 16600,
-                federal: 14940,
-                medicaid: 16600,
-                state: 1660
+                total: 191600,
+                federal: 127440,
+                medicaid: 141600,
+                state: 14160
               }
             }
           },
           '75-25': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -5489,6 +5524,11 @@ describe('budget calculate methods', () => {
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -5511,18 +5551,43 @@ describe('budget calculate methods', () => {
             }
           },
           combined: {
-            2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-            2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
+            2017: {
+              total: 108400,
+              federal: 52560,
+              medicaid: 58400,
+              state: 5840
+            },
+            2018: {
+              total: 83200,
+              federal: 74880,
+              medicaid: 83200,
+              state: 8320
+            },
             total: {
-              total: 16600,
-              federal: 14940,
-              medicaid: 16600,
-              state: 1660
+              total: 191600,
+              federal: 127440,
+              medicaid: 141600,
+              state: 14160
             }
           }
         },
         mando: {
           '75-25': {
+            keyStatePersonnel: {
+              2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+              2018: {
+                total: 45000,
+                federal: 30375,
+                medicaid: 40500,
+                state: 10125
+              },
+              total: {
+                total: 177000,
+                federal: 31365,
+                medicaid: 41820,
+                state: 10455
+              }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -5539,12 +5604,27 @@ describe('budget calculate methods', () => {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
             combined: {
-              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+              2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+              2018: {
+                total: 45000,
+                federal: 30375,
+                medicaid: 40500,
+                state: 10125
+              },
+              total: {
+                total: 177000,
+                federal: 31365,
+                medicaid: 41820,
+                state: 10455
+              }
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -5567,9 +5647,19 @@ describe('budget calculate methods', () => {
             }
           },
           combined: {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+            2018: {
+              total: 45000,
+              federal: 30375,
+              medicaid: 40500,
+              state: 10125
+            },
+            total: {
+              total: 177000,
+              federal: 31365,
+              medicaid: 41820,
+              state: 10455
+            }
           }
         },
         combined: {
@@ -5720,6 +5810,7 @@ describe('budget calculate methods', () => {
         years: ['2017', '2018']
       };
       const actual = calculateBudget(mmisApd);
+
       expect(actual).toEqual(expected);
     });
   });

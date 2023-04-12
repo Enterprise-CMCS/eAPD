@@ -138,6 +138,9 @@ describe('budget getDefault methods', () => {
     test('with fedStateSplitOptions, no years', () => {
       const expected = {
         '90-10': {
+          keyStatePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
@@ -148,6 +151,9 @@ describe('budget getDefault methods', () => {
           combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
         },
         '75-25': {
+          keyStatePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
@@ -158,6 +164,9 @@ describe('budget getDefault methods', () => {
           combined: { total: { total: 0, federal: 0, medicaid: 0, state: 0 } }
         },
         '50-50': {
+          keyStatePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             total: { total: 0, federal: 0, medicaid: 0, state: 0 }
           },
@@ -180,6 +189,11 @@ describe('budget getDefault methods', () => {
     test('with years and fedStateSplitOptions', () => {
       const expected = {
         '90-10': {
+          keyStatePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -202,6 +216,11 @@ describe('budget getDefault methods', () => {
           }
         },
         '75-25': {
+          keyStatePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -224,6 +243,11 @@ describe('budget getDefault methods', () => {
           }
         },
         '50-50': {
+          keyStatePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
           statePersonnel: {
             2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
             2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -611,6 +635,9 @@ describe('budget getDefault methods', () => {
         },
         ddi: {
           '90-10': {
+            keyStatePersonnel: {
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
@@ -625,6 +652,9 @@ describe('budget getDefault methods', () => {
             }
           },
           '75-25': {
+            keyStatePersonnel: {
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
@@ -639,6 +669,9 @@ describe('budget getDefault methods', () => {
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
@@ -658,6 +691,9 @@ describe('budget getDefault methods', () => {
         },
         mando: {
           '75-25': {
+            keyStatePersonnel: {
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
@@ -672,6 +708,9 @@ describe('budget getDefault methods', () => {
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               total: { total: 0, federal: 0, medicaid: 0, state: 0 }
             },
@@ -726,6 +765,11 @@ describe('budget getDefault methods', () => {
         },
         ddi: {
           '90-10': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -748,6 +792,11 @@ describe('budget getDefault methods', () => {
             }
           },
           '75-25': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -770,6 +819,11 @@ describe('budget getDefault methods', () => {
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -799,6 +853,11 @@ describe('budget getDefault methods', () => {
         },
         mando: {
           '75-25': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
@@ -821,6 +880,11 @@ describe('budget getDefault methods', () => {
             }
           },
           '50-50': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
             statePersonnel: {
               2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
               2018: { total: 0, federal: 0, medicaid: 0, state: 0 },

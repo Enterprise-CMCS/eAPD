@@ -8,7 +8,7 @@ import {
   mapStateToProps,
   DataRow,
   DataRowGroup,
-  SummaryBudgetByActivityTotals,
+  SummaryBudgetByActivityTotalsHITECH,
   SummaryBudgetByActivityBreakdown
 } from './CombinedActivityCosts';
 
@@ -98,7 +98,7 @@ describe('renders correctly', () => {
   test('Combined Activity Costs Totals renders', () => {
     expect(
       shallow(
-        <SummaryBudgetByActivityTotals
+        <SummaryBudgetByActivityTotalsHITECH
           data={{
             hit: {
               1975: { federal: 1, state: 2, medicaid: 1000, total: 3 },
