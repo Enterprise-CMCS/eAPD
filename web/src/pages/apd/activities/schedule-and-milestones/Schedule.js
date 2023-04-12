@@ -34,16 +34,8 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   });
 
   useEffect(() => {
-    triggerDates();
+    trigger();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const triggerDates = () => {
-    if (!plannedEndDate) {
-      trigger('plannedStartDate');
-    } else {
-      trigger();
-    }
-  };
 
   return (
     <Subsection resource="activities.schedule">
@@ -64,7 +56,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                   setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
 
-                  triggerDates();
+                  trigger();
                 }}
                 errorMessage={errors?.plannedStartDate?.message}
                 errorPlacement="bottom"
@@ -83,7 +75,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
 
-                    triggerDates();
+                    trigger();
                   }}
                   errorMessage={errors?.plannedEndDate?.message}
                   errorPlacement="bottom"

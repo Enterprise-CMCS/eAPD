@@ -21,7 +21,7 @@ const activityScheduleSchema = Joi.object({
   plannedEndDate: Joi.date()
     .utc()
     .allow('', null)
-    .min(Joi.ref('plannedStartDate'))
+    .min(Joi.ref('plannedStartDate') || DATE_EXTREMES.min)
     .max(DATE_EXTREMES.max)
     .messages({
       'date.base': 'Provide a valid end date.',

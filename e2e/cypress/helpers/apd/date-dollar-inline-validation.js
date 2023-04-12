@@ -19,6 +19,7 @@ const fillField = function (id, content) {
 const dollarError = 'Provide a dollar amount greater than or equal to $0';
 const tableError =
   'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.';
+const validEndDateErr = 'Provide an end date that is after the start date.';
 const validStartDateErr = 'Provide a valid start date.';
 const validYearErr = 'Provide a valid start year.';
 
@@ -83,6 +84,9 @@ export const testDateDollarInlineValidation = function () {
         errorPresent(validStartDateErr);
         populatePage.fillDate('Start date', ['11', '16', '1990']);
         alertNotPresent();
+
+        populatePage.fillDate('End date', ['11', '16', '1900']);
+        errorPresent(validEndDateErr);
       });
 
       it('should show inline validation for Cost Allocation Other Funding dollar fields', function () {
