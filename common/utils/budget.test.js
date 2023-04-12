@@ -1,4 +1,3 @@
-import { APD_TYPE } from './constants.js';
 import {
   calculateCategoryPercentages,
   calculateOtherFundingByYear,
@@ -6,6 +5,7 @@ import {
   calculateQuarterlyCosts,
   calculateBudget
 } from './budget.js';
+import { hitechApd, mmisApd } from './test-data/calculateBudget.js';
 
 describe('budget calculate methods', () => {
   describe('calculateCategoryPercentages', () => {
@@ -5375,350 +5375,12 @@ describe('budget calculate methods', () => {
         ],
         years: ['1931', '1932', '1933']
       };
-      const actual = calculateBudget({
-        apdType: APD_TYPE.HITECH,
-        activities: [
-          {
-            id: 1,
-            key: '1',
-            activityId: '1',
-            name: 'hieOne',
-            fundingSource: 'HIE',
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } },
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-            ],
-            expenses: [
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } },
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-            ],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 1000, perc: 1 },
-                  1932: { amt: 1000, perc: 0.7 },
-                  1933: { amt: 1000, perc: 0.4 }
-                }
-              },
-              {
-                years: {
-                  1931: { amt: 1000, perc: 0.4 },
-                  1932: { amt: 1000, perc: 0.5 },
-                  1933: { amt: 1000, perc: 0.3 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 10 }
-              },
-              1932: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              },
-              1933: {
-                1: { inHouse: 10, contractors: 40 },
-                2: { inHouse: 20, contractors: 30 },
-                3: { inHouse: 30, contractors: 20 },
-                4: { inHouse: 40, contractors: 10 }
-              }
-            }
-          },
-          {
-            id: 2,
-            key: '2',
-            activityId: '2',
-            name: 'hieTwo',
-            fundingSource: 'HIE',
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-            ],
-            expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 1000, perc: 1 },
-                  1932: { amt: 1000, perc: 1 },
-                  1933: { amt: 1000, perc: 1 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              },
-              1932: {
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 10 }
-              },
-              1933: {
-                1: { inHouse: 10, contractors: 40 },
-                2: { inHouse: 20, contractors: 30 },
-                3: { inHouse: 30, contractors: 20 },
-                4: { inHouse: 40, contractors: 10 }
-              }
-            }
-          },
-          {
-            id: 3,
-            key: '3',
-            activityId: '3',
-            name: 'Program Administration',
-            fundingSource: 'HIT',
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 1000 }
-            },
-            contractorResources: [
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-            ],
-            expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 1000, perc: 1 },
-                  1932: { amt: 1000, perc: 1 },
-                  1933: { amt: 1000, perc: 1 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 10, contractors: 40 },
-                2: { inHouse: 20, contractors: 30 },
-                3: { inHouse: 30, contractors: 20 },
-                4: { inHouse: 40, contractors: 10 }
-              },
-              1932: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              },
-              1933: {
-                // Contractor percent is 120%
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 30 }
-              }
-            }
-          },
-          {
-            id: 4,
-            key: '4',
-            activityId: '4',
-            name: 'mmisOne',
-            fundingSource: 'MMIS',
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 50, state: 50 }, other: 1000 },
-              1932: { ffp: { federal: 75, state: 25 }, other: 1000 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [
-              { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-            ],
-            expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 1000, perc: 0.5 },
-                  1932: { amt: 1000, perc: 1 },
-                  1933: { amt: 1000, perc: 0.1 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 10, contractors: 40 },
-                2: { inHouse: 20, contractors: 30 },
-                3: { inHouse: 30, contractors: 20 },
-                4: { inHouse: 40, contractors: 10 }
-              },
-              1932: {
-                // Contractor percent is 120%
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 30 }
-              },
-              1933: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              }
-            }
-          },
-          {
-            // This activity is to represent the case where an activity's
-            // total costs are zero, because that was causing budget math
-            // errors. https://github.com/Enterprise-CMCS/eAPD/issues/1740
-            id: 5,
-            key: '5',
-            activityId: '5',
-            name: 'zero total',
-            fundingSource: 'MMIS',
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 50, state: 50 }, other: 0 },
-              1932: { ffp: { federal: 75, state: 25 }, other: 0 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [{ years: { 1931: 0, 1932: 0, 1933: 0 } }],
-            expenses: [{ years: { 1931: 0, 1932: 0, 1933: 0 } }],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 0, perc: 0 },
-                  1932: { amt: 0, perc: 0 },
-                  1933: { amt: 0, perc: 0 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 0, contractors: 0 },
-                2: { inHouse: 0, contractors: 0 },
-                3: { inHouse: 0, contractors: 0 },
-                4: { inHouse: 0, contractors: 0 }
-              },
-              1932: {
-                1: { inHouse: 0, contractors: 0 },
-                2: { inHouse: 0, contractors: 0 },
-                3: { inHouse: 0, contractors: 0 },
-                4: { inHouse: 0, contractors: 0 }
-              },
-              1933: {
-                1: { inHouse: 0, contractors: 0 },
-                2: { inHouse: 0, contractors: 0 },
-                3: { inHouse: 0, contractors: 0 },
-                4: { inHouse: 0, contractors: 0 }
-              }
-            }
-          },
-          {
-            // This activity is to represent the case where an activity
-            // does not have a funding program yet. New activities do not
-            // get a funding program by default.
-            // https://github.com/Enterprise-CMCS/eAPD/issues/2059
-            id: 6,
-            key: '6',
-            activityId: '6',
-            name: 'no funding program',
-            fundingSource: null,
-            years: ['1931', '1932', '1933'],
-            costAllocation: {
-              1931: { ffp: { federal: 50, state: 50 }, other: 0 },
-              1932: { ffp: { federal: 75, state: 25 }, other: 0 },
-              1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [
-              { years: { 1931: 100, 1932: 100, 1933: 100 } }
-            ],
-            expenses: [{ years: { 1931: 100, 1932: 100, 1933: 100 } }],
-            statePersonnel: [
-              {
-                years: {
-                  1931: { amt: 100, perc: 1 },
-                  1932: { amt: 100, perc: 1 },
-                  1933: { amt: 100, perc: 1 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              1931: {
-                1: { inHouse: 25, contractors: 25 },
-                2: { inHouse: 25, contractors: 25 },
-                3: { inHouse: 25, contractors: 25 },
-                4: { inHouse: 25, contractors: 25 }
-              },
-              1932: {
-                1: { inHouse: 25, contractors: 25 },
-                2: { inHouse: 25, contractors: 25 },
-                3: { inHouse: 25, contractors: 25 },
-                4: { inHouse: 25, contractors: 25 }
-              },
-              1933: {
-                1: { inHouse: 25, contractors: 25 },
-                2: { inHouse: 25, contractors: 25 },
-                3: { inHouse: 25, contractors: 25 },
-                4: { inHouse: 25, contractors: 25 }
-              }
-            }
-          }
-        ],
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: { 1931: 150, 1932: 151, 1933: 152 },
-              fte: { 1931: 0, 1932: 0.5, 1933: 1 },
-              hasCosts: false
-            },
-            {
-              costs: { 1931: 150, 1932: 1500, 1933: 15000 },
-              fte: { 1931: 0, 1932: 0.3, 1933: 1 },
-              hasCosts: true
-            }
-          ]
-        },
-        years: ['1931', '1932', '1933']
-      });
+      const actual = calculateBudget(hitechApd);
       expect(actual).toEqual(expected);
     });
 
     test('with MMIS values', () => {
       const expected = {
-        federalShareByFFYQuarter: {
-          mmis: {
-            years: {
-              2017: {
-                1: { inHouse: 1368, contractors: 1170, combined: 2538 },
-                2: { inHouse: 1062, contractors: 540, combined: 1602 },
-                3: { inHouse: 1674, contractors: 720, combined: 2394 },
-                4: { inHouse: 756, contractors: 270, combined: 1026 },
-                subtotal: { inHouse: 4860, contractors: 2700, combined: 7560 }
-              },
-              2018: {
-                1: { inHouse: 1260, contractors: 1260, combined: 2520 },
-                2: { inHouse: 1080, contractors: 540, combined: 1620 },
-                3: { inHouse: 1440, contractors: 630, combined: 2070 },
-                4: { inHouse: 900, contractors: 270, combined: 1170 },
-                subtotal: { inHouse: 4680, contractors: 2700, combined: 7380 }
-              }
-            },
-            total: {
-              inHouse: 9540,
-              contractors: 5400,
-              combined: 14940
-            }
-          }
-        },
         mmis: {
           statePersonnel: {
             2017: { total: 2400, federal: 2160, medicaid: 2400, state: 240 },
@@ -5776,40 +5438,227 @@ describe('budget calculate methods', () => {
             }
           }
         },
-        mmisByFFP: {
+        ddi: {
           '90-10': {
-            2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-            2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
-            total: {
-              total: 16600,
-              federal: 14940,
-              medicaid: 16600,
-              state: 1660
+            keyStatePersonnel: {
+              2017: {
+                total: 100000,
+                federal: 45000,
+                medicaid: 50000,
+                state: 5000
+              },
+              2018: {
+                total: 75000,
+                federal: 67500,
+                medicaid: 75000,
+                state: 7500
+              },
+              total: {
+                total: 175000,
+                federal: 112500,
+                medicaid: 125000,
+                state: 12500
+              }
+            },
+            statePersonnel: {
+              2017: { total: 2400, federal: 2160, medicaid: 2400, state: 240 },
+              2018: { total: 2200, federal: 1980, medicaid: 2200, state: 220 },
+              total: { total: 4600, federal: 4140, medicaid: 4600, state: 460 }
+            },
+            contractors: {
+              2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+            },
+            expenses: {
+              2017: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              2018: { total: 3000, federal: 2700, medicaid: 3000, state: 300 },
+              total: { total: 6000, federal: 5400, medicaid: 6000, state: 600 }
+            },
+            combined: {
+              2017: {
+                total: 108400,
+                federal: 52560,
+                medicaid: 58400,
+                state: 5840
+              },
+              2018: {
+                total: 83200,
+                federal: 74880,
+                medicaid: 83200,
+                state: 8320
+              },
+              total: {
+                total: 191600,
+                federal: 127440,
+                medicaid: 141600,
+                state: 14160
+              }
             }
           },
           '75-25': {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
           '50-50': {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
-          },
-          '0-100': {
-            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
-            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
           },
           combined: {
-            2017: { total: 8400, federal: 7560, medicaid: 8400, state: 840 },
-            2018: { total: 8200, federal: 7380, medicaid: 8200, state: 820 },
+            2017: {
+              total: 108400,
+              federal: 52560,
+              medicaid: 58400,
+              state: 5840
+            },
+            2018: {
+              total: 83200,
+              federal: 74880,
+              medicaid: 83200,
+              state: 8320
+            },
             total: {
-              total: 16600,
-              federal: 14940,
-              medicaid: 16600,
-              state: 1660
+              total: 191600,
+              federal: 127440,
+              medicaid: 141600,
+              state: 14160
+            }
+          }
+        },
+        mando: {
+          '75-25': {
+            keyStatePersonnel: {
+              2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+              2018: {
+                total: 45000,
+                federal: 30375,
+                medicaid: 40500,
+                state: 10125
+              },
+              total: {
+                total: 177000,
+                federal: 31365,
+                medicaid: 41820,
+                state: 10455
+              }
+            },
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+              2018: {
+                total: 45000,
+                federal: 30375,
+                medicaid: 40500,
+                state: 10125
+              },
+              total: {
+                total: 177000,
+                federal: 31365,
+                medicaid: 41820,
+                state: 10455
+              }
+            }
+          },
+          '50-50': {
+            keyStatePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
+          },
+          combined: {
+            2017: { total: 132000, federal: 990, medicaid: 1320, state: 330 },
+            2018: {
+              total: 45000,
+              federal: 30375,
+              medicaid: 40500,
+              state: 10125
+            },
+            total: {
+              total: 177000,
+              federal: 31365,
+              medicaid: 41820,
+              state: 10455
             }
           }
         },
@@ -5933,69 +5782,6 @@ describe('budget calculate methods', () => {
                 medicaid: 10600,
                 total: 10600
               }
-            },
-            quarterlyFFP: {
-              years: {
-                2017: {
-                  1: {
-                    inHouse: { dollars: 918, percent: 0.3 },
-                    contractors: { dollars: 720, percent: 0.4 },
-                    combined: { dollars: 1638, percent: 0 }
-                  },
-                  2: {
-                    inHouse: { dollars: 612, percent: 0.2 },
-                    contractors: { dollars: 360, percent: 0.2 },
-                    combined: { dollars: 972, percent: 0 }
-                  },
-                  3: {
-                    inHouse: { dollars: 1224, percent: 0.4 },
-                    contractors: { dollars: 540, percent: 0.3 },
-                    combined: { dollars: 1764, percent: 0 }
-                  },
-                  4: {
-                    inHouse: { dollars: 306, percent: 0.1 },
-                    contractors: { dollars: 180, percent: 0.1 },
-                    combined: { dollars: 486, percent: 0 }
-                  },
-                  subtotal: {
-                    inHouse: { dollars: 3060, percent: 1 },
-                    contractors: { dollars: 1800, percent: 1 },
-                    combined: { dollars: 4860, percent: 0 }
-                  }
-                },
-                2018: {
-                  1: {
-                    inHouse: { dollars: 720, percent: 0.25 },
-                    contractors: { dollars: 900, percent: 0.5 },
-                    combined: { dollars: 1620, percent: 0 }
-                  },
-                  2: {
-                    inHouse: { dollars: 720, percent: 0.25 },
-                    contractors: { dollars: 360, percent: 0.2 },
-                    combined: { dollars: 1080, percent: 0 }
-                  },
-                  3: {
-                    inHouse: { dollars: 720, percent: 0.25 },
-                    contractors: { dollars: 360, percent: 0.2 },
-                    combined: { dollars: 1080, percent: 0 }
-                  },
-                  4: {
-                    inHouse: { dollars: 720, percent: 0.25 },
-                    contractors: { dollars: 180, percent: 0.1 },
-                    combined: { dollars: 900, percent: 0 }
-                  },
-                  subtotal: {
-                    inHouse: { dollars: 2880, percent: 1 },
-                    contractors: { dollars: 1800, percent: 1 },
-                    combined: { dollars: 4680, percent: 0 }
-                  }
-                }
-              },
-              total: {
-                inHouse: 5940,
-                contractors: 3600,
-                combined: 9540
-              }
             }
           },
           2: {
@@ -6018,223 +5804,13 @@ describe('budget calculate methods', () => {
                 medicaid: 6000,
                 total: 6000
               }
-            },
-            quarterlyFFP: {
-              years: {
-                2017: {
-                  1: {
-                    inHouse: { dollars: 450, percent: 0.25 },
-                    contractors: { dollars: 450, percent: 0.5 },
-                    combined: { dollars: 900, percent: 0 }
-                  },
-                  2: {
-                    inHouse: { dollars: 450, percent: 0.25 },
-                    contractors: { dollars: 180, percent: 0.2 },
-                    combined: { dollars: 630, percent: 0 }
-                  },
-                  3: {
-                    inHouse: { dollars: 450, percent: 0.25 },
-                    contractors: { dollars: 180, percent: 0.2 },
-                    combined: { dollars: 630, percent: 0 }
-                  },
-                  4: {
-                    inHouse: { dollars: 450, percent: 0.25 },
-                    contractors: { dollars: 90, percent: 0.1 },
-                    combined: { dollars: 540, percent: 0 }
-                  },
-                  subtotal: {
-                    inHouse: { dollars: 1800, percent: 1 },
-                    contractors: { dollars: 900, percent: 1 },
-                    combined: { dollars: 2700, percent: 0 }
-                  }
-                },
-                2018: {
-                  1: {
-                    inHouse: { dollars: 540, percent: 0.3 },
-                    contractors: { dollars: 360, percent: 0.4 },
-                    combined: { dollars: 900, percent: 0 }
-                  },
-                  2: {
-                    inHouse: { dollars: 360, percent: 0.2 },
-                    contractors: { dollars: 180, percent: 0.2 },
-                    combined: { dollars: 540, percent: 0 }
-                  },
-                  3: {
-                    inHouse: { dollars: 720, percent: 0.4 },
-                    contractors: { dollars: 270, percent: 0.3 },
-                    combined: { dollars: 990, percent: 0 }
-                  },
-                  4: {
-                    inHouse: { dollars: 180, percent: 0.1 },
-                    contractors: { dollars: 90, percent: 0.1 },
-                    combined: { dollars: 270, percent: 0 }
-                  },
-                  subtotal: {
-                    inHouse: { dollars: 1800, percent: 1 },
-                    contractors: { dollars: 900, percent: 1 },
-                    combined: { dollars: 2700, percent: 0 }
-                  }
-                }
-              },
-              total: {
-                inHouse: 3600,
-                contractors: 1800,
-                combined: 5400
-              }
             }
           }
         },
         years: ['2017', '2018']
       };
-      const actual = calculateBudget({
-        apdType: APD_TYPE.MMIS,
-        activities: [
-          {
-            id: 1,
-            key: '1',
-            activityId: '1',
-            name: 'One',
-            years: ['2017', '2018'],
-            costAllocation: {
-              2017: { ffp: { federal: 90, state: 10 }, other: 0 },
-              2018: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [
-              { years: { 2017: 1000, 2018: 1000 } },
-              { years: { 2017: 1000, 2018: 1000 } }
-            ],
-            expenses: [
-              { years: { 2017: 1000, 2018: 1000 } },
-              { years: { 2017: 1000, 2018: 1000 } }
-            ],
-            statePersonnel: [
-              {
-                years: {
-                  2017: { amt: 1000, perc: 1 },
-                  2018: { amt: 1000, perc: 0.7 }
-                }
-              },
-              {
-                years: {
-                  2017: { amt: 1000, perc: 0.4 },
-                  2018: { amt: 1000, perc: 0.5 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              2017: {
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 10 }
-              },
-              2018: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              }
-            }
-          },
-          {
-            id: 2,
-            key: '2',
-            activityId: '2',
-            name: 'Two',
-            years: ['2017', '2018'],
-            costAllocation: {
-              2017: { ffp: { federal: 90, state: 10 }, other: 0 },
-              2018: { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            contractorResources: [{ years: { 2017: 1000, 2018: 1000 } }],
-            expenses: [{ years: { 2017: 1000, 2018: 1000 } }],
-            statePersonnel: [
-              {
-                years: {
-                  2017: { amt: 1000, perc: 1 },
-                  2018: { amt: 1000, perc: 1 }
-                }
-              }
-            ],
-            quarterlyFFP: {
-              2017: {
-                1: { inHouse: 25, contractors: 50 },
-                2: { inHouse: 25, contractors: 20 },
-                3: { inHouse: 25, contractors: 20 },
-                4: { inHouse: 25, contractors: 10 }
-              },
-              2018: {
-                1: { inHouse: 30, contractors: 40 },
-                2: { inHouse: 20, contractors: 20 },
-                3: { inHouse: 40, contractors: 30 },
-                4: { inHouse: 10, contractors: 10 }
-              }
-            }
-          }
-        ],
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: { 2017: 100000, 2018: 150000 },
-              fte: { 2017: 1, 2018: 0.5 },
-              split: {
-                2017: {
-                  federal: 90,
-                  state: 10
-                },
-                2018: {
-                  federal: 90,
-                  state: 10
-                }
-              },
-              medicaidShare: {
-                2017: 50,
-                2018: 100
-              },
-              hasCosts: true
-            },
-            {
-              costs: { 2017: 200000, 2018: 150000 },
-              fte: { 2017: 0.66, 2018: 0.3 },
-              split: {
-                2017: {
-                  federal: 75,
-                  state: 25
-                },
-                2018: {
-                  federal: 75,
-                  state: 25
-                }
-              },
-              medicaidShare: {
-                2017: 1,
-                2018: 90
-              },
-              hasCosts: true
-            },
-            {
-              costs: { 2017: 0, 2018: 0 },
-              fte: { 2017: 0, 2018: 0 },
-              split: {
-                2017: {
-                  federal: 0,
-                  state: 0
-                },
-                2018: {
-                  federal: 0,
-                  state: 0
-                }
-              },
-              medicaidShare: {
-                2017: 0,
-                2018: null
-              },
-              hasCosts: false
-            }
-          ]
-        },
-        years: ['2017', '2018']
-      });
+      const actual = calculateBudget(mmisApd);
+
       expect(actual).toEqual(expected);
     });
   });

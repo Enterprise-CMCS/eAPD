@@ -287,7 +287,7 @@ const buildActivitySection = (apdId, apdType, activityId) => {
         },
         {
           label: 'Conditions for Enhanced Funding',
-          url: `/apd/${apdId}/activity/${activityId}/conditions`
+          url: `/apd/${apdId}/activity/${activityId}/enhanced-funding`
         },
         {
           label: 'Outcomes and Metrics',
@@ -349,7 +349,7 @@ const getItems = ({
 } = {}) => {
   // eslint-disable-next-line no-param-reassign
   items = copy(items.length > 0 ? items : staticItems(apdId, apdType)); // copy items state so we don't modify original state
-  if (activities.length && items.length) {
+  if (items.length) {
     const item = items.find(i => i.label === 'Activities');
     item.items = [
       item.items[0],
