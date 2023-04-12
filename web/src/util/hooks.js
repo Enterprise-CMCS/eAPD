@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 import { STATES } from './states';
 
 export function useAvailableStates() {
-  const [availableStates, setAvailableStates] = useState([...STATES]);
   const { supportStateAvailable } = useFlags();
 
-  useEffect(() => {
+  return useMemo(() => {
     if (supportStateAvailable) {
-      setAvailableStates([...STATES, { id: 'na', name: 'New Apdland' }]);
+      return [...STATES, { id: 'na', name: 'New Apdland' }];
     } else {
-      setAvailableStates([...STATES]);
+      return [...STATES];
     }
   }, [supportStateAvailable]);
-
-  return availableStates;
 }

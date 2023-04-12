@@ -15,6 +15,12 @@ jest.mock('./app', () => {
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+const mockUserData = {
+  user: 'Em Ily',
+  id: '123',
+  email: 'em@il.com',
+  username: 'emily'
+};
 
 // eslint-disable-next-line no-promise-executor-return
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -76,7 +82,9 @@ describe('auth actions', () => {
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(expiresAt));
+        .mockImplementation(() =>
+          Promise.resolve({ expiresAt, data: mockUserData })
+        );
 
       const store = mockStore({});
       fetchMock
@@ -86,6 +94,7 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.UPDATE_USER_INFO, data: mockUserData },
         { type: actions.LATEST_ACTIVITY },
         {
           type: actions.UPDATE_USER_INFO,
@@ -114,7 +123,9 @@ describe('auth actions', () => {
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(expiresAt));
+        .mockImplementation(() =>
+          Promise.resolve({ expiresAt, data: mockUserData })
+        );
 
       const store = mockStore({});
       fetchMock
@@ -123,6 +134,7 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.UPDATE_USER_INFO, data: mockUserData },
         { type: actions.LATEST_ACTIVITY },
         { type: actions.STATE_ACCESS_REQUIRED }
       ];
@@ -292,7 +304,9 @@ describe('auth actions', () => {
       const expiresAt = new Date().getTime() + 5000;
       const getTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(expiresAt));
+        .mockImplementation(() =>
+          Promise.resolve({ expiresAt, data: mockUserData })
+        );
 
       const store = mockStore({});
       fetchMock
@@ -301,6 +315,7 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_MFA_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.UPDATE_USER_INFO, data: mockUserData },
         { type: actions.LATEST_ACTIVITY },
         {
           type: actions.UPDATE_USER_INFO,
@@ -568,7 +583,9 @@ describe('auth actions', () => {
       const expiresAt = new Date().getTime() + 5000;
       const setTokenSpy = jest
         .spyOn(mockAuth, 'setTokens')
-        .mockImplementation(() => Promise.resolve(expiresAt));
+        .mockImplementation(() =>
+          Promise.resolve({ expiresAt, data: mockUserData })
+        );
 
       const store = mockStore({});
       fetchMock.onGet('/me').reply(401, 'Request failed with status code 401');
@@ -578,6 +595,7 @@ describe('auth actions', () => {
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
         { type: actions.UPDATE_EXPIRATION, data: expiresAt },
+        { type: actions.UPDATE_USER_INFO, data: mockUserData },
         { type: actions.LATEST_ACTIVITY },
         {
           type: actions.LOGIN_FAILURE,

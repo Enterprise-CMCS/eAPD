@@ -1,10 +1,160 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component renders correctly 1`] = `
-<withRouter(Wrapper)>
-  <Connect(AriaAnnounce) />
-  <Broadcast />
-  <Connect(AutoScrollToElement) />
-  <MainRoutes />
-</withRouter(Wrapper)>
+<div>
+  <div
+    class="site site--gray"
+  >
+    <header>
+      <a
+        class="skip-nav ds-c-dialog__header"
+        href="#start-main-content"
+      >
+        Skip to main content
+      </a>
+      <div
+        class="ds-l-container"
+      >
+        <div
+          class="ds-l-row"
+        >
+          <div
+            class="ds-l-col--12 ds-l-md-col--3 site-title"
+          >
+            <span />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      aria-live="polite"
+      class="ds-u-visibility--screen-reader"
+      role="region"
+    />
+    <main
+      id="start-main-content"
+    >
+      <div
+        class="card--container ds-u-margin-top--7"
+      >
+        <div
+          class="ds-l-container"
+        >
+          <div
+            class="ds-l-row card"
+          >
+            <div
+              class="ds-l-col--1 ds-u-margin-left--auto"
+            />
+            <div
+              class="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+            >
+              <p>
+                This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties.
+                <button
+                  class="ds-c-button ds-c-button--transparent ds-c-button--small"
+                  type="button"
+                >
+                  Read more details
+                </button>
+              </p>
+              <div
+                class="ds-u-text-align--center"
+              >
+                <button
+                  class="ds-c-button ds-c-button--primary"
+                  type="button"
+                >
+                  Agree and continue
+                </button>
+              </div>
+            </div>
+            <div
+              class="ds-l-col--1 ds-u-margin-right--auto"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="visibility--screen"
+    >
+      <div
+        class="ds-l-container"
+      >
+        <div
+          class="ds-l-row ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center"
+        >
+          <img
+            alt="Health and Human Services logo"
+            class="hhs-logo"
+            src="/static/img/dhhs_logo_black.png"
+            width="80px"
+          />
+          <img
+            alt="Centers for Medicare & Medicaid Services Logo"
+            class="cms-logo"
+            src="/static/img/cms-logo.png"
+            width="150px"
+          />
+          <img
+            alt="MACPro logo"
+            class="macpro-logo"
+            src="/static/img/macpro_logo_transparent.png"
+            width="100px"
+          />
+          <img
+            alt="eAPD logo"
+            class="eAPD-logo"
+            src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+            width="115px"
+          />
+          <p
+            class="ds-u-measure--narrow"
+          >
+            A federal government website managed and paid for by the U.S. Centers for Medicare and Medicaid Services and part of the MACPro suite.
+          </p>
+        </div>
+      </div>
+      <div
+        class="footer--banner"
+      >
+        <div
+          class="ds-l-container"
+        >
+          <div
+            class="ds-l-row"
+          >
+            <p
+              class="ds-l-md-col--6"
+            >
+              Email
+               
+              <a
+                href="mailto:CMS-EAPD@cms.hhs.gov"
+              >
+                CMS-EAPD@cms.hhs.gov
+              </a>
+               for help or feedback.
+            </p>
+            <p
+              class="ds-l-md-col--6 ds-u-text-align--right"
+            >
+              7500 Security Boulevard, Baltimore, MD 21244
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div
+      aria-hidden="true"
+      aria-live="polite"
+      class="alert--session-expiring alert--session-expiring__inactive"
+    >
+      <div
+        id="session-ending-modal"
+      />
+    </div>
+  </div>
+</div>
 `;
