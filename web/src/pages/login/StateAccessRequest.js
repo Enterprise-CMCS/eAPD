@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useReducer, Fragment, useEffect } from 'react';
+import React, { useReducer, Fragment, useEffect, useState } from 'react';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
@@ -20,73 +20,40 @@ const StateAccessRequest = ({
   const allowedStates = useAvailableStates();
 
   const initialState = {
-    fullStateList: [],
-    filteredStates: [],
+    fullStateList: allowedStates,
+    filteredStates: allowedStates,
     selectedStates: [],
-    existingAffiliations: [],
-    pendingAffiliations: [],
-    inactiveAffiliations: [],
-    activeAffiliations: [],
     inputValue: ''
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [existingAffiliations, setExistingAffiliations] = useState([]);
+
   useEffect(() => {
     (async () => {
-      if (allowedStates) {
-        const affiliations = await axios.get('/affiliations/me');
-        console.log(`affiliations ${JSON.stringify(affiliations.data)}`);
-        console.log(`allowedState count ${allowedStates.length}`);
-        if (affiliations) {
-          const existingAffiliations = affiliations?.data.map(affiliation => {
-            const stateDetails = allowedStates?.find(
-              item => item.id === affiliation.stateId
-            );
-            return {
-              id: affiliation?.stateId,
-              name: stateDetails?.name,
-              status: affiliation?.status
-            };
-          });
-          console.log({ existingAffiliations });
-
-          const fullStateList = allowedStates?.filter(item => {
-            return !existingAffiliations?.find(affiliation => {
-              return affiliation.id === item.id;
-            });
-          });
-
-          const pendingAffiliations = existingAffiliations?.filter(
-            element => element.status === REQUESTED
-          );
-          const inactiveAffiliations = existingAffiliations?.filter(
-            element => element.status === REVOKED || element.status === DENIED
-          );
-          const activeAffiliations = existingAffiliations?.filter(
-            element => element.status === APPROVED
-          );
-
-          console.log({
-            existingAffiliations,
-            pendingAffiliations,
-            inactiveAffiliations,
-            activeAffiliations
-          });
-          dispatch({
-            type: 'update',
-            payload: {
-              fullStateList: fullStateList || [],
-              existingAffiliations: existingAffiliations || [],
-              pendingAffiliations: pendingAffiliations || [],
-              inactiveAffiliations: inactiveAffiliations || [],
-              activeAffiliations: activeAffiliations || []
-            }
-          });
-        }
-      }
+      const affiliations = await axios.get('/affiliations/me');
+      const results = affiliations.data.map(affiliation => {
+        const stateDetails = allowedStates.find(
+          item => item.id === affiliation.stateId
+        );
+        return {
+          id: affiliation.stateId,
+          name: stateDetails.name,
+          status: affiliation.status
+        };
+      });
+      setExistingAffiliations(results);
     })();
-    return null;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const availableStates = allowedStates.filter(item => {
+      return !existingAffiliations.find(affiliation => {
+        return affiliation.id === item.id;
+      });
+    });
+    dispatch({ type: 'update', payload: availableStates });
   }, [allowedStates]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -95,6 +62,21 @@ const StateAccessRequest = ({
     return { id: stateId, name: stateDetails.name, status: currentAffiliations[stateId] }
   });
   */
+
+  const pendingAffiliations = existingAffiliations.filter(
+    element => element.status === REQUESTED
+  );
+  const inactiveAffiliations = existingAffiliations.filter(
+    element => element.status === REVOKED || element.status === DENIED
+  );
+  const activeAffiliations = existingAffiliations.filter(
+    element => element.status === APPROVED
+  );
+
+  const autocompleteLabel =
+    existingAffiliations.length > 0
+      ? 'Request a new State Affiliation'
+      : 'Select your State Affiliation';
 
   function reducer(state, action) {
     switch (action.type) {
@@ -166,13 +148,8 @@ const StateAccessRequest = ({
     saveAction(state.selectedStates);
   };
 
-  const autocompleteLabel =
-    state.existingAffiliations?.length > 0
-      ? 'Request a new State Affiliation'
-      : 'Select your State Affiliation';
-
   const cardTitle =
-    state.existingAffiliations?.length > 0
+    existingAffiliations?.length > 0
       ? 'Manage Account'
       : 'Verify Your Identity';
 
@@ -188,8 +165,8 @@ const StateAccessRequest = ({
       <div className="ds-u-border--1 ds-u-padding--2">
         <h3 className="ds-h5">Active</h3>
         <span id="active">
-          {state.activeAffiliations?.length === 0 && 'No active affiliations'}
-          {state.activeAffiliations?.map(el => (
+          {activeAffiliations?.length === 0 && 'No active affiliations'}
+          {activeAffiliations?.map(el => (
             <Badge className="ds-u-margin-bottom--1" key={el.id}>
               {el.name}
             </Badge>
@@ -199,8 +176,8 @@ const StateAccessRequest = ({
           Pending
         </h3>
         <span id="pending">
-          {state.pendingAffiliations?.length === 0 && 'No pending affiliations'}
-          {state.pendingAffiliations?.map(el => (
+          {pendingAffiliations?.length === 0 && 'No pending affiliations'}
+          {pendingAffiliations?.map(el => (
             <Badge className="ds-u-margin-bottom--1" key={el.id}>
               {el.name}
             </Badge>
@@ -210,9 +187,8 @@ const StateAccessRequest = ({
           Revoked
         </h3>
         <span id="revoked">
-          {state.inactiveAffiliations?.length === 0 &&
-            'No revoked affiliations'}
-          {state.inactiveAffiliations?.map(el => (
+          {inactiveAffiliations?.length === 0 && 'No revoked affiliations'}
+          {inactiveAffiliations?.map(el => (
             <Badge className="ds-u-margin-bottom--1" key={el.id}>
               {el.name}
             </Badge>
@@ -230,7 +206,6 @@ const StateAccessRequest = ({
 
   return (
     <div id="start-main-content">
-      <p>{`${JSON.stringify(state)}`}</p>
       <AuthenticationForm
         id="state-access-request-form"
         title={cardTitle}
@@ -292,9 +267,7 @@ const StateAccessRequest = ({
             />
           </Autocomplete>
 
-          {state.existingAffiliations?.length > 0 && (
-            <UserExistingAffiliations />
-          )}
+          {existingAffiliations?.length > 0 && <UserExistingAffiliations />}
         </div>
       </AuthenticationForm>
     </div>

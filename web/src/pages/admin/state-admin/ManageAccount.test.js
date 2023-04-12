@@ -73,7 +73,7 @@ describe('<ManageAccount />', () => {
     ).toBeTruthy();
   });
 
-  xtest('renders correctly for admin user, requests a new affiliation', async () => {
+  test('renders correctly for admin user, requests a new affiliation', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
     fetchMock.onPost('/states/al/affiliations').reply(200);
 
