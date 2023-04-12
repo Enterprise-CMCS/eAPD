@@ -13,9 +13,17 @@ import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
+
 import { activityScheduleSchema as schema } from '@cms-eapd/common';
 
-const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
+const Schedule = ({
+  activity,
+  activityIndex,
+  setEndDate,
+  setStartDate,
+  adminCheck
+}) => {
   Schedule.displayName = 'Schedule';
 
   const { activitySchedule: { plannedStartDate, plannedEndDate } = {} } =
@@ -77,7 +85,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
 
                     trigger();
                   }}
-                  errorMessage={errors?.plannedEndDate?.message}
+                  errorMessage={adminCheck && errors?.plannedEndDate?.message}
                   errorPlacement="bottom"
                 />
               );
@@ -104,11 +112,13 @@ Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setEndDate: PropTypes.func.isRequired,
-  setStartDate: PropTypes.func.isRequired
+  setStartDate: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  activity: selectActivityByIndex(state, { activityIndex })
+  activity: selectActivityByIndex(state, { activityIndex }),
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

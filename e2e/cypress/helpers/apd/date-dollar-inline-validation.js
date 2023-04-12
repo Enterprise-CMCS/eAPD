@@ -84,9 +84,6 @@ export const testDateDollarInlineValidation = function () {
         errorPresent(validStartDateErr);
         populatePage.fillDate('Start date', ['11', '16', '1990']);
         alertNotPresent();
-
-        populatePage.fillDate('End date', ['11', '16', '1900']);
-        errorPresent(validEndDateErr);
       });
 
       it('should show inline validation for Cost Allocation Other Funding dollar fields', function () {
