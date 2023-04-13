@@ -26,8 +26,7 @@ import {
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
-
-import { costAllocationOtherSchema as schema } from '@cms-eapd/common';
+import { otherFundingSchema as schema } from '@cms-eapd/common';
 
 export const ActivityTotalCostTable = ({ years, ffy }) => {
   return (
@@ -68,8 +67,8 @@ const OtherFunding = ({
   costSummary,
   setOtherFunding,
   syncOtherFunding,
-  adminCheck,
-  apdType
+  apdType,
+  adminCheck
 }) => {
   const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
     activity;
@@ -79,7 +78,6 @@ const OtherFunding = ({
   const {
     control,
     trigger,
-    clearErrors,
     formState: { errors },
     setValue
   } = useForm({
@@ -93,22 +91,14 @@ const OtherFunding = ({
   });
 
   useEffect(() => {
-    if (adminCheck) {
-      trigger();
-    } else {
-      clearErrors();
-    }
+    trigger();
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleOtherFundingChange =
     ffy =>
     ({ target: { value } }) => {
+      setValue(`costAllocation.${ffy}.other`, value, { shouldValidate: true });
       setOtherFunding(activityIndex, ffy, value);
-      setValue(`costAllocation.${ffy}.other`, value);
-
-      if (adminCheck) {
-        trigger();
-      }
     };
 
   return (
@@ -139,17 +129,9 @@ const OtherFunding = ({
               content={costAllocationNarrative?.years?.[ffy]?.otherSources}
               onSync={html => {
                 syncOtherFunding(activityIndex, ffy, html);
-
-                if (adminCheck) {
-                  trigger();
-                }
+                trigger();
               }}
               editorClassName="rte-textarea-l"
-              error={
-                adminCheck &&
-                costAllocation[ffy]?.other > 0 &&
-                !costAllocationNarrative?.years?.[ffy]?.otherSources
-              }
             />
             <div>
               {adminCheck &&
@@ -184,8 +166,8 @@ const OtherFunding = ({
                   label={`FFY ${ffy}`}
                   labelClassName="ds-u-visibility--screen-reader"
                   onChange={handleOtherFundingChange(ffy)}
-                  errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />
