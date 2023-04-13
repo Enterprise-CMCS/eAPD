@@ -72,9 +72,9 @@
         "position": "Project Management Office Director and Overseer",
         "email": "JohnsonJohn@speak.net",
         "isPrimary": false,
-        "fte": { "2022": 0.75, "2023": 0.75 },
+        "fte": { "2023": 0.75, "2024": 0.75 },
         "hasCosts": false,
-        "costs": { "2022": 0, "2023": 0 },
+        "costs": { "2023": 0, "2024": 0 },
         "split": {
           "2023": {
             "federal": 75,
@@ -209,8 +209,8 @@
         "proposedSolution": "Solution is to hire more security for stationed business areas."
       },
       "activitySchedule": {
-        "plannedStartDate": "2021-08-09",
-        "plannedEndDate": "2024-05-21"
+        "plannedStartDate": "2-08-2023",
+        "plannedEndDate": "6-05-2024"
       },
       "analysisOfAlternativesAndRisks": {
         "alternativeAnalysis": "The Alternative and analysis information is here.",
@@ -225,15 +225,15 @@
       },
       "milestones": [
         {
-          "endDate": "2023-11-01",
+          "endDate": "1-11-2024",
           "milestone": "Implementation security checkpoints outside."
         },
         {
-          "endDate": "2023-12-24",
+          "endDate": "2-12-2025",
           "milestone": "Christmas Party for the security staff!"
         },
         {
-          "endDate": "2024-09-10",
+          "endDate": "3-9-2025",
           "milestone": "Security Roadmap of the premesis."
         }
       ],
@@ -322,56 +322,59 @@
       ],
       "expenses": [
         {
-          "description": "",
+          "description": "Pen and other office supplies",
           "category": "Equipment and supplies",
           "years": { "2023": 25000, "2024": 15000 }
         },
         {
-          "description": "",
+          "description": "Airfare and Uber costs",
           "category": "Travel",
           "years": { "2023": 35000, "2024": 35000 }
-        },
-        {
-          "description": "",
-          "category": "Administrative operations",
-          "years": { "2023": 700000, "2024": 0 }
         }
       ],
       "contractorResources": [
         {
           "description": "Maintain the course",
-          "end": "05/19/2023",
+          "end": "5-29-2023",
           "hourly": {
-            "2023": { "hours": "", "rate": "" },
-            "2024": { "hours": "", "rate": "" }
+            "2023": { "hours": "124", "rate": "634" },
+            "2024": { "hours": "233", "rate": "4666" }
           },
           "useHourly": true,
           "name": "Security Commissioner",
-          "start": "01/01/2022",
+          "start": "1-10-2022",
           "totalCost": 32423,
           "years": { "2023": 999756, "2024": 342444 }
         },
         {
           "description": "Technology consulting and planning services.",
-          "end": "",
+          "end": "6-21-2025",
           "hourly": {
-            "2022": { "hours": "", "rate": "" },
-            "2023": { "hours": "", "rate": "" }
+            "2023": { "hours": "", "rate": "" },
+            "2024": { "hours": "", "rate": "" }
           },
           "useHourly": false,
           "name": "Tech Consulting Inc.",
-          "start": "",
+          "start": "7-1-2023",
           "totalCost": 473573,
-          "years": { "2022": 333000, "2023": 200000 }
+          "years": { "2023": 333000, "2024": 200000 }
         }
       ],
       "costAllocation": {
         "2023": {
-          "ffp": { "federal": 90, "state": 10, "fundingCategory": "DDI" },
+          "ffp": {
+            "federal": 90,
+            "state": 10,
+            "fundingCategory": "Design, Development, and Installation (DDI)"
+          },
           "other": 105000
         },
         "2024": {
-          "ffp": { "federal": 50, "state": 50, "fundingCategory": "MO" },
+          "ffp": {
+            "federal": 50,
+            "state": 50,
+            "fundingCategory": "Maintenance & Operations (M&O)"
+          },
           "other": 0
         }
       },
@@ -410,8 +413,8 @@
         "proposedSolution": "Prosed solution"
       },
       "activitySchedule": {
-        "plannedStartDate": "2019-10-01",
-        "plannedEndDate": "2022-09-30"
+        "plannedStartDate": "1-10-2022",
+        "plannedEndDate": "2-9-2025"
       },
       "analysisOfAlternativesAndRisks": {
         "alternativeAnalysis": "Alternative analysis",
@@ -426,11 +429,11 @@
       },
       "milestones": [
         {
-          "endDate": "2022-12-31",
+          "endDate": "1-12-2024",
           "milestone": "Implement MMIS-HIE Interface"
         },
         {
-          "endDate": "2022-12-31",
+          "endDate": "4-22-2025",
           "milestone": "Develop MMIS-HIE Interface Requirements"
         }
       ],
@@ -450,70 +453,70 @@
           "title": "Project Assistant",
           "description": "Assist with stuff",
           "years": {
-            "2022": { "amt": 85000, "perc": 1 },
-            "2023": { "amt": 71760, "perc": 1 }
+            "2023": { "amt": 85000, "perc": 1 },
+            "2024": { "amt": 71760, "perc": 1 }
           }
         },
         {
           "title": "MMIS Project Manager",
           "description": "This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info",
           "years": {
-            "2022": { "amt": 75120, "perc": 1 },
-            "2023": { "amt": 144100, "perc": 1 }
+            "2023": { "amt": 75120, "perc": 1 },
+            "2024": { "amt": 144100, "perc": 1 }
           }
         },
         {
           "title": "MMIS Trainer",
           "description": "Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System",
           "years": {
-            "2022": { "amt": 432100, "perc": 1 },
-            "2023": { "amt": 90750, "perc": 1 }
+            "2023": { "amt": 432100, "perc": 1 },
+            "2024": { "amt": 90750, "perc": 1 }
           }
         },
         {
           "title": "Programmer IV",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2022": { "amt": 17500, "perc": 1 },
-            "2023": { "amt": 64000, "perc": 1 }
+            "2023": { "amt": 17500, "perc": 1 },
+            "2024": { "amt": 64000, "perc": 1 }
           }
         },
         {
           "title": "Security IT",
           "description": "Make sure its secure.",
           "years": {
-            "2022": { "amt": 90050, "perc": 1 },
-            "2023": { "amt": 100005, "perc": 1 }
+            "2023": { "amt": 90050, "perc": 1 },
+            "2024": { "amt": 100005, "perc": 1 }
           }
         },
         {
           "title": "Operations Specialist",
           "description": "Run the day to day.",
           "years": {
-            "2022": { "amt": 780100, "perc": 1 },
-            "2023": { "amt": 99850, "perc": 1 }
+            "2023": { "amt": 780100, "perc": 1 },
+            "2024": { "amt": 99850, "perc": 1 }
           }
         },
         {
           "title": "Programmer V",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2022": { "amt": 85409, "perc": 2 },
-            "2023": { "amt": 19270, "perc": 3 }
+            "2023": { "amt": 85409, "perc": 2 },
+            "2024": { "amt": 19270, "perc": 3 }
           }
         },
         {
           "title": "Programmer III",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2022": { "amt": 64988, "perc": 1 },
-            "2023": { "amt": 12110, "perc": 1 }
+            "2023": { "amt": 64988, "perc": 1 },
+            "2024": { "amt": 12110, "perc": 1 }
           }
         }
       ],
       "expenses": [
         {
-          "description": "",
+          "description": "Airfare",
           "category": "Travel",
           "years": { "2023": 0, "2024": 0 }
         }
@@ -521,38 +524,46 @@
       "contractorResources": [
         {
           "description": "Hosting and development support.",
-          "end": "",
+          "end": "7-13-2025",
           "hourly": {
-            "2022": { "hours": "", "rate": "" },
-            "2023": { "hours": "", "rate": "" }
+            "2023": { "hours": "86", "rate": "4564" },
+            "2024": { "hours": "55", "rate": "4562" }
           },
           "useHourly": false,
           "name": "Interface Vendor Inc.",
-          "start": "",
+          "start": "4-7-2023",
           "totalCost": 26453574,
-          "years": { "2022": 650000, "2023": 750000 }
+          "years": { "2023": 650000, "2024": 750000 }
         },
         {
           "description": "Interface M&O contractor.",
-          "end": "",
+          "end": "3-9-2029",
           "hourly": {
-            "2022": { "hours": "", "rate": "" },
-            "2023": { "hours": "", "rate": "" }
+            "2023": { "hours": "734", "rate": "5642" },
+            "2024": { "hours": "346", "rate": "345" }
           },
           "useHourly": false,
           "name": "TBD",
-          "start": "",
+          "start": "2-7-2022",
           "totalCost": 7398,
-          "years": { "2022": 0, "2023": 1000000 }
+          "years": { "2023": 0, "2024": 1000000 }
         }
       ],
       "costAllocation": {
         "2023": {
-          "ffp": { "federal": 50, "state": 50, "fundingCategory": "MO" },
+          "ffp": {
+            "federal": 50,
+            "state": 50,
+            "fundingCategory": "Maintenance & Operations (M&O)"
+          },
           "other": 0
         },
         "2024": {
-          "ffp": { "federal": 75, "state": 25, "fundingCategory": "MO" },
+          "ffp": {
+            "federal": 75,
+            "state": 25,
+            "fundingCategory": "Maintenance & Operations (M&O)"
+          },
           "other": 0
         }
       },
@@ -566,26 +577,12 @@
           }
         },
         "methodology": "<p>No cost allocation is necessary for this activity.</p>"
-      },
-      "quarterlyFFP": {
-        "2023": {
-          "1": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "2": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "3": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "4": { "combined": 25, "contractors": 25, "inHouse": 25 }
-        },
-        "2024": {
-          "1": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "2": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "3": { "combined": 25, "contractors": 25, "inHouse": 25 },
-          "4": { "combined": 25, "contractors": 25, "inHouse": 25 }
-        }
       }
     }
   ],
   "securityPlanning": {
-    "securityAndInterfacePlan": "In the event of a security breach, please call the local Ghostbuster in your area.",
-    "businessContinuityAndDisasterRecovery": "Bunsiness continuity and disaster recovery does not exist for this project."
+    "securityAndInterfacePlan": "Grogu, colloquially referred to as Baby Yoda, is a character from the Star Wars Disney+ original television series The Mandalorian. He is a toddler member of the same species as the Star Wars characters Yoda and Yaddle, with whom he shares a strong ability in the Force.",
+    "businessContinuityAndDisasterRecovery": "n the series, the protagonist known as the Mandalorian is hired to track down and capture Grogu for a remnant of the fallen Galactic Empire, but instead, he becomes his adoptive father and protects him from the Imperials. The character's real name was not revealed until Chapter 13: The Jedi, which also explained that Grogu was raised at the Jedi Temple on Coruscant during the Clone Wars."
   },
   "assurancesAndCompliances": {
     "procurement": [

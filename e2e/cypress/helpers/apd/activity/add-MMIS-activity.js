@@ -1,17 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 
-import BudgetPage from '../../../page-objects/budget-page.js';
-import FillOutActivityPage from '../../../page-objects/fill-out-activity-page.js';
-import ExportPage from '../../../page-objects/export-page.js';
-
 const { _ } = Cypress;
 
 export const addMMISActivity = function () {
-  let budgetPage;
-  let exportPage;
-  let fillOutActivityPage;
-
   const fillDate = (string, list) => {
     cy.findAllByText(string)
       .parent()
@@ -23,27 +15,12 @@ export const addMMISActivity = function () {
       });
   };
 
-  before(function () {
-    budgetPage = new BudgetPage();
-    exportPage = new ExportPage();
-    fillOutActivityPage = new FillOutActivityPage();
-  });
-
   beforeEach(function () {
-    // cy.fixture('mmis-basics.json').as('mmisBasic');
-    // cy.fixture('mmis-basics-budget.json').as('budget');
-    // cy.fixture('mmis-basics-table-data.json').as('tableData');
-
     cy.fixture('mmis-with-data.json').as('mmisData');
   });
 
   describe('Add a MMIS Activity', function () {
     it('Adds an MMIS Activity and checks the export view', function () {
-      // const years = this.years;
-      // const mmisBasic = this.mmisBasic;
-      // const budget = this.budget;
-      // const tableData = this.tableData;
-
       const mmisData = this.mmisData;
       const activityData = mmisData.activities;
 
@@ -68,6 +45,7 @@ export const addMMISActivity = function () {
           'activity-proposed-solution-field',
           activityOverviewData.proposedSolution
         );
+        cy.waitForSave();
 
         cy.get('#continue-button').click();
 
@@ -94,6 +72,7 @@ export const addMMISActivity = function () {
           'forseeable-risks-field',
           analysisOfAlternativesAndRisksData.forseeableRisks
         );
+        cy.waitForSave();
 
         cy.get('#continue-button').click();
 
@@ -110,7 +89,7 @@ export const addMMISActivity = function () {
         milestonesData.forEach(milestone => {
           cy.contains('Add Milestone').click();
 
-          cy.findByLabelText('Name', milestone.milestone);
+          cy.findByLabelText('Name').type(milestone.milestone);
           fillDate('Target completion date', milestone.endDate.split('-'));
           cy.findByRole('button', { name: /Save/i }).click();
           cy.waitForSave();
@@ -135,50 +114,158 @@ export const addMMISActivity = function () {
           }).click();
         }
 
+        // cy.waitForSave();
         cy.get('#continue-button').click();
 
         // Outcomes and Metrics
+        const outcomesAndMetricsData = activity.outcomes;
+        outcomesAndMetricsData.forEach((outcome, index) => {
+          cy.findByRole('button', { name: /Add Outcome/i }).click();
+          cy.get(`[data-cy="outcome-${index}"]`).type(outcome.outcome);
+          if (outcome.metrics.length > 0) {
+            outcome.metrics.forEach((metric, index2) => {
+              cy.findByRole('button', {
+                name: /Add Metric to Outcome/i
+              }).click();
+              cy.get(`[data-cy="metric-${index}-${index2}"]`).type(
+                metric.metric
+              );
+            });
+            cy.findByRole('button', { name: /Save/i }).click();
+            cy.waitForSave();
+          }
+        });
+
+        cy.get('#continue-button').click();
+
+        // State Staff and Expenses
+        const statePersonnelData = activity.statePersonnel;
+        statePersonnelData.forEach(statePersonnel => {
+          cy.findByRole('button', { name: /Add State Staff/i }).click();
+
+          cy.findByLabelText('Personnel title').type(statePersonnel.title);
+          cy.findByLabelText('Description').type(statePersonnel.description);
+
+          mmisData.years.forEach((year, index) => {
+            if (statePersonnel.years[year]) {
+              cy.findAllByLabelText('Cost with benefits')
+                .eq(index)
+                .type(statePersonnel.years[year].amt);
+              cy.findAllByLabelText('Number of FTEs')
+                .eq(index)
+                .type(statePersonnel.years[year].perc)
+                .blur();
+            }
+          });
+
+          cy.findByRole('button', { name: /Save/i }).click();
+        });
+
+        const stateExpenseData = activity.expenses;
+        stateExpenseData.forEach(expense => {
+          cy.findByRole('button', { name: /Add State Expense/i }).click();
+
+          cy.findByLabelText('Category').select(expense.category);
+          cy.findByLabelText('Description').type(expense.description);
+
+          mmisData.years.forEach(year => {
+            cy.findByLabelText(`FFY ${year} Cost`).type(expense.years[year]);
+          });
+
+          cy.findByRole('button', { name: /Save/i }).click();
+        });
+
+        cy.get('#continue-button').click();
+
+        // Private Contractor
+        const contractorData = activity.contractorResources;
+        contractorData.forEach((contractor, index) => {
+          cy.findByRole('button', { name: /Add Contractor/i }).click();
+
+          cy.get('[name="name"]').type(contractor.name);
+          cy.setTinyMceContent(
+            `contractor-description-field-${index}`,
+            contractor.description
+          );
+
+          fillDate('Contract start date', contractor.start.split('-'));
+          fillDate('Contract end date', contractor.end.split('-'));
+
+          cy.get('[name="totalCost"]').type(contractor.totalCost);
+
+          if (contractor.useHourly) {
+            cy.findByRole('radio', { name: /Yes/i }).click();
+            mmisData.years.forEach(year => {
+              cy.get(`[name="hourly[${year}].hours"]`).type(
+                contractor.hourly[year].hours
+              );
+              cy.get(`[name="hourly.${year}.rate"]`)
+                .type(contractor.hourly[year].rate)
+                .blur();
+            });
+          } else {
+            cy.findByRole('radio', { name: /No/i }).click();
+            mmisData.years.forEach(year => {
+              cy.get(`[name="years.${year}"]`)
+                .type(contractor.years[year])
+                .blur();
+            });
+          }
+
+          cy.findByRole('button', { name: /Save/i }).click();
+        });
+
+        cy.get('#continue-button').click();
+
+        // Cost Allocation and Other Funding
+        const costAllocationNarrativeData = activity.costAllocationNarrative;
+        const costAllocationData = activity.costAllocation;
+
+        cy.setTinyMceContent(
+          'cost-allocation-methodology-field',
+          costAllocationNarrativeData.methodology
+        );
+
+        mmisData.years.forEach(year => {
+          if (costAllocationData[year]) {
+            cy.setTinyMceContent(
+              `cost-allocation-narrative-${year}-other-sources-field`,
+              costAllocationNarrativeData.years[year].otherSources
+            );
+            cy.get(`[name="costAllocation.${year}.other"]`).type(
+              costAllocationData[year].other
+            );
+          }
+        });
+
+        cy.get('#continue-button').click();
+
+        // Budget and FFP
+        mmisData.years.forEach((year, index) => {
+          if (costAllocationData[year].ffp.federal === 90) {
+            cy.findAllByText(
+              '90/10 Design, Development, and Installation (DDI)'
+            )
+              .eq(index)
+              .click();
+          } else if (costAllocationData[year].ffp.federal === 75) {
+            cy.findAllByRole('radio', { name: /75\/25/ })
+              .eq(index)
+              .click();
+            cy.findAllByRole('radio', {
+              name: costAllocationData[year].ffp.fundingCategory
+            });
+          } else if (costAllocationData[year].ffp.federal === 50) {
+            cy.findAllByRole('radio', { name: /50\/50/ })
+              .eq(index)
+              .click();
+            cy.findAllByRole('radio', {
+              name: costAllocationData[year].ffp.fundingCategory
+            });
+          }
+        });
+        cy.waitForSave();
       });
-
-      // cy.goToActivityDashboard();
-
-      // Add activity
-      // cy.url().should('include', '/activities');
-      // cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
-      //   'exist'
-      // );
-
-      // cy.contains('Add Activity').click();
-      // cy.contains('Activity 1: Untitled').should('exist');
-      // cy.get('#activities').findAllByText('Edit').eq(0).click();
-
-      // Fill out Activity Overview
-      // cy.findByLabelText('Activity name').type(mmisBasic.activities[0].name);
-      // cy.findAllByText(`Activity 1: ${mmisBasic.activities[0].name}`).should(
-      //   'exist'
-      // );
-
-      // cy.goToBudgetAndFFP(0);
-
-      // fillOutActivityPage.checkMmisBudgetAndFFPTables({
-      //   years,
-      //   costAllocation: mmisBasic.activities[0].costAllocation,
-      //   expectedTableData: tableData.activityFedSplitTable
-      // });
-
-      // budgetPage.checkMmisFFYtotals({
-      //   years,
-      //   activityIndex: 0,
-      //   activityId: mmisBasic.activities[0].activityId,
-      //   activityName: mmisBasic.activities[0].name,
-      //   state: 'Alaska',
-      //   fundingSplit: `90/10 DDI (FFY ${years[0]}) and 50/50 M&O (FFY ${years[1]})`,
-      //   totalOtherFunding: 0,
-      //   totals:
-      //     budget.activities[mmisBasic.activities[0].activityId].costsByFFY.total
-      // });
-
-      // cy.waitForSave();
     });
   });
 };

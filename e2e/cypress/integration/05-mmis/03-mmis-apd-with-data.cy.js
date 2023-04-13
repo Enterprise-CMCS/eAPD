@@ -84,7 +84,7 @@ describe(
         testMmisResultsOfPreviousActivitiesWithData();
       });
 
-      describe('add activities', function () {
+      describe.only('add activities', function () {
         addMMISActivity();
       });
 
