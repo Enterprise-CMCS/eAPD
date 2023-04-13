@@ -73,6 +73,7 @@ services:
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
+      - OKTA_AUDIENCE=${OKTA_AUDIENCE}
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}

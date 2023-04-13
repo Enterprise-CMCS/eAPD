@@ -5,8 +5,13 @@ import { mockOktaClient, mockVerifyJWT } from './mockedOktaAuth.js';
 
 const logger = loggerFactory('okta utils');
 
-const { OKTA_DOMAIN, OKTA_SERVER_ID, OKTA_CLIENT_ID, OKTA_API_KEY } =
-  process.env;
+const {
+  OKTA_DOMAIN,
+  OKTA_SERVER_ID,
+  OKTA_CLIENT_ID,
+  OKTA_API_KEY,
+  OKTA_AUDIENCE
+} = process.env;
 const OKTA_ISSUER = `${OKTA_DOMAIN}/oauth2/${OKTA_SERVER_ID}`;
 
 /**
@@ -39,7 +44,7 @@ const oktaVerifier = new OktaJwtVerifier({
  */
 export const actualVerifyJWT = (token, { verifier = oktaVerifier } = {}) => {
   return verifier
-    .verifyAccessToken(token, 'MacPRO-eAPD')
+    .verifyAccessToken(token, OKTA_AUDIENCE)
     .then(({ claims }) => {
       // the token is valid (per definition of 'valid' above)
       return claims;
