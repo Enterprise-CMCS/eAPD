@@ -24,7 +24,8 @@ const setup = async (props = {}) => {
         initialState: {
           apd: {
             data: {
-              activities: []
+              activities: [],
+              adminCheck: false
             }
           }
         }
@@ -82,5 +83,22 @@ describe('MMIS APD State Priorities and Scope', () => {
     expect(screen.getByLabelText('Scope of APD')).toHaveValue(
       'Looking at the scope here.'
     );
+  });
+
+  // This test isn't effectively testing the alert is not appearing. Leaving it
+  // in place for future consideration to be added when it can work as intended.
+  xtest('fields dont trigger validation when adminCheck off', async () => {
+    jest.setTimeout(30000);
+    const { user } = await setup();
+
+    await user.type(screen.getByLabelText('Scope of APD'), 'Testing');
+
+    await user.clear(screen.getByLabelText('Scope of APD'));
+
+    expect(
+      screen.queryByRole('alert', {
+        name: 'Provide Medicaid Program and Priorities'
+      })
+    ).toBeNull();
   });
 });
