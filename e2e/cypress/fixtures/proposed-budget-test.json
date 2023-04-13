@@ -2,17 +2,17 @@
   "defaultCombinedActivityCost": [
     {
       "programTypes": {
-        "HIT Total": ["$0"],
-        "HIE Total": ["$0"],
-        "MMIS Total": ["$0"]
+        "HIT Subtotal": ["$0"],
+        "HIE Subtotal": ["$0"],
+        "MMIS Subtotal": ["$0"]
       },
       "totalComputableMedicaidCost": 0
     },
     {
       "programTypes": {
-        "HIT Total": ["$0"],
-        "HIE Total": ["$0"],
-        "MMIS Total": ["$0"]
+        "HIT Subtotal": ["$0"],
+        "HIE Subtotal": ["$0"],
+        "MMIS Subtotal": ["$0"]
       },
       "totalComputableMedicaidCost": 0
     }
@@ -181,17 +181,17 @@
   "populatedCombinedActivityCost": [
     {
       "programTypes": {
-        "HIT Total": ["$413,000"],
-        "HIE Total": ["$270,512"],
-        "MMIS Total": ["$243,662"]
+        "HIT Subtotal": ["$413,000"],
+        "HIE Subtotal": ["$270,512"],
+        "MMIS Subtotal": ["$243,662"]
       },
       "totalComputableMedicaidCost": 927174
     },
     {
       "programTypes": {
-        "HIT Total": ["$434,000"],
-        "HIE Total": ["$268,802"],
-        "MMIS Total": ["$329,318"]
+        "HIT Subtotal": ["$434,000"],
+        "HIE Subtotal": ["$268,802"],
+        "MMIS Subtotal": ["$329,318"]
       },
       "totalComputableMedicaidCost": 1032120
     }

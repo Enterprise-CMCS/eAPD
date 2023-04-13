@@ -13,14 +13,14 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
 
   // We don't want to display the tables if they'll contain empty values.
   // If the total is 0 the table will contain all zeroes.
-  const showDdiTable = ddi.combined.total.total !== 0;
-  const showMandoTable = mando.combined.total.total !== 0;
+  const ddiTableIsEmpty = ddi.combined.total.total === 0;
+  const mandoTableIsEmpty = mando.combined.total.total === 0;
   const noTableMessage = 'The Program Budget Table(s) are not available.';
 
   const renderDdiTable = () => (
     <table className="budget-table executive-summary-budget-table">
       <caption className="ds-h4">
-        MMIS DDI Costs{' '}
+        MMIS DDI Costs
         <span className="ds-u-visibility--screen-reader">
           executive summary
         </span>
@@ -37,7 +37,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <th colSpan="2" id={thId('ddi50')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.ddi50'))}
           </th>
-          <th colSpan="1" id={thId('ddiTotal')}>
+          <th colSpan="3" id={thId('ddiTotal')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.ddiTotal'))}
           </th>
         </tr>
@@ -59,6 +59,12 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
           <th id={thId('ddi50', 'state')}>
+            {titleCase(t('executiveSummary.budgetTable.stateShare'))}
+          </th>
+          <th id={thId('ddiTotal', 'fed')}>
+            {titleCase(t('executiveSummary.budgetTable.fedShare'))}
+          </th>
+          <th id={thId('ddiTotal', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
           <th id={thId('ddiTotal', 'total')}>
@@ -107,6 +113,14 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
               headers={tdHdrs('ddi50', 'state')}
             />
             <DollarCell
+              value={ddi.combined[year].federal}
+              headers={tdHdrs('ddiTotal', 'fed')}
+            />
+            <DollarCell
+              value={ddi.combined[year].state}
+              headers={tdHdrs('ddiTotal', 'state')}
+            />
+            <DollarCell
               className={'budget-table--cell__hightlight-lighter'}
               value={ddi.combined[year].medicaid}
               headers={tdHdrs('ddiTotal', 'total')}
@@ -134,7 +148,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <th colSpan="2" id={thId('mando50')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.mando50'))}
           </th>
-          <th colSpan="1" id={thId('mandoTotal')}>
+          <th colSpan="3" id={thId('mandoTotal')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.mandoTotal'))}
           </th>
         </tr>
@@ -152,10 +166,13 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <th id={thId('mando50', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
-          <th
-            // className="ds-u-text-align--right"
-            id={thId('mandoTotal', 'total')}
-          >
+          <th id={thId('mandoTotal', 'fed')}>
+            {titleCase(t('executiveSummary.budgetTable.fedShare'))}
+          </th>
+          <th id={thId('mandoTotal', 'state')}>
+            {titleCase(t('executiveSummary.budgetTable.stateShare'))}
+          </th>
+          <th id={thId('mandoTotal', 'total')}>
             {titleCase(t('executiveSummary.budgetTable.grandTotal'))}
           </th>
         </tr>
@@ -193,6 +210,14 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
               headers={tdHdrs('mando50', 'state')}
             />
             <DollarCell
+              value={mando.combined[year].federal}
+              headers={tdHdrs('mandoTotal', 'fed')}
+            />
+            <DollarCell
+              value={mando.combined[year].state}
+              headers={tdHdrs('mandoTotal', 'state')}
+            />
+            <DollarCell
               className={'budget-table--cell__hightlight-lighter'}
               value={mando.combined[year].medicaid}
               headers={tdHdrs('mandoTotal', 'total')}
@@ -208,9 +233,9 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
       id="executive-summary-budget-table"
       resource="executiveSummary.budgetTable"
     >
-      {showDdiTable && renderDdiTable()}
-      {showMandoTable && renderMandoTable()}
-      {!showDdiTable && !showMandoTable && <p>{noTableMessage}</p>}
+      {!ddiTableIsEmpty && renderDdiTable()}
+      {!mandoTableIsEmpty && renderMandoTable()}
+      {ddiTableIsEmpty && mandoTableIsEmpty && <p>{noTableMessage}</p>}
     </Subsection>
   );
 };
