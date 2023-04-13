@@ -18,7 +18,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
   const noTableMessage = 'The Program Budget Table(s) are not available.';
 
   const renderDdiTable = () => (
-    <table className="budget-table">
+    <table className="budget-table executive-summary-budget-table">
       <caption className="ds-h4">
         MMIS DDI Costs{' '}
         <span className="ds-u-visibility--screen-reader">
@@ -37,31 +37,31 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <th colSpan="2" id={thId('ddi50')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.ddi50'))}
           </th>
-          <th colSpan="3" id={thId('ddiTotal')}>
+          <th colSpan="1" id={thId('ddiTotal')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.ddiTotal'))}
           </th>
         </tr>
         <tr className="budget-table--row__highlight-gray-light">
           <td className="th" id="program-budget-table-null4" />
-          <th className="ds-u-text-align--right" id={thId('ddi90', 'fed')}>
+          <th id={thId('ddi90', 'fed')}>
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddi90', 'state')}>
+          <th id={thId('ddi90', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddi75', 'fed')}>
+          <th id={thId('ddi75', 'fed')}>
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddi75', 'state')}>
+          <th id={thId('ddi75', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddi50', 'fed')}>
+          <th id={thId('ddi50', 'fed')}>
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddi50', 'state')}>
+          <th id={thId('ddi50', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('ddiTotal', 'total')}>
+          <th id={thId('ddiTotal', 'total')}>
             {titleCase(t('executiveSummary.budgetTable.grandTotal'))}
           </th>
         </tr>
@@ -118,7 +118,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
   );
 
   const renderMandoTable = () => (
-    <table className="budget-table">
+    <table className="budget-table executive-summary-budget-table">
       <caption className="ds-h4">
         MMIS M&O Costs{' '}
         <span className="ds-u-visibility--screen-reader">
@@ -134,26 +134,26 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
           <th colSpan="2" id={thId('mando50')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.mando50'))}
           </th>
-          <th colSpan="3" id={thId('mandoTotal')}>
+          <th colSpan="1" id={thId('mandoTotal')}>
             {titleCase(t('executiveSummary.budgetTable.mmis.mandoTotal'))}
           </th>
         </tr>
         <tr className="budget-table--row__highlight-gray-light">
           <td className="th" id="program-budget-table-null4" />
-          <th className="ds-u-text-align--right" id={thId('mando75', 'fed')}>
+          <th id={thId('mando75', 'fed')}>
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('mando75', 'state')}>
+          <th id={thId('mando75', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('mando50', 'fed')}>
+          <th id={thId('mando50', 'fed')}>
             {titleCase(t('executiveSummary.budgetTable.fedShare'))}
           </th>
-          <th className="ds-u-text-align--right" id={thId('mando50', 'state')}>
+          <th id={thId('mando50', 'state')}>
             {titleCase(t('executiveSummary.budgetTable.stateShare'))}
           </th>
           <th
-            className="ds-u-text-align--right"
+            // className="ds-u-text-align--right"
             id={thId('mandoTotal', 'total')}
           >
             {titleCase(t('executiveSummary.budgetTable.grandTotal'))}

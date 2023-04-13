@@ -91,7 +91,6 @@ class ExecutiveSummary extends PureComponent {
             </ul>
           </Review>
         ))}
-
         <ExecutiveSummaryBudget />
       </div>
     );

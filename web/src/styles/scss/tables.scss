@@ -165,6 +165,12 @@ td {
   }
 }
 
+.budget-table.executive-summary-budget-table {
+  th {
+    @extend .ds-u-text-align--right;
+  }
+}
+
 .budget-table--cell__nowrap {
   white-space: nowrap;
 }
