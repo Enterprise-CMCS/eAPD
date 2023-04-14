@@ -53,6 +53,21 @@ describe('budget summary component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders read-only correctly for mmis apds', () => {
+    const component = shallow(
+      <BudgetSummary
+        apdType={APD_TYPE.MMIS}
+        activities={{
+          mmis: ['mmis data']
+        }}
+        data={sampleBudgetMMIS}
+        years={['2023', '2024']}
+        isViewOnly
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders DataRowGroup correctly for mmis apds', () => {
     const component = shallow(
       <DataRowGroup

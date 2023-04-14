@@ -17,7 +17,7 @@ const ProposedBudget = ({ apdType }) => (
     <CombinedActivityCosts isViewOnly apdType={apdType} />
 
     <h3>Summary Budget Table</h3>
-    <BudgetSummary apdType={apdType} />
+    <BudgetSummary isViewOnly apdType={apdType} />
 
     {apdType === APD_TYPE.HITECH && (
       <div>

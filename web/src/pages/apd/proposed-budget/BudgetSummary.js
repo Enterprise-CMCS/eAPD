@@ -112,7 +112,7 @@ HeaderRow.propTypes = {
   activity: PropTypes.string.isRequired
 };
 
-const BudgetSummary = ({ activities, data, years, apdType }) => {
+const BudgetSummary = ({ activities, data, years, apdType, isViewOnly }) => {
   const orderedTotals = [];
   data?.combined?.total
     ? orderedTotals.push({ total: data.combined.total })
@@ -425,10 +425,12 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
           </div>
           <div className="ds-u-margin-bottom--5">
             <h3>Medicaid Total Computable by Match Rate</h3>
-            <p>
-              The Medicaid total computable by match rate in the table below,
-              compiles the fiscal years into a subtotal by funding source.
-            </p>
+            {!isViewOnly ? (
+              <p>
+                The Medicaid total computable by match rate in the table below,
+                compiles the fiscal years into a subtotal by funding source.
+              </p>
+            ) : null}
             <table className="budget-table" data-cy="summaryBudgetTotals">
               <thead>
                 <tr>
@@ -536,17 +538,21 @@ const BudgetSummary = ({ activities, data, years, apdType }) => {
           </div>
 
           <h3>Medicaid Total Computable by FFY</h3>
-          <p>
-            The Activities Total compiles all the summary budget tables by FFY
-            and funding source.
-          </p>
-          <Alert>
-            The Activities Grand Total is{' '}
-            <span className="ds-u-font-weight--bold">
-              <Dollars>{data.combined.total.medicaid}</Dollars>
-            </span>
-            .
-          </Alert>
+          {!isViewOnly ? (
+            <p>
+              The Activities Total compiles all the summary budget tables by FFY
+              and funding source.
+            </p>
+          ) : null}
+          {!isViewOnly ? (
+            <Alert>
+              The Activities Grand Total is{' '}
+              <span className="ds-u-font-weight--bold">
+                <Dollars>{data.combined.total.medicaid}</Dollars>
+              </span>
+              .
+            </Alert>
+          ) : null}
           <table
             className="budget-table ds-u-margin-top--3"
             data-cy="summaryBudgetTotals"
@@ -604,7 +610,12 @@ BudgetSummary.propTypes = {
   activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
-  apdType: PropTypes.string.isRequired
+  apdType: PropTypes.string.isRequired,
+  isViewOnly: PropTypes.bool
+};
+
+BudgetSummary.defaultProps = {
+  isViewOnly: false
 };
 
 const mapStateToProps = state => {
