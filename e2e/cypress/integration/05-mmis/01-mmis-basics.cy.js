@@ -632,6 +632,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.goToApdOverview();
       cy.wait(2000);
       cy.goToPreviousActivities();
+      cy.wait(2000);
       cy.checkTinyMCE(
         'previous-activity-summary-field',
         `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
