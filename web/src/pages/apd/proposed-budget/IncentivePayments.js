@@ -61,9 +61,7 @@ const IncentivePayments = ({
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dollar_error = v => {
-    if (adminCheck) {
-      return v >= 0 && v % 1 == 0 && !isNaN(parseInt(v)) ? false : true;
-    }
+    return v >= 0 && v % 1 == 0 && !isNaN(parseInt(v)) ? false : true;
   };
 
   const updateEHCount =
@@ -131,7 +129,11 @@ const IncentivePayments = ({
                             <DollarField
                               {...props}
                               name={name}
-                              className="budget-table--input-holder"
+                              className={
+                                dollar_error(data.ehAmt[year][q])
+                                  ? 'budget-table--input-holder budget-table--input-error'
+                                  : 'budget-table--input-holder'
+                              }
                               fieldClassName={
                                 dollar_error(data.ehAmt[year][q])
                                   ? 'budget-table--input__number-error'

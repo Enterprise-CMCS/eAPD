@@ -580,7 +580,7 @@ export default {
         },
         {
           endDate: '2022-12-31',
-          milestone: 'Develop myNew Apdland HIE Authentication Requirements'
+          milestone: 'Develop my New Apdland HIE Authentication Requirements'
         },
         {
           endDate: '2022-03-31',

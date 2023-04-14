@@ -5,8 +5,7 @@ import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 import HitechBudgetSummary from './HitechBudgetSummary';
-// TODO (#4474): return the following once the component is compatible with new MMIS budget structure
-// import MmisBudgetSummary from './MmisBudgetSummary';
+import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 const thId = (program, share) =>
@@ -36,16 +35,14 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
           />
         );
       case APD_TYPE.MMIS:
-        return null;
-      // TODO (#4474): return the following once the component is compatible with new MMIS budget structure
-      // return (
-      //   <MmisBudgetSummary
-      //     budget={budget}
-      //     rowKeys={rowKeys}
-      //     tdHdrs={tdHdrs}
-      //     thId={thId}
-      //   />
-      // );
+        return (
+          <MmisBudgetSummary
+            budget={budget}
+            rowKeys={rowKeys}
+            tdHdrs={tdHdrs}
+            thId={thId}
+          />
+        );
       default:
         null;
     }

@@ -710,7 +710,7 @@ const activities = [
       },
       {
         endDate: '2020-12-31',
-        milestone: 'Develop myNew Apdland HIE Authentication Requirements',
+        milestone: 'Develop my New Apdland HIE Authentication Requirements',
         key: '905ce6fd'
       },
       {

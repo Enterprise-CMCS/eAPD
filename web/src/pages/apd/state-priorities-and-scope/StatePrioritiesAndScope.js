@@ -82,7 +82,9 @@ const StatePrioritiesAndScope = ({
               }}
               data-testid="medicaidProgramAndPriorities"
               editorClassName="rte-textarea-l"
-              error={errors?.medicaidProgramAndPriorities?.message}
+              error={
+                adminCheck && errors?.medicaidProgramAndPriorities?.message
+              }
             />
           )}
         />
@@ -110,7 +112,7 @@ const StatePrioritiesAndScope = ({
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
-              error={errors?.mesIntroduction?.message}
+              error={adminCheck && errors?.mesIntroduction?.message}
             />
           )}
         />
@@ -135,7 +137,7 @@ const StatePrioritiesAndScope = ({
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
-              error={errors?.scopeOfAPD?.message}
+              error={adminCheck && errors?.scopeOfAPD?.message}
             />
           )}
         />

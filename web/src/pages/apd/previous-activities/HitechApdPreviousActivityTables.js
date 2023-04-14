@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
@@ -12,6 +14,7 @@ import {
 } from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivities } from '../../../redux/selectors/apd.selectors';
+import { previousHitechActivitySchema as schema } from '@cms-eapd/common';
 
 const HitechApdPreviousActivityTables = ({
   isViewOnly,
@@ -21,6 +24,22 @@ const HitechApdPreviousActivityTables = ({
   setActualHitech,
   setApprovedHitech
 }) => {
+  const {
+    control,
+    formState: { errors },
+    setValue,
+    trigger
+  } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: previousActivityExpenses,
+    resolver: joiResolver(schema)
+  });
+
+  useEffect(() => {
+    trigger();
+  }, []);
+
   const years = Object.keys(previousActivityExpenses);
 
   const getActualsHandler = (year, value, level, fundingType, activityType) => {
@@ -110,15 +129,38 @@ const HitechApdPreviousActivityTables = ({
           </thead>
           <tbody>
             {years.map(year => {
-              let expenses;
+              let errFederalActual, errTotalApproved, expenses;
+
               if (level.fundingTypeSchema === 'hithie') {
                 expenses =
                   previousActivityExpenses[year][level.fundingTypeSchema];
+                errFederalActual =
+                  errors && errors[`${year}`]
+                    ? errors[`${year}`]?.hithie?.federalActual?.message
+                    : '';
+                errTotalApproved =
+                  errors && errors[`${year}`]
+                    ? errors[`${year}`]?.hithie?.totalApproved?.message
+                    : '';
               } else {
                 expenses =
                   previousActivityExpenses[year][level.fundingTypeSchema][
                     level.ffp
                   ];
+                errFederalActual =
+                  errors &&
+                  errors[`${year}`]?.mmis &&
+                  errors[`${year}`]?.mmis[`${level.ffp}`]
+                    ? errors[`${year}`]?.mmis[`${level.ffp}`]?.federalActual
+                        ?.message
+                    : '';
+                errTotalApproved =
+                  errors &&
+                  errors[`${year}`]?.mmis &&
+                  errors[`${year}`]?.mmis[`${level.ffp}`]
+                    ? errors[`${year}`]?.mmis[`${level.ffp}`]?.totalApproved
+                        ?.message
+                    : '';
               }
 
               const federalApproved =
@@ -141,24 +183,43 @@ const HitechApdPreviousActivityTables = ({
                     {isViewOnly ? (
                       <Dollars>{expenses.totalApproved}</Dollars>
                     ) : (
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`approved total computable Medicaid funding for ${
-                          level.fundingTypeHeader
-                        } at the ${level.ffp}/${
-                          100 - level
-                        } level for FFY ${year}, state plus federal`}
-                        labelClassName="ds-u-visibility--screen-reader"
-                        name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
-                        value={expenses.totalApproved}
-                        onChange={e => {
-                          getApprovedHandler(
-                            year,
-                            e.target.value,
-                            level.ffp,
-                            level.fundingTypeSchema,
-                            level.fundingTypeHeader
+                      <Controller
+                        name={
+                          level.fundingTypeSchema === 'hithie'
+                            ? `${year}.hithie.totalApproved`
+                            : `${year}.mmis.${level.ffp}.totalApproved`
+                        }
+                        control={control}
+                        render={({ field: { name, ...props } }) => {
+                          return (
+                            <DollarField
+                              {...props}
+                              data-testid={name}
+                              data-cy={name}
+                              className="budget-table--input-holder"
+                              fieldClassName="budget-table--input__number"
+                              label={`approved total computable Medicaid funding for ${
+                                level.fundingTypeHeader
+                              } at the ${level.ffp}/${
+                                100 - level
+                              } level for FFY ${year}, state plus federal`}
+                              labelClassName="ds-u-visibility--screen-reader"
+                              value={expenses.totalApproved}
+                              onChange={e => {
+                                setValue(name, e.target.value, {
+                                  shouldValidate: true
+                                });
+                                getApprovedHandler(
+                                  year,
+                                  e.target.value,
+                                  level.ffp,
+                                  level.fundingTypeSchema,
+                                  level.fundingTypeHeader
+                                );
+                              }}
+                              errorMessage={errTotalApproved}
+                              errorPlacement="bottom"
+                            />
                           );
                         }}
                       />
@@ -181,24 +242,44 @@ const HitechApdPreviousActivityTables = ({
                     {isViewOnly ? (
                       <Dollars>{expenses.federalActual}</Dollars>
                     ) : (
-                      <DollarField
-                        className="budget-table--input-holder"
-                        fieldClassName="budget-table--input__number"
-                        label={`actual ffp expenditures for ${
-                          level.fundingTypeHeader
-                        } at the ${level.ffp}/${
-                          100 - level
-                        } level for FFY ${year}`}
-                        labelClassName="ds-u-visibility--screen-reader"
-                        name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
-                        value={expenses.federalActual}
-                        onChange={e => {
-                          getActualsHandler(
-                            year,
-                            e.target.value,
-                            level.ffp,
-                            level.fundingTypeSchema,
-                            level.fundingTypeHeader
+                      <Controller
+                        name={
+                          level.fundingTypeSchema === 'hithie'
+                            ? `${year}.hithie.federalActual`
+                            : `${year}.mmis.${level.ffp}.federalActual`
+                        }
+                        control={control}
+                        render={({ field: { name, ...props } }) => {
+                          return (
+                            <DollarField
+                              {...props}
+                              data-testid={name}
+                              data-cy={name}
+                              className="budget-table--input-holder"
+                              fieldClassName="budget-table--input__number"
+                              label={`actual ffp expenditures for ${
+                                level.fundingTypeHeader
+                              } at the ${level.ffp}/${
+                                100 - level
+                              } level for FFY ${year}`}
+                              labelClassName="ds-u-visibility--screen-reader"
+                              name={`actual-federal-${level.fundingTypeSchema}${level.ffp}-${year}`}
+                              value={expenses.federalActual}
+                              onChange={e => {
+                                setValue(name, e.target.value, {
+                                  shouldValidate: true
+                                });
+                                getActualsHandler(
+                                  year,
+                                  e.target.value,
+                                  level.ffp,
+                                  level.fundingTypeSchema,
+                                  level.fundingTypeHeader
+                                );
+                              }}
+                              errorMessage={errFederalActual}
+                              errorPlacement="bottom"
+                            />
                           );
                         }}
                       />
