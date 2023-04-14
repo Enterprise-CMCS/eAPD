@@ -95,6 +95,7 @@ export const populateUserRole = async (
             newRoleId: -1,
             newStatus: 'revoked',
             changedBy: 'system',
+            changedByRole: 'system',
             stateId: affiliation.state_id,
             ffy: null
           });

@@ -30,18 +30,19 @@ const formatOktaUser = oktaResult => {
 
 const createUsersToAdd = async (knex, oktaClient) => {
   logger.info('Retrieving user ids from Okta');
+
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
   const sysAdmin = (await oktaClient.getUser('sysadmin')) || {};
   const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
   const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
-  const pendingAdmin = (await oktaClient.getUSer('pendingadmin')) || {};
+  const pendingAdmin = (await oktaClient.getUser('pendingadmin')) || {};
   const expiredAdmin = (await oktaClient.getUser('expiredadmin')) || {};
   const stateStaff = (await oktaClient.getUser('statestaff')) || {};
   const stateContractor = (await oktaClient.getUser('statecontractor')) || {};
   const requestedRole = (await oktaClient.getUser('requestedrole')) || {};
   const deniedRole = (await oktaClient.getUser('deniedrole')) || {};
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
-  const betaUser = (await oktaClient.getUSer('betauser')) || {};
+  const betaUser = (await oktaClient.getUser('betauser')) || {};
   const mfaUser = (await oktaClient.getUser('mfa@email.com')) || {};
   const resetmfa = (await oktaClient.getUser('resetmfa')) || {};
 
@@ -125,7 +126,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateAdmin) {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
-      state_id: 'na',
+      state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
       username: fedAdmin.profile.login,
@@ -140,7 +141,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (expiredAdmin) {
     oktaAffiliations.push({
       user_id: expiredAdmin.id,
-      state_id: 'na',
+      state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
       username: fedAdmin.profile.login,
