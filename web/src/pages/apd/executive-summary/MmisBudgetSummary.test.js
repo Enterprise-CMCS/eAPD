@@ -382,7 +382,7 @@ describe('<MmisBudgetSummary />', () => {
     );
 
     expect(screen.queryByText('MMIS DDI Costs')).not.toBeInTheDocument();
-    expect(screen.queryByText('MMIS M&O Costs')).toBeInTheDocument();
+    expect(screen.getByText('MMIS M&O Costs')).toBeInTheDocument();
   });
 
   test('renders without the M&O table when total is zero', () => {
@@ -417,7 +417,7 @@ describe('<MmisBudgetSummary />', () => {
       <MmisBudgetSummary budget={budget} rowKeys={defaultProps.rowKeys} />
     );
 
-    expect(screen.queryByText('MMIS DDI Costs')).toBeInTheDocument();
+    expect(screen.getByText('MMIS DDI Costs')).toBeInTheDocument();
     expect(screen.queryByText('MMIS M&O Costs')).not.toBeInTheDocument();
   });
 
