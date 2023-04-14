@@ -425,12 +425,12 @@ const BudgetSummary = ({ activities, data, years, apdType, isViewOnly }) => {
           </div>
           <div className="ds-u-margin-bottom--5">
             <h3>Medicaid Total Computable by Match Rate</h3>
-            {!isViewOnly ? (
+            {!isViewOnly && (
               <p>
                 The Medicaid total computable by match rate in the table below,
                 compiles the fiscal years into a subtotal by funding source.
               </p>
-            ) : null}
+            )}
             <table className="budget-table" data-cy="summaryBudgetTotals">
               <thead>
                 <tr>
@@ -538,13 +538,13 @@ const BudgetSummary = ({ activities, data, years, apdType, isViewOnly }) => {
           </div>
 
           <h3>Medicaid Total Computable by FFY</h3>
-          {!isViewOnly ? (
+          {!isViewOnly && (
             <p>
               The Activities Total compiles all the summary budget tables by FFY
               and funding source.
             </p>
-          ) : null}
-          {!isViewOnly ? (
+          )}
+          {!isViewOnly && (
             <Alert>
               The Activities Grand Total is{' '}
               <span className="ds-u-font-weight--bold">
@@ -552,7 +552,7 @@ const BudgetSummary = ({ activities, data, years, apdType, isViewOnly }) => {
               </span>
               .
             </Alert>
-          ) : null}
+          )}
           <table
             className="budget-table ds-u-margin-top--3"
             data-cy="summaryBudgetTotals"
