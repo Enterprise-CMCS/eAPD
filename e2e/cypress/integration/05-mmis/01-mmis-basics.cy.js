@@ -65,10 +65,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.visit(apdUrl);
   });
 
-  // after(function () {
-  //   cy.visit('/');
-  //   cy.deleteAPD(this.apdId);
-  // });
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
+  });
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {

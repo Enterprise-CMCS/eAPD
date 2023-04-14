@@ -134,10 +134,10 @@ export const mmisCombinedSchema = Joi.object({
     __v: Joi.any(),
     __t: Joi.any(),
     years: Joi.any(),
-    federalShareByFFYQuarter: Joi.any(),
     mmis: Joi.any(),
-    mmisByFFP: Joi.any(),
     combined: Joi.any(),
+    ddi: Joi.any(),
+    mando: Joi.any(),
     activityTotals: Joi.any(),
     activities: budgetActivitiesSchema
   })
