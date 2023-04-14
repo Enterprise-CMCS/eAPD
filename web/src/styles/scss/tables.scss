@@ -174,7 +174,13 @@ td {
 
 .budget-table.executive-summary-budget-table {
   th {
-    @extend .ds-u-text-align--right;
+    @extend .ds-u-text-align--center;
+  }
+  &.ddi-table {
+    max-width: 1000px;
+  }
+  &.mando-table {
+    max-width: 850px;
   }
 }
 

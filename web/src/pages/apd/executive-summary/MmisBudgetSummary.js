@@ -18,7 +18,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
   const noTableMessage = 'The Program Budget Table(s) are not available.';
 
   const renderDdiTable = () => (
-    <table className="budget-table executive-summary-budget-table">
+    <table className="budget-table executive-summary-budget-table ddi-table">
       <caption className="ds-h4">
         MMIS DDI Costs
         <span className="ds-u-visibility--screen-reader">
@@ -132,7 +132,7 @@ const MmisBudgetSummary = ({ budget, rowKeys }) => {
   );
 
   const renderMandoTable = () => (
-    <table className="budget-table executive-summary-budget-table">
+    <table className="budget-table executive-summary-budget-table mando-table">
       <caption className="ds-h4">
         MMIS M&O Costs{' '}
         <span className="ds-u-visibility--screen-reader">

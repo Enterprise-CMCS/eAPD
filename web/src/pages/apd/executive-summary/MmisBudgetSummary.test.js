@@ -347,4 +347,140 @@ describe('<MmisBudgetSummary />', () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
+
+  test('renders without the DDI table when total is zero', () => {
+    const budget = {
+      ddi: {
+        '90-10': {},
+        '75-25': {},
+        '50-50': {},
+        combined: {
+          2023: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          2024: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          total: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          }
+        }
+      },
+      mando: Object.assign(sampleBudget.mando, {}) // contains non-zero values
+    };
+    render(
+      <MmisBudgetSummary budget={budget} rowKeys={defaultProps.rowKeys} />
+    );
+
+    expect(screen.queryByText('MMIS DDI Costs')).not.toBeInTheDocument();
+    expect(screen.queryByText('MMIS M&O Costs')).toBeInTheDocument();
+  });
+
+  test('renders without the M&O table when total is zero', () => {
+    const budget = {
+      mando: {
+        '75-25': {},
+        '50-50': {},
+        combined: {
+          2023: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          2024: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          total: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          }
+        }
+      },
+      ddi: Object.assign(sampleBudget.ddi, {}) // contains non-zero values
+    };
+    render(
+      <MmisBudgetSummary budget={budget} rowKeys={defaultProps.rowKeys} />
+    );
+
+    expect(screen.queryByText('MMIS DDI Costs')).toBeInTheDocument();
+    expect(screen.queryByText('MMIS M&O Costs')).not.toBeInTheDocument();
+  });
+
+  test('renders message when no tables are present', () => {
+    const budget = {
+      ddi: {
+        '90-10': {},
+        '75-25': {},
+        '50-50': {},
+        combined: {
+          2023: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          2024: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          total: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          }
+        }
+      },
+      mando: {
+        '75-25': {},
+        '50-50': {},
+        combined: {
+          2023: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          2024: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          },
+          total: {
+            total: 0,
+            federal: 0,
+            medicaid: 0,
+            state: 0
+          }
+        }
+      }
+    };
+    render(
+      <MmisBudgetSummary budget={budget} rowKeys={defaultProps.rowKeys} />
+    );
+
+    expect(screen.queryByText('MMIS DDI Costs')).not.toBeInTheDocument();
+    expect(screen.queryByText('MMIS M&O Costs')).not.toBeInTheDocument();
+    expect(
+      screen.getByText('The Program Budget Table(s) are not available.')
+    ).toBeInTheDocument();
+  });
 });
