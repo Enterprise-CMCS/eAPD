@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const OopsMessage = () => (
   <div className="site-body ds-l-container">
     <main id="start-main-content">
       <div className="ds-u-padding-top--2">
-        <h1>Oops! Looks like something went wrong.</h1>
+        <h1 data-testid="errorboundary">
+          Oops! Looks like something went wrong.
+        </h1>
         <p>You might want to double-check your link and try again. (404)</p>
       </div>
     </main>
@@ -27,7 +30,6 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
       return <OopsMessage />;
     }
 
