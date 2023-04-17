@@ -31,7 +31,7 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
-    
+
     // reset before each test case
     resetLDMocks();
     mockFlags({ emptyBudgetWording: false, enableMmis: true });
