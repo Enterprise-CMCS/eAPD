@@ -21,7 +21,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
   const years = [];
 
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
@@ -61,7 +61,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
     cy.wrap(apdUrl).as('apdUrl');
     cy.wrap(years).as('years');
 
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit(apdUrl);
   });

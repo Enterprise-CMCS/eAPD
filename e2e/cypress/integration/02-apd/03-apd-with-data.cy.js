@@ -18,7 +18,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
@@ -49,7 +49,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
 
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit(apdUrl);
   });

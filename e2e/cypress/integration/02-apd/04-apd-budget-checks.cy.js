@@ -19,7 +19,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   before(function () {
     fillOutActivityPage = new FillOutActivityPage();
 
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
@@ -51,7 +51,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.wrap(years).as('years');
 
     cy.fixture('budget-checks-test.json').as('budgetData');
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit(apdUrl);
   });

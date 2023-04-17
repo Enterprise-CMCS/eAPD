@@ -8,7 +8,7 @@ describe('tests state admin portal', () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 

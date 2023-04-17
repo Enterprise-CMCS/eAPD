@@ -10,7 +10,7 @@ const hitechCategories = [
 
 export const testDefaultHitechAssurancesAndCompliance = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.fixture('hitech-assurances-compliance-test.json').as(
       'assurancesAndCompliance'
     );
@@ -74,7 +74,7 @@ export const testDefaultHitechAssurancesAndCompliance = function () {
 
 export const testHitechAssurancesAndComplianceWithData = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.fixture('hitech-assurances-compliance-test.json').as(
       'assurancesAndCompliance'
     );
@@ -146,7 +146,7 @@ export const testHitechAssurancesAndComplianceWithData = function () {
 
 export const testDefaultMmisAssurancesAndCompliance = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.fixture('mmis-assurances-compliance-test.json').as(
       'assurancesAndCompliance'
     );
@@ -205,7 +205,7 @@ export const testDefaultMmisAssurancesAndCompliance = function () {
 
 export const testMmisAssurancesAndComplianceWithData = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.fixture('mmis-assurances-compliance-test.json').as(
       'assurancesAndCompliance'
     );

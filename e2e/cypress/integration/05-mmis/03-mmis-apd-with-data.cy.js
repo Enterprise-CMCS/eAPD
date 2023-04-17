@@ -13,7 +13,7 @@ describe(
     const years = [];
 
     before(function () {
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: true });
       cy.useStateStaff();
       cy.visit('/');
 
@@ -50,7 +50,7 @@ describe(
       cy.wrap(apdId).as('apdId');
       cy.wrap(years).as('years');
 
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: true });
       cy.useStateStaff();
       cy.visit(apdUrl);
     });

@@ -17,7 +17,7 @@ describe(
     const years = [];
 
     before(function () {
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: true });
       cy.useStateStaff();
       cy.visit('/');
 
@@ -54,7 +54,7 @@ describe(
       cy.wrap(years).as('years');
 
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: true });
       cy.useStateStaff();
       cy.visit(apdUrl);
     });

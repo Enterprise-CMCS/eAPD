@@ -12,7 +12,7 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
   const years = [];
 
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
