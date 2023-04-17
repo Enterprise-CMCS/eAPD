@@ -17,7 +17,7 @@ export const testMmisAdminCheck = function () {
       .within(() => {
         cy.findByLabelText('Month').clear();
         cy.findByLabelText('Day').clear();
-        cy.findByLabelText('Year').clear();
+        cy.findByLabelText('Year').clear().blur();
       });
   };
 
