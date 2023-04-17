@@ -32,7 +32,7 @@ const initialState = {
     data: {
       state: {
         id: 'al',
-        name: 'Alaska'
+        name: 'New Apdland'
       }
     }
   }

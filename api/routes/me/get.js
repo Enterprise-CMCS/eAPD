@@ -32,7 +32,7 @@ export default (
 
   app.get('/me/jwToken', async (req, res, next) => {
     try {
-      // when exchaning tokens, you switch an Okta token for a EAPD token,
+      // when exchanging tokens, you switch an Okta token for a EAPD token,
       // so the verifier should be the Okta verifier
       const user = await tokenExchanger(req, { verifier: verifyOkta });
       if (!user) return res.status(401).send();

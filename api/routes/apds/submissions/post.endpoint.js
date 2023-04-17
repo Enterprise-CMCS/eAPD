@@ -5,7 +5,7 @@ import {
   setupDB,
   teardownDB
 } from '../../../endpoint-tests/utils.js';
-import { mnAPDId, badAPDId } from '../../../seeds/test/apds.js';
+import { mdAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe(' /apds/submissions', () => {
   const db = getDB();
@@ -19,7 +19,7 @@ describe(' /apds/submissions', () => {
   it('it returns 403 when there is no api key', async () => {
     const response = await apiNoKey.post('/apds/submissions', [
       {
-        apdId: mnAPDId,
+        apdId: mdAPDId,
         newStatus: 'approved'
       }
     ]);
@@ -37,7 +37,7 @@ describe(' /apds/submissions', () => {
   it('returns 200 when there is an api key and the body is valid', async () => {
     const response = await apiKeyAuth.post('/apds/submissions', [
       {
-        apdId: mnAPDId,
+        apdId: mdAPDId,
         newStatus: 'approved'
       }
     ]);

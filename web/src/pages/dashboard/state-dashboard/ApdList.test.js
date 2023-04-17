@@ -5,7 +5,9 @@ import {
   screen
 } from '../../../shared/apd-testing-library';
 import mockAxios from '../../../util/api';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
+
+const { APPROVED } = AFFILIATION_STATUSES;
 
 jest.mock('../../../util/api', () => ({
   get: jest.fn(),
@@ -54,7 +56,7 @@ describe('<ApdList />', () => {
           user: {
             data: {
               state: { id: 'mo' },
-              states: { mo: AFFILIATION_STATUSES.APPROVED },
+              states: { mo: APPROVED },
               activities: ['view-document', 'edit-document']
             }
           }
@@ -100,7 +102,7 @@ describe('<ApdList />', () => {
           user: {
             data: {
               state: { id: 'mo' },
-              states: { state_id: AFFILIATION_STATUSES.APPROVED },
+              states: { state_id: APPROVED },
               activities: ['view-document', 'edit-document']
             }
           },
@@ -142,9 +144,7 @@ describe('<ApdList />', () => {
           user: {
             data: {
               state: { id: 'mo' },
-              affiliations: [
-                { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
-              ],
+              affiliations: [{ state_id: 'mo', status: APPROVED }],
               activities: ['not-view-document', 'not-edit-document']
             }
           }

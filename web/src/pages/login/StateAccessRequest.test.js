@@ -10,6 +10,10 @@ import StateAccessRequest from './StateAccessRequest';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../util/api';
 
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
+import * as hooks from '../../util/hooks';
+import { STATES } from '../../util/states';
+
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const defaultProps = {
   errorMessage: null,
@@ -26,6 +30,9 @@ const setup = (props = {}) =>
 describe('<StateAccessRequest />', () => {
   beforeEach(() => {
     fetchMock.reset();
+    resetLDMocks();
+    mockFlags({ supportStateAvailable: false });
+    jest.spyOn(hooks, 'useAvailableStates').mockImplementation(() => STATES);
   });
 
   // TODO: check after upgrading design system

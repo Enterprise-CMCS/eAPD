@@ -31,7 +31,7 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
-    
+
     // reset before each test case
     resetLDMocks();
     mockFlags({ emptyBudgetWording: false, enableMmis: true });
@@ -64,7 +64,7 @@ describe('<ApdViewOnly/>', () => {
       initialHistory: ['/apd/1']
     });
     expect(screen.getByTestId('apdName')).toHaveTextContent(
-      'MMIS IAPD for Alaska'
+      'MMIS IAPD for New Apdland'
     );
     expect(screen.getByText('2023-2024 APD')).toBeTruthy();
     // Overview Summary

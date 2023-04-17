@@ -146,7 +146,7 @@ export const addHIEActivity = function () {
         totalTotalMedicaidCost,
         fundingSplit: `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
         totalFederalShare,
-        state: 'Alaska',
+        state: 'New Apdland',
         totalStateShare
       });
 
