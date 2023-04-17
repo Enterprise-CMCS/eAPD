@@ -25,11 +25,11 @@ RequestedStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
-              state: 'Alaska'
+              id: 'na',
+              state: 'New Apdland'
             },
             states: {
-              ak: 'requested'
+              na: 'requested'
             }
           }
         }
@@ -46,11 +46,11 @@ DeniedStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
-              state: 'Alaska'
+              id: 'na',
+              state: 'New Apdland'
             },
             states: {
-              ak: 'denied'
+              na: 'denied'
             }
           }
         }
@@ -67,11 +67,11 @@ RevokedStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
-              state: 'Alaska'
+              id: 'na',
+              state: 'New Apdland'
             },
             states: {
-              ak: 'revoked'
+              na: 'revoked'
             }
           }
         }

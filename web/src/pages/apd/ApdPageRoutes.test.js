@@ -27,8 +27,8 @@ const setup = (options = {}) => {
         user: {
           data: {
             state: {
-              id: 'ak',
-              name: 'Alaska',
+              id: 'na',
+              name: 'New Apdland',
               medicaid_office: {
                 medicaidDirector: {
                   name: 'Cornelius Fudge',

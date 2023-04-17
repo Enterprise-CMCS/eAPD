@@ -1,2 +1,5 @@
 coverage
 _dev
+node_modules
+**/node_modules/**
+@cms-eapd/common/*

@@ -176,8 +176,9 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
 const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
   if (sessionToken) {
-    const expiresAt = await setTokens(sessionToken);
+    const { expiresAt, data } = await setTokens(sessionToken);
     dispatch(updateSessionExpiration(expiresAt));
+    dispatch(updateUserInfo(data));
   }
   dispatch(setLatestActivity());
 

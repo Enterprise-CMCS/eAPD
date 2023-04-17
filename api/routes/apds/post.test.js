@@ -39,7 +39,7 @@ tap.test('apds POST endpoint', async endpointTest => {
     let handler;
 
     let req = {
-      user: { state: { id: 'st' } },
+      user: { state: { id: 'na' } },
       body: {
         apdType: APD_TYPE.HITECH,
         apdOverview: {}
@@ -81,7 +81,7 @@ tap.test('apds POST endpoint', async endpointTest => {
       'sends back the new HITECH APD if everything works',
       async test => {
         req = {
-          user: { state: { id: 'st' } },
+          user: { state: { id: 'na' } },
           body: {
             apdType: APD_TYPE.HITECH,
             apdOverview: {
@@ -283,7 +283,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         test.same(
           createAPD.args[0][0],
           {
-            stateId: 'st',
+            stateId: 'na',
             status: 'draft',
             ...expectedApd
           },
@@ -307,7 +307,7 @@ tap.test('apds POST endpoint', async endpointTest => {
       'sends back the new MMIS APD if everything works',
       async test => {
         req = {
-          user: { state: { id: 'st' } },
+          user: { state: { id: 'na' } },
           body: {
             apdType: APD_TYPE.MMIS,
             years: ['2005', '2006'],
@@ -476,7 +476,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         test.same(
           createAPD.args[0][0],
           {
-            stateId: 'st',
+            stateId: 'na',
             status: 'draft',
             ...expectedApd
           },

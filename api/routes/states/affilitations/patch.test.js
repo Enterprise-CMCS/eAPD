@@ -37,7 +37,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
   t.test('missing body parameters', async t => {
     await handler(
-      { user: { id: 1 }, body: { foo: 'foo' }, params: { state: 'md', id: 7 } },
+      { user: { id: 1 }, body: { foo: 'foo' }, params: { state: 'na', id: 7 } },
       res,
       next
     );
@@ -48,7 +48,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
   t.test('missing body parameters', async t => {
     await handler(
-      { user: { id: 1 }, body: { foo: 'foo' }, params: { state: 'md', id: 7 } },
+      { user: { id: 1 }, body: { foo: 'foo' }, params: { state: 'na', id: 7 } },
       res,
       next
     );
@@ -62,7 +62,7 @@ tap.test('PATCH affiliations endpoint', async t => {
       {
         user: { id: 1 },
         body: { status: 'foo' },
-        params: { state: 'md', id: 7 }
+        params: { state: 'na', id: 7 }
       },
       res,
       next
@@ -77,7 +77,7 @@ tap.test('PATCH affiliations endpoint', async t => {
       {
         user: { id: 1 },
         body: { roleId: 'foo' },
-        params: { state: 'md', id: 7 }
+        params: { state: 'na', id: 7 }
       },
       res,
       next
@@ -90,7 +90,7 @@ tap.test('PATCH affiliations endpoint', async t => {
   t.test('successfully updates the auth affiliation', async t => {
     updateAuthAffiliation
       .withArgs({
-        stateId: 'md',
+        stateId: 'na',
         newRoleId: 6,
         newStatus: 'approved',
         changedBy: 1,
@@ -102,7 +102,7 @@ tap.test('PATCH affiliations endpoint', async t => {
       {
         user: { id: 1 },
         body: { roleId: 6, status: 'approved' },
-        params: { stateId: 'md', id: 7 }
+        params: { stateId: 'na', id: 7 }
       },
       res,
       next
@@ -118,7 +118,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
     updateAuthAffiliation
       .withArgs({
-        stateId: 'ak',
+        stateId: 'na',
         newRoleId: 5,
         newStatus: 'approved',
         changedBy: 10,
@@ -131,7 +131,7 @@ tap.test('PATCH affiliations endpoint', async t => {
       {
         user: { id: 10, role: 'eAPD State Admin' },
         body: { roleId: 5, status: 'approved' },
-        params: { stateId: 'ak', id: 8 }
+        params: { stateId: 'na', id: 8 }
       },
       res,
       next

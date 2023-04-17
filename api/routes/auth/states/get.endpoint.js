@@ -21,8 +21,8 @@ describe('auth roles endpoint get endpoint', () => {
   describe('GET /auth/state/:stateId', () => {
     const url = '/auth/state';
 
-    unauthenticatedTest('get', `${url}/ak`);
-    unauthorizedTest('get', `${url}/ak`);
+    unauthenticatedTest('get', `${url}/na`);
+    unauthorizedTest('get', `${url}/na`);
 
     it('when authenticated', async () => {
       const response = await api.get(`${url}/md`);
