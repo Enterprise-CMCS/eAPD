@@ -66,14 +66,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   after(function () {
-    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {
-      cy.contains('AK APD Home').click();
+      cy.contains('NA APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.contains(
@@ -388,27 +387,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
 
-      // Previous Activities
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-
       // Activity Tests
       cy.goToActivityDashboard();
 
@@ -613,6 +591,30 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Provide Security and Interface Plan').should('not.exist');
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'not.exist'
+      );
+    });
+
+    it('tests the Results of Previous Activities section', function () {
+      const mmisBasics = this.mmisBasics;
+
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToPreviousActivities();
+      cy.wait(2000);
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
   });

@@ -61,7 +61,10 @@ const states = [
   { id: 'vi', name: 'U.S. Virgin Islands' },
 
   // Federal
-  { id: 'fd', name: 'Federal' }
+  { id: 'fd', name: 'Federal' },
+
+  // Fake State
+  { id: 'na', name: 'New Apdland' }
 ];
 
 export default states;

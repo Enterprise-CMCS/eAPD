@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
@@ -27,17 +27,13 @@ const ManageAccount = ({
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const [currentAffiliations, setCurrentAffiliations] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
+  const currentAffiliations = useMemo(() => {
+    (async () => {
       const affiliations = await axios.get('/affiliations/me');
-      setCurrentAffiliations(affiliations.data);
-      return null;
-    };
-
-    fetchData();
+      return affiliations.data;
+    })();
   }, []);
+
   const handleCreateAccessRequest = async states => {
     const response = await createAccessRequest(states);
     if (response) {

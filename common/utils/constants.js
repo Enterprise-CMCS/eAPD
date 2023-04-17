@@ -64,6 +64,13 @@ export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
 );
 
+export const AFFILIATION_STATUSES = {
+  APPROVED: 'approved',
+  REVOKED: 'revoked',
+  DENIED: 'denied',
+  REQUESTED: 'requested'
+};
+
 export const DATE_EXTREMES = {
   min: '1960-01-01',
   max: '2151-12-31'

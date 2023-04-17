@@ -47,11 +47,11 @@ mmisEnabledStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
-              state: 'Alaska'
+              id: 'na',
+              state: 'New Apdland'
             },
             states: {
-              ak: 'requested'
+              na: 'requested'
             }
           }
         }
@@ -75,11 +75,11 @@ mmisDisabledStory.decorators = [
         user: {
           data: {
             state: {
-              id: 'ak',
-              state: 'Alaska'
+              id: 'na',
+              state: 'New Apdland'
             },
             states: {
-              ak: 'requested'
+              na: 'requested'
             }
           }
         }

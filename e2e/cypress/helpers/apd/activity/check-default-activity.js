@@ -213,7 +213,7 @@ export const checkDefaultActivity = function () {
           totalTotalMedicaidCost,
           fundingSplit: `90/10 (FFY ${years[0]} and FFY ${years[1]})`,
           totalFederalShare,
-          state: 'Alaska',
+          state: 'New Apdland',
           totalStateShare
         });
 

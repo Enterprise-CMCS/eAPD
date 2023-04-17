@@ -7,8 +7,8 @@ import {
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
 import {
-  mnAPDId,
-  akAPDId,
+  mdAPDId,
+  naAPDId,
   finalAPDId,
   badAPDId
 } from '../../seeds/test/apds.js';
@@ -38,7 +38,7 @@ describe('APD endpoint', () => {
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const response = await api.delete(url(mnAPDId));
+        const response = await api.delete(url(mdAPDId));
 
         expect(response.status).toEqual(403);
         expect(response.data).toMatchSnapshot();
@@ -52,7 +52,7 @@ describe('APD endpoint', () => {
       });
 
       it('with a valid update', async () => {
-        const response = await api.delete(url(akAPDId), {
+        const response = await api.delete(url(naAPDId), {
           programOverview: 'new overview'
         });
 

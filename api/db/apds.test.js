@@ -66,7 +66,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       ...hitech
     });
     mmisId = await createAPD({
-      stateId: 'ak',
+      stateId: 'na',
       status: 'draft',
       ...mmis
     });
@@ -361,7 +361,7 @@ tap.test('database wrappers / apds', async apdsTests => {
           apd: { updatedAt, activities }
         } = await updateAPDDocument({
           id: mmisId,
-          stateId: 'ak',
+          stateId: 'na',
           patch: [
             {
               op: 'replace',
@@ -409,7 +409,7 @@ tap.test('database wrappers / apds', async apdsTests => {
             apd: { updatedAt, activities }
           } = await updateAPDDocument({
             id: mmisId,
-            stateId: 'ak',
+            stateId: 'na',
             patch: [
               {
                 op: 'replace',
@@ -481,7 +481,7 @@ tap.test('database wrappers / apds', async apdsTests => {
           stateUpdated
         } = await updateAPDDocument({
           id: mmisId,
-          stateId: 'ak',
+          stateId: 'na',
           patch: [
             {
               op: 'replace',
@@ -499,7 +499,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       updateAPDDocumentTests.test('with a state profile', async test => {
         const updateProfile = stub();
         updateProfile
-          .withArgs('ak', {
+          .withArgs('na', {
             medicaidDirector: {
               name: 'Cornelius Fudge',
               email: 'c.fudge@ministry.magic',
@@ -509,7 +509,7 @@ tap.test('database wrappers / apds', async apdsTests => {
               address1: '132 Green St',
               address2: '',
               city: 'Cityville',
-              state: 'AK',
+              state: 'NA',
               zip: '12345'
             },
             years: ['2021', '2022']
@@ -523,7 +523,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         } = await updateAPDDocument(
           {
             id: mmisId,
-            stateId: 'ak',
+            stateId: 'na',
             patch: [
               {
                 op: 'replace',
@@ -576,7 +576,7 @@ tap.test('database wrappers / apds', async apdsTests => {
             apd: { updatedAt, activities }
           } = await updateAPDDocument({
             id: mmisId,
-            stateId: 'ak',
+            stateId: 'na',
             patch: [
               {
                 op: 'replace',

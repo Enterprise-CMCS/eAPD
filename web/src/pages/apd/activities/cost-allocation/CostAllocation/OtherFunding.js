@@ -103,7 +103,7 @@ const OtherFunding = ({
 
   return (
     <Fragment>
-      <h2 className="ds-u-margin-bottom--0">
+      <h2 className="ds-u-margin-bottom--0 ds-h2">
         {titleCase(t('activities.otherFunding.title'))}
       </h2>
       {yearsArray.map(ffy => (

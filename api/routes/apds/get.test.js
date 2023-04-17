@@ -38,7 +38,7 @@ tap.test('GET /apds', async endpointTest => {
       const err = { error: 'err0r' };
       getAllAPDsByState.rejects(err);
 
-      await handler({ params: {}, user: { state: { id: 'va' } } }, res, next);
+      await handler({ params: {}, user: { state: { id: 'na' } } }, res, next);
 
       invalidTest.ok(next.called, 'next is called');
       invalidTest.ok(next.calledWith(err), 'pass error to middleware');
@@ -60,7 +60,7 @@ tap.test('GET /apds', async endpointTest => {
           _id: 'a',
           createdAt: 'created a',
           updatedAt: 'updated a',
-          stateId: 'va',
+          stateId: 'na',
           name: 'apd a',
           years: 'years a',
           status: 'status a',
@@ -70,7 +70,7 @@ tap.test('GET /apds', async endpointTest => {
           _id: 'b',
           createdAt: 'created b',
           updatedAt: 'updated b',
-          stateId: 'va',
+          stateId: 'na',
           name: 'apd b',
           years: 'years b',
           status: 'status b',
@@ -80,7 +80,7 @@ tap.test('GET /apds', async endpointTest => {
           _id: 'c',
           createdAt: 'created c',
           updatedAt: 'updated c',
-          stateId: 'va',
+          stateId: 'na',
           name: 'apd c',
           years: 'years c',
           status: 'status c',
@@ -88,7 +88,7 @@ tap.test('GET /apds', async endpointTest => {
         }
       ]);
 
-      await handler({ params: {}, user: { state: { id: 'va' } } }, res);
+      await handler({ params: {}, user: { state: { id: 'na' } } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
@@ -97,7 +97,7 @@ tap.test('GET /apds', async endpointTest => {
             id: 'a',
             created: 'created a',
             updated: 'updated a',
-            state: 'va',
+            state: 'na',
             name: 'apd a',
             status: 'status a',
             years: 'years a'
@@ -106,7 +106,7 @@ tap.test('GET /apds', async endpointTest => {
             id: 'b',
             created: 'created b',
             updated: 'updated b',
-            state: 'va',
+            state: 'na',
             name: 'apd b',
             status: 'status b',
             years: 'years b'
@@ -115,7 +115,7 @@ tap.test('GET /apds', async endpointTest => {
             id: 'c',
             created: 'created c',
             updated: 'updated c',
-            state: 'va',
+            state: 'na',
             name: 'apd c',
             status: 'status c',
             years: 'years c'
@@ -167,7 +167,7 @@ tap.test('apds/:id GET endpoint', async tests => {
       getAPDByIDAndState.rejects(err);
 
       await handler(
-        { params: { id: '1' }, user: { state: { id: 'va' } } },
+        { params: { id: '1' }, user: { state: { id: 'na' } } },
         res,
         next
       );
@@ -192,7 +192,7 @@ tap.test('apds/:id GET endpoint', async tests => {
         getAPDByIDAndState.returns(undefined);
 
         await handler(
-          { params: { id: '1' }, user: { state: { id: 'va' } } },
+          { params: { id: '1' }, user: { state: { id: 'na' } } },
           res,
           next
         );
@@ -207,7 +207,7 @@ tap.test('apds/:id GET endpoint', async tests => {
         _id: 'id',
         createdAt: 'created at',
         updatedAt: 'updated at',
-        stateId: 'va',
+        stateId: 'na',
         stuff: 'from',
         goes: 'here',
         status: 'status',
@@ -217,7 +217,7 @@ tap.test('apds/:id GET endpoint', async tests => {
       adminCheckAPDDocument.returns([]);
 
       await handler(
-        { params: { id: '1' }, user: { state: { id: 'va' } } },
+        { params: { id: '1' }, user: { state: { id: 'na' } } },
         res,
         next
       );
@@ -231,7 +231,7 @@ tap.test('apds/:id GET endpoint', async tests => {
             updated: 'updated at',
             stuff: 'from',
             goes: 'here',
-            state: 'va',
+            state: 'na',
             status: 'status',
             other: 'stuff'
           },

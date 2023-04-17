@@ -1,13 +1,65 @@
 {
-  "segments": {},
+  "segments": {
+    "shared-test-users": {
+      "key": "shared-test-users",
+      "included": [
+        "expiredmfa",
+        "expired",
+        "norolemfa",
+        "norole",
+        "resetmfa",
+        "lockedoutmfa",
+        "lockedout",
+        "notingroupmfa",
+        "betauser",
+        "pendingadmin",
+        "expiredadmin",
+        "revokedrole",
+        "deniedrole",
+        "requestedrole",
+        "sysadmin",
+        "statecontractor",
+        "statestaff",
+        "stateadmin",
+        "fedadmin",
+        "mfa@email.com",
+        "em@il.com"
+      ],
+      "excluded": [],
+      "includedContexts": [],
+      "excludedContexts": [],
+      "salt": "4b751516f1fd4b5a9f3cec3cbf72f6d7",
+      "rules": [],
+      "unboundedContextKind": "user",
+      "version": 2,
+      "generation": 1,
+      "deleted": false
+    },
+    "support-users": {
+      "key": "support-users",
+      "included": ["sysadmin"],
+      "excluded": [],
+      "includedContexts": [],
+      "excludedContexts": [],
+      "salt": "a0a4c2756055421fa510763f168b1399",
+      "rules": [],
+      "unboundedContextKind": "user",
+      "version": 2,
+      "generation": 1,
+      "deleted": false
+    }
+  },
   "flags": {
     "adminCheckFlag": {
       "key": "adminCheckFlag",
       "on": true,
       "prerequisites": [],
       "targets": [],
+      "contextTargets": [],
       "rules": [],
-      "fallthrough": { "variation": 0 },
+      "fallthrough": {
+        "variation": 0
+      },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -22,13 +74,52 @@
       "version": 15,
       "deleted": false
     },
+    "empty-budget-wording": {
+      "key": "empty-budget-wording",
+      "on": false,
+      "prerequisites": [],
+      "targets": [
+        {
+          "contextKind": "user",
+          "variation": 1,
+          "values": ["stateadmin"]
+        }
+      ],
+      "contextTargets": [
+        {
+          "contextKind": "user",
+          "variation": 1,
+          "values": []
+        }
+      ],
+      "rules": [],
+      "fallthrough": {
+        "variation": 1
+      },
+      "offVariation": 0,
+      "variations": [true, false],
+      "clientSideAvailability": {
+        "usingMobileKey": false,
+        "usingEnvironmentId": true
+      },
+      "clientSide": true,
+      "salt": "476db1bb46504e72b6ef5cfa848d81c8",
+      "trackEvents": false,
+      "trackEventsFallthrough": false,
+      "debugEventsUntilDate": null,
+      "version": 9,
+      "deleted": false
+    },
     "enableMmis": {
       "key": "enableMmis",
       "on": true,
       "prerequisites": [],
       "targets": [],
+      "contextTargets": [],
       "rules": [],
-      "fallthrough": { "variation": 0 },
+      "fallthrough": {
+        "variation": 0
+      },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -40,30 +131,34 @@
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 39,
+      "version": 65,
       "deleted": false
     },
-    "sharepoint-endpoints-4196": {
-      "key": "sharepoint-endpoints-4196",
+    "support-state-available": {
+      "key": "support-state-available",
       "on": true,
       "prerequisites": [],
       "targets": [],
+      "contextTargets": [],
       "rules": [
         {
           "variation": 0,
-          "id": "a15a97f2-9458-4eb0-b7a5-341fd6162678",
+          "id": "1cf3b84f-13ca-4eca-bb42-a667177fd661",
           "clauses": [
             {
-              "attribute": "ip",
-              "op": "in",
-              "values": ["10.0.0.0"],
+              "contextKind": "user",
+              "attribute": "segmentMatch",
+              "op": "segmentMatch",
+              "values": ["support-users", "shared-test-users"],
               "negate": false
             }
           ],
           "trackEvents": false
         }
       ],
-      "fallthrough": { "variation": 1 },
+      "fallthrough": {
+        "variation": 1
+      },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -71,20 +166,38 @@
         "usingEnvironmentId": true
       },
       "clientSide": true,
-      "salt": "18f4e75bf858489496c23d18c3c2fef0",
+      "salt": "f5760e4e0ba047e59359f2d9611b00a9",
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 28,
+      "version": 6,
       "deleted": false
     },
-    "validation": {
-      "key": "validation",
-      "on": false,
+    "support-team": {
+      "key": "support-team",
+      "on": true,
       "prerequisites": [],
       "targets": [],
-      "rules": [],
-      "fallthrough": { "variation": 0 },
+      "contextTargets": [],
+      "rules": [
+        {
+          "variation": 0,
+          "id": "beb084ec-da8e-42da-a780-c5545005e447",
+          "clauses": [
+            {
+              "contextKind": "user",
+              "attribute": "segmentMatch",
+              "op": "segmentMatch",
+              "values": ["support-users"],
+              "negate": false
+            }
+          ],
+          "trackEvents": false
+        }
+      ],
+      "fallthrough": {
+        "variation": 1
+      },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -92,11 +205,11 @@
         "usingEnvironmentId": true
       },
       "clientSide": true,
-      "salt": "295e3a5320ac42298548b7e5aada8a1d",
+      "salt": "09509abc6f99462d9831ed4fadc4cb75",
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 80,
+      "version": 6,
       "deleted": false
     }
   }

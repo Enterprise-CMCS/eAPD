@@ -1,14 +1,16 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 import FederalAdmin from '../../admin/fed-admin/FederalAdmin';
 import { ApprovalStatus } from '../state-dashboard/AffiliationStatus';
 
 import { plain as FederalDashboard } from './FederalDashboard';
 
+const { APPROVED, DENIED } = AFFILIATION_STATUSES;
+
 const initialProps = {
-  approvalStatus: AFFILIATION_STATUSES.APPROVED
+  approvalStatus: APPROVED
 };
 
 const setup = (props = {}) =>
@@ -21,7 +23,7 @@ describe('<FederalDashboard /> component', () => {
   });
 
   it('renders <ApprovalStatus /> otherwise', () => {
-    const component = setup({ approvalStatus: AFFILIATION_STATUSES.DENIED });
+    const component = setup({ approvalStatus: DENIED });
     expect(component.find(ApprovalStatus).exists()).toBe(true);
   });
 });

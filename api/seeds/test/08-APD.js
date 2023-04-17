@@ -3,7 +3,7 @@ import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 export default {
   _id: '62a76c5310a0f01aaa73788b',
   status: 'draft',
-  stateId: 'ak',
+  stateId: 'na',
   apdType: APD_TYPE.HITECH,
   name: 'HITECH IAPD Dio 4',
   years: ['2022', '2023', '2024'],
