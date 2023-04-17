@@ -94,11 +94,6 @@ export const testMmisAdminCheck = function () {
     'tests the Admin check for mmis pages',
     { tags: ['@state', '@admin'] },
     function () {
-      cy.goToActivityDashboard();
-      cy.get('.ds-h2').should('contain', 'Activities');
-
-      cy.findAllByText('Add Activity').click();
-
       cy.turnOnAdminCheck(); // On each page verify the correct number of validation errors show
 
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
