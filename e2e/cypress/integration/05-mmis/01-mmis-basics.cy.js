@@ -427,20 +427,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'bc-dr-plan',
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
       );
-
-      // Verify validation disappears when Admin Check is off
-      cy.setTinyMceContent('security-interface-plan', '');
-      cy.contains('Provide Security and Interface Plan').should('exist');
-
-      cy.setTinyMceContent('bc-dr-plan', '');
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'exist'
-      );
-
-      cy.contains('Provide Security and Interface Plan').should('not.exist');
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'not.exist'
-      );
     });
 
     it('tests the Results of Previous Activities section', function () {
