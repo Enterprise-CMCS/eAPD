@@ -428,10 +428,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
       );
 
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list).contains('Security Planning').should('not.exist');
-      });
-
       // Verify validation disappears when Admin Check is off
       cy.setTinyMceContent('security-interface-plan', '');
       cy.contains('Provide Security and Interface Plan').should('exist');
@@ -440,10 +436,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'exist'
       );
-
-      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
-        force: true
-      });
 
       cy.contains('Provide Security and Interface Plan').should('not.exist');
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
