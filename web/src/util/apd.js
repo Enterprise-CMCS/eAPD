@@ -58,12 +58,12 @@ export const tdHdrs = (program, share) =>
 export const ffyList = ffys => {
   return Object.entries(ffys).map(
     ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
-      <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
+      <div key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
         <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
         <strong>Total Computable Medicaid Cost:</strong>{' '}
         <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars> Federal
         share)
-      </li>
+      </div>
     )
   );
 };

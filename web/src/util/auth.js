@@ -132,8 +132,16 @@ export const setTokens = sessionToken => {
     })
     .then(async res => {
       const { tokens = {} } = res;
-      const { accessToken = {} } = tokens;
+      const { accessToken = {}, idToken = {} } = tokens;
       const { expiresAt = 0 } = accessToken;
+      const {
+        claims: {
+          sub: id = '',
+          preferred_username: username = '',
+          name = '',
+          email = ''
+        } = {}
+      } = idToken;
       // if (stateToken === responseToken) { // state not currently being returned
       oktaAuth.tokenManager.setTokens(tokens);
       if (expiresAt) {
@@ -143,7 +151,7 @@ export const setTokens = sessionToken => {
         setCookie(eAPDToken);
       }
 
-      return expiresAt;
+      return { expiresAt, data: { id, username, name, email } };
       // }
       // throw new Error('Authentication failed');
     });

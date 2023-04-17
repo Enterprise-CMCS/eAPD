@@ -25,11 +25,11 @@ describe('Affiliations endpoint | GET', () => {
   });
 
   describe('GET /states/:stateId/affiliations', () => {
-    unauthenticatedTest('get', '/states/ak/affiliations');
-    unauthorizedTest('get', '/states/ak/affiliations');
+    unauthenticatedTest('get', '/states/na/affiliations');
+    unauthorizedTest('get', '/states/na/affiliations');
 
     it('returns 200', async () => {
-      const response = await api.get('/states/ak/affiliations');
+      const response = await api.get('/states/na/affiliations');
       expect(response.status).toEqual(200);
     });
     // Figure this out when we have the
@@ -40,16 +40,16 @@ describe('Affiliations endpoint | GET', () => {
   });
 
   describe('GET /states/:stateId/affiliations/:id', () => {
-    unauthenticatedTest('get', '/states/ak/affiliations/4000');
-    unauthorizedTest('get', '/states/ak/affiliations/4000');
+    unauthenticatedTest('get', '/states/na/affiliations/4000');
+    unauthorizedTest('get', '/states/na/affiliations/4000');
 
     it('returns 200', async () => {
-      const response = await api.get('/states/ak/affiliations/4000');
+      const response = await api.get('/states/na/affiliations/4000');
       expect(response.status).toEqual(200);
     });
 
     it('returns 404', async () => {
-      const response = await api.get('/states/ak/affiliations/9000');
+      const response = await api.get('/states/na/affiliations/9000');
       expect(response.status).toEqual(404);
     });
   });

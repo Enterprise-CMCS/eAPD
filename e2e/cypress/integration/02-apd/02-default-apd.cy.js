@@ -1,4 +1,5 @@
 // <reference types="cypress" />
+import { testDateDollarInlineValidation } from '../../helpers/apd/date-dollar-inline-validation.js';
 import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview.js';
 import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel.js';
 import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities.js';
@@ -72,6 +73,10 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
           cy.get('[type="checkbox"][checked]').should('have.length', 2);
         });
       });
+    });
+
+    describe.only('default Date and Dollar Inline Validation', function () {
+      testDateDollarInlineValidation();
     });
 
     describe('default Key State Personnel', function () {

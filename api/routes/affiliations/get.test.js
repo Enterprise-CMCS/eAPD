@@ -51,7 +51,7 @@ tap.test('GET /affiliations/me', async tests => {
         {
           id: 30,
           userId: '00u4ofhu66rpuz7BM297',
-          stateId: 'ar',
+          stateId: 'na',
           status: 'revoked',
           createdAt: '2020-12-02T18:50:56.817Z',
           updatedAt: '2020-12-02T18:50:56.817Z',

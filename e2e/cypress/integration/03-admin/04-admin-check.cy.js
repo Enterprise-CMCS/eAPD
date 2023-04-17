@@ -252,7 +252,7 @@ describe('tests state admin portal', () => {
       'tests admin check on a functionally complete APD',
       { tags: ['@state', '@admin'] },
       function () {
-        cy.contains('AK APD Home').click();
+        cy.contains('NA APD Home').click();
         cy.findAllByText('HITECH IAPD Complete').eq(0).click();
 
         cy.turnOnAdminCheck();

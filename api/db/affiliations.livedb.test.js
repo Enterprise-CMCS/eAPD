@@ -61,28 +61,28 @@ tap.test(
         const AUTH_AFFILIATIONS = {
           stateAdminApproved: {
             user_id: 'stateadmin1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateAdminRoleId,
             status: 'approved',
             username: 'test1'
           },
           stateAdminPending: {
             user_id: 'stateadmin2',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateAdminRoleId,
             status: 'requested',
             username: 'test2'
           },
           stateStaffRevoked: {
             user_id: 'statestaff1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateStaffRoleId,
             status: 'revoked',
             username: 'test3'
           },
           stateStaffApproved: {
             user_id: 'statestaff2',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateStaffRoleId,
             status: 'approved',
             username: 'test4'
@@ -107,7 +107,7 @@ tap.test(
 
         await setupDB(oktaUsers, authAffiliations);
 
-        const results = await getAffiliationMatches({ stateId: 'ak' });
+        const results = await getAffiliationMatches({ stateId: 'na' });
 
         test.same(results.length, 2);
         test.notHas(AUTH_AFFILIATIONS.stateAdminApproved);
@@ -149,14 +149,14 @@ tap.test(
         const AUTH_AFFILIATIONS = {
           stateAdmin: {
             user_id: 'stateadmin1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateAdminRoleId,
             status: 'approved',
             username: 'test1'
           },
           stateStaff: {
             user_id: 'statestaff1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateStaffRoleId,
             status: 'revoked',
             username: 'test3'
@@ -186,7 +186,7 @@ tap.test(
             newStatus: 'approved',
             changedBy: 'stateadmin1',
             changedByRole: 'eAPD State Admin',
-            stateId: 'ak',
+            stateId: 'na',
             ffy: thisFFY
           });
         } catch (e) {
@@ -226,7 +226,7 @@ tap.test(
         const AUTH_AFFILIATIONS = {
           stateAdmin: {
             user_id: 'stateadmin1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateStaffRoleId,
             status: 'approved',
             username: 'test1'
@@ -257,7 +257,7 @@ tap.test(
             newStatus: 'approved',
             changedBy: 'fedadmin1',
             changedByRole: 'eAPD Federal Admin',
-            stateId: 'ak',
+            stateId: 'na',
             ffy: thisFFY
           });
         } catch (e) {
@@ -300,7 +300,7 @@ tap.test(
         const AUTH_AFFILIATIONS = {
           stateAdmin: {
             user_id: 'stateadmin1',
-            state_id: 'ak',
+            state_id: 'na',
             role_id: stateStaffRoleId,
             status: 'approved',
             username: 'test1'
@@ -315,7 +315,7 @@ tap.test(
 
         const stateAdminCertifications = [
           {
-            state: 'ak',
+            state: 'na',
             ffy: '2020',
             name: 'stateadmin1',
             email: 'stateAdmin@email.com',
@@ -344,7 +344,7 @@ tap.test(
             newStatus: 'approved',
             changedBy: 'fedadmin1',
             changedByRole: 'eAPD Federal Admin',
-            stateId: 'ak',
+            stateId: 'na',
             ffy: thisFFY
           });
         } catch (e) {

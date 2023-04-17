@@ -11,7 +11,11 @@ import axios from '../../util/api';
 
 import { selectAffiliation } from '../../redux/actions/auth';
 
-const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
+const statesWithCustomAdditions = [
+  ...STATES,
+  { id: 'fd', name: 'Federal' },
+  { id: 'na', name: 'New Apdland' }
+];
 
 const SelectAffiliation = ({
   currentStateId,
@@ -52,7 +56,7 @@ const SelectAffiliation = ({
   const choiceList = availableAffiliations.map(item => {
     const choice = {
       className: 'state-aff-item',
-      label: statesWithFederal.find(state => state.id === item).name,
+      label: statesWithCustomAdditions.find(state => state.id === item).name,
       value: item
     };
     if (item === currentStateId) {

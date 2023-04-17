@@ -1,8 +1,10 @@
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 import { format } from 'date-fns';
 import loggerFactory from '../../logger/index.js';
-import states from '../../util/states.js';
 
 const logger = loggerFactory('user seeder');
+
+const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
 
 const currentFfy = (() => {
   const year = new Date().getFullYear();
@@ -32,7 +34,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
   logger.info('Retrieving user ids from Okta');
 
   const regularUser = (await oktaClient.getUser('em@il.com')) || {};
-  const sysAdmin = (await oktaClient.getUser('sysadmin')) || {};
   const fedAdmin = (await oktaClient.getUser('fedadmin')) || {};
   const stateAdmin = (await oktaClient.getUser('stateadmin')) || {};
   const pendingAdmin = (await oktaClient.getUser('pendingadmin')) || {};
@@ -47,10 +48,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const resetmfa = (await oktaClient.getUser('resetmfa')) || {};
 
   logger.info('Retrieving role ids from database');
-  const sysAdminRoleId = await knex('auth_roles')
-    .where({ name: 'eAPD System Admin' })
-    .first()
-    .then(role => role.id);
   const fedAdminRoleId = await knex('auth_roles')
     .where({ name: 'eAPD Federal Admin' })
     .first()
@@ -73,26 +70,13 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const stateCertifications = [];
   const oktaUsers = [];
 
-  if (sysAdmin) {
-    states.forEach(state => {
-      oktaAffiliations.push({
-        user_id: sysAdmin.id,
-        state_id: state.id,
-        role_id: sysAdminRoleId,
-        status: 'approved',
-        username: 'sysadmin'
-      });
-    });
-    oktaUsers.push(formatOktaUser(sysAdmin));
-  }
-
   if (regularUser) {
     oktaAffiliations.push({
       user_id: regularUser.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateAdminRoleId,
-      status: 'approved',
-      username: 'em@il.com',
+      status: APPROVED,
+      username: regularUser.profile.login,
       expires_at: format(
         new Date(new Date().getFullYear() + 1, '06', '30'),
         PostgresDateFormat
@@ -104,10 +88,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (mfaUser) {
     oktaAffiliations.push({
       user_id: mfaUser.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
-      status: 'approved',
-      username: 'em@il.com'
+      status: APPROVED,
+      username: mfaUser.profile.login
     });
     oktaUsers.push(formatOktaUser(mfaUser));
   }
@@ -117,7 +101,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       user_id: fedAdmin.id,
       state_id: 'fd',
       role_id: fedAdminRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: fedAdmin.profile.login
     });
     oktaUsers.push(formatOktaUser(fedAdmin));
@@ -126,10 +110,10 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateAdmin) {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateAdminRoleId,
-      status: 'approved',
-      username: fedAdmin.profile.login,
+      status: APPROVED,
+      username: stateAdmin.profile.login,
       expires_at: format(
         new Date(new Date().getFullYear() + 1, '06', '30'),
         PostgresDateFormat
@@ -141,12 +125,12 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (expiredAdmin) {
     oktaAffiliations.push({
       user_id: expiredAdmin.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateAdminRoleId,
-      status: 'approved',
-      username: fedAdmin.profile.login,
+      status: APPROVED,
+      username: expiredAdmin.profile.login,
       expires_at: format(
-        new Date(new Date().getFullYear() - 1, '06', '30'),
+        new Date(new Date().getFullYear() - 1, '06', '30'), // set the expiration to last year
         PostgresDateFormat
       )
     });
@@ -157,9 +141,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       id: 1001, // manually set id for testing
       user_id: pendingAdmin.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: pendingAdmin.profile.login
     });
     // Let them be a staffer in Maryland too
@@ -167,7 +151,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       user_id: pendingAdmin.id,
       state_id: 'md',
       role_id: stateStaffRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: pendingAdmin.profile.login
     });
     // Add a valid certification and this user will remain an admin
@@ -175,7 +159,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       id: 1002, // manually set id for testing
       ffy: currentFfy,
       name: `${pendingAdmin.profile.firstName} ${pendingAdmin.profile.lastName}`,
-      state: 'ak',
+      state: 'na',
       email: pendingAdmin.profile.email,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
@@ -203,9 +187,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateStaff) {
     oktaAffiliations.push({
       user_id: stateStaff.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: stateStaff.profile.login
     });
     oktaUsers.push(formatOktaUser(stateStaff));
@@ -214,9 +198,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateContractor) {
     oktaAffiliations.push({
       user_id: stateContractor.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateContractorRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: stateContractor.profile.login
     });
     oktaUsers.push(formatOktaUser(stateContractor));
@@ -225,8 +209,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (requestedRole) {
     oktaAffiliations.push({
       user_id: requestedRole.id,
-      state_id: 'ak',
-      status: 'requested',
+      state_id: 'na',
+      status: REQUESTED,
       username: requestedRole.profile.login
     });
 
@@ -236,8 +220,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (deniedRole) {
     oktaAffiliations.push({
       user_id: deniedRole.id,
-      state_id: 'ak',
-      status: 'denied',
+      state_id: 'na',
+      status: DENIED,
       username: deniedRole.profile.login
     });
     oktaUsers.push(formatOktaUser(deniedRole));
@@ -246,8 +230,8 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (revokedRole) {
     oktaAffiliations.push({
       user_id: revokedRole.id,
-      state_id: 'ak',
-      status: 'revoked',
+      state_id: 'na',
+      status: REVOKED,
       username: revokedRole.profile.login
     });
 
@@ -257,9 +241,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (betaUser) {
     oktaAffiliations.push({
       user_id: betaUser.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: betaUser.profile.login
     });
     oktaUsers.push(formatOktaUser(betaUser));
@@ -268,9 +252,9 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (resetmfa) {
     oktaAffiliations.push({
       user_id: resetmfa.id,
-      state_id: 'ak',
+      state_id: 'na',
       role_id: stateStaffRoleId,
-      status: 'approved',
+      status: APPROVED,
       username: resetmfa.profile.login
     });
     oktaUsers.push(formatOktaUser(resetmfa));

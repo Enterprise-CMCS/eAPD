@@ -2,20 +2,22 @@ import auditor, { actions } from '../../../audit.js';
 import loggerFactory from '../../../logger/index.js';
 import { can, validForState } from '../../../middleware/index.js';
 import { updateAuthAffiliation } from '../../../db/affiliations.js';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const logger = loggerFactory('affiliations');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = actions;
+const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
 
 // map affiliation status to audit actions
 const statusToAction = status => {
   switch (status) {
-    case 'approved':
+    case APPROVED:
       return ENABLE_ACCOUNT;
-    case 'denied':
-    case 'revoked':
+    case DENIED:
+    case REVOKED:
       return DISABLE_ACCOUNT;
-    case 'requested':
+    case REQUESTED:
     default:
       return MODIFY_ACCOUNT;
   }
