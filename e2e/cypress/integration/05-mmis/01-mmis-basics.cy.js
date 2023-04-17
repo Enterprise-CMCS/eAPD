@@ -398,6 +398,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
 
       // Security Planning
+      cy.goToSecurityPlanning();
       cy.checkTinyMCE('security-interface-plan', '');
 
       cy.setTinyMceContent(

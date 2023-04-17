@@ -111,7 +111,7 @@ export const testMmisAdminCheck = function () {
 
       cy.turnOnAdminCheck();
 
-      cy.get('[data-cy="numRequired"]').should('have.text', '33');
+      cy.get('[data-cy="numRequired"]').should('have.text', '30');
 
       cy.collapseAdminCheck();
 
@@ -139,10 +139,10 @@ export const testMmisAdminCheck = function () {
       );
 
       cy.collapseAdminCheck();
-      cy.get('[data-cy="numRequired"]').should('have.text', '33');
+      cy.get('[data-cy="numRequired"]').should('have.text', '30');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.get('[data-cy="numRequired"]').should('have.text', '34');
+      cy.get('[data-cy="numRequired"]').should('have.text', '31');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
       cy.expandAdminCheck();
