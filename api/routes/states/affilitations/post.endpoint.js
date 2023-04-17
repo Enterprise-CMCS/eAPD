@@ -16,10 +16,10 @@ describe('Affiliations endpoint | POST', () => {
     await teardownDB(db);
   });
 
-  unauthenticatedTest('post', '/states/ak/affiliations');
+  unauthenticatedTest('post', '/states/na/affiliations');
 
   it('returns 201', async () => {
-    const response = await api.post('/states/ak/affiliations');
+    const response = await api.post('/states/na/affiliations');
     expect(response.status).toEqual(201);
     const keys = Object.keys(response.data);
     expect(keys).toEqual(['id']);

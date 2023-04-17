@@ -7,25 +7,27 @@ import {
   getUserStateOrTerritory,
   getUserStateOrTerritoryStatus
 } from '../../../redux/selectors/user.selector';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 import UpgradeBrowser from '../../../components/UpgradeBrowser';
 import axios from '../../../util/api';
 
+const { REQUESTED, DENIED, REVOKED } = AFFILIATION_STATUSES;
+
 const ApprovalStatus = ({ status, mailTo, administratorType }) => {
   const options = {
-    [AFFILIATION_STATUSES.REQUESTED]: {
+    [REQUESTED]: {
       status: `Approval Pending From ${administratorType} Administrator`,
       src: '../static/icons/puzzle.svg',
       alt: 'Puzzle Piece Icon',
       width: 57
     },
-    [AFFILIATION_STATUSES.DENIED]: {
+    [DENIED]: {
       status: 'Approval Has Been Denied',
       src: '../static/icons/alert.svg',
       alt: 'Alert Icon',
       width: 18
     },
-    [AFFILIATION_STATUSES.REVOKED]: {
+    [REVOKED]: {
       status: 'Approval Permissions Revoked',
       src: '../static/icons/alert.svg',
       alt: 'Alert Icon',
@@ -127,8 +129,7 @@ AffiliationStatus.propTypes = {
 
 const mapStateToProps = state => ({
   state: getUserStateOrTerritory(state) || {},
-  approvalStatus:
-    getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
+  approvalStatus: getUserStateOrTerritoryStatus(state) || REQUESTED
 });
 
 export default connect(mapStateToProps)(AffiliationStatus);

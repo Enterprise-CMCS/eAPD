@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-
+import PropTypes from 'prop-types';
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
 import axios from '../../../util/api';
-import { STATES } from '../../../util/states';
-import PropTypes from 'prop-types';
+import { useAvailableStates } from '../../../util/hooks';
 
 const MatchStateAdminDialog = ({ certification, hideModal }) => {
+  const availableStates = useAvailableStates();
   const [stateAffiliations, setStateAffiliations] = useState([]);
   const [selectedAffiliation, setSelectedAffiliation] = useState({});
 
@@ -52,9 +52,10 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
     hideModal();
   };
 
-  const stateName = STATES.find(
-    state => state.id === certification.state.toLowerCase()
-  ).name;
+  const stateName =
+    availableStates.find(
+      state => state.id === certification.state.toLowerCase()
+    )?.name || '';
 
   const dropdownOptions = stateAffiliations.map(item => {
     return {
