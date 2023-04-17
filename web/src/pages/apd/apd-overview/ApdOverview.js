@@ -54,7 +54,7 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
-  const { enableMmis } = useFlags();
+  // const { enableMmis } = useFlags();
 
   const {
     control,

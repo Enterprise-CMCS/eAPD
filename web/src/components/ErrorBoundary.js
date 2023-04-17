@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const OopsMessage = () => (
   <div className="site-body ds-l-container">
@@ -23,7 +22,7 @@ class ErrorBoundary extends Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
@@ -38,7 +37,8 @@ class ErrorBoundary extends Component {
 }
 
 ErrorBoundary.propTypes = {
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
+  children: PropTypes.node
 };
 
 ErrorBoundary.defaultProps = {
