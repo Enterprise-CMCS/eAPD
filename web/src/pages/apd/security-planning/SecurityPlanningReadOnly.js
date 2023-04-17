@@ -10,7 +10,6 @@ import {
 const SecurityPlanningSummary = ({ securityInterfacePlan, BCDRPlan }) => {
   return (
     <Fragment>
-      <hr className="section-rule ds-u-margin-y--3" />
       <h2>Security Planning</h2>
       <h3>Security and Interface Plan</h3>
       <p
