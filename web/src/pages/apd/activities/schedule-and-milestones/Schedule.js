@@ -11,8 +11,9 @@ import {
 import { Subsection } from '../../../../components/Section';
 import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
-import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
+
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 
 import { activityScheduleSchema as schema } from '@cms-eapd/common';
 
@@ -31,8 +32,7 @@ const Schedule = ({
   const {
     control,
     formState: { errors },
-    trigger,
-    clearErrors
+    trigger
   } = useForm({
     defaultValues: {
       plannedStartDate,
@@ -42,20 +42,8 @@ const Schedule = ({
   });
 
   useEffect(() => {
-    if (adminCheck) {
-      triggerDates();
-    } else {
-      clearErrors();
-    }
-  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const triggerDates = () => {
-    if (adminCheck && plannedEndDate) {
-      trigger();
-    } else if (adminCheck && !plannedEndDate) {
-      trigger('plannedStartDate');
-    }
-  };
+    trigger();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Subsection resource="activities.schedule">
@@ -76,7 +64,7 @@ const Schedule = ({
                   setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
 
-                  triggerDates();
+                  trigger();
                 }}
                 errorMessage={errors?.plannedStartDate?.message}
                 errorPlacement="bottom"
@@ -95,9 +83,11 @@ const Schedule = ({
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
 
-                    triggerDates();
+                    if (adminCheck) {
+                      trigger();
+                    }
                   }}
-                  errorMessage={errors?.plannedEndDate?.message}
+                  errorMessage={adminCheck && errors?.plannedEndDate?.message}
                   errorPlacement="bottom"
                 />
               );

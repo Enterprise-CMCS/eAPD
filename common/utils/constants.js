@@ -13,7 +13,8 @@ export const BUDGET_TYPE = {
 
 export const FUNDING_CATEGORY_TYPE = {
   DDI: 'DDI',
-  MANDO: 'MO'
+  MANDO: 'MO',
+  MANDOALT: 'M&O'
 };
 export const FUNDING_CATEGORY_TYPE_KEY_LOOKUP = {
   DDI: 'ddi',
@@ -62,3 +63,8 @@ function returnArrayOfCheckBoxes(obj) {
 export const MEDICAID_BUSINESS_AREAS_CHECKBOXES = returnArrayOfCheckBoxes(
   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
 );
+
+export const DATE_EXTREMES = {
+  min: '1960-01-01',
+  max: '2151-12-31'
+};

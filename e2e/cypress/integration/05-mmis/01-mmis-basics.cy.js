@@ -68,7 +68,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   after(function () {
     cy.visit('/');
-    cy.deleteAPD(this.apdId); // try removing the this
+    cy.deleteAPD(this.apdId);
   });
 
   describe('Create MMIS APD', function () {
@@ -308,34 +308,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
 
-      // Previous Activities
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('MMIS DDI at 90% FFP');
-      cy.findAllByText('MMIS DDI at 75% FFP');
-      cy.findAllByText('MMIS M&O at 75% FFP');
-      cy.findAllByText('MMIS DDI at 50% FFP');
-      cy.findAllByText('MMIS M&O at 50% FFP');
-      cy.findAllByText('MMIS Grand Totals');
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-
       // Activity Tests
       cy.goToActivityDashboard();
 
@@ -453,6 +425,52 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.checkTinyMCE(
         'bc-dr-plan',
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
+      );
+
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Security Planning').should('not.exist');
+      });
+
+      // Verify validation disappears when Admin Check is off
+      cy.setTinyMceContent('security-interface-plan', '');
+      cy.contains('Provide Security and Interface Plan').should('exist');
+
+      cy.setTinyMceContent('bc-dr-plan', '');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'exist'
+      );
+
+      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+        force: true
+      });
+
+      cy.contains('Provide Security and Interface Plan').should('not.exist');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'not.exist'
+      );
+    });
+
+    it('tests the Results of Previous Activities section', function () {
+      const mmisBasics = this.mmisBasics;
+
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToPreviousActivities();
+      cy.wait(2000);
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
   });

@@ -25,7 +25,14 @@ budgetTable:
   mmis90: MMIS (90/10)
   mmis75: MMIS (75/25)
   mmis50: MMIS (50/50)
+  mmisDdi90: MMIS DDI (90/10)
+  mmisDdi75: MMIS DDI (75/25)
+  mmisDdi50: MMIS DDI (50/50)
+  mmisMando75: MMIS M&O (75/25)
+  mmisMando50: MMIS M&O (50/50)
   mmisTotal: MMIS (Total)
+  mmisDdiTotal: MMIS DDI (Total)
+  mmisMandoTotal: MMIS M&O (Total)
   fedShare: Federal
   stateShare: State
   grandTotal: Total Computable Medicaid Cost

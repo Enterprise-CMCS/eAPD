@@ -51,9 +51,11 @@ export const testMmisNavigation = function () {
       title: 'Executive Summary',
       subnav: [
         'Executive Summary',
-        'Activities Summary' /* 'Program Budget Tables' */
+        'APD Overview Summary',
+        'Activities Summary',
+        'Program Budget Tables'
       ],
-      type: ['h2', 'h3', 'h3']
+      type: ['h2', 'h3', 'h3', 'h3']
     },
     {
       title: 'Export and Submit',
@@ -103,7 +105,7 @@ export const testMmisNavigation = function () {
     }
   ];
 
-  it('is my version of main side nav navigation', function () {
+  it('tests main side nav navigation', function () {
     cy.wrap(pages).each(index => {
       const { title, subnav, type } = index;
 
@@ -121,7 +123,7 @@ export const testMmisNavigation = function () {
     });
   });
 
-  it('is my version of activity side nav navigation', function () {
+  it('tests side nav navigation for activities', function () {
     cy.goToActivityDashboard();
     cy.get('.ds-h2').should('contain', 'Activities');
 
@@ -149,7 +151,7 @@ export const testMmisNavigation = function () {
     });
   });
 
-  it('is my version of Continue and Previous buttons', function () {
+  it('tests Continue and Previous buttons', function () {
     cy.log('Click through Continue buttons');
     cy.goToApdOverview();
 

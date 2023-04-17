@@ -1,4 +1,4 @@
-import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '../constants';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '../constants.js';
 
 export const hitechApd = {
   apdType: APD_TYPE.HITECH,
@@ -429,11 +429,13 @@ export const mmisApd = {
         split: {
           2017: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2018: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {
@@ -448,11 +450,13 @@ export const mmisApd = {
         split: {
           2017: {
             federal: 75,
-            state: 25
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           2018: {
             federal: 75,
-            state: 25
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           }
         },
         medicaidShare: {
@@ -467,11 +471,13 @@ export const mmisApd = {
         split: {
           2017: {
             federal: 0,
-            state: 0
+            state: 0,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2018: {
             federal: 0,
-            state: 0
+            state: 0,
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {

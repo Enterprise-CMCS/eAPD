@@ -1,7 +1,6 @@
 import {
   costAllocationSplitSchema,
   costAllocationMatchRateSchema,
-  costAllocationOtherSchema,
   hitechCostAllocationSchema,
   mmisCostAllocationSchema
 } from './costAllocation.js';
@@ -156,41 +155,6 @@ describe('cost allocation validation', () => {
       expect(schemaValidation.length).toEqual(1);
       expect(schemaValidation[0].message).toEqual(
         'Select a federal-state split.'
-      );
-    });
-  });
-
-  describe('cost allocation other funding', () => {
-    test('valid other funding', () => {
-      const { error: { details: schemaValidation = [] } = {} } =
-        costAllocationOtherSchema.validate(0, { abortEarly: false });
-      expect(schemaValidation).toEqual([]);
-    });
-
-    test('negative other funding', () => {
-      const { error: { details: schemaValidation = [] } = {} } =
-        costAllocationOtherSchema.validate(-1, { abortEarly: false });
-      expect(schemaValidation.length).toEqual(1);
-      expect(schemaValidation[0].message).toEqual(
-        'Provide an other funding amount greater than or equal to $0.'
-      );
-    });
-
-    test('null other funding', () => {
-      const { error: { details: schemaValidation = [] } = {} } =
-        costAllocationOtherSchema.validate(null, { abortEarly: false });
-      expect(schemaValidation.length).toEqual(1);
-      expect(schemaValidation[0].message).toEqual(
-        'Provide an other funding amount greater than or equal to $0.'
-      );
-    });
-
-    test('undefined other funding', () => {
-      const { error: { details: schemaValidation = [] } = {} } =
-        costAllocationOtherSchema.validate(undefined, { abortEarly: false });
-      expect(schemaValidation.length).toEqual(1);
-      expect(schemaValidation[0].message).toEqual(
-        'Provide a valid funding amount.'
       );
     });
   });
