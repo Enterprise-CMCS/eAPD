@@ -39,13 +39,6 @@ export const TABLE_HEADERS = {
   total: <span>Total computable (Federal + state)</span>
 };
 
-export const AFFILIATION_STATUSES = {
-  REQUESTED: 'requested',
-  APPROVED: 'approved',
-  DENIED: 'denied',
-  REVOKED: 'revoked'
-};
-
 export const MFA_FACTOR_TYPES = {
   CALL: 'call-OKTA',
   EMAIL: 'email-OKTA',

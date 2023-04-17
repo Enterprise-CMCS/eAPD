@@ -59,7 +59,7 @@ tap.test('apds PATCH endpoint', async tests => {
     'handles the case where the message body is not an array',
     async test => {
       await handler(
-        { params: { id: 'apd id' }, user: { state: { id: 'co' } } },
+        { params: { id: 'apd id' }, user: { state: { id: 'na' } } },
         res,
         next
       );
@@ -73,7 +73,7 @@ tap.test('apds PATCH endpoint', async tests => {
     const error = new Error('fake error');
     updateAPDDocument.throws(error);
     await handler(
-      { body: [], params: { id: 'apd id' }, user: { state: { id: 'co' } } },
+      { body: [], params: { id: 'apd id' }, user: { state: { id: 'na' } } },
       res,
       next
     );
@@ -101,7 +101,7 @@ tap.test('apds PATCH endpoint', async tests => {
       {
         body: patches,
         params: { id: 'apd id' },
-        user: { state: { id: 'co' } }
+        user: { state: { id: 'na' } }
       },
       res,
       next
@@ -134,7 +134,7 @@ tap.test('apds PATCH endpoint', async tests => {
         ...apd,
         createdAt: 'created at',
         updatedAt: 'updated at',
-        stateId: 'co',
+        stateId: 'na',
         keyPersonnel: [
           {
             name: 'Sam I Am',
@@ -159,14 +159,14 @@ tap.test('apds PATCH endpoint', async tests => {
       {
         body: patch,
         params: { id: 'apd id' },
-        user: { state: { id: 'co' } }
+        user: { state: { id: 'na' } }
       },
       res,
       next
     );
 
     test.ok(
-      updateAPDDocument.calledWith({ id: 'apd id', stateId: 'co', patch }),
+      updateAPDDocument.calledWith({ id: 'apd id', stateId: 'na', patch }),
       'updates the right set of things'
     );
 
@@ -178,7 +178,7 @@ tap.test('apds PATCH endpoint', async tests => {
           id: 'apd id',
           created: 'created at',
           updated: 'updated at',
-          state: 'co',
+          state: 'na',
           status: 'draft',
           keyPersonnel: [
             {

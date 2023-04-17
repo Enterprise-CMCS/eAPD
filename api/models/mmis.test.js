@@ -16,7 +16,7 @@ tap.test('MMIS model test', async t => {
   t.beforeEach(async () => {
     const { _id } = await MMIS.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...mmis
     });
 

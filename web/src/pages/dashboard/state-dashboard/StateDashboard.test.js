@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 import ApdList from './ApdList';
 import AffiliationStatus from './AffiliationStatus';
@@ -8,7 +8,7 @@ import AffiliationStatus from './AffiliationStatus';
 import { plain as StateDashboard } from './StateDashboard';
 
 const initialProps = {
-  state: { id: 'ak' },
+  state: { id: 'na' },
   role: 'some role',
   approvalStatus: AFFILIATION_STATUSES.APPROVED
 };

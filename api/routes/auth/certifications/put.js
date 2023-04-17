@@ -2,8 +2,11 @@ import { can, loggedIn } from '../../../middleware/index.js';
 import loggerFactory from '../../../logger/index.js';
 import { matchStateAdminCertification as matchCertification } from '../../../db/certifications.js';
 import { getAllActiveRoles as getActiveRoles } from '../../../db/roles.js';
+import { AFFILIATION_STATUSES } from '@cms-eapd/common';
 
 const logger = loggerFactory('auth certifications put');
+
+const { APPROVED } = AFFILIATION_STATUSES;
 
 export default (
   app,
@@ -36,7 +39,7 @@ export default (
           changedBy: req.user.id,
           changedByRole: req.user.role,
           newRoleId: stateAdminId,
-          newStatus: 'approved'
+          newStatus: APPROVED
         });
 
         if (error) {

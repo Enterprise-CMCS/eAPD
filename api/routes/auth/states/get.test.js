@@ -42,7 +42,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
               states: ['md']
             },
             params: {
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res
@@ -60,15 +60,15 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       'calls ChangeState if the user has the state to switch to',
       async validTest => {
         const user = {
-          states: { ak: 'approved', md: 'approved' }
+          states: { na: 'approved', md: 'approved' }
         };
 
-        changeState.withArgs(user, 'ak').resolves('JWT for AK');
+        changeState.withArgs(user, 'na').resolves('JWT for AK');
         await handler(
           {
             user,
             params: {
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res
