@@ -62,9 +62,9 @@ const ExecutiveSummary = ({
   function otherDetails() {
     if (medicaidBusinessAreas.other) {
       return (
-        <li className="ds-c-choice__checkedChild">
+        <p className="ds-c-choice__checkedChild">
           {medicaidBusinessAreas.otherMedicaidBusinessAreas}
-        </li>
+        </p>
       );
     }
   }
@@ -74,12 +74,12 @@ const ExecutiveSummary = ({
       var businessAreasList = businessAreaChoices(medicaidBusinessAreas);
       return (
         <div>
-          <li className="ds-u-margin-top--1">
+          <p className="ds-u-margin-top--1">
             <strong>Medicaid Business Area(s) :</strong>{' '}
             {!businessAreasList.length
               ? 'Provide at least one Medicaid Business Area.'
               : arrayOfObjectsToStringList(businessAreasList)}
-          </li>
+          </p>
           {otherDetails()}
         </div>
       );
@@ -98,18 +98,18 @@ const ExecutiveSummary = ({
           resource="executiveSummary.overviewSummary"
         >
           {renderSubtitle(apdType, updateStatus)}
-          <ul className="ds-c-list--bare">
-            <li className="ds-u-margin-top--1">
+          <div className="ds-c-list--bare">
+            <p className="ds-u-margin-top--1">
               <strong>APD Name :</strong> {apdName}
-            </li>
-            <li className="ds-u-margin-top--1">
+            </p>
+            <p className="ds-u-margin-top--1">
               <strong>Update Type :</strong>{' '}
               {updateStatus.isUpdateAPD
                 ? arrayOfObjectsToStringList(statusList)
                 : 'New Project'}
-            </li>
+            </p>
             {renderMedicaidBusinessAreas()}
-          </ul>
+          </div>
         </Subsection>
         <Waypoint id="executive-activities-summary" />
         <Subsection
@@ -137,22 +137,22 @@ const ExecutiveSummary = ({
               Verify that this information is correct. Edit activities above to
               make changes.
             </p>
-            <ul className="ds-c-list--bare">
-              <li>
+            <div className="ds-c-list--bare">
+              <p>
                 <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
                 {!noYears && years.join(', ')}
-              </li>
-              <li>
+              </p>
+              <p>
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
                 <Dollars>{total.medicaid}</Dollars> (
                 <Dollars>{total.federal}</Dollars> Federal share)
-              </li>
-              <li>
+              </p>
+              <p>
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
-              </li>
+              </p>
               {!noYears && ffyList(total.ffys)}
-            </ul>
+            </div>
           </Review>
         </Subsection>
 

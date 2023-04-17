@@ -48,6 +48,7 @@ e2e/cypress/videos/*
 e2e/tokens.json
 e2e/.nyc_output
 e2e/coverage
+e2e/cypress/downloads
 
 web/.jest-test-results.json
 web/coverage
