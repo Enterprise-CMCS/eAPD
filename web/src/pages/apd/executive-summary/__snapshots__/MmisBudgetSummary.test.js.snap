@@ -11,17 +11,8 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
     >
       Program Budget Tables
     </h3>
-    <div>
-      <div
-        class="visibility--screen"
-      >
-        <p>
-          Program budget tables are automatically computed for this APD. This table will be referenced in the CMS approval letter.
-        </p>
-      </div>
-    </div>
     <table
-      class="budget-table"
+      class="budget-table executive-summary-budget-table ddi-table"
     >
       <caption
         class="ds-h4"
@@ -42,34 +33,29 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null3"
           />
           <th
-            class="ds-u-text-align--right"
             colspan="2"
-            id="program-budget-table-mmis90"
+            id="program-budget-table-ddi90"
           >
             MMIS DDI (90/10)
           </th>
           <th
-            class="ds-u-text-align--right"
             colspan="2"
-            id="program-budget-table-mmis75"
+            id="program-budget-table-ddi75"
           >
             MMIS DDI (75/25)
           </th>
           <th
-            class="ds-u-text-align--right"
             colspan="2"
-            id="program-budget-table-mmis50"
+            id="program-budget-table-ddi50"
           >
             MMIS DDI (50/50)
           </th>
           <th
-            class="ds-u-text-align--right"
-            colspan="2"
-            id="program-budget-table-mmisTotal"
+            colspan="3"
+            id="program-budget-table-ddiTotal"
           >
             MMIS DDI (Total)
           </th>
-          <th />
         </tr>
         <tr
           class="budget-table--row__highlight-gray-light"
@@ -79,56 +65,47 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null4"
           />
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis90-fed"
+            id="program-budget-table-ddi90-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis90-state"
+            id="program-budget-table-ddi90-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis75-fed"
+            id="program-budget-table-ddi75-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis75-state"
+            id="program-budget-table-ddi75-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis50-fed"
+            id="program-budget-table-ddi50-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis50-state"
+            id="program-budget-table-ddi50-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-fed"
+            id="program-budget-table-ddiTotal-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-state"
+            id="program-budget-table-ddiTotal-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-total"
+            id="program-budget-table-ddiTotal-total"
           >
             Total Computable Medicaid Cost
           </th>
@@ -146,7 +123,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
           >
             <span>
               $4,547,548
@@ -154,7 +131,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
           >
             <span>
               $505,283
@@ -162,7 +139,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
           >
             <span>
               $0
@@ -170,7 +147,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
           >
             <span>
               $0
@@ -178,7 +155,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
           >
             <span>
               $0
@@ -186,7 +163,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
           >
             <span>
               $0
@@ -194,7 +171,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
           >
             <span>
               $4,547,548
@@ -202,7 +179,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
           >
             <span>
               $505,283
@@ -210,7 +187,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
           >
             <span>
               $5,052,831
@@ -228,7 +205,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
           >
             <span>
               $0
@@ -236,7 +213,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
           >
             <span>
               $0
@@ -244,7 +221,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
           >
             <span>
               $2,319,750
@@ -252,7 +229,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
           >
             <span>
               $773,250
@@ -260,7 +237,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
           >
             <span>
               $0
@@ -268,7 +245,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
           >
             <span>
               $0
@@ -276,7 +253,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
           >
             <span>
               $2,319,750
@@ -284,7 +261,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
           >
             <span>
               $773,250
@@ -292,7 +269,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
           >
             <span>
               $3,093,000
@@ -310,7 +287,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-fed"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
           >
             <span>
               $4,547,548
@@ -318,7 +295,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis90 program-budget-table-mmis90-state"
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
           >
             <span>
               $505,283
@@ -326,7 +303,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
           >
             <span>
               $2,319,750
@@ -334,7 +311,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
           >
             <span>
               $773,250
@@ -342,7 +319,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
           >
             <span>
               $0
@@ -350,7 +327,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
           >
             <span>
               $0
@@ -358,7 +335,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
           >
             <span>
               $6,867,298
@@ -366,7 +343,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
           >
             <span>
               $1,278,533
@@ -374,7 +351,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
           >
             <span>
               $8,145,831
@@ -384,12 +361,12 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
       </tbody>
     </table>
     <table
-      class="budget-table"
+      class="budget-table executive-summary-budget-table mando-table"
     >
       <caption
         class="ds-h4"
       >
-        MMIS M&O Costs
+        MMIS M&O Costs 
         <span
           class="ds-u-visibility--screen-reader"
         >
@@ -405,27 +382,23 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null3"
           />
           <th
-            class="ds-u-text-align--right"
             colspan="2"
-            id="program-budget-table-mmis75"
+            id="program-budget-table-mando75"
           >
             MMIS M&O (75/25)
           </th>
           <th
-            class="ds-u-text-align--right"
             colspan="2"
-            id="program-budget-table-mmis50"
+            id="program-budget-table-mando50"
           >
             MMIS M&O (50/50)
           </th>
           <th
-            class="ds-u-text-align--right"
-            colspan="2"
-            id="program-budget-table-mmisTotal"
+            colspan="3"
+            id="program-budget-table-mandoTotal"
           >
             MMIS M&O (Total)
           </th>
-          <th />
         </tr>
         <tr
           class="budget-table--row__highlight-gray-light"
@@ -435,44 +408,37 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
             id="program-budget-table-null4"
           />
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis75-fed"
+            id="program-budget-table-mando75-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis75-state"
+            id="program-budget-table-mando75-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis50-fed"
+            id="program-budget-table-mando50-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmis50-state"
+            id="program-budget-table-mando50-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-fed"
+            id="program-budget-table-mandoTotal-fed"
           >
             Federal
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-state"
+            id="program-budget-table-mandoTotal-state"
           >
             State
           </th>
           <th
-            class="ds-u-text-align--right"
-            id="program-budget-table-mmisTotal-total"
+            id="program-budget-table-mandoTotal-total"
           >
             Total Computable Medicaid Cost
           </th>
@@ -490,7 +456,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
           >
             <span>
               $0
@@ -498,7 +464,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
           >
             <span>
               $0
@@ -506,7 +472,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
           >
             <span>
               $0
@@ -514,7 +480,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
           >
             <span>
               $0
@@ -522,7 +488,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
           >
             <span>
               $0
@@ -530,7 +496,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
           >
             <span>
               $0
@@ -538,7 +504,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
           >
             <span>
               $0
@@ -556,7 +522,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
           >
             <span>
               $1,428,184
@@ -564,7 +530,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
           >
             <span>
               $476,061
@@ -572,7 +538,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
           >
             <span>
               $0
@@ -580,7 +546,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
           >
             <span>
               $0
@@ -588,7 +554,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
           >
             <span>
               $1,428,184
@@ -596,7 +562,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
           >
             <span>
               $476,061
@@ -604,7 +570,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
           >
             <span>
               $1,904,245
@@ -622,7 +588,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </th>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-fed"
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
           >
             <span>
               $1,428,184
@@ -630,7 +596,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis75 program-budget-table-mmis75-state"
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
           >
             <span>
               $476,061
@@ -638,7 +604,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-fed"
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
           >
             <span>
               $0
@@ -646,7 +612,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmis50 program-budget-table-mmis50-state"
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
           >
             <span>
               $0
@@ -654,7 +620,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-fed"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
           >
             <span>
               $1,428,184
@@ -662,7 +628,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number "
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
           >
             <span>
               $476,061
@@ -670,7 +636,7 @@ exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
           </td>
           <td
             class="budget-table--number budget-table--cell__hightlight-lighter"
-            headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
           >
             <span>
               $1,904,245
@@ -694,15 +660,9 @@ exports[`<MmisBudgetSummary /> renders correctly with empty budget 1`] = `
     >
       Program Budget Tables
     </h3>
-    <div>
-      <div
-        class="visibility--screen"
-      >
-        <p>
-          Program budget tables are automatically computed for this APD. This table will be referenced in the CMS approval letter.
-        </p>
-      </div>
-    </div>
+    <p>
+      The Program Budget Table(s) are not available.
+    </p>
   </div>
 </DocumentFragment>
 `;

@@ -27,13 +27,13 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
           <tr className="budget-table--row__highlight-gray-dark">
             <td className="th" id="program-budget-table-null1" />
             <th colSpan="2" id={thId('hit')}>
-              {titleCase(t('executiveSummary.budgetTable.hit'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.hit'))}
             </th>
             <th colSpan="2" id={thId('hie')}>
-              {titleCase(t('executiveSummary.budgetTable.hie'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.hie'))}
             </th>
             <th colSpan="3" id={thId('combined')}>
-              {titleCase(t('executiveSummary.budgetTable.hitHie'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.hitHie'))}
             </th>
           </tr>
           <tr className="budget-table--row__highlight-gray-light">
@@ -128,16 +128,16 @@ const HitechBudgetSummary = ({ budget, rowKeys }) => {
           <tr className="budget-table--row__highlight-gray-dark">
             <td className="th" id="program-budget-table-null3" />
             <th colSpan="2" id={thId('mmis90')}>
-              {titleCase(t('executiveSummary.budgetTable.mmis90'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.mmis90'))}
             </th>
             <th colSpan="2" id={thId('mmis75')}>
-              {titleCase(t('executiveSummary.budgetTable.mmis75'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.mmis75'))}
             </th>
             <th colSpan="2" id={thId('mmis50')}>
-              {titleCase(t('executiveSummary.budgetTable.mmis50'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.mmis50'))}
             </th>
             <th colSpan="3" id={thId('mmisTotal')}>
-              {titleCase(t('executiveSummary.budgetTable.mmisTotal'))}
+              {titleCase(t('executiveSummary.budgetTable.hitech.mmisTotal'))}
             </th>
           </tr>
           <tr className="budget-table--row__highlight-gray-light">
