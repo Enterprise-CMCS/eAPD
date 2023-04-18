@@ -7,9 +7,9 @@ const securityPlanningSchema = Joi.object({
     .required()
     .min(1)
     .messages({
-      'string.base': 'Provide Security and Interface Plan',
-      'string.empty': 'Provide Security and Interface Plan',
-      'string.required': 'Provide Security and Interface Plan'
+      'string.base': 'Provide Security and Interface Plan.',
+      'string.empty': 'Provide Security and Interface Plan.',
+      'string.required': 'Provide Security and Interface Plan.'
     }),
   businessContinuityAndDisasterRecovery: Joi.string()
     .trim()
@@ -17,9 +17,9 @@ const securityPlanningSchema = Joi.object({
     .required()
     .min(1)
     .messages({
-      'string.base': 'Provide Business Continuity and Disaster Recovery',
-      'string.empty': 'Provide Business Continuity and Disaster Recovery',
-      'string.required': 'Provide Business Continuity and Disaster Recovery'
+      'string.base': 'Provide Business Continuity and Disaster Recovery.',
+      'string.empty': 'Provide Business Continuity and Disaster Recovery.',
+      'string.required': 'Provide Business Continuity and Disaster Recovery.'
     })
 });
 
