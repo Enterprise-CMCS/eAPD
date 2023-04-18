@@ -16,7 +16,7 @@ tap.test('HITECH model test', async t => {
   t.beforeEach(async () => {
     const { _id } = await HITECH.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...hitech
     });
 

@@ -73,7 +73,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {
-      cy.contains('AK APD Home').click();
+      cy.contains('NA APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.contains(
@@ -426,6 +426,30 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.checkTinyMCE(
         'bc-dr-plan',
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
+      );
+    });
+
+    it('tests the Results of Previous Activities section', function () {
+      const mmisBasics = this.mmisBasics;
+
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToPreviousActivities();
+      cy.wait(2000);
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
 

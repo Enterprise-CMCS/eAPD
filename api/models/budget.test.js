@@ -23,7 +23,7 @@ tap.test('Budget model test', async t => {
     budgetId = budget._id.toString();
     const { _id: apdObjId } = await APD.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...apd,
       budget
     });

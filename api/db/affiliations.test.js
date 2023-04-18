@@ -25,7 +25,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
   useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
   const db = dbMock('auth_affiliations');
   const expectedUsers = [{ foo: 'foo' }, { foo: 'bar' }];
-  const stateId = 'BC';
+  const stateId = 'NA';
 
   affiliationsTests.beforeEach(async () => {
     dbMock.reset();

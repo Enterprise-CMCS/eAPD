@@ -29,13 +29,13 @@ const OKTA_USERS = {
 const AUTH_AFFILIATIONS = {
   emailMatch: {
     user_id: 'emailMatch',
-    state_id: 'ak',
+    state_id: 'na',
     status: 'approved',
     username: 'emailmatchusername'
   },
   nameMatch: {
     user_id: 'nameMatch',
-    state_id: 'ak',
+    state_id: 'na',
     status: 'approved',
     username: 'namematchusername'
   }
@@ -80,7 +80,7 @@ tap.test(
       const certifications = {
         email: 'matchme@email.com',
         name: 'Cant match me Flynn',
-        state: 'ak',
+        state: 'na',
         fileUrl: '/auth/certifications/files/whatever.pdf',
         uploadedBy: 'unitTest',
         uploadedOn: new Date(),
@@ -124,7 +124,7 @@ tap.test(
       const certifications = {
         email: 'matchme@email.com',
         name: 'Cant match me Flynn',
-        state: 'ak',
+        state: 'na',
         fileUrl: '/auth/certifications/files/whatever.pdf',
         uploadedBy: 'unitTest',
         uploadedOn: new Date(),
@@ -150,7 +150,7 @@ tap.test(
       const certifications = {
         email: 'cantmatchme@email.com',
         name: 'Match Flynn',
-        state: 'ak',
+        state: 'na',
         fileUrl: '/auth/certifications/files/whatever.pdf',
         uploadedBy: 'unitTest',
         uploadedOn: new Date(),
@@ -177,7 +177,7 @@ tap.test(
       const certifications = {
         email: 'nomatches@email.com',
         name: 'No Match Flynn',
-        state: 'ak',
+        state: 'na',
         fileUrl: '/auth/certifications/files/whatever.pdf',
         uploadedBy: 'unitTest',
         uploadedOn: new Date(),
@@ -206,7 +206,7 @@ tap.test(
         const certifications = {
           email: 'matchme@email.com',
           name: 'Match Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),
@@ -235,7 +235,7 @@ tap.test(
         const certifications = {
           email: 'matchme@email.com',
           name: 'Cant match me Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),
@@ -264,7 +264,7 @@ tap.test(
         const certifications = {
           email: 'matchme@email.com',
           name: 'Cant match me Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),
@@ -293,7 +293,7 @@ tap.test(
           id: '1001',
           email: 'matchme@email.com',
           name: 'Cant match me Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),
@@ -330,7 +330,7 @@ tap.test(
           id: '1001',
           email: 'matchme@email.com',
           name: 'Cant match me Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),
@@ -367,7 +367,7 @@ tap.test(
           id: '1001',
           email: 'matchme@email.com',
           name: 'Cant match me Flynn',
-          state: 'ak',
+          state: 'na',
           fileUrl: '/auth/certifications/files/whatever.pdf',
           uploadedBy: 'unitTest',
           uploadedOn: new Date(),

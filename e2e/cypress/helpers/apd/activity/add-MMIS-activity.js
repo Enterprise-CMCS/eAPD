@@ -62,7 +62,7 @@ export const addMMISActivity = function () {
         activityIndex: 0,
         activityId: mmisBasic.activities[0].activityId,
         activityName: mmisBasic.activities[0].name,
-        state: 'Alaska',
+        state: 'New Apdland',
         fundingSplit: `90/10 DDI (FFY ${years[0]}) and 50/50 M&O (FFY ${years[1]})`,
         totalOtherFunding: 0,
         totals:

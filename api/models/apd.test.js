@@ -15,7 +15,7 @@ tap.test('APD model test', async t => {
   t.beforeEach(async () => {
     const { _id } = await APD.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...apd
     });
 

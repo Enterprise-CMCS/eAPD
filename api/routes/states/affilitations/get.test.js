@@ -49,7 +49,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
       getPopulatedAffiliationsByStateId.rejects(err);
 
       await handler(
-        { params: { stateId: 'ar' }, query: {}, user: { state: { id: 'ar' } } },
+        { params: { stateId: 'na' }, query: {}, user: { state: { id: 'na' } } },
         res,
         next
       );
@@ -63,7 +63,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
         {
           id: 29,
           userId: '00u4oerp8sl6vtG3y297',
-          stateId: 'ar',
+          stateId: 'na',
           status: 'requested',
           createdAt: '2020-12-02T18:30:54.477Z',
           updatedAt: '2020-12-02T18:30:54.477Z',
@@ -76,7 +76,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
         {
           id: 28,
           userId: '00u5jkmqzqkGveBeO297',
-          stateId: 'ar',
+          stateId: 'na',
           status: 'requested',
           createdAt: '2020-12-02T18:30:54.477Z',
           updatedAt: '2020-12-02T18:30:54.477Z',
@@ -91,9 +91,9 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
 
       await handler(
         {
-          params: { stateId: 'ar' },
+          params: { stateId: 'na' },
           query: { status: 'pending' },
-          user: { state: { id: 'ar' } }
+          user: { state: { id: 'na' } }
         },
         res
       );
@@ -145,7 +145,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
       getPopulatedAffiliationById.rejects(err);
 
       await handler(
-        { params: { stateId: 'ar', id: '1' }, user: { state: { id: 'ar' } } },
+        { params: { stateId: 'na', id: '1' }, user: { state: { id: 'na' } } },
         res,
         next
       );
@@ -161,8 +161,8 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
 
         await handler(
           {
-            params: { stateId: 'ar', id: '100' },
-            user: { state: { id: 'ar' } }
+            params: { stateId: 'na', id: '100' },
+            user: { state: { id: 'na' } }
           },
           res,
           next
@@ -177,7 +177,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
       const affiliation = {
         id: 30,
         userId: '00u4ofhu66rpuz7BM297',
-        stateId: 'ar',
+        stateId: 'na',
         status: 'revoked',
         createdAt: '2020-12-02T18:50:56.817Z',
         updatedAt: '2020-12-02T18:50:56.817Z',
@@ -190,7 +190,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
       getPopulatedAffiliationById.returns(affiliation);
 
       await handler(
-        { params: { stateId: 'ar', id: '30' }, user: { state: { id: 'ar' } } },
+        { params: { stateId: 'na', id: '30' }, user: { state: { id: 'na' } } },
         res
       );
 
