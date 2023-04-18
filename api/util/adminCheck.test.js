@@ -2168,7 +2168,7 @@ const expectedErrorsMockHitechApdRandom = [
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Select yes or no'
+    fieldDescription: 'Select yes or no.'
   },
   {
     section: 'Assurances and Compliance',
@@ -2271,7 +2271,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Select yes or no'
+    fieldDescription: 'Select yes or no.'
   },
   {
     section: 'Assurances and Compliance',
@@ -2484,7 +2484,7 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select yes or no.'
         }
       ]);
     }
@@ -2757,7 +2757,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select yes or no.'
         }
       ]);
     }

@@ -372,7 +372,7 @@ describe('assurances and compliance component', () => {
 
       // Does not show error messages if adminCheck is false
       expect(
-        screen.queryAllByText('Select yes or no', {
+        screen.queryAllByText('Select yes or no.', {
           selector: 'span',
           ignore: 'div'
         })
@@ -545,7 +545,7 @@ describe('assurances and compliance component', () => {
         expect(cfrWithin.getByRole('radio', { name: /Yes/i })).toBeChecked();
       });
       expect(
-        cfrWithin.queryAllByText('Select yes or no', {
+        cfrWithin.queryAllByText('Select yes or no.', {
           selector: 'span',
           ignore: 'div'
         })
