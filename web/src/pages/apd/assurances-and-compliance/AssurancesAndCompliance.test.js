@@ -509,7 +509,7 @@ describe('assurances and compliance component', () => {
 
       // when admin check is on, it should display radio error on load
       expect(
-        await cfrWithin.findAllByText('Select yes or no', {
+        await cfrWithin.findAllByText('Select yes or no.', {
           selector: 'span',
           ignore: 'div'
         })
@@ -521,7 +521,7 @@ describe('assurances and compliance component', () => {
         expect(cfrWithin.getByRole('radio', { name: /Yes/i })).toBeChecked();
       });
       expect(
-        cfrWithin.queryAllByText('Select yes or no', {
+        cfrWithin.queryAllByText('Select yes or no.', {
           selector: 'span',
           ignore: 'div'
         })
@@ -533,7 +533,7 @@ describe('assurances and compliance component', () => {
         expect(cfrWithin.getByRole('radio', { name: /No/i })).toBeChecked();
       });
       expect(
-        await cfrWithin.findAllByText('Provide an explanation', {
+        await cfrWithin.findAllByText('Provide an explanation.', {
           selector: 'span',
           ignore: 'div'
         })
