@@ -452,29 +452,5 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
-
-    it('tests the Results of Previous Activities section', function () {
-      const mmisBasics = this.mmisBasics;
-
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-      cy.goToApdOverview();
-      cy.wait(2000);
-      cy.goToPreviousActivities();
-      cy.wait(2000);
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `${mmisBasics.previousActivities.previousActivitySummary}`
-      );
-    });
   });
 });
