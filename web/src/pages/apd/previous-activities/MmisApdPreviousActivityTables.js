@@ -34,7 +34,7 @@ const MmisApdPreviousActivityTables = ({
 
   useEffect(() => {
     trigger();
-  }, []);
+  }, [trigger]);
 
   const years = Object.keys(previousActivityExpenses);
 
