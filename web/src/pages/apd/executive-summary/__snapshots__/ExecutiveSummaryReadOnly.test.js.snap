@@ -338,12 +338,6 @@ exports[`executive summary component renders correctly 1`] = `
       </li>
     </ul>
   </Review>
-  <hr
-    className="subsection-rule"
-  />
-  <h3>
-    Program Budget Tables
-  </h3>
   <Connect(ExecutiveSummaryBudget) />
 </div>
 `;

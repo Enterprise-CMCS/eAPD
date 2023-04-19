@@ -38,7 +38,7 @@ const HitechApdPreviousActivityTables = ({
 
   useEffect(() => {
     trigger();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [trigger]);
 
   const years = Object.keys(previousActivityExpenses);
 
