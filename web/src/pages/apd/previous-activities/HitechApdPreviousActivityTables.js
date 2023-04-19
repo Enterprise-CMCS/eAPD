@@ -38,7 +38,7 @@ const HitechApdPreviousActivityTables = ({
 
   useEffect(() => {
     trigger();
-  }, []);
+  }, [trigger]);
 
   const years = Object.keys(previousActivityExpenses);
 
