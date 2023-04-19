@@ -19,7 +19,6 @@ import endpointCoverage from './middleware/endpointCoverage.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setup as mongoSetup, getConnectionStatus } from './db/mongodb.js';
 import knex from './db/knex.js';
-import { waitForInitialization as ldWaitForInitialization } from './middleware/launchDarkly.js'; // initialize LaunchDarkly
 import me from './routes/me/index.js';
 
 const logger = loggerFactory('main');
@@ -33,15 +32,6 @@ const logger = loggerFactory('main');
     logger.info('Mongo connected');
   } catch (err) {
     logger.error(`Error setting up MongoDB: ${err}`);
-  }
-})();
-
-(async () => {
-  try {
-    await ldWaitForInitialization();
-    logger.info('LaunchDarkly connected');
-  } catch (err) {
-    logger.error(`Error setting up LaunchDarkly: ${err}`);
   }
 })();
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import Router from 'react-router-dom';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import ApdViewOnly from './ApdReadOnly';
 
@@ -31,10 +30,6 @@ describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
-
-    // reset before each test case
-    resetLDMocks();
-    mockFlags({ enableMmis: true });
   });
 
   test('renders HITECH Read Only correctly', async () => {
@@ -55,7 +50,6 @@ describe('<ApdViewOnly/>', () => {
   });
 
   test.skip('renders MMIS Read Only correctly', async () => {
-    mockFlags({ enableMmis: true });
     setup(null, {
       initialState: {
         ...mmisApd,

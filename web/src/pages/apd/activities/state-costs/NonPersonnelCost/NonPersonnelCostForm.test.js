@@ -5,7 +5,6 @@ import {
   screen,
   waitFor
 } from 'apd-testing-library';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -167,13 +166,8 @@ describe('the NonPersonnelCostForm component', () => {
 });
 
 describe('Selection removes "Administrative operations" for in MMIS apd', () => {
-  beforeEach(() => {
-    mockFlags({ enableMmis: true });
-  });
-
   afterAll(() => {
     jest.resetAllMocks();
-    resetLDMocks();
   });
 
   it('shows "Administrative operations" on HITECH APD', async () => {

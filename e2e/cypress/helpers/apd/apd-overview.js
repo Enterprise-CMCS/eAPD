@@ -48,7 +48,6 @@ export const testDefaultAPDOverview = function () {
 export const testAPDOverviewWithData = function () {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
     cy.fixture('apd-overview-template.json').as('apdOverview');
     cy.useStateStaff();
     cy.visit(this.apdUrl);
@@ -192,7 +191,6 @@ export const testDefaultMmisAPDOverview = function () {
 
 export const testMmisAPDOverviewWithData = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: false, enableMmis: true });
     cy.fixture('apd-overview-template.json').as('apdOverview');
     cy.useStateStaff();
     cy.visit(this.apdUrl);

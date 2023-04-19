@@ -20,11 +20,11 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();
+    cy.findByRole('radio', { name: /HITECH/i }).click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
@@ -53,7 +53,6 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
     cy.wrap(years).as('years');
 
     cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
-    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit(apdUrl);
   });

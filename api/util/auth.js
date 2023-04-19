@@ -1,24 +1,42 @@
-import { getLaunchDarklyFlag } from '../middleware/launchDarkly.js';
-import { FEATURE_FLAGS } from '@cms-eapd/common';
-
+// This was previously handled in LaunchDarkly so that we could
+// manage the list of support state users without having to
+// update the code or the database. We recommend using that
+// option if you have LaunchDarkly or a feature flag service like it.
 export const isSysAdmin = async name => {
   if (name) {
-    return getLaunchDarklyFlag(
-      FEATURE_FLAGS.SUPPORT_TEAM.FLAG,
-      { kind: 'user', key: name, name },
-      FEATURE_FLAGS.SUPPORT_TEAM.DEFAULT
-    );
+    return name === 'sysadmin';
   }
-  return FEATURE_FLAGS.SUPPORT_TEAM.DEFAULT;
+  return false;
 };
 
+// This was previously handled in LaunchDarkly so that we could
+// manage the list of support state users without having to
+// update the code or the database. We recommend using that
+// option if you have LaunchDarkly or a feature flag service like it.
 export const hasSupportState = async name => {
   if (name) {
-    return getLaunchDarklyFlag(
-      FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.FLAG,
-      { kind: 'user', key: name, name },
-      FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.DEFAULT
-    );
+    // all shared test users
+    // 'em@il.com', 'fedadmin', 'stateadmin', 'statestaff', 'statecontractor',
+    // 'sysadmin', 'requestedrole', 'deniedrole', 'revokedrole', 'norole',
+    // 'expiredadmin', 'pendingadmin', 'betauser', 'notingroupmfa', 'lockedout',
+    // 'expired', 'mfa@email.com', 'lockedoutmfa', 'resetmfa', 'norolemfa', 'expiredmfa'
+    return [
+      'em@il.com',
+      'fedadmin',
+      'stateadmin',
+      'statestaff',
+      'statecontractor',
+      'sysadmin',
+      'requestedrole',
+      'deniedrole',
+      'revokedrole',
+      'norole',
+      'expiredadmin',
+      'pendingadmin',
+      'mfa@email.com',
+      'resetmfa',
+      'norolemfa'
+    ].includes(name);
   }
-  return FEATURE_FLAGS.SUPPORT_STATE_AVAILABLE.DEFAULT;
+  return false;
 };

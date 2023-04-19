@@ -19,11 +19,11 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   before(function () {
     fillOutActivityPage = new FillOutActivityPage();
 
-    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();
+    cy.findByRole('radio', { name: /HITECH/i }).click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
@@ -51,7 +51,6 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.wrap(years).as('years');
 
     cy.fixture('budget-checks-test.json').as('budgetData');
-    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit(apdUrl);
   });

@@ -8,11 +8,11 @@ describe('tests state admin portal', () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false });
     cy.useStateStaff();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();
+    cy.findByRole('radio', { name: /HITECH/i }).click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
