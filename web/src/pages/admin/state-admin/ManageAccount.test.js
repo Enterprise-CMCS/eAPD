@@ -4,7 +4,6 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../util/api';
 import userEvent from '@testing-library/user-event';
 
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import * as hooks from '../../../util/hooks';
 import { STATES } from '../../../util/states';
 
@@ -45,8 +44,6 @@ describe('<ManageAccount />', () => {
 
   beforeEach(() => {
     fetchMock.reset();
-    resetLDMocks();
-    mockFlags({ supportStateAvailable: false });
     jest.spyOn(hooks, 'useAvailableStates').mockImplementation(() => STATES);
   });
 

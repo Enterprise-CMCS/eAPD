@@ -1,5 +1,6 @@
 export { default as roundedPercents } from './roundedPercents.js';
 
+export * from './auth.js';
 export * from './budget.js';
 export * from './formatting.js';
 export * from './utils.js';

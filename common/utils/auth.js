@@ -2,7 +2,7 @@
 // manage the list of support state users without having to
 // update the code or the database. We recommend using that
 // option if you have LaunchDarkly or a feature flag service like it.
-export const isSysAdmin = async name => {
+export const isSysAdmin = name => {
   if (name) {
     return name === 'sysadmin';
   }
@@ -13,7 +13,7 @@ export const isSysAdmin = async name => {
 // manage the list of support state users without having to
 // update the code or the database. We recommend using that
 // option if you have LaunchDarkly or a feature flag service like it.
-export const hasSupportState = async name => {
+export const hasSupportState = name => {
   if (name) {
     // all shared test users
     // 'em@il.com', 'fedadmin', 'stateadmin', 'statestaff', 'statecontractor',
