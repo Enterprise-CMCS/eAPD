@@ -1,0 +1,113 @@
+name: 'Deployment'
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - <change-me-to-main>
+  pull_request:
+    branches: [<change-me-to-main>]
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency: ${{ github.head_ref || github.ref_name || github.run_id }}
+jobs:
+  terraform:
+    name: ${{matrix.runner}} - dev
+    runs-on: ['${{ matrix.runner }}']
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: dev
+            runner: ubuntu-latest
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.OIDC_IAM_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push the web image to Amazon ECR
+        id: build-web-image
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: ${{ secrets.WEB_ECR_REPOSITORY }}
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          TEALIUM_ENV: 'dev'
+          LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+          TEALIUM_TAG: ${{ secrets.TEALIUM_TAG }}
+          API_URL: ${{ secrets.API_URL }}
+
+        run: |
+          # Build a docker container and push it to ECR
+          export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA")
+          docker build --quiet -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg LD_CLIENT_ID=$LD_CLIENT_ID --build-arg TEALIUM_ENV=$TEALIUM_ENV --build-arg TEALIUM_TAG=TEALIUM_TAG --build-arg OKTA_DOMAIN=$OKTA_DOMAIN -f web/DockerfileECS .
+          echo "Pushing image to ECR..."
+          export WEB_IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $WEB_IMAGE
+          echo "::set-output name=image::${WEB_IMAGE}"
+
+      - name: Build, tag, and push the api image to Amazon ECR
+        id: build-api-image
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: ${{ secrets.API_ECR_REPOSITORY }}
+        run: |
+          # Build a docker container and push it to ECR
+          export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA")
+          docker build --quiet -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f api/DockerfileECS .
+          echo "Pushing image to ECR..."
+          export API_IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $API_IMAGE
+          echo "::set-output name=image::${API_IMAGE}"
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+      - name: Terraform Init
+        id: init
+        working-directory: terraform/greenfield/ecs
+        run: |
+          rm -rf .terraform
+          terraform init -backend-config=envs/dev/backend.tfvars -upgrade=true -no-color -input=false
+      - name: Terraform Plan
+        id: plan
+        working-directory: terraform/greenfield/ecs
+        run: |
+          terraform plan -input=false -var-file=envs/dev/inputs.tfvars -var "web_image=$WEB_IMAGE" -var "aws_account=$AWS_ACCOUNT"  -var "api_image=$API_IMAGE" -no-color
+        env:
+          AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+          WEB_IMAGE: ${{steps.build-web-image.outputs.image}}
+          API_IMAGE: ${{steps.build-api-image.outputs.image}}
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/gf-ecs'
+        id: apply
+        working-directory: terraform/greenfield/ecs
+        run: |
+          terraform apply -auto-approve -input=false -var-file=envs/dev/inputs.tfvars -var "aws_account=$AWS_ACCOUNT" -var "web_image=$WEB_IMAGE" -var "api_image=$API_IMAGE"
+        env:
+          AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+          WEB_IMAGE: ${{steps.build-web-image.outputs.image}}
+          API_IMAGE: ${{steps.build-api-image.outputs.image}}
+      - name: Terraform destroy
+        if: github.ref == 'refs/heads/destroy'
+        id: destroy
+        working-directory: terraform/greenfiel/ecs
+        run: |
+          terraform destroy -auto-approve -input=false -var-file=envs/dev/inputs.tfvars
+        env:
+          WEB_IMAGE: ${{steps.build-web-image.outputs.image}}
+          API_IMAGE: ${{steps.build-api-image.outputs.image}}
