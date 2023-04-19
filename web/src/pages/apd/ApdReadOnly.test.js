@@ -34,7 +34,7 @@ describe('<ApdViewOnly/>', () => {
 
     // reset before each test case
     resetLDMocks();
-    mockFlags({ emptyBudgetWording: false, enableMmis: true });
+    mockFlags({ enableMmis: true });
   });
 
   test('renders HITECH Read Only correctly', async () => {

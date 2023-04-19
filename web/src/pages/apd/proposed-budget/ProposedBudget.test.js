@@ -4,7 +4,6 @@ import apd from '../../../fixtures/ak-apd.json';
 import budget from '../../../fixtures/ak-budget.json';
 import mmisApd from '../../../fixtures/ak-apd-mmis.json';
 import mmisBudget from '../../../fixtures/ak-budget-mmis.json';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -30,12 +29,6 @@ const setup = (props = {}, options = {}) => {
 };
 
 describe('<ProposedBudget />', () => {
-  beforeEach(() => {
-    // reset before each test case
-    resetLDMocks();
-    mockFlags({ emptyBudgetWording: false });
-  });
-
   it('renders correctly for hitech apds', async () => {
     setup({}, hitechApd);
 
