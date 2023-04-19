@@ -33,6 +33,6 @@ build {
         environment_vars = [
             "ENVIRONMENT=${var.environment}"
         ]        
-        script = "./backend20220608.sh"
+        script = "./backend20230405.sh"
     }
 }

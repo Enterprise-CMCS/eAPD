@@ -1,6 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { format, isExists, parse } from 'date-fns';
 import { isNumeric } from '../util/formats';
 
 const dateParts = value => {
@@ -16,13 +17,14 @@ const dateParts = value => {
 };
 
 const formatDate = ({ day = '', month = '', year = '' } = {}) => {
-  if (day === '' && month === '' && year === '') {
-    return '';
+  const dateString = year + '-' + month + '-' + day;
+  const dateFormat = 'yyyy-mm-dd';
+
+  if (isExists(+year, +month - 1, +day)) {
+    return format(parse(dateString, dateFormat, new Date()), dateFormat);
   }
-  // Make sure it's an ISO-8601 date, which uses 2-digit month and day
-  return `${year}-${month < 10 ? `0${month}` : month}-${
-    day < 10 ? `0${day}` : day
-  }`;
+
+  return '';
 };
 
 const DateField = ({

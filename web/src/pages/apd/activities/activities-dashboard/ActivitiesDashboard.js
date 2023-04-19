@@ -28,7 +28,7 @@ const All = ({ addActivity, activities, adminCheck, apdType }) => {
     } else {
       setValidation();
     }
-  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck, activities]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>

@@ -89,15 +89,15 @@ describe(
     });
 
     it('allows filtering by state', function () {
-      cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
+      cy.get('#state-admin-letters td:contains(NA)').should('be.visible');
       cy.get('#state-admin-letters td:contains(TN)').should('be.visible');
 
-      getInputByLabel('State').select('AK');
-      cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
+      getInputByLabel('State').select('NA');
+      cy.get('#state-admin-letters td:contains(NA)').should('be.visible');
       cy.get('#state-admin-letters td:contains(TN)').should('have.length', 0);
 
       getInputByLabel('State').select('All');
-      cy.get('#state-admin-letters td:contains(AK)').should('be.visible');
+      cy.get('#state-admin-letters td:contains(NA)').should('be.visible');
       cy.get('#state-admin-letters td:contains(TN)').should('be.visible');
     });
 
@@ -110,6 +110,8 @@ describe(
     });
 
     it('allows matching to users/affiliations', function () {
+      cy.updateFeatureFlags({ supportStateAvailable: true });
+
       cy.contains('Match To User').click();
 
       cy.contains('Cancel').click();

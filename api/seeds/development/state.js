@@ -1,13 +1,13 @@
 const seed = async knex => {
   await knex
     .table('states')
-    .where({ id: 'ak' })
+    .where({ id: 'na' })
     .update({
       medicaid_office: JSON.stringify({
         address1: '100 Round Sq',
         city: 'Cityville',
         zip: '12345',
-        state: 'Alaska',
+        state: 'New Apdland',
         director: {
           name: 'Cornelius Fudge',
           email: 'c.fudge@ministry.magic',

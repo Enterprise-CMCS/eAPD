@@ -6,22 +6,22 @@ import mmisNoActivities from './04-mmisNoActivities.js';
 export const data = [
   {
     ...hitech,
-    stateId: 'ak',
+    stateId: 'na',
     status: 'draft'
   },
   {
     ...hitechNoActivities,
-    stateId: 'ak',
+    stateId: 'na',
     status: 'draft'
   },
   {
     ...mmis,
-    stateId: 'ak',
+    stateId: 'na',
     status: 'draft'
   },
   {
     ...mmisNoActivities,
-    stateId: 'ak',
+    stateId: 'na',
     status: 'draft'
   }
 ];

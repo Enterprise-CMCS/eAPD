@@ -19,7 +19,7 @@ tap.test('Budget model test', async t => {
     budgetId = budget._id.toString();
     const { _id: apdObjId } = await HITECH.create({
       status: 'draft',
-      stateId: 'md',
+      stateId: 'na',
       ...hitech,
       budget
     });

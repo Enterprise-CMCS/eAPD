@@ -136,7 +136,7 @@ tap.test('Local jwtUtils', async t => {
     complexObject: {
       foo: 'bar',
       state: {
-        id: 'ak'
+        id: 'na'
       }
     }
   };
@@ -162,7 +162,7 @@ tap.test('Local jwtUtils', async t => {
 
     t.equal(
       actualPayload.complexObject.state.id,
-      'ak',
+      'na',
       'A complex object is stored correctly in the token'
     );
     t.equal(

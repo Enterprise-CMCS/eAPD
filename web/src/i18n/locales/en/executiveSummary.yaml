@@ -15,17 +15,22 @@ activitiesSummary:
       Each activity is listed with its total cost and cost per FFY.
 budgetTable:
   title: Program Budget Tables
-  instruction:
-    detail: >-
-      Program budget tables are automatically computed for this APD. This table
-      will be referenced in the CMS approval letter.
-  hit: HIT (90/10)
-  hie: HIE (90/10)
-  hitHie: HIT + HIE (90/10)
-  mmis90: MMIS (90/10)
-  mmis75: MMIS (75/25)
-  mmis50: MMIS (50/50)
-  mmisTotal: MMIS (Total)
   fedShare: Federal
   stateShare: State
   grandTotal: Total Computable Medicaid Cost
+  hitech:
+    hit: HIT (90/10)
+    hie: HIE (90/10)
+    hitHie: HIT + HIE (90/10)
+    mmis90: MMIS (90/10)
+    mmis75: MMIS (75/25)
+    mmis50: MMIS (50/50)
+    mmisTotal: MMIS (Total)
+  mmis:
+    ddi90: MMIS DDI (90/10)
+    ddi75: MMIS DDI (75/25)
+    ddi50: MMIS DDI (50/50)
+    ddiTotal: MMIS DDI (Total)
+    mando75: MMIS M&O (75/25)
+    mando50: MMIS M&O (50/50)
+    mandoTotal: MMIS M&O (Total)

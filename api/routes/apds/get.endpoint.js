@@ -8,7 +8,7 @@ import {
   unauthenticatedTest,
   unauthorizedTest
 } from '../../endpoint-tests/utils.js';
-import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
+import { mdAPDId, naAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
   const db = getDB();
@@ -37,12 +37,12 @@ describe('APD endpoint', () => {
   describe('Get specific APD | GET /apds/:id', () => {
     const url = id => `/apds/${id}`;
 
-    unauthenticatedTest('get', url(mnAPDId));
-    unauthorizedTest('get', url(mnAPDId));
+    unauthenticatedTest('get', url(mdAPDId));
+    unauthorizedTest('get', url(mdAPDId));
 
     describe('when authenticated', () => {
       it('as a user without a state', async () => {
-        const response = await apiNoPermissionsNoState.get(url(mnAPDId));
+        const response = await apiNoPermissionsNoState.get(url(mdAPDId));
         expect(response.status).toEqual(401);
       });
 
@@ -53,12 +53,12 @@ describe('APD endpoint', () => {
         });
 
         it('when requesting an APD that belongs to another state', async () => {
-          const response = await api.get(url(mnAPDId));
+          const response = await api.get(url(mdAPDId));
           expect(response.status).toEqual(404);
         });
 
         it('when requesting an APD that belongs to their state', async () => {
-          const response = await api.get(url(akAPDId));
+          const response = await api.get(url(naAPDId));
           expect(response.status).toEqual(200);
         });
       });

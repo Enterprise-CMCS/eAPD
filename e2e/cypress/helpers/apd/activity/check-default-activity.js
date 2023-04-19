@@ -213,7 +213,7 @@ export const checkDefaultActivity = function () {
           totalTotalMedicaidCost,
           fundingSplit: `90/10 (FFY ${years[0]} and FFY ${years[1]})`,
           totalFederalShare,
-          state: 'Alaska',
+          state: 'New Apdland',
           totalStateShare
         });
 
@@ -241,10 +241,10 @@ export const checkDefaultActivity = function () {
                   ...overviewData
                 });
 
+                exportPage.checkMilestones({});
+
                 // Check Outcomes and Metrics
                 exportPage.checkOutcomes({});
-
-                exportPage.checkMilestones({});
 
                 // Check State Staff and Expenses
                 exportPage.checkStateStaff({});

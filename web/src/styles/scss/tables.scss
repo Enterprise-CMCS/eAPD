@@ -150,6 +150,13 @@ td {
       }
     }
   }
+
+  .budget-table__alternate-striping:nth-child(even) {
+    th,
+    td {
+      background-color: #f1f1f1;
+    }
+  }
 }
 
 .budget-table.activity-budget-table {
@@ -162,6 +169,18 @@ td {
       width: 100%;
       white-space: normal;
     }
+  }
+}
+
+.budget-table.executive-summary-budget-table {
+  th {
+    @extend .ds-u-text-align--center;
+  }
+  &.ddi-table {
+    max-width: 1000px;
+  }
+  &.mando-table {
+    max-width: 850px;
   }
 }
 

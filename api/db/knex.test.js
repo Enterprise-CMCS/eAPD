@@ -6,10 +6,10 @@ tap.test('database wrappers / oktaUsers', async dbTest => {
   dbTest.skip('db select alaska from the database', async t => {
     const dbResponse = await knex('states')
       .select('*')
-      .where({ id: 'ak' })
+      .where({ id: 'na' })
       .first();
 
-    t.same(dbResponse.id, 'ak');
+    t.same(dbResponse.id, 'na');
   });
 
   dbTest.teardown(async () => {

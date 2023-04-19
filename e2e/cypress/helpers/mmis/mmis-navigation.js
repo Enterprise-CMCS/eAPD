@@ -51,9 +51,11 @@ export const testMmisNavigation = function () {
       title: 'Executive Summary',
       subnav: [
         'Executive Summary',
-        'Activities Summary' /* 'Program Budget Tables' */
+        'APD Overview Summary',
+        'Activities Summary',
+        'Program Budget Tables'
       ],
-      type: ['h2', 'h3', 'h3']
+      type: ['h2', 'h3', 'h3', 'h3']
     },
     {
       title: 'Export and Submit',

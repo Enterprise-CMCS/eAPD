@@ -1,7 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { APD_TYPE } from '@cms-eapd/common';
+import {
+  APD_TYPE,
+  exampleMMISBudget as sampleBudgetMMIS
+} from '@cms-eapd/common';
 
 import {
   plain as BudgetSummary,
@@ -43,14 +46,34 @@ describe('budget summary component', () => {
         activities={{
           mmis: ['mmis data']
         }}
-        data={{
-          mmis: {},
-          combined: {
-            1: { federal: 1, state: 2, medicaid: 1000, total: 3 },
-            2: { federal: 10, state: 20, medicaid: 2000, total: 30 }
-          }
+        data={sampleBudgetMMIS}
+        years={['2023', '2024']}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders read-only correctly for mmis apds', () => {
+    const component = shallow(
+      <BudgetSummary
+        apdType={APD_TYPE.MMIS}
+        activities={{
+          mmis: ['mmis data']
         }}
-        years={['1', '2']}
+        data={sampleBudgetMMIS}
+        years={['2023', '2024']}
+        isViewOnly
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders DataRowGroup correctly for mmis apds', () => {
+    const component = shallow(
+      <DataRowGroup
+        apdType={APD_TYPE.MMIS}
+        data={sampleBudgetMMIS.ddi['90-10']}
+        year={'2023'}
       />
     );
     expect(component).toMatchSnapshot();

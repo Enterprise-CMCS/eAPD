@@ -32,7 +32,7 @@ describe(
       cy.findByRole('button', { name: /Log in/i }).click();
       cy.findByRole('button', { name: /Logging in/i }).should('exist');
 
-      cy.findByRole('heading', { name: /Alaska APDs/i }).should('exist');
+      cy.findByRole('heading', { name: /New Apdland APDs/i }).should('exist');
     });
   }
 );

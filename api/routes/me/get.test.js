@@ -8,7 +8,7 @@ let app;
 let res;
 let next;
 const req = { jwt: 'aaaa.bbbb.cccc' };
-const user = { uid: 1234, state: { id: 'ak' } };
+const user = { uid: 1234, state: { id: 'na' } };
 const claims = { id: 123, claims: 'this is a claim' };
 
 tap.test('me GET endpoint', async endpointTest => {

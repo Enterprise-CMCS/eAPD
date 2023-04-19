@@ -102,7 +102,7 @@ class ActivityPage {
     cy.contains(name).should('exist');
 
     years.forEach(year => {
-      cy.contains(`FFY ${year}`)
+      cy.contains(`FFY ${year} Cost:`)
         .parent()
         .within(() => {
           cy.contains(`Cost: $${addCommas(cost)}`).should('exist');

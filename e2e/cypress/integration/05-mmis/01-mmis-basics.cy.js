@@ -73,7 +73,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {
-      cy.contains('AK APD Home').click();
+      cy.contains('NA APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.contains(
@@ -188,13 +188,15 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     testMmisAdminCheck();
   });
 
+  describe('Default MMIS APD - Admin Check', function () {
+    testMmisAdminCheck();
+  });
+
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
       testApdName();
 
-      it('tests APD Update section and FFYs', () => {
-        const allYears = [];
-
+      it('tests APD Update section', () => {
         cy.goToApdOverview();
 
         // Check all of the years
@@ -370,34 +372,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
 
-      // Previous Activities
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('MMIS DDI at 90% FFP');
-      cy.findAllByText('MMIS DDI at 75% FFP');
-      cy.findAllByText('MMIS M&O at 75% FFP');
-      cy.findAllByText('MMIS DDI at 50% FFP');
-      cy.findAllByText('MMIS M&O at 50% FFP');
-      cy.findAllByText('MMIS Grand Totals');
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-
       // Activity Tests
       cy.goToActivityDashboard();
 
@@ -488,6 +462,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
 
       // Security Planning
+      cy.goToSecurityPlanning();
       cy.checkTinyMCE('security-interface-plan', '');
 
       cy.setTinyMceContent(

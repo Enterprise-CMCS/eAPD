@@ -46,9 +46,9 @@ export { default as contractorResourcesSchema } from './contractorResources.js';
 export {
   costAllocationSplitSchema,
   costAllocationMatchRateSchema,
-  costAllocationOtherSchema,
   hitechCostAllocationSchema,
-  mmisCostAllocationSchema
+  mmisCostAllocationSchema,
+  otherFundingSchema
 } from './costAllocation.js';
 export {
   default as costAllocationNarrativeSchema,
@@ -75,3 +75,10 @@ export {
 export { hitechCombinedSchema, mmisCombinedSchema } from './combined.js';
 
 export { default as newApdSchema } from './apdNew.js';
+
+export {
+  dollarFieldReqAndMsg,
+  previousActivityObject,
+  previousHitechActivitySchema,
+  previousMmisActivitySchema
+} from './dollarFieldSchema.js';

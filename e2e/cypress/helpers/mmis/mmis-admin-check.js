@@ -17,7 +17,7 @@ export const testMmisAdminCheck = function () {
       .within(() => {
         cy.findByLabelText('Month').clear();
         cy.findByLabelText('Day').clear();
-        cy.findByLabelText('Year').clear();
+        cy.findByLabelText('Year').clear().blur();
       });
   };
 
@@ -44,7 +44,7 @@ export const testMmisAdminCheck = function () {
       hyperlink: 'Activity 1 Activity Schedule',
       header: ['Activity Schedule', 3],
       fieldType: ['dateField'],
-      errorMessage: ['Provide a start date.', 3]
+      errorMessage: ['Provide a valid start date.', 3]
     },
     {
       hyperlink: 'Activity 1 Conditions for Enhanced Funding',
@@ -94,7 +94,7 @@ export const testMmisAdminCheck = function () {
     'tests the Admin check for mmis pages',
     { tags: ['@state', '@admin'] },
     function () {
-      cy.turnOnAdminCheck();
+      cy.turnOnAdminCheck(); // On each page verify the correct number of validation errors show
 
       cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
 
@@ -111,7 +111,7 @@ export const testMmisAdminCheck = function () {
 
       cy.turnOnAdminCheck();
 
-      cy.get('[data-cy="numRequired"]').should('have.text', '33');
+      cy.get('[data-cy="numRequired"]').should('have.text', '30');
 
       cy.collapseAdminCheck();
 
@@ -139,10 +139,10 @@ export const testMmisAdminCheck = function () {
       );
 
       cy.collapseAdminCheck();
-      cy.get('[data-cy="numRequired"]').should('have.text', '33');
+      cy.get('[data-cy="numRequired"]').should('have.text', '30');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
-      cy.get('[data-cy="numRequired"]').should('have.text', '34');
+      cy.get('[data-cy="numRequired"]').should('have.text', '31');
 
       cy.findByRole('checkbox', { name: /Claims Processing/i }).click();
       cy.expandAdminCheck();

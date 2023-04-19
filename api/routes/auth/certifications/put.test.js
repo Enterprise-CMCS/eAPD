@@ -64,7 +64,7 @@ tap.test('state certifications post endpoint', async putTest => {
               certificationId: '123',
               certificationFfy: '2022',
               affiliationId: '213',
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res,
@@ -88,7 +88,7 @@ tap.test('state certifications post endpoint', async putTest => {
               certificationId: '123',
               certificationFfy: '2022',
               affiliationId: '213',
-              stateId: 'ak'
+              stateId: 'na'
             }
           },
           res,

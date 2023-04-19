@@ -22,17 +22,17 @@ describe('US States endpoint', () => {
     it('returns 200', async () => {
       const response = await api.get('/states');
       expect(response.status).toEqual(200);
-      expect(response.data.length).toEqual(57);
+      expect(response.data.length).toEqual(58);
       const keys = Object.keys(response.data[0]);
       expect(keys).toEqual(['id', 'name']);
     });
   });
 
   describe('GET /states/:id', () => {
-    unauthenticatedTest('get', '/states/ak');
+    unauthenticatedTest('get', '/states/na');
 
     it('returns 200', async () => {
-      const response = await apiAsStateAdmin.get('/states/ak');
+      const response = await apiAsStateAdmin.get('/states/na');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);
       expect(keys).toEqual(['id', 'name', 'medicaid_office', 'stateAdmins']);
