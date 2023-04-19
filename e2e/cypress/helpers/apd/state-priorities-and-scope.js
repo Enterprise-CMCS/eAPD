@@ -36,7 +36,7 @@ export const testStatePrioritiesAndScopeWithData = function () {
     cy.findByText('Provide a Medicaid Enterprise System Introduction.').should(
       'exist'
     );
-    cy.findByText("Provide an Overview of the APD's Scope").should('exist');
+    cy.findByText("Provide an Overview of the APD's Scope.").should('exist');
 
     cy.setTinyMceContent(
       'medicaid-program-priorities-field',
@@ -53,7 +53,9 @@ export const testStatePrioritiesAndScopeWithData = function () {
       'not.exist'
     );
     cy.setTinyMceContent('scope-of-apd', prioritiesAndScope.scopeOfApd);
-    cy.findByText("Provide an Overview of the APD's Scope").should('not.exist');
+    cy.findByText("Provide an Overview of the APD's Scope.").should(
+      'not.exist'
+    );
 
     cy.waitForSave();
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
