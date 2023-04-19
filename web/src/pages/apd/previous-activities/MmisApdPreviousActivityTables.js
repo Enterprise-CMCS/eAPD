@@ -38,16 +38,12 @@ const MmisApdPreviousActivityTables = ({
 
   const years = Object.keys(previousActivityExpenses);
 
-  const getActualsHandler = (year, ffp, fundingType) => {
-    return ({ target: { value } }) => {
-      setActual(year, value, ffp, fundingType);
-    };
+  const getActualsHandler = (year, value, ffp, fundingType) => {
+    return setActual(year, value, ffp, fundingType);
   };
 
-  const getApprovedHandler = (year, ffp, fundingType) => {
-    return ({ target: { value } }) => {
-      setApproved(year, value, ffp, fundingType);
-    };
+  const getApprovedHandler = (year, value, ffp, fundingType) => {
+    return setApproved(year, value, ffp, fundingType);
   };
 
   const tables = [
@@ -81,7 +77,10 @@ const MmisApdPreviousActivityTables = ({
   return (
     <Fragment>
       {tables.map(level => (
-        <table key={level} className="budget-table">
+        <table
+          key={`${level.fundingTypeHeader}-${level.ffp}`}
+          className="budget-table"
+        >
           {level.fundingTypeHeader === 'DDI' && (
             <caption className="ds-h4">
               MMIS {TABLE_HEADERS.federal(level.ffp)}
@@ -169,6 +168,7 @@ const MmisApdPreviousActivityTables = ({
                           return (
                             <DollarField
                               {...props}
+                              name={name}
                               data-testid={name}
                               className="budget-table--input-holder"
                               fieldClassName="budget-table--input__number"
@@ -178,17 +178,17 @@ const MmisApdPreviousActivityTables = ({
                                 100 - level.ffp
                               } level for FFY ${year}, state plus federal`}
                               labelClassName="ds-u-visibility--screen-reader"
-                              // name={`approved-total-${level.fundingTypeSchema}${level.ffp}-${year}`}
                               value={expenses.totalApproved}
                               onChange={e => {
-                                setValue(name, e.target.value, {
-                                  shouldValidate: true
-                                });
                                 getApprovedHandler(
                                   year,
+                                  e.target.value,
                                   level.ffp,
                                   level.fundingTypeSchema
                                 );
+                                setValue(name, e.target.value, {
+                                  shouldValidate: true
+                                });
                               }}
                               errorMessage={errTotalApproved}
                               errorPlacement="bottom"
@@ -204,7 +204,9 @@ const MmisApdPreviousActivityTables = ({
                     className="budget-table--number"
                     data-cy={`prev_act_mmis${level.ffp}_federal_approved_${level.fundingTypeSchema}_${year}`}
                   >
-                    <Dollars>{federalApproved}</Dollars>
+                    <Dollars>
+                      {(expenses.totalApproved * level.ffp) / 100}
+                    </Dollars>
                   </td>
 
                   <td
@@ -236,6 +238,7 @@ const MmisApdPreviousActivityTables = ({
                                 });
                                 getActualsHandler(
                                   year,
+                                  e.target.value,
                                   level.ffp,
                                   level.fundingTypeSchema
                                 );
