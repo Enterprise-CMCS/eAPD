@@ -1,9 +1,7 @@
-import React from 'react';
 import {
   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING,
   UPDATE_STATUS_LABEL_MAPPING
 } from '@cms-eapd/common';
-import Dollars from '../components/Dollars';
 
 export const updateStatusChoices = updateStatus => {
   let list = [];
