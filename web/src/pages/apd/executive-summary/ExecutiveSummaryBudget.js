@@ -23,7 +23,7 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
     ];
 
     // Returns the correct budget summary component based on APD type
-    function renderBudgetSummary() {
+    const renderBudgetSummary = () => {
       switch (apdType) {
         case APD_TYPE.HITECH:
           return (
@@ -46,7 +46,7 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
         default:
           null;
       }
-    }
+    };
 
     return renderBudgetSummary();
   } else return null;

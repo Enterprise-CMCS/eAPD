@@ -31,7 +31,7 @@ const ActivityExecutiveSummary = ({ apdId, data, years, enableEdit }) => {
             years.map((year, rowNum) => (
               // no acitivities are present, so display 0 for all amounts
               <FFYRow
-                key={`${rowNum}-${year}`}
+                key={year}
                 year={year}
                 total={0}
                 medicaid={0}
