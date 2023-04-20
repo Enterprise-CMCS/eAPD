@@ -102,8 +102,8 @@ describe(
     });
 
     it('allows search filtering', function () {
-      getInputByLabel('Search').type('State Admin');
-      cy.get('#state-admin-letters td:contains(State Admin)').should(
+      getInputByLabel('Search').type('Pending Admin');
+      cy.get('#state-admin-letters td:contains(Pending Admin)').should(
         'have.length',
         2
       );
@@ -124,7 +124,7 @@ describe(
 
       cy.get('#dialog-content').find('li').contains('State Staff');
 
-      getInputByLabel('Select User').select('State Admin', { force: true });
+      getInputByLabel('Select User').select('Pending Admin', { force: true });
 
       cy.contains('Match and Approve Access').click();
 

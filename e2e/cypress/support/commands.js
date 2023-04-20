@@ -128,39 +128,35 @@ Cypress.Commands.add('useJwtUser', (username, url = '/') => {
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
-  cy.useJwtUser('sysadmin', url);
-});
-
-Cypress.Commands.add('useRegularUser', url => {
-  cy.useJwtUser('em@il.com', url);
+  cy.useJwtUser(Cypress.env('sysadmin'), url);
 });
 
 Cypress.Commands.add('useFedAdmin', url => {
-  cy.useJwtUser('fedadmin', url);
+  cy.useJwtUser(Cypress.env('fedadmin'), url);
 });
 
 Cypress.Commands.add('useStateAdmin', url => {
-  cy.useJwtUser('stateadmin', url);
+  cy.useJwtUser(Cypress.env('stateadmin'), url);
 });
 
 Cypress.Commands.add('useStateStaff', url => {
-  cy.useJwtUser('statestaff', url);
+  cy.useJwtUser(Cypress.env('statestaff'), url);
 });
 
 Cypress.Commands.add('useStateContractor', url => {
-  cy.useJwtUser('statecontractor', url);
+  cy.useJwtUser(Cypress.env('statecontractor'), url);
 });
 
 Cypress.Commands.add('useRequestedRole', url => {
-  cy.useJwtUser('requestedrole', url);
+  cy.useJwtUser(Cypress.env('requestedrole'), url);
 });
 
 Cypress.Commands.add('useDeniedRole', url => {
-  cy.useJwtUser('deniedrole', url);
+  cy.useJwtUser(Cypress.env('deniedrole'), url);
 });
 
 Cypress.Commands.add('useJWTrevokedrole', () => {
-  cy.useJwtUser('revokedrole');
+  cy.useJwtUser(Cypress.env('revokedrole'));
 });
 
 // TinyMCE

@@ -13,12 +13,12 @@ services:
   mongo:
     image: mongo:5.0.9
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin-user
-      - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - MONGO_INITDB_DATABASE=admin
-      - MONGO_DATABASE_USERNAME=mongo-test
-      - MONGO_DATABASE_PASSWORD=cms-test
       - MONGO_DATABASE=eapd-test
+      - MONGO_DATABASE_PASSWORD=cms-test
+      - MONGO_DATABASE_USERNAME=mongo-test
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin-password
+      - MONGO_INITDB_ROOT_USERNAME=admin-user
     volumes:
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     command: [--auth]
@@ -35,23 +35,24 @@ services:
       - db
       - mongo
     environment:
-      - PORT=8000
+      - API_HOST=api-for-testing
+      - API_PORT=8000
+      - ENDPOINT_COVERAGE_CAPTURE=true
+      - FILE_PATH=test-data/files
+      - FILE_STORE=local
+      - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/admin
+      - MONGO_AUTH_SOURCE=admin
+      - MONGO_DATABASE=eapd-test
+      - MONGO_URL=mongodb://mongo-test:cms-test@mongo:27017/eapd-test?authSource=admin
       - NODE_ENV=test
-      - OKTA_DOMAIN=${OKTA_DOMAIN}
-      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
-      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
-      - OKTA_API_KEY=${OKTA_API_KEY}
+      - PORT=8000
       - JWT_SECRET=${JWT_SECRET}
       - LD_API_KEY=${LD_API_KEY}
-      - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/admin
-      - MONGO_URL=mongodb://mongo-test:cms-test@mongo:27017/eapd-test?authSource=admin
-      - MONGO_DATABASE=eapd-test
-      - MONGO_AUTH_SOURCE=admin
-      - ENDPOINT_COVERAGE_CAPTURE=true
-      - FILE_STORE=local
-      - FILE_PATH=test-data/files
-      - API_PORT=8000
-      - API_HOST=api-for-testing
+      - OKTA_API_KEY=${OKTA_API_KEY}
+      - OKTA_AUDIENCE=${OKTA_AUDIENCE}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
     command: yarn start
     expose:
       - 8000
