@@ -107,7 +107,7 @@ export const testHitechAssurancesAndComplianceWithData = function () {
       });
     });
 
-    cy.contains('Select yes or no').should('not.exist');
+    cy.contains('Select yes or no.').should('not.exist');
 
     cy.waitForSave();
   });
@@ -246,7 +246,7 @@ export const testMmisAssurancesAndComplianceWithData = function () {
       }
     });
 
-    cy.contains('Select yes or no').should('not.exist');
+    cy.contains('Select yes or no.').should('not.exist');
 
     cy.waitForSave();
   });

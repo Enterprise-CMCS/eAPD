@@ -169,7 +169,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .should('eq', 4);
 
       cy.goToAssurancesAndCompliance();
-      cy.findAllByText('Select yes or no');
+      cy.findAllByText('Select yes or no.');
     });
   });
 

@@ -268,7 +268,7 @@ describe('the cost allocation quarterly FFP component', () => {
         name: 'Error message for Estimated Quarterly Expenditure table'
       })
     ).toHaveTextContent(
-      'State Staff and Expenses (In-House Costs) quarterly percentages must total 100% Private Contractor Costs quarterly percentages must total 100%'
+      'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%. Private Contractor Costs quarterly percentages must total 100%.'
     );
   });
 

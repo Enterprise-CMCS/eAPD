@@ -37,7 +37,7 @@ export const hitechCombinedSchema = Joi.object({
   createdAt: Joi.any(),
   updatedAt: Joi.any(),
   apdType: Joi.any().valid('HITECH').required().messages({
-    'any.only': 'APD Type must be HITECH'
+    'any.only': 'APD Type must be HITECH.'
   }),
   status: Joi.any(),
   stateId: Joi.any(),
@@ -97,7 +97,7 @@ export const mmisCombinedSchema = Joi.object({
   createdAt: Joi.any(),
   updatedAt: Joi.any(),
   apdType: Joi.any().valid('MMIS').required().messages({
-    'any.only': 'APD Type must be MMIS'
+    'any.only': 'APD Type must be MMIS.'
   }),
   status: Joi.any(),
   stateId: Joi.any(),
