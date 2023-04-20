@@ -22,7 +22,6 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-jest',
     '@storybook/addon-links',
-    'storybook-addon-launchdarkly',
     'storybook-addon-designs'
   ],
   staticDirs: [{ from: '../src/static', to: '/static' }],
