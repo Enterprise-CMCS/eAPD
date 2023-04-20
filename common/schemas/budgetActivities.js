@@ -35,18 +35,18 @@ export const quarterFFPSchema = Joi.object({
       dollars: Joi.any(),
       percent: Joi.number().precision(3).valid(1).messages({
         'any.default':
-          'Private Contractor Costs quarterly percentages must total 100%',
+          'Private Contractor Costs quarterly percentages must total 100%.',
         'any.only':
-          'Private Contractor Costs quarterly percentages must total 100%'
+          'Private Contractor Costs quarterly percentages must total 100%.'
       })
     }),
     inHouse: Joi.object({
       dollars: Joi.any(),
       percent: Joi.number().precision(3).valid(1).messages({
         'any.default':
-          'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%',
+          'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%.',
         'any.only':
-          'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%'
+          'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%.'
       })
     })
   })

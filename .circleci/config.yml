@@ -452,7 +452,7 @@ jobs:
               --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
-              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_okta_audience=$PREVIEW_OKTA_AUDIENCE --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
   
   packer validation tests:
@@ -484,7 +484,7 @@ jobs:
               --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
-              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_okta_audience=$PREVIEW_OKTA_AUDIENCE --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
       - run:
           name: Validate Mongo AMI
@@ -498,6 +498,7 @@ jobs:
               --var mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var mongo_url=$PREVIEW_MONGO_URL --var database_url=$PREVIEW_DATABASE_URL \
               --var okta_domain=$PREVIEW_MONGO_OKTA_DOMAIN --var okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview --var ami_name=$AMI_NAME \
+              --var okta_audience=$PREVIEW_OKTA_AUDIENCE \
               mongo-ami.pkr.hcl
 
       - run:
@@ -763,6 +764,7 @@ jobs:
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_AUDIENCE="$PREVIEW_OKTA_AUDIENCE"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
@@ -1175,6 +1177,7 @@ jobs:
           command: |
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_AUDIENCE="$PREVIEW_OKTA_AUDIENCE"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
@@ -1259,6 +1262,7 @@ jobs:
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
+              --OKTA_AUDIENCE "${<< parameters.env >>_OKTA_AUDIENCE}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
@@ -1394,6 +1398,7 @@ jobs:
                 --OKTA_SERVER_ID "$PREVIEW_OKTA_SERVER_ID" \
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
+                --OKTA_AUDIENCE "$PREVIEW_OKTA_AUDIENCE" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET" \
                 --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
                 --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
