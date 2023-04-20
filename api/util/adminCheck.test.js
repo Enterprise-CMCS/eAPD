@@ -2111,7 +2111,7 @@ const expectedErrorsMockHitechApdRandom = [
   {
     section: 'Activity 1 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
-    fieldDescription: 'Metric is required'
+    fieldDescription: 'Metric is required.'
   },
   {
     section: 'Activity 1 State Staff and Expenses',
@@ -2131,7 +2131,7 @@ const expectedErrorsMockHitechApdRandom = [
   {
     section: 'Activity 2 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/oms',
-    fieldDescription: 'Metric is required'
+    fieldDescription: 'Metric is required.'
   },
   {
     section: 'Activity 2 State Staff and Expenses',
@@ -2168,12 +2168,12 @@ const expectedErrorsMockHitechApdRandom = [
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Select yes or no'
+    fieldDescription: 'Select yes or no.'
   },
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Provide an explanation'
+    fieldDescription: 'Provide an explanation.'
   }
 ];
 
@@ -2206,22 +2206,22 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'State Priorities and Scope',
     link: '/apd/632a0fbc5665670a34b3bbd7/state-priorities-and-scope',
-    fieldDescription: 'Provide Medicaid Program and Priorities'
+    fieldDescription: 'Provide Medicaid Program and Priorities.'
   },
   {
     section: 'Activity 1 Activity Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-    fieldDescription: 'Provide an Activity snapshot'
+    fieldDescription: 'Provide an Activity snapshot.'
   },
   {
     section: 'Activity 1 Conditions for Enhanced Funding',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/enhanced-funding',
-    fieldDescription: 'Provide an Enhanced Funding Justification'
+    fieldDescription: 'Provide an Enhanced Funding Justification.'
   },
   {
     section: 'Activity 1 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
-    fieldDescription: 'Metric is required'
+    fieldDescription: 'Metric is required.'
   },
   {
     section: 'Activity 1 State Staff and Expenses',
@@ -2241,7 +2241,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'Activity 2 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/oms',
-    fieldDescription: 'Metric is required'
+    fieldDescription: 'Metric is required.'
   },
   {
     section: 'Activity 2 State Staff and Expenses',
@@ -2266,17 +2266,17 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'Security Planning',
     link: '/apd/632a0fbc5665670a34b3bbd7/security-planning',
-    fieldDescription: 'Provide Security and Interface Plan'
+    fieldDescription: 'Provide Security and Interface Plan.'
   },
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Select yes or no'
+    fieldDescription: 'Select yes or no.'
   },
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Provide an explanation'
+    fieldDescription: 'Provide an explanation.'
   }
 ];
 
@@ -2385,12 +2385,12 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Funding sources are required'
+          fieldDescription: 'Funding sources are required.'
         },
         {
           section: 'Activity 1 Activity Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-          fieldDescription: 'Select a Program Type'
+          fieldDescription: 'Select a Program Type.'
         },
         {
           section: 'Activity 1 State Staff and Expenses',
@@ -2474,17 +2474,17 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Provide an explanation'
+          fieldDescription: 'Provide an explanation.'
         },
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Provide an explanation'
+          fieldDescription: 'Provide an explanation.'
         },
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select yes or no.'
         }
       ]);
     }
@@ -2649,7 +2649,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'State Priorities and Scope',
           link: '/apd/632a0fbc5665670a34b3bbd7/state-priorities-and-scope',
-          fieldDescription: 'Provide a Medicaid Enterprise System Introduction'
+          fieldDescription: 'Provide a Medicaid Enterprise System Introduction.'
         }
       ]);
     }
@@ -2672,17 +2672,17 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide an Activity name'
+        fieldDescription: 'Provide an Activity name.'
       },
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide a Problem statement'
+        fieldDescription: 'Provide a Problem statement.'
       },
       {
         section: 'Activity 1 Conditions for Enhanced Funding',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/enhanced-funding',
-        fieldDescription: 'Provide an Enhanced Funding Justification'
+        fieldDescription: 'Provide an Enhanced Funding Justification.'
       },
       {
         section: 'Activity 1 State Staff and Expenses',
@@ -2727,7 +2727,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'Security Planning',
           link: '/apd/632a0fbc5665670a34b3bbd7/security-planning',
-          fieldDescription: 'Provide Business Continuity and Disaster Recovery'
+          fieldDescription: 'Provide Business Continuity and Disaster Recovery.'
         }
       ]);
     }
@@ -2752,12 +2752,12 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Provide an explanation'
+          fieldDescription: 'Provide an explanation.'
         },
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select yes or no.'
         }
       ]);
     }

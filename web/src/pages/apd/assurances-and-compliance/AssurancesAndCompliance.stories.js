@@ -199,7 +199,7 @@ ErrorsMmisAssurancesAndComplianceStory.decorators = [
               {
                 section: 'Assurances and Compliance',
                 link: '/apd/63dc42496379ad06919f1666/assurances-and-compliance',
-                fieldDescription: 'Select yes or no'
+                fieldDescription: 'Select yes or no.'
               }
             ],
             enabled: true,

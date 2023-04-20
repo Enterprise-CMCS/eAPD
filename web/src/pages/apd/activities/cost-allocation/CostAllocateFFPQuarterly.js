@@ -281,6 +281,7 @@ const CostAllocateFFPQuarterly = ({
           className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
           role="alert"
           aria-label="Error message for Estimated Quarterly Expenditure table"
+          name="Error message for Estimated Quarterly Expenditure table"
         >
           {errors?.subtotal?.inHouse?.percent?.message} <br />
           {errors?.subtotal?.contractors?.percent?.message}
