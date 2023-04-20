@@ -145,8 +145,8 @@ export const testMmisResultsOfPreviousActivitiesWithData = function () {
   before(function () {
     previousActivitiesPage = new PreviousActivitiesPage();
 
-    // cy.useStateStaff();
-    // cy.visit(this.apdUrl);
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
     cy.goToPreviousActivities();
     // Get the years referenced by previous activities
     previousActivitiesPage.getYears('MMIS');
