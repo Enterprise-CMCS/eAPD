@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { titleCase } from 'title-case';
 
+import { t } from '../../../i18n';
 import Dollars from '../../../components/Dollars';
+import FFYList, { FFYRow } from '../../../components/FFYList';
 import Review from '../../../components/Review';
 
-import { ffyList } from '../../../util/apd';
-
-const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
-  if (data.length === 0 && isApdMmis) {
+const ActivityExecutiveSummary = ({ apdId, data, years, enableEdit }) => {
+  const hasActivities = data.length > 0;
+  if (!hasActivities) {
     return (
       <Fragment>
         <div className="ds-c-list--bare ds-u-margin-bottom--3">
@@ -25,8 +27,18 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
           <p>
             <strong>Total Computable Cost:</strong> $0 ($0 Federal share)
           </p>
-
-          {ffyList(ffys)}
+          {years &&
+            years.map((year, rowNum) => (
+              // no acitivities are present, so display 0 for all amounts
+              <FFYRow
+                key={`${rowNum}-${year}`}
+                year={year}
+                total={0}
+                medicaid={0}
+                federal={0}
+                rowNum={rowNum}
+              />
+            ))}
         </div>
       </Fragment>
     );
@@ -37,13 +49,13 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
       {data.map((activity, i) => (
         <Review
           key={activity.activityId}
-          heading={
-            <Fragment>
-              Activity {i + 1}: {activity.name || 'Untitled'}
-            </Fragment>
-          }
+          heading={titleCase(
+            `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
+          )}
           headingLevel="4"
-          editHref={`/apd/${apdId}/activity/${i}/overview`}
+          editHref={
+            enableEdit && apdId ? `/apd/${apdId}/activity/${i}/overview` : ''
+          }
           className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
         >
           {activity.summary && (
@@ -63,7 +75,7 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
               <Dollars>{activity.medicaid}</Dollars> (
               <Dollars>{activity.federal}</Dollars> Federal share)
             </p>
-            {ffyList(activity.ffys)}
+            {activity.ffys && <FFYList ffys={activity.ffys} />}
           </div>
         </Review>
       ))}
@@ -72,10 +84,14 @@ const ActivityExecutiveSummary = ({ apdId, data, ffys, isApdMmis }) => {
 };
 
 ActivityExecutiveSummary.propTypes = {
-  apdId: PropTypes.string.isRequired,
+  apdId: PropTypes.string,
   data: PropTypes.array.isRequired,
-  ffys: PropTypes.object.isRequired,
-  isApdMmis: PropTypes.bool
+  enableEdit: PropTypes.bool,
+  years: PropTypes.array
+};
+
+ActivityExecutiveSummary.defaultProps = {
+  enableEdit: false
 };
 
 export default ActivityExecutiveSummary;

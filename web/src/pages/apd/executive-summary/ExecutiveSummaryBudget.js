@@ -16,40 +16,40 @@ const tdHdrs = (program, share) =>
 const ExecutiveSummaryBudget = ({ apdType, budget }) => {
   const { years } = budget;
 
-  if (!years.length) return null;
+  if (years && years.length > 0) {
+    const rowKeys = [
+      ...years.map(year => ({ year, display: t('ffy', { year }) })),
+      { year: 'total', display: 'Total' }
+    ];
 
-  const rowKeys = [
-    ...years.map(year => ({ year, display: t('ffy', { year }) })),
-    { year: 'total', display: 'Total' }
-  ];
-
-  // Returns the correct budget summary component based on APD type
-  function renderBudgetSummary() {
-    switch (apdType) {
-      case APD_TYPE.HITECH:
-        return (
-          <HitechBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
-      case APD_TYPE.MMIS:
-        return (
-          <MmisBudgetSummary
-            budget={budget}
-            rowKeys={rowKeys}
-            tdHdrs={tdHdrs}
-            thId={thId}
-          />
-        );
-      default:
-        null;
+    // Returns the correct budget summary component based on APD type
+    function renderBudgetSummary() {
+      switch (apdType) {
+        case APD_TYPE.HITECH:
+          return (
+            <HitechBudgetSummary
+              budget={budget}
+              rowKeys={rowKeys}
+              tdHdrs={tdHdrs}
+              thId={thId}
+            />
+          );
+        case APD_TYPE.MMIS:
+          return (
+            <MmisBudgetSummary
+              budget={budget}
+              rowKeys={rowKeys}
+              tdHdrs={tdHdrs}
+              thId={thId}
+            />
+          );
+        default:
+          null;
+      }
     }
-  }
 
-  return renderBudgetSummary();
+    return renderBudgetSummary();
+  } else return null;
 };
 
 ExecutiveSummaryBudget.propTypes = {

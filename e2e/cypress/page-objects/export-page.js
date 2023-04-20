@@ -560,7 +560,7 @@ class ExportPage {
   }) => {
     cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
       .parent()
-      .findByRole('heading', { name: /Total Cost of All Activities/i })
+      .findByRole('heading', { name: /Total Cost/i })
       .next()
       .within(() => {
         cy.contains('Federal Fiscal Years requested:')
