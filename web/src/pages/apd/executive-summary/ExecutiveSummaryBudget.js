@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
@@ -23,7 +23,8 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
     { year: 'total', display: 'Total' }
   ];
 
-  function renderApdTypeSpecificFields(apdType) {
+  // Returns the correct budget summary component based on APD type
+  function renderBudgetSummary() {
     switch (apdType) {
       case APD_TYPE.HITECH:
         return (
@@ -48,12 +49,7 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
     }
   }
 
-  return (
-    <Fragment>
-      {/* Show relevant fields based on APD type selected */}
-      {renderApdTypeSpecificFields(apdType)}
-    </Fragment>
-  );
+  return renderBudgetSummary();
 };
 
 ExecutiveSummaryBudget.propTypes = {

@@ -29,7 +29,7 @@ export const selectBudgetExecutiveSummary = createSelector(
         activityId,
         name,
         activitySchedule: { plannedStartDate, plannedEndDate } = {},
-        activityOverview: { summary } = {}
+        activityOverview: { summary, activitySnapshot } = {}
       }) => {
         const { total, ...ffyCosts } = budget.activities[activityId].costsByFFY;
 
@@ -37,7 +37,7 @@ export const selectBudgetExecutiveSummary = createSelector(
           activityId,
           dateRange: stateDateRangeToDisplay(plannedStartDate, plannedEndDate),
           name,
-          summary,
+          summary: summary || activitySnapshot, // summary exists for HITECH types, activitySnapshot exists for MMIS types
           combined: total.total,
           federal: total.federal,
           medicaid: total.medicaid,
