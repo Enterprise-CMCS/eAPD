@@ -194,6 +194,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       it('tests APD Update section', () => {
         cy.goToApdOverview();
+        let allYears = [];
 
         // Check all of the years
         cy.get('[data-cy=yearList]').within(() => {
