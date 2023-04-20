@@ -1,3 +1,8 @@
+/**
+ * For more information on how this works, checkout the GitHub
+ * Wiki page at https://github.com/Enterprise-CMCS/eAPD/wiki/Admin-Check
+ */
+
 import {
   hitechCombinedSchema,
   mmisCombinedSchema,
