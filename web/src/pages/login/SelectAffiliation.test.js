@@ -38,9 +38,7 @@ describe('Switch Affiliation component', () => {
   test('renders correct legend', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
-    expect(
-      screen.getByText('Please select your state affiliation')
-    ).toBeTruthy();
+    expect(screen.getByText('Select your state affiliation')).toBeTruthy();
   });
   test('renders correct set of radio options', async () => {
     fetchMock

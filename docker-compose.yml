@@ -3,9 +3,9 @@ services:
   db:
     image: postgres:10.18-bullseye
     environment:
+      - PGDATA=/pgdata
       - POSTGRES_DB=hitech_apd
       - POSTGRES_PASSWORD=cms
-      - PGDATA=/pgdata
     volumes:
       - pgdata:/pgdata
     expose:
@@ -16,12 +16,12 @@ services:
   mongo:
     image: mongo:5.0.9
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin-user
-      - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - MONGO_INITDB_DATABASE=admin
-      - MONGO_DATABASE_USERNAME=mongo
-      - MONGO_DATABASE_PASSWORD=cms
       - MONGO_DATABASE=eapd
+      - MONGO_DATABASE_PASSWORD=cms
+      - MONGO_DATABASE_USERNAME=mongo
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin-password
+      - MONGO_INITDB_ROOT_USERNAME=admin-user
     volumes:
       - mongodata:/mongodata
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
@@ -37,12 +37,12 @@ services:
     restart: unless-stopped
     environment:
       - API_URL=http://localhost:8081
-      - TEALIUM_TAG=${TEALIUM_TAG:-default}
+      - LD_CLIENT_ID=${LD_CLIENT_ID}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
-      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - TEALIUM_ENV=${TEALIUM_ENV:-dev}
-      - LD_CLIENT_ID=${LD_CLIENT_ID}
+      - TEALIUM_TAG=${TEALIUM_TAG:-default}
     volumes:
       - type: bind
         source: ./web
@@ -67,26 +67,28 @@ services:
       - db
       - mongo
     environment:
-      - PORT=8000
-      - NODE_ENV=development
-      - OKTA_DOMAIN=${OKTA_DOMAIN}
-      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
-      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
-      - OKTA_API_KEY=${OKTA_API_KEY}
-      - JWT_SECRET=${JWT_SECRET}
-      - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
-      - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}
-      - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
-      - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
       - DISABLE_SAME_SITE=yes
-      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
-      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
-      - LD_API_KEY=${LD_API_KEY}
-      - FILE_STORE=${FILE_STORE}
-      - FILE_S3_BUCKET=${FILE_S3_BUCKET}
+      - NODE_ENV=development
+      - PORT=8000
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_REGION=${AWS_REGION}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
+      - FILE_S3_BUCKET=${FILE_S3_BUCKET}
+      - FILE_PATH=${FILE_PATH:-test-data/files}
+      - FILE_STORE=${FILE_STORE:-local}
+      - JWT_SECRET=${JWT_SECRET}
+      - LD_API_KEY=${LD_API_KEY}
+      - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
+      - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
+      - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
+      - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}
+      - OKTA_API_KEY=${OKTA_API_KEY}
+      - OKTA_AUDIENCE=${OKTA_AUDIENCE}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_SERVER_ID=${OKTA_SERVER_ID}
+      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
     volumes:
       - type: bind
         source: ./api
