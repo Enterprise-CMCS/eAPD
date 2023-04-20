@@ -44,7 +44,7 @@ const oktaVerifier = new OktaJwtVerifier({
  */
 export const actualVerifyJWT = (token, { verifier = oktaVerifier } = {}) => {
   return verifier
-    .verifyAccessToken(token, OKTA_AUDIENCE)
+    .verifyAccessToken(token, OKTA_AUDIENCE || 'MacPRO-eAPD')
     .then(({ claims }) => {
       // the token is valid (per definition of 'valid' above)
       return claims;
