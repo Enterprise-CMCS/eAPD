@@ -97,7 +97,7 @@ describe('MMIS APD State Priorities and Scope', () => {
 
     expect(
       screen.queryByRole('alert', {
-        name: 'Provide Medicaid Program and Priorities'
+        name: 'Provide Medicaid Program and Priorities.'
       })
     ).toBeNull();
   });
