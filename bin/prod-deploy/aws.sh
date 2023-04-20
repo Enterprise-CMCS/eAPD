@@ -124,6 +124,8 @@ function addBuildUrlToUserData() {
 
   sed -i'.backup' -e "s|__OKTA_API_KEY__|`echo $OKTA_API_KEY`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__OKTA_AUDIENCE__|`echo $OKTA_AUDIENCE`|g" aws.user-data.sh
+
   sed -i'.backup' -e "s|__OKTA_CLIENT_ID__|`echo $OKTA_CLIENT_ID`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__OKTA_SERVER_ID__|`echo $OKTA_SERVER_ID`|g" aws.user-data.sh
@@ -212,6 +214,7 @@ function addEcosystemToUserData() {
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
         OKTA_CLIENT_ID: '$OKTA_CLIENT_ID',
         OKTA_API_KEY: '$OKTA_API_KEY',
+        OKTA_AUDIENCE: '$OKTA_AUDIENCE',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
         MONGO_URL: '$MONGO_URL',
@@ -230,6 +233,7 @@ function addEcosystemToUserData() {
         OKTA_DOMAIN: '$OKTA_DOMAIN',
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
         OKTA_API_KEY: '$OKTA_API_KEY',
+        OKTA_AUDIENCE: '$OKTA_AUDIENCE',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
         MONGO_URL: '$MONGO_URL',
@@ -248,6 +252,7 @@ function addEcosystemToUserData() {
         OKTA_DOMAIN: '$OKTA_DOMAIN',
         OKTA_SERVER_ID: '$OKTA_SERVER_ID',
         OKTA_API_KEY: '$OKTA_API_KEY',
+        OKTA_AUDIENCE: '$OKTA_AUDIENCE',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
         MONGO_URL: '$MONGO_URL',

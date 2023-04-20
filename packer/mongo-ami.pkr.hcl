@@ -12,6 +12,7 @@ variable "mongo_url" {}
 variable "database_url" {}
 variable "okta_domain" {}
 variable "okta_api_key" {}
+variable "okta_audience" {}
 variable "environment" {}
 variable "ami_name" {}
 
@@ -55,6 +56,7 @@ build {
             "DATABASE_URL=${var.database_url}",
             "OKTA_DOMAIN=${var.okta_domain}",
             "OKTA_API_KEY=${var.okta_api_key}",
+            "OKTA_AUDIENCE=${var.okta_audience}",
             "ENVIRONMENT=${var.environment}"
         ]
         script = "./mongo20220708.sh"

@@ -8,4 +8,4 @@ docker-compose exec api yarn run migrate
 docker-compose exec api yarn run seed
 sleep 5
 
-TZ=utc npx cypress $1 $2 $3 --browser chrome
+TZ=utc npx cypress $1 $2 $3 $4 $5 $6 $7
