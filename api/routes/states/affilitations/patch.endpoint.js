@@ -25,13 +25,13 @@ describe('Affiliations endpoint | PATCH', () => {
   const url = (stateId, affiliationId) =>
     `/states/${stateId}/affiliations/${affiliationId}`;
 
-  unauthenticatedTest('patch', url('ak', 4000));
-  unauthorizedTest('patch', url('ak', 4000));
+  unauthenticatedTest('patch', url('na', 4000));
+  unauthorizedTest('patch', url('na', 4000));
 
   describe('when authenticated', () => {
     ['approved', 'denied', 'revoked'].forEach(status => {
       it(`returns 200, when an affiliation is ${status}`, async () => {
-        const response = await api.patch(url('ak', 4000), {
+        const response = await api.patch(url('na', 4000), {
           status,
           roleId: stateStaffId
         });
@@ -52,12 +52,12 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it('returns 400 when affiliation id is invalid', async () => {
-      const response = await api.patch(url('ak', 'NaN'));
+      const response = await api.patch(url('na', 'NaN'));
       expect(response.status).toEqual(400);
     });
 
     it('returns 400 when status is invalid', async () => {
-      const response = await api.patch(url('ak', 4000), {
+      const response = await api.patch(url('na', 4000), {
         status: 'blarg',
         roleId: stateStaffId
       });
@@ -65,7 +65,7 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it('returns 400 when body is invalid', async () => {
-      const response = await api.patch(url('ak', 4000), {
+      const response = await api.patch(url('na', 4000), {
         status: undefined,
         roleId: undefined
       });
@@ -73,7 +73,7 @@ describe('Affiliations endpoint | PATCH', () => {
     });
 
     it(`returns 403, when user tries to change their status`, async () => {
-      const response = await api.patch(url('ak', 4004), {
+      const response = await api.patch(url('na', 4004), {
         status: 'approved',
         roleId: stateStaffId
       });

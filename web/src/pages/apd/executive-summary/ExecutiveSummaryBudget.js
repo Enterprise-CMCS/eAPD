@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 import HitechBudgetSummary from './HitechBudgetSummary';
-// TODO (#4474): return the following once the component is compatible with new MMIS budget structure
-// import MmisBudgetSummary from './MmisBudgetSummary';
+import MmisBudgetSummary from './MmisBudgetSummary';
 import { APD_TYPE } from '@cms-eapd/common';
 
 const thId = (program, share) =>
@@ -24,7 +23,8 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
     { year: 'total', display: 'Total' }
   ];
 
-  function renderApdTypeSpecificFields(apdType) {
+  // Returns the correct budget summary component based on APD type
+  function renderBudgetSummary() {
     switch (apdType) {
       case APD_TYPE.HITECH:
         return (
@@ -36,27 +36,20 @@ const ExecutiveSummaryBudget = ({ apdType, budget }) => {
           />
         );
       case APD_TYPE.MMIS:
-        return null;
-      // TODO (#4474): return the following once the component is compatible with new MMIS budget structure
-      // return (
-      //   <MmisBudgetSummary
-      //     budget={budget}
-      //     rowKeys={rowKeys}
-      //     tdHdrs={tdHdrs}
-      //     thId={thId}
-      //   />
-      // );
+        return (
+          <MmisBudgetSummary
+            budget={budget}
+            rowKeys={rowKeys}
+            tdHdrs={tdHdrs}
+            thId={thId}
+          />
+        );
       default:
         null;
     }
   }
 
-  return (
-    <Fragment>
-      {/* Show relevant fields based on APD type selected */}
-      {renderApdTypeSpecificFields(apdType)}
-    </Fragment>
-  );
+  return renderBudgetSummary();
 };
 
 ExecutiveSummaryBudget.propTypes = {

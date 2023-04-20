@@ -110,7 +110,7 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
     cy.wait('@uploadImage', { timeout: 30000 });
 
     cy.waitForSave();
-    cy.contains('AK APD Home').click();
+    cy.contains('NA APD Home').click();
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(5000); // Gives time to load the APD dashboard
 

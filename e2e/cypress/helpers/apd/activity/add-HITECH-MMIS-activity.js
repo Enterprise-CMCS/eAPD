@@ -146,7 +146,7 @@ export const addMMISActivity = function () {
         totalTotalMedicaidCost,
         fundingSplit: `90/10 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
         totalFederalShare,
-        state: 'Alaska',
+        state: 'New Apdland',
         totalStateShare
       });
 

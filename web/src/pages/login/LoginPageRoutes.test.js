@@ -2,6 +2,10 @@ import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import LoginPageRoutes from './LoginPageRoutes';
 
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
+import * as hooks from '../../util/hooks';
+import { STATES } from '../../util/states';
+
 const defaultProps = {
   hasEverLoggedOn: false,
   fetching: false,
@@ -38,6 +42,9 @@ const setup = (props = {}, options = {}) =>
 describe('LoginPageRoutes', () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    resetLDMocks();
+    mockFlags({ supportStateAvailable: false });
+    jest.spyOn(hooks, 'useAvailableStates').mockImplementation(() => STATES);
   });
 
   it('should redirect the user to Login if the path is /login', () => {

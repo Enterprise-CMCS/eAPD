@@ -2,6 +2,7 @@
 import BudgetPage from '../../page-objects/budget-page.js';
 import { testApdName } from '../../helpers/apd/apd-name.js';
 import { testMmisNavigation } from '../../helpers/mmis/mmis-navigation.js';
+import { testMmisAdminCheck } from '../../helpers/mmis/mmis-admin-check.js';
 
 /// <reference types="cypress" />
 
@@ -66,14 +67,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   after(function () {
-    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
 
   describe('Create MMIS APD', function () {
     it('tests Create New page and does not save', function () {
-      cy.contains('AK APD Home').click();
+      cy.contains('NA APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.contains(
@@ -184,9 +184,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     testMmisNavigation();
   });
 
+  describe('Default MMIS APD - Admin Check', function () {
+    testMmisAdminCheck();
+  });
+
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
-      testApdName();
+      testApdName(); // Try removing the describe above and moving testApdName to the it below
 
       it('tests APD Update section', () => {
         cy.goToApdOverview();
@@ -203,96 +207,20 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         // When Yes is selected in the Is Update section, Update Type options display
         cy.findByRole('radio', { name: /Yes, it is an update./i }).click();
         cy.findByText('Update Type').should('exist');
-
-        // Before selecting an update type validation error shows up in admin check
-        cy.turnOnAdminCheck();
-        cy.get('[class="eapd-admin-check-list"]').within(list => {
-          cy.get(list).contains('Select an update type.').should('exist');
-        });
-        cy.collapseAdminCheck();
-
-        // Before selecting an update type validation error shows up in form
-        cy.goToApdOverview();
-        cy.contains('Select an update type.').should('exist');
-
-        // Select an update type to ensure form error and admin check error is removed
-        cy.findByRole('checkbox', { name: /As-needed update/i }).click();
-        cy.contains('Select an update type.').should('not.exist');
-        cy.expandAdminCheck();
-        cy.get('[class="eapd-admin-check-list"]').within(list => {
-          cy.get(list).contains('Select an update type.').should('not.exist');
-        });
       });
 
       it('tests Medicaid Business Areas section', () => {
         cy.goToApdOverview();
-
-        // Uncheck the option chosen when APD was created in the test's "before" hook
-        cy.findByRole('checkbox', {
-          name: /Claims Processing/i
-        }).click();
-
-        // Check validation errors within admin check list
-        cy.turnOnAdminCheck();
-        cy.get('[class="eapd-admin-check-list"]').within(list => {
-          cy.get(list).contains('APD Overview').should('exist');
-          cy.get(list)
-            .contains('Select at least one Medicaid Business Area.')
-            .should('exist');
-        });
-
-        cy.collapseAdminCheck();
-        cy.goToApdOverview();
-
-        // Check validation error exists within form
-        cy.contains('Select at least one Medicaid Business Area.').should(
-          'exist'
-        );
 
         // Fill out field
         cy.findByRole('checkbox', {
           name: /Other/i
         }).click();
 
-        // Check validation errors change on page
-        cy.contains('Select at least one Medicaid Business Area.').should(
-          'not.exist'
-        );
-        cy.contains('Provide Other Medicaid Business Area(s).').should('exist');
-
-        // Check validation errors change in admin check
-        cy.expandAdminCheck();
-        cy.get('[class="eapd-admin-check-list"]').within(list => {
-          // Selecting a choice will clear this error
-          cy.get(list)
-            .contains('Select at least one Medicaid Business Area.')
-            .should('not.exist');
-
-          // Selecting "Other" without filling in the "Other Medicaid Business Area(s)" text box will show a new error
-          cy.get(list).contains('APD Overview').should('exist');
-          cy.get(list)
-            .contains('Provide Other Medicaid Business Area(s).')
-            .should('exist');
-        });
-
-        // Fill out "Other Medicaid Business Area(s)" text box and check that error is cleared
-        cy.collapseAdminCheck();
+        // Fill out "Other Medicaid Business Area(s)" text box
         cy.get(`[data-cy='other_details']`)
           .type('This info in the text box should clear the error.')
           .blur();
-        // Error cleared in form
-        cy.contains('Provide Other Medicaid Business Area(s).').should(
-          'not.exist'
-        );
-        // Error cleared in admin check
-        cy.expandAdminCheck();
-        cy.get('[class="eapd-admin-check-list"]').within(list => {
-          cy.get(list).contains('APD Overview').should('not.exist');
-          cy.get(list)
-            .contains('Provide Other Medicaid Business Area(s).')
-            .should('not.exist');
-        });
-        cy.turnOffAdminCheck();
 
         // Verify that fields save
         // Navigates away from page and back to check persistence of entered data
@@ -306,18 +234,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
           'have.value',
           'This info in the text box should clear the error.'
         );
+        cy.findByRole('checkbox', {
+          name: /Other/i
+        }).click();
       });
-    });
-
-    it('tests Results of Previous Activities page', () => {
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('MMIS DDI at 90% FFP');
-      cy.findAllByText('MMIS DDI at 75% FFP');
-      cy.findAllByText('MMIS M&O at 75% FFP');
-      cy.findAllByText('MMIS DDI at 50% FFP');
-      cy.findAllByText('MMIS M&O at 50% FFP');
-      cy.findAllByText('MMIS Grand Totals');
     });
 
     it('test MMIS APD Basics', function () {
@@ -388,27 +308,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
 
-      // Previous Activities
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-
       // Activity Tests
       cy.goToActivityDashboard();
 
@@ -435,75 +334,29 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Proposed solution').should('exist');
       cy.checkTinyMCE('activity-proposed-solution-field', '');
 
-      // Check validation errors
-      cy.turnOnAdminCheck();
-
-      // Validation errors within admin check list
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list).contains('Activity 1 Activity Overview').should('exist');
-        cy.get(list).contains('Provide an Activity name').should('exist');
-        cy.get(list).contains('Provide an Activity snapshot').should('exist');
-        cy.get(list).contains('Provide a Problem statement').should('exist');
-        cy.get(list).contains('Provide a Proposed solution').should('exist');
-      });
-
-      // Verifies Activity Overview exists in the admin check list and navigates to that page
-      cy.checkAdminCheckHyperlinks(
-        'Activity 1 Activity Overview',
-        'Activity Overview',
-        3
-      );
-
-      // Validation errors on the Activity Overview page
-      cy.contains('Provide an Activity name').should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide an Activity snapshot')
-        .should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide a Problem statement')
-        .should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide a Proposed solution')
-        .should('exist');
-
-      cy.collapseAdminCheck();
-
       // Fill out fields and check that each validation error is cleared
       cy.get(`[data-cy="activity-name"]`)
         .click()
         .type(mmisBasics.activities[0].name);
       cy.waitForSave();
-      cy.contains('Provide an Activity name').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-snapshot-field',
         mmisBasics.activities[0].activityOverview.activitySnapshot
       );
       cy.waitForSave();
-      cy.contains('Provide an Activity snapshot').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-problem-statement-field',
         mmisBasics.activities[0].activityOverview.problemStatement
       );
       cy.waitForSave();
-      cy.contains('Provide a Problem statement').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-proposed-solution-field',
         mmisBasics.activities[0].activityOverview.proposedSolution
       );
       cy.waitForSave();
-      cy.contains('Provide a Proposed solution').should('not.exist');
-
-      // Check validation errors are gone from admin check
-      cy.expandAdminCheck();
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list)
-          .contains('Activity 1 Activity Overview')
-          .should('not.exist');
-      });
-      cy.turnOffAdminCheck();
 
       // Verify that fields save
       // Navigates away from page and back to check persistence of entered data
@@ -545,14 +398,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
 
       // Security Planning
-      cy.turnOnAdminCheck();
-      cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
-
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list).contains('Security Planning').should('exist');
-      });
-
-      cy.contains('Provide Security and Interface Plan').should('exist');
+      cy.goToSecurityPlanning();
       cy.checkTinyMCE('security-interface-plan', '');
 
       cy.setTinyMceContent(
@@ -561,23 +407,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
 
       cy.waitForSave();
-
-      cy.contains('Provide Security and Interface Plan').should('not.exist');
-
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'exist'
-      );
       cy.checkTinyMCE('bc-dr-plan', '');
-
       cy.setTinyMceContent(
         'bc-dr-plan',
         mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery
       );
       cy.waitForSave();
-
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'not.exist'
-      );
 
       // Verify fields saved
       cy.goToApdOverview();
@@ -592,27 +427,29 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'bc-dr-plan',
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
       );
+    });
 
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list).contains('Security Planning').should('not.exist');
-      });
+    it('tests the Results of Previous Activities section', function () {
+      const mmisBasics = this.mmisBasics;
 
-      // Verify validation disappears when Admin Check is off
-      cy.setTinyMceContent('security-interface-plan', '');
-      cy.contains('Provide Security and Interface Plan').should('exist');
+      cy.goToPreviousActivities();
 
-      cy.setTinyMceContent('bc-dr-plan', '');
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'exist'
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
       );
-
-      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
-        force: true
-      });
-
-      cy.contains('Provide Security and Interface Plan').should('not.exist');
-      cy.contains('Provide Business Continuity and Disaster Recovery').should(
-        'not.exist'
+      cy.waitForSave();
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToPreviousActivities();
+      cy.wait(2000);
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
   });

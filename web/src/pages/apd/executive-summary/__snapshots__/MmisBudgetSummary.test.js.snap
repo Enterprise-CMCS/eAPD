@@ -1,0 +1,668 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MmisBudgetSummary /> renders correctly with a valid budget 1`] = `
+<DocumentFragment>
+  <div
+    class="subsection--title"
+  >
+    <h3
+      class=" ds-h3"
+      id="executive-summary-budget-table"
+    >
+      Program Budget Tables
+    </h3>
+    <table
+      class="budget-table executive-summary-budget-table ddi-table"
+    >
+      <caption
+        class="ds-h4"
+      >
+        MMIS DDI Costs
+        <span
+          class="ds-u-visibility--screen-reader"
+        >
+          executive summary
+        </span>
+      </caption>
+      <thead>
+        <tr
+          class="budget-table--row__highlight-gray-dark"
+        >
+          <td
+            class="th"
+            id="program-budget-table-null3"
+          />
+          <th
+            colspan="2"
+            id="program-budget-table-ddi90"
+          >
+            MMIS DDI (90/10)
+          </th>
+          <th
+            colspan="2"
+            id="program-budget-table-ddi75"
+          >
+            MMIS DDI (75/25)
+          </th>
+          <th
+            colspan="2"
+            id="program-budget-table-ddi50"
+          >
+            MMIS DDI (50/50)
+          </th>
+          <th
+            colspan="3"
+            id="program-budget-table-ddiTotal"
+          >
+            MMIS DDI (Total)
+          </th>
+        </tr>
+        <tr
+          class="budget-table--row__highlight-gray-light"
+        >
+          <td
+            class="th"
+            id="program-budget-table-null4"
+          />
+          <th
+            id="program-budget-table-ddi90-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-ddi90-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-ddi75-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-ddi75-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-ddi50-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-ddi50-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-ddiTotal-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-ddiTotal-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-ddiTotal-total"
+          >
+            Total Computable Medicaid Cost
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class=""
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            FFY 2023
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
+          >
+            <span>
+              $4,547,548
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
+          >
+            <span>
+              $505,283
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
+          >
+            <span>
+              $4,547,548
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
+          >
+            <span>
+              $505,283
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
+          >
+            <span>
+              $5,052,831
+            </span>
+          </td>
+        </tr>
+        <tr
+          class=""
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            FFY 2024
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
+          >
+            <span>
+              $2,319,750
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
+          >
+            <span>
+              $773,250
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
+          >
+            <span>
+              $2,319,750
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
+          >
+            <span>
+              $773,250
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
+          >
+            <span>
+              $3,093,000
+            </span>
+          </td>
+        </tr>
+        <tr
+          class="budget-table--total budget-table--row__highlight-lighter"
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            Total
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-fed"
+          >
+            <span>
+              $4,547,548
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi90 program-budget-table-ddi90-state"
+          >
+            <span>
+              $505,283
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-fed"
+          >
+            <span>
+              $2,319,750
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi75 program-budget-table-ddi75-state"
+          >
+            <span>
+              $773,250
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddi50 program-budget-table-ddi50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-fed"
+          >
+            <span>
+              $6,867,298
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-state"
+          >
+            <span>
+              $1,278,533
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-ddiTotal program-budget-table-ddiTotal-total"
+          >
+            <span>
+              $8,145,831
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      class="budget-table executive-summary-budget-table mando-table"
+    >
+      <caption
+        class="ds-h4"
+      >
+        MMIS M&O Costs 
+        <span
+          class="ds-u-visibility--screen-reader"
+        >
+          executive summary
+        </span>
+      </caption>
+      <thead>
+        <tr
+          class="budget-table--row__highlight-gray-dark"
+        >
+          <td
+            class="th"
+            id="program-budget-table-null3"
+          />
+          <th
+            colspan="2"
+            id="program-budget-table-mando75"
+          >
+            MMIS M&O (75/25)
+          </th>
+          <th
+            colspan="2"
+            id="program-budget-table-mando50"
+          >
+            MMIS M&O (50/50)
+          </th>
+          <th
+            colspan="3"
+            id="program-budget-table-mandoTotal"
+          >
+            MMIS M&O (Total)
+          </th>
+        </tr>
+        <tr
+          class="budget-table--row__highlight-gray-light"
+        >
+          <td
+            class="th"
+            id="program-budget-table-null4"
+          />
+          <th
+            id="program-budget-table-mando75-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-mando75-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-mando50-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-mando50-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-mandoTotal-fed"
+          >
+            Federal
+          </th>
+          <th
+            id="program-budget-table-mandoTotal-state"
+          >
+            State
+          </th>
+          <th
+            id="program-budget-table-mandoTotal-total"
+          >
+            Total Computable Medicaid Cost
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class=""
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            FFY 2023
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+        </tr>
+        <tr
+          class=""
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            FFY 2024
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
+          >
+            <span>
+              $1,428,184
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
+          >
+            <span>
+              $476,061
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
+          >
+            <span>
+              $1,428,184
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
+          >
+            <span>
+              $476,061
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
+          >
+            <span>
+              $1,904,245
+            </span>
+          </td>
+        </tr>
+        <tr
+          class="budget-table--total budget-table--row__highlight-lighter"
+        >
+          <th
+            headers="program-budget-table-null3 program-budget-table-null4"
+            scope="row"
+          >
+            Total
+          </th>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-fed"
+          >
+            <span>
+              $1,428,184
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando75 program-budget-table-mando75-state"
+          >
+            <span>
+              $476,061
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-fed"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mando50 program-budget-table-mando50-state"
+          >
+            <span>
+              $0
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-fed"
+          >
+            <span>
+              $1,428,184
+            </span>
+          </td>
+          <td
+            class="budget-table--number "
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-state"
+          >
+            <span>
+              $476,061
+            </span>
+          </td>
+          <td
+            class="budget-table--number budget-table--cell__hightlight-lighter"
+            headers="program-budget-table-mandoTotal program-budget-table-mandoTotal-total"
+          >
+            <span>
+              $1,904,245
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<MmisBudgetSummary /> renders correctly with empty budget 1`] = `
+<DocumentFragment>
+  <div
+    class="subsection--title"
+  >
+    <h3
+      class=" ds-h3"
+      id="executive-summary-budget-table"
+    >
+      Program Budget Tables
+    </h3>
+    <p>
+      The Program Budget Table(s) are not available.
+    </p>
+  </div>
+</DocumentFragment>
+`;

@@ -71,7 +71,7 @@ StateStaffUserStory.decorators = [
             affiliation: {
               id: 399,
               user_id: '123',
-              state_id: 'ak',
+              state_id: 'na',
               role_id: 58,
               status: 'approved',
               username: 'statestaff'
@@ -80,7 +80,7 @@ StateStaffUserStory.decorators = [
             name: 'State Staff',
             permissions: [
               {
-                ak: [
+                na: [
                   'create-draft',
                   'view-document',
                   'edit-document',
@@ -90,11 +90,11 @@ StateStaffUserStory.decorators = [
             ],
             role: 'eAPD State Staff',
             state: {
-              id: 'ak',
-              name: 'Alaska'
+              id: 'na',
+              name: 'New Apdland'
             },
             states: {
-              ak: 'approved'
+              na: 'approved'
             },
             username: 'statestaff'
           },
@@ -137,7 +137,7 @@ StateAdminUserStory.decorators = [
             affiliation: {
               id: 396,
               user_id: '123',
-              state_id: 'ak',
+              state_id: 'na',
               status: 'approved',
               username: 'stateadmin'
             },
@@ -145,7 +145,7 @@ StateAdminUserStory.decorators = [
             name: 'State Staff',
             permissions: [
               {
-                ak: [
+                na: [
                   'view-roles',
                   'view-affiliations',
                   'edit-affiliations',
@@ -158,11 +158,11 @@ StateAdminUserStory.decorators = [
             ],
             role: 'eAPD State Admin',
             state: {
-              id: 'ak',
-              name: 'Alaska'
+              id: 'na',
+              name: 'New Apdland'
             },
             states: {
-              ak: 'approved'
+              na: 'approved'
             },
             username: 'stateadmin'
           },
