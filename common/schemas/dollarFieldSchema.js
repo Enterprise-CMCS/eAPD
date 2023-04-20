@@ -5,11 +5,11 @@ export const dollarFieldReqAndMsg = Joi.number()
   .allow(0)
   .required()
   .messages({
-    'number.base': 'Provide a dollar amount greater than or equal to $0',
-    'number.empty': 'Provide a dollar amount greater than or equal to $0',
-    'number.format': 'Provide a dollar amount greater than or equal to $0',
-    'number.positive': 'Provide a dollar amount greater than or equal to $0',
-    'number.allow': 'Provide a dollar amount greater than or equal to $0'
+    'number.base': 'Provide a dollar amount greater than or equal to $0.',
+    'number.empty': 'Provide a dollar amount greater than or equal to $0.',
+    'number.format': 'Provide a dollar amount greater than or equal to $0.',
+    'number.positive': 'Provide a dollar amount greater than or equal to $0.',
+    'number.allow': 'Provide a dollar amount greater than or equal to $0.'
   });
 
 export const previousActivityObject = Joi.object({

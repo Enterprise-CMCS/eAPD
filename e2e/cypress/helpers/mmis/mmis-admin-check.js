@@ -38,7 +38,7 @@ export const testMmisAdminCheck = function () {
       hyperlink: 'Activity 1 Activity Overview',
       header: ['Activity Overview', 3],
       fieldType: ['textField', 'input[name="name"]'],
-      errorMessage: ['Provide an Activity name', 2]
+      errorMessage: ['Provide an Activity name.', 2]
     },
     {
       hyperlink: 'Activity 1 Activity Schedule',
@@ -53,9 +53,9 @@ export const testMmisAdminCheck = function () {
         'radio',
         /Yes, this activity is qualified for enhanced funding./i
       ],
-      errorMessage: ['Select an Enhanced Funding Qualification', 3],
+      errorMessage: ['Select an Enhanced Funding Qualification.', 3],
       subField: ['tinyMCE', 'justification-field'],
-      subFieldErrorMessage: ['Provide an Enhanced Funding Justification', 2]
+      subFieldErrorMessage: ['Provide an Enhanced Funding Justification.', 2]
     },
     {
       hyperlink: 'Activity 1 Cost Allocation',
@@ -78,15 +78,15 @@ export const testMmisAdminCheck = function () {
       hyperlink: 'Security Planning',
       header: ['Security Planning', 2],
       fieldType: ['tinyMCE', 'security-interface-plan'],
-      errorMessage: ['Provide Security and Interface Plan', 2]
+      errorMessage: ['Provide Security and Interface Plan.', 2]
     },
     {
       hyperlink: 'Assurances and Compliance',
       header: ['Assurances and Compliance', 2],
       fieldType: ['radio', /No/i],
-      errorMessage: ['Select yes or no', 30, 27],
+      errorMessage: ['Select yes or no.', 30, 27],
       subField: ['textField', 'textarea[name="procurement.0.explanation"]'],
-      subFieldErrorMessage: ['Provide an explanation', 2]
+      subFieldErrorMessage: ['Provide an explanation.', 2]
     }
   ];
 
