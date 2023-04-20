@@ -89,7 +89,7 @@ const SelectAffiliation = ({
       <h1 className="ds-h3">State Affiliation</h1>
       <ChoiceList
         choices={sortedChoiceList}
-        label="Please select your state affiliation"
+        label="Select your state affiliation"
         labelClassName="ds-u-font-weight--normal ds-u-padding-bottom--1"
         name="radio_choices"
         type="radio"

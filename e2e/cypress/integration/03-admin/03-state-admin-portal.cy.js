@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 const goToStateAdminPortal = function () {
   Cypress.session.clearAllSavedSessions();
-  cy.useRegularUser();
+  cy.useStateAdmin();
   cy.get(
     '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
   ).click();
