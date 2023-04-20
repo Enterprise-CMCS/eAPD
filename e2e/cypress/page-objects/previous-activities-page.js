@@ -78,24 +78,24 @@ class PreviousActivitiesPage {
     levels.forEach(level => {
       this.years.forEach(year => {
         if (level === 90) {
-          cy.get(`[name="approved-total-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.totalApproved"]`)
             .clear()
             .type(actualExpenditures[year].ddi[level].totalApproved);
-          cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.federalActual"]`)
             .clear()
             .type(actualExpenditures[year].ddi[level].federalActual);
         } else {
-          cy.get(`[name="approved-total-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.totalApproved"]`)
             .clear()
             .type(actualExpenditures[year].ddi[level].totalApproved);
-          cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.federalActual"]`)
             .clear()
             .type(actualExpenditures[year].ddi[level].federalActual);
 
-          cy.get(`[name="approved-total-mando${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.mando.${level}.totalApproved"]`)
             .clear()
             .type(actualExpenditures[year].mando[level].totalApproved);
-          cy.get(`[name="actual-federal-mando${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.mando.${level}.federalActual"]`)
             .clear()
             .type(actualExpenditures[year].mando[level].federalActual);
         }
@@ -188,7 +188,7 @@ class PreviousActivitiesPage {
     levels.forEach(level => {
       this.years.forEach(year => {
         if (level === 90) {
-          cy.get(`[name="approved-total-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.totalApproved"]`)
             .invoke('val')
             .then(val => {
               const share = level * 0.01;
@@ -200,7 +200,7 @@ class PreviousActivitiesPage {
               ).shouldBeCloseTo(expectedFFP);
             });
         } else {
-          cy.get(`[name="approved-total-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.totalApproved"]`)
             .invoke('val')
             .then(val => {
               const share = level * 0.01;
@@ -212,7 +212,7 @@ class PreviousActivitiesPage {
               ).shouldBeCloseTo(expectedFFP);
             });
 
-          cy.get(`[name="approved-total-mando${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.mando.${level}.totalApproved"]`)
             .invoke('val')
             .then(val => {
               const share = level * 0.01;
@@ -359,19 +359,19 @@ class PreviousActivitiesPage {
     this.years.forEach((year, index) => {
       levels.forEach(level => {
         if (level === 90) {
-          cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.federalActual"]`)
             .invoke('val')
             .then(val => {
               totals[index] += extractNumber(val);
             });
         } else {
-          cy.get(`[name="actual-federal-ddi${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.ddi.${level}.federalActual"]`)
             .invoke('val')
             .then(val => {
               totals[index] += extractNumber(val);
             });
 
-          cy.get(`[name="actual-federal-mando${level}-${year}"]`)
+          cy.get(`[data-testid="${year}.mando.${level}.federalActual"]`)
             .invoke('val')
             .then(val => {
               totals[index] += extractNumber(val);

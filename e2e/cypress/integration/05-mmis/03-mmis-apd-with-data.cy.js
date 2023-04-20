@@ -61,11 +61,11 @@ describe(
       cy.visit(apdUrl);
     });
 
-    // after(function () {
-    //   cy.useStateStaff();
-    //   cy.visit('/');
-    //   cy.deleteAPD(this.apdId);
-    // });
+    after(function () {
+      cy.useStateStaff();
+      cy.visit('/');
+      cy.deleteAPD(this.apdId);
+    });
 
     describe('Form View', function () {
       describe('MMIS APD Overview', function () {
@@ -84,7 +84,7 @@ describe(
         testMmisResultsOfPreviousActivitiesWithData();
       });
 
-      describe.only('add activities', function () {
+      describe('add activities', function () {
         addMMISActivity();
       });
 

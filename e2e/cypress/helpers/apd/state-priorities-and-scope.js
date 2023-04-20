@@ -27,19 +27,21 @@ export const testStatePrioritiesAndScopeWithData = function () {
     cy.goToStatePrioritiesAndScope();
 
     cy.url().should('include', '/state-priorities-and-scope');
+
     cy.findByRole('heading', {
       name: /State Priorities and Scope of APD/
     }).should('exist');
 
     cy.setTinyMceContent(
       'medicaid-program-priorities-field',
-      prioritiesAndScope.priorities
+      prioritiesAndScope.medicaidProgramAndPriorities
     );
+
     cy.setTinyMceContent(
       'medicaid-enterprise-system-intro',
-      prioritiesAndScope.mesIntro
+      prioritiesAndScope.mesIntroduction
     );
-    cy.setTinyMceContent('scope-of-apd', prioritiesAndScope.scopeOfApd);
+    cy.setTinyMceContent('scope-of-apd', prioritiesAndScope.scopeOfAPD);
 
     cy.waitForSave();
   });

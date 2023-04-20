@@ -252,16 +252,30 @@ export const addMMISActivity = function () {
             cy.findAllByRole('radio', { name: /75\/25/ })
               .eq(index)
               .click();
-            cy.findAllByRole('radio', {
-              name: costAllocationData[year].ffp.fundingCategory
-            });
+
+            cy.findAllByRole('radio', { name: /75\/25/ })
+              .eq(index)
+              .parent()
+              .parent()
+              .within(() => {
+                cy.findAllByRole('radio', {
+                  name: costAllocationData[year].ffp.fundingCategory
+                }).click();
+              });
           } else if (costAllocationData[year].ffp.federal === 50) {
             cy.findAllByRole('radio', { name: /50\/50/ })
               .eq(index)
               .click();
-            cy.findAllByRole('radio', {
-              name: costAllocationData[year].ffp.fundingCategory
-            });
+
+            cy.findAllByRole('radio', { name: /50\/50/ })
+              .eq(index)
+              .parent()
+              .parent()
+              .within(() => {
+                cy.findAllByRole('radio', {
+                  name: costAllocationData[year].ffp.fundingCategory
+                }).click();
+              });
           }
         });
         cy.waitForSave();
