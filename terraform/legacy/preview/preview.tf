@@ -125,6 +125,7 @@ module "mongo" {
     preview_database_url = var.preview_database_url
     preview_okta_domain = var.preview_okta_domain
     preview_okta_api_key = var.preview_okta_api_key
+    preview_okta_audience = var.preview_okta_audience
     preview_environment = var.preview_environment
 
 }
