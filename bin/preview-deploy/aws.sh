@@ -117,6 +117,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__OKTA_API_KEY__|`echo $OKTA_API_KEY`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__OKTA_AUDIENCE__|`echo $OKTA_AUDIENCE`|g" aws.user-data.sh
+
   sed -i'.backup' -e "s|__OKTA_CLIENT_ID__|`echo $OKTA_CLIENT_ID`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__OKTA_SERVER_ID__|`echo $OKTA_SERVER_ID`|g" aws.user-data.sh
