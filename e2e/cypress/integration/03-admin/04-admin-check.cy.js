@@ -9,7 +9,7 @@ describe('tests state admin portal', () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.useRegularUser();
+    cy.useStateStaff();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();

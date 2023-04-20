@@ -151,6 +151,13 @@
               "op": "segmentMatch",
               "values": ["support-users", "shared-test-users"],
               "negate": false
+            },
+            {
+              "contextKind": "user",
+              "attribute": "key",
+              "op": "in",
+              "values": ["betauser"],
+              "negate": true
             }
           ],
           "trackEvents": false
@@ -170,7 +177,7 @@
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 6,
+      "version": 10,
       "deleted": false
     },
     "support-team": {
