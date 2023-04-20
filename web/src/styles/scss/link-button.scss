@@ -12,3 +12,16 @@
 .link-button:hover {
   background-color: #045d83;
 }
+
+.eapd-admin-check {
+  .link-button,
+  .link-button:visited {
+    .fa-circle-stop {
+      margin-left: 1rem;
+    }
+  }
+
+  .link-button:hover {
+    background-color: #fff;
+  }
+}
