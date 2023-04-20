@@ -614,10 +614,10 @@ class ExportPage {
         if (shortOverview) {
           cy.contains(shortOverview);
         }
-        cy.contains('Start date - End date:')
+        cy.contains('Start Date - End Date:')
           .parent()
           .should('contain', getDateRange(startDate, endDate));
-        cy.contains('Total cost of activity:')
+        cy.contains('Total Cost of Activity:')
           .next()
           .shouldBeCloseTo(activityTotalCosts);
         cy.contains('Total Computable Medicaid Cost:')
