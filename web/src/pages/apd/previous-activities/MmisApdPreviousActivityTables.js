@@ -125,8 +125,6 @@ const MmisApdPreviousActivityTables = ({
                 previousActivityExpenses[year][level.fundingTypeSchema][
                   level.ffp
                 ];
-              const federalApproved =
-                (expenses.totalApproved * level.ffp) / 100;
               const errTotalApproved =
                 errors &&
                 errors[`${year}`] &&
