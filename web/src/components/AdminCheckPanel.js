@@ -11,7 +11,7 @@ import {
 
 import { Button, Drawer } from '@cmsgov/design-system';
 
-import Icon, { faExclamationTriangle } from '../components/Icons';
+import { StopIcon } from '../components/Icons';
 
 import {
   selectAdminCheckErrors,
@@ -84,17 +84,10 @@ const AdminCheckPanel = ({
             !adminCheckCollapsed && (
               <Fragment>
                 <div className="ds-u-padding-bottom--1">
-                  <Icon
-                    className="ds-u-margin-right--1"
-                    icon={faExclamationTriangle}
-                    size="lg"
-                  />
-                  <button
-                    onClick={handleClose}
-                    className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent ds-u-font-size--lg"
-                  >
+                  <Button onClick={handleClose} className="link-button">
                     Stop Administrative Check
-                  </button>
+                    <StopIcon />
+                  </Button>
                 </div>
                 <p className="ds-u-margin--0">
                   APDs cannot be submitted until all required fields are
