@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import {
-  Alert,
-  ChoiceList,
-  TextField,
-  Tooltip,
-  TooltipIcon
-} from '@cmsgov/design-system';
+import { Alert, TextField, Tooltip, TooltipIcon } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
+import ChoiceList from '../../../components/ChoiceList';
 import { sharedApdOverviewFields as schema, APD_TYPE } from '@cms-eapd/common';
 
 import {
@@ -27,7 +22,6 @@ import {
   selectSummary,
   selectAdminCheckEnabled
 } from '../../../redux/selectors/apd.selectors';
-import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import ApdOverviewHITECHFields from './ApdOverviewHITECHFields';
 import ApdOverviewMMISFields from './ApdOverviewMMISFields';
@@ -54,7 +48,6 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
-  const { enableMmis } = useFlags();
 
   const {
     control,
@@ -167,7 +160,7 @@ const ApdOverview = ({
           labelClassName="hidden-display"
           choices={[
             {
-              defaultChecked: !enableMmis || apdType === APD_TYPE.HITECH,
+              defaultChecked: apdType === APD_TYPE.HITECH,
               disabled: true,
               label: 'HITECH IAPD'
             }
@@ -185,35 +178,33 @@ const ApdOverview = ({
           </Tooltip>
         </span>
       </div>
-      {enableMmis == true && (
-        <div className="apd_type_choice-container">
-          <ChoiceList
-            type="radio"
-            className="apd_disabled_choice"
-            name="MMIS choice"
-            label="MMIS choice"
-            labelClassName="hidden-display"
-            choices={[
-              {
-                defaultChecked: apdType === APD_TYPE.MMIS,
-                disabled: true,
-                label: 'MMIS IAPD'
-              }
-            ]}
-          />
-          <span className="tooltip-container">
-            <Tooltip
-              className="ds-c-tooltip__trigger-link"
-              component="a"
-              onClose={function noRefCheck() {}}
-              onOpen={function noRefCheck() {}}
-              title="Medicaid Management Information System"
-            >
-              <TooltipIcon />
-            </Tooltip>
-          </span>
-        </div>
-      )}
+      <div className="apd_type_choice-container">
+        <ChoiceList
+          type="radio"
+          className="apd_disabled_choice"
+          name="MMIS choice"
+          label="MMIS choice"
+          labelClassName="hidden-display"
+          choices={[
+            {
+              defaultChecked: apdType === APD_TYPE.MMIS,
+              disabled: true,
+              label: 'MMIS IAPD'
+            }
+          ]}
+        />
+        <span className="tooltip-container">
+          <Tooltip
+            className="ds-c-tooltip__trigger-link"
+            component="a"
+            onClose={function noRefCheck() {}}
+            onOpen={function noRefCheck() {}}
+            title="Medicaid Management Information System"
+          >
+            <TooltipIcon />
+          </Tooltip>
+        </span>
+      </div>
       <Controller
         name="name"
         control={control}

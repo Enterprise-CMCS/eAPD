@@ -32,43 +32,8 @@ export default {
 
 const Template = args => <ApdNew {...args} />;
 
-export const mmisEnabledStory = Template.bind({});
-mmisEnabledStory.parameters = {
-  launchdarkly: {
-    flags: {
-      enableMmis: true
-    }
-  }
-};
-mmisEnabledStory.decorators = [
-  story =>
-    renderWithProvider({
-      initialState: {
-        user: {
-          data: {
-            state: {
-              id: 'na',
-              state: 'New Apdland'
-            },
-            states: {
-              na: 'requested'
-            }
-          }
-        }
-      },
-      story
-    })
-];
-
-export const mmisDisabledStory = Template.bind({});
-mmisDisabledStory.parameters = {
-  launchdarkly: {
-    flags: {
-      enableMmis: false
-    }
-  }
-};
-mmisDisabledStory.decorators = [
+export const BasicStory = Template.bind({});
+BasicStory.decorators = [
   story =>
     renderWithProvider({
       initialState: {

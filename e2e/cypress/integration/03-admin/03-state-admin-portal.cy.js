@@ -32,7 +32,6 @@ describe('tests state admin portal', async function () {
   });
 
   it('tests state admin portal', { tags: ['@state', '@admin'] }, function () {
-    cy.updateFeatureFlags({ supportStateAvailable: true });
     // Request access on No Role
     cy.visit('/');
     cy.loginWithEnv('norole');

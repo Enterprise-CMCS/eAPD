@@ -110,8 +110,6 @@ describe(
     });
 
     it('allows matching to users/affiliations', function () {
-      cy.updateFeatureFlags({ supportStateAvailable: true });
-
       cy.contains('Match To User').click();
 
       cy.contains('Cancel').click();

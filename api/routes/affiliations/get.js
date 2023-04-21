@@ -1,9 +1,8 @@
 import loggerFactory from '../../logger/index.js';
 import { getAffiliationsByUserId as _getAffiliationsByUserId } from '../../db/index.js';
 import { loggedIn } from '../../middleware/index.js';
-import { isSysAdmin } from '../../util/auth.js';
 import { getAllStates as _getAllStates } from '../../db/states.js';
-import { AFFILIATION_STATUSES } from '@cms-eapd/common';
+import { AFFILIATION_STATUSES, isSysAdmin } from '@cms-eapd/common';
 
 const { APPROVED } = AFFILIATION_STATUSES;
 
@@ -22,7 +21,7 @@ export default (
       message: `handling GET /me endpoint}`
     });
     try {
-      if (await isSysAdmin(request.user.username)) {
+      if (isSysAdmin(request.user.username)) {
         const allStates = await getAllStates();
         const resp = allStates.map(state => ({
           displayName: request.user.displayName,

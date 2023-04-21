@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { useReducer, Fragment, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
 import { AFFILIATION_STATUSES } from '@cms-eapd/common';
@@ -17,7 +18,8 @@ const StateAccessRequest = ({
   fetching,
   secondaryButtonText
 }) => {
-  const allowedStates = useAvailableStates();
+  const username = useSelector(state => state?.user?.data?.username || '');
+  const allowedStates = useAvailableStates(username);
 
   const initialState = {
     fullStateList: allowedStates,

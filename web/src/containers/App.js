@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useLDClient } from 'launchdarkly-react-client-sdk';
+import React from 'react';
 
 import Routes from '../pages/MainRoutes';
 import Wrapper from '../components/Wrapper';
@@ -9,15 +7,6 @@ import AriaAnnounce from '../components/AriaAnnounce';
 import AutoScrollToElement from '../components/AutoScrollToElement';
 
 const App = () => {
-  const ldClient = useLDClient();
-  const username = useSelector(state => state?.user?.data?.username || '');
-
-  useEffect(() => {
-    if (ldClient) {
-      ldClient.identify({ kind: 'user', key: username, name: username });
-    }
-  }, [username, ldClient]);
-
   return (
     <Wrapper>
       <AriaAnnounce />

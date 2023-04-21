@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import loggerFactory from '../../logger/index.js';
 
 const logger = loggerFactory('user seeder');
+const SEEDED_STATE = 'na';
 
 const { REQUESTED, APPROVED, DENIED, REVOKED } = AFFILIATION_STATUSES;
 
@@ -43,7 +44,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const requestedRole = (await oktaClient.getUser('requestedrole')) || {};
   const deniedRole = (await oktaClient.getUser('deniedrole')) || {};
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
-  const betaUser = (await oktaClient.getUser('betauser')) || {};
+  // const betaUser = (await oktaClient.getUser('betauser')) || {};
   const mfaUser = (await oktaClient.getUser('mfa@email.com')) || {};
   const resetmfa = (await oktaClient.getUser('resetmfa')) || {};
 
@@ -73,7 +74,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (regularUser) {
     oktaAffiliations.push({
       user_id: regularUser.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateAdminRoleId,
       status: APPROVED,
       username: regularUser.profile.login,
@@ -88,7 +89,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (mfaUser) {
     oktaAffiliations.push({
       user_id: mfaUser.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateStaffRoleId,
       status: APPROVED,
       username: mfaUser.profile.login
@@ -110,7 +111,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateAdmin) {
     oktaAffiliations.push({
       user_id: stateAdmin.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateAdminRoleId,
       status: APPROVED,
       username: stateAdmin.profile.login,
@@ -125,7 +126,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (expiredAdmin) {
     oktaAffiliations.push({
       user_id: expiredAdmin.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateAdminRoleId,
       status: APPROVED,
       username: expiredAdmin.profile.login,
@@ -141,7 +142,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaAffiliations.push({
       id: 1001, // manually set id for testing
       user_id: pendingAdmin.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateStaffRoleId,
       status: APPROVED,
       username: pendingAdmin.profile.login
@@ -159,7 +160,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       id: 1002, // manually set id for testing
       ffy: currentFfy,
       name: `${pendingAdmin.profile.firstName} ${pendingAdmin.profile.lastName}`,
-      state: 'na',
+      state: SEEDED_STATE,
       email: pendingAdmin.profile.email,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
@@ -187,7 +188,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateStaff) {
     oktaAffiliations.push({
       user_id: stateStaff.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateStaffRoleId,
       status: APPROVED,
       username: stateStaff.profile.login
@@ -198,7 +199,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (stateContractor) {
     oktaAffiliations.push({
       user_id: stateContractor.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateContractorRoleId,
       status: APPROVED,
       username: stateContractor.profile.login
@@ -209,7 +210,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (requestedRole) {
     oktaAffiliations.push({
       user_id: requestedRole.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       status: REQUESTED,
       username: requestedRole.profile.login
     });
@@ -220,7 +221,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (deniedRole) {
     oktaAffiliations.push({
       user_id: deniedRole.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       status: DENIED,
       username: deniedRole.profile.login
     });
@@ -230,7 +231,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   if (revokedRole) {
     oktaAffiliations.push({
       user_id: revokedRole.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       status: REVOKED,
       username: revokedRole.profile.login
     });
@@ -238,21 +239,21 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaUsers.push(formatOktaUser(revokedRole));
   }
 
-  if (betaUser) {
-    oktaAffiliations.push({
-      user_id: betaUser.id,
-      state_id: 'na',
-      role_id: stateStaffRoleId,
-      status: APPROVED,
-      username: betaUser.profile.login
-    });
-    oktaUsers.push(formatOktaUser(betaUser));
-  }
+  // if (betaUser) {
+  //   oktaAffiliations.push({
+  //     user_id: betaUser.id,
+  //     state_id: SEEDED_STATE,
+  //     role_id: stateStaffRoleId,
+  //     status: APPROVED,
+  //     username: betaUser.profile.login
+  //   });
+  //   oktaUsers.push(formatOktaUser(betaUser));
+  // }
 
   if (resetmfa) {
     oktaAffiliations.push({
       user_id: resetmfa.id,
-      state_id: 'na',
+      state_id: SEEDED_STATE,
       role_id: stateStaffRoleId,
       status: APPROVED,
       username: resetmfa.profile.login
