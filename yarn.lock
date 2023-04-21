@@ -13278,10 +13278,15 @@ jpeg-js@^0.4.1:
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.4.tgz#a9f1c6f1f9f0fa80cdb3484ed9635054d28936aa"
   integrity sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==
 
-js-cookie@3.0.1, js-cookie@^3.0.1:
+js-cookie@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
   integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
+js-cookie@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.2.tgz#a9a1e8f51b08d3a47caf1a79705ea715dca40384"
+  integrity sha512-5EgA+ev3+vChW7A7t2Oz2Lbr5u/5Pb1ikENtFuYP6GPZpX5Mm84WRlRtD9+9p7myNphw6N24AG/UzrE4HgGLtA==
 
 js-library-detector@^6.4.0:
   version "6.6.0"
