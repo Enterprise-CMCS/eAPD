@@ -23,7 +23,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   before(function () {
     // activityPage = new ActivityPage();
     budgetPage = new BudgetPage();
-    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
 
@@ -59,7 +58,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
 
-    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.fixture('mmis-basics.json').as('mmisBasics');
 
     cy.useStateStaff();
@@ -68,7 +66,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   after(function () {
     cy.visit('/');
-    cy.deleteAPD(this.apdId);
+    cy.deleteAPD(this.apdId); // try removing the this
   });
 
   describe('Create MMIS APD', function () {
@@ -190,14 +188,75 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
-      testApdName(); // Try removing the describe above and moving testApdName to the it below
+      testApdName();
 
       it('tests APD Update section', () => {
         cy.goToApdOverview();
+        let allYears = [];
 
-        // When No is selected in the Is Update section, Update Type options do NOT display
+        // Check all of the years
+        cy.get('[data-cy=yearList]').within(() => {
+          cy.get("[class='ds-c-choice']").each(($el, index, list) => {
+            allYears.push(list[index].value);
+            if (!list[index].checked) {
+              cy.findByRole('checkbox', { name: list[index].value }).check({
+                force: true
+              });
+            }
+          });
+        });
+
+        cy.then(() => {
+          // The last FFY should be check
+          cy.get('#apd-header-info').should('contain', allYears[0]);
+          cy.get('#apd-header-info').should(
+            'contain',
+            allYears[allYears.length - 1]
+          );
+
+          // Testing delete(cancel) last FFY
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).uncheck({
+            force: true
+          });
+
+          // Cancel the delete
+          cy.contains('Delete FFY?').should('exist');
+          cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
+          cy.get('button[id="dialog-cancel"]').click({ force: true });
+
+          // the last FFY should still be check
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).should('be.checked');
+          cy.get('#apd-header-info').should(
+            'contain',
+            allYears[allYears.length - 1]
+          );
+
+          // Testing delete(confirm) last FFY
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).uncheck({
+            force: true
+          });
+          cy.get('button[id="dialog-delete"]').click({ force: true });
+          cy.contains('Delete FFY?').should('not.exist');
+
+          // the last FFY should not be checked
+          cy.findByRole('checkbox', {
+            name: allYears[allYears.length - 1]
+          }).should('not.be.checked');
+          cy.get('#apd-header-info').should(
+            'not.contain',
+            allYears[allYears.length - 1]
+          );
+        });
+
         cy.findByText('Is this an APD update?').should('exist');
 
+        // When No is selected in the Is Update section, Update Type options do NOT display
         cy.findByRole('radio', {
           name: /No, this is for a new project./i
         }).click();
@@ -426,30 +485,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.checkTinyMCE(
         'bc-dr-plan',
         `<p>${mmisBasics.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
-      );
-    });
-
-    it('tests the Results of Previous Activities section', function () {
-      const mmisBasics = this.mmisBasics;
-
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-      cy.goToApdOverview();
-      cy.wait(2000);
-      cy.goToPreviousActivities();
-      cy.wait(2000);
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
       );
     });
   });

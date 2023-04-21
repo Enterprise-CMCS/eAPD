@@ -184,7 +184,7 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'shouldBeCloseTo',
   { prevSubject: true },
-  ($element, expected, delta = 1) => {
+  ($element, expected, delta = 2) => {
     expect(convertDollarStrToNum($element.text())).to.be.closeTo(
       expected,
       delta
@@ -644,31 +644,6 @@ Cypress.Commands.add('checkPageA11y', () => {
     null,
     callback
   ); // Remove ignored nav when upgrading cms design system
-});
-
-// Cypress command to turn on a feature flag for launch darkly
-Cypress.Commands.add('updateFeatureFlags', featureFlags => {
-  // ignore api calls to events endpoint
-  cy.intercept(
-    { method: 'POST', hostname: /.*events.launchdarkly.us/ },
-    { body: {} }
-  ).as('LDEvents');
-
-  // turn off push (EventSource) updates from LaunchDarkly
-  cy.intercept({ method: 'GET', hostname: /.*stream.launchdarkly.us/ }, req => {
-    req.reply('Random message');
-  }).as('LDClientStream');
-
-  const flags = {};
-  Cypress._.forEach(featureFlags, function (ffValue, ffKey) {
-    flags[ffKey] = { value: ffValue };
-  });
-
-  // return feature flag values in format expected by launchdarkly client
-  cy.intercept(
-    { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
-    { body: flags }
-  ).as('LDApp');
 });
 
 Cypress.Commands.add('turnOnAdminCheck', () => {

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
 import { APD_TYPE } from '@cms-eapd/common';
-import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import classNames from 'classnames';
 
@@ -74,33 +73,6 @@ const CostAllocationRows = ({
   showUnitCostHeader,
   highlightTotal
 }) => {
-  const { emptyBudgetWording } = useFlags();
-  const [emptyStateStaff, setEmptyStateStaff] = useState(
-    'State staff not specified.'
-  );
-  const [emptyStateExpense, setEmptyStateExpense] = useState(
-    'Other state expenses not specified.'
-  );
-  const [emptyPrivateContractor, setEmptyPrivateContractor] = useState(
-    'Private contractor not specified.'
-  );
-
-  useEffect(() => {
-    setEmptyStateStaff(
-      emptyBudgetWording ? 'State staff not specified.' : 'State staff'
-    );
-    setEmptyStateExpense(
-      emptyBudgetWording
-        ? 'Other state expenses not specified.'
-        : 'Other state expense'
-    );
-    setEmptyPrivateContractor(
-      emptyBudgetWording
-        ? 'Private contractor not specified.'
-        : 'Private contractor'
-    );
-  }, [emptyBudgetWording]);
-
   const budgetTableClassName = classNames({
     'budget-table--number': true,
     'budget-table--cell__hightlight-lighter': highlightSubtotals
@@ -150,7 +122,9 @@ const CostAllocationRows = ({
       )}
       <CostSummaryRows
         items={years[ffy].statePersonnel}
-        defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateStaff : null}
+        defaultMessage={
+          apdType === APD_TYPE.MMIS ? 'State staff not specified.' : null
+        }
         highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
@@ -189,7 +163,11 @@ const CostAllocationRows = ({
       </tr>
       <CostSummaryRows
         items={years[ffy].nonPersonnel}
-        defaultMessage={apdType === APD_TYPE.MMIS ? emptyStateExpense : null}
+        defaultMessage={
+          apdType === APD_TYPE.MMIS
+            ? 'Other state expenses not specified.'
+            : null
+        }
         highlightSubtotals={highlightSubtotals}
       />
       {otherFunding && (
@@ -232,7 +210,7 @@ const CostAllocationRows = ({
       <CostSummaryRows
         items={years[ffy].contractorResources}
         defaultMessage={
-          apdType === APD_TYPE.MMIS ? emptyPrivateContractor : null
+          apdType === APD_TYPE.MMIS ? 'Private contractor not specified.' : null
         }
         highlightSubtotals={highlightSubtotals}
       />

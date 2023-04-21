@@ -26,11 +26,11 @@ import {
   selectBudgetGrandTotal
 } from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
+import FFYList from '../../../components/FFYList';
 
 import {
   arrayOfObjectsToStringList,
   businessAreaChoices,
-  ffyList,
   updateStatusChoices
 } from '../../../util/apd';
 
@@ -44,9 +44,6 @@ const ExecutiveSummary = ({
   years
 }) => {
   const { apdId } = useParams();
-  const { ffys } = total;
-  const isApdMmis = apdType === APD_TYPE.MMIS;
-  const noYears = !years.length;
   const statusList = updateStatusChoices(updateStatus);
 
   function renderSubtitle(apdType, updateStatus) {
@@ -70,21 +67,18 @@ const ExecutiveSummary = ({
   }
 
   function renderMedicaidBusinessAreas() {
-    if (isApdMmis) {
-      var businessAreasList = businessAreaChoices(medicaidBusinessAreas);
-      return (
-        <div>
-          <p className="ds-u-margin-top--1">
-            <strong>Medicaid Business Area(s) :</strong>{' '}
-            {!businessAreasList.length
-              ? 'Provide at least one Medicaid Business Area.'
-              : arrayOfObjectsToStringList(businessAreasList)}
-          </p>
-          {otherDetails()}
-        </div>
-      );
-    }
-    return null;
+    const businessAreasList = businessAreaChoices(medicaidBusinessAreas);
+    return (
+      <div>
+        <p className="ds-u-margin-top--1">
+          <strong>Medicaid Business Area(s) :</strong>{' '}
+          {businessAreasList.length > 0
+            ? arrayOfObjectsToStringList(businessAreasList)
+            : 'Provide at least one Medicaid Business Area.'}
+        </p>
+        {otherDetails()}
+      </div>
+    );
   }
 
   return (
@@ -108,7 +102,7 @@ const ExecutiveSummary = ({
                 ? arrayOfObjectsToStringList(statusList)
                 : 'New Project'}
             </p>
-            {renderMedicaidBusinessAreas()}
+            {apdType === APD_TYPE.MMIS && renderMedicaidBusinessAreas()}
           </div>
         </Subsection>
         <Waypoint id="executive-activities-summary" />
@@ -116,23 +110,17 @@ const ExecutiveSummary = ({
           id="executive-activities-summary"
           resource="executiveSummary.activitiesSummary"
         >
-          {/* Show relevant activities fields based on APD type selected */}
-          {!noYears && (
-            <ActivityExecutiveSummary
-              apdId={apdId}
-              data={data}
-              ffys={ffys}
-              isApdMmis={isApdMmis}
-              noYears={noYears}
-            />
-          )}
-
+          <ActivityExecutiveSummary
+            apdId={apdId}
+            data={data}
+            enableEdit
+            years={years}
+          />
           <hr className="ds-u-margin--0" />
-          <Review
-            heading="Total Cost"
-            headingLevel="4"
-            className="ds-u-border--0"
-          >
+          <h3 className="ds-h3 ds-u-margin-top--2 ds-u-margin-bottom--0">
+            Total Cost
+          </h3>
+          <Review className="ds-u-border--0 ds-u-padding--0">
             <p>
               Verify that this information is correct. Edit activities above to
               make changes.
@@ -140,7 +128,7 @@ const ExecutiveSummary = ({
             <div className="ds-c-list--bare">
               <p>
                 <strong>Federal Fiscal Years Requested:</strong> FFY{' '}
-                {!noYears && years.join(', ')}
+                {years && years.join(', ')}
               </p>
               <p>
                 <strong>Total Computable Medicaid Cost:</strong>{' '}
@@ -151,14 +139,12 @@ const ExecutiveSummary = ({
                 <strong>Total Funding Request:</strong>{' '}
                 <Dollars>{total.combined}</Dollars>
               </p>
-              {!noYears && ffyList(total.ffys)}
+              {total.ffys && <FFYList ffys={total.ffys} />}
             </div>
           </Review>
         </Subsection>
-
         <Waypoint id="executive-summary-budget-table" />
-        {/* Show relevant budgets based on APD type selected */}
-        {!noYears && <ExecutiveSummaryBudget />}
+        <ExecutiveSummaryBudget />
       </Section>
     </React.Fragment>
   );

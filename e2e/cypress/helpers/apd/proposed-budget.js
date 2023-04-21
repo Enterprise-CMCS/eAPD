@@ -9,7 +9,6 @@ export const testDefaultProposedBudget = function () {
   });
 
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('proposed-budget-test.json').as('budgetData');
 
     cy.useStateStaff();
@@ -109,7 +108,6 @@ export const testProposedBudgetWithData = function () {
   });
 
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('proposed-budget-test.json').as('budgetData');
 
     cy.useStateStaff();

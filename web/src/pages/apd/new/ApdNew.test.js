@@ -5,7 +5,6 @@ import {
   act,
   waitFor
 } from 'apd-testing-library';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
 
 import ApdNew from './ApdNew';
@@ -51,29 +50,12 @@ describe('<ApdNew />', () => {
   describe('form with MMIS disabled', () => {
     beforeEach(() => {
       jest.clearAllMocks();
-      resetLDMocks();
-      mockFlags({ enableMmis: false });
-    });
-
-    it('should not show MMIS option', async () => {
-      await setup(props, options);
-      expect(
-        screen.getByText(/Create a New Advanced Planning Document/)
-      ).toBeTruthy();
-      expect(screen.queryByText(/MMIS IAPD/)).toBeFalsy();
-      expect(
-        screen.getByRole('button', { name: /Create an APD/ })
-      ).toBeDisabled();
-    });
-
-    it('should automatically check HITECH IAPD', async () => {
-      await setup(props, options);
-      expect(screen.getByRole('radio', { name: /HITECH IAPD/i })).toBeChecked();
     });
 
     it('requires all fields to enable Create APD button', async () => {
       const { user } = await setup(props, options);
       const disabledBtn = screen.getByRole('button', { name: /Create an APD/ });
+      await user.click(screen.getByRole('radio', { name: /HITECH IAPD/i }));
       expect(screen.getByRole('radio', { name: /HITECH IAPD/i })).toBeChecked();
 
       expect(disabledBtn).toBeDisabled();
@@ -117,8 +99,6 @@ describe('<ApdNew />', () => {
   describe('form with MMIS enabled', () => {
     beforeEach(() => {
       jest.clearAllMocks();
-      resetLDMocks();
-      mockFlags({ enableMmis: true });
     });
 
     it('should display form with MMIS', async () => {
@@ -135,8 +115,6 @@ describe('<ApdNew />', () => {
     describe('selecting and filling out HITECH form', () => {
       beforeEach(() => {
         jest.clearAllMocks();
-        resetLDMocks();
-        mockFlags({ enableMmis: true });
       });
 
       it('should render all field options correctly', async () => {
@@ -227,8 +205,6 @@ describe('<ApdNew />', () => {
     describe('selecting and filling out MMIS form', () => {
       beforeEach(() => {
         jest.clearAllMocks();
-        resetLDMocks();
-        mockFlags({ enableMmis: true });
       });
 
       it('should render all field options correctly', async () => {

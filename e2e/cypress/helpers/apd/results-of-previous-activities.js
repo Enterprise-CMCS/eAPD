@@ -6,7 +6,7 @@ export const testDefaultResultsOfPreviousActivities = function () {
     const previousActivitiesPage = new PreviousActivitiesPage();
     cy.goToPreviousActivities();
     // Get the years referenced by previous activities
-    previousActivitiesPage.getYears();
+    previousActivitiesPage.getYears('HITECH');
 
     cy.goToPreviousActivities();
 
@@ -89,7 +89,7 @@ export const testResultsOfPreviousActivitiesWithData = function () {
     cy.visit(this.apdUrl);
     cy.goToPreviousActivities();
     // Get the years referenced by previous activities
-    previousActivitiesPage.getYears();
+    previousActivitiesPage.getYears('HITECH');
   });
 
   beforeEach(function () {
@@ -121,6 +121,68 @@ export const testResultsOfPreviousActivitiesWithData = function () {
   });
 
   it('should have the correct values on the export view', function () {
+    const resultsOfPreviousActivities = this.resultsOfPreviousActivities;
+    const exportPage = new ExportPage();
+    exportPage.getPrevActExpenditureVals();
+
+    cy.goToExportView();
+
+    cy.findByRole('heading', { name: /Prior Activities Overview/i })
+      .next()
+      .should('have.text', resultsOfPreviousActivities.summary);
+
+    exportPage.verifyPrevActInputs(resultsOfPreviousActivities.expenditures);
+    exportPage.verifyPrevActFFY();
+    exportPage.verifyPrevActTotals();
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+  });
+};
+
+export const testMmisResultsOfPreviousActivitiesWithData = function () {
+  let previousActivitiesPage;
+
+  before(function () {
+    previousActivitiesPage = new PreviousActivitiesPage();
+
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
+    cy.goToPreviousActivities();
+    // Get the years referenced by previous activities
+    previousActivitiesPage.getYears('MMIS');
+  });
+
+  beforeEach(function () {
+    cy.fixture('mmis-with-data.json').as('mmisData');
+  });
+
+  it('fill out Results of Previous Activities', function () {
+    const mmisData = this.mmisData;
+    const resultsOfPreviousActivitiesData = mmisData.previousActivities;
+
+    cy.goToPreviousActivities();
+
+    cy.url().should('include', '/previous-activities');
+    cy.findByRole('heading', {
+      name: /Results of Previous Activities/i
+    }).should('exist');
+
+    previousActivitiesPage.setSummary(
+      resultsOfPreviousActivitiesData.previousActivitySummary
+    );
+    previousActivitiesPage.setMmisExpenditures(
+      resultsOfPreviousActivitiesData.actualExpenditures
+    );
+
+    previousActivitiesPage.verifyMmisFFP();
+    previousActivitiesPage.verifyTotalMmisFFP();
+    previousActivitiesPage.verifyTotalMmisExpenditures();
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.waitForSave();
+  });
+
+  it.skip('should have the correct values on the export view', function () {
     const resultsOfPreviousActivities = this.resultsOfPreviousActivities;
     const exportPage = new ExportPage();
     exportPage.getPrevActExpenditureVals();

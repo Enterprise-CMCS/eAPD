@@ -2,7 +2,6 @@ import React from 'react';
 import Router from 'react-router-dom';
 import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import { plain as ExecutiveSummary } from './ExecutiveSummary';
 import { APD_TYPE } from '@cms-eapd/common';
@@ -164,13 +163,13 @@ const setup = async (props = {}, options = {}) => {
 describe('<ExecutiveSummary />', () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    resetLDMocks();
   });
 
   test('renders HITECH correctly', async () => {
-    mockFlags({ enableMmis: false });
     await setup(
-      {},
+      {
+        apdType: APD_TYPE.HITECH
+      },
       {
         initialState: {
           apd: {
@@ -197,10 +196,10 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Total Cost' })).toBeTruthy();
   });
 
   test('renders MMIS correctly', async () => {
-    mockFlags({ enableMmis: true });
     await setup(
       {
         apdType: APD_TYPE.MMIS,
@@ -227,5 +226,6 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Total Cost' })).toBeTruthy();
   });
 });

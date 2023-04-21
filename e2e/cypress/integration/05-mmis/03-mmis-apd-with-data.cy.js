@@ -2,6 +2,9 @@ import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
 import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 import { testMmisAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
+import { testKeyStatePersonnelWithDataMmis } from '../../helpers/apd/key-state-personnel.js';
+import { testMmisResultsOfPreviousActivitiesWithData } from '../../helpers/apd/results-of-previous-activities.js';
+import { testSecurityPlanning } from '../../helpers/mmis/mmis-security-planning.js';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -13,13 +16,15 @@ describe(
     const years = [];
 
     before(function () {
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
       cy.useStateStaff();
       cy.visit('/');
 
       cy.findAllByText('Create new').click();
       cy.findByRole('radio', { name: /MMIS/i }).click();
-      cy.findByLabelText('APD Name').clear().type('My MMIS IAPD').blur();
+      cy.findByLabelText('APD Name')
+        .clear()
+        .type('MMIS IAPD - Temp Name')
+        .blur();
       cy.findByRole('radio', {
         name: /No, this is for a new project./i
       }).click();
@@ -50,7 +55,6 @@ describe(
       cy.wrap(apdId).as('apdId');
       cy.wrap(years).as('years');
 
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
       cy.useStateStaff();
       cy.visit(apdUrl);
     });
@@ -66,12 +70,24 @@ describe(
         testMmisAPDOverviewWithData();
       });
 
-      describe('first', function () {
+      describe('State Priorities and Scope of APD', function () {
         testStatePrioritiesAndScopeWithData();
       });
 
-      describe('add activity', function () {
+      describe('Key State Personnel', function () {
+        testKeyStatePersonnelWithDataMmis();
+      });
+
+      describe('Results of Previous Activities', function () {
+        testMmisResultsOfPreviousActivitiesWithData();
+      });
+
+      describe('add activities', function () {
         addMMISActivity();
+      });
+
+      describe('Security Planning', function () {
+        testSecurityPlanning();
       });
 
       describe('Assurances and Compliance', function () {
