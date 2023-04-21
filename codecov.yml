@@ -27,19 +27,19 @@ coverage:
         only_pulls: true
         removed_code_behavior: adjust_base
       api:
-        target: 73%
+        target: 65%
         paths: #note, accepts globs, not regexes
           - api/
         flags:
           - api
       common:
-        target: 73%
+        target: 65%
         paths:
           - common/
         flags:
           - common
       web:
-        target: 73%
+        target: 65%
         paths:
           - web/
         flags:

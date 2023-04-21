@@ -250,3 +250,181 @@ export const testKeyStatePersonnelWithData = function () {
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
+
+export const testKeyStatePersonnelWithDataMmis = function () {
+  beforeEach(function () {
+    cy.fixture('mmis-with-data.json').as('mmisData');
+  });
+
+  it('Fill out Key State Personnel', function () {
+    const mmisData = this.mmisData;
+    const kepStatePersonnelData = mmisData.keyStatePersonnel;
+
+    cy.goToKeyStatePersonnel();
+
+    cy.url().should('include', '/state-profile');
+    cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
+
+    cy.get('input[name="medicaidDirector.name"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidDirector.name);
+    cy.get('input[name="medicaidDirector.email"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidDirector.email);
+    cy.get('input[name="medicaidDirector.phone"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidDirector.phone);
+    cy.get('input[name="medicaidOffice.address1"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidOffice.address1);
+    if (kepStatePersonnelData.medicaidOffice.address2) {
+      cy.get('input[name="medicaidOffice.address2"]')
+        .clear()
+        .type(kepStatePersonnelData.medicaidOffice.address2);
+    }
+    cy.get('input[name="medicaidOffice.city"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidOffice.city);
+    cy.get('input[name="medicaidOffice.zip"]')
+      .clear()
+      .type(kepStatePersonnelData.medicaidOffice.zip);
+    cy.get('select[name="medicaidOffice.state"]')
+      .select(kepStatePersonnelData.medicaidOffice.state)
+      .trigger('change');
+
+    kepStatePersonnelData.keyPersonnel.forEach((person, index) => {
+      if (index === 0) {
+        cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+      } else {
+        cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      }
+
+      cy.get(`[data-cy="key-person-${index}__name"]`).clear().type(person.name);
+      cy.get(`[data-cy="key-person-${index}__email"]`)
+        .clear()
+        .type(person.email);
+      cy.get(`[data-cy="key-person-${index}__position"]`)
+        .clear()
+        .type(person.position);
+
+      if (person.hasCosts) {
+        cy.findByRole('radio', { name: /Yes/i }).click();
+
+        mmisData.years.forEach((year, yearIndex) => {
+          cy.get(`[data-cy="key-person-${index}-${yearIndex}__cost"]`).type(
+            person.costs[year]
+          );
+          cy.get(`[data-cy="key-person-${index}-${yearIndex}__fte"]`).type(
+            person.fte[year]
+          );
+          cy.get(
+            `[data-cy="key-person-${index}-${yearIndex}__medicaidShare"]`
+          ).type(person.medicaidShare[year]);
+
+          if (person.split[year].fundingCategory === 'DDI') {
+            cy.findAllByRole('radio', {
+              name: '90/10 Design, Development, and Installation (DDI)'
+            })
+              .eq(yearIndex)
+              .click()
+              .blur();
+          } else if (person.split[year].fundingCategory === 'M&O') {
+            cy.findAllByRole('radio', {
+              name: '75/25 Maintenance & Operations (M&O)'
+            })
+              .eq(yearIndex)
+              .click()
+              .blur();
+          }
+        });
+      } else {
+        cy.findByRole('radio', { name: /No/i }).click().blur();
+      }
+
+      cy.findByRole('button', { name: /Save/i }).click();
+      cy.waitForSave();
+
+      cy.get('.ds-c-review__heading')
+        .contains(`${index + 1}.`)
+        .should('have.text', `${index + 1}. ${person.name}`);
+      cy.get('.ds-c-review__heading')
+        .contains(`${index + 1}.`)
+        .next()
+        .find('li')
+        .should($lis => {
+          if (person.isPrimary) {
+            expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
+            expect($lis.eq(1)).to.contain(person.position);
+          } else {
+            expect($lis.eq(0)).to.contain(person.position);
+          }
+        });
+    });
+  });
+
+  it.skip('should display the correct values in the export view', function () {
+    const years = this.years;
+    cy.log({ years });
+
+    cy.goToExportView();
+
+    cy.findByRole('heading', { name: /Key State Personnel/i })
+      .parent()
+      .as('personnel');
+
+    cy.fixture('users').then(userData => {
+      cy.get('@personnel')
+        .findByRole('heading', { name: /Medicaid director/i })
+        .next()
+        .should(
+          'have.text',
+          `${
+            userData[0].name // Mysterious extra space
+          }Email: ${userData[0].email}Phone: ${userData[0].phone}`
+        );
+
+      // Default state is Alabama
+      cy.get('@personnel')
+        .findByRole('heading', { name: /Medicaid office address/i })
+        .next()
+        .should(
+          'have.text',
+          `${
+            userData[0].address.street +
+            userData[0].address.suite +
+            userData[0].address.city
+          }, AL ${userData[0].address.zipcode}`
+        );
+
+      // Check text data for the first personnel
+      cy.get('@personnel')
+        .findByRole('heading', {
+          name: /Key Personnel and Program Management/i
+        })
+        .next()
+        .find('ul')
+        .first()
+        .should(
+          'have.text',
+          `1. ${userData[1].name}Primary APD Point of Contact${userData[1].username}Email: ${userData[1].email}Total cost: $0`
+        );
+
+      // Create string to check for personnel who is chargeable for the project for certain years.
+      let str = `2. ${userData[3].name}${userData[3].username}Email: ${userData[3].email}`;
+      str += years
+        .map(year => `FFY ${year} Cost: $100,000 | FTE: 0.5 | Total: $50,000`)
+        .join('');
+
+      cy.get('@personnel')
+        .findByRole('heading', {
+          name: /Key Personnel and Program Management/i
+        })
+        .next()
+        .find('ul')
+        .eq(1)
+        .should('have.text', str);
+    });
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+  });
+};
