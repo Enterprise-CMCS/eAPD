@@ -560,7 +560,7 @@ class ExportPage {
   }) => {
     cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
       .parent()
-      .findByRole('heading', { name: /Total Cost of All Activities/i })
+      .findByRole('heading', { name: /Total Cost/i })
       .next()
       .within(() => {
         cy.contains('Federal Fiscal Years requested:')
@@ -608,16 +608,16 @@ class ExportPage {
   }) => {
     cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
       .parent()
-      .contains('h3', `Activity ${index + 1}: ${activityName}`)
+      .contains('h4', `Activity ${index + 1}: ${activityName}`)
       .next()
       .within(() => {
         if (shortOverview) {
           cy.contains(shortOverview);
         }
-        cy.contains('Start date - End date:')
+        cy.contains('Start Date - End Date:')
           .parent()
           .should('contain', getDateRange(startDate, endDate));
-        cy.contains('Total cost of activity:')
+        cy.contains('Total Cost of Activity:')
           .next()
           .shouldBeCloseTo(activityTotalCosts);
         cy.contains('Total Computable Medicaid Cost:')

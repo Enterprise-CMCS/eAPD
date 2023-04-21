@@ -5,12 +5,15 @@ exports[`executive summary component renders correctly 1`] = `
   <h2>
     Executive Summary
   </h2>
+  <h3
+    className="ds-h3"
+  >
+    Total Cost
+  </h3>
   <Review
     ariaLabel={null}
     className="ds-u-border--0"
     editHref={null}
-    heading="Total Cost of All Activities"
-    headingLevel="3"
     objType={null}
     onDeleteClick={null}
     onDeleteLabel={null}
@@ -52,292 +55,82 @@ exports[`executive summary component renders correctly 1`] = `
           10
         </Dollars>
       </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          5232
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          23626
-        </Dollars>
-         (
-        <Dollars>
-          2883
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          848622
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2468252
-        </Dollars>
-         (
-        <Dollars>
-          826
-        </Dollars>
-         
-        Federal share)
-      </li>
-    </ul>
-  </Review>
-  <Review
-    ariaLabel={null}
-    className=""
-    editHref={null}
-    heading="Activity 1: Activity 1"
-    headingLevel="3"
-    key="a1"
-    objType={null}
-    onDeleteClick={null}
-    onDeleteLabel={null}
-    onEditClick={null}
-    skipConfirmation={false}
-    title={null}
-  >
-    <p
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "first activity",
+      <FFYList
+        ffys={
+          Object {
+            "1": Object {
+              "federal": 2883,
+              "medicaid": 23626,
+              "total": 5232,
+            },
+            "2": Object {
+              "federal": 826,
+              "medicaid": 2468252,
+              "total": 848622,
+            },
+          }
         }
-      }
-    />
-    <ul
-      className="ds-c-list--bare"
-    >
-      <li>
-        <strong>
-          Start date - End date:
-        </strong>
-         
-      </li>
-      <li>
-        <strong>
-          Total cost of activity:
-        </strong>
-         
-        <Dollars>
-          950
-        </Dollars>
-      </li>
-      <li>
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          1150
-        </Dollars>
-         (
-        <Dollars>
-          1050
-        </Dollars>
-         Federal share)
-      </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          5232
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          23626
-        </Dollars>
-         (
-        <Dollars>
-          2883
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          848622
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2468252
-        </Dollars>
-         (
-        <Dollars>
-          826
-        </Dollars>
-         
-        Federal share)
-      </li>
+      />
     </ul>
   </Review>
-  <Review
-    ariaLabel={null}
-    className="ds-u-border-bottom--0"
-    editHref={null}
-    heading="Activity 2: Untitled"
-    headingLevel="3"
-    key="a2"
-    objType={null}
-    onDeleteClick={null}
-    onDeleteLabel={null}
-    onEditClick={null}
-    skipConfirmation={false}
-    title={null}
+  <h3
+    className="subsection--title ds-h3"
   >
-    <p
-      dangerouslySetInnerHTML={
+    Activity Summary
+  </h3>
+  <ActivityExecutiveSummary
+    data={
+      Array [
         Object {
-          "__html": "second activity",
-        }
-      }
-    />
-    <ul
-      className="ds-c-list--bare"
-    >
-      <li>
-        <strong>
-          Start date - End date:
-        </strong>
-         
-      </li>
-      <li>
-        <strong>
-          Total cost of activity:
-        </strong>
-         
-        <Dollars>
-          310
-        </Dollars>
-      </li>
-      <li>
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          2150
-        </Dollars>
-         (
-        <Dollars>
-          2050
-        </Dollars>
-         Federal share)
-      </li>
-      <li
-        className="ds-u-margin-top--2"
-        key="1"
-      >
-        <strong>
-          FFY 
-          1
-          :
-        </strong>
-         
-        <Dollars>
-          26926
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          989264
-        </Dollars>
-         (
-        <Dollars>
-          2356
-        </Dollars>
-         
-        Federal share)
-      </li>
-      <li
-        className=""
-        key="2"
-      >
-        <strong>
-          FFY 
-          2
-          :
-        </strong>
-         
-        <Dollars>
-          54634738
-        </Dollars>
-         |
-         
-        <strong>
-          Total Computable Medicaid Cost:
-        </strong>
-         
-        <Dollars>
-          73
-        </Dollars>
-         (
-        <Dollars>
-          643
-        </Dollars>
-         
-        Federal share)
-      </li>
-    </ul>
-  </Review>
+          "activityId": "a1",
+          "combined": 950,
+          "federal": 1050,
+          "ffys": Object {
+            "1": Object {
+              "federal": 2883,
+              "medicaid": 23626,
+              "total": 5232,
+            },
+            "2": Object {
+              "federal": 826,
+              "medicaid": 2468252,
+              "total": 848622,
+            },
+          },
+          "medicaid": 1150,
+          "name": "activity 1",
+          "summary": "first activity",
+        },
+        Object {
+          "activityId": "a2",
+          "combined": 310,
+          "federal": 2050,
+          "ffys": Object {
+            "1": Object {
+              "federal": 2356,
+              "medicaid": 989264,
+              "total": 26926,
+            },
+            "2": Object {
+              "federal": 643,
+              "medicaid": 73,
+              "total": 54634738,
+            },
+          },
+          "medicaid": 2150,
+          "name": "",
+          "summary": "second activity",
+        },
+      ]
+    }
+    enableEdit={false}
+    years={
+      Array [
+        "1",
+        "2",
+      ]
+    }
+  />
   <Connect(ExecutiveSummaryBudget) />
 </div>
 `;
