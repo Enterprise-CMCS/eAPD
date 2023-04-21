@@ -197,6 +197,7 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Total Cost' })).toBeTruthy();
   });
 
   test('renders MMIS correctly', async () => {
@@ -227,5 +228,6 @@ describe('<ExecutiveSummary />', () => {
     expect(
       screen.getByRole('heading', { name: 'Activities Summary' })
     ).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Total Cost' })).toBeTruthy();
   });
 });

@@ -65,7 +65,7 @@ class ExecutiveSummaryPage {
   }) => {
     cy.get('#executive-activities-summary')
       .parent()
-      .contains('h4', 'Total Cost')
+      .contains('h3', 'Total Cost')
       .next()
       .within(() => {
         cy.contains('Federal Fiscal Years Requested:')
