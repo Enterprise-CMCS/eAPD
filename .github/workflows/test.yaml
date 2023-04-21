@@ -1,0 +1,74 @@
+name: 'Deployment'
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - <change-me-to-main>
+  pull_request:
+    branches: [<change-me-to-main>]
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency: ${{ github.head_ref || github.ref_name || github.run_id }}
+jobs:
+  dependency_vulnerability_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.19.1'
+      # - name: save yarn package cache
+      #   continue-on-error: true
+      #   with:
+      #     id: cache-npm
+      #     uses: actions/cache@v3
+      #     # npm cache files are stored in `~/.npm` on Linux/macOS
+      #     path: ~/.cache/yarn
+      #     key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ cms-eapd-yarn-packages }}-
+      #       ${{ runner.os }}-build-
+      #       ${{ runner.os }}-
+      - name: install dependencies
+        continue-on-error: true
+        run: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - name: setup nvm
+        continue-on-error: true
+        run: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+          nvm install 16.19.1
+          nvm alias default 16.19.1
+          echo 'export NVM_DIR="$HOME/.nvm"' >> $GITHUB_ENV
+          echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $GITHUB_ENV
+
+      - name: dependency vulnerability scan
+        continue-on-error: true
+        run: yarn run audit
+      - name: yaml test
+        working-directory: ./web
+        run: |
+          yarn install --frozen-lockfile
+          yarn add glob
+          yarn add js-yaml
+          node yaml-tests.js
+      - name: backend_lint
+        continue-on-error: true
+        working-directory: ./api
+        run: |
+          npm install -g eslint
+          yarn lint
+      - name: frontend_lint
+        continue-on-error: true
+        working-directory: ./web
+        run: |
+          npm install -g eslint
+          yarn lint
