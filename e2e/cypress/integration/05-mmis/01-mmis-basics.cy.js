@@ -23,7 +23,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   before(function () {
     // activityPage = new ActivityPage();
     budgetPage = new BudgetPage();
-    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
 
@@ -59,7 +58,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
 
-    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.fixture('mmis-basics.json').as('mmisBasics');
 
     cy.useStateStaff();

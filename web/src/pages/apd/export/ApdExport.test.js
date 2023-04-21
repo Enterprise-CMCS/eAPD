@@ -7,8 +7,6 @@ import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
 
 import { toggleAdminCheck } from '../../../redux/actions/app/apd';
 
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
-
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn()
@@ -22,12 +20,6 @@ const setup = (push = () => {}) => {
 };
 
 describe('apd export component', () => {
-  beforeEach(() => {
-    // reset before each test case
-    resetLDMocks();
-    mockFlags({ adminCheckFlag: true });
-  });
-
   test('renders correctly', () => {
     expect(setup()).toMatchSnapshot();
   });

@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
 import axios from '../../../util/api';
 import { useAvailableStates } from '../../../util/hooks';
 
 const MatchStateAdminDialog = ({ certification, hideModal }) => {
-  const availableStates = useAvailableStates();
+  const username = useSelector(state => state?.user?.data?.username || '');
+
+  const availableStates = useAvailableStates(username);
   const [stateAffiliations, setStateAffiliations] = useState([]);
   const [selectedAffiliation, setSelectedAffiliation] = useState({});
 
