@@ -44,7 +44,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
   const requestedRole = (await oktaClient.getUser('requestedrole')) || {};
   const deniedRole = (await oktaClient.getUser('deniedrole')) || {};
   const revokedRole = (await oktaClient.getUser('revokedrole')) || {};
-  const betaUser = (await oktaClient.getUser('betauser')) || {};
+  // const betaUser = (await oktaClient.getUser('betauser')) || {};
   const mfaUser = (await oktaClient.getUser('mfa@email.com')) || {};
   const resetmfa = (await oktaClient.getUser('resetmfa')) || {};
 
@@ -239,16 +239,16 @@ const createUsersToAdd = async (knex, oktaClient) => {
     oktaUsers.push(formatOktaUser(revokedRole));
   }
 
-  if (betaUser) {
-    oktaAffiliations.push({
-      user_id: betaUser.id,
-      state_id: SEEDED_STATE,
-      role_id: stateStaffRoleId,
-      status: APPROVED,
-      username: betaUser.profile.login
-    });
-    oktaUsers.push(formatOktaUser(betaUser));
-  }
+  // if (betaUser) {
+  //   oktaAffiliations.push({
+  //     user_id: betaUser.id,
+  //     state_id: SEEDED_STATE,
+  //     role_id: stateStaffRoleId,
+  //     status: APPROVED,
+  //     username: betaUser.profile.login
+  //   });
+  //   oktaUsers.push(formatOktaUser(betaUser));
+  // }
 
   if (resetmfa) {
     oktaAffiliations.push({
