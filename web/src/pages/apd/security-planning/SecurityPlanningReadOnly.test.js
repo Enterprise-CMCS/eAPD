@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import { APD_TYPE } from '@cms-eapd/common';
 
@@ -40,8 +39,6 @@ const setup = async (props = {}, options = {}) => {
 describe('security planning summary component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    resetLDMocks();
-    mockFlags({ enableMmis: true });
   });
 
   test('renders correctly without data', async () => {

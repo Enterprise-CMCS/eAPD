@@ -4,7 +4,6 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../util/api';
 import userEvent from '@testing-library/user-event';
 
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import * as hooks from '../../../util/hooks';
 import { STATES } from '../../../util/states';
 
@@ -22,9 +21,18 @@ const defaultProps = {
 };
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
-const setup = async (props = {}) => {
+const setup = async (props = {}, username = '') => {
   const utils = await renderWithConnection(
-    <MatchStateAdminDialog {...defaultProps} {...props} />
+    <MatchStateAdminDialog {...defaultProps} {...props} />,
+    {
+      initialState: {
+        user: {
+          data: {
+            username
+          }
+        }
+      }
+    }
   );
   const user = userEvent.setup();
   return {
@@ -35,8 +43,6 @@ const setup = async (props = {}) => {
 
 describe('<MatchStateAdminDialog />', () => {
   beforeEach(() => {
-    resetLDMocks();
-    mockFlags({ supportStateAvailable: false });
     jest.spyOn(hooks, 'useAvailableStates').mockImplementation(() => STATES);
   });
   it('renders correctly', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  render,
+  renderWithConnection,
   fireEvent,
   axe,
   screen,
@@ -10,7 +10,6 @@ import StateAccessRequest from './StateAccessRequest';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../util/api';
 
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import * as hooks from '../../util/hooks';
 import { STATES } from '../../util/states';
 
@@ -24,14 +23,20 @@ const defaultProps = {
 };
 
 // https://testing-library.com/docs/example-input-event/
-const setup = (props = {}) =>
-  render(<StateAccessRequest {...defaultProps} {...props} />);
+const setup = (props = {}, username = '') =>
+  renderWithConnection(<StateAccessRequest {...defaultProps} {...props} />, {
+    initialState: {
+      user: {
+        data: {
+          username
+        }
+      }
+    }
+  });
 
 describe('<StateAccessRequest />', () => {
   beforeEach(() => {
     fetchMock.reset();
-    resetLDMocks();
-    mockFlags({ supportStateAvailable: false });
     jest.spyOn(hooks, 'useAvailableStates').mockImplementation(() => STATES);
   });
 

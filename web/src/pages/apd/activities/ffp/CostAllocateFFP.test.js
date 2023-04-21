@@ -8,7 +8,6 @@ import {
 import userEvent from '@testing-library/user-event';
 import { APD_TYPE } from '@cms-eapd/common';
 import { useForm, FormProvider } from 'react-hook-form';
-import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import CostAllocatedFFP from './CostAllocateFFP';
 
@@ -239,9 +238,6 @@ describe('the CostAllocateFFP component', () => {
   jest.setTimeout(30000);
   beforeEach(() => {
     jest.resetAllMocks();
-    // reset before each test case
-    resetLDMocks();
-    mockFlags({ emptyBudgetWording: false });
   });
 
   it('renders table correctly', async () => {

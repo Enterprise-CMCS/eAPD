@@ -12,11 +12,11 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
   const years = [];
 
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();
+    cy.findByRole('radio', { name: /HITECH/i }).click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();

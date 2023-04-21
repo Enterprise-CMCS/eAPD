@@ -19,7 +19,6 @@ const fillField = function (id, content) {
 const dollarError = 'Provide a dollar amount greater than or equal to $0';
 const tableError =
   'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.';
-const validEndDateErr = 'Provide an end date that is after the start date.';
 const validStartDateErr = 'Provide a valid start date.';
 const validYearErr = 'Provide a valid start year.';
 

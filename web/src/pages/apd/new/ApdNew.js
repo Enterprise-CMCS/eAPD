@@ -19,7 +19,6 @@ import {
   defaultAPDYears
 } from '@cms-eapd/common';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import { apdValid } from '../../../redux/reducers/apd';
 import { createApd } from '../../../redux/actions/app';
@@ -32,7 +31,6 @@ import MmisUpdateStatus from './MmisUpdateStatus';
 const ApdNew = ({ createApd: create }) => {
   ApdNew.displayName = 'ApdNew';
   const history = useHistory();
-  const { enableMmis } = useFlags();
 
   // Default values for form
   const businessAreaOptions = {
@@ -60,7 +58,7 @@ const ApdNew = ({ createApd: create }) => {
     asNeededUpdate: false
   };
 
-  const apdTypeChoicesWithMmis = [
+  const apdTypeChoices = [
     {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
@@ -77,22 +75,9 @@ const ApdNew = ({ createApd: create }) => {
     }
   ];
 
-  const apdTypeHitechOnly = [
-    {
-      label: 'HITECH IAPD',
-      labelClassName: 'label-extended',
-      value: APD_TYPE.HITECH,
-      hint: 'Health Information Technology for Economic and Clinical Health Implementation APD',
-      checked: true
-    }
-  ];
-
-  let apdTypeChoices = apdTypeChoicesWithMmis;
-
   const yearOptions = defaultAPDYearOptions();
 
   // State management
-  const [apdChoices, setApdChoices] = useState(apdTypeChoices);
   const [apdType, setApdType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [medicaidBusinessAreas, setMedicaidBusinessAreas] =
@@ -124,14 +109,8 @@ const ApdNew = ({ createApd: create }) => {
   } = methods;
 
   useEffect(() => {
-    if (!enableMmis) {
-      setApdChoices(apdTypeHitechOnly);
-      setApdType(APD_TYPE.HITECH);
-      setValue('apdType', APD_TYPE.HITECH);
-    }
-
     setSubmitDisabled(!isValid);
-  }, [enableMmis, isValid]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isLoading) {
     return (
@@ -257,7 +236,7 @@ const ApdNew = ({ createApd: create }) => {
                     </Alert>
                   }
                   type="radio"
-                  choices={apdChoices}
+                  choices={apdTypeChoices}
                   onChange={e => {
                     setApdType(e.target.value);
                     onChange(e);
