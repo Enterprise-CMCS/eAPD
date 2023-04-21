@@ -11,6 +11,7 @@ import {
   faChevronLeft,
   faChevronRight,
   faChevronUp,
+  faCircleStop,
   faEdit,
   faExclamationTriangle,
   faFileAlt,
@@ -60,6 +61,8 @@ const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
 const ChevronRight = () => <FontAwesomeIcon icon={faChevronRight} />;
 
+const StopIcon = () => <FontAwesomeIcon icon={faCircleStop} />;
+
 export {
   faArrowRight,
   faCheckCircle,
@@ -87,6 +90,7 @@ export {
   PDFFileBlue,
   LockIcon,
   Spinner,
+  StopIcon,
   TimesCircle,
   UnlockIcon,
   Xmark,
